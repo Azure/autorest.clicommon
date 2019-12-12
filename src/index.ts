@@ -13,7 +13,7 @@ export enum ArtifactType
     ArtifactTypeAzureAzExtension,
 }
 
-extension.Add("cli-common", async autoRestApi => {
+extension.Add("cli.common", async autoRestApi => {
 
     let log = await autoRestApi.GetValue("log");
 
