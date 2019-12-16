@@ -3,8 +3,7 @@
 # Add steps that analyze code, save build artifacts, deploy, and more:
 # https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
 
-trigger:
-- master 
+trigger: none 
 
 pool:
   vmImage: 'ubuntu-latest'
@@ -23,11 +22,6 @@ steps:
     npx @microsoft/rush sync-versions
     npx @microsoft/rush update 
 
-    # set the actual package versions and update again
-    npx @microsoft/rush set-versions
-    npx @microsoft/rush sync-versions
-    npx @microsoft/rush update 
-
     # compile the code
     npx @microsoft/rush rebuild 
 
@@ -40,4 +34,5 @@ steps:
     do
      common/temp/pnpm-local/node_modules/.bin/pnpm publish $file --tag latest --access public || echo no-worries 
     done
+    rm ./.npmrc
 
