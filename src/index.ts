@@ -19,14 +19,14 @@ extension.Add("cli.common", async autoRestApi => {
         // read a setting
 
         const isDebugFlagSet = await autoRestApi.GetValue("debug");
-        let cliCommonSettings = await autoRestApi.GetValue("cli.common");
+        let cliCommonSettings = await autoRestApi.GetValue("cli");
 
 
         // emit messages
 
         autoRestApi.Message({
             Channel: Channel.Warning,
-            Text: "Hello World! The `debug` flag is " + (isDebugFlagSet ? "set" : "not set"),
+            Text: "Hello World cli.common! The `debug` flag is " + (isDebugFlagSet ? "set" : "not set"),
         });
 
         autoRestApi.Message({
@@ -41,7 +41,7 @@ extension.Add("cli.common", async autoRestApi => {
 
         // emit a file (all input files concatenated)
 
-        autoRestApi.WriteFile("myfolder/concat.txt", inputFiles.join("\n---\n"));
+        autoRestApi.WriteFile("myfolder/concatcommon.txt", inputFiles.join("\n---\n"));
     }
     catch (e)
     {

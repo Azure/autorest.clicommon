@@ -10,15 +10,12 @@ use-extension:
 pipeline-model: v3
 
 pipeline:
-    modelerfour:
-        input: openapi-document/multi-api/identity
-    common/generate:
-        plugin: cli.common
+    cli.common:
         input: modelerfour
         output-artifact: source-file-common
 
-    common/emitter:
-        input: generate
+    cli.common/emitter:
+        input: cli.common
         scope: scope-here
 
 scope-here:
