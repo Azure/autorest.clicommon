@@ -13,12 +13,13 @@ pipeline:
     cli.common:
         input: modelerfour
         output-artifact: source-file-common
+        scope: clicommon
 
     cli.common/emitter:
         input: cli.common
-        scope: scope-here
+        scope: scope-clicommon
 
-scope-here:
+scope-clicommon:
     is-object: false
     output-artifact:
         - source-file-common
