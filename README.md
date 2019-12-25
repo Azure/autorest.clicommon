@@ -8,7 +8,7 @@ use-extension:
   "cli.common": "$(this-folder)"
 
 pipeline-model: v3
-
+clicommon: true
 pipeline:
     cli.common:
         input: modelerfour
