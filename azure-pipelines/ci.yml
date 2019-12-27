@@ -1,10 +1,23 @@
 trigger:
-- master
+  - master
 
 variables:
   NodeVersion: '10.x'
 
 jobs:
+
+  - job: Linter
+    steps:
+      - task: TSLint@1
+        inputs:
+          RuleLibrary: 'tslint'
+          Ruleset: 'tsrecommended'
+          FileSelectionType: 'fileGlob'
+          Files: '**\*.ts'
+          OutputFormat: 'json'
+          ToolVersion: 'latest'
+          TypeScriptVersion: 'latest'
+
   - job: 'Build'
 
     pool:
@@ -76,4 +89,3 @@ jobs:
           Semmle: false
           TSLint: false
           ToolLogsNotFoundAction: 'Standard'
-
