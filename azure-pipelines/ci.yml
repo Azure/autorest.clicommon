@@ -7,6 +7,8 @@ variables:
 jobs:
 
   - job: Linter
+    pool:
+      vmImage: 'Windows'
     steps:
       - task: TSLint@1
         inputs:
