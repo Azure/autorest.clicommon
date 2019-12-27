@@ -8,7 +8,7 @@ jobs:
 
   - job: Linter
     pool:
-      vmImage: 'Windows'
+      vmImage: 'vs2017-win2016'
     steps:
       - task: TSLint@1
         inputs:
