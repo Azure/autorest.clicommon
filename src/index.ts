@@ -1,5 +1,6 @@
-import { AutoRestExtension, Channel } from '@azure-tools/autorest-extension-base';
-
+import { AutoRestExtension, Channel, Host, startSession } from '@azure-tools/autorest-extension-base';
+import { codeModelSchema, CodeModel } from '@azure-tools/codemodel';
+import { serialize } from '@azure-tools/codegen';
 
 export type LogCallback = (message: string) => void;
 export type FileCallback = (path: string, rows: string[]) => void;
@@ -21,6 +22,7 @@ extension.Add("cli.common", async autoRestApi => {
         const isDebugFlagSet = await autoRestApi.GetValue("debug");
         let cliCommonSettings = await autoRestApi.GetValue("cli");
 
+        const session = await startSession<CodeModel>(autoRestApi, {}, codeModelSchema);
 
         // emit messages
 
@@ -39,8 +41,13 @@ extension.Add("cli.common", async autoRestApi => {
             Text: "AutoRest offers the following input files: " + inputFileUris.join(", "),
         });
 
+
+        let result = session.model;
+
+        result["ADDITIONAL"] = "TEST";
+
         // emit a file (all input files concatenated)
-        autoRestApi.WriteFile("code-model-v4-cli.yaml", inputFiles[inputFileUris.indexOf("code-model-v4-no-tags.yaml")]);
+        autoRestApi.WriteFile("code-model-v4-cli.yaml", serialize(result, codeModelSchema));
     }
     catch (e)
     {
