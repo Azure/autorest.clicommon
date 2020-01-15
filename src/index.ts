@@ -38,7 +38,7 @@ extension.Add("cli.common", async autoRestApi => {
         }
 
         // emit a file (all input files concatenated)
-        autoRestApi.WriteFile("code-model-v4-cli.yaml", serialize(result, codeModelSchema));
+        autoRestApi.WriteFile("code-model-v4-cli.yaml", serialize(result));
     }
     catch (e)
     {
