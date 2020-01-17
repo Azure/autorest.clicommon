@@ -1,6 +1,6 @@
 import { CodeModel, Schema, ObjectSchema, SchemaType, Property } from '@azure-tools/codemodel';
 import { Session } from '@azure-tools/autorest-extension-base';
-import { values, items, length, Dictionary, refCount } from '@azure-tools/linq';
+import { values, items, length, Dictionary } from '@azure-tools/linq';
 
 export class Namer {
   codeModel: CodeModel
