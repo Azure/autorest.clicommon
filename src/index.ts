@@ -8,7 +8,7 @@ export type FileCallback = (path: string, rows: string[]) => void;
 
 const extension = new AutoRestExtension();
 
-extension.Add("cli.common", async autoRestApi => {
+extension.Add("clicommon", async autoRestApi => {
 
 
     try
@@ -20,12 +20,12 @@ extension.Add("cli.common", async autoRestApi => {
 
         autoRestApi.Message({
             Channel: Channel.Warning,
-            Text: "Hello World cli.common! The `debug` flag is " + (isDebugFlagSet ? "set" : "not set"),
+            Text: "Hello World clicommon! The `debug` flag is " + (isDebugFlagSet ? "set" : "not set"),
         });
 
         autoRestApi.Message({
             Channel: Channel.Warning,
-            Text: "cli.common settings " + JSON.stringify(cliCommonSettings)
+            Text: "clicommon settings " + JSON.stringify(cliCommonSettings)
         });
 
 

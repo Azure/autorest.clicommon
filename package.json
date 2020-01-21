@@ -1,6 +1,6 @@
 {
-  "name": "@autorest/cli.common",
-  "version": "1.0.14",
+  "name": "@autorest/clicommon",
+  "version": "0.1.0",
   "description": "Autorest Azure Cli Common Module",
   "main": "dist/index.js",
   "engines": {
@@ -23,7 +23,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Azure/autorest.cli.common.git"
+    "url": "git+https://github.com/Azure/autorest.clicommon.git"
   },
   "keywords": [
     "autorest",

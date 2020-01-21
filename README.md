@@ -5,18 +5,17 @@ See documentation [here](doc/00-overview.md)
 ``` yaml
 use-extension:
   "@autorest/modelerfour": "~4.1.60"
-  "cli.common": "$(this-folder)"
+  "clicommon": "$(this-folder)"
 
 pipeline-model: v3
-clicommon: true
 pipeline:
-    cli.common:
+    clicommon:
         input: modelerfour
         output-artifact: source-file-common
         scope: clicommon
 
-    cli.common/emitter:
-        input: cli.common
+    clicommon/emitter:
+        input: clicommon
         scope: scope-clicommon
 
 scope-clicommon:
