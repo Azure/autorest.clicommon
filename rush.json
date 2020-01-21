@@ -95,7 +95,7 @@
   "telemetryEnabled": false,
   "projects": [
     {
-      "packageName": "@autorest/cli.common",
+      "packageName": "@autorest/clicommon",
       "projectFolder": ".",
       "reviewCategory": "production",
       "shouldPublish": true
