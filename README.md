@@ -16,9 +16,9 @@ pipeline:
 
     clicommon/emitter:
         input: clicommon
-        scope: scope-clicommon
+        scope: here
 
-scope-clicommon:
+scope-here:
     is-object: false
     output-artifact:
         - source-file-common
