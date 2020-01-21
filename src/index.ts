@@ -37,7 +37,7 @@ extension.Add("clicommon", async autoRestApi => {
         });
 
         modifiers.codeModel = result;
-       modifiers.directives = cliCommonSettings['directives'];
+        modifiers.directives = (cliCommonSettings != null) ? cliCommonSettings['directives'] : null;
 
         autoRestApi.Message({
             Channel: Channel.Warning,
