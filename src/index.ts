@@ -44,7 +44,7 @@ extension.Add("clicommon", async autoRestApi => {
             Text: "XXX --- processing modifiers"
         });
 
-        //result = modifiers.process();
+        result = await modifiers.process();
 
         autoRestApi.Message({
             Channel: Channel.Warning,

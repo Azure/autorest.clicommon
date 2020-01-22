@@ -114,12 +114,11 @@ export class Modifiers {
         this.codeModel = session.model;
     }
 
-    process() {
-        this.session.message({Channel:Channel.Warning, Text: "PROCESSING MODIFIERS" });
-        let cliSettings = null; //await this.session.getValue('cli');
-        this.session.message({Channel:Channel.Warning, Text: "GOT CLI SETTINGS" });
-        this.session.message({Channel:Channel.Warning, Text: "CLI SETTINGS: " + JSON.stringify(cliSettings) });
-        //directives = cliSettings['directive'];
+    async process() {
+        this.directives = await this.session.getValue("directive");
+        let moo = await this.session.getValue("moo");
+        this.session.message({Channel:Channel.Warning, Text: "MOO: " + JSON.stringify(moo) });
+        this.session.message({Channel:Channel.Warning, Text: "DIRECTIVES: " + JSON.stringify(this.directives) });
 
         if (this.directives != null) {
             for (const directive of this.directives.filter(each => !each.transform)) {
