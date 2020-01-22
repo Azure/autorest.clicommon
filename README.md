@@ -5,10 +5,9 @@ See documentation [here](doc/00-overview.md)
 ``` yaml
 use-extension:
   "@autorest/modelerfour": "~4.1.60"
-  "cli.common": "$(this-folder)"
 
 pipeline-model: v3
-clicommon: true
+#clicommon: true
 pipeline:
     cli.common:
         input: modelerfour
