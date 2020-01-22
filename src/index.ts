@@ -18,16 +18,6 @@ extension.Add("clicommon", async autoRestApi => {
 
         const session = await startSession<CodeModel>(autoRestApi, {}, codeModelSchema);
 
-        autoRestApi.Message({
-            Channel: Channel.Warning,
-            Text: "Hello World clicommon! The `debug` flag is " + (isDebugFlagSet ? "set" : "not set"),
-        });
-
-        autoRestApi.Message({
-            Channel: Channel.Warning,
-            Text: "clicommon settings " + JSON.stringify(cliCommonSettings)
-        });
-
 
         const plugin = await new Namer(session).init();
         const result = plugin.process();
