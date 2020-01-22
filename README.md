@@ -5,11 +5,11 @@ See documentation [here](doc/00-overview.md)
 ``` yaml
 use-extension:
   "@autorest/modelerfour": "~4.1.60"
-  "clicommon": "$(this-folder)"
 
 try-require: ./readme.cli.md
 
 pipeline-model: v3
+#clicommon: true
 pipeline:
     clicommon:
         input: modelerfour
