@@ -133,37 +133,34 @@ export class Modifiers {
                     const modelRegex = getPatternToMatch(directive.where["model"]);
                     const propertyRegex = getPatternToMatch(directive.where["property"]);
 
+
+                    this.session.message({Channel:Channel.Warning, Text: "GROUP REGEX: " + groupRegex });
+                    this.session.message({Channel:Channel.Warning, Text: "OPERATION REGEX: " + operationRegex });
+
                     const parameterReplacer = directive.set !== undefined? directive.set["parameter-name"]: undefined;
                     const paramDescriptionReplacer = directive.set !== undefined? directive.set["parameter-description"]: undefined;
                     const groupReplacer = directive.set !== undefined ? directive.set["name"] : undefined;
                     const groupDescriptionReplacer = directive.set !== undefined? directive.set["description"]: undefined;
                     const operationReplacer = directive.set !== undefined ? directive.set["name"] : undefined;
                     const operationDescriptionReplacer = directive.set !== undefined? directive.set["description"]: undefined;
-        
-                    this.session.message({Channel:Channel.Warning, Text:serialize(groupRegex) + " " + serialize(groupReplacer)});
-
-                    this.session.message({Channel:Channel.Warning, Text: "GROUPS: " + typeof this.codeModel.operationGroups });
 
                     for (const operationGroup of values(this.codeModel.operationGroups)) {
 
-                        this.session.message({Channel:Channel.Warning, Text: "CHECKING GROUP: " + operationGroup.language['cli']['name'] });
+                        if (groupRegex && !operationRegex && !parameterRegex && !modelRegex && !propertyRegex) {
+                            if (operationGroup.language['cli']['name'] != undefined && operationGroup.language["cli"]["name"].match(groupRegex)) {
+                                this.session.message({Channel:Channel.Warning, Text: "FOUND GROUP: " + operationGroup.language['cli']['name'] });
 
-                        if (operationGroup.language['cli']['name'] != undefined && operationGroup.language["cli"]["name"].match(groupRegex)) {
-                            this.session.message({Channel:Channel.Warning, Text: "FOUND GROUP: " + operationGroup.language['cli']['name'] });
-
-                            operationGroup.language["cli"]["name"] = groupReplacer? groupRegex? operationGroup.language["cli"]["name"].replace(groupRegex, groupReplacer): groupReplacer : operationGroup.language["cli"]["name"];
-                            operationGroup.language["cli"]["description"] = groupDescriptionReplacer? groupDescriptionReplacer: operationGroup.language["cli"]["description"];
+                                operationGroup.language["cli"]["name"] = groupReplacer? groupRegex? operationGroup.language["cli"]["name"].replace(groupRegex, groupReplacer): groupReplacer : operationGroup.language["cli"]["name"];
+                                operationGroup.language["cli"]["description"] = groupDescriptionReplacer? groupDescriptionReplacer: operationGroup.language["cli"]["description"];
+                            }
                         }
 
-                        this.session.message({Channel:Channel.Warning, Text: "NOT FOUND GROUP: " + operationGroup.language['cli']['name'] });
-
                         for (const operation of values(operationGroup.operations)) {
-                            this.session.message({Channel:Channel.Warning, Text: "CHECKING 1" });
-
-                            //operation
-                            if (operation.language['cli']['name'] != undefined && operation.language["cli"]["name"].match(operationRegex)) {
-                                operation.language["cli"]["name"] = operationReplacer? operationRegex? operation.language["cli"]["name"].replace(operationRegex, operationReplacer): operationReplacer: operation.language["cli"]["name"];
-                                operation.language["cli"]["description"] = operationDescriptionReplacer? operationDescriptionReplacer: operation.language["cli"]["description"];
+                            if (operationRegex && !parameterRegex && !modelRegex && !propertyRegex) {
+                                if (operation.language['cli']['name'] != undefined && operation.language["cli"]["name"].match(operationRegex)) {
+                                    operation.language["cli"]["name"] = operationReplacer? operationRegex? operation.language["cli"]["name"].replace(operationRegex, operationReplacer): operationReplacer: operation.language["cli"]["name"];
+                                    operation.language["cli"]["description"] = operationDescriptionReplacer? operationDescriptionReplacer: operation.language["cli"]["description"];
+                                }
                             }
 
                             this.session.message({Channel:Channel.Warning, Text: "CHECKING 2" });
