@@ -7,6 +7,8 @@ use-extension:
   "@autorest/modelerfour": "~4.1.60"
   "clicommon": "$(this-folder)"
 
+try-require: ./readme.cli.md
+
 pipeline-model: v3
 pipeline:
     clicommon:
