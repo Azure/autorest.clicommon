@@ -19,16 +19,15 @@ let directives: Array<any> = [];
 interface WhereCommandDirective {
     select?: string;
     where: {
-        "command"?: string;
-        "command-description"?: string;
-        "parameter-name"?: string;
-        "parameter-description"?: string;
+        "group"?: string;
+        "operation"?: string;
+        "parameter"?: string;
+        "model"?: string;
+        "property"?: string;
     };
     set?: {
-        "command"?: string;
-        "command-description"?: string;
-        "parameter-name"?: string;
-        "parameter-description"?: string;
+        "name"?: string;
+        "description"?: string;
         default?: {
             name: string;
             description: string;
@@ -72,23 +71,14 @@ function isWhereCommandDirective(it: any): it is WhereCommandDirective {
     const set = directive.set;
     if (where && (where["group"] || where['operation'] || where['parameter-name'] || where['model'] || where['property'])) {
         const prohibitedFilters = [
-        //    "model-name",
-        //    "property-name",
-        //    "enum-name",
-        //    "enum-value-name"
         ];
         let error = getFilterError(where, prohibitedFilters, "command");
 
-        //if (set !== undefined) {
-        //    const prohibitedSetters = [
-        //        "property-name",
-        //        "property-description",
-        //        "model-name",
-        //        "enum-name",
-        //        "enum-value-name"
-        //    ];
-        //    error += getSetError(set, prohibitedSetters, "command");
-        //}
+        if (set !== undefined) {
+            const prohibitedSetters = [
+            ];
+            error += getSetError(set, prohibitedSetters, "command");
+        }
 
         if (error) {
             throw Error(
@@ -116,29 +106,24 @@ export class Modifiers {
 
     async process() {
         this.directives = await this.session.getValue("directive");
-        this.session.message({Channel:Channel.Warning, Text: "DIRECTIVES: " + JSON.stringify(this.directives) });
 
         if (this.directives != null) {
             for (const directive of this.directives.filter(each => !each.transform)) {
                 const getPatternToMatch = (selector: string | undefined): RegExp | undefined => {
                     return selector? !hasSpecialChars(selector)? new RegExp(`^${selector}$`, "gi"): new RegExp(selector, "gi"): undefined;
                 };
-                this.session.message({Channel:Channel.Warning, Text: "FILTERED DIRECTIVES: " + JSON.stringify(this.directives) });
 
                 if (isWhereCommandDirective(directive)) {
                     const selectType = directive.select;
                     const groupRegex = getPatternToMatch(directive.where["group"]);
                     const operationRegex = getPatternToMatch(directive.where["operation"]);
-                    const parameterRegex = getPatternToMatch(directive.where["parameter-name"]);
+                    const parameterRegex = getPatternToMatch(directive.where["parameter"]);
                     const modelRegex = getPatternToMatch(directive.where["model"]);
                     const propertyRegex = getPatternToMatch(directive.where["property"]);
 
 
-                    this.session.message({Channel:Channel.Warning, Text: "GROUP REGEX: " + groupRegex });
-                    this.session.message({Channel:Channel.Warning, Text: "OPERATION REGEX: " + operationRegex });
-
-                    const parameterReplacer = directive.set !== undefined? directive.set["parameter-name"]: undefined;
-                    const paramDescriptionReplacer = directive.set !== undefined? directive.set["parameter-description"]: undefined;
+                    const parameterReplacer = directive.set !== undefined? directive.set["name"]: undefined;
+                    const parameterDescriptionReplacer = directive.set !== undefined? directive.set["description"]: undefined;
                     const groupReplacer = directive.set !== undefined ? directive.set["name"] : undefined;
                     const groupDescriptionReplacer = directive.set !== undefined? directive.set["description"]: undefined;
                     const operationReplacer = directive.set !== undefined ? directive.set["name"] : undefined;
@@ -148,7 +133,6 @@ export class Modifiers {
 
                         if (groupRegex && !operationRegex && !parameterRegex && !modelRegex && !propertyRegex) {
                             if (operationGroup.language['cli']['name'] != undefined && operationGroup.language["cli"]["name"].match(groupRegex)) {
-                                this.session.message({Channel:Channel.Warning, Text: "FOUND GROUP: " + operationGroup.language['cli']['name'] });
 
                                 operationGroup.language["cli"]["name"] = groupReplacer? groupRegex? operationGroup.language["cli"]["name"].replace(groupRegex, groupReplacer): groupReplacer : operationGroup.language["cli"]["name"];
                                 operationGroup.language["cli"]["description"] = groupDescriptionReplacer? groupDescriptionReplacer: operationGroup.language["cli"]["description"];
@@ -163,14 +147,15 @@ export class Modifiers {
                                 }
                             }
 
-                            this.session.message({Channel:Channel.Warning, Text: "CHECKING 2" });
                             for (const parameter of values(operation.request.parameters)) {
-                                //if (parameter.language['cli']['name'] != undefined && parameter.language["cli"]["name"].match(parameterRegex)) {
-                                //    parameter.language["cli"]["name"] = parameterReplacer? parameterRegex? parameter.language["az"]["name"].replace(parameterRegex, parameterReplacer): parameterReplacer: parameter.language["az"]["name"];
-                                //    parameter.language["cli"]["description"] = paramDescriptionReplacer? paramDescriptionReplacer: parameter.language["az"]["description"];
-                                //}
+                                if (parameterRegex) {
+
+                                    if (parameter.language['cli']['name'] != undefined && parameter.language["cli"]["name"].match(parameterRegex)) {
+                                        parameter.language["cli"]["name"] = parameterReplacer? parameterRegex? parameter.language["cli"]["name"].replace(parameterRegex, parameterReplacer): parameterReplacer: parameter.language["cli"]["name"];
+                                        parameter.language["cli"]["description"] = parameterDescriptionReplacer? parameterRegex? parameter.language["cli"]["description"].replace(parameterRegex, parameterDescriptionReplacer): parameterDescriptionReplacer: parameter.language["cli"]["description"];
+                                    }
+                                }
                             }
-                            this.session.message({Channel:Channel.Warning, Text: "CHECKING 3" });
                         }
                     }
                 }
