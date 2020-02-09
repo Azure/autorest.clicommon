@@ -18,28 +18,15 @@ modelerfour:
 pipeline:
     clicommon:
         input: modelerfour
-        output-artifact: source-file-clicommon
-        #scope: clicommon
-
-    #clicommon/clinamer:
-    #    input: clicommon
-        #output-artifact: source-file-commonnamer
-
-    #clicommon/climodifiers:
-    #    input: clinamer
-    #    output-artifact: source-file-commonmodifiers
+        output-artifact: source-file-common
 
     clicommon/emitter:
         input: 
             - clicommon
-            #- clinamer
-            #- climodifiers
         scope: scope-clicommon
 
 scope-clicommon:
     is-object: false
     output-artifact:
-        - source-file-clicommon
-        #- source-file-commonnamer
-        #- source-file-commonmodifiers
+        - source-file-common
 ```
