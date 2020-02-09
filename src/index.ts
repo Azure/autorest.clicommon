@@ -15,9 +15,10 @@ extension.Add("clicommon", async autoRestApi => {
     try
     {
         const inputFileUris = await autoRestApi.ListInputs();
+        let cliCommonSettings = await autoRestApi.GetValue("cli");
+
         const inputFiles: string[] = await Promise.all(inputFileUris.map(uri => autoRestApi.ReadFile(uri)));
         const session = await startSession<CodeModel>(autoRestApi, {}, codeModelSchema);
-        let cliCommonSettings = autoRestApi.GetValue("cli");
 
         // at this point namer and modifirers are in a single plug-in
         const namer = await new CommonNamer(session).init();
