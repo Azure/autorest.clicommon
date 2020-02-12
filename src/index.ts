@@ -1,8 +1,8 @@
-import { AutoRestExtension, Channel, Host, startSession } from '@azure-tools/autorest-extension-base';
+import { AutoRestExtension, Session, Channel, Host, startSession } from '@azure-tools/autorest-extension-base';
 import { codeModelSchema, CodeModel } from '@azure-tools/codemodel';
 import { serialize } from '@azure-tools/codegen';
-import { Namer } from './plugins/namer';
-import { Modifiers } from './plugins/modifiers';
+import { CommonNamer } from './plugins/namer';
+import { CommonModifiers } from './plugins/modifiers';
 
 export type LogCallback = (message: string) => void;
 export type FileCallback = (path: string, rows: string[]) => void;
@@ -14,17 +14,17 @@ extension.Add("clicommon", async autoRestApi => {
 
     try
     {
-        const isDebugFlagSet = await autoRestApi.GetValue("debug");
+        const inputFileUris = await autoRestApi.ListInputs();
         let cliCommonSettings = await autoRestApi.GetValue("cli");
 
+        const inputFiles: string[] = await Promise.all(inputFileUris.map(uri => autoRestApi.ReadFile(uri)));
         const session = await startSession<CodeModel>(autoRestApi, {}, codeModelSchema);
 
-
         // at this point namer and modifirers are in a single plug-in
-        const namer = await new Namer(session).init();
+        const namer = await new CommonNamer(session).init();
         let result = namer.process();
 
-        const modifiers = new Modifiers(session);
+        const modifiers = new CommonModifiers(session);
         modifiers.codeModel = result;
         modifiers.directives = (cliCommonSettings != null) ? cliCommonSettings['directives'] : null;
         result = await modifiers.process();
@@ -42,5 +42,12 @@ extension.Add("clicommon", async autoRestApi => {
         Error(e.message + " -- " + JSON.stringify(e.stack));
     }
 });
+
+/*async function initializePlugins(pluginHost: AutoRestExtension) {
+    pluginHost.Add("clinamer", clinamer);
+    pluginHost.Add("climodifiers", climodifiers);
+}
+
+initializePlugins(extension);*/
 
 extension.Run();
