@@ -4,7 +4,7 @@ See documentation [here](doc/00-overview.md)
 
 ``` yaml
 use-extension:
-  "@autorest/modelerfour": "~4.1.60"
+  "@autorest/modelerfour": "~4.4.162"
 
 try-require: ./readme.cli.md
 

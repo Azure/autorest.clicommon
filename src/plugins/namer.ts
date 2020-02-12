@@ -25,10 +25,8 @@ export class CommonNamer {
 
     getCliName(obj: any) {
         if(obj == null || obj.language == null) {
-            //return [];
             this.session.message({Channel: Channel.Warning, Text: "working in obj has problems"});
             return;
-            //this.session.message({Channel: Channel.Warning, Text:"Object don't have language property: " + serialize(obj)});
         }
         obj.language['cli'] = new Language();
         obj.language['cli']['name'] = obj.language.default.name;
@@ -71,7 +69,6 @@ export class CommonNamer {
 
         for(let cons of values(schemas.constants)) {
             this.getCliName(cons);
-            this.getCliName(cons.value);
         }
 
         for(let num of values(schemas.numbers)) {
