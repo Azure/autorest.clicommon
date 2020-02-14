@@ -63,9 +63,9 @@ export abstract class Action {
         }
         if (logNeeded) {
             if (directive.log.position == 'pre' || directive.log.position == "both" || isNullOrUndefined(directive.log.position))
-                arr.splice(0, 0, new ActionLog(value));
+                arr.splice(0, 0, new ActionLog(directive.log));
             if (directive.log.position == "post" || directive.log.position == "both" || isNullOrUndefined(directive.log.position))
-                arr.push(new ActionLog(value))
+                arr.push(new ActionLog(directive.log))
         }
         return arr;
     }
@@ -100,6 +100,8 @@ class ActionSetName extends Action {
     }
 
     public process(metadata: Metadata): void {
+        Helper.validateNullOrUndefined(this.directiveSetName.name, 'name');
+
         var name: string = this.newName;
         var style: string = null;
 
@@ -163,6 +165,10 @@ class ActionReplace extends Action {
     }
 
     public process(metadata: Metadata): void {
+        Helper.validateNullOrUndefined(this.actionReplace.field, 'field');
+        Helper.validateNullOrUndefined(this.actionReplace.old, 'old');
+        Helper.validateNullOrUndefined(this.actionReplace.new, 'new');
+
         var original: string = metadata.language.default[this.actionReplace.field].toString();
         if (isNullOrUndefined(this.actionReplace.isRegex) || this.actionReplace.isRegex == false) {
             metadata.language[CliConst.CLI][this.actionReplace.field] = original.replace(this.actionReplace.old, this.actionReplace.new);

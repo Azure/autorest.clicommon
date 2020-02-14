@@ -20,9 +20,10 @@ export class Modifier {
     constructor(protected session: Session<CodeModel>) {
     }
 
-    async init() {
+    async init(): Promise<Modifier> {
         this.manager = new CliDirectiveManager();
         await this.manager.LoadDirective(this.session);
+        return this;
     }
 
     public process(): CodeModel {

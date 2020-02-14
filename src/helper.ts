@@ -63,6 +63,11 @@ export class Helper {
         return str[0].toUpperCase().concat(str.substr(1).toLowerCase());
     }
 
+    public static validateNullOrUndefined(obj: any, name: string): void {
+        if (isNullOrUndefined(obj))
+            throw Error(`Validation failed: '${name}' is null or undefined`)
+    }
+
     public static ToSelectType(metadata: Metadata): SelectType {
         if (metadata instanceof OperationGroup)
             return 'operationGroup';
