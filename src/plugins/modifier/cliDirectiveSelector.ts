@@ -43,27 +43,18 @@ class MatchAllNodeSelector extends NodeSelector {
 }
 
 class CommandNodeSelector extends NodeSelector {
-    private operationGroupNameRegex: RegExp;
-    private operationNameRegex: RegExp;
-    private parameterNameRegex: RegExp;
-    private selectType: SelectType;
 
-    constructor(operationGroupName: string, operationName: string, parameterName: string, selectType: SelectType) {
+    constructor(private operationGroupName: string, private operationName: string, private parameterName: string, private selectType: SelectType) {
         super();
 
-        let emptyAsMatchAll: boolean = true
-        this.parameterNameRegex = Helper.toRegex(parameterName, emptyAsMatchAll);
-        this.operationNameRegex = Helper.toRegex(operationName, emptyAsMatchAll);
-        this.operationGroupNameRegex = Helper.toRegex(operationGroupName, emptyAsMatchAll);
-        this.selectType = selectType;
     }
 
     public match(descriptor: CliCommonSchema.CodeModel.NodeDescriptor): boolean {
 
         return Helper.ToSelectType(descriptor.metadata) === this.selectType &&
-            Helper.matchRegex(this.parameterNameRegex, descriptor.parameterName) &&
-            Helper.matchRegex(this.operationNameRegex, descriptor.operationName) &&
-            Helper.matchRegex(this.operationGroupNameRegex, descriptor.operationGroupName);
+            Helper.matchRegex(Helper.createRegex(this.parameterName, true /*emptyAsMatchAll*/), descriptor.parameterName) &&
+            Helper.matchRegex(Helper.createRegex(this.operationName, true /*emptyAsMatchAll*/), descriptor.operationName) &&
+            Helper.matchRegex(Helper.createRegex(this.operationGroupName, true /*emptyAsMatchAll*/), descriptor.operationGroupName);
     }
 
 }

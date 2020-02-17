@@ -4,6 +4,7 @@ import { serialize } from '@azure-tools/codegen';
 import { CommonNamer } from './plugins/namer';
 import { Modifier } from './plugins/modifier/modifier';
 import { Logger } from './logger';
+import { Helper } from './helper';
 
 export type LogCallback = (message: string) => void;
 export type FileCallback = (path: string, rows: string[]) => void;
@@ -22,6 +23,7 @@ extension.Add("clicommon", async autoRestApi => {
     const modifier = await new Modifier(session).init();
     result = modifier.process();
     autoRestApi.WriteFile("code-model-v4-cli-modifier.yaml", serialize(result));
+    autoRestApi.WriteFile("code-model-v4-cli-modifier-report.yaml", modifier.generateReport());
 
     // add test scenario from common settings
     let cliCommonSettings = await autoRestApi.GetValue("cli");

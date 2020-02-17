@@ -1,6 +1,7 @@
-import { isNullOrUndefined } from "util";
-import { Metadata, OperationGroup, Operation, Parameter } from "@azure-tools/codemodel";
+import { isNullOrUndefined, isUndefined, isNull } from "util";
+import { Metadata, OperationGroup, Operation, Parameter, CodeModel } from "@azure-tools/codemodel";
 import { SelectType } from "./schema";
+import { indent } from "@azure-tools/codegen";
 
 export class Helper {
     public static isEmptyString(str): boolean {
@@ -12,7 +13,7 @@ export class Helper {
      * @param str
      */
     public static containsSpecialChar(str: string): boolean {
-        return !/^[a-zA-Z0-9]+$/.test(str);
+        return !/^[a-zA-Z0-9_]+$/.test(str);
     }
 
     /**
@@ -40,7 +41,7 @@ export class Helper {
      *  set to 'true' to return MatchAll regex when str is null/undefined/string.empty
      *  set to 'false' to return null when str is null/undefined/string.empty
      */
-    public static toRegex(str: string, emptyAsMatchAll: boolean = false): RegExp {
+    public static createRegex(str: string, emptyAsMatchAll: boolean = false): RegExp {
         let MATCH_ALL = /^.*$/g;
         if (isNullOrUndefined(str) || str.length === 0) {
             if (emptyAsMatchAll)
