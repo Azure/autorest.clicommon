@@ -9,7 +9,8 @@ import {
 } from "@azure-tools/autorest-extension-base";
 import { serialize, deserialize } from "@azure-tools/codegen";
 import { CliDirectiveManager } from "./cliDirective";
-import { isNullOrUndefined } from "util";
+import { isNullOrUndefined, isString, isObject, isArray } from "util";
+import { keys, items } from "@azure-tools/linq";
 
 export class Modifier {
     private manager: CliDirectiveManager;
@@ -61,21 +62,37 @@ export class Modifier {
 
     public generateReport(): string {
         const INDENT = 2;
-        const GROUP_INDENT = 4;
-        const OPERATION_INDENT = 6;
-        const PARAM_INDENT = 8;
-        let generateValue = (o: any, i: number) => `'${o.language.default.name}'` +
+        const NEW_LINE = '\n';
+        // TODO: refactor the yaml simple parser to helper
+        let withIndent = (i: number, s: string = '') => `${' '.repeat(i)}${s}`;
+        let nextIndent = (i, level = 1) => i + INDENT * level;
+        let formatValue = (o: any, i: number) => {
+            if (isString(o))
+                return o;
+            else if (isArray(o))
+                return o.map(v => NEW_LINE + withIndent(i, "- " + formatValue(v, nextIndent(i, 2 /* one more indent for array*/)))).join('');
+            else if (isObject(o))
+                return keys(o).select(k => NEW_LINE + `${withIndent(i, k)}: ${formatValue(o[k], nextIndent(i))}`).join('');
+            else
+                return o.toString();
+        };
+        let generateCliValue = (o: any, i: number) => o.language.default.name +
             (isNullOrUndefined(o.language.cli) ? '' : Object.getOwnPropertyNames(o.language.cli)
                 .filter(key => o.language.cli[key] !== o.language.default[key])
-                .reduce((pv, cv, ci) => pv.concat((ci === 0 ? `\n${' '.repeat(i)}cli:` : '') + `\n${' '.repeat(i + INDENT)}${cv}: ${o.language.cli[cv]}`), ''));
+                .reduce((pv, cv, ci) => pv.concat((ci === 0 ? NEW_LINE + withIndent(i, 'cli:') : '') +
+                    NEW_LINE + `${withIndent(nextIndent(i), cv)}: ${formatValue(o.language.cli[cv], nextIndent(i, 2 /*next next level*/))}`), ''));
 
         // TODO: include schema... when we support schema in modifier
-        return this.codeModel.operationGroups.map(
-            v => `- operationGroup: ${generateValue(v, GROUP_INDENT)}\n`.concat(
-                v.operations.map(vv => `  - operation: ${generateValue(vv, OPERATION_INDENT)}\n`.concat(
-                    vv.request.parameters.map(vvv => `    - parameter: ${generateValue(vvv, PARAM_INDENT)}\n`)
-                        .join(''))
-                ).join(''))
-        ).join('');
+        let initialIndent = 0;
+        return `${withIndent(initialIndent)}operationGroups:${NEW_LINE}`.concat(
+            this.codeModel.operationGroups.map(
+                v => `${withIndent(initialIndent)}- operationGroupName: ${generateCliValue(v, nextIndent(initialIndent))}` + 
+                    `${NEW_LINE}${withIndent(nextIndent(initialIndent))}operations:${NEW_LINE}`.concat(
+                        v.operations.map(vv => `${withIndent(nextIndent(initialIndent))}- operationName: ${generateCliValue(vv, nextIndent(initialIndent, 2))}` + 
+                        `${NEW_LINE}${withIndent(nextIndent(initialIndent,2))}parameters:${NEW_LINE}`.concat(
+                            vv.request.parameters.map(vvv => `${withIndent(nextIndent(initialIndent, 2))}- parameterName: ${generateCliValue(vvv, nextIndent(initialIndent, 3))}` + NEW_LINE)
+                            .join(''))
+                    ).join(''))
+            ).join(''));
     }
 }

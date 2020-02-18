@@ -6,29 +6,32 @@ export type NamingStyle = 'camel' | 'pascal' | 'snake' | 'upper' | 'kebab' | 'sp
 export type SelectType = 'operationGroup' | 'operation' | 'parameter';
 
 export namespace CliConst {
-        export const CLI: string = "cli";
-        export const CLI_DIRECTIVE: string = "cli-directive";
+    // Todo: merge this into code model?
+    export const CLI: string = "cli";
+    export const CLI_FORMATTABLE: string = "formatTable";
+    export const CLI_FORMATTABLE_PROPERTIES: string = "properties";
+    export const CLI_DIRECTIVE: string = "cli-directive";
 
-        export class NamingStyle {
-            /** camelCase */
-            static readonly camel = "camel";
-            /** PascalCase */
-            static readonly pascal = "pascal";
-            /** snake_case */
-            static readonly snake = "snake";
-            /** kebab-case */
-            static readonly kebab = "kebab";
-            /** space case */
-            static readonly space = "space";
-            /** UPPER_CASE */
-            static readonly upper = "upper";
-        };
+    export class NamingStyle {
+        /** camelCase */
+        static readonly camel = "camel";
+        /** PascalCase */
+        static readonly pascal = "pascal";
+        /** snake_case */
+        static readonly snake = "snake";
+        /** kebab-case */
+        static readonly kebab = "kebab";
+        /** space case */
+        static readonly space = "space";
+        /** UPPER_CASE */
+        static readonly upper = "upper";
+    };
 
-        export class SelectType {
-            static readonly operationGroup = 'operationGroup';
-            static readonly operation = 'operation';
-            static readonly parameter = 'parameter';
-        }
+    export class SelectType {
+        static readonly operationGroup = 'operationGroup';
+        static readonly operation = 'operation';
+        static readonly parameter = 'parameter';
+    }
 }
 
 export namespace CliCommonSchema {
@@ -61,6 +64,10 @@ export namespace CliCommonSchema {
             parameter?: string;
         }
 
+        export interface FormatTableClause {
+            properties?: string[];
+        }
+
         export interface Directive {
             select?: SelectType;
             where?: WhereClause;
@@ -69,6 +76,7 @@ export namespace CliCommonSchema {
             setName?: SetNameClause;
             log?: LogClause;
             replace?: ReplaceClause;
+            formatTable?: FormatTableClause;
         }
 
         export interface NamingStyleSetting {

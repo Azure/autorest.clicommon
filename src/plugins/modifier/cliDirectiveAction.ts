@@ -19,6 +19,12 @@ export abstract class Action {
     }
     public abstract process(metadata: Metadata): void;
 
+    protected createNodeIfNotExist(metadata: Metadata, nodeName: string) : any {
+        if (isNullOrUndefined(metadata.language[CliConst.CLI][nodeName]))
+            metadata.language[CliConst.CLI][nodeName] = {};
+        return metadata.language[CliConst.CLI][nodeName];
+    }
+
     protected setProperty(metadata: Metadata, key: string, value: any): void {
         if (isNullOrUndefined(metadata.language[CliConst.CLI]))
             metadata.language[CliConst.CLI] = {};
@@ -56,6 +62,9 @@ export abstract class Action {
                 case 'replace':
                     arr.push(new ActionReplace(value));
                     break;
+                case 'formattable':
+                    arr.push(new ActionFormatTable(value));
+                    break;
                 default:
                     // TODO: better to log instead of throw here?
                     throw Error("Unknown directive operation");
@@ -80,6 +89,20 @@ class ActionSet extends Action {
     public process(metadata: Metadata): void {
         for (var key in this.directiveSet) {
             this.setProperty(metadata, key, this.directiveSet[key]);
+        }
+    }
+}
+
+class ActionFormatTable extends Action {
+    
+    constructor(private directiveFormatTable: CliCommonSchema.CliDirective.FormatTableClause) {
+        super();
+    }
+
+    public process(metadata: Metadata): void {
+        if (!isNullOrUndefined(this.directiveFormatTable.properties)) {
+            var n = this.createNodeIfNotExist(metadata, CliConst.CLI_FORMATTABLE);
+            n[CliConst.CLI_FORMATTABLE_PROPERTIES] = this.directiveFormatTable.properties;
         }
     }
 }
