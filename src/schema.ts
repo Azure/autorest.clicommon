@@ -4,6 +4,7 @@ import {
 
 export type NamingStyle = 'camel' | 'pascal' | 'snake' | 'upper' | 'kebab' | 'space';
 export type SelectType = 'operationGroup' | 'operation' | 'parameter';
+export type LanguageType = 'cli' | 'default';
 
 export namespace CliConst {
     // Todo: merge this into code model?
@@ -35,6 +36,7 @@ export namespace CliConst {
 }
 
 export namespace CliCommonSchema {
+
     export namespace CliDirective {
 
         export interface LogClause {
@@ -78,18 +80,13 @@ export namespace CliCommonSchema {
             replace?: ReplaceClause;
             formatTable?: FormatTableClause;
         }
+    }
 
-        export interface NamingStyleSetting {
-            parameter?: NamingStyle
-            property?: NamingStyle
-            operation?: NamingStyle
-            operationGroup?: NamingStyle
-            choice?: NamingStyle
-            choiceValue?: NamingStyle
-            constant?: NamingStyle
-            type?: NamingStyle
-            client?: NamingStyle
-        }
+    export interface NamingConvention {
+        applyTo?: LanguageType[]
+        parameter?: NamingStyle
+        operation?: NamingStyle
+        operationGroup?: NamingStyle
     }
 
     export namespace CodeModel {

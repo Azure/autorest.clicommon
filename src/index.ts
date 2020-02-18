@@ -16,14 +16,15 @@ extension.Add("clicommon", async autoRestApi => {
     Logger.Initialize(session);
 
     // at this point namer and modifirers are in a single plug-in
-    const namer = await new CommonNamer(session).init();
-    let result = namer.process();
-    autoRestApi.WriteFile("code-model-v4-cli-namer.yaml", serialize(result));
-
     const modifier = await new Modifier(session).init();
-    result = modifier.process();
+    let result = modifier.process();
     autoRestApi.WriteFile("code-model-v4-cli-modifier.yaml", serialize(result));
-    autoRestApi.WriteFile("code-model-v4-cli-modifier-report.yaml", modifier.generateReport());
+    autoRestApi.WriteFile("code-model-v4-cli-modifier-report.yaml", Helper.generateReport(session.model));
+
+    const namer = await new CommonNamer(session).init();
+    result = namer.process();
+    autoRestApi.WriteFile("code-model-v4-cli-namer.yaml", serialize(result));
+    autoRestApi.WriteFile("code-model-v4-cli-namer-report.yaml", Helper.generateReport(session.model));
 
     // add test scenario from common settings
     let cliCommonSettings = await autoRestApi.GetValue("cli");

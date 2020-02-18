@@ -19,6 +19,16 @@ modelerfour:
         operation: 'snake'
         operationGroup:  'snake'
 
+clicommon:
+    # default naming convention from clicommon, possible value: pascal|camel|snake|upper|kebab|space
+    naming: 
+        applyTo: 
+          - 'cli'
+          - 'default'
+        parameter: 'camel'
+        operation: 'pascal'
+        operationGroup:  'pascal'
+
 pipeline:
     clicommon:
         input: modelerfour/identity

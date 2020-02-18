@@ -1,10 +1,14 @@
-import { CodeModel, codeModelSchema, Property, Language} from '@azure-tools/codemodel';
+import { CodeModel, codeModelSchema, Property, Language, Metadata, Operation, OperationGroup, Parameter} from '@azure-tools/codemodel';
 import { Session, Host, startSession, Channel } from '@azure-tools/autorest-extension-base';
 import { serialize, deserialize } from '@azure-tools/codegen';
 import { values, items, length, Dictionary } from '@azure-tools/linq';
+import { isNullOrUndefined } from 'util';
+import { CliCommonSchema, CliConst, LanguageType } from '../schema';
+import { Helper } from '../helper';
 
 export class CommonNamer {
     codeModel: CodeModel
+    namingConvention: CliCommonSchema.NamingConvention
 
     constructor(protected session: Session<CodeModel>) {
         this.codeModel = session.model;
@@ -12,6 +16,7 @@ export class CommonNamer {
 
     async init() {
         // any configuration if necessary
+        this.namingConvention = await this.session.getValue("clicommon.naming");
         return this;
     }
 
@@ -23,14 +28,66 @@ export class CommonNamer {
         return this.codeModel;
     }
 
+    /**
+     * only support Operation, OperationGroup, Parameter for now
+     * @param oldName
+     * @param metadata
+     */
+    public convertNamingConvention(oldName: string, metadata: Metadata) {
+        var style: string = null;
+
+        if (isNullOrUndefined(this.namingConvention))
+            return oldName;
+
+        // we only support OperationGroup, Operation and Parameter for now. Let's add more when needed
+        if (metadata instanceof OperationGroup)
+            style = this.namingConvention.operationGroup;
+        else if (metadata instanceof Operation)
+            style = this.namingConvention.operation;
+        else if (metadata instanceof Parameter)
+            style = this.namingConvention.parameter;
+
+        if (Helper.isEmptyString(style)) {
+            return oldName;
+        }
+
+        const SEP = '_';
+        switch (style) {
+            case CliConst.NamingStyle.camel:
+                return oldName.split(SEP).map((value, index) => (index == 0 ? value : Helper.UpcaseFirstLetter(value))).join('');
+            case CliConst.NamingStyle.kebab:
+                return oldName.replace(SEP, '-');
+            case CliConst.NamingStyle.snake:
+                return oldName;
+            case CliConst.NamingStyle.pascal:
+                return oldName.split(SEP).map((value) => Helper.UpcaseFirstLetter(value)).join('');
+            case CliConst.NamingStyle.space:
+                return oldName.replace(SEP, ' ');
+            case CliConst.NamingStyle.upper:
+                return oldName.toUpperCase();
+            default:
+                throw Error(`Unknown name style: ${style}`)
+        }
+    }
+
     getCliName(obj: any) {
         if(obj == null || obj.language == null) {
             this.session.message({Channel: Channel.Warning, Text: "working in obj has problems"});
             return;
         }
-        obj.language['cli'] = new Language();
-        obj.language['cli']['name'] = obj.language.default.name;
-        obj.language['cli']['description'] = obj.language.default.description;
+        if (isNullOrUndefined(obj.language['cli']))
+            obj.language['cli'] = new Language();
+        if (isNullOrUndefined(obj.language['cli']['name']))
+            obj.language['cli']['name'] = obj.language.default.name;
+        if(isNullOrUndefined(obj.language['cli']['description']))
+            obj.language['cli']['description'] = obj.language.default.description;
+
+        let lan: LanguageType[] = this.namingConvention?.applyTo;
+        for (let l of lan) {
+            if (!isNullOrUndefined(obj.language[l]) && !isNullOrUndefined(obj.language[l]['name']))
+                obj.language[l]['name'] = this.convertNamingConvention(obj.language[l]['name'], obj);
+        }
+
     } 
 
     processSchemas() {

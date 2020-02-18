@@ -19,13 +19,15 @@ export abstract class Action {
     }
     public abstract process(metadata: Metadata): void;
 
-    protected createNodeIfNotExist(metadata: Metadata, nodeName: string) : any {
+    protected createCliSubNode(metadata: Metadata, nodeName: string) : any {
+        if (isNullOrUndefined(metadata.language[CliConst.CLI]))
+            metadata.language[CliConst.CLI] = {};
         if (isNullOrUndefined(metadata.language[CliConst.CLI][nodeName]))
             metadata.language[CliConst.CLI][nodeName] = {};
         return metadata.language[CliConst.CLI][nodeName];
     }
 
-    protected setProperty(metadata: Metadata, key: string, value: any): void {
+    protected setCliProperty(metadata: Metadata, key: string, value: any): void {
         if (isNullOrUndefined(metadata.language[CliConst.CLI]))
             metadata.language[CliConst.CLI] = {};
         metadata.language[CliConst.CLI][key] = value;
@@ -49,12 +51,6 @@ export abstract class Action {
                     break;
                 case 'set':
                     arr.push(new ActionSet(value));
-                    break;
-                case 'setname':
-                    var naming = await session.getValue("clicommon.nameing", null);
-                    if (naming === null)
-                        naming = await session.getValue("modelerfour.naming", {})
-                    arr.push(new ActionSetName(value, naming));
                     break;
                 case 'log':
                     logNeeded = true;
@@ -88,7 +84,8 @@ class ActionSet extends Action {
 
     public process(metadata: Metadata): void {
         for (var key in this.directiveSet) {
-            this.setProperty(metadata, key, this.directiveSet[key]);
+            let value = this.directiveSet[key];
+            this.setCliProperty(metadata, key, value);
         }
     }
 }
@@ -101,71 +98,10 @@ class ActionFormatTable extends Action {
 
     public process(metadata: Metadata): void {
         if (!isNullOrUndefined(this.directiveFormatTable.properties)) {
-            var n = this.createNodeIfNotExist(metadata, CliConst.CLI_FORMATTABLE);
+            var n = this.createCliSubNode(metadata, CliConst.CLI_FORMATTABLE);
             n[CliConst.CLI_FORMATTABLE_PROPERTIES] = this.directiveFormatTable.properties;
         }
     }
-}
-
-class ActionSetName extends Action {
-    private newName: string;
-    private naming: CliCommonSchema.CliDirective.NamingStyleSetting;
-
-    /**
-     * 
-     * @param newNameInKebabCase new name in kebab-case
-     * @param style
-     */
-    constructor(private directiveSetName: CliCommonSchema.CliDirective.SetNameClause, private nameStyleSetting: CliCommonSchema.CliDirective.NamingStyleSetting) {
-        super();
-        this.newName = directiveSetName.name;
-        this.naming = nameStyleSetting;
-    }
-
-    public process(metadata: Metadata): void {
-        Helper.validateNullOrUndefined(this.directiveSetName.name, 'name');
-
-        var name: string = this.newName;
-        var style: string = null;
-
-        if (metadata instanceof OperationGroup)
-            style = this.naming.operationGroup;
-        else if (metadata instanceof Operation)
-            style = this.naming.operation;
-        else if (metadata instanceof Parameter)
-            style = this.naming.parameter;
-        else 
-            Logger.instance.error(`Unsupported metadata type for naming action: ${typeof (metadata)}`);
-
-        if (Helper.isEmptyString(style)) {
-            Logger.instance.warning("No naming style found, use kebab-case as default");
-            style = CliConst.NamingStyle.kebab;
-        }
-
-        switch (style) {
-            case CliConst.NamingStyle.camel:
-                name = this.newName.split('-').map((value, index) => (index == 0 ? value : Helper.UpcaseFirstLetter(value))).join('');
-                break;
-            case CliConst.NamingStyle.kebab:
-                name = this.newName;
-                break;
-            case CliConst.NamingStyle.snake:
-                name = this.newName.replace('-', '_');
-                break;
-            case CliConst.NamingStyle.pascal:
-                name = this.newName.split('-').map((value) => Helper.UpcaseFirstLetter(value)).join('');
-                break;
-            case CliConst.NamingStyle.space:
-                name = this.newName.replace('-', ' ');
-                break;
-            case CliConst.NamingStyle.upper:
-                name = this.newName.split('-').map(value => value.toUpperCase).join('_');
-                break;
-            default:
-                throw Error(`Unknown name style: ${style}`)
-        }
-        this.setProperty(metadata, "name", name);
-    };
 }
 
 class ActionLog extends Action {
@@ -194,11 +130,11 @@ class ActionReplace extends Action {
 
         var original: string = metadata.language.default[this.actionReplace.field].toString();
         if (isNullOrUndefined(this.actionReplace.isRegex) || this.actionReplace.isRegex == false) {
-            metadata.language[CliConst.CLI][this.actionReplace.field] = original.replace(this.actionReplace.old, this.actionReplace.new);
+            this.setCliProperty(metadata, this.actionReplace.field, original.replace(this.actionReplace.old, this.actionReplace.new));
         }
         else {
             var regex = new RegExp(this.actionReplace.old);
-            metadata.language[CliConst.CLI][this.actionReplace.field] = original.replace(regex, this.actionReplace.new);
+            this.setCliProperty(metadata, this.actionReplace.field, original.replace(regex, this.actionReplace.new));
         }
     }
 }
