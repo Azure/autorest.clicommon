@@ -31,7 +31,7 @@ extension.Add("clicommon", async autoRestApi => {
 
         // add test scenario from common settings
         if (cliCommonSettings) {
-            result["test-scenario"] = cliCommonSettings['test-scenario'];
+            result["test-scenario"] = cliCommonSettings['test-scenario'] || cliCommonSettings['test-setup'];
         }
 
         // emit a file (all input files concatenated)
