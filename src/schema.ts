@@ -3,7 +3,7 @@ import {
 } from "@azure-tools/codemodel";
 
 export type NamingStyle = 'camel' | 'pascal' | 'snake' | 'upper' | 'kebab' | 'space';
-export type SelectType = 'operationGroup' | 'operation' | 'parameter';
+export type SelectType = 'operationGroup' | 'operation' | 'parameter' | 'objectSchema' | 'property';
 export type LanguageType = 'cli' | 'default';
 
 export namespace CliConst {
@@ -32,6 +32,8 @@ export namespace CliConst {
         static readonly operationGroup = 'operationGroup';
         static readonly operation = 'operation';
         static readonly parameter = 'parameter';
+        static readonly objectSchema = 'objectSchema';
+        static readonly property = 'property';
     }
 }
 
@@ -64,6 +66,8 @@ export namespace CliCommonSchema {
             operationGroup?: string;
             operation?: string;
             parameter?: string;
+            objectSchema?: string;
+            property?: string;
         }
 
         export interface FormatTableClause {
@@ -87,13 +91,17 @@ export namespace CliCommonSchema {
         parameter?: NamingStyle
         operation?: NamingStyle
         operationGroup?: NamingStyle
+        property?: NamingStyle
+        type?: NamingStyle
     }
 
     export namespace CodeModel {
         export interface NodeDescriptor {
-            operationGroupName: string;
-            operationName: string;
-            parameterName: string;
+            operationGroupName?: string;
+            operationName?: string;
+            parameterName?: string;
+            objectSchemaName?: string;
+            propertyName?: string;
             metadata: Metadata;
         }
     }

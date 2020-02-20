@@ -1,7 +1,7 @@
 import { CliCommonSchema, SelectType, CliConst } from "../../schema"
 import { isNullOrUndefined } from "util";
 import { Helper } from "../../helper"
-import { Metadata } from "@azure-tools/codemodel";
+import { Metadata, Parameter } from "@azure-tools/codemodel";
 
 export abstract class NodeSelector {
     constructor() {
@@ -21,10 +21,10 @@ export abstract class NodeSelector {
             case CliConst.SelectType.operationGroup:
             case CliConst.SelectType.operation:
             case CliConst.SelectType.parameter:
+            case CliConst.SelectType.objectSchema:
+            case CliConst.SelectType.property:
                 return new CommandNodeSelector(
-                    directive.where.operationGroup,
-                    directive.where.operation,
-                    directive.where.parameter,
+                    directive.where,
                     directive.select);
             default:
                 throw Error(`Unexpected SelectType: ${JSON.stringify(directive.select)}`);
@@ -44,17 +44,20 @@ class MatchAllNodeSelector extends NodeSelector {
 
 class CommandNodeSelector extends NodeSelector {
 
-    constructor(private operationGroupName: string, private operationName: string, private parameterName: string, private selectType: SelectType) {
+    constructor(private where: CliCommonSchema.CliDirective.WhereClause, private selectType: SelectType) {
         super();
 
     }
 
     public match(descriptor: CliCommonSchema.CodeModel.NodeDescriptor): boolean {
 
+        let match = (e, v) => isNullOrUndefined(e) || Helper.matchRegex(Helper.createRegex(e), v);
         return Helper.ToSelectType(descriptor.metadata) === this.selectType &&
-            Helper.matchRegex(Helper.createRegex(this.parameterName, true /*emptyAsMatchAll*/), descriptor.parameterName) &&
-            Helper.matchRegex(Helper.createRegex(this.operationName, true /*emptyAsMatchAll*/), descriptor.operationName) &&
-            Helper.matchRegex(Helper.createRegex(this.operationGroupName, true /*emptyAsMatchAll*/), descriptor.operationGroupName);
+            match(this.where.objectSchema, descriptor.objectSchemaName) &&
+            match(this.where.property, descriptor.propertyName) &&
+            match(this.where.operationGroup, descriptor.operationGroupName) &&
+            match(this.where.operation, descriptor.operationName) &&
+            match(this.where.parameter, descriptor.parameterName);
     }
 
 }

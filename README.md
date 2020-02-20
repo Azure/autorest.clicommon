@@ -18,6 +18,8 @@ modelerfour:
         parameter: 'snake'
         operation: 'snake'
         operationGroup:  'snake'
+        property: 'snake'
+        type:  'snake'
 
 clicommon:
     # default naming convention from clicommon, possible value: pascal|camel|snake|upper|kebab|space
@@ -28,6 +30,8 @@ clicommon:
         parameter: 'camel'
         operation: 'pascal'
         operationGroup:  'pascal'
+        property: 'camel'
+        type:  'pascal'
 
 pipeline:
     clicommon:

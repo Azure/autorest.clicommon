@@ -30,20 +30,29 @@ export class Modifier {
 
     public process(): CodeModel {
 
-        // Only operationGroup, operation, parameter SelectType is supported, so only go through operationGroups in code model
-        // TODO: perf improvement may be needed in the future in the go-through, let's do it when needed
+        this.codeModel.schemas.objects.forEach(s => {
+            this.manager.process({
+                objectSchemaName: s.language.default.name,
+                metadata: s,
+            });
+            s.properties.forEach(p => {
+                this.manager.process({
+                    objectSchemaName: s.language.default.name,
+                    propertyName: p.language.default.name,
+                    metadata: p,
+                })
+            });
+        });
+
         for (var group of this.codeModel.operationGroups) {
             this.manager.process({
                 operationGroupName: group.language.default.name,
-                operationName: '',
-                parameterName: '',
                 metadata: group
             })
             for (var op of group.operations) {
                 this.manager.process({
                     operationGroupName: group.language.default.name,
                     operationName: op.language.default.name,
-                    parameterName: '',
                     metadata: op
                 })
                 for (var param of op.request.parameters) {

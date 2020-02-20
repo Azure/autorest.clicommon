@@ -1,5 +1,5 @@
 import { isNullOrUndefined, isUndefined, isNull, isString, isArray, isObject } from "util";
-import { Metadata, OperationGroup, Operation, Parameter, CodeModel } from "@azure-tools/codemodel";
+import { Metadata, OperationGroup, Operation, Parameter, CodeModel, ObjectSchema, Property } from "@azure-tools/codemodel";
 import { SelectType } from "./schema";
 import { indent } from "@azure-tools/codegen";
 import { keys } from "@azure-tools/linq";
@@ -76,43 +76,60 @@ export class Helper {
         else if (metadata instanceof Operation)
             return 'operation';
         else if (metadata instanceof Parameter)
-            return 'parameter'
+            return 'parameter';
+        else if (metadata instanceof ObjectSchema)
+            return 'objectSchema';
+        else if (metadata instanceof Property)
+            return 'property';
         throw Error(`Unexpected metadata type: ${typeof (metadata)}`);
     }
 
     public static generateReport(codeModel: CodeModel): string {
-        const INDENT = 2;
+        const INDENT = '  ';
         const NEW_LINE = '\n';
-        // TODO: refactor the yaml simple parser to helper
-        let withIndent = (i: number, s: string = '') => `${' '.repeat(i)}${s}`;
-        let nextIndent = (i, level = 1) => i + INDENT * level;
+        let initialIndent = 1;
+        let tab = (extra: number = 0) => INDENT.repeat(initialIndent + extra);
         let formatValue = (o: any, i: number) => {
             if (isString(o))
                 return o;
             else if (isArray(o))
-                return o.map(v => NEW_LINE + withIndent(i, "- " + formatValue(v, nextIndent(i, 2 /* one more indent for array*/)))).join('');
+                return o.map(v => NEW_LINE + tab(i) + "- " + formatValue(v, i + 2/* one more indent for array*/)).join('');
             else if (isObject(o))
-                return keys(o).select(k => NEW_LINE + `${withIndent(i, k)}: ${formatValue(o[k], nextIndent(i))}`).join('');
+                return keys(o).select(k => NEW_LINE + tab(i) + `${k}: ${formatValue(o[k], i + 1)}`).join('');
             else
                 return o.toString();
         };
         let generateCliValue = (o: any, i: number) => o.language.default.name +
             (isNullOrUndefined(o.language.cli) ? '' : Object.getOwnPropertyNames(o.language.cli)
                 .filter(key => o.language.cli[key] !== o.language.default[key])
-                .reduce((pv, cv, ci) => pv.concat((ci === 0 ? NEW_LINE + withIndent(i, 'cli:') : '') +
-                    NEW_LINE + `${withIndent(nextIndent(i), cv)}: ${formatValue(o.language.cli[cv], nextIndent(i, 2 /*next next level*/))}`), ''));
+                .reduce((pv, cv, ci) => pv.concat((ci === 0 ? (NEW_LINE + tab(i) + 'cli:') : '') +
+                    NEW_LINE + tab(i + 1) + `${cv}: ${formatValue(o.language.cli[cv], i + 2 /*next next level*/)}`), ''));
 
         // TODO: include schema... when we support schema in modifier
-        let initialIndent = 0;
-        return `${withIndent(initialIndent)}operationGroups:${NEW_LINE}`.concat(
-            codeModel.operationGroups.map(
-                v => `${withIndent(initialIndent)}- operationGroupName: ${generateCliValue(v, nextIndent(initialIndent))}` +
-                    `${NEW_LINE}${withIndent(nextIndent(initialIndent))}operations:${NEW_LINE}`.concat(
-                        v.operations.map(vv => `${withIndent(nextIndent(initialIndent))}- operationName: ${generateCliValue(vv, nextIndent(initialIndent, 2))}` +
-                            `${NEW_LINE}${withIndent(nextIndent(initialIndent, 2))}parameters:${NEW_LINE}`.concat(
-                                vv.request.parameters.map(vvv => `${withIndent(nextIndent(initialIndent, 2))}- parameterName: ${generateCliValue(vvv, nextIndent(initialIndent, 3))}` + NEW_LINE)
+        let s = '';
+        s = s + `operationGroups:${NEW_LINE}` +
+            `${tab()}all:${NEW_LINE}`.concat(codeModel.operationGroups.map(
+                v => `${tab(1)}- operationGroupName: ${generateCliValue(v, 2)}` +
+                    `${NEW_LINE}${tab(2)}operations:${NEW_LINE}`.concat(
+                        v.operations.map(vv => `${tab(2)}- operationName: ${generateCliValue(vv, 3)}` +
+                            `${NEW_LINE}${tab(3)}parameters:${NEW_LINE}`.concat(
+                                vv.request.parameters.map(vvv => `${tab(3)}- parameterName: ${generateCliValue(vvv, 4)}${NEW_LINE}` +
+                                    ((vvv.protocol.http.in === 'body')?`${tab(4)}bodySchema: ${vvv.schema.language.default.name}${NEW_LINE}` : ''))
                                     .join(''))
                         ).join(''))
             ).join(''));
+        s = s + `schemas:${NEW_LINE}` +
+            `${tab()}objects:${NEW_LINE}` +
+            `${tab(1)}all:${NEW_LINE}`.concat(codeModel.schemas.objects.map(
+                v => `${tab(2)}- schemaName: ${generateCliValue(v, 3)}` +
+                    `${NEW_LINE}${tab(3)}properties:${NEW_LINE}`.concat(
+                        v.properties.map(vv => `${tab(4)}- propertyName: ${generateCliValue(vv, 5)}${NEW_LINE}`)
+                            .join('')))
+                .join(''));
+        return s;
+    }
+
+    public static generateSchemaSection(codeModel: CodeModel) {
+
     }
 }
