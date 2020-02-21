@@ -57,14 +57,6 @@ export class Helper {
         return new RegExp(`^${str}$`, "g");
     }
 
-    public static UpcaseFirstLetter(str: string) {
-        if (this.isEmptyString(str))
-            return str;
-        if (str.length == 1)
-            return str.toUpperCase();
-        return str[0].toUpperCase().concat(str.substr(1).toLowerCase());
-    }
-
     public static validateNullOrUndefined(obj: any, name: string): void {
         if (isNullOrUndefined(obj))
             throw Error(`Validation failed: '${name}' is null or undefined`)
@@ -97,7 +89,7 @@ export class Helper {
             else if (isObject(o))
                 return keys(o).select(k => NEW_LINE + tab(i) + `${k}: ${formatValue(o[k], i + 1)}`).join('');
             else
-                return o.toString();
+                return isUndefined(o) ? '{undefined}' : isNull(o) ? '{null}' : o.toString();
         };
         let generateCliValue = (o: any, i: number) => o.language.default.name +
             (isNullOrUndefined(o.language.cli) ? '' : Object.getOwnPropertyNames(o.language.cli)

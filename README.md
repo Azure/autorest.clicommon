@@ -24,9 +24,7 @@ modelerfour:
 clicommon:
     # default naming convention from clicommon, possible value: pascal|camel|snake|upper|kebab|space
     naming: 
-        applyTo: 
-          - 'cli'
-          - 'default'
+        singularize: true
         parameter: 'camel'
         operation: 'pascal'
         operationGroup:  'pascal'

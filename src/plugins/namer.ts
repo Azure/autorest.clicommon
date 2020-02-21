@@ -5,11 +5,13 @@ import { values, items, length, Dictionary } from '@azure-tools/linq';
 import { isNullOrUndefined } from 'util';
 import { CliCommonSchema, CliConst, LanguageType } from '../schema';
 import { Helper } from '../helper';
+import { pascalCase, EnglishPluralizationService } from '@azure-tools/codegen';
 
 export class CommonNamer {
     codeModel: CodeModel
     namingConvention: CliCommonSchema.NamingConvention
     flag: Set<Metadata>
+    glossary: string[]
 
     constructor(protected session: Session<CodeModel>) {
         this.codeModel = session.model;
@@ -18,6 +20,7 @@ export class CommonNamer {
     async init() {
         // any configuration if necessary
         this.namingConvention = await this.session.getValue("clicommon.naming");
+        this.glossary = await this.session.getValue("clicommon.glossary", []);
         return this;
     }
 
@@ -30,17 +33,30 @@ export class CommonNamer {
         this.flag = null;
         return this.codeModel;
     }
+    
+    singularize(word: string): string {
+        let loWord = word.toLowerCase();
+        if (this.glossary.findIndex(v => v === loWord) >= 0)
+            return word;
+
+        const eps = new EnglishPluralizationService();
+        eps.addWord('Database', 'Databases');
+        eps.addWord('database', 'databases');
+        return eps.singularize(word);
+    }
 
     /**
-     * only support Operation, OperationGroup, Parameter for now
+     * only support Operation, OperationGroup, Parameter, Property, ObjectSchema for now
      * @param oldName
      * @param metadata
      */
-    public convertNamingConvention(oldName: string, metadata: Metadata) {
+    public convertNamingConvention(metadata: Metadata) {
         var style: string = null;
 
         if (isNullOrUndefined(this.namingConvention))
-            return oldName;
+            return;
+        if (isNullOrUndefined(metadata.language['cli']))
+            return;
 
         // we only support OperationGroup, Operation and Parameter for now. Let's add more when needed
         if (metadata instanceof OperationGroup)
@@ -55,34 +71,44 @@ export class CommonNamer {
             style = this.namingConvention.type;
 
         if (Helper.isEmptyString(style)) {
-            return oldName;
+            return;
         }
+
+        let oldName: string = metadata.language['cli']['name'];
+        let glossary: string[] = metadata.language['cli']['glossary'];
+        if (isNullOrUndefined(glossary))
+            glossary = [];
+
+        let getSingleArr = (n: string) => n.split(SEP).map(v => this.singularize(v));
+        let getPluralArr = (n: string) => n.split(SEP);
+        let up1 = (n: string) => n.length == 1 ? n.toUpperCase() : n[0].toUpperCase().concat(n.substr(1).toLowerCase());
 
         const SEP = '_';
         let newName: string;
         switch (style) {
             case CliConst.NamingStyle.camel:
-                newName = oldName.split(SEP).map((value, index) => (index == 0 ? value : Helper.UpcaseFirstLetter(value))).join('');
+                newName = (this.namingConvention.singularize ? getSingleArr(oldName) : getPluralArr(oldName)).map((v, i) => i === 0 ? v : up1(v)).join('');
                 break;
             case CliConst.NamingStyle.kebab:
-                newName = oldName.replace(SEP, '-');
+                newName = this.namingConvention.singularize ? getSingleArr(oldName).join('-') : oldName.replace(SEP, '-');
                 break;
             case CliConst.NamingStyle.snake:
-                newName = oldName;
+                newName = this.namingConvention.singularize ? getSingleArr(oldName).join('_') : oldName;
                 break;
             case CliConst.NamingStyle.pascal:
-                newName = oldName.split(SEP).map((value) => Helper.UpcaseFirstLetter(value)).join('');
+                newName = (this.namingConvention.singularize ? getSingleArr(oldName) : getPluralArr(oldName)).map(v => up1(v)).join('');
                 break;
             case CliConst.NamingStyle.space:
-                newName = oldName.replace(SEP, ' ');
+                newName = this.namingConvention.singularize ? getSingleArr(oldName).join(' ') : oldName.replace(SEP, ' ');
                 break;
             case CliConst.NamingStyle.upper:
-                newName = oldName.toUpperCase();
+                newName = this.namingConvention.singularize ? getSingleArr(oldName).join('_').toUpperCase() : oldName.toUpperCase();
                 break;
             default:
                 throw Error(`Unknown name style: ${style}`)
         }
-        return newName;
+
+        metadata.language['cli']['name'] = newName;
     }
 
     getCliName(obj: any) {
@@ -99,11 +125,13 @@ export class CommonNamer {
 
         if (!this.flag.has(obj)) {
             this.flag.add(obj);
-            let lan: LanguageType[] = this.namingConvention?.applyTo;
-            for (let l of lan) {
-                if (!isNullOrUndefined(obj.language[l]) && !isNullOrUndefined(obj.language[l]['name']))
-                    obj.language[l]['name'] = this.convertNamingConvention(obj.language[l]['name'], obj);
-            }
+            this.convertNamingConvention(obj);
+            // TODO: shall we apply to default?
+            //let lan: LanguageType[] = this.namingConvention?.applyTo;
+            //for (let l of lan) {
+            //    if (!isNullOrUndefined(obj.language[l]) && !isNullOrUndefined(obj.language[l]['name']))
+            //        obj.language[l]['name'] = this.convertNamingConvention(obj.language[l]['name'], obj);
+            //}
         }
     }
 

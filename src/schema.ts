@@ -87,7 +87,7 @@ export namespace CliCommonSchema {
     }
 
     export interface NamingConvention {
-        applyTo?: LanguageType[]
+        singularize?: boolean
         parameter?: NamingStyle
         operation?: NamingStyle
         operationGroup?: NamingStyle
