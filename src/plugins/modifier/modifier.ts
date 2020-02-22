@@ -10,7 +10,7 @@ import {
 import { serialize, deserialize } from "@azure-tools/codegen";
 import { CliDirectiveManager } from "./cliDirective";
 import { isNullOrUndefined, isString, isObject, isArray } from "util";
-import { keys, items } from "@azure-tools/linq";
+import { keys, items, values } from "@azure-tools/linq";
 
 export class Modifier {
     private manager: CliDirectiveManager;
@@ -30,16 +30,34 @@ export class Modifier {
 
     public process(): CodeModel {
 
+        let choices = [this.codeModel.schemas.choices, this.codeModel.schemas.sealedChoices];
+        
+        choices.forEach(arr => {
+            arr.forEach(s => {
+                this.manager.process({
+                    enumSchema: s.language.default.name,
+                    target: s,
+                });
+                s.choices.forEach(ss => {
+                    this.manager.process({
+                        enumSchema: s.language.default.name,
+                        enumValue: ss.language.default.name,
+                        target: ss,
+                    });
+                })
+            })
+        });
+
         this.codeModel.schemas.objects.forEach(s => {
             this.manager.process({
                 objectSchemaName: s.language.default.name,
-                metadata: s,
+                target: s,
             });
             s.properties.forEach(p => {
                 this.manager.process({
                     objectSchemaName: s.language.default.name,
                     propertyName: p.language.default.name,
-                    metadata: p,
+                    target: p,
                 })
             });
         });
@@ -47,20 +65,20 @@ export class Modifier {
         for (var group of this.codeModel.operationGroups) {
             this.manager.process({
                 operationGroupName: group.language.default.name,
-                metadata: group
+                target: group
             })
             for (var op of group.operations) {
                 this.manager.process({
                     operationGroupName: group.language.default.name,
                     operationName: op.language.default.name,
-                    metadata: op
+                    target: op
                 })
                 for (var param of op.request.parameters) {
                     this.manager.process({
                         operationGroupName: group.language.default.name,
                         operationName: op.language.default.name,
                         parameterName: param.language.default.name,
-                        metadata: param
+                        target: param
                     })
                 }
             }

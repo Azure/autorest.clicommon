@@ -1,9 +1,9 @@
-import { CodeModel, codeModelSchema, Property, Language, Metadata, Operation, OperationGroup, Parameter, ComplexSchema, ObjectSchema } from '@azure-tools/codemodel';
+import { CodeModel, codeModelSchema, Property, Language, Metadata, Operation, OperationGroup, Parameter, ComplexSchema, ObjectSchema, ChoiceSchema, ChoiceValue, SealedChoiceSchema } from '@azure-tools/codemodel';
 import { Session, Host, startSession, Channel } from '@azure-tools/autorest-extension-base';
 import { serialize, deserialize } from '@azure-tools/codegen';
 import { values, items, length, Dictionary } from '@azure-tools/linq';
 import { isNullOrUndefined } from 'util';
-import { CliCommonSchema, CliConst, LanguageType } from '../schema';
+import { CliCommonSchema, CliConst, LanguageType, M4Node } from '../schema';
 import { Helper } from '../helper';
 import { pascalCase, EnglishPluralizationService } from '@azure-tools/codegen';
 
@@ -19,7 +19,9 @@ export class CommonNamer {
 
     async init() {
         // any configuration if necessary
-        this.namingConvention = await this.session.getValue("clicommon.naming");
+        this.namingConvention = await this.session.getValue("clicommon.naming", {});
+        if (isNullOrUndefined(this.namingConvention.singularize))
+            this.namingConvention.singularize = [];
         this.glossary = await this.session.getValue("clicommon.glossary", []);
         return this;
     }
@@ -50,32 +52,52 @@ export class CommonNamer {
      * @param oldName
      * @param metadata
      */
-    public convertNamingConvention(metadata: Metadata) {
+    public convertNamingConvention(node: M4Node) {
         var style: string = null;
 
         if (isNullOrUndefined(this.namingConvention))
             return;
-        if (isNullOrUndefined(metadata.language['cli']))
+        if (isNullOrUndefined(node.language['cli']))
             return;
 
-        // we only support OperationGroup, Operation and Parameter for now. Let's add more when needed
-        if (metadata instanceof OperationGroup)
-            style = this.namingConvention.operationGroup;
-        else if (metadata instanceof Operation)
-            style = this.namingConvention.operation;
-        else if (metadata instanceof Parameter)
-            style = this.namingConvention.parameter;
-        else if (metadata instanceof Property)
-            style = this.namingConvention.property;
-        else if (metadata instanceof ObjectSchema)
-            style = this.namingConvention.type;
+        let single = false;
+        switch (Helper.TryToM4NodeType(node)) {
+            case CliConst.SelectType.operationGroup:
+                style = this.namingConvention.operationGroup;
+                single = this.namingConvention.singularize.includes(CliConst.SelectType.operationGroup);
+                break;
+            case CliConst.SelectType.operation:
+                style = this.namingConvention.operation;
+                single = this.namingConvention.singularize.includes(CliConst.SelectType.operation);
+                break;
+            case CliConst.SelectType.parameter:
+                style = this.namingConvention.parameter;
+                single = this.namingConvention.singularize.includes(CliConst.SelectType.parameter);
+                break;
+            case CliConst.SelectType.property:
+                style = this.namingConvention.property;
+                single = this.namingConvention.singularize.includes(CliConst.SelectType.property);
+                break;
+            case CliConst.SelectType.objectSchema:
+                style = this.namingConvention.type;
+                single = this.namingConvention.singularize.includes(CliConst.SelectType.objectSchema);
+                break;
+            case CliConst.SelectType.enumSchema:
+                style = this.namingConvention.choice;
+                single = this.namingConvention.singularize.includes(CliConst.SelectType.enumSchema);
+                break;
+            case CliConst.SelectType.enumValue:
+                style = this.namingConvention.choiceValue;
+                single = this.namingConvention.singularize.includes(CliConst.SelectType.enumValue);
+                break;
+        }
 
         if (Helper.isEmptyString(style)) {
             return;
         }
 
-        let oldName: string = metadata.language['cli']['name'];
-        let glossary: string[] = metadata.language['cli']['glossary'];
+        let oldName: string = node.language['cli']['name'];
+        let glossary: string[] = node.language['cli']['glossary'];
         if (isNullOrUndefined(glossary))
             glossary = [];
 
@@ -87,28 +109,28 @@ export class CommonNamer {
         let newName: string;
         switch (style) {
             case CliConst.NamingStyle.camel:
-                newName = (this.namingConvention.singularize ? getSingleArr(oldName) : getPluralArr(oldName)).map((v, i) => i === 0 ? v : up1(v)).join('');
+                newName = (single ? getSingleArr(oldName) : getPluralArr(oldName)).map((v, i) => i === 0 ? v : up1(v)).join('');
                 break;
             case CliConst.NamingStyle.kebab:
-                newName = this.namingConvention.singularize ? getSingleArr(oldName).join('-') : oldName.replace(SEP, '-');
+                newName = single ? getSingleArr(oldName).join('-') : oldName.replace(SEP, '-');
                 break;
             case CliConst.NamingStyle.snake:
-                newName = this.namingConvention.singularize ? getSingleArr(oldName).join('_') : oldName;
+                newName = single ? getSingleArr(oldName).join('_') : oldName;
                 break;
             case CliConst.NamingStyle.pascal:
-                newName = (this.namingConvention.singularize ? getSingleArr(oldName) : getPluralArr(oldName)).map(v => up1(v)).join('');
+                newName = (single ? getSingleArr(oldName) : getPluralArr(oldName)).map(v => up1(v)).join('');
                 break;
             case CliConst.NamingStyle.space:
-                newName = this.namingConvention.singularize ? getSingleArr(oldName).join(' ') : oldName.replace(SEP, ' ');
+                newName = single ? getSingleArr(oldName).join(' ') : oldName.replace(SEP, ' ');
                 break;
             case CliConst.NamingStyle.upper:
-                newName = this.namingConvention.singularize ? getSingleArr(oldName).join('_').toUpperCase() : oldName.toUpperCase();
+                newName = single ? getSingleArr(oldName).join('_').toUpperCase() : oldName.toUpperCase();
                 break;
             default:
                 throw Error(`Unknown name style: ${style}`)
         }
 
-        metadata.language['cli']['name'] = newName;
+        node.language['cli']['name'] = newName;
     }
 
     getCliName(obj: any) {

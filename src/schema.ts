@@ -1,10 +1,11 @@
 import {
-    Metadata,
+    Metadata, ChoiceValue,
 } from "@azure-tools/codemodel";
 
 export type NamingStyle = 'camel' | 'pascal' | 'snake' | 'upper' | 'kebab' | 'space';
-export type SelectType = 'operationGroup' | 'operation' | 'parameter' | 'objectSchema' | 'property';
+export type M4NodeType = 'operationGroup' | 'operation' | 'parameter' | 'objectSchema' | 'property' | 'enumSchema' | 'enumValue';
 export type LanguageType = 'cli' | 'default';
+export type M4Node = Metadata | ChoiceValue;
 
 export namespace CliConst {
     // Todo: merge this into code model?
@@ -34,6 +35,8 @@ export namespace CliConst {
         static readonly parameter = 'parameter';
         static readonly objectSchema = 'objectSchema';
         static readonly property = 'property';
+        static readonly enumSchema = 'enumSchema';
+        static readonly enumValue = 'enumValue';
     }
 }
 
@@ -48,6 +51,9 @@ export namespace CliCommonSchema {
         }
 
         export interface SetClause {
+        }
+
+        export interface ValueClause {
         }
 
         export interface SetNameClause {
@@ -68,6 +74,8 @@ export namespace CliCommonSchema {
             parameter?: string;
             objectSchema?: string;
             property?: string;
+            enumSchema?: string;
+            enumValue?: string;
         }
 
         export interface FormatTableClause {
@@ -75,9 +83,12 @@ export namespace CliCommonSchema {
         }
 
         export interface Directive {
-            select?: SelectType;
+            select?: M4NodeType;
             where?: WhereClause;
             set?: SetClause;
+            hide?: ValueClause;
+            remove?: ValueClause;
+            name?: ValueClause;
             /** in kebab-case */
             setName?: SetNameClause;
             log?: LogClause;
@@ -87,12 +98,14 @@ export namespace CliCommonSchema {
     }
 
     export interface NamingConvention {
-        singularize?: boolean
+        singularize?: M4NodeType[]
         parameter?: NamingStyle
         operation?: NamingStyle
         operationGroup?: NamingStyle
         property?: NamingStyle
         type?: NamingStyle
+        choice?: NamingStyle
+        choiceValue?: NamingStyle
     }
 
     export namespace CodeModel {
@@ -102,7 +115,9 @@ export namespace CliCommonSchema {
             parameterName?: string;
             objectSchemaName?: string;
             propertyName?: string;
-            metadata: Metadata;
+            enumSchema?: string;
+            enumValue?: string;
+            target: M4Node;
         }
     }
 }

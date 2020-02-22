@@ -22,7 +22,7 @@ class CliDirective {
     process(descriptor: CliCommonSchema.CodeModel.NodeDescriptor): void {
         if (this.selector.match(descriptor)) {
             for (var action of this.actions) {
-                action.process(descriptor.metadata);
+                action.process(descriptor.target);
             }
         }
     }

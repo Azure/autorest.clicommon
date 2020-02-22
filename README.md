@@ -20,16 +20,24 @@ modelerfour:
         operationGroup:  'snake'
         property: 'snake'
         type:  'snake'
+        choice:  'snake'
+        choiceValue:  'snake'
+        constant:  pascal
+        client: pascal
 
 clicommon:
     # default naming convention from clicommon, possible value: pascal|camel|snake|upper|kebab|space
     naming: 
-        singularize: true
+        singularize:
+          - operationGroup
+          - operation
         parameter: 'camel'
         operation: 'pascal'
         operationGroup:  'pascal'
         property: 'camel'
         type:  'pascal'
+        choice: 'pascal'
+        choiceValue: 'pascal'
 
 pipeline:
     clicommon:

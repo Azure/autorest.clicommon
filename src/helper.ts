@@ -1,6 +1,6 @@
 import { isNullOrUndefined, isUndefined, isNull, isString, isArray, isObject } from "util";
-import { Metadata, OperationGroup, Operation, Parameter, CodeModel, ObjectSchema, Property } from "@azure-tools/codemodel";
-import { SelectType } from "./schema";
+import { OperationGroup, Operation, Parameter, CodeModel, ObjectSchema, Property, ChoiceSchema, ChoiceValue, SealedChoiceSchema } from "@azure-tools/codemodel";
+import { M4Node, CliConst, M4NodeType } from "./schema";
 import { indent } from "@azure-tools/codegen";
 import { keys } from "@azure-tools/linq";
 
@@ -62,18 +62,33 @@ export class Helper {
             throw Error(`Validation failed: '${name}' is null or undefined`)
     }
 
-    public static ToSelectType(metadata: Metadata): SelectType {
-        if (metadata instanceof OperationGroup)
-            return 'operationGroup';
-        else if (metadata instanceof Operation)
-            return 'operation';
-        else if (metadata instanceof Parameter)
-            return 'parameter';
-        else if (metadata instanceof ObjectSchema)
-            return 'objectSchema';
-        else if (metadata instanceof Property)
-            return 'property';
-        throw Error(`Unexpected metadata type: ${typeof (metadata)}`);
+    public static TryToM4NodeType(node: M4Node): M4NodeType | null {
+        try {
+            return Helper.ToM4NodeType(node);
+        }
+        catch{
+            return null;
+        }
+    }
+
+    public static ToM4NodeType(node: M4Node): M4NodeType {
+        if (node instanceof OperationGroup)
+            return CliConst.SelectType.operationGroup;
+        else if (node instanceof Operation)
+            return CliConst.SelectType.operation;
+        else if (node instanceof Parameter)
+            return CliConst.SelectType.parameter;
+        else if (node instanceof ObjectSchema)
+            return CliConst.SelectType.objectSchema;
+        else if (node instanceof Property)
+            return CliConst.SelectType.property;
+        else if (node instanceof ChoiceSchema)
+            return CliConst.SelectType.enumSchema;
+        else if (node instanceof SealedChoiceSchema)
+            return CliConst.SelectType.enumSchema;
+        else if (node instanceof ChoiceValue)
+            return CliConst.SelectType.enumValue;
+        throw Error(`Unsupported node type: ${typeof (node)}`);
     }
 
     public static generateReport(codeModel: CodeModel): string {
@@ -97,7 +112,6 @@ export class Helper {
                 .reduce((pv, cv, ci) => pv.concat((ci === 0 ? (NEW_LINE + tab(i) + 'cli:') : '') +
                     NEW_LINE + tab(i + 1) + `${cv}: ${formatValue(o.language.cli[cv], i + 2 /*next next level*/)}`), ''));
 
-        // TODO: include schema... when we support schema in modifier
         let s = '';
         s = s + `operationGroups:${NEW_LINE}` +
             `${tab()}all:${NEW_LINE}`.concat(codeModel.operationGroups.map(
@@ -117,6 +131,15 @@ export class Helper {
                     `${NEW_LINE}${tab(3)}properties:${NEW_LINE}`.concat(
                         v.properties.map(vv => `${tab(4)}- propertyName: ${generateCliValue(vv, 5)}${NEW_LINE}`)
                             .join('')))
+                .join(''));
+        s = s + `${tab()}choices:${NEW_LINE}` +
+            `${tab(1)}all:${NEW_LINE}`.concat(
+                [codeModel.schemas.choices, codeModel.schemas.sealedChoices].map((arr : any[]) => arr.map(
+                    v => `${tab(2)}- choiceName: ${generateCliValue(v, 3)}` +
+                        `${NEW_LINE}${tab(3)}choiceValues:${NEW_LINE}`.concat(
+                            v.choices.map(vv => `${tab(4)}- choiceValue: ${generateCliValue(vv, 5)}${NEW_LINE}`)
+                                .join('')))
+                    .join(''))
                 .join(''));
         return s;
     }

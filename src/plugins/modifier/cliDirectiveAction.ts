@@ -1,5 +1,4 @@
 import {
-    Metadata,
     CodeModel,
     Operation,
     OperationGroup,
@@ -9,7 +8,7 @@ import {
     Channel,
     Session
 } from "@azure-tools/autorest-extension-base";
-import { CliCommonSchema, CliConst } from "../../schema";
+import { CliCommonSchema, CliConst, M4Node } from "../../schema";
 import { isNullOrUndefined } from "util";
 import { Logger } from "../../logger";
 import { Helper } from "../../helper"
@@ -17,20 +16,20 @@ import { Helper } from "../../helper"
 export abstract class Action {
     constructor() {
     }
-    public abstract process(metadata: Metadata): void;
+    public abstract process(node: M4Node): void;
 
-    protected createCliSubNode(metadata: Metadata, nodeName: string) : any {
-        if (isNullOrUndefined(metadata.language[CliConst.CLI]))
-            metadata.language[CliConst.CLI] = {};
-        if (isNullOrUndefined(metadata.language[CliConst.CLI][nodeName]))
-            metadata.language[CliConst.CLI][nodeName] = {};
-        return metadata.language[CliConst.CLI][nodeName];
+    protected createCliSubNode(node: M4Node, nodeName: string): any {
+        if (isNullOrUndefined(node.language[CliConst.CLI]))
+            node.language[CliConst.CLI] = {};
+        if (isNullOrUndefined(node.language[CliConst.CLI][nodeName]))
+            node.language[CliConst.CLI][nodeName] = {};
+        return node.language[CliConst.CLI][nodeName];
     }
 
-    protected setCliProperty(metadata: Metadata, key: string, value: any): void {
-        if (isNullOrUndefined(metadata.language[CliConst.CLI]))
-            metadata.language[CliConst.CLI] = {};
-        metadata.language[CliConst.CLI][key] = value;
+    protected setCliProperty(node: M4Node, key: string, value: any): void {
+        if (isNullOrUndefined(node.language[CliConst.CLI]))
+            node.language[CliConst.CLI] = {};
+        node.language[CliConst.CLI][key] = value;
     }
 
     public static async buildActionList(directive: CliCommonSchema.CliDirective.Directive, session: Session<CodeModel>): Promise<Action[]> {
@@ -51,6 +50,14 @@ export abstract class Action {
                     break;
                 case 'set':
                     arr.push(new ActionSet(value));
+                    break;
+                case 'hide':
+                case 'remove':
+                    arr.push(new ActionSetProperty(value, key, () => true));
+                    break;
+                case 'name':
+                case 'alias':
+                    arr.push(new ActionSetProperty(value, key, () => { throw Error(`${key} missing in directive`) }))
                     break;
                 case 'log':
                     logNeeded = true;
@@ -76,16 +83,27 @@ export abstract class Action {
     }
 }
 
+class ActionSetProperty extends Action {
+
+    constructor(private directiveValue: CliCommonSchema.CliDirective.ValueClause, private propertyName: string, private getDefault: ()=>any) {
+        super();
+    }
+
+    public process(node: M4Node): void {
+        this.setCliProperty(node, this.propertyName, this.directiveValue ?? this.getDefault());
+    }
+}
+
 class ActionSet extends Action {
 
     constructor(private directiveSet: CliCommonSchema.CliDirective.SetClause) {
         super();
     }
 
-    public process(metadata: Metadata): void {
+    public process(node: M4Node): void {
         for (var key in this.directiveSet) {
             let value = this.directiveSet[key];
-            this.setCliProperty(metadata, key, value);
+            this.setCliProperty(node, key, value);
         }
     }
 }
@@ -96,9 +114,9 @@ class ActionFormatTable extends Action {
         super();
     }
 
-    public process(metadata: Metadata): void {
+    public process(node: M4Node): void {
         if (!isNullOrUndefined(this.directiveFormatTable.properties)) {
-            var n = this.createCliSubNode(metadata, CliConst.CLI_FORMATTABLE);
+            var n = this.createCliSubNode(node, CliConst.CLI_FORMATTABLE);
             n[CliConst.CLI_FORMATTABLE_PROPERTIES] = this.directiveFormatTable.properties;
         }
     }
@@ -110,9 +128,9 @@ class ActionLog extends Action {
         super();
     }
 
-    public process(metadata: Metadata): void {
+    public process(node: M4Node): void {
         Logger.instance.log({
-            Text: `${this.directiveLog.message ?? "NodeInfo:"}: ${JSON.stringify(metadata)}`,
+            Text: `${this.directiveLog.message ?? "NodeInfo:"}: ${JSON.stringify(node)}`,
             Channel: Channel[this.directiveLog.logLevel ?? "Debug"]
         })
     }
@@ -123,18 +141,18 @@ class ActionReplace extends Action {
         super();
     }
 
-    public process(metadata: Metadata): void {
+    public process(node: M4Node): void {
         Helper.validateNullOrUndefined(this.actionReplace.field, 'field');
         Helper.validateNullOrUndefined(this.actionReplace.old, 'old');
         Helper.validateNullOrUndefined(this.actionReplace.new, 'new');
 
-        var original: string = metadata.language.default[this.actionReplace.field].toString();
+        var original: string = node.language.default[this.actionReplace.field].toString();
         if (isNullOrUndefined(this.actionReplace.isRegex) || this.actionReplace.isRegex == false) {
-            this.setCliProperty(metadata, this.actionReplace.field, original.replace(this.actionReplace.old, this.actionReplace.new));
+            this.setCliProperty(node, this.actionReplace.field, original.replace(this.actionReplace.old, this.actionReplace.new));
         }
         else {
             var regex = new RegExp(this.actionReplace.old);
-            this.setCliProperty(metadata, this.actionReplace.field, original.replace(regex, this.actionReplace.new));
+            this.setCliProperty(node, this.actionReplace.field, original.replace(regex, this.actionReplace.new));
         }
     }
 }

@@ -1,7 +1,7 @@
-import { CliCommonSchema, SelectType, CliConst } from "../../schema"
+import { CliCommonSchema, CliConst, M4NodeType } from "../../schema"
 import { isNullOrUndefined } from "util";
 import { Helper } from "../../helper"
-import { Metadata, Parameter } from "@azure-tools/codemodel";
+import { Parameter } from "@azure-tools/codemodel";
 
 export abstract class NodeSelector {
     constructor() {
@@ -11,24 +11,9 @@ export abstract class NodeSelector {
 
     public static createSelector(directive: CliCommonSchema.CliDirective.Directive) {
 
-        if (isNullOrUndefined(directive.select))
-            throw Error(`'select' clause missing in direcitve: ${JSON.stringify(directive)}`)
-
-        if (isNullOrUndefined(directive.where))
-            return new MatchAllNodeSelector();
-
-        switch (directive.select) {
-            case CliConst.SelectType.operationGroup:
-            case CliConst.SelectType.operation:
-            case CliConst.SelectType.parameter:
-            case CliConst.SelectType.objectSchema:
-            case CliConst.SelectType.property:
-                return new CommandNodeSelector(
-                    directive.where,
-                    directive.select);
-            default:
-                throw Error(`Unexpected SelectType: ${JSON.stringify(directive.select)}`);
-        }
+        return new CommandNodeSelector(
+            directive.where,
+            directive.select);
     }
 }
 
@@ -44,15 +29,35 @@ class MatchAllNodeSelector extends NodeSelector {
 
 class CommandNodeSelector extends NodeSelector {
 
-    constructor(private where: CliCommonSchema.CliDirective.WhereClause, private selectType: SelectType) {
+    constructor(private where: CliCommonSchema.CliDirective.WhereClause, private selectType: M4NodeType) {
         super();
-
+        if (isNullOrUndefined(selectType)) {
+            if (!Helper.isEmptyString(this.where.parameter))
+                this.selectType = CliConst.SelectType.parameter;
+            else if (!Helper.isEmptyString(this.where.operation))
+                this.selectType = CliConst.SelectType.operation;
+            else if (!Helper.isEmptyString(this.where.operationGroup))
+                this.selectType = CliConst.SelectType.operationGroup;
+            else if (!Helper.isEmptyString(this.where.property))
+                this.selectType = CliConst.SelectType.property;
+            else if (!Helper.isEmptyString(this.where.objectSchema))
+                this.selectType = CliConst.SelectType.objectSchema;
+            else if (!Helper.isEmptyString(this.where.enumValue))
+                this.selectType = CliConst.SelectType.enumValue;
+            else if (!Helper.isEmptyString(this.where.enumSchema))
+                this.selectType = CliConst.SelectType.enumSchema;
+            else
+                throw Error("SelectType missing in directive: " + JSON.stringify(where));
+        }
     }
 
     public match(descriptor: CliCommonSchema.CodeModel.NodeDescriptor): boolean {
 
+        // TODO: seperate different node type to get better performance when needed
         let match = (e, v) => isNullOrUndefined(e) || Helper.matchRegex(Helper.createRegex(e), v);
-        return Helper.ToSelectType(descriptor.metadata) === this.selectType &&
+        return Helper.ToM4NodeType(descriptor.target) === this.selectType &&
+            match(this.where.enumSchema, descriptor.enumSchema) &&
+            match(this.where.enumValue, descriptor.enumValue) &&
             match(this.where.objectSchema, descriptor.objectSchemaName) &&
             match(this.where.property, descriptor.propertyName) &&
             match(this.where.operationGroup, descriptor.operationGroupName) &&
