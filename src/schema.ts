@@ -3,7 +3,7 @@ import {
 } from "@azure-tools/codemodel";
 
 export type NamingStyle = 'camel' | 'pascal' | 'snake' | 'upper' | 'kebab' | 'space';
-export type M4NodeType = 'operationGroup' | 'operation' | 'parameter' | 'objectSchema' | 'property' | 'enumSchema' | 'enumValue';
+export type M4NodeType = 'operationGroup' | 'operation' | 'parameter' | 'objectSchema' | 'property' | 'choiceSchema' | 'choiceValue';
 export type LanguageType = 'cli' | 'default';
 export type M4Node = Metadata | ChoiceValue;
 
@@ -35,8 +35,8 @@ export namespace CliConst {
         static readonly parameter = 'parameter';
         static readonly objectSchema = 'objectSchema';
         static readonly property = 'property';
-        static readonly enumSchema = 'enumSchema';
-        static readonly enumValue = 'enumValue';
+        static readonly choiceSchema = 'choiceSchema';
+        static readonly choiceValue = 'choiceValue';
     }
 }
 
@@ -74,8 +74,8 @@ export namespace CliCommonSchema {
             parameter?: string;
             objectSchema?: string;
             property?: string;
-            enumSchema?: string;
-            enumValue?: string;
+            choiceSchema?: string;
+            choiceValue?: string;
         }
 
         export interface FormatTableClause {
@@ -115,8 +115,8 @@ export namespace CliCommonSchema {
             parameterName?: string;
             objectSchemaName?: string;
             propertyName?: string;
-            enumSchema?: string;
-            enumValue?: string;
+            choiceSchema?: string;
+            choiceValue?: string;
             target: M4Node;
         }
     }

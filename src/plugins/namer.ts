@@ -82,13 +82,13 @@ export class CommonNamer {
                 style = this.namingConvention.type;
                 single = this.namingConvention.singularize.includes(CliConst.SelectType.objectSchema);
                 break;
-            case CliConst.SelectType.enumSchema:
+            case CliConst.SelectType.choiceSchema:
                 style = this.namingConvention.choice;
-                single = this.namingConvention.singularize.includes(CliConst.SelectType.enumSchema);
+                single = this.namingConvention.singularize.includes(CliConst.SelectType.choiceSchema);
                 break;
-            case CliConst.SelectType.enumValue:
+            case CliConst.SelectType.choiceValue:
                 style = this.namingConvention.choiceValue;
-                single = this.namingConvention.singularize.includes(CliConst.SelectType.enumValue);
+                single = this.namingConvention.singularize.includes(CliConst.SelectType.choiceValue);
                 break;
         }
 

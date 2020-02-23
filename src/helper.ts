@@ -83,11 +83,11 @@ export class Helper {
         else if (node instanceof Property)
             return CliConst.SelectType.property;
         else if (node instanceof ChoiceSchema)
-            return CliConst.SelectType.enumSchema;
+            return CliConst.SelectType.choiceSchema;
         else if (node instanceof SealedChoiceSchema)
-            return CliConst.SelectType.enumSchema;
+            return CliConst.SelectType.choiceSchema;
         else if (node instanceof ChoiceValue)
-            return CliConst.SelectType.enumValue;
+            return CliConst.SelectType.choiceValue;
         throw Error(`Unsupported node type: ${typeof (node)}`);
     }
 

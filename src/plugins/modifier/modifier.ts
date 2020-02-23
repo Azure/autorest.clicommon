@@ -35,13 +35,13 @@ export class Modifier {
         choices.forEach(arr => {
             arr.forEach(s => {
                 this.manager.process({
-                    enumSchema: s.language.default.name,
+                    choiceSchema: s.language.default.name,
                     target: s,
                 });
                 s.choices.forEach(ss => {
                     this.manager.process({
-                        enumSchema: s.language.default.name,
-                        enumValue: ss.language.default.name,
+                        choiceSchema: s.language.default.name,
+                        choiceValue: ss.language.default.name,
                         target: ss,
                     });
                 })
