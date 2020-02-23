@@ -1,8 +1,7 @@
-import { isNullOrUndefined, isUndefined, isNull, isString, isArray, isObject } from "util";
-import { OperationGroup, Operation, Parameter, CodeModel, ObjectSchema, Property, ChoiceSchema, ChoiceValue, SealedChoiceSchema } from "@azure-tools/codemodel";
-import { M4Node, CliConst, M4NodeType } from "./schema";
-import { indent } from "@azure-tools/codegen";
+import { ChoiceSchema, ChoiceValue, CodeModel, ObjectSchema, Operation, OperationGroup, Parameter, Property, SealedChoiceSchema } from "@azure-tools/codemodel";
 import { keys } from "@azure-tools/linq";
+import { isArray, isNull, isNullOrUndefined, isObject, isString, isUndefined } from "util";
+import { CliConst, M4Node, M4NodeType, NamingType } from "./schema";
 
 export class Helper {
     public static isEmptyString(str): boolean {
@@ -62,13 +61,24 @@ export class Helper {
             throw Error(`Validation failed: '${name}' is null or undefined`)
     }
 
-    public static TryToM4NodeType(node: M4Node): M4NodeType | null {
-        try {
-            return Helper.ToM4NodeType(node);
-        }
-        catch{
-            return null;
-        }
+    public static ToNamingType(node: M4Node): NamingType | null {
+        if (node instanceof OperationGroup)
+            return CliConst.NamingType.operationGroup;
+        else if (node instanceof Operation)
+            return CliConst.NamingType.operation;
+        else if (node instanceof Parameter)
+            return CliConst.NamingType.parameter;
+        else if (node instanceof ObjectSchema)
+            return CliConst.NamingType.type;
+        else if (node instanceof Property)
+            return CliConst.NamingType.property;
+        else if (node instanceof ChoiceSchema)
+            return CliConst.NamingType.choice;
+        else if (node instanceof SealedChoiceSchema)
+            return CliConst.NamingType.choice;
+        else if (node instanceof ChoiceValue)
+            return CliConst.NamingType.choiceValue;
+        return null;
     }
 
     public static ToM4NodeType(node: M4Node): M4NodeType {
@@ -91,7 +101,7 @@ export class Helper {
         throw Error(`Unsupported node type: ${typeof (node)}`);
     }
 
-    public static generateReport(codeModel: CodeModel): string {
+    public static toYamlSimplified(codeModel: CodeModel): string {
         const INDENT = '  ';
         const NEW_LINE = '\n';
         let initialIndent = 1;
@@ -106,11 +116,12 @@ export class Helper {
             else
                 return isUndefined(o) ? '{undefined}' : isNull(o) ? '{null}' : o.toString();
         };
+
         let generateCliValue = (o: any, i: number) => o.language.default.name +
             (isNullOrUndefined(o.language.cli) ? '' : Object.getOwnPropertyNames(o.language.cli)
                 .filter(key => o.language.cli[key] !== o.language.default[key])
                 .reduce((pv, cv, ci) => pv.concat((ci === 0 ? (NEW_LINE + tab(i) + 'cli:') : '') +
-                    NEW_LINE + tab(i + 1) + `${cv}: ${formatValue(o.language.cli[cv], i + 2 /*next next level*/)}`), ''));
+                    NEW_LINE + tab(i + 1) + `${cv}: ${formatValue(o.language.cli[cv], i + 2)}`), ''));
 
         let s = '';
         s = s + `operationGroups:${NEW_LINE}` +
@@ -120,10 +131,8 @@ export class Helper {
                         v.operations.map(vv => `${tab(2)}- operationName: ${generateCliValue(vv, 3)}` +
                             `${NEW_LINE}${tab(3)}parameters:${NEW_LINE}`.concat(
                                 vv.request.parameters.map(vvv => `${tab(3)}- parameterName: ${generateCliValue(vvv, 4)}${NEW_LINE}` +
-                                    ((vvv.protocol.http.in === 'body')?`${tab(4)}bodySchema: ${vvv.schema.language.default.name}${NEW_LINE}` : ''))
-                                    .join(''))
-                        ).join(''))
-            ).join(''));
+                                    ((vvv.protocol.http.in === 'body') ? `${tab(4)}bodySchema: ${vvv.schema.language.default.name}${NEW_LINE}` : ''))
+                                    .join(''))).join(''))).join(''));
         s = s + `schemas:${NEW_LINE}` +
             `${tab()}objects:${NEW_LINE}` +
             `${tab(1)}all:${NEW_LINE}`.concat(codeModel.schemas.objects.map(
@@ -134,17 +143,11 @@ export class Helper {
                 .join(''));
         s = s + `${tab()}choices:${NEW_LINE}` +
             `${tab(1)}all:${NEW_LINE}`.concat(
-                [codeModel.schemas.choices, codeModel.schemas.sealedChoices].map((arr : any[]) => arr.map(
+                [codeModel.schemas.choices, codeModel.schemas.sealedChoices].map((arr: any[]) => arr.map(
                     v => `${tab(2)}- choiceName: ${generateCliValue(v, 3)}` +
                         `${NEW_LINE}${tab(3)}choiceValues:${NEW_LINE}`.concat(
                             v.choices.map(vv => `${tab(4)}- choiceValue: ${generateCliValue(vv, 5)}${NEW_LINE}`)
-                                .join('')))
-                    .join(''))
-                .join(''));
+                                .join(''))).join('')).join(''));
         return s;
-    }
-
-    public static generateSchemaSection(codeModel: CodeModel) {
-
     }
 }

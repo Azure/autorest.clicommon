@@ -1,8 +1,7 @@
-import {
-    Metadata, ChoiceValue,
-} from "@azure-tools/codemodel";
+import { ChoiceValue, Metadata } from "@azure-tools/codemodel";
 
 export type NamingStyle = 'camel' | 'pascal' | 'snake' | 'upper' | 'kebab' | 'space';
+export type NamingType = 'parameter' | 'operation' | 'operationGroup' | 'property' | 'type' | 'choice' | 'choiceValue' | 'constant' | 'client';
 export type M4NodeType = 'operationGroup' | 'operation' | 'parameter' | 'objectSchema' | 'property' | 'choiceSchema' | 'choiceValue';
 export type LanguageType = 'cli' | 'default';
 export type M4Node = Metadata | ChoiceValue;
@@ -28,6 +27,18 @@ export namespace CliConst {
         /** UPPER_CASE */
         static readonly upper = "upper";
     };
+
+    export class NamingType {
+        static readonly parameter = 'parameter';
+        static readonly operation = 'operation';
+        static readonly operationGroup = 'operationGroup';
+        static readonly property = 'property';
+        static readonly type = 'type';
+        static readonly choice = 'choice';
+        static readonly choiceValue = 'choiceValue';
+        static readonly constant = 'constant';
+        static readonly client = 'client';
+    }
 
     export class SelectType {
         static readonly operationGroup = 'operationGroup';
@@ -91,14 +102,13 @@ export namespace CliCommonSchema {
             name?: ValueClause;
             /** in kebab-case */
             setName?: SetNameClause;
-            log?: LogClause;
             replace?: ReplaceClause;
             formatTable?: FormatTableClause;
         }
     }
 
     export interface NamingConvention {
-        singularize?: M4NodeType[]
+        singularize?: NamingType[]
         parameter?: NamingStyle
         operation?: NamingStyle
         operationGroup?: NamingStyle

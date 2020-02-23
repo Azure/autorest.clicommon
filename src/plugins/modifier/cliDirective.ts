@@ -14,7 +14,7 @@ class CliDirective {
     }
 
     async init(): Promise<CliDirective> {
-        this.selector = NodeSelector.createSelector(this.directive);
+        this.selector = new NodeSelector(this.directive);
         this.actions = await Action.buildActionList(this.directive, this.session);
         return this;
     }

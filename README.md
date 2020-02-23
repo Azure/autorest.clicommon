@@ -22,8 +22,8 @@ modelerfour:
         type:  'snake'
         choice:  'snake'
         choiceValue:  'snake'
-        constant:  pascal
-        client: pascal
+        constant:  'pascal'
+        client: 'pascal'
 
 clicommon:
     # default naming convention from clicommon, possible value: pascal|camel|snake|upper|kebab|space

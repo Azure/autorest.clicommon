@@ -1,37 +1,16 @@
-import { CliCommonSchema, CliConst, M4NodeType } from "../../schema"
 import { isNullOrUndefined } from "util";
-import { Helper } from "../../helper"
-import { Parameter } from "@azure-tools/codemodel";
-import { keys } from "@azure-tools/linq";
+import { Helper } from "../../helper";
+import { CliCommonSchema, CliConst, M4NodeType } from "../../schema";
 
-export abstract class NodeSelector {
-    constructor() {
-    }
+export class NodeSelector {
 
-    public abstract match(node: CliCommonSchema.CodeModel.NodeDescriptor): boolean;
+    private where: CliCommonSchema.CliDirective.WhereClause;
+    private selectType: M4NodeType;
 
-    public static createSelector(directive: CliCommonSchema.CliDirective.Directive) {
+    constructor(directive: CliCommonSchema.CliDirective.Directive) {
+        this.where = directive.where;
+        this.selectType = directive.select;
 
-        return new CommandNodeSelector(
-            directive.where,
-            directive.select);
-    }
-}
-
-class MatchAllNodeSelector extends NodeSelector {
-    constructor() {
-        super();
-    }
-
-    public match(descriptor: CliCommonSchema.CodeModel.NodeDescriptor): boolean {
-        return true;
-    }
-}
-
-class CommandNodeSelector extends NodeSelector {
-
-    constructor(private where: CliCommonSchema.CliDirective.WhereClause, private selectType: M4NodeType) {
-        super();
         let alias = {
             parameter: ['param'],
             operation: ['op'],
@@ -46,7 +25,7 @@ class CommandNodeSelector extends NodeSelector {
             alias[key].forEach(av => this.where[key] = this.where[key] ?? this.where[av]);
         };
 
-        if (isNullOrUndefined(selectType)) {
+        if (isNullOrUndefined(this.selectType)) {
             if (!Helper.isEmptyString(this.where.parameter))
                 this.selectType = CliConst.SelectType.parameter;
             else if (!Helper.isEmptyString(this.where.operation))
@@ -62,7 +41,7 @@ class CommandNodeSelector extends NodeSelector {
             else if (!Helper.isEmptyString(this.where.choiceSchema))
                 this.selectType = CliConst.SelectType.choiceSchema;
             else
-                throw Error("SelectType missing in directive: " + JSON.stringify(where));
+                throw Error("SelectType missing in directive: " + JSON.stringify(this.where));
         }
     }
 

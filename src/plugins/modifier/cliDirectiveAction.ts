@@ -1,17 +1,8 @@
-import {
-    CodeModel,
-    Operation,
-    OperationGroup,
-    Parameter
-} from "@azure-tools/codemodel";
-import {
-    Channel,
-    Session
-} from "@azure-tools/autorest-extension-base";
-import { CliCommonSchema, CliConst, M4Node } from "../../schema";
+import { Session } from "@azure-tools/autorest-extension-base";
+import { CodeModel } from "@azure-tools/codemodel";
 import { isNullOrUndefined } from "util";
-import { Logger } from "../../logger";
-import { Helper } from "../../helper"
+import { Helper } from "../../helper";
+import { CliCommonSchema, CliConst, M4Node } from "../../schema";
 
 export abstract class Action {
     constructor() {
@@ -33,12 +24,8 @@ export abstract class Action {
     }
 
     public static async buildActionList(directive: CliCommonSchema.CliDirective.Directive, session: Session<CodeModel>): Promise<Action[]> {
-        if (isNullOrUndefined(directive)) {
-            throw Error("arguement 'directive' is null or undefined");
-        }
-
+        Helper.validateNullOrUndefined(directive, 'directive');
         var arr: Action[] = [];
-        var logNeeded: boolean = false;
 
         for (var key in directive) {
             var value = directive[key];
@@ -59,9 +46,6 @@ export abstract class Action {
                 case 'alias':
                     arr.push(new ActionSetProperty(value, key, () => { throw Error(`${key} missing in directive`) }))
                     break;
-                case 'log':
-                    logNeeded = true;
-                    break;
                 case 'replace':
                     arr.push(new ActionReplace(value));
                     break;
@@ -73,19 +57,13 @@ export abstract class Action {
                     throw Error("Unknown directive operation");
             }
         }
-        if (logNeeded) {
-            if (directive.log.position == 'pre' || directive.log.position == "both" || isNullOrUndefined(directive.log.position))
-                arr.splice(0, 0, new ActionLog(directive.log));
-            if (directive.log.position == "post" || directive.log.position == "both" || isNullOrUndefined(directive.log.position))
-                arr.push(new ActionLog(directive.log))
-        }
         return arr;
     }
 }
 
 class ActionSetProperty extends Action {
 
-    constructor(private directiveValue: CliCommonSchema.CliDirective.ValueClause, private propertyName: string, private getDefault: ()=>any) {
+    constructor(private directiveValue: CliCommonSchema.CliDirective.ValueClause, private propertyName: string, private getDefault: () => any) {
         super();
     }
 
@@ -109,7 +87,7 @@ class ActionSet extends Action {
 }
 
 class ActionFormatTable extends Action {
-    
+
     constructor(private directiveFormatTable: CliCommonSchema.CliDirective.FormatTableClause) {
         super();
     }
@@ -119,20 +97,6 @@ class ActionFormatTable extends Action {
             var n = this.createCliSubNode(node, CliConst.CLI_FORMATTABLE);
             n[CliConst.CLI_FORMATTABLE_PROPERTIES] = this.directiveFormatTable.properties;
         }
-    }
-}
-
-class ActionLog extends Action {
-
-    constructor(private directiveLog: CliCommonSchema.CliDirective.LogClause) {
-        super();
-    }
-
-    public process(node: M4Node): void {
-        Logger.instance.log({
-            Text: `${this.directiveLog.message ?? "NodeInfo:"}: ${JSON.stringify(node)}`,
-            Channel: Channel[this.directiveLog.logLevel ?? "Debug"]
-        })
     }
 }
 

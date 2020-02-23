@@ -53,46 +53,20 @@ export class CommonNamer {
      * @param metadata
      */
     public convertNamingConvention(node: M4Node) {
-        var style: string = null;
-
-        if (isNullOrUndefined(this.namingConvention))
-            return;
         if (isNullOrUndefined(node.language['cli']))
             return;
 
-        let single = false;
-        switch (Helper.TryToM4NodeType(node)) {
-            case CliConst.SelectType.operationGroup:
-                style = this.namingConvention.operationGroup;
-                single = this.namingConvention.singularize.includes(CliConst.SelectType.operationGroup);
-                break;
-            case CliConst.SelectType.operation:
-                style = this.namingConvention.operation;
-                single = this.namingConvention.singularize.includes(CliConst.SelectType.operation);
-                break;
-            case CliConst.SelectType.parameter:
-                style = this.namingConvention.parameter;
-                single = this.namingConvention.singularize.includes(CliConst.SelectType.parameter);
-                break;
-            case CliConst.SelectType.property:
-                style = this.namingConvention.property;
-                single = this.namingConvention.singularize.includes(CliConst.SelectType.property);
-                break;
-            case CliConst.SelectType.objectSchema:
-                style = this.namingConvention.type;
-                single = this.namingConvention.singularize.includes(CliConst.SelectType.objectSchema);
-                break;
-            case CliConst.SelectType.choiceSchema:
-                style = this.namingConvention.choice;
-                single = this.namingConvention.singularize.includes(CliConst.SelectType.choiceSchema);
-                break;
-            case CliConst.SelectType.choiceValue:
-                style = this.namingConvention.choiceValue;
-                single = this.namingConvention.singularize.includes(CliConst.SelectType.choiceValue);
-                break;
+        let namingType = Helper.ToNamingType(node);
+        if (isNullOrUndefined(namingType)) {
+            // unsupported modelerfour node for naming type, ignore it
+            return;
         }
 
+        let style = this.namingConvention[namingType];
+        let single = this.namingConvention.singularize.includes(namingType);
+
         if (Helper.isEmptyString(style)) {
+            // Only process when naming convention is set
             return;
         }
 
@@ -148,12 +122,6 @@ export class CommonNamer {
         if (!this.flag.has(obj)) {
             this.flag.add(obj);
             this.convertNamingConvention(obj);
-            // TODO: shall we apply to default?
-            //let lan: LanguageType[] = this.namingConvention?.applyTo;
-            //for (let l of lan) {
-            //    if (!isNullOrUndefined(obj.language[l]) && !isNullOrUndefined(obj.language[l]['name']))
-            //        obj.language[l]['name'] = this.convertNamingConvention(obj.language[l]['name'], obj);
-            //}
         }
     }
 

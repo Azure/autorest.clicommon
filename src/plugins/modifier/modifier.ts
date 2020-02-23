@@ -1,16 +1,6 @@
-import {
-    CodeModel,
-    codeModelSchema,
-} from "@azure-tools/codemodel";
-import {
-    Session,
-    startSession,
-    Host,
-} from "@azure-tools/autorest-extension-base";
-import { serialize, deserialize } from "@azure-tools/codegen";
+import { Session } from "@azure-tools/autorest-extension-base";
+import { CodeModel } from "@azure-tools/codemodel";
 import { CliDirectiveManager } from "./cliDirective";
-import { isNullOrUndefined, isString, isObject, isArray } from "util";
-import { keys, items, values } from "@azure-tools/linq";
 
 export class Modifier {
     private manager: CliDirectiveManager;
@@ -31,7 +21,6 @@ export class Modifier {
     public process(): CodeModel {
 
         let choices = [this.codeModel.schemas.choices, this.codeModel.schemas.sealedChoices];
-        
         choices.forEach(arr => {
             arr.forEach(s => {
                 this.manager.process({
