@@ -25,6 +25,8 @@ export class NodeSelector {
             alias[key].forEach(av => this.where[key] = this.where[key] ?? this.where[av]);
         };
 
+        // TODO: support alias for 'select'? let's support it when needed considering in most case people dont need to specify it...
+
         if (isNullOrUndefined(this.selectType)) {
             if (!Helper.isEmptyString(this.where.parameter))
                 this.selectType = CliConst.SelectType.parameter;
@@ -63,8 +65,8 @@ export class NodeSelector {
                 break;
             case CliConst.SelectType.choiceSchema:
             case CliConst.SelectType.choiceValue:
-                r = match(this.where.choiceSchema, descriptor.choiceSchema) &&
-                    match(this.where.choiceValue, descriptor.choiceValue);
+                r = match(this.where.choiceSchema, descriptor.choiceSchemaName) &&
+                    match(this.where.choiceValue, descriptor.choiceValueName);
                 break;
             case CliConst.SelectType.objectSchema:
             case CliConst.SelectType.property:

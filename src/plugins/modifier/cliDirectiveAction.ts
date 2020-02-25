@@ -61,7 +61,7 @@ export abstract class Action {
     }
 }
 
-class ActionSetProperty extends Action {
+export class ActionSetProperty extends Action {
 
     constructor(private directiveValue: CliCommonSchema.CliDirective.ValueClause, private propertyName: string, private getDefault: () => any) {
         super();
@@ -72,7 +72,7 @@ class ActionSetProperty extends Action {
     }
 }
 
-class ActionSet extends Action {
+export class ActionSet extends Action {
 
     constructor(private directiveSet: CliCommonSchema.CliDirective.SetClause) {
         super();
@@ -86,7 +86,7 @@ class ActionSet extends Action {
     }
 }
 
-class ActionFormatTable extends Action {
+export class ActionFormatTable extends Action {
 
     constructor(private directiveFormatTable: CliCommonSchema.CliDirective.FormatTableClause) {
         super();
@@ -100,7 +100,7 @@ class ActionFormatTable extends Action {
     }
 }
 
-class ActionReplace extends Action {
+export class ActionReplace extends Action {
     constructor(private actionReplace: CliCommonSchema.CliDirective.ReplaceClause) {
         super();
     }

@@ -24,13 +24,13 @@ export class Modifier {
         choices.forEach(arr => {
             arr.forEach(s => {
                 this.manager.process({
-                    choiceSchema: s.language.default.name,
+                    choiceSchemaName: s.language.default.name,
                     target: s,
                 });
                 s.choices.forEach(ss => {
                     this.manager.process({
-                        choiceSchema: s.language.default.name,
-                        choiceValue: ss.language.default.name,
+                        choiceSchemaName: s.language.default.name,
+                        choiceValueName: ss.language.default.name,
                         target: ss,
                     });
                 })

@@ -125,8 +125,8 @@ export namespace CliCommonSchema {
             parameterName?: string;
             objectSchemaName?: string;
             propertyName?: string;
-            choiceSchema?: string;
-            choiceValue?: string;
+            choiceSchemaName?: string;
+            choiceValueName?: string;
             target: M4Node;
         }
     }

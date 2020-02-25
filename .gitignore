@@ -7,3 +7,5 @@ generated
 *.orig
 *.njsproj
 *.user
+bin*/
+obj/Release*/

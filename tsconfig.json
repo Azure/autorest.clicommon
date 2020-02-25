@@ -10,9 +10,14 @@
         "types": [
             "node"
         ],
+        "rootDirs": [
+            "./src",
+            "./test"
+        ],
         "target": "es2016"
     },
     "include": [
-        "src"
+        "src",
+        "test"
     ]
 }
