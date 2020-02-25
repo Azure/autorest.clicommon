@@ -20,14 +20,14 @@ export class Modifier {
 
     public process(): CodeModel {
 
-        let choices = [this.codeModel.schemas.choices, this.codeModel.schemas.sealedChoices];
+        let choices = [this.codeModel.schemas.choices ?? [], this.codeModel.schemas.sealedChoices ?? []];
         choices.forEach(arr => {
             arr.forEach(s => {
                 this.manager.process({
                     choiceSchemaName: s.language.default.name,
                     target: s,
                 });
-                s.choices.forEach(ss => {
+                s.choices?.forEach(ss => {
                     this.manager.process({
                         choiceSchemaName: s.language.default.name,
                         choiceValueName: ss.language.default.name,
@@ -42,7 +42,7 @@ export class Modifier {
                 objectSchemaName: s.language.default.name,
                 target: s,
             });
-            s.properties.forEach(p => {
+            s.properties?.forEach(p => {
                 this.manager.process({
                     objectSchemaName: s.language.default.name,
                     propertyName: p.language.default.name,

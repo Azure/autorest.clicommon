@@ -138,15 +138,15 @@ export class Helper {
             `${tab(1)}all:${NEW_LINE}`.concat(codeModel.schemas.objects.map(
                 v => `${tab(2)}- schemaName: ${generateCliValue(v, 3)}` +
                     `${NEW_LINE}${tab(3)}properties:${NEW_LINE}`.concat(
-                        v.properties.map(vv => `${tab(4)}- propertyName: ${generateCliValue(vv, 5)}${NEW_LINE}`)
+                        isNullOrUndefined(v.properties) ? '' : v.properties.map(vv => `${tab(4)}- propertyName: ${generateCliValue(vv, 5)}${NEW_LINE}`)
                             .join('')))
                 .join(''));
         s = s + `${tab()}choices:${NEW_LINE}` +
             `${tab(1)}all:${NEW_LINE}`.concat(
-                [codeModel.schemas.choices, codeModel.schemas.sealedChoices].map((arr: any[]) => arr.map(
+                [codeModel.schemas.choices ?? [], codeModel.schemas.sealedChoices ?? []].map((arr: any[]) => arr.map(
                     v => `${tab(2)}- choiceName: ${generateCliValue(v, 3)}` +
                         `${NEW_LINE}${tab(3)}choiceValues:${NEW_LINE}`.concat(
-                            v.choices.map(vv => `${tab(4)}- choiceValue: ${generateCliValue(vv, 5)}${NEW_LINE}`)
+                            isNullOrUndefined(v.choices) ? '' : v.choices.map(vv => `${tab(4)}- choiceValue: ${generateCliValue(vv, 5)}${NEW_LINE}`)
                                 .join(''))).join('')).join(''));
         return s;
     }

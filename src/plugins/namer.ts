@@ -19,10 +19,10 @@ export class CommonNamer {
 
     async init() {
         // any configuration if necessary
-        this.namingConvention = await this.session.getValue("clicommon.naming", {});
+        this.namingConvention = await this.session.getValue("naming", {});
         if (isNullOrUndefined(this.namingConvention.singularize))
             this.namingConvention.singularize = [];
-        this.glossary = await this.session.getValue("clicommon.glossary", []);
+        this.glossary = await this.session.getValue("glossary", []);
         return this;
     }
 

@@ -32,6 +32,7 @@ extension.Add("clicommon", async autoRestApi => {
 
     // emit a file (all input files concatenated)
     autoRestApi.WriteFile("code-model-v4-cli.yaml", serialize(result));
+    autoRestApi.WriteFile("code-model-v4-cli-simplified.yaml", Helper.toYamlSimplified(session.model));
 });
 
 extension.Run();
