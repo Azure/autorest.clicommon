@@ -1,7 +1,9 @@
 import { ChoiceSchema, ChoiceValue, CodeModel, ObjectSchema, Operation, OperationGroup, Parameter, Property, SealedChoiceSchema } from "@azure-tools/codemodel";
 import { keys } from "@azure-tools/linq";
 import { isArray, isNull, isNullOrUndefined, isObject, isString, isUndefined } from "util";
-import { CliConst, M4Node, M4NodeType, NamingType } from "./schema";
+import { CliConst, M4Node, M4NodeType, NamingType, CliCommonSchema } from "./schema";
+import { pascalCase, EnglishPluralizationService } from '@azure-tools/codegen';
+
 
 export class Helper {
     public static isEmptyString(str): boolean {
@@ -101,6 +103,98 @@ export class Helper {
         throw Error(`Unsupported node type: ${typeof (node)}`);
     }
 
+    public static singularize(settings: CliCommonSchema.NamingConvention, word: string): string {
+        let low = word.toLowerCase();
+        if (settings.glossary.findIndex(v => v === low) >= 0)
+            return word;
+
+        const eps = new EnglishPluralizationService();
+        eps.addWord('Database', 'Databases');
+        eps.addWord('database', 'databases');
+        return eps.singularize(word);
+    }
+
+    public static normalizeNamingSettings(settings: CliCommonSchema.NamingConvention) {
+        if (isNullOrUndefined(settings.singularize))
+            settings.singularize = [];
+        if (isNullOrUndefined(settings.glossary))
+            settings.glossary = [];
+        else
+            settings.glossary = settings.glossary.map(v => v.toLowerCase());
+        if (isNullOrUndefined(settings.override))
+            settings.override = {};
+        else {
+            for (let key in settings.override)
+                settings.override[key.toLowerCase()] = settings.override[key];
+        }
+        return settings;
+    }
+
+    /**
+     * Remark: Please make sure the singularize, glossary and override is set to [] or {} instead of null or undefined when calling this method
+     * No check for them will be done in this method for better performance. exception may be thrown if they are null or undefiend.
+     * You can call Helper.normalizeNamingSettings to do these normalization
+     * @param settings
+     * @param node
+     * @param languageKey
+     */
+    public static applyNamingConvention(settings: CliCommonSchema.NamingConvention, node: M4Node, languageKey: string) {
+        if (isNullOrUndefined(node.language[languageKey]))
+            return;
+
+        let namingType = Helper.ToNamingType(node);
+        if (isNullOrUndefined(namingType)) {
+            // unsupported modelerfour node for naming type, ignore it for now
+            return;
+        }
+
+        let style = settings[namingType];
+        let single = settings.singularize.includes(namingType) === true;
+
+        if (Helper.isEmptyString(style)) {
+            // Only process when naming convention is set
+            return;
+        }
+
+        let oldName: string = node.language[languageKey]['name'];
+        let up1 = (n: string) => n.length == 1 ? n.toUpperCase() : n[0].toUpperCase().concat(n.substr(1).toLowerCase());
+        let op = {};
+        op[CliConst.NamingStyle.camel] = {
+            wording: (v: string, i: number) => i === 0 ? v.toLowerCase() : up1(v),
+            sep: '',
+        };
+        op[CliConst.NamingStyle.pascal] = {
+            wording: (v: string, i: number) => up1(v),
+            sep: '',
+        };
+        op[CliConst.NamingStyle.kebab] = {
+            wording: (v: string, i: number) => v.toLowerCase(),
+            sep: '-',
+        };
+        op[CliConst.NamingStyle.snake] = {
+            wording: (v: string, i: number) => v.toLowerCase(),
+            sep: '_',
+        };
+        op[CliConst.NamingStyle.space] = {
+            wording: (v: string, i: number) => v.toLowerCase(),
+            sep: ' ',
+        };
+        op[CliConst.NamingStyle.upper] = {
+            wording: (v: string, i: number) => v.toUpperCase(),
+            sep: '_',
+        };
+
+        // the oldName should be in snake_naming_convention
+        const SEP = '_';
+        let newName = oldName.split(SEP).map((v, i) =>
+            (!isNullOrUndefined(settings.override[v.toLowerCase()]))
+                ? settings.override[v.toLowerCase()]
+                : op[style].wording(single ? Helper.singularize(settings, v) : v, i)
+        ).join(op[style].sep);
+
+        node.language[languageKey]['name'] = newName;
+    }
+
     public static toYamlSimplified(codeModel: CodeModel): string {
         const INDENT = '  ';
         const NEW_LINE = '\n';
@@ -131,7 +225,7 @@ export class Helper {
                         v.operations.map(vv => `${tab(2)}- operationName: ${generateCliValue(vv, 3)}` +
                             `${NEW_LINE}${tab(3)}parameters:${NEW_LINE}`.concat(
                                 vv.request.parameters.map(vvv => `${tab(3)}- parameterName: ${generateCliValue(vvv, 4)}${NEW_LINE}` +
-                                    ((vvv.protocol.http.in === 'body') ? `${tab(4)}bodySchema: ${vvv.schema.language.default.name}${NEW_LINE}` : ''))
+                                    (((!isNullOrUndefined(vvv.protocol?.http?.in)) && vvv.protocol.http.in === 'body') ? `${tab(4)}bodySchema: ${vvv.schema.language.default.name}${NEW_LINE}` : ''))
                                     .join(''))).join(''))).join(''));
         s = s + `schemas:${NEW_LINE}` +
             `${tab()}objects:${NEW_LINE}` +

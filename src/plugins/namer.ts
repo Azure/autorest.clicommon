@@ -1,17 +1,16 @@
 import { CodeModel, codeModelSchema, Property, Language, Metadata, Operation, OperationGroup, Parameter, ComplexSchema, ObjectSchema, ChoiceSchema, ChoiceValue, SealedChoiceSchema } from '@azure-tools/codemodel';
 import { Session, Host, startSession, Channel } from '@azure-tools/autorest-extension-base';
 import { serialize, deserialize } from '@azure-tools/codegen';
-import { values, items, length, Dictionary } from '@azure-tools/linq';
+import { values, items, length, Dictionary, keys } from '@azure-tools/linq';
 import { isNullOrUndefined } from 'util';
 import { CliCommonSchema, CliConst, LanguageType, M4Node } from '../schema';
 import { Helper } from '../helper';
-import { pascalCase, EnglishPluralizationService } from '@azure-tools/codegen';
 
 export class CommonNamer {
     codeModel: CodeModel
-    namingConvention: CliCommonSchema.NamingConvention
+    cliNamingSettings: CliCommonSchema.NamingConvention
+    defaultNamingSettings: CliCommonSchema.NamingConvention
     flag: Set<Metadata>
-    glossary: string[]
 
     constructor(protected session: Session<CodeModel>) {
         this.codeModel = session.model;
@@ -19,10 +18,9 @@ export class CommonNamer {
 
     async init() {
         // any configuration if necessary
-        this.namingConvention = await this.session.getValue("naming", {});
-        if (isNullOrUndefined(this.namingConvention.singularize))
-            this.namingConvention.singularize = [];
-        this.glossary = await this.session.getValue("glossary", []);
+        this.cliNamingSettings = Helper.normalizeNamingSettings(await this.session.getValue("naming.cli", {}));
+        this.defaultNamingSettings = Helper.normalizeNamingSettings(await this.session.getValue("naming.default", {}));
+
         return this;
     }
 
@@ -35,77 +33,7 @@ export class CommonNamer {
         this.flag = null;
         return this.codeModel;
     }
-    
-    singularize(word: string): string {
-        let loWord = word.toLowerCase();
-        if (this.glossary.findIndex(v => v === loWord) >= 0)
-            return word;
 
-        const eps = new EnglishPluralizationService();
-        eps.addWord('Database', 'Databases');
-        eps.addWord('database', 'databases');
-        return eps.singularize(word);
-    }
-
-    /**
-     * only support Operation, OperationGroup, Parameter, Property, ObjectSchema for now
-     * @param oldName
-     * @param metadata
-     */
-    public convertNamingConvention(node: M4Node) {
-        if (isNullOrUndefined(node.language['cli']))
-            return;
-
-        let namingType = Helper.ToNamingType(node);
-        if (isNullOrUndefined(namingType)) {
-            // unsupported modelerfour node for naming type, ignore it
-            return;
-        }
-
-        let style = this.namingConvention[namingType];
-        let single = this.namingConvention.singularize.includes(namingType);
-
-        if (Helper.isEmptyString(style)) {
-            // Only process when naming convention is set
-            return;
-        }
-
-        let oldName: string = node.language['cli']['name'];
-        let glossary: string[] = node.language['cli']['glossary'];
-        if (isNullOrUndefined(glossary))
-            glossary = [];
-
-        let getSingleArr = (n: string) => n.split(SEP).map(v => this.singularize(v));
-        let getPluralArr = (n: string) => n.split(SEP);
-        let up1 = (n: string) => n.length == 1 ? n.toUpperCase() : n[0].toUpperCase().concat(n.substr(1).toLowerCase());
-
-        const SEP = '_';
-        let newName: string;
-        switch (style) {
-            case CliConst.NamingStyle.camel:
-                newName = (single ? getSingleArr(oldName) : getPluralArr(oldName)).map((v, i) => i === 0 ? v : up1(v)).join('');
-                break;
-            case CliConst.NamingStyle.kebab:
-                newName = single ? getSingleArr(oldName).join('-') : oldName.replace(SEP, '-');
-                break;
-            case CliConst.NamingStyle.snake:
-                newName = single ? getSingleArr(oldName).join('_') : oldName;
-                break;
-            case CliConst.NamingStyle.pascal:
-                newName = (single ? getSingleArr(oldName) : getPluralArr(oldName)).map(v => up1(v)).join('');
-                break;
-            case CliConst.NamingStyle.space:
-                newName = single ? getSingleArr(oldName).join(' ') : oldName.replace(SEP, ' ');
-                break;
-            case CliConst.NamingStyle.upper:
-                newName = single ? getSingleArr(oldName).join('_').toUpperCase() : oldName.toUpperCase();
-                break;
-            default:
-                throw Error(`Unknown name style: ${style}`)
-        }
-
-        node.language['cli']['name'] = newName;
-    }
 
     getCliName(obj: any) {
         if (obj == null || obj.language == null) {
@@ -121,7 +49,8 @@ export class CommonNamer {
 
         if (!this.flag.has(obj)) {
             this.flag.add(obj);
-            this.convertNamingConvention(obj);
+            Helper.applyNamingConvention(this.cliNamingSettings, obj, 'cli');
+            Helper.applyNamingConvention(this.defaultNamingSettings, obj, 'default');
         }
     }
 
