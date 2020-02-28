@@ -27,7 +27,7 @@ extension.Add("clicommon", async autoRestApi => {
     // add test scenario from common settings
     let cliCommonSettings = await autoRestApi.GetValue("cli");
     if (cliCommonSettings) {
-        result["test-scenario"] = cliCommonSettings['test-scenario'];
+        result["test-scenario"] = cliCommonSettings['test-scenario'] || cliCommonSettings['test-setup'];
     }
 
     // write the final result first which is hardcoded in the Session class to use to build the model..
