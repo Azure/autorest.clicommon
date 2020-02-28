@@ -8,7 +8,7 @@
     },
     "scripts": {
         "start": "node dist/src/index.js",
-        "debug": "node --max_old_space_size=4096 --inspect-brk ./dist/src/index.js",
+        "debug": "node --max_old_space_size=4096 --inspect-brk --inspect-port=9998 ./dist/src/index.js",
         "eslint-fix": "eslint  . --fix --ext .ts",
         "eslint": "eslint  . --ext .ts",
         "build": "tsc -p .",

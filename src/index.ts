@@ -1,9 +1,9 @@
-import { AutoRestExtension, Session, Channel, Host, startSession } from '@azure-tools/autorest-extension-base';
-import { codeModelSchema, CodeModel } from '@azure-tools/codemodel';
+import { AutoRestExtension, startSession } from '@azure-tools/autorest-extension-base';
 import { serialize } from '@azure-tools/codegen';
-import { CommonNamer } from './plugins/namer';
-import { Modifier } from './plugins/modifier/modifier';
+import { CodeModel, codeModelSchema, OperationGroup, Operation, Schema, ObjectSchema, Property } from '@azure-tools/codemodel';
 import { Helper } from './helper';
+import { Modifier } from './plugins/modifier/modifier';
+import { CommonNamer } from './plugins/namer';
 
 export type LogCallback = (message: string) => void;
 export type FileCallback = (path: string, rows: string[]) => void;
@@ -16,13 +16,13 @@ extension.Add("clicommon", async autoRestApi => {
     // at this point namer and modifirers are in a single plug-in
     const modifier = await new Modifier(session).init();
     let result = modifier.process();
-    autoRestApi.WriteFile("code-model-v4-cli-modifier.yaml", serialize(result));
-    autoRestApi.WriteFile("code-model-v4-cli-modifier-simplified.yaml", Helper.toYamlSimplified(session.model));
+    let afterModifier = serialize(result);
+    let simplifiedModelAfterModifier = Helper.toYamlSimplified(session.model);
 
     const namer = await new CommonNamer(session).init();
     result = namer.process();
-    autoRestApi.WriteFile("code-model-v4-cli-namer.yaml", serialize(result));
-    autoRestApi.WriteFile("code-model-v4-cli-namer-simplified.yaml", Helper.toYamlSimplified(session.model));
+    let afterNamer = serialize(result);
+    let simplifiedModelAfterNamer = Helper.toYamlSimplified(session.model);
 
     // add test scenario from common settings
     let cliCommonSettings = await autoRestApi.GetValue("cli");
@@ -30,9 +30,21 @@ extension.Add("clicommon", async autoRestApi => {
         result["test-scenario"] = cliCommonSettings['test-scenario'];
     }
 
-    // emit a file (all input files concatenated)
-    autoRestApi.WriteFile("code-model-v4-cli.yaml", serialize(result));
-    autoRestApi.WriteFile("code-model-v4-cli-simplified.yaml", Helper.toYamlSimplified(session.model));
+    // write the final result first which is hardcoded in the Session class to use to build the model..
+    // overwrite the modelerfour which should be fine considering our change is backward compatible
+    const options = <any>await session.getValue('modelerfour', {});
+    if (options['emit-yaml-tags'] !== false) {
+        autoRestApi.WriteFile('code-model-v4.yaml', serialize(result, codeModelSchema), undefined, 'code-model-v4');
+    }
+    if (options['emit-yaml-tags'] !== true) {
+        autoRestApi.WriteFile('code-model-v4-no-tags.yaml', serialize(result), undefined, 'code-model-v4-no-tags');
+    }
+
+    autoRestApi.WriteFile("code-model-v4-cli-after-modifier.yaml", afterModifier);
+    autoRestApi.WriteFile("code-model-v4-cli-after-modifier-simplified.yaml", simplifiedModelAfterModifier);
+    autoRestApi.WriteFile("code-model-v4-cli-after-namer.yaml", afterNamer);
+    autoRestApi.WriteFile("code-model-v4-cli-after-namer-simplified.yaml", simplifiedModelAfterNamer);
+
 });
 
 extension.Run();

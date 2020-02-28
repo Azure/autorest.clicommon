@@ -13,8 +13,11 @@ pipeline:
         input: modelerfour/identity
         output-artifact: clicommon-output-file
 
-    clicommon/emitter:
+    clicommon/identity:
         input: clicommon
+
+    clicommon/emitter:
+        input: clicommon/identity
         scope: scope-clicommon
 
 scope-clicommon:
@@ -36,8 +39,12 @@ modelerfour:
         type:  'snake'
         choice:  'snake'
         choiceValue:  'snake'
-        constant:  'pascal'
+        constant:  'snake'
         client: 'pascal'
+        override:  # a key/value mapping of names to force to a certain value 
+          cmyk : CMYK
+          $host: $host
+          LRO: LRO
 
 clicommon:
     naming:
@@ -49,6 +56,8 @@ clicommon:
                 cmyk : CMYK
                 $host: $host
                 LRO: LRO
+                # workaround for modelerfour issue
+                SubscriptionId: SubscriptionId
             parameter: 'camel'
             operation: 'pascal'
             operationGroup:  'pascal'
@@ -56,11 +65,14 @@ clicommon:
             type:  'pascal'
             choice: 'pascal'
             choiceValue: 'pascal'
+            constant: 'pascal'
         default:
             override:
                 cmyk : CMYK
                 $host: $host
                 LRO: LRO
+                # workaround for modelerfour issue
+                SubscriptionId: SubscriptionId
             parameter: 'camel'
             operation: 'pascal'
             operationGroup:  'pascal'
@@ -68,6 +80,7 @@ clicommon:
             type:  'pascal'
             choice: 'pascal'
             choiceValue: 'pascal'
+            constant: 'pascal'
 ```
 
 # Available Configurations for CLI Common:

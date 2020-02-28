@@ -1,4 +1,4 @@
-import { ChoiceSchema, ChoiceValue, CodeModel, ObjectSchema, Operation, OperationGroup, Parameter, Property, SealedChoiceSchema } from "@azure-tools/codemodel";
+import { ChoiceSchema, ChoiceValue, CodeModel, ObjectSchema, Operation, OperationGroup, Parameter, Property, SealedChoiceSchema, Schema, ConstantSchema, SchemaType } from "@azure-tools/codemodel";
 import { keys } from "@azure-tools/linq";
 import { isArray, isNull, isNullOrUndefined, isObject, isString, isUndefined } from "util";
 import { CliConst, M4Node, M4NodeType, NamingType, CliCommonSchema } from "./schema";
@@ -64,22 +64,29 @@ export class Helper {
     }
 
     public static ToNamingType(node: M4Node): NamingType | null {
+
         if (node instanceof OperationGroup)
             return CliConst.NamingType.operationGroup;
         else if (node instanceof Operation)
             return CliConst.NamingType.operation;
-        else if (node instanceof Parameter)
-            return CliConst.NamingType.parameter;
-        else if (node instanceof ObjectSchema)
-            return CliConst.NamingType.type;
-        else if (node instanceof Property)
-            return CliConst.NamingType.property;
+        else if (node instanceof Parameter) {
+            if (node['flattened'] === true)
+                return null; // workaround modelerfour's bug
+            return node.schema.type === SchemaType.Constant ? CliConst.NamingType.constant : CliConst.NamingType.parameter;
+        }
         else if (node instanceof ChoiceSchema)
             return CliConst.NamingType.choice;
         else if (node instanceof SealedChoiceSchema)
             return CliConst.NamingType.choice;
+        else if (node instanceof ConstantSchema)
+            return CliConst.NamingType.constant;
         else if (node instanceof ChoiceValue)
             return CliConst.NamingType.choiceValue;
+        // Treat other schema type as 'type' like 'string, 'number', 'array', 'dictionary', 'object'...
+        else if (node instanceof Schema)
+            return CliConst.NamingType.type;
+        else if (node instanceof Property)
+            return CliConst.NamingType.property;
         return null;
     }
 
