@@ -70,8 +70,9 @@ export class Helper {
         else if (node instanceof Operation)
             return CliConst.NamingType.operation;
         else if (node instanceof Parameter) {
+            // workaround for modelerfour's bug, the naming convention is not applied to flattened parameter
             if (node['flattened'] === true)
-                return null; // workaround modelerfour's bug
+                return null;
             return node.schema?.type === SchemaType.Constant ? CliConst.NamingType.constant : CliConst.NamingType.parameter;
         }
         else if (node instanceof ChoiceSchema)
