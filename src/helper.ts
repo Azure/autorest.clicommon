@@ -72,7 +72,7 @@ export class Helper {
         else if (node instanceof Parameter) {
             if (node['flattened'] === true)
                 return null; // workaround modelerfour's bug
-            return node.schema.type === SchemaType.Constant ? CliConst.NamingType.constant : CliConst.NamingType.parameter;
+            return node.schema?.type === SchemaType.Constant ? CliConst.NamingType.constant : CliConst.NamingType.parameter;
         }
         else if (node instanceof ChoiceSchema)
             return CliConst.NamingType.choice;
