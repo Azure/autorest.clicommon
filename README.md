@@ -57,6 +57,7 @@ clicommon:
                 $host: $host
                 LRO: LRO
                 # workaround for modelerfour issue
+                # https://github.com/Azure/autorest.modelerfour/issues/195
                 SubscriptionId: SubscriptionId
             parameter: 'camel'
             operation: 'pascal'

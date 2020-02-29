@@ -71,6 +71,7 @@ export class Helper {
             return CliConst.NamingType.operation;
         else if (node instanceof Parameter) {
             // workaround for modelerfour's bug, the naming convention is not applied to flattened parameter
+            // https://github.com/Azure/autorest.modelerfour/issues/195
             if (node['flattened'] === true)
                 return null;
             return node.schema?.type === SchemaType.Constant ? CliConst.NamingType.constant : CliConst.NamingType.parameter;
