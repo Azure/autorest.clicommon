@@ -47,6 +47,7 @@ modelerfour:
           LRO: LRO
 
 clicommon:
+    debug-output: true
     naming:
         cli:
             singularize:

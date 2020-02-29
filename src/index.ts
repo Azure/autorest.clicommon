@@ -13,16 +13,27 @@ const extension = new AutoRestExtension();
 extension.Add("clicommon", async autoRestApi => {
     const session = await startSession<CodeModel>(autoRestApi, {}, codeModelSchema);
 
+    let cliDebug = await session.getValue('debug-output', false);
     // at this point namer and modifirers are in a single plug-in
+    let debugOutput = {};
+
+    let namingMapping = Helper.toYamlSimplified(session.model);
+    if (cliDebug) {
+        debugOutput['cli-debug-before-everything.yaml'] = serialize(session.model);
+    }
     const modifier = await new Modifier(session).init();
     let result = modifier.process();
-    let afterModifier = serialize(result);
-    let simplifiedModelAfterModifier = Helper.toYamlSimplified(session.model);
+    if (cliDebug) {
+        debugOutput['cli-debug-after-modifier.yaml'] = serialize(result);
+        debugOutput['cli-debug-after-modifier-simplified.yaml'] = Helper.toYamlSimplified(session.model);
+    }
 
     const namer = await new CommonNamer(session).init();
     result = namer.process();
-    let afterNamer = serialize(result);
-    let simplifiedModelAfterNamer = Helper.toYamlSimplified(session.model);
+    if (cliDebug) {
+        debugOutput['cli-debug-after-namer.yaml'] = serialize(result);
+        debugOutput['cli-debug-after-namer-simplified.yaml'] = Helper.toYamlSimplified(session.model);
+    }
 
     // add test scenario from common settings
     let cliCommonSettings = await autoRestApi.GetValue("cli");
@@ -40,11 +51,9 @@ extension.Add("clicommon", async autoRestApi => {
         autoRestApi.WriteFile('code-model-v4-no-tags.yaml', serialize(result), undefined, 'code-model-v4-no-tags');
     }
 
-    autoRestApi.WriteFile("code-model-v4-cli-after-modifier.yaml", afterModifier);
-    autoRestApi.WriteFile("code-model-v4-cli-after-modifier-simplified.yaml", simplifiedModelAfterModifier);
-    autoRestApi.WriteFile("code-model-v4-cli-after-namer.yaml", afterNamer);
-    autoRestApi.WriteFile("code-model-v4-cli-after-namer-simplified.yaml", simplifiedModelAfterNamer);
-
+    autoRestApi.WriteFile("clicommon-name-mapping.yaml", namingMapping);
+    for (let key in debugOutput)
+        autoRestApi.WriteFile(key, debugOutput[key], null);
 });
 
 extension.Run();
