@@ -1,8 +1,9 @@
-import { AutoRestExtension, Session, Channel, Host, startSession } from '@azure-tools/autorest-extension-base';
-import { codeModelSchema, CodeModel } from '@azure-tools/codemodel';
+import { AutoRestExtension, startSession } from '@azure-tools/autorest-extension-base';
 import { serialize } from '@azure-tools/codegen';
+import { CodeModel, codeModelSchema, OperationGroup, Operation, Schema, ObjectSchema, Property } from '@azure-tools/codemodel';
+import { Helper } from './helper';
+import { Modifier } from './plugins/modifier/modifier';
 import { CommonNamer } from './plugins/namer';
-import { CommonModifiers } from './plugins/modifiers';
 
 export type LogCallback = (message: string) => void;
 export type FileCallback = (path: string, rows: string[]) => void;
@@ -10,44 +11,40 @@ export type FileCallback = (path: string, rows: string[]) => void;
 const extension = new AutoRestExtension();
 
 extension.Add("clicommon", async autoRestApi => {
+    const session = await startSession<CodeModel>(autoRestApi, {}, codeModelSchema);
 
+    // at this point namer and modifirers are in a single plug-in
+    const modifier = await new Modifier(session).init();
+    let result = modifier.process();
+    let afterModifier = serialize(result);
+    let simplifiedModelAfterModifier = Helper.toYamlSimplified(session.model);
 
-    try
-    {
-        const inputFileUris = await autoRestApi.ListInputs();
-        let cliCommonSettings = await autoRestApi.GetValue("cli");
+    const namer = await new CommonNamer(session).init();
+    result = namer.process();
+    let afterNamer = serialize(result);
+    let simplifiedModelAfterNamer = Helper.toYamlSimplified(session.model);
 
-        const inputFiles: string[] = await Promise.all(inputFileUris.map(uri => autoRestApi.ReadFile(uri)));
-        const session = await startSession<CodeModel>(autoRestApi, {}, codeModelSchema);
-
-        // at this point namer and modifirers are in a single plug-in
-        const namer = await new CommonNamer(session).init();
-        let result = namer.process();
-
-        const modifiers = new CommonModifiers(session);
-        modifiers.codeModel = result;
-        modifiers.directives = (cliCommonSettings != null) ? cliCommonSettings['directives'] : null;
-        result = await modifiers.process();
-
-        // add test scenario from common settings
-        if (cliCommonSettings) {
-            result["test-scenario"] = cliCommonSettings['test-scenario'] || cliCommonSettings['test-setup'];
-        }
-
-        // emit a file (all input files concatenated)
-        autoRestApi.WriteFile("code-model-v4-cli.yaml", serialize(result));
+    // add test scenario from common settings
+    let cliCommonSettings = await autoRestApi.GetValue("cli");
+    if (cliCommonSettings) {
+        result["test-scenario"] = cliCommonSettings['test-scenario'] || cliCommonSettings['test-setup'];
     }
-    catch (e)
-    {
-        Error(e.message + " -- " + JSON.stringify(e.stack));
+
+    // write the final result first which is hardcoded in the Session class to use to build the model..
+    // overwrite the modelerfour which should be fine considering our change is backward compatible
+    const options = <any>await session.getValue('modelerfour', {});
+    if (options['emit-yaml-tags'] !== false) {
+        autoRestApi.WriteFile('code-model-v4.yaml', serialize(result, codeModelSchema), undefined, 'code-model-v4');
     }
+    if (options['emit-yaml-tags'] !== true) {
+        autoRestApi.WriteFile('code-model-v4-no-tags.yaml', serialize(result), undefined, 'code-model-v4-no-tags');
+    }
+
+    autoRestApi.WriteFile("code-model-v4-cli-after-modifier.yaml", afterModifier);
+    autoRestApi.WriteFile("code-model-v4-cli-after-modifier-simplified.yaml", simplifiedModelAfterModifier);
+    autoRestApi.WriteFile("code-model-v4-cli-after-namer.yaml", afterNamer);
+    autoRestApi.WriteFile("code-model-v4-cli-after-namer-simplified.yaml", simplifiedModelAfterNamer);
+
 });
-
-/*async function initializePlugins(pluginHost: AutoRestExtension) {
-    pluginHost.Add("clinamer", clinamer);
-    pluginHost.Add("climodifiers", climodifiers);
-}
-
-initializePlugins(extension);*/
 
 extension.Run();

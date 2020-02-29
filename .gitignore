@@ -3,3 +3,9 @@ dist/
 .vscode/
 package-lock.json
 generated
+
+*.orig
+*.njsproj
+*.user
+bin*/
+obj/Release*/
