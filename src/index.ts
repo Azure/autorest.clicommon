@@ -34,10 +34,10 @@ extension.Add("clicommon", async autoRestApi => {
     // overwrite the modelerfour which should be fine considering our change is backward compatible
     const options = <any>await session.getValue('modelerfour', {});
     if (options['emit-yaml-tags'] !== false) {
-        autoRestApi.WriteFile('code-model-v4-cli.yaml', serialize(result, codeModelSchema), undefined, 'code-model-v4');
+        autoRestApi.WriteFile('code-model-v4.yaml', serialize(result, codeModelSchema), undefined, 'code-model-v4');
     }
     if (options['emit-yaml-tags'] !== true) {
-        autoRestApi.WriteFile('code-model-v4-cli-no-tags.yaml', serialize(result), undefined, 'code-model-v4-no-tags');
+        autoRestApi.WriteFile('code-model-v4-no-tags.yaml', serialize(result), undefined, 'code-model-v4-no-tags');
     }
 
     autoRestApi.WriteFile("code-model-v4-cli-after-modifier.yaml", afterModifier);
