@@ -26,9 +26,6 @@ scope-clicommon:
         - clicommon-output-file
 
 modelerfour:
-    group-parameters: true
-    flatten-models: true
-    flatten-payloads: true
     # standardize to snake in modelerfour for selecting and formatting in clicommon
     # further naming will be done in clicommon to corresonding convention
     naming: 
