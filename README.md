@@ -166,6 +166,9 @@ clicommon:
 - remove:
   - add 'remove: ...' under 'language->cli'.
   - optional
+- required:
+  - add 'required: ...' under 'language->cli'.
+  - optional
 - alias:
   - add 'alias: ...' under 'language->cli'
   - optional
@@ -192,7 +195,7 @@ clicommon:
      output-artifact:
         - clicommon-output-file
 ```
-- File 'code-model-v4-cli-simplified.yaml' will be generated containing the simplified code model which can be looked up for the name of operationGroup, operation, parameter, schema, property, enum, enumValue
+- File 'clicommon-name-mapping.yaml' will be generated containing the simplified code model which can be looked up for the name of operationGroup, operation, parameter, schema, property, enum, enumValue
 
 #### Samples
 
@@ -229,7 +232,7 @@ clicommon:
             group: 'group_name'
             op: 'operation_name'
             param: 'parameter_name'
-        remove: true
+        required: true
     # add hide property for all parameter start with 'abc'
       - where:
             parameter: '^abc.*$'

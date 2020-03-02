@@ -40,6 +40,7 @@ export abstract class Action {
                     break;
                 case 'hide':
                 case 'remove':
+                case 'required':
                     arr.push(new ActionSetProperty(value, key, () => true));
                     break;
                 case 'name':
