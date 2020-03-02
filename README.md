@@ -26,9 +26,6 @@ scope-clicommon:
         - clicommon-output-file
 
 modelerfour:
-    group-parameters: true
-    flatten-models: true
-    flatten-payloads: true
     # standardize to snake in modelerfour for selecting and formatting in clicommon
     # further naming will be done in clicommon to corresonding convention
     naming: 
@@ -162,11 +159,14 @@ clicommon:
 - name:
   - add 'name: ...' under 'language->cli'. Please make sure **snake_naming_convention** is used
   - optional
-- hide:
-  - add 'hide: ...' under 'language->cli'.
+- hidden:
+  - add 'hidden: ...' under 'language->cli'.
   - optional
-- remove:
-  - add 'remove: ...' under 'language->cli'.
+- removed:
+  - add 'removed: ...' under 'language->cli'.
+  - optional
+- required:
+  - add 'required: ...' under 'language->cli'.
   - optional
 - alias:
   - add 'alias: ...' under 'language->cli'
@@ -194,7 +194,8 @@ clicommon:
      output-artifact:
         - clicommon-output-file
 ```
-- File 'code-model-v4-cli-simplified.yaml' will be generated containing the simplified code model which can be looked up for the name of operationGroup, operation, parameter, schema, property, enum, enumValue
+- File 'clicommon-name-mapping.yaml' will be generated containing the simplified code model which can be looked up for the name of operationGroup, operation, parameter, schema, property, enum, enumValue
+- Additional output files for debugging purpose will be generated if --debug is set
 
 #### Samples
 
@@ -208,34 +209,34 @@ clicommon:
         name: 'new_name'   
       - where:
             resource: 'old_name'
-        hide: true
+        hidden: true
       - where:
             group: 'old_name'
-        remove: 'true
-    # add hide property for operation
+        removed: 'true
+    # add hidden property for operation
       - where:
             group: 'group_name'
             operation: 'operation_name'
-        hide: true
+        hidden: true
       - where:
             group: 'group_name'
             op: 'operatoin_name'
-        hide: true
-    # add remove property for parameter
+        hidden: true
+    # add removed property for parameter
       - where:
             group: 'group_name'
             op: 'operation_name'
             parameter: 'parameter_name'
-        remove: true
+        removed: true
       - where:
             group: 'group_name'
             op: 'operation_name'
             param: 'parameter_name'
-        remove: true
-    # add hide property for all parameter start with 'abc'
+        required: true
+    # add hidden property for all parameter start with 'abc'
       - where:
             parameter: '^abc.*$'
-        hide: true
+        hidden: true
     # set table format under for schema
       - where:
             schemaObject: 'schema_name'

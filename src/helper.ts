@@ -166,6 +166,9 @@ export class Helper {
         }
 
         let oldName: string = node.language[languageKey]['name'];
+        if (Helper.isEmptyString(oldName))
+            return;
+
         let up1 = (n: string) => n.length == 1 ? n.toUpperCase() : n[0].toUpperCase().concat(n.substr(1).toLowerCase());
         let op = {};
         op[CliConst.NamingStyle.camel] = {

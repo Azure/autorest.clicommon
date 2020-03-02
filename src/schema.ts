@@ -97,8 +97,9 @@ export namespace CliCommonSchema {
             select?: M4NodeType;
             where?: WhereClause;
             set?: SetClause;
-            hide?: ValueClause;
-            remove?: ValueClause;
+            hidden?: ValueClause;
+            removed?: ValueClause;
+            required?: ValueClause;
             name?: ValueClause;
             /** in kebab-case */
             setName?: SetNameClause;
