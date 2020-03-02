@@ -159,11 +159,11 @@ clicommon:
 - name:
   - add 'name: ...' under 'language->cli'. Please make sure **snake_naming_convention** is used
   - optional
-- hide:
-  - add 'hide: ...' under 'language->cli'.
+- hidden:
+  - add 'hidden: ...' under 'language->cli'.
   - optional
-- remove:
-  - add 'remove: ...' under 'language->cli'.
+- removed:
+  - add 'removed: ...' under 'language->cli'.
   - optional
 - required:
   - add 'required: ...' under 'language->cli'.
@@ -209,34 +209,34 @@ clicommon:
         name: 'new_name'   
       - where:
             resource: 'old_name'
-        hide: true
+        hidden: true
       - where:
             group: 'old_name'
-        remove: 'true
-    # add hide property for operation
+        removed: 'true
+    # add hidden property for operation
       - where:
             group: 'group_name'
             operation: 'operation_name'
-        hide: true
+        hidden: true
       - where:
             group: 'group_name'
             op: 'operatoin_name'
-        hide: true
-    # add remove property for parameter
+        hidden: true
+    # add removed property for parameter
       - where:
             group: 'group_name'
             op: 'operation_name'
             parameter: 'parameter_name'
-        remove: true
+        removed: true
       - where:
             group: 'group_name'
             op: 'operation_name'
             param: 'parameter_name'
         required: true
-    # add hide property for all parameter start with 'abc'
+    # add hidden property for all parameter start with 'abc'
       - where:
             parameter: '^abc.*$'
-        hide: true
+        hidden: true
     # set table format under for schema
       - where:
             schemaObject: 'schema_name'
