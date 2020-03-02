@@ -13,7 +13,7 @@ const extension = new AutoRestExtension();
 extension.Add("clicommon", async autoRestApi => {
     const session = await startSession<CodeModel>(autoRestApi, {}, codeModelSchema);
 
-    let cliDebug = await session.getValue('debug-output', false);
+    let cliDebug = await session.getValue('debug', false);
     // at this point namer and modifirers are in a single plug-in
     let debugOutput = {};
 

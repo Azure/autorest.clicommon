@@ -38,8 +38,8 @@ export abstract class Action {
                 case 'set':
                     arr.push(new ActionSet(value));
                     break;
-                case 'hide':
-                case 'remove':
+                case 'hidden':
+                case 'removed':
                 case 'required':
                     arr.push(new ActionSetProperty(value, key, () => true));
                     break;

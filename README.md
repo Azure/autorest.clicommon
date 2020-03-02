@@ -44,7 +44,6 @@ modelerfour:
           LRO: LRO
 
 clicommon:
-    debug-output: true
     naming:
         cli:
             singularize:
@@ -196,6 +195,7 @@ clicommon:
         - clicommon-output-file
 ```
 - File 'clicommon-name-mapping.yaml' will be generated containing the simplified code model which can be looked up for the name of operationGroup, operation, parameter, schema, property, enum, enumValue
+- Additional output files for debugging purpose will be generated if --debug is set
 
 #### Samples
 
