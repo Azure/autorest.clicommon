@@ -109,6 +109,7 @@ export namespace CliCommonSchema {
     }
 
     export interface NamingConvention {
+        appliedTo?: string[]
         singularize?: NamingType[]
         glossary?: string[]
         override?: any

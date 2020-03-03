@@ -9,6 +9,7 @@ describe('Test NamingConvention', function () {
     it('namingConvention', () => {
 
         let settings: CliCommonSchema.NamingConvention = {
+            appliedTo: ['name', 'alias'],
             singularize: ['operation', 'operationGroup'],
             glossary: ['cats', 'Dogs'],
             override: {
@@ -30,22 +31,34 @@ describe('Test NamingConvention', function () {
         assert.equal(group.language['default'].name, 'CATS_FOOD');
 
         let op: Operation = new Operation('birds_food', 'desc');
+        op.language.default['alias'] = ['alias_name1', 'alias_name2'];
         Helper.applyNamingConvention(settings, op, 'default');
         assert.equal(op.language['default'].name, 'BirdFood');
+        assert.deepEqual(op.language.default['alias'], ['AliasName1', 'AliasName2']);
 
-        let param: Parameter = new Parameter('try_ame_test', 'desc' ,null);
+        let param: Parameter = new Parameter('try_ame_test', 'desc', null);
+        param.language.default['alias'] = 'param_alias';
         Helper.applyNamingConvention(settings, param, 'default');
-        assert.equal(param.language['default'].name, 'tryAMETest')
+        assert.equal(param.language['default'].name, 'tryAMETest');
+        assert.equal(param.language['default']['alias'], 'paramAlias');
 
         let schema: ObjectSchema = new ObjectSchema('AUTOREST_is_cool', 'desc');
-        schema.language['cli'] = { name: 'is_autorest_very_cool' };
+        schema.language['cli'] = {
+            name: 'is_autorest_very_cool',
+            alias: 'op_alias_autorest',
+        };
         Helper.applyNamingConvention(settings, schema, 'cli');
         assert.equal(schema.language['cli'].name, 'is_AUTOREST_very_cool');
+        assert.equal(schema.language['cli'].alias, 'op_alias_AUTOREST');
 
         let prop: Property = new Property('hello_world', 'desc', null);
-        prop.language['cli'] = { name: 'hello_world' };
+        prop.language['cli'] = {
+            name: 'hello_world',
+            alias: 'prop_alias'
+        };
         Helper.applyNamingConvention(settings, prop, 'cli');
         assert.equal(prop.language['cli'].name, 'hello-world');
+        assert.equal(prop.language['cli'].alias, 'prop-alias');
 
         let choice: ChoiceSchema = new ChoiceSchema('name', 'desc');
         choice.language['cli'] = { name: 'all_dogs_are_animal' }
@@ -56,6 +69,5 @@ describe('Test NamingConvention', function () {
         choice.language['cli'] = { name: 'all_dogs_are_animal' }
         Helper.applyNamingConvention(settings, choice, 'cli');
         assert.equal(choice.language['cli'].name, 'all dogs are animal');
-
     });
 });
