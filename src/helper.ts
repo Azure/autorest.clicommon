@@ -168,7 +168,7 @@ export class Helper {
             return;
         }
 
-        let up1 = (n: string) => n.length == 1 ? n.toUpperCase() : n[0].toUpperCase().concat(n.substr(1).toLowerCase());
+        let up1 = (n: string) => Helper.isEmptyString(n) ? n : n.length == 1 ? n.toUpperCase() : n[0].toUpperCase().concat(n.substr(1).toLowerCase());
         let op = {};
         op[CliConst.NamingStyle.camel] = {
             wording: (v: string, i: number) => i === 0 ? v.toLowerCase() : up1(v),
