@@ -136,11 +136,14 @@ export class Helper {
             for (let key in settings.override)
                 settings.override[key.toLowerCase()] = settings.override[key];
         }
+        if (isNullOrUndefined(settings.appliedTo)) {
+            settings.appliedTo = ['name'];
+        }
         return settings;
     }
 
     /**
-     * Remark: Please make sure the singularize, glossary and override is set to [] or {} instead of null or undefined when calling this method
+     * Remark: Please make sure the singularize, glossary, appliedTo and override is set to [] or {} instead of null or undefined when calling this method
      * No check for them will be done in this method for better performance. exception may be thrown if they are null or undefiend.
      * You can call Helper.normalizeNamingSettings to do these normalization
      * @param settings
@@ -165,11 +168,7 @@ export class Helper {
             return;
         }
 
-        let oldName: string = node.language[languageKey]['name'];
-        if (Helper.isEmptyString(oldName))
-            return;
-
-        let up1 = (n: string) => n.length == 1 ? n.toUpperCase() : n[0].toUpperCase().concat(n.substr(1).toLowerCase());
+        let up1 = (n: string) => Helper.isEmptyString(n) ? n : n.length == 1 ? n.toUpperCase() : n[0].toUpperCase().concat(n.substr(1).toLowerCase());
         let op = {};
         op[CliConst.NamingStyle.camel] = {
             wording: (v: string, i: number) => i === 0 ? v.toLowerCase() : up1(v),
@@ -196,15 +195,36 @@ export class Helper {
             sep: '_',
         };
 
-        // the oldName should be in snake_naming_convention
-        const SEP = '_';
-        let newName = oldName.split(SEP).map((v, i) =>
-            (!isNullOrUndefined(settings.override[v.toLowerCase()]))
-                ? settings.override[v.toLowerCase()]
-                : op[style].wording(single ? Helper.singularize(settings, v) : v, i)
-        ).join(op[style].sep);
+        let convert = (oldName) => {
+            if (Helper.isEmptyString(oldName))
+                return oldName;
 
-        node.language[languageKey]['name'] = newName;
+            // the oldName should be in snake_naming_convention
+            const SEP = '_';
+            let newName = oldName.split(SEP).map((v, i) =>
+                (!isNullOrUndefined(settings.override[v.toLowerCase()]))
+                    ? settings.override[v.toLowerCase()]
+                    : op[style].wording(single ? Helper.singularize(settings, v) : v, i)
+            ).join(op[style].sep);
+            return newName;
+        };
+
+
+        settings.appliedTo.forEach(field => {
+            let v = node.language[languageKey][field];
+            if (isNullOrUndefined(v))
+                return;
+            else if (isString(v)) {
+                node.language[languageKey][field] = convert(v);
+            }
+            else if (isArray(v)) {
+                // exception will be thrown if it's not an string arry, don't do the check explicitly for better perf
+                node.language[languageKey][field] = v.map((item) => convert(item));
+            }
+            else {
+                throw Error("Only string or string array is supported for naming convention");
+            }
+        });
     }
 
     public static toYamlSimplified(codeModel: CodeModel): string {

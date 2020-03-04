@@ -46,6 +46,9 @@ modelerfour:
 clicommon:
     naming:
         cli:
+            appliedTo:
+              - name
+              - alias
             singularize:
               - operationGroup
               - operation
@@ -96,6 +99,9 @@ clicommon:
 clicommon:
     naming:
         cli:
+            appliedTo:
+              - name
+              - alias
             singularize:
               - operationGroup
               - operation
@@ -103,6 +109,8 @@ clicommon:
                 cmyk : CMYK
                 $host: $host
                 LRO: LRO
+            glossary:
+              - insights
             parameter: 'camel'
             operation: 'pascal'
             operationGroup:  'pascal'
