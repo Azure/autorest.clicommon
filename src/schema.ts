@@ -12,6 +12,7 @@ export namespace CliConst {
     export const CLI_FORMATTABLE: string = "formatTable";
     export const CLI_FORMATTABLE_PROPERTIES: string = "properties";
     export const CLI_DIRECTIVE: string = "cli-directive";
+    export const CLI_DIRECTIVE_KEY: string = 'cli.cli-directive';
 
     export class NamingStyle {
         /** camelCase */

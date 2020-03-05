@@ -32,7 +32,7 @@ export class CliDirectiveManager {
     private directives: CliDirective[] = [];
 
     public async LoadDirective(session: Session<CodeModel>) {
-        var arr: CliCommonSchema.CliDirective.Directive[] = await session.getValue(CliConst.CLI_DIRECTIVE, null);
+        var arr: CliCommonSchema.CliDirective.Directive[] = await session.getValue(CliConst.CLI_DIRECTIVE_KEY, null);
 
         if (!isNullOrUndefined(arr) && !Array.isArray(arr)) {
             throw Error("cli-directive is expected to be an array. Please check '-' is set property in yaml")

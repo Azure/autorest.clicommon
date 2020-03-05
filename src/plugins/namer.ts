@@ -18,8 +18,8 @@ export class CommonNamer {
 
     async init() {
         // any configuration if necessary
-        this.cliNamingSettings = Helper.normalizeNamingSettings(await this.session.getValue("naming.cli", {}));
-        this.defaultNamingSettings = Helper.normalizeNamingSettings(await this.session.getValue("naming.default", {}));
+        this.cliNamingSettings = Helper.normalizeNamingSettings(await this.session.getValue("cli.naming.cli", {}));
+        this.defaultNamingSettings = Helper.normalizeNamingSettings(await this.session.getValue("cli.naming.default", {}));
 
         return this;
     }

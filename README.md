@@ -43,7 +43,7 @@ modelerfour:
           $host: $host
           LRO: LRO
 
-clicommon:
+cli:
     naming:
         cli:
             appliedTo:
@@ -96,7 +96,7 @@ clicommon:
 > so that it will be converted to correct naming convention in the output. Samples as below:
 
 ``` $(sample-cli-directive)
-clicommon:
+cli:
     naming:
         cli:
             appliedTo:
@@ -208,7 +208,7 @@ clicommon:
 #### Samples
 
 ``` $(sample-cli-directive)
-clicommon:
+cli:
     cli-directive:
     # directive on operationGroup
       - select: 'operationGroup'
