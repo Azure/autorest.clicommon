@@ -5,6 +5,12 @@ import { M4Node } from '../src/schema';
 import { Metadata } from "@azure-tools/codemodel";
 
 describe('Test Directive - Action - replace', function () {
+    var descriptor = {
+        parent: null,
+        targetIndex: -1,
+        target: null,
+    };
+
     it('Action replace - part', () => {
         let ori = {
             field: 'p1',
@@ -15,10 +21,10 @@ describe('Test Directive - Action - replace', function () {
         let action = new ActionReplace(ori);
 
         let baseline = { p1: 'here is the newValue' };
-        let o = new Metadata();
-        o.language.default['p1'] = 'here is the oldValue';
-        action.process(o);
-        assert.deepEqual(o.language['cli'], baseline);
+        descriptor.target = new Metadata();
+        descriptor.target.language.default['p1'] = 'here is the oldValue';
+        action.process(descriptor);
+        assert.deepEqual(descriptor.target.language['cli'], baseline);
     });
 
     it('Action replace - whole', () => {
@@ -31,10 +37,10 @@ describe('Test Directive - Action - replace', function () {
         let action = new ActionReplace(ori);
 
         let baseline = { p1: 'newValue' };
-        let o = new Metadata();
-        o.language.default['p1'] = 'oldValue';
-        action.process(o);
-        assert.deepEqual(o.language['cli'], baseline);
+        descriptor.target = new Metadata();
+        descriptor.target.language.default['p1'] = 'oldValue';
+        action.process(descriptor);
+        assert.deepEqual(descriptor.target.language['cli'], baseline);
     });
 
     it('Action replace - not found', () => {
@@ -47,9 +53,10 @@ describe('Test Directive - Action - replace', function () {
         let action = new ActionReplace(ori);
 
         let baseline = { p1: 'here is the old1Value' };
-        let o = new Metadata();
+        descriptor.target = new Metadata();
+        let o = descriptor.target;
         o.language.default['p1'] = 'here is the old1Value';
-        action.process(o);
+        action.process(descriptor);
         assert.deepEqual(o.language['cli'], baseline);
     });
 
@@ -63,9 +70,10 @@ describe('Test Directive - Action - replace', function () {
         let action = new ActionReplace(ori);
 
         let baseline = { p1: 'here is the newValue' };
-        let o = new Metadata();
+        descriptor.target = new Metadata();
+        let o = descriptor.target;
         o.language.default['p1'] = 'here is the old1Value';
-        action.process(o);
+        action.process(descriptor);
         assert.deepEqual(o.language['cli'], baseline);
     });
 
@@ -79,9 +87,10 @@ describe('Test Directive - Action - replace', function () {
         let action = new ActionReplace(ori);
 
         let baseline = { p1: 'here is the oldValue' };
-        let o = new Metadata();
+        descriptor.target = new Metadata();
+        let o = descriptor.target;
         o.language.default['p1'] = 'here is the oldValue';
-        action.process(o);
+        action.process(descriptor);
         assert.deepEqual(o.language['cli'], baseline);
     });
 
@@ -95,9 +104,10 @@ describe('Test Directive - Action - replace', function () {
         let action = new ActionReplace(ori);
 
         let baseline = { p1: 'here is the Value_old_2' };
-        let o = new Metadata();
+        descriptor.target = new Metadata();
+        let o = descriptor.target;
         o.language.default['p1'] = 'here is the old2Value';
-        action.process(o);
+        action.process(descriptor);
         assert.deepEqual(o.language['cli'], baseline);
     });
 

@@ -17,11 +17,15 @@ describe('Test Directive - Selector - operationGroup', function () {
 
         assert.isTrue(selector.match({
             operationGroupName: 'og1',
+            parent: null,
+            targetIndex: -1,
             target: new OperationGroup('fake'),
         }));
 
         assert.isNotTrue(selector.match({
             operationGroupName: 'og1+',
+            parent: null,
+            targetIndex: -1,
             target: new OperationGroup('fake'),
         }));
     });
@@ -35,11 +39,15 @@ describe('Test Directive - Selector - operationGroup', function () {
 
         assert.isTrue(selector.match({
             operationGroupName: 'og1',
+            parent: null,
+            targetIndex: -1,
             target: new OperationGroup('fake'),
         }));
 
         assert.isNotTrue(selector.match({
             operationGroupName: 'og1+',
+            parent: null,
+            targetIndex: -1,
             target: new OperationGroup('fake'),
         }));
     });
@@ -56,11 +64,15 @@ describe('Test Directive - Selector - operationGroup', function () {
 
             assert.isTrue(selector.match({
                 operationGroupName: 'og1',
+                parent: null,
+                targetIndex: -1,
                 target: new OperationGroup('fake'),
             }));
 
             assert.isNotTrue(selector.match({
                 operationGroupName: 'og1+',
+                parent: null,
+                targetIndex: -1,
                 target: new OperationGroup('fake'),
             }));
         });
@@ -76,21 +88,29 @@ describe('Test Directive - Selector - operationGroup', function () {
 
         assert.isTrue(selector.match({
             operationGroupName: 'og1og2',
+            parent: null,
+            targetIndex: -1,
             target: new OperationGroup('fake'),
         }));
 
         assert.isNotTrue(selector.match({
             operationGroupName: 'og0og1og2',
+            parent: null,
+            targetIndex: -1,
             target: new OperationGroup('fake'),
         }));
 
         assert.isNotTrue(selector.match({
             operationGroupName: 'og0og1',
+            parent: null,
+            targetIndex: -1,
             target: new OperationGroup('fake'),
         }));
 
         assert.isNotTrue(selector.match({
             operationGroupName: 'og',
+            parent: null,
+            targetIndex: -1,
             target: new OperationGroup('fake'),
         }));
     });

@@ -21,6 +21,8 @@ describe('Test Directive - Selector - parameter', function () {
             operationGroupName: 'og1',
             operationName: 'o1',
             parameterName: 'p1',
+            parent: null,
+            targetIndex: -1,
             target: new Parameter('fake', 'fake description', null),
         }));
 
@@ -28,6 +30,8 @@ describe('Test Directive - Selector - parameter', function () {
             operationGroupName: 'og1+',
             operationName: 'o1',
             parameterName: 'p1',
+            parent: null,
+            targetIndex: -1,
             target: new Parameter('fake', 'fake description', null),
         }));
 
@@ -35,6 +39,8 @@ describe('Test Directive - Selector - parameter', function () {
             operationGroupName: 'og1',
             operationName: 'o1+',
             parameterName: 'p1',
+            parent: null,
+            targetIndex: -1,
             target: new Parameter('fake', 'fake description', null),
         }));
 
@@ -42,6 +48,8 @@ describe('Test Directive - Selector - parameter', function () {
             operationGroupName: 'og1',
             operationName: 'o1',
             parameterName: 'p1+',
+            parent: null,
+            targetIndex: -1,
             target: new Parameter('fake', 'fake description', null),
         }));
 
@@ -49,6 +57,8 @@ describe('Test Directive - Selector - parameter', function () {
             operationGroupName: 'og1+',
             operationName: 'o1+',
             parameterName: 'p1+',
+            parent: null,
+            targetIndex: -1,
             target: new Parameter('fake', 'fake description', null),
         }));
     });
@@ -67,6 +77,8 @@ describe('Test Directive - Selector - parameter', function () {
             operationGroupName: 'og1',
             operationName: 'o1',
             parameterName: 'p1',
+            parent: null,
+            targetIndex: -1,
             target: new Parameter('fake', 'fake description', null),
         }));
 
@@ -74,6 +86,8 @@ describe('Test Directive - Selector - parameter', function () {
             operationGroupName: 'og1+',
             operationName: 'o1',
             parameterName: 'p1',
+            parent: null,
+            targetIndex: -1,
             target: new Parameter('fake', 'fake description', null),
         }));
 
@@ -81,6 +95,8 @@ describe('Test Directive - Selector - parameter', function () {
             operationGroupName: 'og1',
             operationName: 'o1+',
             parameterName: 'p1',
+            parent: null,
+            targetIndex: -1,
             target: new Parameter('fake', 'fake description', null),
         }));
 
@@ -88,6 +104,8 @@ describe('Test Directive - Selector - parameter', function () {
             operationGroupName: 'og1',
             operationName: 'o1',
             parameterName: 'p1+',
+            parent: null,
+            targetIndex: -1,
             target: new Parameter('fake', 'fake description', null),
         }));
     });
@@ -106,6 +124,8 @@ describe('Test Directive - Selector - parameter', function () {
             operationGroupName: 'og1',
             operationName: 'o1',
             parameterName: 'p1',
+            parent: null,
+            targetIndex: -1,
             target: new Parameter('fake', 'fake description', null),
         }));
 
@@ -113,6 +133,8 @@ describe('Test Directive - Selector - parameter', function () {
             operationGroupName: 'og1',
             operationName: 'o1+',
             parameterName: 'p1',
+            parent: null,
+            targetIndex: -1,
             target: new Parameter('fake', 'fake description', null),
         }));
 
@@ -120,6 +142,8 @@ describe('Test Directive - Selector - parameter', function () {
             operationGroupName: 'og1+',
             operationName: 'o1',
             parameterName: 'p1',
+            parent: null,
+            targetIndex: -1,
             target: new Parameter('fake', 'fake description', null),
         }));
 
@@ -127,6 +151,8 @@ describe('Test Directive - Selector - parameter', function () {
             operationGroupName: 'og1',
             operationName: 'o1',
             parameterName: 'p1+',
+            parent: null,
+            targetIndex: -1,
             target: new Parameter('fake', 'fake description', null),
         }));
     });
@@ -143,6 +169,8 @@ describe('Test Directive - Selector - parameter', function () {
             operationGroupName: 'og1',
             operationName: 'o1',
             parameterName: 'p1',
+            parent: null,
+            targetIndex: -1,
             target: new Parameter('fake', 'fake description', null),
         }));
 
@@ -150,6 +178,8 @@ describe('Test Directive - Selector - parameter', function () {
             operationGroupName: 'og1+',
             operationName: 'o1+',
             parameterName: 'p1',
+            parent: null,
+            targetIndex: -1,
             target: new Parameter('fake', 'fake description', null),
         }));
 
@@ -157,6 +187,8 @@ describe('Test Directive - Selector - parameter', function () {
             operationGroupName: 'og1',
             operationName: 'o1',
             parameterName: 'p1+',
+            parent: null,
+            targetIndex: -1,
             target: new Parameter('fake', 'fake description', null),
         }));
     });
@@ -175,6 +207,8 @@ describe('Test Directive - Selector - parameter', function () {
             operationGroupName: 'og1',
             operationName: 'o1',
             parameterName: 'p1',
+            parent: null,
+            targetIndex: -1,
             target: new Parameter('fake', 'fake description', null),
         }));
 
@@ -182,6 +216,8 @@ describe('Test Directive - Selector - parameter', function () {
             operationGroupName: 'og1+',
             operationName: 'o1',
             parameterName: 'p1',
+            parent: null,
+            targetIndex: -1,
             target: new Parameter('fake', 'fake description', null),
         }));
 
@@ -189,6 +225,8 @@ describe('Test Directive - Selector - parameter', function () {
             operationGroupName: 'og1',
             operationName: 'o1+',
             parameterName: 'p1',
+            parent: null,
+            targetIndex: -1,
             target: new Parameter('fake', 'fake description', null),
         }));
 
@@ -196,6 +234,8 @@ describe('Test Directive - Selector - parameter', function () {
             operationGroupName: 'og1',
             operationName: 'o1',
             parameterName: 'p1+',
+            parent: null,
+            targetIndex: -1,
             target: new Parameter('fake', 'fake description', null),
         }));
     });
@@ -214,6 +254,8 @@ describe('Test Directive - Selector - parameter', function () {
             operationGroupName: 'og1',
             operationName: 'o1',
             parameterName: 'p0p1p2',
+            parent: null,
+            targetIndex: -1,
             target: new Parameter('fake', 'fake description', null),
         }));
 
@@ -221,6 +263,8 @@ describe('Test Directive - Selector - parameter', function () {
             operationGroupName: 'og1',
             operationName: 'o1',
             parameterName: 'p1p2p3',
+            parent: null,
+            targetIndex: -1,
             target: new Parameter('fake', 'fake description', null),
         }));
 
@@ -228,6 +272,8 @@ describe('Test Directive - Selector - parameter', function () {
             operationGroupName: 'og1',
             operationName: 'o1',
             parameterName: 'p1p2',
+            parent: null,
+            targetIndex: -1,
             target: new Parameter('fake', 'fake description', null),
         }));
 
@@ -235,6 +281,8 @@ describe('Test Directive - Selector - parameter', function () {
             operationGroupName: 'og1',
             operationName: 'o1',
             parameterName: 'p1p3p2',
+            parent: null,
+            targetIndex: -1,
             target: new Parameter('fake', 'fake description', null),
         }));
     });

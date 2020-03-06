@@ -5,15 +5,20 @@ import { M4Node } from '../src/schema';
 import { Metadata } from "@azure-tools/codemodel";
 
 describe('Test Directive - Action - setProperty', function () {
+    var descriptor = {
+        parent: null,
+        targetIndex: -1,
+        target: null,
+    };
     it('directive setProperty - string', () => {
         let baseline = {
             key: "someValue",
         };
         let action = new ActionSetProperty("someValue", "key", () => true);
 
-        let o = new Metadata();
-        action.process(o);
-        assert.deepEqual(o.language["cli"], baseline);
+        descriptor.target = new Metadata();
+        action.process(descriptor);
+        assert.deepEqual(descriptor.target.language["cli"], baseline);
     });
 
     it('directive setProperty - bool', () => {
@@ -22,9 +27,9 @@ describe('Test Directive - Action - setProperty', function () {
         };
         let action = new ActionSetProperty(true, "key", () => false);
 
-        let o = new Metadata();
-        action.process(o);
-        assert.deepEqual(o.language["cli"], baseline);
+        descriptor.target = new Metadata();
+        action.process(descriptor);
+        assert.deepEqual(descriptor.target.language["cli"], baseline);
     });
 
     it('directive setProperty - undefined', () => {
@@ -33,9 +38,9 @@ describe('Test Directive - Action - setProperty', function () {
         };
         let action = new ActionSetProperty(undefined, "key", () => "someValue");
 
-        let o = new Metadata();
-        action.process(o);
-        assert.deepEqual(o.language["cli"], baseline);
+        descriptor.target = new Metadata();
+        action.process(descriptor);
+        assert.deepEqual(descriptor.target.language["cli"], baseline);
     });
 
     it('directive setProperty - null', () => {
@@ -44,9 +49,9 @@ describe('Test Directive - Action - setProperty', function () {
         };
         let action = new ActionSetProperty(null, "key", () => "someValue");
 
-        let o = new Metadata();
-        action.process(o);
-        assert.deepEqual(o.language["cli"], baseline);
+        descriptor.target = new Metadata();
+        action.process(descriptor);
+        assert.deepEqual(descriptor.target.language["cli"], baseline);
     });
 
     it('directive setProperty - array', () => {
@@ -55,9 +60,9 @@ describe('Test Directive - Action - setProperty', function () {
         };
         let action = new ActionSetProperty(['a', 'b', 'c'], "key", () => true);
 
-        let o = new Metadata();
-        action.process(o);
-        assert.deepEqual(o.language["cli"], baseline);
+        descriptor.target = new Metadata();
+        action.process(descriptor);
+        assert.deepEqual(descriptor.target.language["cli"], baseline);
     });
 
 });

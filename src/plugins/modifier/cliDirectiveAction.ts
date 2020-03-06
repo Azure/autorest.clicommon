@@ -1,13 +1,13 @@
 import { Session } from "@azure-tools/autorest-extension-base";
 import { CodeModel } from "@azure-tools/codemodel";
-import { isNullOrUndefined } from "util";
+import { isNullOrUndefined, isArray } from "util";
 import { Helper } from "../../helper";
 import { CliCommonSchema, CliConst, M4Node } from "../../schema";
 
 export abstract class Action {
     constructor() {
     }
-    public abstract process(node: M4Node): void;
+    public abstract process(node: CliCommonSchema.CodeModel.NodeDescriptor): void;
 
     protected createCliSubNode(node: M4Node, nodeName: string): any {
         if (isNullOrUndefined(node.language[CliConst.CLI]))
@@ -43,6 +43,9 @@ export abstract class Action {
                 case 'required':
                     arr.push(new ActionSetProperty(value, key, () => true));
                     break;
+                case 'delete':
+                    arr.push(new ActionDelete(value));
+                    break;
                 case 'name':
                 case 'alias':
                     arr.push(new ActionSetProperty(value, key, () => { throw Error(`${key} missing in directive`) }))
@@ -68,9 +71,26 @@ export class ActionSetProperty extends Action {
         super();
     }
 
-    public process(node: M4Node): void {
+    public process(descriptor: CliCommonSchema.CodeModel.NodeDescriptor): void {
+        let node = descriptor.target;
         this.setCliProperty(node, this.propertyName, this.directiveValue ?? this.getDefault());
     }
+}
+
+export class ActionDelete extends Action {
+
+    constructor(private directiveValue: CliCommonSchema.CliDirective.ValueClause) {
+        super();
+    }
+
+    public process(descriptor: CliCommonSchema.CodeModel.NodeDescriptor): void {
+        if (this.directiveValue === true) {
+            if (!isArray(descriptor.parent))
+                throw Error("Only array parent are supported for delete directive now");
+            descriptor.parent.splice(descriptor.targetIndex, 1);
+        }
+    }
+
 }
 
 export class ActionSet extends Action {
@@ -79,7 +99,8 @@ export class ActionSet extends Action {
         super();
     }
 
-    public process(node: M4Node): void {
+    public process(descriptor: CliCommonSchema.CodeModel.NodeDescriptor): void {
+        let node = descriptor.target;
         for (var key in this.directiveSet) {
             let value = this.directiveSet[key];
             this.setCliProperty(node, key, value);
@@ -93,7 +114,8 @@ export class ActionFormatTable extends Action {
         super();
     }
 
-    public process(node: M4Node): void {
+    public process(descriptor: CliCommonSchema.CodeModel.NodeDescriptor): void {
+        let node = descriptor.target;
         if (!isNullOrUndefined(this.directiveFormatTable.properties)) {
             var n = this.createCliSubNode(node, CliConst.CLI_FORMATTABLE);
             n[CliConst.CLI_FORMATTABLE_PROPERTIES] = this.directiveFormatTable.properties;
@@ -106,7 +128,8 @@ export class ActionReplace extends Action {
         super();
     }
 
-    public process(node: M4Node): void {
+    public process(descriptor: CliCommonSchema.CodeModel.NodeDescriptor): void {
+        let node = descriptor.target;
         Helper.validateNullOrUndefined(this.actionReplace.field, 'field');
         Helper.validateNullOrUndefined(this.actionReplace.old, 'old');
         Helper.validateNullOrUndefined(this.actionReplace.new, 'new');

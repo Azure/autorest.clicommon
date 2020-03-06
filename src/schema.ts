@@ -132,7 +132,10 @@ export namespace CliCommonSchema {
             propertyName?: string;
             choiceSchemaName?: string;
             choiceValueName?: string;
+            parent: any;
             target: M4Node;
+            /** set to -1 if the parent is not an array */
+            targetIndex: number;
         }
     }
 }

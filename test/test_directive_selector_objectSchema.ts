@@ -17,11 +17,15 @@ describe('Test Directive - Selector - objectSchema', function () {
 
         assert.isTrue(selector.match({
             objectSchemaName: 'os1',
+            parent: null,
+            targetIndex: -1,
             target: new ObjectSchema('fake', 'fake description'),
         }));
 
         assert.isNotTrue(selector.match({
             objectSchemaName: 'os1+',
+            parent: null,
+            targetIndex: -1,
             target: new ObjectSchema('fake', 'fake description'),
         }));
     });
@@ -35,11 +39,15 @@ describe('Test Directive - Selector - objectSchema', function () {
 
         assert.isTrue(selector.match({
             objectSchemaName: 'os1',
+            parent: null,
+            targetIndex: -1,
             target: new ObjectSchema('fake', 'fake description'),
         }));
 
         assert.isNotTrue(selector.match({
             objectSchemaName: 'os1+',
+            parent: null,
+            targetIndex: -1,
             target: new ObjectSchema('fake', 'fake description'),
         }));
     });
@@ -56,11 +64,15 @@ describe('Test Directive - Selector - objectSchema', function () {
 
             assert.isTrue(selector.match({
                 objectSchemaName: 'os1',
+                parent: null,
+                targetIndex: -1,
                 target: new ObjectSchema('fake', 'fake description'),
             }));
 
             assert.isNotTrue(selector.match({
                 objectSchemaName: 'os1+',
+                parent: null,
+                targetIndex: -1,
                 target: new ObjectSchema('fake', 'fake description'),
             }));
         });
@@ -76,21 +88,29 @@ describe('Test Directive - Selector - objectSchema', function () {
 
         assert.isTrue(selector.match({
             objectSchemaName: 'og1og2',
+            parent: null,
+            targetIndex: -1,
             target: new ObjectSchema('fake', 'fake description'),
         }));
 
         assert.isNotTrue(selector.match({
             objectSchemaName: 'og0og1og2',
+            parent: null,
+            targetIndex: -1,
             target: new ObjectSchema('fake', 'fake description'),
         }));
 
         assert.isNotTrue(selector.match({
             objectSchemaName: 'og0og1',
+            parent: null,
+            targetIndex: -1,
             target: new ObjectSchema('fake', 'fake description'),
         }));
 
         assert.isNotTrue(selector.match({
             objectSchemaName: 'og',
+            parent: null,
+            targetIndex: -1,
             target: new ObjectSchema('fake', 'fake description'),
         }));
     });
