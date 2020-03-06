@@ -19,12 +19,16 @@ describe('Test Directive - Selector - property', function () {
         assert.isTrue(selector.match({
             objectSchemaName: 'obj',
             propertyName: 'os1',
+            parent: null,
+            targetIndex: -1,
             target: new Property('fake', 'fake description', null),
         }));
 
         assert.isNotTrue(selector.match({
             objectSchemaName: 'obj',
             propertyName: 'os1+',
+            parent: null,
+            targetIndex: -1,
             target: new Property('fake', 'fake description', null),
         }));
     });
@@ -41,12 +45,16 @@ describe('Test Directive - Selector - property', function () {
         assert.isTrue(selector.match({
             objectSchemaName: 'obj',
             propertyName: 'os1',
+            parent: null,
+            targetIndex: -1,
             target: new Property('fake', 'fake description', null),
         }));
 
         assert.isNotTrue(selector.match({
             objectSchemaName: 'obj',
             propertyName: 'os1+',
+            parent: null,
+            targetIndex: -1,
             target: new Property('fake', 'fake description', null),
         }));
     });
@@ -62,12 +70,16 @@ describe('Test Directive - Selector - property', function () {
         assert.isTrue(selector.match({
             objectSchemaName: 'obj',
             propertyName: 'os1',
+            parent: null,
+            targetIndex: -1,
             target: new Property('fake', 'fake description', null),
         }));
 
         assert.isNotTrue(selector.match({
             objectSchemaName: 'obj',
             propertyName: 'os1+',
+            parent: null,
+            targetIndex: -1,
             target: new Property('fake', 'fake description', null),
         }));
     });
@@ -85,11 +97,15 @@ describe('Test Directive - Selector - property', function () {
             assert.isTrue(selector.match({
                 objectSchemaName: 'obj',
                 propertyName: 'os1',
+                parent: null,
+                targetIndex: -1,
                 target: new Property('fake', 'fake description', null),
             }));
 
             assert.isNotTrue(selector.match({
                 propertyName: 'os1+',
+                parent: null,
+                targetIndex: -1,
                 target: new Property('fake', 'fake description', null),
             }));
         });
@@ -106,24 +122,32 @@ describe('Test Directive - Selector - property', function () {
         assert.isTrue(selector.match({
             objectSchemaName: 'obj',
             propertyName: 'a1b',
+            parent: null,
+            targetIndex: -1,
             target: new Property('fake', 'fake description', null),
         }));
 
         assert.isNotTrue(selector.match({
             objectSchemaName: 'obj',
             propertyName: 'a12b',
+            parent: null,
+            targetIndex: -1,
             target: new Property('fake', 'fake description', null),
         }));
 
         assert.isNotTrue(selector.match({
             objectSchemaName: 'obj',
             propertyName: 'aab',
+            parent: null,
+            targetIndex: -1,
             target: new Property('fake', 'fake description', null),
         }));
 
         assert.isNotTrue(selector.match({
             objectSchemaName: 'obj',
             propertyName: 'ab',
+            parent: null,
+            targetIndex: -1,
             target: new Property('fake', 'fake description', null),
         }));
     });

@@ -18,12 +18,16 @@ describe('Test Directive - Selector - choiceValue', function () {
         assert.isTrue(selector.match({
             choiceSchemaName: 'cs1',
             choiceValueName: 'os1',
+            parent: null,
+            targetIndex: -1,
             target: new ChoiceValue('fake', 'fake description', null),
         }));
 
         assert.isNotTrue(selector.match({
             choiceSchemaName: 'os1',
             choiceValueName: 'os1+',
+            parent: null,
+            targetIndex: -1,
             target: new ChoiceValue('fake', 'fake description', null),
         }));
     });
@@ -40,12 +44,16 @@ describe('Test Directive - Selector - choiceValue', function () {
         assert.isTrue(selector.match({
             choiceSchemaName: 'cs1',
             choiceValueName: 'os1',
+            parent: null,
+            targetIndex: -1,
             target: new ChoiceValue('fake', 'fake description', null),
         }));
 
         assert.isNotTrue(selector.match({
             choiceSchemaName: 'os1',
             choiceValueName: 'os1+',
+            parent: null,
+            targetIndex: -1,
             target: new ChoiceValue('fake', 'fake description', null),
         }));
     });
@@ -61,12 +69,16 @@ describe('Test Directive - Selector - choiceValue', function () {
         assert.isTrue(selector.match({
             choiceSchemaName: 'cs1',
             choiceValueName: 'os1',
+            parent: null,
+            targetIndex: -1,
             target: new ChoiceValue('fake', 'fake description', null),
         }));
 
         assert.isNotTrue(selector.match({
             choiceSchemaName: 'cs1',
             choiceValueName: 'os1+',
+            parent: null,
+            targetIndex: -1,
             target: new ChoiceValue('fake', 'fake description', null),
         }));
     });
@@ -84,12 +96,16 @@ describe('Test Directive - Selector - choiceValue', function () {
             assert.isTrue(selector.match({
                 choiceSchemaName: 'cs1',
                 choiceValueName: 'os1',
+                parent: null,
+                targetIndex: -1,
                 target: new ChoiceValue('fake', 'fake description', null),
             }));
 
             assert.isNotTrue(selector.match({
                 choiceSchemaName: 'cs1',
                 choiceValueName: 'os1+',
+                parent: null,
+                targetIndex: -1,
                 target: new ChoiceValue('fake', 'fake description', null),
             }));
         });
@@ -107,24 +123,32 @@ describe('Test Directive - Selector - choiceValue', function () {
         assert.isTrue(selector.match({
             choiceSchemaName: 'cs1',
             choiceValueName: 'hw',
+            parent: null,
+            targetIndex: -1,
             target: new ChoiceValue('fake', 'fake description', null),
         }));
 
         assert.isNotTrue(selector.match({
             choiceSchemaName: 'cs1',
             choiceValueName: 'hww',
+            parent: null,
+            targetIndex: -1,
             target: new ChoiceValue('fake', 'fake description', null),
         }));
 
         assert.isNotTrue(selector.match({
             choiceSchemaName: 'cs1',
             choiceValueName: 'hhw',
+            parent: null,
+            targetIndex: -1,
             target: new ChoiceValue('fake', 'fake description', null),
         }));
 
         assert.isNotTrue(selector.match({
             choiceSchemaName: 'cs1',
             choiceValueName: 'haw',
+            parent: null,
+            targetIndex: -1,
             target: new ChoiceValue('fake', 'fake description', null),
         }));
     });

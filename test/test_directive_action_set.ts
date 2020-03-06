@@ -5,6 +5,12 @@ import { M4Node } from '../src/schema';
 import { Metadata } from "@azure-tools/codemodel";
 
 describe('Test Directive - Action - set', function () {
+    var descriptor = {
+        parent: null,
+        targetIndex: -1,
+        target: null,
+    };
+
     it('Action set - normal', () => {
         let ori = {
             value1: 'abc',
@@ -13,8 +19,9 @@ describe('Test Directive - Action - set', function () {
         };
         let action = new ActionSet(ori);
 
-        let o = new Metadata();
-        action.process(o);
+        descriptor.target = new Metadata();
+        let o = descriptor.target;
+        action.process(descriptor);
         assert.deepEqual(o.language["cli"], ori);
     });
 });

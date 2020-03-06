@@ -5,6 +5,12 @@ import { M4Node } from '../src/schema';
 import { Metadata } from "@azure-tools/codemodel";
 
 describe('Test Directive - Action - formatTable', function () {
+    var descriptor = {
+        parent: null,
+        targetIndex: -1,
+        target: null,
+    };
+
     it('Action formatTable - normal', () => {
         let ori = {
             formatTable: {
@@ -13,8 +19,8 @@ describe('Test Directive - Action - formatTable', function () {
         };
         let action = new ActionFormatTable(ori.formatTable);
 
-        let o = new Metadata();
-        action.process(o);
-        assert.deepEqual(o.language["cli"], ori);
+        descriptor.target = new Metadata();
+        action.process(descriptor);
+        assert.deepEqual(descriptor.target.language["cli"], ori);
     });
 });

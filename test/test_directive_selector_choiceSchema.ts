@@ -16,11 +16,15 @@ describe('Test Directive - Selector - choiceSchema', function () {
 
         assert.isTrue(selector.match({
             choiceSchemaName: 'os1',
+            parent: null,
+            targetIndex: -1,
             target: new ChoiceSchema('fake', 'fake description'),
         }));
 
         assert.isNotTrue(selector.match({
             choiceSchemaName: 'os1+',
+            parent: null,
+            targetIndex: -1,
             target: new ChoiceSchema('fake', 'fake description'),
         }));
     });
@@ -35,10 +39,14 @@ describe('Test Directive - Selector - choiceSchema', function () {
         assert.isTrue(selector.match({
             choiceSchemaName: 'os1',
             target: new ChoiceSchema('fake', 'fake description'),
+            parent: null,
+            targetIndex: -1,
         }));
 
         assert.isNotTrue(selector.match({
             choiceSchemaName: 'os1+',
+            parent: null,
+            targetIndex: -1,
             target: new ChoiceSchema('fake', 'fake description'),
         }));
     });
@@ -55,11 +63,15 @@ describe('Test Directive - Selector - choiceSchema', function () {
 
             assert.isTrue(selector.match({
                 choiceSchemaName: 'os1',
+                parent: null,
+                targetIndex: -1,
                 target: new ChoiceSchema('fake', 'fake description'),
             }));
 
             assert.isNotTrue(selector.match({
                 choiceSchemaName: 'os1+',
+                parent: null,
+                targetIndex: -1,
                 target: new ChoiceSchema('fake', 'fake description'),
             }));
         });
@@ -75,21 +87,29 @@ describe('Test Directive - Selector - choiceSchema', function () {
 
         assert.isTrue(selector.match({
             choiceSchemaName: 'og1og2',
+            parent: null,
+            targetIndex: -1,
             target: new ChoiceSchema('fake', 'fake description'),
         }));
 
         assert.isNotTrue(selector.match({
             choiceSchemaName: 'og0og1og2',
+            parent: null,
+            targetIndex: -1,
             target: new ChoiceSchema('fake', 'fake description'),
         }));
 
         assert.isNotTrue(selector.match({
             choiceSchemaName: 'og0og1',
+            parent: null,
+            targetIndex: -1,
             target: new ChoiceSchema('fake', 'fake description'),
         }));
 
         assert.isNotTrue(selector.match({
             choiceSchemaName: 'og',
+            parent: null,
+            targetIndex: -1,
             target: new ChoiceSchema('fake', 'fake description'),
         }));
     });
