@@ -3,6 +3,7 @@ import { keys } from "@azure-tools/linq";
 import { isArray, isNull, isNullOrUndefined, isObject, isString, isUndefined } from "util";
 import { CliConst, M4Node, M4NodeType, NamingType, CliCommonSchema } from "./schema";
 import { pascalCase, EnglishPluralizationService } from '@azure-tools/codegen';
+import {DependencyModel} from "./models/DependencyModel";
 
 
 export class Helper {
@@ -275,5 +276,112 @@ export class Helper {
                             isNullOrUndefined(v.choices) ? '' : v.choices.map(vv => `${tab(4)}- choiceValue: ${generateCliValue(vv, 5)}${NEW_LINE}`)
                                 .join(''))).join('')).join(''));
         return s;
+    }
+
+    public static resolveDependencies(codeModel: CodeModel): DependencyModel[]{
+        let dependencies: DependencyModel[] = [];
+        let operationGroups = codeModel.operationGroups;
+
+        function hasCreateMethod(operationGroup: OperationGroup) {
+            for (let operation of operationGroup.operations) {
+                if (operation.language.default.name === 'Create' || operation.language.default.name === 'CreateOrUpdate') {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        function convertPluralToSingular(name: string) {
+            if (name.endsWith("ies"))   {
+                name = name.substring(0, name.length - 3) + "y";
+            }
+            else if (name.toLowerCase().endsWith("xes")) {
+                name = name.substring(0, name.length - 2);
+            }
+            else if (name.endsWith('s')) {
+                name = name.substring(0, name.length - 1);
+            }
+            return name;
+        }
+
+        function toSnakeCase(v: string) {
+            let snake: string = v.replace(/([a-z](?=[A-Z]))/g, '$1 ').split(' ').join('_').toLowerCase();
+            return snake;
+        }
+
+        for (let operationGroup of operationGroups) {
+            if (!hasCreateMethod(operationGroup)) continue;
+            dependencies.push(new DependencyModel(operationGroup.$key, toSnakeCase(convertPluralToSingular(operationGroup.$key))));
+        }
+
+        function getDependedResourcesFromUrl(resource: DependencyModel, url: string) {
+            url = url.trim();
+            let urls = url.split('/');
+            // /subscriptions/9760acf5-4638-11e7-9bdb-020073ca7778/resourceGroups/myRP/providers/Microsoft.Network/virtualNetworks/testvnet3/subnets/testsubnet3
+            for (let i = 3; i < urls.length; i = i + 2) {
+                if (urls[i] === 'providers') continue;
+                if(!resource.externalDependedResourcesSet.has(toSnakeCase(convertPluralToSingular(urls[i])))) {
+                    resource.externalDependedResourcesSet.add(toSnakeCase(convertPluralToSingular(urls[i])));
+                    resource.externalDependedResources.push(toSnakeCase(convertPluralToSingular(urls[i])));
+                }
+
+            }
+        }
+
+        function getDependedResourcesFromParameters(resource: DependencyModel, parameters: any) {
+            for (let key in parameters) {
+                if (key.toLowerCase().startsWith('subscription')) continue;
+                if ((typeof parameters[key]) === 'object') getDependedResourcesFromParameters(resource, parameters[key]);
+                else if (key.toLowerCase().endsWith('name') || key.toLowerCase().endsWith('id')) {
+                    let value = parameters[key] as string;
+                    if (value.startsWith('/subscriptions')) {
+                        getDependedResourcesFromUrl(resource, value);
+                    }
+                    let dependedResource = key.substring(0, key.length - 4);
+                    if (key.toLowerCase().endsWith('id'))
+                        dependedResource = key.substring(0, key.length - 2);
+                    dependedResource = toSnakeCase(dependedResource);
+                    if (dependedResource === resource.resourceName) continue;
+                    let isInternalDependency = false;
+                    for (let r of dependencies) {
+                        if (r.resourceName === dependedResource) {
+                            if (!resource.internalDependedResourcesSet.has(r.resourceName)) {
+                                resource.internalDependedResourcesSet.add(r.resourceName);
+                                resource.internalDependedResources.push(r.resourceName);
+                                isInternalDependency = true;
+                            }
+                            break;
+                        }
+                    }
+                    if (!isInternalDependency) {
+                        if(!resource.externalDependedResourcesSet.has(dependedResource)) {
+                            resource.externalDependedResourcesSet.add(dependedResource);
+                            resource.externalDependedResources.push(dependedResource);
+                        }
+
+                    }
+                }
+            }
+        }
+
+        for (let resource of dependencies) {
+            let operationGroup = codeModel.getOperationGroup(resource.operationGroup);
+            let createMethod: Operation;
+            for (let operation of operationGroup.operations) {
+                if (operation.language.default.name === 'Create' || operation.language.default.name === 'CreateOrUpdate') {
+                    createMethod = operation;
+                    break;
+                }
+            }
+            if (createMethod.extensions === undefined || createMethod.extensions["x-ms-examples"] === undefined) continue;
+            let examples = createMethod.extensions["x-ms-examples"];
+            for (let exampleKey in examples) {
+                let example = examples[exampleKey];
+                let parameters = example["parameters"];
+                if (parameters === undefined) continue;
+                getDependedResourcesFromParameters(resource, parameters);
+            }
+        }
+        return dependencies;
     }
 }

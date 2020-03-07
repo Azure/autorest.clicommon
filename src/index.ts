@@ -41,6 +41,8 @@ extension.Add("clicommon", async autoRestApi => {
         result["test-scenario"] = cliCommonSettings['test-scenario'] || cliCommonSettings['test-setup'];
     }
 
+    result["dependencies"] = Helper.resolveDependencies(result);
+
     // write the final result first which is hardcoded in the Session class to use to build the model..
     // overwrite the modelerfour which should be fine considering our change is backward compatible
     const options = <any>await session.getValue('modelerfour', {});
