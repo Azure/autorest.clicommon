@@ -37,6 +37,8 @@ export class FlattenSetter {
 
     async process(host: Host) {
 
+        let overwriteSwagger = await this.session.getValue(CliConst.CLI_FLATTEN_SET_FLATTEN_ALL_OVERWRITE_SWAGGER_KEY, false);
+
         this.codeModel.schemas.objects.forEach(o => {
             if (!FlattenSetter.isBase(o)) {
                 if (!isNullOrUndefined(o.properties)) {
@@ -44,7 +46,9 @@ export class FlattenSetter {
                         if (isObjectSchema(p.schema)) {
                             if (isNullOrUndefined(p.extensions))
                                 p.extensions = {};
-                            p.extensions[CliConst.FLATTEN_FLAG] = !FlattenSetter.isBase(p.schema as ObjectSchema);
+
+                            if (isNullOrUndefined(p.extensions[CliConst.FLATTEN_FLAG]) || overwriteSwagger)
+                                p.extensions[CliConst.FLATTEN_FLAG] = !FlattenSetter.isBase(p.schema as ObjectSchema);
                         }
                     })
                 }
@@ -71,6 +75,8 @@ export async function processRequest(host: Host) {
 
     let cliDebug = await session.getValue('debug', false);
     let flag = await session.getValue(CliConst.CLI_FLATTEN_SET_ENABLED_KEY, false);
+
+
     if (flag !== true) {
         Helper.logWarning(`'${CliConst.CLI_FLATTEN_SET_ENABLED_KEY}' is not set to true, skip flattenSetter`);
     }
@@ -81,6 +87,13 @@ export async function processRequest(host: Host) {
             debugOutput['cli-flatten-set-before-everything-simplified.yaml'] = Helper.toYamlSimplified(session.model);
         }
 
+        let m4FlattenModels = await session.getValue('modelerfour.flatten-models', false);
+        if (m4FlattenModels !== true)
+            Helper.logWarning('modelerfour.flatten-models is not turned on');
+        let m4FlattenPayloads = await session.getValue('modelerfour.flatten-payloads', false);
+        if (m4FlattenPayloads !== true)
+            Helper.logWarning('modelerfour.flatten-payloads is not turned on');
+        
         let flattenAll = await session.getValue(CliConst.CLI_FLATTEN_SET_FLATTEN_ALL_KEY);
         if (flattenAll === true) {
             const plugin = await new FlattenSetter(session);

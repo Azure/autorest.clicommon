@@ -23,7 +23,7 @@ class PropertyInfo {
     }
 
     public toOutputString(withClass: boolean) {
-        return `${this.property.language.default.name}${this.isPointToBaseClass ? BASECLASS_INDICATOR : ''}${this.isCirculeVictim ? CIRCLE_VICIM_INDICATOR : ''}${withClass ? '>' + this.property.schema.language.default.name : ''}`;
+        return `${this.property.language.default.name}${this.isPointToBaseClass ? BASECLASS_INDICATOR : ''}${this.isCirculeVictim ? CIRCLE_VICIM_INDICATOR : ''}${withClass ? ':' + this.property.schema.language.default.name : ''}`;
     }
 
     public unflattenAsCirculeVictim() {
@@ -60,7 +60,10 @@ class NodeInfo {
     }
 
     public toOutputString(withPropertyClass: boolean) {
-        return this.node.language.default.name + `<${isNullOrUndefined(this.node.properties) ? '0' : this.node.properties.length}>` + (this.isBaseClass ? BASECLASS_INDICATOR : '') + (this.unflattenProperty.length == 0 ? '' : `(${this.unflattenProperty.map(pi => pi.toOutputString(withPropertyClass)).join(', ')})`);
+        return this.node.language.default.name +
+            `<${isNullOrUndefined(this.node.properties) ? '0' : this.node.properties.length}>` +
+            (this.isBaseClass ? BASECLASS_INDICATOR : '') +
+            (this.unflattenProperty.length == 0 ? '' : `(${this.unflattenProperty.map(pi => pi.toOutputString(withPropertyClass)).join(', ')})`);
     }
 };
 
@@ -72,7 +75,7 @@ class NodeLink {
         if (isNullOrUndefined(this.linkProperty))
             return this.preNode.toOutputString(true);
         else
-            return `${this.preNode.toOutputString(false)}[${this.linkProperty.toOutputString(false)}]`;
+            return `${this.preNode.toOutputString(true)}[${this.linkProperty.toOutputString(false)}]`;
     }
 }
 

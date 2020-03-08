@@ -43,6 +43,10 @@ scope-clicommon:
         - clicommon-output-file
 
 modelerfour:
+    #group-parameters: true
+    #flatten-models: true
+    #flatten-payloads: true    
+
     # standardize to snake in modelerfour for selecting and formatting in clicommon
     # further naming will be done in clicommon to corresonding convention
     naming: 
@@ -61,6 +65,15 @@ modelerfour:
           LRO: LRO
 
 cli:
+    #flatten:
+    #    cli-flatten-set-enabled: true
+    #    cli-flatten-all: true
+    #    cli-flatten-all-overwrite-swagger: false
+    #    cli-flatten-directive:
+    #        - where:
+    #            type: SchemaType
+    #            prop: propertyName
+    #          flatten: true
     naming:
         cli:
             appliedTo:
@@ -135,6 +148,8 @@ cli:
         #   - all the object schemas except has discriminator (base class)
         #   - all the body parameters of operation
         cli-flatten-all: true
+        # whether to overwrite the flag in swagger when cli-flatten-all is true
+        cli-flatten-all-overwrite-swagger: false
         # further customizatoin on flatten
         # refer to the where caluse in the directive section below fore more details
         # flatten: true|false to set selectedNode.extensions['x-ms-client-flatten'] = true|false 
@@ -142,7 +157,7 @@ cli:
             - where:
                 type: ResourceProviderOperation
                 prop: display
-              flatten: false
+              flatten: true
 
 ```
 
