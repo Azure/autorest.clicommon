@@ -38,14 +38,16 @@ export class FlattenSetter {
     async process(host: Host) {
 
         this.codeModel.schemas.objects.forEach(o => {
-            if (!isNullOrUndefined(o.properties)) {
-                o.properties.forEach(p => {
-                    if (isObjectSchema(p.schema)) {
-                        if (isNullOrUndefined(p.extensions))
-                            p.extensions = {};
-                        p.extensions[CliConst.FLATTEN_FLAG] = !FlattenSetter.isBase(p.schema as ObjectSchema);
-                    }
-                })
+            if (!FlattenSetter.isBase(o)) {
+                if (!isNullOrUndefined(o.properties)) {
+                    o.properties.forEach(p => {
+                        if (isObjectSchema(p.schema)) {
+                            if (isNullOrUndefined(p.extensions))
+                                p.extensions = {};
+                            p.extensions[CliConst.FLATTEN_FLAG] = !FlattenSetter.isBase(p.schema as ObjectSchema);
+                        }
+                    })
+                }
             }
         });
 
