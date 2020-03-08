@@ -2,6 +2,7 @@ import { Session } from "@azure-tools/autorest-extension-base";
 import { CodeModel } from "@azure-tools/codemodel";
 import { CliDirectiveManager } from "./cliDirective";
 import { isNullOrUndefined } from "util";
+import { CliConst, CliCommonSchema } from "../../schema";
 
 export class Modifier {
     private manager: CliDirectiveManager;
@@ -13,9 +14,14 @@ export class Modifier {
     constructor(protected session: Session<CodeModel>) {
     }
 
-    async init(): Promise<Modifier> {
+    async init(directives: CliCommonSchema.CliDirective.Directive[]): Promise<Modifier> {
+        if (isNullOrUndefined(directives))
+            directives = [];
+        if (!isNullOrUndefined(directives) && !Array.isArray(directives))
+            throw Error("directive is expected to be an array. Please check '-' is set property in yaml")
+
         this.manager = new CliDirectiveManager();
-        await this.manager.LoadDirective(this.session);
+        await this.manager.LoadDirective(directives);
         return this;
     }
 

@@ -12,7 +12,11 @@ export namespace CliConst {
     export const CLI_FORMATTABLE: string = "formatTable";
     export const CLI_FORMATTABLE_PROPERTIES: string = "properties";
     export const CLI_DIRECTIVE: string = "cli-directive";
+    export const CLI_FLATTEN_KEY: string = "cli.cli-flatten";
     export const CLI_DIRECTIVE_KEY: string = 'cli.cli-directive';
+    export const FLATTEN_FLAG: string = 'x-ms-client-flatten';
+    export const CLI_FLATTEN_SET_ENABLED: string = 'cli-flatten-set-enabled';
+    export const CLI_FLATTEN_SET_ENABLED_KEY: string = 'cli.cli-flatten-set-enabled';
 
     export class NamingStyle {
         /** camelCase */

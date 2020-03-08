@@ -4,14 +4,15 @@ import { CodeModel, codeModelSchema, OperationGroup, Operation, Schema, ObjectSc
 import { Helper } from './helper';
 import { Modifier } from './plugins/modifier/modifier';
 import { CommonNamer } from './plugins/namer';
-
-export type LogCallback = (message: string) => void;
-export type FileCallback = (path: string, rows: string[]) => void;
+import { processRequest as flattenSetter } from './plugins/flattensetter/flattensetter';
+import { CliConst } from './schema';
+import { isNullOrUndefined } from 'util';
 
 const extension = new AutoRestExtension();
 
 extension.Add("clicommon", async autoRestApi => {
     const session = await startSession<CodeModel>(autoRestApi, {}, codeModelSchema);
+    Helper.init(session);
 
     let cliDebug = await session.getValue('debug', false);
     // at this point namer and modifirers are in a single plug-in
@@ -21,7 +22,10 @@ extension.Add("clicommon", async autoRestApi => {
     if (cliDebug) {
         debugOutput['cli-debug-before-everything.yaml'] = serialize(session.model);
     }
-    const modifier = await new Modifier(session).init();
+    
+    let arr = await session.getValue(CliConst.CLI_DIRECTIVE_KEY, null);
+
+    const modifier = await new Modifier(session).init(arr);
     let result = modifier.process();
     if (cliDebug) {
         debugOutput['cli-debug-after-modifier.yaml'] = serialize(result);
@@ -55,5 +59,7 @@ extension.Add("clicommon", async autoRestApi => {
     for (let key in debugOutput)
         autoRestApi.WriteFile(key, debugOutput[key], null);
 });
+
+extension.Add("flatten-setter", flattenSetter);
 
 extension.Run();

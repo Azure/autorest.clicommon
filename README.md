@@ -9,6 +9,18 @@ use-extension:
 pipeline-model: v3
 
 pipeline:
+
+    modelerfour/new-transform:
+        input: clicommon/flatten-setter
+
+    clicommon/flatten-setter:
+        input: modelerfour
+        output-artifact: clicommon-flatten-setter
+
+    clicommon/flatten-setter/emitter:
+        input: clicommon/flatten-setter
+        scope: scope-clicommon-flatten-setter
+
     clicommon:
         input: modelerfour/identity
         output-artifact: clicommon-output-file
@@ -20,12 +32,21 @@ pipeline:
         input: clicommon/identity
         scope: scope-clicommon
 
+scope-clicommon-flatten-setter:
+    is-object: false
+    output-artifact:
+        - clicommon-flatten-setter
+
 scope-clicommon:
     is-object: false
     output-artifact:
         - clicommon-output-file
 
 modelerfour:
+    #group-parameters: true
+    #flatten-models: true
+    #flatten-payloads: true
+
     # standardize to snake in modelerfour for selecting and formatting in clicommon
     # further naming will be done in clicommon to corresonding convention
     naming: 
@@ -44,6 +65,12 @@ modelerfour:
           LRO: LRO
 
 cli:
+    #cli-flatten-set-enabled: true
+    #cli-flatten:
+    #    - where:
+    #        type: ResourceProviderOperation
+    #        prop: display
+    #      flatten: true
     naming:
         cli:
             appliedTo:
