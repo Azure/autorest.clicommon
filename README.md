@@ -65,12 +65,14 @@ modelerfour:
           LRO: LRO
 
 cli:
-    #cli-flatten-set-enabled: true
-    #cli-flatten:
-    #    - where:
-    #        type: ResourceProviderOperation
-    #        prop: display
-    #      flatten: true
+    #flatten:
+    #    cli-flatten-set-enabled: true
+    #    flatten-all: true
+    #    cli-flatten-directive:
+    #        - where:
+    #            type: ResourceProviderOperation
+    #            prop: display
+    #          flatten: false
     naming:
         cli:
             appliedTo:

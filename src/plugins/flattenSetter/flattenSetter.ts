@@ -1,7 +1,7 @@
 import { Host, Session, startSession } from "@azure-tools/autorest-extension-base";
 import { serialize } from "@azure-tools/codegen";
 import { CodeModel, codeModelSchema, Metadata, ObjectSchema, isObjectSchema, Property } from "@azure-tools/codemodel";
-import { isNullOrUndefined } from "util";
+import { isNullOrUndefined, isArray } from "util";
 import { DESTRUCTION } from "dns";
 import { Helper } from "../../helper";
 import { CliConst } from "../../schema";
@@ -58,37 +58,43 @@ export async function processRequest(host: Host) {
     const session = await startSession<CodeModel>(host, {}, codeModelSchema);
     Helper.init(session);
 
+    let cliDebug = await session.getValue('debug', false);
     let flag = await session.getValue(CliConst.CLI_FLATTEN_SET_ENABLED_KEY, false);
     if (flag !== true) {
-        Helper.logWarning(`'${CliConst.CLI_FLATTEN_SET_ENABLED}' is not set to true, skip flattenSetter`);
+        Helper.logWarning(`'${CliConst.CLI_FLATTEN_SET_ENABLED_KEY}' is not set to true, skip flattenSetter`);
     }
     else {
-        let cliDebug = await session.getValue('debug', false);
 
         if (cliDebug) {
             debugOutput['cli-flatten-set-before-everything.yaml'] = serialize(session.model);
             debugOutput['cli-flatten-set-before-everything-simplified.yaml'] = Helper.toYamlSimplified(session.model);
         }
 
-        const plugin = await new FlattenSetter(session);
-        let flatResult = await plugin.process(host);
+        let flattenAll = await session.getValue(CliConst.CLI_FLATTEN_SET_FLATTEN_ALL_KEY);
+        if (flattenAll === true) {
+            const plugin = await new FlattenSetter(session);
+            let flatResult = await plugin.process(host);
 
-        if (cliDebug) {
-            debugOutput['cli-flatten-set-after-flatten-set.yaml'] = serialize(flatResult);
-            debugOutput['cli-flatten-set-after-flatten-set-simplified.yaml'] = Helper.toYamlSimplified(flatResult);
+            if (cliDebug) {
+                debugOutput['cli-flatten-set-after-flatten-set.yaml'] = serialize(flatResult);
+                debugOutput['cli-flatten-set-after-flatten-set-simplified.yaml'] = Helper.toYamlSimplified(flatResult);
+            }
         }
 
-        let directives = await session.getValue(CliConst.CLI_FLATTEN_KEY, null);
-        const modifier = await new Modifier(session).init(directives);
-        let modResult: CodeModel = modifier.process();
-
-        let finalMapping = new FlattenValidator(session).validate(modResult.schemas.objects)
-
-        if (cliDebug) {
-            debugOutput['cli-flatten-set-after-modifier.yaml'] = serialize(modResult);
-            debugOutput['cli-flatten-set-after-modifier-simplified.yaml'] = Helper.toYamlSimplified(modResult);
-            debugOutput['cli-flatten-set-flatten-mapping.txt'] = finalMapping;
+        let directives = await session.getValue(CliConst.CLI_FLATTEN_DIRECTIVE_KEY, null);
+        if (!isNullOrUndefined(directives) && isArray(directives) && directives.length > 0) {
+            const modifier = await new Modifier(session).init(directives);
+            let modResult: CodeModel = modifier.process();
+            if (cliDebug) {
+                debugOutput['cli-flatten-set-after-modifier.yaml'] = serialize(modResult);
+                debugOutput['cli-flatten-set-after-modifier-simplified.yaml'] = Helper.toYamlSimplified(modResult);
+            }
         }
+
+    }
+    let finalMapping = new FlattenValidator(session).validate(session.model.schemas.objects)
+    if (cliDebug) {
+        debugOutput['cli-flatten-set-flatten-mapping.txt'] = finalMapping;
     }
 
     // write the final result first which is hardcoded in the Session class to use to build the model..
