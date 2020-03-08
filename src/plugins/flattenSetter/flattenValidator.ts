@@ -60,7 +60,7 @@ class NodeInfo {
     }
 
     public toOutputString(withPropertyClass: boolean) {
-        return this.node.language.default.name + (this.isBaseClass ? BASECLASS_INDICATOR : '') + (this.unflattenProperty.length == 0 ? '' : `(${this.unflattenProperty.map(pi => pi.toOutputString(withPropertyClass)).join(', ')})`);
+        return this.node.language.default.name + `<${isNullOrUndefined(this.node.properties) ? '0' : this.node.properties.length}>` + (this.isBaseClass ? BASECLASS_INDICATOR : '') + (this.unflattenProperty.length == 0 ? '' : `(${this.unflattenProperty.map(pi => pi.toOutputString(withPropertyClass)).join(', ')})`);
     }
 };
 

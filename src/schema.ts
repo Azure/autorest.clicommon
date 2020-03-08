@@ -17,7 +17,7 @@ export namespace CliConst {
     export const FLATTEN_FLAG: string = 'x-ms-client-flatten';
     export const CLI_FLATTEN_DIRECTIVE_KEY: string = "cli.flatten.cli-flatten-directive";
     export const CLI_FLATTEN_SET_ENABLED_KEY: string = 'cli.flatten.cli-flatten-set-enabled';
-    export const CLI_FLATTEN_SET_FLATTEN_ALL_KEY: string = 'cli.flatten.flatten-all';
+    export const CLI_FLATTEN_SET_FLATTEN_ALL_KEY: string = 'cli.flatten.cli-flatten-all';
 
     export class NamingStyle {
         /** camelCase */
