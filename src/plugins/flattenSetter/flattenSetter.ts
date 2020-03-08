@@ -1,6 +1,6 @@
 import { Host, Session, startSession } from "@azure-tools/autorest-extension-base";
 import { serialize } from "@azure-tools/codegen";
-import { CodeModel, codeModelSchema, Metadata, ObjectSchema, isObjectSchema, Property } from "@azure-tools/codemodel";
+import { CodeModel, codeModelSchema, Metadata, ObjectSchema, isObjectSchema, Property, Extensions } from "@azure-tools/codemodel";
 import { isNullOrUndefined, isArray } from "util";
 import { DESTRUCTION } from "dns";
 import { Helper } from "../../helper";
@@ -8,6 +8,7 @@ import { CliConst } from "../../schema";
 import { CliDirectiveManager } from "../modifier/cliDirective";
 import { Modifier } from "../modifier/modifier";
 import { FlattenValidator } from "./flattenValidator";
+import { values } from "@azure-tools/linq";
 
 const DISCRIMINATOR = 'discriminator';
 
@@ -20,7 +21,7 @@ export class FlattenSetter {
         return !isNullOrUndefined(o[DISCRIMINATOR]);
     }
 
-    public static setFlatten(p: Property, isFlatten: boolean) {
+    public static setFlatten(p: Extensions, isFlatten: boolean) {
         if (isNullOrUndefined(p.extensions))
             p.extensions = {};
         p.extensions[CliConst.FLATTEN_FLAG] = isFlatten;
@@ -47,6 +48,14 @@ export class FlattenSetter {
                 })
             }
         });
+
+        this.codeModel.operationGroups.forEach(group => {
+            group.operations.forEach(operation => {
+                const body = values(operation.request.parameters).first(p => p.protocol.http?.in === 'body' && p.implementation === 'Method');
+                if (!isNullOrUndefined(body))
+                    FlattenSetter.setFlatten(body, true);
+            })
+        })
 
         return this.codeModel;
     }
