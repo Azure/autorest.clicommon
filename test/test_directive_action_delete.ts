@@ -3,7 +3,7 @@ import 'mocha';
 import { ActionSet } from '../src/plugins/modifier/cliDirectiveAction';
 import { M4Node } from '../src/schema';
 import { Metadata } from "@azure-tools/codemodel";
-import { ActionDelete } from '../dist/src/plugins/modifier/cliDirectiveAction';
+import { ActionDelete } from '../src/plugins/modifier/cliDirectiveAction';
 
 describe('Test Directive - Action - delete', function () {
     var descriptor = {
