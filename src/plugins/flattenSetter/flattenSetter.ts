@@ -94,7 +94,7 @@ export async function processRequest(host: Host) {
         if (m4FlattenPayloads !== true)
             Helper.logWarning('modelerfour.flatten-payloads is not turned on');
         
-        let flattenAll = await session.getValue(CliConst.CLI_FLATTEN_SET_FLATTEN_ALL_KEY);
+        let flattenAll = await session.getValue(CliConst.CLI_FLATTEN_SET_FLATTEN_ALL_KEY, false);
         if (flattenAll === true) {
             const plugin = await new FlattenSetter(session);
             let flatResult = await plugin.process(host);
