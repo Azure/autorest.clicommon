@@ -4,7 +4,7 @@ import { CodeModel, codeModelSchema, OperationGroup, Operation, Schema, ObjectSc
 import { Helper } from './helper';
 import { Modifier } from './plugins/modifier/modifier';
 import { CommonNamer } from './plugins/namer';
-import { processRequest as flattenSetter } from './plugins/flattensetter/flattensetter';
+import { processRequest as flattenSetter } from './plugins/flattenSetter/flattenSetter';
 import { CliConst } from './schema';
 import { isNullOrUndefined } from 'util';
 
