@@ -3,9 +3,22 @@ import { keys } from "@azure-tools/linq";
 import { isArray, isNull, isNullOrUndefined, isObject, isString, isUndefined } from "util";
 import { CliConst, M4Node, M4NodeType, NamingType, CliCommonSchema } from "./schema";
 import { pascalCase, EnglishPluralizationService } from '@azure-tools/codegen';
+import { Session } from "@azure-tools/autorest-extension-base";
 
 
 export class Helper {
+
+    private static session: Session<CodeModel>;
+    public static init(session: Session<CodeModel>) {
+        Helper.session = session;
+    }
+
+    public static logWarning(msg: string) {
+        if (isNullOrUndefined(Helper.session))
+            throw Error("Helper not init yet, please call Helper.init() to init the Helper");
+        Helper.session.warning(msg, []);
+    }
+
     public static isEmptyString(str): boolean {
         return isNullOrUndefined(str) || str.length === 0;
     }
@@ -249,6 +262,9 @@ export class Helper {
                 .reduce((pv, cv, ci) => pv.concat((ci === 0 ? (NEW_LINE + tab(i) + 'cli:') : '') +
                     NEW_LINE + tab(i + 1) + `${cv}: ${formatValue(o.language.cli[cv], i + 2)}`), ''));
 
+        let generatePropertyFlattenValue = (o: any, i: number) => isNullOrUndefined(o.extensions) || isNullOrUndefined[CliConst.FLATTEN_FLAG] ? '' :
+            NEW_LINE + tab(i) + CliConst.FLATTEN_FLAG + ': ' + o.extensions[CliConst.FLATTEN_FLAG];
+
         let s = '';
         s = s + `operationGroups:${NEW_LINE}` +
             `${tab()}all:${NEW_LINE}`.concat(codeModel.operationGroups.map(
@@ -264,7 +280,7 @@ export class Helper {
             `${tab(1)}all:${NEW_LINE}`.concat(codeModel.schemas.objects.map(
                 v => `${tab(2)}- schemaName: ${generateCliValue(v, 3)}` +
                     `${NEW_LINE}${tab(3)}properties:${NEW_LINE}`.concat(
-                        isNullOrUndefined(v.properties) ? '' : v.properties.map(vv => `${tab(4)}- propertyName: ${generateCliValue(vv, 5)}${NEW_LINE}`)
+                        isNullOrUndefined(v.properties) ? '' : v.properties.map(vv => `${tab(4)}- propertyName: ${generateCliValue(vv, 5)}${generatePropertyFlattenValue(vv, 5)} ${NEW_LINE}`)
                             .join('')))
                 .join(''));
         s = s + `${tab()}choices:${NEW_LINE}` +

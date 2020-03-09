@@ -9,6 +9,18 @@ use-extension:
 pipeline-model: v3
 
 pipeline:
+
+    modelerfour/new-transform:
+        input: clicommon/flatten-setter
+
+    clicommon/flatten-setter:
+        input: modelerfour
+        output-artifact: clicommon-flatten-setter
+
+    clicommon/flatten-setter/emitter:
+        input: clicommon/flatten-setter
+        scope: scope-clicommon-flatten-setter
+
     clicommon:
         input: modelerfour/identity
         output-artifact: clicommon-output-file
@@ -20,12 +32,21 @@ pipeline:
         input: clicommon/identity
         scope: scope-clicommon
 
+scope-clicommon-flatten-setter:
+    is-object: false
+    output-artifact:
+        - clicommon-flatten-setter
+
 scope-clicommon:
     is-object: false
     output-artifact:
         - clicommon-output-file
 
 modelerfour:
+    #group-parameters: true
+    #flatten-models: true
+    #flatten-payloads: true    
+
     # standardize to snake in modelerfour for selecting and formatting in clicommon
     # further naming will be done in clicommon to corresonding convention
     naming: 
@@ -44,6 +65,15 @@ modelerfour:
           LRO: LRO
 
 cli:
+    #flatten:
+    #    cli-flatten-set-enabled: true
+    #    cli-flatten-all: true
+    #    cli-flatten-all-overwrite-swagger: false
+    #    cli-flatten-directive:
+    #        - where:
+    #            type: SchemaType
+    #            prop: propertyName
+    #          flatten: true
     naming:
         cli:
             appliedTo:
@@ -88,6 +118,48 @@ cli:
 
 > **snake_naming_convention** is used as standardized naming convention in cli common 
 > to avoid confusing from different name convention when querying code model and set name.
+
+## Flatten support:
+
+Refer to sample below for the configurations for Flatten.
+
+> Add '--debug' argument to get following output files for debugging: 
+* cli-flatten-set-flatten-mapping.txt
+  * contains detail information about how objects are flattened
+* cli-flatten-set-before-everything-simplified.yaml
+  * useful for you to figure out the name to use to auther the cli-flatten-directive
+* cli-flatten-set-after-flatten-set-simplified.yaml
+* cli-flatten-set-after-flatten-set.yaml
+* cli-flatten-set-before-everything.yaml
+
+Sample:
+``` $(sample-cli-directive)
+modelerfour:
+    # clicommon flatten depends on modelerfour's flatten
+    # so please make sure modelerfour's flatten is turned on
+    group-parameters: true
+    flatten-models: true
+    flatten-payloads: true
+cli:
+    flatten:
+        # turn all the flatten features on/off
+        cli-flatten-set-enabled: true
+        # set to true to set flatten flag for
+        #   - all the object schemas except has discriminator (base class)
+        #   - all the body parameters of operation
+        cli-flatten-all: true
+        # whether to overwrite the flag in swagger when cli-flatten-all is true
+        cli-flatten-all-overwrite-swagger: false
+        # further customizatoin on flatten
+        # refer to the where caluse in the directive section below fore more details
+        # flatten: true|false to set selectedNode.extensions['x-ms-client-flatten'] = true|false 
+        cli-flatten-directive:
+            - where:
+                type: ResourceProviderOperation
+                prop: display
+              flatten: true
+
+```
 
 ## Naming Convention:
 

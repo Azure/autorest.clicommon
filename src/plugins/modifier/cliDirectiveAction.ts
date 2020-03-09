@@ -23,7 +23,7 @@ export abstract class Action {
         node.language[CliConst.CLI][key] = value;
     }
 
-    public static async buildActionList(directive: CliCommonSchema.CliDirective.Directive, session: Session<CodeModel>): Promise<Action[]> {
+    public static async buildActionList(directive: CliCommonSchema.CliDirective.Directive): Promise<Action[]> {
         Helper.validateNullOrUndefined(directive, 'directive');
         var arr: Action[] = [];
 
@@ -56,12 +56,29 @@ export abstract class Action {
                 case 'formattable':
                     arr.push(new ActionFormatTable(value));
                     break;
+                case 'flatten':
+                    arr.push(new ActionFlatten(value));
+                    break;
                 default:
                     // TODO: better to log instead of throw here?
                     throw Error("Unknown directive operation");
             }
         }
         return arr;
+    }
+}
+
+export class ActionFlatten extends Action {
+
+    constructor(private directiveValue: CliCommonSchema.CliDirective.ValueClause) {
+        super();
+    }
+
+    public process(descriptor: CliCommonSchema.CodeModel.NodeDescriptor): void {
+        let node = descriptor.target;
+        if (isNullOrUndefined(node.extensions))
+            node.extensions = {};
+        node.extensions[CliConst.FLATTEN_FLAG] = (this.directiveValue === true);
     }
 }
 

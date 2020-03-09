@@ -10,12 +10,12 @@ class CliDirective {
     private selector: NodeSelector;
     private actions: Action[];
 
-    constructor(private directive: CliCommonSchema.CliDirective.Directive, private session: Session<CodeModel>) {
+    constructor(private directive: CliCommonSchema.CliDirective.Directive) {
     }
 
     async init(): Promise<CliDirective> {
         this.selector = new NodeSelector(this.directive);
-        this.actions = await Action.buildActionList(this.directive, this.session);
+        this.actions = await Action.buildActionList(this.directive);
         return this;
     }
 
@@ -31,14 +31,9 @@ class CliDirective {
 export class CliDirectiveManager {
     private directives: CliDirective[] = [];
 
-    public async LoadDirective(session: Session<CodeModel>) {
-        var arr: CliCommonSchema.CliDirective.Directive[] = await session.getValue(CliConst.CLI_DIRECTIVE_KEY, null);
+    public async LoadDirective(directives: CliCommonSchema.CliDirective.Directive[]) {
 
-        if (!isNullOrUndefined(arr) && !Array.isArray(arr)) {
-            throw Error("cli-directive is expected to be an array. Please check '-' is set property in yaml")
-        }
-
-        this.directives = isNullOrUndefined(arr) ? [] : await Promise.all(arr.map(async v => new CliDirective(v, session).init()));
+        this.directives = isNullOrUndefined(directives) ? [] : await Promise.all(directives.map(async v => new CliDirective(v).init()));
     }
 
     public process(descripter: CliCommonSchema.CodeModel.NodeDescriptor) {
