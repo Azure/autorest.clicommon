@@ -1,4 +1,4 @@
-import { ChoiceSchema, ChoiceValue, CodeModel, ObjectSchema, Operation, OperationGroup, Parameter, Property, SealedChoiceSchema, Schema, ConstantSchema, SchemaType } from "@azure-tools/codemodel";
+import { ChoiceSchema, ChoiceValue, Extensions, CodeModel, ObjectSchema, Operation, OperationGroup, Parameter, Property, SealedChoiceSchema, Schema, ConstantSchema, SchemaType } from "@azure-tools/codemodel";
 import { keys } from "@azure-tools/linq";
 import { isArray, isNull, isNullOrUndefined, isObject, isString, isUndefined } from "util";
 import { CliConst, M4Node, M4NodeType, NamingType, CliCommonSchema } from "./schema";
@@ -292,4 +292,21 @@ export class Helper {
                                 .join(''))).join('')).join(''));
         return s;
     }
+
+    public static isBaseClass(o: ObjectSchema) {
+        const DISCRIMINATOR = 'discriminator';
+
+        return !isNullOrUndefined(o[DISCRIMINATOR]);
+    }
+
+    public static setFlatten(p: Extensions, isFlatten: boolean) {
+        if (isNullOrUndefined(p.extensions))
+            p.extensions = {};
+        p.extensions[CliConst.FLATTEN_FLAG] = isFlatten;
+    }
+
+    public static isFlattened(p: Extensions) {
+        return !isNullOrUndefined(p.extensions) && p.extensions[CliConst.FLATTEN_FLAG] == true;
+    }
+
 }

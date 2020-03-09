@@ -10,26 +10,10 @@ import { Modifier } from "../modifier/modifier";
 import { FlattenValidator } from "./flattenValidator";
 import { values } from "@azure-tools/linq";
 
-const DISCRIMINATOR = 'discriminator';
-
 export class FlattenSetter {
     codeModel: CodeModel;
     cliConfig: any;
     manager: CliDirectiveManager;
-
-    public static isBase(o: ObjectSchema) {
-        return !isNullOrUndefined(o[DISCRIMINATOR]);
-    }
-
-    public static setFlatten(p: Extensions, isFlatten: boolean) {
-        if (isNullOrUndefined(p.extensions))
-            p.extensions = {};
-        p.extensions[CliConst.FLATTEN_FLAG] = isFlatten;
-    }
-
-    public static isFlattened(p: Property) {
-        return !isNullOrUndefined(p.extensions) && p.extensions[CliConst.FLATTEN_FLAG] == true;
-    }
 
     constructor(protected session: Session<CodeModel>) {
         this.codeModel = session.model;
@@ -40,7 +24,7 @@ export class FlattenSetter {
         let overwriteSwagger = await this.session.getValue(CliConst.CLI_FLATTEN_SET_FLATTEN_ALL_OVERWRITE_SWAGGER_KEY, false);
 
         this.codeModel.schemas.objects.forEach(o => {
-            if (!FlattenSetter.isBase(o)) {
+            if (!Helper.isBaseClass(o)) {
                 if (!isNullOrUndefined(o.properties)) {
                     o.properties.forEach(p => {
                         if (isObjectSchema(p.schema)) {
@@ -48,7 +32,7 @@ export class FlattenSetter {
                                 p.extensions = {};
 
                             if (isNullOrUndefined(p.extensions[CliConst.FLATTEN_FLAG]) || overwriteSwagger)
-                                p.extensions[CliConst.FLATTEN_FLAG] = !FlattenSetter.isBase(p.schema as ObjectSchema);
+                                p.extensions[CliConst.FLATTEN_FLAG] = !Helper.isBaseClass(p.schema as ObjectSchema);
                         }
                     })
                 }
@@ -59,7 +43,7 @@ export class FlattenSetter {
             group.operations.forEach(operation => {
                 const body = values(operation.request.parameters).first(p => p.protocol.http?.in === 'body' && p.implementation === 'Method');
                 if (!isNullOrUndefined(body))
-                    FlattenSetter.setFlatten(body, true);
+                    Helper.setFlatten(body, true);
             })
         })
 
