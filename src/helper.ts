@@ -284,7 +284,7 @@ export class Helper {
                                         ? `${tab(4)}bodySchema: ${vvv.schema.language.default.name}${NEW_LINE}` : '')).join('')) +
                             vv.requests.map((req, index) =>
                                 isNullOrUndefined(req.parameters) ? '' :
-                                    req.parameters.map((vvv, index) => `${tab(3)}- [${index}]parameterName: ${generateCliValue(vvv, 4)}${NEW_LINE}` +
+                                    req.parameters.map((vvv) => `${tab(3)}- parameterName[${index}]: ${generateCliValue(vvv, 4)}${NEW_LINE}` +
                                         (((!isNullOrUndefined(vvv.protocol?.http?.in)) && vvv.protocol.http.in === 'body')
                                             ? `${tab(4)}bodySchema: ${vvv.schema.language.default.name}${NEW_LINE}` : '')).join(''))
                             ).join(''))

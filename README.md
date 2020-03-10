@@ -37,11 +37,13 @@ pipeline:
 
 scope-clicommon-flatten-setter:
     is-object: false
-    output-artifact:
+    output-folder: $(output-folder)\_clicommon_output
+    output-artifact: 
         - clicommon-flatten-setter
 
 scope-clicommon:
     is-object: false
+    output-folder: $(output-folder)\_clicommon_output
     output-artifact:
         - clicommon-output-file
 
