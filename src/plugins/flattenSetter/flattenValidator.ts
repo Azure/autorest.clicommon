@@ -26,7 +26,7 @@ class PropertyInfo {
     }
 
     public unflattenAsCirculeVictim() {
-        Helper.setFlatten(this.property, false);
+        Helper.setFlatten(this.property, false, true);
         this.isCirculeVictim = true;
     }
 }

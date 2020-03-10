@@ -91,16 +91,34 @@ export class Modifier {
                     target: op,
                     targetIndex: j,
                 })
-                for (let k = op.request.parameters.length - 1; k >= 0; k--) {
-                    let param = op.request.parameters[k];
+
+                for (let k = op.parameters.length - 1; k >= 0; k--) {
+                    let param = op.parameters[k];
                     this.manager.process({
                         operationGroupName: group.language.default.name,
                         operationName: op.language.default.name,
                         parameterName: param.language.default.name,
-                        parent: op.request.parameters,
+                        parent: op.parameters,
                         target: param,
                         targetIndex: k,
                     })
+                }
+
+                for (let m = op.requests.length - 1; m >= 0; m--) {
+                    if (!isNullOrUndefined(op.requests[m].parameters)) {
+                        for (let k = op.requests[m].parameters.length - 1; k >= 0; k--) {
+                            let param = op.requests[m].parameters[k];
+                            this.manager.process({
+                                operationGroupName: group.language.default.name,
+                                operationName: op.language.default.name,
+                                requestIndex: m,
+                                parameterName: param.language.default.name,
+                                parent: op.requests[m].parameters,
+                                target: param,
+                                targetIndex: k,
+                            })
+                        }
+                    }
                 }
             }
         }

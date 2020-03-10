@@ -4,6 +4,7 @@ import { CodeModel, codeModelSchema, OperationGroup, Operation, Schema, ObjectSc
 import { Helper } from './helper';
 import { Modifier } from './plugins/modifier/modifier';
 import { CommonNamer } from './plugins/namer';
+import { processRequest as configTwitter } from './plugins/configTwitter';
 import { processRequest as flattenSetter } from './plugins/flattenSetter/flattenSetter';
 import { CliConst } from './schema';
 import { isNullOrUndefined } from 'util';
@@ -18,8 +19,8 @@ extension.Add("clicommon", async autoRestApi => {
     // at this point namer and modifirers are in a single plug-in
     let debugOutput = {};
 
-    let namingMapping = Helper.toYamlSimplified(session.model);
     if (cliDebug) {
+        debugOutput["clicommon-name-mapping.yaml"] = Helper.toYamlSimplified(session.model);
         debugOutput['cli-debug-before-everything.yaml'] = serialize(session.model);
     }
     
@@ -55,11 +56,10 @@ extension.Add("clicommon", async autoRestApi => {
         autoRestApi.WriteFile('code-model-v4-no-tags.yaml', serialize(result), undefined, 'code-model-v4-no-tags');
     }
 
-    autoRestApi.WriteFile("clicommon-name-mapping.yaml", namingMapping);
     for (let key in debugOutput)
         autoRestApi.WriteFile(key, debugOutput[key], null);
 });
 
 extension.Add("flatten-setter", flattenSetter);
-
+extension.Add("config-twitter", configTwitter)
 extension.Run();

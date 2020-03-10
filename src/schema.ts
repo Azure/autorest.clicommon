@@ -89,6 +89,7 @@ export namespace CliCommonSchema {
         export interface WhereClause {
             operationGroup?: string;
             operation?: string;
+            requestIndex?: number;
             parameter?: string;
             objectSchema?: string;
             property?: string;
@@ -133,6 +134,7 @@ export namespace CliCommonSchema {
         export interface NodeDescriptor {
             operationGroupName?: string;
             operationName?: string;
+            requestIndex?: number;
             parameterName?: string;
             objectSchemaName?: string;
             propertyName?: string;

@@ -109,8 +109,16 @@ export class CommonNamer {
             for (const operation of values(operationGroup.operations)) {
                 this.getCliName(operation);
 
-                for (const parameter of values(operation.request.parameters)) {
+                for (const parameter of values(operation.parameters)) {
                     this.getCliName(parameter);
+                }
+
+                for (const request of values(operation.requests)) {
+                    if (!isNullOrUndefined(request.parameters)) {
+                        for (const parameter of values(request.parameters)) {
+                            this.getCliName(parameter);
+                        }
+                    }
                 }
             }
         }

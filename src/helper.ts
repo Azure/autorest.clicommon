@@ -1,5 +1,5 @@
 import { ChoiceSchema, ChoiceValue, Extensions, CodeModel, ObjectSchema, Operation, OperationGroup, Parameter, Property, SealedChoiceSchema, Schema, ConstantSchema, SchemaType } from "@azure-tools/codemodel";
-import { keys } from "@azure-tools/linq";
+import { keys, values } from "@azure-tools/linq";
 import { isArray, isNull, isNullOrUndefined, isObject, isString, isUndefined } from "util";
 import { CliConst, M4Node, M4NodeType, NamingType, CliCommonSchema } from "./schema";
 import { pascalCase, EnglishPluralizationService } from '@azure-tools/codegen';
@@ -11,6 +11,12 @@ export class Helper {
     private static session: Session<CodeModel>;
     public static init(session: Session<CodeModel>) {
         Helper.session = session;
+    }
+
+    public static logDebug(msg: string) {
+        if (isNullOrUndefined(Helper.session))
+            throw Error("Helper not init yet, please call Helper.init() to init the Helper");
+        Helper.session.debug(msg, []);
     }
 
     public static logWarning(msg: string) {
@@ -270,11 +276,21 @@ export class Helper {
             `${tab()}all:${NEW_LINE}`.concat(codeModel.operationGroups.map(
                 v => `${tab(1)}- operationGroupName: ${generateCliValue(v, 2)}` +
                     `${NEW_LINE}${tab(2)}operations:${NEW_LINE}`.concat(
-                        v.operations.map(vv => `${tab(2)}- operationName: ${generateCliValue(vv, 3)}` +
+                        v.operations.map(vv =>
+                            `${tab(2)}- operationName: ${generateCliValue(vv, 3)}` +
                             `${NEW_LINE}${tab(3)}parameters:${NEW_LINE}`.concat(
-                                vv.request.parameters.map(vvv => `${tab(3)}- parameterName: ${generateCliValue(vvv, 4)}${NEW_LINE}` +
-                                    (((!isNullOrUndefined(vvv.protocol?.http?.in)) && vvv.protocol.http.in === 'body') ? `${tab(4)}bodySchema: ${vvv.schema.language.default.name}${NEW_LINE}` : ''))
-                                    .join(''))).join(''))).join(''));
+                                vv.parameters.map(vvv => `${tab(3)}- parameterName: ${generateCliValue(vvv, 4)}${NEW_LINE}` +
+                                    (((!isNullOrUndefined(vvv.protocol?.http?.in)) && vvv.protocol.http.in === 'body')
+                                        ? `${tab(4)}bodySchema: ${vvv.schema.language.default.name}${NEW_LINE}` : '')).join('')) +
+                            vv.requests.map((req, index) =>
+                                isNullOrUndefined(req.parameters) ? '' :
+                                    req.parameters.map((vvv, index) => `${tab(3)}- [${index}]parameterName: ${generateCliValue(vvv, 4)}${NEW_LINE}` +
+                                        (((!isNullOrUndefined(vvv.protocol?.http?.in)) && vvv.protocol.http.in === 'body')
+                                            ? `${tab(4)}bodySchema: ${vvv.schema.language.default.name}${NEW_LINE}` : '')).join(''))
+                            ).join(''))
+                ).join('')
+            );
+
         s = s + `schemas:${NEW_LINE}` +
             `${tab()}objects:${NEW_LINE}` +
             `${tab(1)}all:${NEW_LINE}`.concat(codeModel.schemas.objects.map(
@@ -299,10 +315,12 @@ export class Helper {
         return !isNullOrUndefined(o[DISCRIMINATOR]);
     }
 
-    public static setFlatten(p: Extensions, isFlatten: boolean) {
+    public static setFlatten(p: Extensions, isFlatten: boolean, overwrite: boolean) {
         if (isNullOrUndefined(p.extensions))
             p.extensions = {};
-        p.extensions[CliConst.FLATTEN_FLAG] = isFlatten;
+        if (isNullOrUndefined(p.extensions[CliConst.FLATTEN_FLAG]) || overwrite) {
+            p.extensions[CliConst.FLATTEN_FLAG] = isFlatten;
+        }
     }
 
     public static isFlattened(p: Extensions) {

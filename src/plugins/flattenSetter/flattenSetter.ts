@@ -28,11 +28,7 @@ export class FlattenSetter {
                 if (!isNullOrUndefined(o.properties)) {
                     o.properties.forEach(p => {
                         if (isObjectSchema(p.schema)) {
-                            if (isNullOrUndefined(p.extensions))
-                                p.extensions = {};
-
-                            if (isNullOrUndefined(p.extensions[CliConst.FLATTEN_FLAG]) || overwriteSwagger)
-                                p.extensions[CliConst.FLATTEN_FLAG] = !Helper.isBaseClass(p.schema as ObjectSchema);
+                            Helper.setFlatten(p, !Helper.isBaseClass(p.schema as ObjectSchema), overwriteSwagger);
                         }
                     })
                 }
@@ -41,9 +37,17 @@ export class FlattenSetter {
 
         this.codeModel.operationGroups.forEach(group => {
             group.operations.forEach(operation => {
-                const body = values(operation.request.parameters).first(p => p.protocol.http?.in === 'body' && p.implementation === 'Method');
-                if (!isNullOrUndefined(body))
-                    Helper.setFlatten(body, true);
+                values(operation.parameters)
+                    .where(p => p.protocol.http?.in === 'body' && p.implementation === 'Method')
+                    .forEach(p => Helper.setFlatten(p, !Helper.isBaseClass(p.schema as ObjectSchema), overwriteSwagger));
+
+                operation.requests.forEach(request => {
+                    if (!isNullOrUndefined(request.parameters)) {
+                        values(request.parameters)
+                            .where(p => p.protocol.http?.in === 'body' && p.implementation === 'Method')
+                            .forEach(p => Helper.setFlatten(p, !Helper.isBaseClass(p.schema as ObjectSchema), overwriteSwagger));
+                    }
+                });
             })
         })
 
