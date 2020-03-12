@@ -18,6 +18,8 @@ export namespace CliConst {
     export const CLI_FLATTEN_DIRECTIVE_KEY: string = "cli.flatten.cli-flatten-directive";
     export const CLI_FLATTEN_SET_ENABLED_KEY: string = 'cli.flatten.cli-flatten-set-enabled';
     export const CLI_FLATTEN_SET_FLATTEN_ALL_KEY: string = 'cli.flatten.cli-flatten-all';
+    export const CLI_FLATTEN_SET_FLATTEN_SCHEMA_KEY: string = 'cli.flatten.cli-flatten-schema';
+    export const CLI_FLATTEN_SET_FLATTEN_PAYLOAD_KEY: string = 'cli.flatten.cli-flatten-payload';
     export const CLI_FLATTEN_SET_FLATTEN_ALL_OVERWRITE_SWAGGER_KEY: string = 'cli.flatten.cli-flatten-all-overwrite-swagger';
 
     export class NamingStyle {

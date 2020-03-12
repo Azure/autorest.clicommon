@@ -86,6 +86,7 @@ cli:
                 cmyk : CMYK
                 $host: $host
                 LRO: LRO
+                rp: RP
                 # workaround for modelerfour issue
                 # https://github.com/Azure/autorest.modelerfour/issues/195
                 SubscriptionId: SubscriptionId
@@ -102,6 +103,7 @@ cli:
                 cmyk : CMYK
                 $host: $host
                 LRO: LRO
+                rp: RP
                 # workaround for modelerfour issue
                 SubscriptionId: SubscriptionId
             parameter: 'camel'
@@ -150,6 +152,10 @@ cli:
         cli-flatten-all: true
         # whether to overwrite the flag in swagger when cli-flatten-all is true
         cli-flatten-all-overwrite-swagger: false
+        # whether to flatten the body parameters of peration
+        cli-flatten-payload : true
+        # whether to flatten the object schemas except has discriminator (base class)
+        cli-flatten-schema: false
         # further customizatoin on flatten
         # refer to the where caluse in the directive section below fore more details
         # flatten: true|false to set selectedNode.extensions['x-ms-client-flatten'] = true|false 
