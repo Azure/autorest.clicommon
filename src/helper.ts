@@ -133,6 +133,8 @@ export class Helper {
         const eps = new EnglishPluralizationService();
         eps.addWord('Database', 'Databases');
         eps.addWord('database', 'databases');
+        eps.addWord('cache', 'caches');
+        eps.addWord('Cache', 'Caches');
         return eps.singularize(word);
     }
 
