@@ -22,30 +22,39 @@ export class FlattenSetter {
     async process(host: Host) {
 
         let overwriteSwagger = await this.session.getValue(CliConst.CLI_FLATTEN_SET_FLATTEN_ALL_OVERWRITE_SWAGGER_KEY, false);
+        let flattenAll = await this.session.getValue(CliConst.CLI_FLATTEN_SET_FLATTEN_ALL_KEY, false);
 
-        this.codeModel.schemas.objects.forEach(o => {
-            if (!Helper.isBaseClass(o)) {
-                if (!isNullOrUndefined(o.properties)) {
-                    o.properties.forEach(p => {
-                        if (isObjectSchema(p.schema)) {
-                            if (isNullOrUndefined(p.extensions))
-                                p.extensions = {};
+        let flattenSchema = await this.session.getValue(CliConst.CLI_FLATTEN_SET_FLATTEN_SCHEMA_KEY, false);
 
-                            if (isNullOrUndefined(p.extensions[CliConst.FLATTEN_FLAG]) || overwriteSwagger)
-                                p.extensions[CliConst.FLATTEN_FLAG] = !Helper.isBaseClass(p.schema as ObjectSchema);
-                        }
-                    })
+        // by default on when the flatten_all flag is one
+        if (flattenSchema === true || flattenAll === true) {
+            this.codeModel.schemas.objects.forEach(o => {
+                if (!Helper.isBaseClass(o)) {
+                    if (!isNullOrUndefined(o.properties)) {
+                        o.properties.forEach(p => {
+                            if (isObjectSchema(p.schema)) {
+                                if (isNullOrUndefined(p.extensions))
+                                    p.extensions = {};
+
+                                if (isNullOrUndefined(p.extensions[CliConst.FLATTEN_FLAG]) || overwriteSwagger)
+                                    p.extensions[CliConst.FLATTEN_FLAG] = !Helper.isBaseClass(p.schema as ObjectSchema);
+                            }
+                        })
+                    }
                 }
-            }
-        });
+            });
+        }
 
-        this.codeModel.operationGroups.forEach(group => {
-            group.operations.forEach(operation => {
-                const body = values(operation.request.parameters).first(p => p.protocol.http?.in === 'body' && p.implementation === 'Method');
-                if (!isNullOrUndefined(body))
-                    Helper.setFlatten(body, true);
+        let flattenPayload = await this.session.getValue(CliConst.CLI_FLATTEN_SET_FLATTEN_PAYLOAD_KEY, false);
+        if (flattenPayload === true || flattenAll === true) {
+            this.codeModel.operationGroups.forEach(group => {
+                group.operations.forEach(operation => {
+                    const body = values(operation.request.parameters).first(p => p.protocol.http?.in === 'body' && p.implementation === 'Method');
+                    if (!isNullOrUndefined(body))
+                        Helper.setFlatten(body, true);
+                })
             })
-        })
+        }
 
         return this.codeModel;
     }
@@ -77,16 +86,13 @@ export async function processRequest(host: Host) {
         let m4FlattenPayloads = await session.getValue('modelerfour.flatten-payloads', false);
         if (m4FlattenPayloads !== true)
             Helper.logWarning('modelerfour.flatten-payloads is not turned on');
-        
-        let flattenAll = await session.getValue(CliConst.CLI_FLATTEN_SET_FLATTEN_ALL_KEY, false);
-        if (flattenAll === true) {
-            const plugin = await new FlattenSetter(session);
-            let flatResult = await plugin.process(host);
 
-            if (cliDebug) {
-                debugOutput['cli-flatten-set-after-flatten-set.yaml'] = serialize(flatResult);
-                debugOutput['cli-flatten-set-after-flatten-set-simplified.yaml'] = Helper.toYamlSimplified(flatResult);
-            }
+        const plugin = await new FlattenSetter(session);
+        let flatResult = await plugin.process(host);
+
+        if (cliDebug) {
+            debugOutput['cli-flatten-set-after-flatten-set.yaml'] = serialize(flatResult);
+            debugOutput['cli-flatten-set-after-flatten-set-simplified.yaml'] = Helper.toYamlSimplified(flatResult);
         }
 
         let directives = await session.getValue(CliConst.CLI_FLATTEN_DIRECTIVE_KEY, null);

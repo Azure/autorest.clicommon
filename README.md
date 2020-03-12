@@ -86,6 +86,7 @@ cli:
                 cmyk : CMYK
                 $host: $host
                 LRO: LRO
+                rp: RP
                 # workaround for modelerfour issue
                 # https://github.com/Azure/autorest.modelerfour/issues/195
                 SubscriptionId: SubscriptionId
@@ -102,6 +103,7 @@ cli:
                 cmyk : CMYK
                 $host: $host
                 LRO: LRO
+                rp: RP
                 # workaround for modelerfour issue
                 SubscriptionId: SubscriptionId
             parameter: 'camel'
