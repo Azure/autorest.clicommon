@@ -68,8 +68,8 @@ export class Helper {
         if (str === "*")
             return MATCH_ALL;
         if (Helper.containsSpecialChar(str))
-            return new RegExp(str);
-        return new RegExp(`^${str}$`, "g");
+            return new RegExp(str, "gi");
+        return new RegExp(`^${str}$`, "gi");
     }
 
     public static validateNullOrUndefined(obj: any, name: string): void {
