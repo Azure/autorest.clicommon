@@ -16,16 +16,16 @@ describe('Test Directive - Selector - choiceValue', function () {
         });
 
         assert.isTrue(selector.match({
-            choiceSchemaName: 'cs1',
-            choiceValueName: 'os1',
+            choiceSchemaCliKey: 'cs1',
+            choiceValueCliKey: 'os1',
             parent: null,
             targetIndex: -1,
             target: new ChoiceValue('fake', 'fake description', null),
         }));
 
         assert.isNotTrue(selector.match({
-            choiceSchemaName: 'os1',
-            choiceValueName: 'os1+',
+            choiceSchemaCliKey: 'os1',
+            choiceValueCliKey: 'os1+',
             parent: null,
             targetIndex: -1,
             target: new ChoiceValue('fake', 'fake description', null),
@@ -42,16 +42,16 @@ describe('Test Directive - Selector - choiceValue', function () {
         });
 
         assert.isTrue(selector.match({
-            choiceSchemaName: 'cs1',
-            choiceValueName: 'os1',
+            choiceSchemaCliKey: 'cs1',
+            choiceValueCliKey: 'os1',
             parent: null,
             targetIndex: -1,
             target: new ChoiceValue('fake', 'fake description', null),
         }));
 
         assert.isNotTrue(selector.match({
-            choiceSchemaName: 'os1',
-            choiceValueName: 'os1+',
+            choiceSchemaCliKey: 'os1',
+            choiceValueCliKey: 'os1+',
             parent: null,
             targetIndex: -1,
             target: new ChoiceValue('fake', 'fake description', null),
@@ -67,16 +67,16 @@ describe('Test Directive - Selector - choiceValue', function () {
         });
 
         assert.isTrue(selector.match({
-            choiceSchemaName: 'cs1',
-            choiceValueName: 'os1',
+            choiceSchemaCliKey: 'cs1',
+            choiceValueCliKey: 'os1',
             parent: null,
             targetIndex: -1,
             target: new ChoiceValue('fake', 'fake description', null),
         }));
 
         assert.isNotTrue(selector.match({
-            choiceSchemaName: 'cs1',
-            choiceValueName: 'os1+',
+            choiceSchemaCliKey: 'cs1',
+            choiceValueCliKey: 'os1+',
             parent: null,
             targetIndex: -1,
             target: new ChoiceValue('fake', 'fake description', null),
@@ -94,16 +94,16 @@ describe('Test Directive - Selector - choiceValue', function () {
             let selector = new NodeSelector(s);
 
             assert.isTrue(selector.match({
-                choiceSchemaName: 'cs1',
-                choiceValueName: 'os1',
+                choiceSchemaCliKey: 'cs1',
+                choiceValueCliKey: 'os1',
                 parent: null,
                 targetIndex: -1,
                 target: new ChoiceValue('fake', 'fake description', null),
             }));
 
             assert.isNotTrue(selector.match({
-                choiceSchemaName: 'cs1',
-                choiceValueName: 'os1+',
+                choiceSchemaCliKey: 'cs1',
+                choiceValueCliKey: 'os1+',
                 parent: null,
                 targetIndex: -1,
                 target: new ChoiceValue('fake', 'fake description', null),
@@ -121,32 +121,32 @@ describe('Test Directive - Selector - choiceValue', function () {
         });
 
         assert.isTrue(selector.match({
-            choiceSchemaName: 'cs1',
-            choiceValueName: 'hw',
+            choiceSchemaCliKey: 'cs1',
+            choiceValueCliKey: 'hw',
             parent: null,
             targetIndex: -1,
             target: new ChoiceValue('fake', 'fake description', null),
         }));
 
         assert.isNotTrue(selector.match({
-            choiceSchemaName: 'cs1',
-            choiceValueName: 'hww',
+            choiceSchemaCliKey: 'cs1',
+            choiceValueCliKey: 'hww',
             parent: null,
             targetIndex: -1,
             target: new ChoiceValue('fake', 'fake description', null),
         }));
 
         assert.isNotTrue(selector.match({
-            choiceSchemaName: 'cs1',
-            choiceValueName: 'hhw',
+            choiceSchemaCliKey: 'cs1',
+            choiceValueCliKey: 'hhw',
             parent: null,
             targetIndex: -1,
             target: new ChoiceValue('fake', 'fake description', null),
         }));
 
         assert.isNotTrue(selector.match({
-            choiceSchemaName: 'cs1',
-            choiceValueName: 'haw',
+            choiceSchemaCliKey: 'cs1',
+            choiceValueCliKey: 'haw',
             parent: null,
             targetIndex: -1,
             target: new ChoiceValue('fake', 'fake description', null),

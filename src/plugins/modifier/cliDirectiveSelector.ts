@@ -59,19 +59,19 @@ export class NodeSelector {
             case CliConst.SelectType.operationGroup:
             case CliConst.SelectType.operation:
             case CliConst.SelectType.parameter:
-                r = match(this.where.operationGroup, descriptor.operationGroupName) &&
-                    match(this.where.operation, descriptor.operationName) &&
-                    match(this.where.parameter, descriptor.parameterName);
+                r = match(this.where.operationGroup, descriptor.operationGroupCliKey) &&
+                    match(this.where.operation, descriptor.operationCliKey) &&
+                    match(this.where.parameter, descriptor.parameterCliKey);
                 break;
             case CliConst.SelectType.choiceSchema:
             case CliConst.SelectType.choiceValue:
-                r = match(this.where.choiceSchema, descriptor.choiceSchemaName) &&
-                    match(this.where.choiceValue, descriptor.choiceValueName);
+                r = match(this.where.choiceSchema, descriptor.choiceSchemaCliKey) &&
+                    match(this.where.choiceValue, descriptor.choiceValueCliKey);
                 break;
             case CliConst.SelectType.objectSchema:
             case CliConst.SelectType.property:
-                r = match(this.where.objectSchema, descriptor.objectSchemaName) &&
-                    match(this.where.property, descriptor.propertyName);
+                r = match(this.where.objectSchema, descriptor.objectSchemaCliKey) &&
+                    match(this.where.property, descriptor.propertyCliKey);
                 break;
             default:
                 throw Error(`Unknown select type: ${this.selectType}`)

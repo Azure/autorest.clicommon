@@ -109,6 +109,8 @@ export namespace CliCommonSchema {
             hidden?: ValueClause;
             removed?: ValueClause;
             required?: ValueClause;
+            json?: ValueClause;
+            flatten?: ValueClause
             name?: ValueClause;
             /** in kebab-case */
             setName?: SetNameClause;
@@ -133,13 +135,13 @@ export namespace CliCommonSchema {
 
     export namespace CodeModel {
         export interface NodeDescriptor {
-            operationGroupName?: string;
-            operationName?: string;
-            parameterName?: string;
-            objectSchemaName?: string;
-            propertyName?: string;
-            choiceSchemaName?: string;
-            choiceValueName?: string;
+            operationGroupCliKey?: string;
+            operationCliKey?: string;
+            parameterCliKey?: string;
+            objectSchemaCliKey?: string;
+            propertyCliKey?: string;
+            choiceSchemaCliKey?: string;
+            choiceValueCliKey?: string;
             parent: any;
             target: M4Node;
             /** set to -1 if the parent is not an array */
