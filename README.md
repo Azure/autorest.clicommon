@@ -11,36 +11,36 @@ pipeline-model: v3
 pipeline:
 
     modelerfour/new-transform:
-        input: clicommon/flatten-setter
+        input: clicommon/cli-flatten-setter
 
-    clicommon/flatten-setter:
+    clicommon/cli-prenamer:
         input: modelerfour
-        output-artifact: clicommon-flatten-setter
+        output-artifact: clicommon-prenamer
 
-    clicommon/flatten-setter/emitter:
-        input: clicommon/flatten-setter
-        scope: scope-clicommon-flatten-setter
+    clicommon/cli-flatten-setter:
+        input: clicommon/cli-prenamer
+        output-artifact: clicommon-flatten-setter
 
     clicommon:
         input: modelerfour/identity
-        output-artifact: clicommon-output-file
+        output-artifact: clicommon-output
 
     clicommon/identity:
         input: clicommon
 
     clicommon/emitter:
-        input: clicommon/identity
+        input: 
+          - clicommon
+          - clicommon/cli-prenamer
+          - clicommon/cli-flatten-setter
         scope: scope-clicommon
-
-scope-clicommon-flatten-setter:
-    is-object: false
-    output-artifact:
-        - clicommon-flatten-setter
 
 scope-clicommon:
     is-object: false
     output-artifact:
-        - clicommon-output-file
+        - clicommon-output
+        - clicommon-prenamer
+        - clicommon-flatten-setter
 
 modelerfour:
     #group-parameters: true

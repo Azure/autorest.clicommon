@@ -5,6 +5,7 @@ import { Helper } from './helper';
 import { Modifier } from './plugins/modifier/modifier';
 import { CommonNamer } from './plugins/namer';
 import { processRequest as flattenSetter } from './plugins/flattenSetter/flattenSetter';
+import { processRequest as preNamer } from './plugins/prenamer';
 import { CliConst } from './schema';
 import { isNullOrUndefined } from 'util';
 
@@ -18,9 +19,10 @@ extension.Add("clicommon", async autoRestApi => {
     // at this point namer and modifirers are in a single plug-in
     let debugOutput = {};
 
-    let namingMapping = Helper.toYamlSimplified(session.model);
     if (cliDebug) {
-        debugOutput['cli-debug-before-everything.yaml'] = serialize(session.model);
+        debugOutput['clicommon-0060-modifier-pre.yaml'] = serialize(session.model);
+        debugOutput['clicommon-0060-modifier-pre-simplified.yaml'] = Helper.toYamlSimplified(session.model);
+        debugOutput['clicommon-modifier-naming.yaml'] = debugOutput['clicommon-modifier-pre-simplified.yaml'];
     }
     
     let arr = await session.getValue(CliConst.CLI_DIRECTIVE_KEY, null);
@@ -28,15 +30,15 @@ extension.Add("clicommon", async autoRestApi => {
     const modifier = await new Modifier(session).init(arr);
     let result = modifier.process();
     if (cliDebug) {
-        debugOutput['cli-debug-after-modifier.yaml'] = serialize(result);
-        debugOutput['cli-debug-after-modifier-simplified.yaml'] = Helper.toYamlSimplified(session.model);
+        debugOutput['clicommon-0070-modifier-post.yaml'] = serialize(result);
+        debugOutput['clicommon-0070-modifier-post-simplified.yaml'] = Helper.toYamlSimplified(session.model);
     }
 
     const namer = await new CommonNamer(session).init();
     result = namer.process();
     if (cliDebug) {
-        debugOutput['cli-debug-after-namer.yaml'] = serialize(result);
-        debugOutput['cli-debug-after-namer-simplified.yaml'] = Helper.toYamlSimplified(session.model);
+        debugOutput['clicommon-0080-namer-post-namer.yaml'] = serialize(result);
+        debugOutput['clicommon-0080-namer-post-simplified.yaml'] = Helper.toYamlSimplified(session.model);
     }
 
     // add test scenario from common settings
@@ -55,11 +57,11 @@ extension.Add("clicommon", async autoRestApi => {
         autoRestApi.WriteFile('code-model-v4-no-tags.yaml', serialize(result), undefined, 'code-model-v4-no-tags');
     }
 
-    autoRestApi.WriteFile("clicommon-name-mapping.yaml", namingMapping);
     for (let key in debugOutput)
         autoRestApi.WriteFile(key, debugOutput[key], null);
 });
 
-extension.Add("flatten-setter", flattenSetter);
+extension.Add("cli-flatten-setter", flattenSetter);
+extension.Add("cli-prenamer", preNamer);
 
 extension.Run();

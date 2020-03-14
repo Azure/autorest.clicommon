@@ -4,7 +4,7 @@ import { CodeModel, codeModelSchema, Metadata, ObjectSchema, isObjectSchema, Pro
 import { isNullOrUndefined, isArray } from "util";
 import { DESTRUCTION } from "dns";
 import { Helper } from "../../helper";
-import { CliConst } from "../../schema";
+import { CliConst, CliCommonSchema } from "../../schema";
 import { CliDirectiveManager } from "../modifier/cliDirective";
 import { Modifier } from "../modifier/modifier";
 import { FlattenValidator } from "./flattenValidator";
@@ -76,8 +76,8 @@ export async function processRequest(host: Host) {
     else {
 
         if (cliDebug) {
-            debugOutput['cli-flatten-set-before-everything.yaml'] = serialize(session.model);
-            debugOutput['cli-flatten-set-before-everything-simplified.yaml'] = Helper.toYamlSimplified(session.model);
+            debugOutput['clicommon-0030-flatten-set-pre.yaml'] = serialize(session.model);
+            debugOutput['clicommon-0030-flatten-set-pre-simplified.yaml'] = Helper.toYamlSimplified(session.model);
         }
 
         let m4FlattenModels = await session.getValue('modelerfour.flatten-models', false);
@@ -91,24 +91,37 @@ export async function processRequest(host: Host) {
         let flatResult = await plugin.process(host);
 
         if (cliDebug) {
-            debugOutput['cli-flatten-set-after-flatten-set.yaml'] = serialize(flatResult);
-            debugOutput['cli-flatten-set-after-flatten-set-simplified.yaml'] = Helper.toYamlSimplified(flatResult);
+            debugOutput['clicommon-0040-flatten-set-post.yaml'] = serialize(flatResult);
+            debugOutput['clicommon-0040-flatten-set-post-simplified.yaml'] = Helper.toYamlSimplified(flatResult);
         }
 
-        let directives = await session.getValue(CliConst.CLI_FLATTEN_DIRECTIVE_KEY, null);
+        let directives = await session.getValue(CliConst.CLI_FLATTEN_DIRECTIVE_KEY, []);
+        let cliDirectives = await session.getValue(CliConst.CLI_DIRECTIVE_KEY, []);
+        directives = directives.concat(
+            cliDirectives.filter((d: CliCommonSchema.CliDirective.Directive) => (!isNullOrUndefined(d.json) || !isNullOrUndefined(d.flatten)))
+                .map((d: CliCommonSchema.CliDirective.Directive) => {
+                    let r: CliCommonSchema.CliDirective.Directive = {
+                        select: d.select,
+                        where: JSON.parse(JSON.stringify(d.where)),
+                        json: d.json,
+                        flatten: d.flatten
+                    };
+                    return r;
+                })
+        )
         if (!isNullOrUndefined(directives) && isArray(directives) && directives.length > 0) {
             const modifier = await new Modifier(session).init(directives);
             let modResult: CodeModel = modifier.process();
             if (cliDebug) {
-                debugOutput['cli-flatten-set-after-modifier.yaml'] = serialize(modResult);
-                debugOutput['cli-flatten-set-after-modifier-simplified.yaml'] = Helper.toYamlSimplified(modResult);
+                debugOutput['clicommon-0050-flatten-modifier-post.yaml'] = serialize(modResult);
+                debugOutput['clicommon-0050-flatten-modifier-post-simplified.yaml'] = Helper.toYamlSimplified(modResult);
             }
         }
 
     }
     let finalMapping = new FlattenValidator(session).validate(session.model.schemas.objects)
     if (cliDebug) {
-        debugOutput['cli-flatten-set-flatten-mapping.txt'] = finalMapping;
+        debugOutput['clicommon-flatten-object-map.txt'] = finalMapping;
     }
 
     // write the final result first which is hardcoded in the Session class to use to build the model..
