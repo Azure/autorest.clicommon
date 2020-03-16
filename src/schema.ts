@@ -138,7 +138,7 @@ export namespace CliCommonSchema {
         export interface NodeDescriptor {
             operationGroupCliKey?: string;
             operationCliKey?: string;
-	    requestIndex? number;
+            requestIndex?: number;
             parameterCliKey?: string;
             objectSchemaCliKey?: string;
             propertyCliKey?: string;

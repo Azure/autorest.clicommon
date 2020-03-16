@@ -412,7 +412,7 @@ export class Helper {
      * @param codeModel
      * @param action
      */
-    public static enumerateCodeMode(codeModel: CodeModel, action: (nodeDescriptor: CliCommonSchema.CodeModel.NodeDescriptor) => void) {
+    public static enumerateCodeModel(codeModel: CodeModel, action: (nodeDescriptor: CliCommonSchema.CodeModel.NodeDescriptor) => void) {
         if (isNullOrUndefined(action))
             throw Error("empty action for going through code model")
 
@@ -480,16 +480,34 @@ export class Helper {
                     target: op,
                     targetIndex: j,
                 })
-                for (let k = op.request.parameters.length - 1; k >= 0; k--) {
-                    let param = op.request.parameters[k];
+
+                for (let k = op.parameters.length - 1; k >= 0; k--) {
+                    let param = op.parameters[k];
                     action({
                         operationGroupCliKey: PreNamer.getCliKey(group),
                         operationCliKey: PreNamer.getCliKey(op),
                         parameterCliKey: PreNamer.getCliKey(param),
-                        parent: op.request.parameters,
+                        parent: op.parameters,
                         target: param,
                         targetIndex: k,
                     })
+                }
+
+                for (let m = op.requests.length - 1; m >= 0; m--) {
+                    if (!isNullOrUndefined(op.requests[m].parameters)) {
+                        for (let k = op.requests[m].parameters.length - 1; k >= 0; k--) {
+                            let param = op.requests[m].parameters[k];
+                            action({
+                                operationGroupCliKey: PreNamer.getCliKey(group),
+                                operationCliKey: PreNamer.getCliKey(op),
+                                requestIndex: m,
+                                parameterCliKey: PreNamer.getCliKey(param),
+                                parent: op.requests[m].parameters,
+                                target: param,
+                                targetIndex: k,
+                            })
+                        }
+                    }
                 }
             }
         }
