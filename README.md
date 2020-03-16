@@ -4,7 +4,7 @@ See documentation [here](doc/00-overview.md)
 
 ``` yaml
 use-extension:
-  "@autorest/modelerfour": "4.9.234"
+  "@autorest/modelerfour": "4.10.250"
 
 pipeline-model: v3
 
