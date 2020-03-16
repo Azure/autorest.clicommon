@@ -1,17 +1,20 @@
-import { ChoiceSchema, ChoiceValue, Extensions, CodeModel, ObjectSchema, Operation, OperationGroup, Parameter, Property, SealedChoiceSchema, Schema, ConstantSchema, SchemaType } from "@azure-tools/codemodel";
+import { codeModelSchema, ChoiceSchema, ChoiceValue, Extensions, CodeModel, ObjectSchema, Operation, OperationGroup, Parameter, Property, SealedChoiceSchema, Schema, ConstantSchema, SchemaType } from "@azure-tools/codemodel";
 import { keys, values } from "@azure-tools/linq";
 import { isArray, isNull, isNullOrUndefined, isObject, isString, isUndefined } from "util";
 import { CliConst, M4Node, M4NodeType, NamingType, CliCommonSchema } from "./schema";
 import { pascalCase, EnglishPluralizationService, guid } from '@azure-tools/codegen';
-import { Session } from "@azure-tools/autorest-extension-base";
+import { Session, Host, startSession } from "@azure-tools/autorest-extension-base";
 import { PreNamer } from "./plugins/prenamer";
-
+import { serialize } from "@azure-tools/codegen";
 
 export class Helper {
 
     private static session: Session<CodeModel>;
-    public static init(session: Session<CodeModel>) {
-        Helper.session = session;
+    private static host: Host;
+    public static async init(host: Host) {
+        Helper.session = await startSession<CodeModel>(host, {}, codeModelSchema);;
+        Helper.host = host;
+        return Helper.session;
     }
 
     public static logDebug(msg: string) {
@@ -24,6 +27,23 @@ export class Helper {
         if (isNullOrUndefined(Helper.session))
             throw Error("Helper not init yet, please call Helper.init() to init the Helper");
         Helper.session.warning(msg, []);
+    }
+
+    public static async outputToModelerfour() {
+        if (isNullOrUndefined(Helper.session))
+            throw Error("Helper not init yet, please call Helper.init() to init the Helper");
+        if (isNullOrUndefined(Helper.host))
+            throw Error("Helper not init yet, please call Helper.init() to init the Helper");
+
+        // write the final result first which is hardcoded in the Session class to use to build the model..
+        // overwrite the modelerfour which should be fine considering our change is backward compatible
+        const options = <any>await Helper.session.getValue('modelerfour', {});
+        if (options['emit-yaml-tags'] !== false) {
+            Helper.host.WriteFile('code-model-v4.yaml', serialize(Helper.session.model, codeModelSchema), undefined, 'code-model-v4');
+        }
+        if (options['emit-yaml-tags'] !== true) {
+            Helper.host.WriteFile('code-model-v4-no-tags.yaml', serialize(Helper.session.model), undefined, 'code-model-v4-no-tags');
+        }
     }
 
     public static isEmptyString(str): boolean {

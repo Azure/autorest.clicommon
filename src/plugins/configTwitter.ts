@@ -5,8 +5,7 @@ import { Helper } from "../helper";
 
 export async function processRequest(host: Host) {
     let debugOutput = {};
-    const session = await startSession<CodeModel>(host, {}, codeModelSchema);
-    Helper.init(session);
+    const session = await Helper.init(host);
 
     let oriNaming : any = await session.getValue('modelerfour.naming');
     Helper.logDebug(JSON.stringify(oriNaming));

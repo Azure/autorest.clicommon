@@ -30,8 +30,7 @@ export class PreNamer{
 export async function processRequest(host: Host) {
     let debugOutput = {};
 
-    const session = await startSession<CodeModel>(host, {}, codeModelSchema);
-    Helper.init(session);
+    const session = await Helper.init(host);
 
     let cliDebug = await session.getValue('debug', false);
 

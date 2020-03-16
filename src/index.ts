@@ -12,9 +12,9 @@ import { isNullOrUndefined } from 'util';
 
 const extension = new AutoRestExtension();
 
-extension.Add("clicommon", async autoRestApi => {
-    const session = await startSession<CodeModel>(autoRestApi, {}, codeModelSchema);
-    Helper.init(session);
+extension.Add("clicommon", async host => {
+
+    const session = await Helper.init(host);
 
     let cliDebug = await session.getValue('debug', false);
     // at this point namer and modifirers are in a single plug-in
@@ -43,7 +43,7 @@ extension.Add("clicommon", async autoRestApi => {
     }
 
     // add test scenario from common settings
-    let cliCommonSettings = await autoRestApi.GetValue("cli");
+    let cliCommonSettings = await host.GetValue("cli");
     if (cliCommonSettings) {
         result["test-scenario"] = cliCommonSettings['test-scenario'] || cliCommonSettings['test-setup'];
     }
@@ -52,14 +52,14 @@ extension.Add("clicommon", async autoRestApi => {
     // overwrite the modelerfour which should be fine considering our change is backward compatible
     const options = <any>await session.getValue('modelerfour', {});
     if (options['emit-yaml-tags'] !== false) {
-        autoRestApi.WriteFile('code-model-v4.yaml', serialize(result, codeModelSchema), undefined, 'code-model-v4');
+        host.WriteFile('code-model-v4.yaml', serialize(result, codeModelSchema), undefined, 'code-model-v4');
     }
     if (options['emit-yaml-tags'] !== true) {
-        autoRestApi.WriteFile('code-model-v4-no-tags.yaml', serialize(result), undefined, 'code-model-v4-no-tags');
+        host.WriteFile('code-model-v4-no-tags.yaml', serialize(result), undefined, 'code-model-v4-no-tags');
     }
 
     for (let key in debugOutput)
-        autoRestApi.WriteFile(key, debugOutput[key], null);
+        host.WriteFile(key, debugOutput[key], null);
 });
 
 extension.Add("cli-flatten-setter", flattenSetter);
