@@ -17,16 +17,16 @@ describe('Test Directive - Selector - property', function () {
         });
 
         assert.isTrue(selector.match({
-            objectSchemaName: 'obj',
-            propertyName: 'os1',
+            objectSchemaCliKey: 'obj',
+            propertyCliKey: 'os1',
             parent: null,
             targetIndex: -1,
             target: new Property('fake', 'fake description', null),
         }));
 
         assert.isNotTrue(selector.match({
-            objectSchemaName: 'obj',
-            propertyName: 'os1+',
+            objectSchemaCliKey: 'obj',
+            propertyCliKey: 'os1+',
             parent: null,
             targetIndex: -1,
             target: new Property('fake', 'fake description', null),
@@ -43,16 +43,16 @@ describe('Test Directive - Selector - property', function () {
         });
 
         assert.isTrue(selector.match({
-            objectSchemaName: 'obj',
-            propertyName: 'os1',
+            objectSchemaCliKey: 'obj',
+            propertyCliKey: 'os1',
             parent: null,
             targetIndex: -1,
             target: new Property('fake', 'fake description', null),
         }));
 
         assert.isNotTrue(selector.match({
-            objectSchemaName: 'obj',
-            propertyName: 'os1+',
+            objectSchemaCliKey: 'obj',
+            propertyCliKey: 'os1+',
             parent: null,
             targetIndex: -1,
             target: new Property('fake', 'fake description', null),
@@ -68,16 +68,16 @@ describe('Test Directive - Selector - property', function () {
         });
 
         assert.isTrue(selector.match({
-            objectSchemaName: 'obj',
-            propertyName: 'os1',
+            objectSchemaCliKey: 'obj',
+            propertyCliKey: 'os1',
             parent: null,
             targetIndex: -1,
             target: new Property('fake', 'fake description', null),
         }));
 
         assert.isNotTrue(selector.match({
-            objectSchemaName: 'obj',
-            propertyName: 'os1+',
+            objectSchemaCliKey: 'obj',
+            propertyCliKey: 'os1+',
             parent: null,
             targetIndex: -1,
             target: new Property('fake', 'fake description', null),
@@ -95,15 +95,15 @@ describe('Test Directive - Selector - property', function () {
             let selector = new NodeSelector(s);
 
             assert.isTrue(selector.match({
-                objectSchemaName: 'obj',
-                propertyName: 'os1',
+                objectSchemaCliKey: 'obj',
+                propertyCliKey: 'os1',
                 parent: null,
                 targetIndex: -1,
                 target: new Property('fake', 'fake description', null),
             }));
 
             assert.isNotTrue(selector.match({
-                propertyName: 'os1+',
+                propertyCliKey: 'os1+',
                 parent: null,
                 targetIndex: -1,
                 target: new Property('fake', 'fake description', null),
@@ -120,32 +120,32 @@ describe('Test Directive - Selector - property', function () {
         });
 
         assert.isTrue(selector.match({
-            objectSchemaName: 'obj',
-            propertyName: 'a1b',
+            objectSchemaCliKey: 'obj',
+            propertyCliKey: 'a1b',
             parent: null,
             targetIndex: -1,
             target: new Property('fake', 'fake description', null),
         }));
 
         assert.isNotTrue(selector.match({
-            objectSchemaName: 'obj',
-            propertyName: 'a12b',
+            objectSchemaCliKey: 'obj',
+            propertyCliKey: 'a12b',
             parent: null,
             targetIndex: -1,
             target: new Property('fake', 'fake description', null),
         }));
 
         assert.isNotTrue(selector.match({
-            objectSchemaName: 'obj',
-            propertyName: 'aab',
+            objectSchemaCliKey: 'obj',
+            propertyCliKey: 'aab',
             parent: null,
             targetIndex: -1,
             target: new Property('fake', 'fake description', null),
         }));
 
         assert.isNotTrue(selector.match({
-            objectSchemaName: 'obj',
-            propertyName: 'ab',
+            objectSchemaCliKey: 'obj',
+            propertyCliKey: 'ab',
             parent: null,
             targetIndex: -1,
             target: new Property('fake', 'fake description', null),

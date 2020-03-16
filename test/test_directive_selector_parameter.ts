@@ -18,45 +18,45 @@ describe('Test Directive - Selector - parameter', function () {
         });
 
         assert.isTrue(selector.match({
-            operationGroupName: 'og1',
-            operationName: 'o1',
-            parameterName: 'p1',
+            operationGroupCliKey: 'og1',
+            operationCliKey: 'o1',
+            parameterCliKey: 'p1',
             parent: null,
             targetIndex: -1,
             target: new Parameter('fake', 'fake description', null),
         }));
 
         assert.isNotTrue(selector.match({
-            operationGroupName: 'og1+',
-            operationName: 'o1',
-            parameterName: 'p1',
+            operationGroupCliKey: 'og1+',
+            operationCliKey: 'o1',
+            parameterCliKey: 'p1',
             parent: null,
             targetIndex: -1,
             target: new Parameter('fake', 'fake description', null),
         }));
 
         assert.isNotTrue(selector.match({
-            operationGroupName: 'og1',
-            operationName: 'o1+',
-            parameterName: 'p1',
+            operationGroupCliKey: 'og1',
+            operationCliKey: 'o1+',
+            parameterCliKey: 'p1',
             parent: null,
             targetIndex: -1,
             target: new Parameter('fake', 'fake description', null),
         }));
 
         assert.isNotTrue(selector.match({
-            operationGroupName: 'og1',
-            operationName: 'o1',
-            parameterName: 'p1+',
+            operationGroupCliKey: 'og1',
+            operationCliKey: 'o1',
+            parameterCliKey: 'p1+',
             parent: null,
             targetIndex: -1,
             target: new Parameter('fake', 'fake description', null),
         }));
 
         assert.isNotTrue(selector.match({
-            operationGroupName: 'og1+',
-            operationName: 'o1+',
-            parameterName: 'p1+',
+            operationGroupCliKey: 'og1+',
+            operationCliKey: 'o1+',
+            parameterCliKey: 'p1+',
             parent: null,
             targetIndex: -1,
             target: new Parameter('fake', 'fake description', null),
@@ -74,36 +74,36 @@ describe('Test Directive - Selector - parameter', function () {
         });
 
         assert.isTrue(selector.match({
-            operationGroupName: 'og1',
-            operationName: 'o1',
-            parameterName: 'p1',
+            operationGroupCliKey: 'og1',
+            operationCliKey: 'o1',
+            parameterCliKey: 'p1',
             parent: null,
             targetIndex: -1,
             target: new Parameter('fake', 'fake description', null),
         }));
 
         assert.isTrue(selector.match({
-            operationGroupName: 'og1+',
-            operationName: 'o1',
-            parameterName: 'p1',
+            operationGroupCliKey: 'og1+',
+            operationCliKey: 'o1',
+            parameterCliKey: 'p1',
             parent: null,
             targetIndex: -1,
             target: new Parameter('fake', 'fake description', null),
         }));
 
         assert.isNotTrue(selector.match({
-            operationGroupName: 'og1',
-            operationName: 'o1+',
-            parameterName: 'p1',
+            operationGroupCliKey: 'og1',
+            operationCliKey: 'o1+',
+            parameterCliKey: 'p1',
             parent: null,
             targetIndex: -1,
             target: new Parameter('fake', 'fake description', null),
         }));
 
         assert.isNotTrue(selector.match({
-            operationGroupName: 'og1',
-            operationName: 'o1',
-            parameterName: 'p1+',
+            operationGroupCliKey: 'og1',
+            operationCliKey: 'o1',
+            parameterCliKey: 'p1+',
             parent: null,
             targetIndex: -1,
             target: new Parameter('fake', 'fake description', null),
@@ -121,36 +121,36 @@ describe('Test Directive - Selector - parameter', function () {
         });
 
         assert.isTrue(selector.match({
-            operationGroupName: 'og1',
-            operationName: 'o1',
-            parameterName: 'p1',
+            operationGroupCliKey: 'og1',
+            operationCliKey: 'o1',
+            parameterCliKey: 'p1',
             parent: null,
             targetIndex: -1,
             target: new Parameter('fake', 'fake description', null),
         }));
 
         assert.isTrue(selector.match({
-            operationGroupName: 'og1',
-            operationName: 'o1+',
-            parameterName: 'p1',
+            operationGroupCliKey: 'og1',
+            operationCliKey: 'o1+',
+            parameterCliKey: 'p1',
             parent: null,
             targetIndex: -1,
             target: new Parameter('fake', 'fake description', null),
         }));
 
         assert.isNotTrue(selector.match({
-            operationGroupName: 'og1+',
-            operationName: 'o1',
-            parameterName: 'p1',
+            operationGroupCliKey: 'og1+',
+            operationCliKey: 'o1',
+            parameterCliKey: 'p1',
             parent: null,
             targetIndex: -1,
             target: new Parameter('fake', 'fake description', null),
         }));
 
         assert.isNotTrue(selector.match({
-            operationGroupName: 'og1',
-            operationName: 'o1',
-            parameterName: 'p1+',
+            operationGroupCliKey: 'og1',
+            operationCliKey: 'o1',
+            parameterCliKey: 'p1+',
             parent: null,
             targetIndex: -1,
             target: new Parameter('fake', 'fake description', null),
@@ -166,27 +166,27 @@ describe('Test Directive - Selector - parameter', function () {
         });
 
         assert.isTrue(selector.match({
-            operationGroupName: 'og1',
-            operationName: 'o1',
-            parameterName: 'p1',
+            operationGroupCliKey: 'og1',
+            operationCliKey: 'o1',
+            parameterCliKey: 'p1',
             parent: null,
             targetIndex: -1,
             target: new Parameter('fake', 'fake description', null),
         }));
 
         assert.isTrue(selector.match({
-            operationGroupName: 'og1+',
-            operationName: 'o1+',
-            parameterName: 'p1',
+            operationGroupCliKey: 'og1+',
+            operationCliKey: 'o1+',
+            parameterCliKey: 'p1',
             parent: null,
             targetIndex: -1,
             target: new Parameter('fake', 'fake description', null),
         }));
 
         assert.isNotTrue(selector.match({
-            operationGroupName: 'og1',
-            operationName: 'o1',
-            parameterName: 'p1+',
+            operationGroupCliKey: 'og1',
+            operationCliKey: 'o1',
+            parameterCliKey: 'p1+',
             parent: null,
             targetIndex: -1,
             target: new Parameter('fake', 'fake description', null),
@@ -204,36 +204,36 @@ describe('Test Directive - Selector - parameter', function () {
         }));
 
         assert.isTrue(selector.match({
-            operationGroupName: 'og1',
-            operationName: 'o1',
-            parameterName: 'p1',
+            operationGroupCliKey: 'og1',
+            operationCliKey: 'o1',
+            parameterCliKey: 'p1',
             parent: null,
             targetIndex: -1,
             target: new Parameter('fake', 'fake description', null),
         }));
 
         assert.isNotTrue(selector.match({
-            operationGroupName: 'og1+',
-            operationName: 'o1',
-            parameterName: 'p1',
+            operationGroupCliKey: 'og1+',
+            operationCliKey: 'o1',
+            parameterCliKey: 'p1',
             parent: null,
             targetIndex: -1,
             target: new Parameter('fake', 'fake description', null),
         }));
 
         assert.isNotTrue(selector.match({
-            operationGroupName: 'og1',
-            operationName: 'o1+',
-            parameterName: 'p1',
+            operationGroupCliKey: 'og1',
+            operationCliKey: 'o1+',
+            parameterCliKey: 'p1',
             parent: null,
             targetIndex: -1,
             target: new Parameter('fake', 'fake description', null),
         }));
 
         assert.isNotTrue(selector.match({
-            operationGroupName: 'og1',
-            operationName: 'o1',
-            parameterName: 'p1+',
+            operationGroupCliKey: 'og1',
+            operationCliKey: 'o1',
+            parameterCliKey: 'p1+',
             parent: null,
             targetIndex: -1,
             target: new Parameter('fake', 'fake description', null),
@@ -251,36 +251,36 @@ describe('Test Directive - Selector - parameter', function () {
         }));
 
         assert.isTrue(selector.match({
-            operationGroupName: 'og1',
-            operationName: 'o1',
-            parameterName: 'p0p1p2',
+            operationGroupCliKey: 'og1',
+            operationCliKey: 'o1',
+            parameterCliKey: 'p0p1p2',
             parent: null,
             targetIndex: -1,
             target: new Parameter('fake', 'fake description', null),
         }));
 
         assert.isNotTrue(selector.match({
-            operationGroupName: 'og1',
-            operationName: 'o1',
-            parameterName: 'p1p2p3',
+            operationGroupCliKey: 'og1',
+            operationCliKey: 'o1',
+            parameterCliKey: 'p1p2p3',
             parent: null,
             targetIndex: -1,
             target: new Parameter('fake', 'fake description', null),
         }));
 
         assert.isTrue(selector.match({
-            operationGroupName: 'og1',
-            operationName: 'o1',
-            parameterName: 'p1p2',
+            operationGroupCliKey: 'og1',
+            operationCliKey: 'o1',
+            parameterCliKey: 'p1p2',
             parent: null,
             targetIndex: -1,
             target: new Parameter('fake', 'fake description', null),
         }));
 
         assert.isNotTrue(selector.match({
-            operationGroupName: 'og1',
-            operationName: 'o1',
-            parameterName: 'p1p3p2',
+            operationGroupCliKey: 'og1',
+            operationCliKey: 'o1',
+            parameterCliKey: 'p1p3p2',
             parent: null,
             targetIndex: -1,
             target: new Parameter('fake', 'fake description', null),

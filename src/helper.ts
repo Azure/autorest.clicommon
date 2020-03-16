@@ -2,8 +2,9 @@ import { ChoiceSchema, ChoiceValue, Extensions, CodeModel, ObjectSchema, Operati
 import { keys, values } from "@azure-tools/linq";
 import { isArray, isNull, isNullOrUndefined, isObject, isString, isUndefined } from "util";
 import { CliConst, M4Node, M4NodeType, NamingType, CliCommonSchema } from "./schema";
-import { pascalCase, EnglishPluralizationService } from '@azure-tools/codegen';
+import { pascalCase, EnglishPluralizationService, guid } from '@azure-tools/codegen';
 import { Session } from "@azure-tools/autorest-extension-base";
+import { PreNamer } from "./plugins/prenamer";
 
 
 export class Helper {
@@ -73,8 +74,8 @@ export class Helper {
         if (str === "*")
             return MATCH_ALL;
         if (Helper.containsSpecialChar(str))
-            return new RegExp(str);
-        return new RegExp(`^${str}$`, "g");
+            return new RegExp(str, "gi");
+        return new RegExp(`^${str}$`, "gi");
     }
 
     public static validateNullOrUndefined(obj: any, name: string): void {
@@ -139,6 +140,8 @@ export class Helper {
         const eps = new EnglishPluralizationService();
         eps.addWord('Database', 'Databases');
         eps.addWord('database', 'databases');
+        eps.addWord('cache', 'caches');
+        eps.addWord('Cache', 'Caches');
         return eps.singularize(word);
     }
 
@@ -221,9 +224,10 @@ export class Helper {
             // the oldName should be in snake_naming_convention
             const SEP = '_';
             let newName = oldName.split(SEP).map((v, i) =>
-                (!isNullOrUndefined(settings.override[v.toLowerCase()]))
-                    ? settings.override[v.toLowerCase()]
-                    : op[style].wording(single ? Helper.singularize(settings, v) : v, i)
+                Helper.isEmptyString(v) ? '_' :
+                    (!isNullOrUndefined(settings.override[v.toLowerCase()]))
+                        ? settings.override[v.toLowerCase()]
+                        : op[style].wording(single ? Helper.singularize(settings, v) : v, i)
             ).join(op[style].sep);
             return newName;
         };
@@ -268,8 +272,8 @@ export class Helper {
                 .reduce((pv, cv, ci) => pv.concat((ci === 0 ? (NEW_LINE + tab(i) + 'cli:') : '') +
                     NEW_LINE + tab(i + 1) + `${cv}: ${formatValue(o.language.cli[cv], i + 2)}`), ''));
 
-        let generatePropertyFlattenValue = (o: any, i: number) => isNullOrUndefined(o.extensions) || isNullOrUndefined[CliConst.FLATTEN_FLAG] ? '' :
-            NEW_LINE + tab(i) + CliConst.FLATTEN_FLAG + ': ' + o.extensions[CliConst.FLATTEN_FLAG];
+        let generatePropertyFlattenValue = (o: any, i: number) => (isNullOrUndefined(o.extensions) || isNullOrUndefined(o.extensions[CliConst.FLATTEN_FLAG])) ? '' :
+            (NEW_LINE + tab(i) + CliConst.FLATTEN_FLAG + ': ' + o.extensions[CliConst.FLATTEN_FLAG]);
 
         let s = '';
         s = s + `operationGroups:${NEW_LINE}` +
@@ -279,12 +283,12 @@ export class Helper {
                         v.operations.map(vv =>
                             `${tab(2)}- operationName: ${generateCliValue(vv, 3)}` +
                             `${NEW_LINE}${tab(3)}parameters:${NEW_LINE}`.concat(
-                                vv.parameters.map(vvv => `${tab(3)}- parameterName: ${generateCliValue(vvv, 4)}${NEW_LINE}` +
+                                vv.parameters.map(vvv => `${tab(3)}- parameterName: ${generateCliValue(vvv, 4)}${generatePropertyFlattenValue(vvv, 4)}${NEW_LINE}` +
                                     (((!isNullOrUndefined(vvv.protocol?.http?.in)) && vvv.protocol.http.in === 'body')
                                         ? `${tab(4)}bodySchema: ${vvv.schema.language.default.name}${NEW_LINE}` : '')).join('')) +
                             vv.requests.map((req, index) =>
                                 isNullOrUndefined(req.parameters) ? '' :
-                                    req.parameters.map((vvv) => `${tab(3)}- parameterName[${index}]: ${generateCliValue(vvv, 4)}${NEW_LINE}` +
+                                    req.parameters.map((vvv) => `${tab(3)}- parameterName[${index}]: ${generateCliValue(vvv, 4)}${generatePropertyFlattenValue(vvv, 4)}${NEW_LINE}` +
                                         (((!isNullOrUndefined(vvv.protocol?.http?.in)) && vvv.protocol.http.in === 'body')
                                             ? `${tab(4)}bodySchema: ${vvv.schema.language.default.name}${NEW_LINE}` : '')).join(''))
                             ).join(''))
@@ -325,6 +329,170 @@ export class Helper {
 
     public static isFlattened(p: Extensions) {
         return !isNullOrUndefined(p.extensions) && p.extensions[CliConst.FLATTEN_FLAG] == true;
+    }
+
+    public static getDefaultValue(schema: Schema) {
+        switch (schema.type) {
+            case SchemaType.Array:
+                return [];
+            case SchemaType.Dictionary:
+                return {};
+            case SchemaType.Boolean:
+                return false;
+            case SchemaType.Integer:
+                return 0;
+            case SchemaType.Number:
+                return 0;
+            case SchemaType.Object:
+                return {};
+            case SchemaType.String:
+                return '';
+            case SchemaType.UnixTime:
+                return Date.now();
+            case SchemaType.ByteArray:
+            case SchemaType.Binary:
+                return 'BinaryData'
+            case SchemaType.Char:
+                return ' ';
+            case SchemaType.Date:
+            case SchemaType.DateTime:
+                return Date.now();
+            case SchemaType.Duration:
+                return 0;
+            case SchemaType.Uuid:
+                return guid();
+            case SchemaType.Uri:
+                return 'https://www.microsoft.com';
+            case SchemaType.Credential:
+                return '********';
+            case SchemaType.Any:
+                return '<any>';
+            case SchemaType.Choice:
+                return (schema as ChoiceSchema).choices[0].value;
+            case SchemaType.SealedChoice:
+                return (schema as SealedChoiceSchema).choices[0].value;
+            case SchemaType.Conditional:
+                return false;
+            case SchemaType.SealedConditional:
+                return false;
+            case SchemaType.Flag:
+                return 0;
+            case SchemaType.Constant:
+                return 'constant';
+            case SchemaType.Or:
+                return 'or';
+            case SchemaType.Xor:
+                return 'xor';
+            case SchemaType.Not:
+                return 'not';
+            case SchemaType.Group:
+                return 'group';
+            default:
+                return 'unknown'
+        }
+    }
+
+    public static setCliProperty(node: M4Node, key: string, value: any): void {
+        if (isNullOrUndefined(node.language[CliConst.CLI]))
+            node.language[CliConst.CLI] = {};
+        node.language[CliConst.CLI][key] = value;
+    }
+
+    /**
+     * following nodes will be gone through now:
+     *   - choice
+     *     - value
+     *   - sealedChoice
+     *     - value
+     *   - schemaObject
+     *     - property
+     *   - OperationGroup
+     *     - operation
+     *       - parameter
+     * @param codeModel
+     * @param action
+     */
+    public static enumerateCodeMode(codeModel: CodeModel, action: (nodeDescriptor: CliCommonSchema.CodeModel.NodeDescriptor) => void) {
+        if (isNullOrUndefined(action))
+            throw Error("empty action for going through code model")
+
+        let choices = [codeModel.schemas.choices ?? [], codeModel.schemas.sealedChoices ?? []];
+        let i = -1;
+        choices.forEach(arr => {
+            for (i = arr.length - 1; i >= 0; i--) {
+                let s = arr[i];
+                action({
+                    choiceSchemaCliKey: PreNamer.getCliKey(s),
+                    parent: arr,
+                    target: s,
+                    targetIndex: i
+                });
+
+                for (let j = s.choices.length - 1; j >= 0; j--) {
+                    let ss = s.choices[j];
+                    action({
+                        choiceSchemaCliKey: PreNamer.getCliKey(s),
+                        choiceValueCliKey: PreNamer.getCliKey(ss),
+                        parent: s.choices,
+                        target: ss,
+                        targetIndex: j
+                    });
+                }
+            }
+        });
+
+        for (i = codeModel.schemas.objects.length - 1; i >= 0; i--) {
+            let s = codeModel.schemas.objects[i];
+            action({
+                objectSchemaCliKey: PreNamer.getCliKey(s),
+                parent: codeModel.schemas.objects,
+                target: s,
+                targetIndex: i
+            });
+            if (!isNullOrUndefined(s.properties)) {
+                for (let j = s.properties.length - 1; j >= 0; j--) {
+                    let p = s.properties[j];
+                    action({
+                        objectSchemaCliKey: PreNamer.getCliKey(s),
+                        propertyCliKey: PreNamer.getCliKey(p),
+                        parent: s.properties,
+                        target: p,
+                        targetIndex: j
+                    })
+                }
+            }
+        }
+
+        for (i = codeModel.operationGroups.length - 1; i >= 0; i--) {
+            let group = codeModel.operationGroups[i];
+            action({
+                operationGroupCliKey: PreNamer.getCliKey(group),
+                parent: codeModel.operationGroups,
+                target: group,
+                targetIndex: i,
+            })
+            for (let j = group.operations.length - 1; j >= 0; j--) {
+                let op = group.operations[j];
+                action({
+                    operationGroupCliKey: PreNamer.getCliKey(group),
+                    operationCliKey: PreNamer.getCliKey(op), 
+                    parent: group.operations,
+                    target: op,
+                    targetIndex: j,
+                })
+                for (let k = op.request.parameters.length - 1; k >= 0; k--) {
+                    let param = op.request.parameters[k];
+                    action({
+                        operationGroupCliKey: PreNamer.getCliKey(group),
+                        operationCliKey: PreNamer.getCliKey(op),
+                        parameterCliKey: PreNamer.getCliKey(param),
+                        parent: op.request.parameters,
+                        target: param,
+                        targetIndex: k,
+                    })
+                }
+            }
+        }
     }
 
 }

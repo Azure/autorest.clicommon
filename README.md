@@ -11,41 +11,39 @@ pipeline-model: v3
 pipeline:
 
     modelerfour/new-transform:
-        input: clicommon/flatten-setter
+        input: clicommon/cli-flatten-setter
+	
+    clicommon/cli-config-twitter:
+        input: modelerfour 
 
-    clicommon/config-twitter:
-        input: modelerfour
+    clicommon/cli-prenamer:
+        input: clicommon/cli-config-twitter
+        output-artifact: clicommon-prenamer
 
-    clicommon/flatten-setter:
-        input: clicommon/config-twitter
+    clicommon/cli-flatten-setter:
+        input: clicommon/cli-prenamer
         output-artifact: clicommon-flatten-setter
-
-    clicommon/flatten-setter/emitter:
-        input: clicommon/flatten-setter
-        scope: scope-clicommon-flatten-setter
 
     clicommon:
         input: modelerfour/identity
-        output-artifact: clicommon-output-file
+        output-artifact: clicommon-output
 
     clicommon/identity:
         input: clicommon
 
     clicommon/emitter:
-        input: clicommon/identity
+        input: 
+          - clicommon
+          - clicommon/cli-prenamer
+          - clicommon/cli-flatten-setter
         scope: scope-clicommon
-
-scope-clicommon-flatten-setter:
-    is-object: false
-    output-folder: $(output-folder)\_clicommon_output
-    output-artifact: 
-        - clicommon-flatten-setter
 
 scope-clicommon:
     is-object: false
-    output-folder: $(output-folder)\_clicommon_output
     output-artifact:
-        - clicommon-output-file
+        - clicommon-output
+        - clicommon-prenamer
+        - clicommon-flatten-setter
 
 modelerfour:
     #group-parameters: true
@@ -73,6 +71,8 @@ cli:
     #flatten:
     #    cli-flatten-set-enabled: true
     #    cli-flatten-all: true
+    #    cli-flatten-payload: true
+    #    cli-flatten-schema: false
     #    cli-flatten-all-overwrite-swagger: false
     #    cli-flatten-directive:
     #        - where:
@@ -91,6 +91,7 @@ cli:
                 cmyk : CMYK
                 $host: $host
                 LRO: LRO
+                rp: RP
                 # workaround for modelerfour issue
                 # https://github.com/Azure/autorest.modelerfour/issues/195
                 SubscriptionId: SubscriptionId
@@ -107,6 +108,7 @@ cli:
                 cmyk : CMYK
                 $host: $host
                 LRO: LRO
+                rp: RP
                 # workaround for modelerfour issue
                 SubscriptionId: SubscriptionId
             parameter: 'camel'
@@ -121,21 +123,11 @@ cli:
 
 # Available Configurations for CLI Common:
 
-> **snake_naming_convention** is used as standardized naming convention in cli common 
-> to avoid confusing from different name convention when querying code model and set name.
+> **snake_naming_convention** is used as standardized naming convention in clicommon, 
+> so please use snake naming convention for the new name you provided so that clicommon can 
+> convert it properly according to your naming convention settings.
 
 ## Flatten support:
-
-Refer to sample below for the configurations for Flatten.
-
-> Add '--debug' argument to get following output files for debugging: 
-* cli-flatten-set-flatten-mapping.txt
-  * contains detail information about how objects are flattened
-* cli-flatten-set-before-everything-simplified.yaml
-  * useful for you to figure out the name to use to auther the cli-flatten-directive
-* cli-flatten-set-after-flatten-set-simplified.yaml
-* cli-flatten-set-after-flatten-set.yaml
-* cli-flatten-set-before-everything.yaml
 
 Sample:
 ``` $(sample-cli-directive)
@@ -155,6 +147,10 @@ cli:
         cli-flatten-all: true
         # whether to overwrite the flag in swagger when cli-flatten-all is true
         cli-flatten-all-overwrite-swagger: false
+        # whether to flatten the body parameters of peration
+        cli-flatten-payload : true
+        # whether to flatten the object schemas except has discriminator (base class)
+        cli-flatten-schema: false
         # further customizatoin on flatten
         # refer to the where caluse in the directive section below fore more details
         # flatten: true|false to set selectedNode.extensions['x-ms-client-flatten'] = true|false 
@@ -169,12 +165,13 @@ cli:
 ## Naming Convention:
 
 > Naming convention to be used in the output of clicommon.
-> Please make sure **snake_naming_convention** is used if the name is changed through directive
-> so that it will be converted to correct naming convention in the output. Samples as below:
+> Please make sure **snake_naming_convention** is used for the name provided.
+> Samples as below:
 
 ``` $(sample-cli-directive)
 cli:
     naming:
+        # the naming convention used for language.cli
         cli:
             appliedTo:
               - name
@@ -195,6 +192,7 @@ cli:
             type:  'pascal'
             choice: 'pascal'
             choiceValue: 'pascal'
+        # the naming convention used for language.default
         default:
             override:
                 cmyk : CMYK
@@ -213,8 +211,8 @@ cli:
 
 ## Directive
 
-> so please make sure **snake_naming_convention** is used for 'where' and 'name' clause in directive 
-> so that the correct object can be located in code model and naming convention can be applied correctly
+> so please make sure **snake_naming_convention** is used for 'name' and 'alias' clause in directive 
+> so that the naming convention configured in clicommon can be applied correctly
 > when generating the output
 
 #### Supported clause in directive
@@ -225,19 +223,18 @@ cli:
 - where: 
   - conditions to locate the object to apply directive
   - required
-  - **snake_naming_converion** is expected as the value
   - regex is supported in the value
   - possible search condition, refer to sample below for more detail usage:
     - search for operatoinGroup, operation or parameter
-      - 'operationGroup' | 'group' | 'resource': 'name_in_snake_naming_convention'
-      - 'operation' | 'op': 'name_in_snake_naming_convention'
-      - 'parameter' | 'param': 'name_in_snake_naming_convention'
+      - 'operationGroup' | 'group' | 'resource': 'operationGroupName'
+      - 'operation' | 'op': 'operationName'
+      - 'parameter' | 'param': 'parameterName'
     - search for schema or properties
-      - 'schemaObject' | 'type' | 'object': 'name_in_snake_naming_convention'
-      - 'property' | 'prop': 'name_in_snake_naming_convention'
+      - 'schemaObject' | 'type' | 'object': 'schemaName'
+      - 'property' | 'prop': 'propertyName'
     - search for enum or enumValue
-      - 'choiceSchema' | 'enum': 'name_in_snake_naming_convention'
-      - 'choiceValue' | 'value': 'name_in_snake_naming_convention'
+      - 'choiceSchema' | 'enum': 'choiceName'
+      - 'choiceValue' | 'value': 'choiceName'
 - set:
   - set anything property in the selected object(s)
   - optional
@@ -254,8 +251,13 @@ cli:
   - add 'required: ...' under 'language->cli'.
   - optional
 - alias:
-  - add 'alias: ...' under 'language->cli'
+  - add 'alias: ...' under 'language->cli'.  Please make sure **snake_naming_convention** is used
   - optional
+- json:
+  - add 'json: ...' under 'language->cli'.
+  - add 'x-ms-client-flatten: false' under 'extensions' if 'json: true'
+- flatten:
+  - add 'x-ms-client-flatten: ..." under 'extensions'
 - formatTable:
   - add properties information  under 'language->cli'.
   - optional
@@ -273,14 +275,8 @@ cli:
     - new: 'new_value'
     - isRegex: true | false
 
-#### How to figure out the name to be used in directives
-- Enable output for clicommon by following configuration:
-``` #(sample-cli-directive)
-     output-artifact:
-        - clicommon-output-file
-```
-- File 'clicommon-name-mapping.yaml' will be generated containing the simplified code model which can be looked up for the name of operationGroup, operation, parameter, schema, property, enum, enumValue
-- Additional output files for debugging purpose will be generated if --debug is set
+#### How to troubleshooting
+> Add --debug in your command line to have more intermedia output files for troubleshooting
 
 #### Samples
 
@@ -290,33 +286,33 @@ cli:
     # directive on operationGroup
       - select: 'operationGroup'
         where:
-            operationGroup: 'old_name'
+            operationGroup: 'OldName'
         name: 'new_name'   
       - where:
-            resource: 'old_name'
+            resource: 'OldName'
         hidden: true
       - where:
-            group: 'old_name'
+            group: 'OldName'
         removed: 'true
     # add hidden property for operation
       - where:
-            group: 'group_name'
-            operation: 'operation_name'
+            group: 'GroupName'
+            operation: 'OperationName'
         hidden: true
       - where:
-            group: 'group_name'
-            op: 'operatoin_name'
+            group: 'groupName'
+            op: 'OperationName'
         hidden: true
     # add removed property for parameter
       - where:
-            group: 'group_name'
-            op: 'operation_name'
-            parameter: 'parameter_name'
+            group: 'groupName'
+            op: 'OperationName'
+            parameter: 'ParameterName'
         removed: true
       - where:
-            group: 'group_name'
-            op: 'operation_name'
-            param: 'parameter_name'
+            group: 'groupName'
+            op: 'OperationName'
+            param: 'ParameterName'
         required: true
     # add hidden property for all parameter start with 'abc'
       - where:
@@ -324,27 +320,27 @@ cli:
         hidden: true
     # set table format under for schema
       - where:
-            schemaObject: 'schema_name'
+            schemaObject: 'SchemaName'
         tableFormat:
             properties:
               - 'p1'
               - 'p2'
       - where:
-            type: 'schema_name'
+            type: 'SchemaName'
         tableFormat:
             properties:
               - 'p1'
               - 'p2'
       - where:
-            object: 'schema_name'
+            object: 'SchemaName'
         tableFormat:
             properties:
               - 'p1'
               - 'p2'
     # set anything for schema property
       - where:
-            type: 'schema_name'
-            property: 'property_name'
+            type: 'SchemaName'
+            property: 'PropertyName'
         set:
             key1: 'value1'
             key2: true
@@ -352,8 +348,8 @@ cli:
               - v1
               - v2
       - where:
-            type: 'schema_name'
-            prop: 'property_name'
+            type: 'SchemaName'
+            prop: 'PropertyName'
         set:
             key1: 'value1'
             key2: true
@@ -362,8 +358,8 @@ cli:
               - v2
     # replac 'name_a' with 'name_b' (whole word match) in operation's name
       - where:
-            group: 'group_name'
-            op: 'operation_name'
+            group: 'GroupName'
+            op: 'OperationName'
         replace:
             field: 'name'
             old: 'name_a'
@@ -371,8 +367,8 @@ cli:
             isRegex: false
     # replace with regex
       - where:
-            group: 'group_name'
-            op: 'operation_name'
+            group: 'GroupName'
+            op: 'OperationName'
         replace:
             field: 'description'
             old: '(startByThis)(.*)'
@@ -380,12 +376,12 @@ cli:
             isRegex: true
     # add alias for enum value
       - where:
-            choiceSchema: 'choice_type'
-            choiceValue: 'choice_value_name'
+            choiceSchema: 'choiceType'
+            choiceValue: 'choiceValue'
         alias: NewAlias
       - where:
-            enum: 'enum_type'
-            value: 'value_name'
+            enum: 'enumTyp'
+            value: 'enumValue'
         alias: NewAlias
 ```
 

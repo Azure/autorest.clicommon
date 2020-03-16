@@ -3,6 +3,7 @@ import { CodeModel } from "@azure-tools/codemodel";
 import { CliDirectiveManager } from "./cliDirective";
 import { isNullOrUndefined } from "util";
 import { CliConst, CliCommonSchema } from "../../schema";
+import { Helper } from "../../helper";
 
 export class Modifier {
     private manager: CliDirectiveManager;

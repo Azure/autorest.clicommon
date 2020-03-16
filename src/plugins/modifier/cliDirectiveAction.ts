@@ -17,18 +17,15 @@ export abstract class Action {
         return node.language[CliConst.CLI][nodeName];
     }
 
-    protected setCliProperty(node: M4Node, key: string, value: any): void {
-        if (isNullOrUndefined(node.language[CliConst.CLI]))
-            node.language[CliConst.CLI] = {};
-        node.language[CliConst.CLI][key] = value;
-    }
-
     public static async buildActionList(directive: CliCommonSchema.CliDirective.Directive): Promise<Action[]> {
         Helper.validateNullOrUndefined(directive, 'directive');
         var arr: Action[] = [];
 
         for (var key in directive) {
             var value = directive[key];
+            if (isNullOrUndefined(value))
+                continue;
+
             key = key.toLowerCase();
 
             switch (key) {
@@ -59,12 +56,32 @@ export abstract class Action {
                 case 'flatten':
                     arr.push(new ActionFlatten(value));
                     break;
+                case 'json':
+                    arr.push(new ActionJson(value));
+                    break;
                 default:
                     // TODO: better to log instead of throw here?
-                    throw Error("Unknown directive operation");
+                    throw Error(`Unknown directive operation: '${key}'`);
             }
         }
         return arr;
+    }
+}
+
+export class ActionJson extends Action {
+
+    constructor(private directiveValue: CliCommonSchema.CliDirective.ValueClause) {
+        super();
+    }
+
+    public process(descriptor: CliCommonSchema.CodeModel.NodeDescriptor): void {
+        let node = descriptor.target;
+        if (this.directiveValue === true) {
+            if (isNullOrUndefined(node.extensions))
+                node.extensions = {};
+            node.extensions[CliConst.FLATTEN_FLAG] = false;
+        }
+        Helper.setCliProperty(node, "json", this.directiveValue);
     }
 }
 
@@ -90,7 +107,7 @@ export class ActionSetProperty extends Action {
 
     public process(descriptor: CliCommonSchema.CodeModel.NodeDescriptor): void {
         let node = descriptor.target;
-        this.setCliProperty(node, this.propertyName, this.directiveValue ?? this.getDefault());
+        Helper.setCliProperty(node, this.propertyName, this.directiveValue ?? this.getDefault());
     }
 }
 
@@ -120,7 +137,7 @@ export class ActionSet extends Action {
         let node = descriptor.target;
         for (var key in this.directiveSet) {
             let value = this.directiveSet[key];
-            this.setCliProperty(node, key, value);
+            Helper.setCliProperty(node, key, value);
         }
     }
 }
@@ -153,11 +170,11 @@ export class ActionReplace extends Action {
 
         var original: string = node.language.default[this.actionReplace.field].toString();
         if (isNullOrUndefined(this.actionReplace.isRegex) || this.actionReplace.isRegex == false) {
-            this.setCliProperty(node, this.actionReplace.field, original.replace(this.actionReplace.old, this.actionReplace.new));
+            Helper.setCliProperty(node, this.actionReplace.field, original.replace(this.actionReplace.old, this.actionReplace.new));
         }
         else {
             var regex = new RegExp(this.actionReplace.old);
-            this.setCliProperty(node, this.actionReplace.field, original.replace(regex, this.actionReplace.new));
+            Helper.setCliProperty(node, this.actionReplace.field, original.replace(regex, this.actionReplace.new));
         }
     }
 }

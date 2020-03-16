@@ -47,10 +47,16 @@ export class CommonNamer {
         if (isNullOrUndefined(obj.language['cli']['description']))
             obj.language['cli']['description'] = obj.language.default.description;
 
-        if (!this.flag.has(obj)) {
-            this.flag.add(obj);
-            Helper.applyNamingConvention(this.cliNamingSettings, obj, 'cli');
-            Helper.applyNamingConvention(this.defaultNamingSettings, obj, 'default');
+        let lan = 'cli';
+        if (!this.flag.has(obj.language[lan])) {
+            this.flag.add(obj.language[lan]);
+            Helper.applyNamingConvention(this.cliNamingSettings, obj, lan);
+        }
+
+        lan = 'default';
+        if (!this.flag.has(obj.language[lan])) {
+            this.flag.add(obj.language[lan]);
+            Helper.applyNamingConvention(this.defaultNamingSettings, obj, lan);
         }
     }
 
