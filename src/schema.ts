@@ -22,6 +22,8 @@ export namespace CliConst {
     export const CLI_FLATTEN_SET_FLATTEN_PAYLOAD_KEY: string = 'cli.flatten.cli-flatten-payload';
     export const CLI_FLATTEN_SET_FLATTEN_ALL_OVERWRITE_SWAGGER_KEY: string = 'cli.flatten.cli-flatten-all-overwrite-swagger';
 
+    export const DEFAULT_OPERATION_PARAMETER_INDEX = -1;
+
     export class NamingStyle {
         /** camelCase */
         static readonly camel = "camel";

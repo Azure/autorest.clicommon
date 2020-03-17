@@ -63,7 +63,7 @@ export class NodeSelector {
                 r = match(this.where.operationGroup, descriptor.operationGroupCliKey) &&
                     match(this.where.operation, descriptor.operationCliKey) &&
                     match(this.where.parameter, descriptor.parameterCliKey) &&
-                    (isNullOrUndefined(descriptor.requestIndex) || descriptor.requestIndex === this.where.requestIndex);
+                    (isNullOrUndefined(this.where.requestIndex) || descriptor.requestIndex === this.where.requestIndex);
                 break;
             case CliConst.SelectType.choiceSchema:
             case CliConst.SelectType.choiceValue:
