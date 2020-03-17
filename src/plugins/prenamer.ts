@@ -4,7 +4,7 @@ import { CodeModel, codeModelSchema, Metadata, ObjectSchema, isObjectSchema, Pro
 import { isNullOrUndefined, isArray } from "util";
 import { Helper } from "../helper";
 import { CliConst, M4Node } from "../schema";
-import { NodeHelper } from "../NodeHelper";
+import { NodeHelper } from "../nodeHelper";
 
 export class PreNamer{
 
