@@ -6,7 +6,7 @@ import { pascalCase, EnglishPluralizationService, guid } from '@azure-tools/code
 import { Session, Host, startSession } from "@azure-tools/autorest-extension-base";
 import { PreNamer } from "./plugins/prenamer";
 import { serialize } from "@azure-tools/codegen";
-import { NodeHelper } from "./hodeHelper";
+import { NodeHelper } from "./nodeHelper";
 import { Dumper } from "./dumper";
 
 export class Helper {
