@@ -137,8 +137,9 @@ export class ActionFormatTable extends Action {
     public process(descriptor: CliCommonSchema.CodeModel.NodeDescriptor): void {
         let node = descriptor.target;
         if (!isNullOrUndefined(this.directiveFormatTable.properties)) {
-            var n = NodeHelper.setCliProperty(node, CliConst.CLI_FORMATTABLE, {});
-            n[CliConst.CLI_FORMATTABLE_PROPERTIES] = this.directiveFormatTable.properties;
+            NodeHelper.setCliProperty(node, CliConst.CLI_FORMATTABLE, {
+                [CliConst.CLI_FORMATTABLE_PROPERTIES]: this.directiveFormatTable.properties
+            });
         }
     }
 }
