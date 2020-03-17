@@ -3,19 +3,12 @@ import { CodeModel } from "@azure-tools/codemodel";
 import { isNullOrUndefined, isArray } from "util";
 import { Helper } from "../../helper";
 import { CliCommonSchema, CliConst, M4Node } from "../../schema";
+import { NodeHelper } from "../../nodeHelper";
 
 export abstract class Action {
     constructor() {
     }
     public abstract process(node: CliCommonSchema.CodeModel.NodeDescriptor): void;
-
-    protected createCliSubNode(node: M4Node, nodeName: string): any {
-        if (isNullOrUndefined(node.language[CliConst.CLI]))
-            node.language[CliConst.CLI] = {};
-        if (isNullOrUndefined(node.language[CliConst.CLI][nodeName]))
-            node.language[CliConst.CLI][nodeName] = {};
-        return node.language[CliConst.CLI][nodeName];
-    }
 
     public static async buildActionList(directive: CliCommonSchema.CliDirective.Directive): Promise<Action[]> {
         Helper.validateNullOrUndefined(directive, 'directive');
@@ -76,12 +69,7 @@ export class ActionJson extends Action {
 
     public process(descriptor: CliCommonSchema.CodeModel.NodeDescriptor): void {
         let node = descriptor.target;
-        if (this.directiveValue === true) {
-            if (isNullOrUndefined(node.extensions))
-                node.extensions = {};
-            node.extensions[CliConst.FLATTEN_FLAG] = false;
-        }
-        Helper.setCliProperty(node, "json", this.directiveValue);
+        NodeHelper.setJson(node, this.directiveValue === true, true /*modify flatten*/)
     }
 }
 
@@ -93,9 +81,7 @@ export class ActionFlatten extends Action {
 
     public process(descriptor: CliCommonSchema.CodeModel.NodeDescriptor): void {
         let node = descriptor.target;
-        if (isNullOrUndefined(node.extensions))
-            node.extensions = {};
-        node.extensions[CliConst.FLATTEN_FLAG] = (this.directiveValue === true);
+        NodeHelper.setFlatten(node, this.directiveValue === true, true /*overwrite*/)
     }
 }
 
@@ -107,7 +93,7 @@ export class ActionSetProperty extends Action {
 
     public process(descriptor: CliCommonSchema.CodeModel.NodeDescriptor): void {
         let node = descriptor.target;
-        Helper.setCliProperty(node, this.propertyName, this.directiveValue ?? this.getDefault());
+        NodeHelper.setCliProperty(node, this.propertyName, this.directiveValue ?? this.getDefault());
     }
 }
 
@@ -137,7 +123,7 @@ export class ActionSet extends Action {
         let node = descriptor.target;
         for (var key in this.directiveSet) {
             let value = this.directiveSet[key];
-            Helper.setCliProperty(node, key, value);
+            NodeHelper.setCliProperty(node, key, value);
         }
     }
 }
@@ -151,7 +137,7 @@ export class ActionFormatTable extends Action {
     public process(descriptor: CliCommonSchema.CodeModel.NodeDescriptor): void {
         let node = descriptor.target;
         if (!isNullOrUndefined(this.directiveFormatTable.properties)) {
-            var n = this.createCliSubNode(node, CliConst.CLI_FORMATTABLE);
+            var n = NodeHelper.setCliProperty(node, CliConst.CLI_FORMATTABLE, {});
             n[CliConst.CLI_FORMATTABLE_PROPERTIES] = this.directiveFormatTable.properties;
         }
     }
@@ -170,11 +156,11 @@ export class ActionReplace extends Action {
 
         var original: string = node.language.default[this.actionReplace.field].toString();
         if (isNullOrUndefined(this.actionReplace.isRegex) || this.actionReplace.isRegex == false) {
-            Helper.setCliProperty(node, this.actionReplace.field, original.replace(this.actionReplace.old, this.actionReplace.new));
+            NodeHelper.setCliProperty(node, this.actionReplace.field, original.replace(this.actionReplace.old, this.actionReplace.new));
         }
         else {
             var regex = new RegExp(this.actionReplace.old);
-            Helper.setCliProperty(node, this.actionReplace.field, original.replace(regex, this.actionReplace.new));
+            NodeHelper.setCliProperty(node, this.actionReplace.field, original.replace(regex, this.actionReplace.new));
         }
     }
 }

@@ -13,11 +13,11 @@ pipeline:
     modelerfour/new-transform:
         input: clicommon/cli-flatten-setter
 	
-    clicommon/cli-config-twitter:
-        input: modelerfour 
+#    clicommon/cli-config-twitter:
+#        input: modelerfour 
 
     clicommon/cli-prenamer:
-        input: clicommon/cli-config-twitter
+        input: modelerfour
         output-artifact: clicommon-prenamer
 
     clicommon/cli-flatten-setter:
