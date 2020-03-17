@@ -486,6 +486,7 @@ export class Helper {
                     action({
                         operationGroupCliKey: PreNamer.getCliKey(group),
                         operationCliKey: PreNamer.getCliKey(op),
+                        requestIndex: CliConst.DEFAULT_OPERATION_PARAMETER_INDEX,
                         parameterCliKey: PreNamer.getCliKey(param),
                         parent: op.parameters,
                         target: param,
