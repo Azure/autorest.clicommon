@@ -8,19 +8,19 @@ export type M4Node = Metadata | ChoiceValue;
 
 export namespace CliConst {
     // Todo: merge this into code model?
-    export const CLI: string = "cli";
     export const CLI_FORMATTABLE: string = "formatTable";
     export const CLI_FORMATTABLE_PROPERTIES: string = "properties";
     export const CLI_DIRECTIVE: string = "cli-directive";
     export const CLI_DIRECTIVE_KEY: string = 'cli.cli-directive';
 
-    export const FLATTEN_FLAG: string = 'x-ms-client-flatten';
     export const CLI_FLATTEN_DIRECTIVE_KEY: string = "cli.flatten.cli-flatten-directive";
     export const CLI_FLATTEN_SET_ENABLED_KEY: string = 'cli.flatten.cli-flatten-set-enabled';
     export const CLI_FLATTEN_SET_FLATTEN_ALL_KEY: string = 'cli.flatten.cli-flatten-all';
     export const CLI_FLATTEN_SET_FLATTEN_SCHEMA_KEY: string = 'cli.flatten.cli-flatten-schema';
     export const CLI_FLATTEN_SET_FLATTEN_PAYLOAD_KEY: string = 'cli.flatten.cli-flatten-payload';
     export const CLI_FLATTEN_SET_FLATTEN_ALL_OVERWRITE_SWAGGER_KEY: string = 'cli.flatten.cli-flatten-all-overwrite-swagger';
+
+    export const DEFAULT_OPERATION_PARAMETER_INDEX = -1;
 
     export class NamingStyle {
         /** camelCase */
@@ -91,6 +91,7 @@ export namespace CliCommonSchema {
         export interface WhereClause {
             operationGroup?: string;
             operation?: string;
+            requestIndex?: number;
             parameter?: string;
             objectSchema?: string;
             property?: string;
@@ -137,6 +138,7 @@ export namespace CliCommonSchema {
         export interface NodeDescriptor {
             operationGroupCliKey?: string;
             operationCliKey?: string;
+            requestIndex?: number;
             parameterCliKey?: string;
             objectSchemaCliKey?: string;
             propertyCliKey?: string;

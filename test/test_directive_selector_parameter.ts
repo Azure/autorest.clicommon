@@ -26,6 +26,15 @@ describe('Test Directive - Selector - parameter', function () {
             target: new Parameter('fake', 'fake description', null),
         }));
 
+        assert.isTrue(selector.match({
+            operationGroupCliKey: 'og1',
+            operationCliKey: 'o1',
+            parameterCliKey: 'p1',
+            parent: null,
+            targetIndex: 0,
+            target: new Parameter('fake', 'fake description', null),
+        }));
+
         assert.isNotTrue(selector.match({
             operationGroupCliKey: 'og1+',
             operationCliKey: 'o1',

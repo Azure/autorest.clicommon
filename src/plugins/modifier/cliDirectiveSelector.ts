@@ -13,12 +13,13 @@ export class NodeSelector {
 
         let alias = {
             parameter: ['param'],
+            requestIndex: ['request-index'],
             operation: ['op'],
-            operationGroup: ['group', 'resource'],
-            objectSchema: ['type', 'object'],
+            operationGroup: ['group', 'resource', 'operation-group'],
+            objectSchema: ['type', 'object', 'object-schema'],
             property: ['prop'],
-            choiceSchema: ['enum'],
-            choiceValue: ['value'],
+            choiceSchema: ['enum', 'choice-schema'],
+            choiceValue: ['value', 'choice-value'],
         };
 
         for (let key in alias) {
@@ -61,7 +62,8 @@ export class NodeSelector {
             case CliConst.SelectType.parameter:
                 r = match(this.where.operationGroup, descriptor.operationGroupCliKey) &&
                     match(this.where.operation, descriptor.operationCliKey) &&
-                    match(this.where.parameter, descriptor.parameterCliKey);
+                    match(this.where.parameter, descriptor.parameterCliKey) &&
+                    (isNullOrUndefined(this.where.requestIndex) || descriptor.requestIndex === this.where.requestIndex);
                 break;
             case CliConst.SelectType.choiceSchema:
             case CliConst.SelectType.choiceValue:

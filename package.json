@@ -1,6 +1,6 @@
 {
     "name": "@autorest/clicommon",
-    "version": "0.3.8",
+    "version": "0.4.0",
     "description": "Autorest Azure Cli Common Module",
     "main": "dist/index.js",
     "engines": {
@@ -33,24 +33,24 @@
     "author": "Microsoft Corporation",
     "license": "MIT",
     "devDependencies": {
-        "@types/chai": "^4.2.9",
+        "@types/chai": "^4.2.10",
         "@types/js-yaml": "3.12.1",
-        "@types/mocha": "^7.0.1",
+        "@types/mocha": "^7.0.2",
         "@types/node": "10.17.0",
         "@types/should": "^13.0.0",
         "chai": "^4.2.0",
         "eslint": "~5.4.0",
-        "mocha": "^7.0.1",
+        "mocha": "^7.1.0",
         "node-yaml": "^3.2.0",
         "nyc": "^15.0.0",
         "ts-node": "^8.6.2",
-        "typescript": "^3.8.2"
+        "typescript": "^3.8.3"
     },
     "dependencies": {
-        "@azure-tools/autorest-extension-base": "^3.1.228",
-        "@azure-tools/codegen": "^2.4.250",
-        "@azure-tools/codemodel": "3.0.260",
-        "@azure-tools/linq": "^3.1.225",
+        "@azure-tools/autorest-extension-base": "^3.1.235",
+        "@azure-tools/codegen": "^2.4.257",
+        "@azure-tools/codemodel": "3.3.295",
+        "@azure-tools/linq": "^3.1.232",
         "node-yaml": "^3.2.0"
     },
     "mocha": {

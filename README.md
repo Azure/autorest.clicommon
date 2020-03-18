@@ -4,7 +4,7 @@ See documentation [here](doc/00-overview.md)
 
 ``` yaml
 use-extension:
-  "@autorest/modelerfour": "4.6.200"
+  "@autorest/modelerfour": "4.10.250"
 
 pipeline-model: v3
 
@@ -12,6 +12,9 @@ pipeline:
 
     modelerfour/new-transform:
         input: clicommon/cli-flatten-setter
+	
+#    clicommon/cli-config-twitter:
+#        input: modelerfour 
 
     clicommon/cli-prenamer:
         input: modelerfour

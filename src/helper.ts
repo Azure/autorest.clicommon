@@ -1,23 +1,61 @@
-import { ChoiceSchema, ChoiceValue, Extensions, CodeModel, ObjectSchema, Operation, OperationGroup, Parameter, Property, SealedChoiceSchema, Schema, ConstantSchema, SchemaType } from "@azure-tools/codemodel";
-import { keys } from "@azure-tools/linq";
+import { codeModelSchema, ChoiceSchema, ChoiceValue, Extensions, CodeModel, ObjectSchema, Operation, OperationGroup, Parameter, Property, SealedChoiceSchema, Schema, ConstantSchema, SchemaType } from "@azure-tools/codemodel";
+import { keys, values } from "@azure-tools/linq";
 import { isArray, isNull, isNullOrUndefined, isObject, isString, isUndefined } from "util";
 import { CliConst, M4Node, M4NodeType, NamingType, CliCommonSchema } from "./schema";
 import { pascalCase, EnglishPluralizationService, guid } from '@azure-tools/codegen';
-import { Session } from "@azure-tools/autorest-extension-base";
+import { Session, Host, startSession } from "@azure-tools/autorest-extension-base";
 import { PreNamer } from "./plugins/prenamer";
-
+import { serialize } from "@azure-tools/codegen";
+import { NodeHelper } from "./nodeHelper";
+import { Dumper } from "./dumper";
 
 export class Helper {
 
     private static session: Session<CodeModel>;
-    public static init(session: Session<CodeModel>) {
-        Helper.session = session;
+    private static host: Host;
+    private static _dumper: Dumper;
+    private static modelerfourOptions: any;
+
+    public static async init(host: Host) {
+        Helper.session = await startSession<CodeModel>(host, {}, codeModelSchema);;
+        Helper.host = host;
+        Helper._dumper = await (new Dumper(host, Helper.session)).init();
+        Helper.modelerfourOptions = <any>await Helper.session.getValue('modelerfour', {});
+        return Helper.session;
+    }
+
+    public static get dumper(): Dumper {
+        if (isNullOrUndefined(Helper._dumper))
+            throw Error("Helper not init yet, please call Helper.init() to init the Helper");
+        return Helper._dumper;
+    }
+
+    public static logDebug(msg: string) {
+        if (isNullOrUndefined(Helper.session))
+            throw Error("Helper not init yet, please call Helper.init() to init the Helper");
+        Helper.session.debug(msg, []);
     }
 
     public static logWarning(msg: string) {
         if (isNullOrUndefined(Helper.session))
             throw Error("Helper not init yet, please call Helper.init() to init the Helper");
         Helper.session.warning(msg, []);
+    }
+
+    public static outputToModelerfour() {
+        if (isNullOrUndefined(Helper.session))
+            throw Error("Helper not init yet, please call Helper.init() to init the Helper");
+        if (isNullOrUndefined(Helper.host))
+            throw Error("Helper not init yet, please call Helper.init() to init the Helper");
+
+        // write the final result first which is hardcoded in the Session class to use to build the model..
+        // overwrite the modelerfour which should be fine considering our change is backward compatible
+        if (Helper.modelerfourOptions['emit-yaml-tags'] !== false) {
+            Helper.host.WriteFile('code-model-v4.yaml', serialize(Helper.session.model, codeModelSchema), undefined, 'code-model-v4');
+        }
+        if (Helper.modelerfourOptions['emit-yaml-tags'] !== true) {
+            Helper.host.WriteFile('code-model-v4-no-tags.yaml', serialize(Helper.session.model), undefined, 'code-model-v4-no-tags');
+        }
     }
 
     public static isEmptyString(str): boolean {
@@ -266,19 +304,31 @@ export class Helper {
                 .reduce((pv, cv, ci) => pv.concat((ci === 0 ? (NEW_LINE + tab(i) + 'cli:') : '') +
                     NEW_LINE + tab(i + 1) + `${cv}: ${formatValue(o.language.cli[cv], i + 2)}`), ''));
 
-        let generatePropertyFlattenValue = (o: any, i: number) => (isNullOrUndefined(o.extensions) || isNullOrUndefined(o.extensions[CliConst.FLATTEN_FLAG])) ? '' :
-            (NEW_LINE + tab(i) + CliConst.FLATTEN_FLAG + ': ' + o.extensions[CliConst.FLATTEN_FLAG]);
+        let generatePropertyFlattenValue = (o: any, i: number) => {
+            let v = NodeHelper.getFlattenedValue(o);
+            return (isNullOrUndefined(v))? '' : NEW_LINE + tab(i) + NodeHelper.FLATTEN_FLAG + ': ' + v;
+        };
 
         let s = '';
         s = s + `operationGroups:${NEW_LINE}` +
             `${tab()}all:${NEW_LINE}`.concat(codeModel.operationGroups.map(
                 v => `${tab(1)}- operationGroupName: ${generateCliValue(v, 2)}` +
                     `${NEW_LINE}${tab(2)}operations:${NEW_LINE}`.concat(
-                        v.operations.map(vv => `${tab(2)}- operationName: ${generateCliValue(vv, 3)}` +
+                        v.operations.map(vv =>
+                            `${tab(2)}- operationName: ${generateCliValue(vv, 3)}` +
                             `${NEW_LINE}${tab(3)}parameters:${NEW_LINE}`.concat(
-                                vv.request.parameters.map(vvv => `${tab(3)}- parameterName: ${generateCliValue(vvv, 4)}${generatePropertyFlattenValue(vvv, 4)}${NEW_LINE}` +
-                                    (((!isNullOrUndefined(vvv.protocol?.http?.in)) && vvv.protocol.http.in === 'body') ? `${tab(4)}bodySchema: ${vvv.schema.language.default.name}${NEW_LINE}` : ''))
-                                    .join(''))).join(''))).join(''));
+                                vv.parameters.map(vvv => `${tab(3)}- parameterName: ${generateCliValue(vvv, 4)}${generatePropertyFlattenValue(vvv, 4)}${NEW_LINE}` +
+                                    (((!isNullOrUndefined(vvv.protocol?.http?.in)) && vvv.protocol.http.in === 'body')
+                                        ? `${tab(4)}bodySchema: ${vvv.schema.language.default.name}${NEW_LINE}` : '')).join('')) +
+                            vv.requests.map((req, index) =>
+                                isNullOrUndefined(req.parameters) ? '' :
+                                    req.parameters.map((vvv) => `${tab(3)}- parameterName[${index}]: ${generateCliValue(vvv, 4)}${generatePropertyFlattenValue(vvv, 4)}${NEW_LINE}` +
+                                        (((!isNullOrUndefined(vvv.protocol?.http?.in)) && vvv.protocol.http.in === 'body')
+                                            ? `${tab(4)}bodySchema: ${vvv.schema.language.default.name}${NEW_LINE}` : '')).join(''))
+                            ).join(''))
+                ).join('')
+            );
+
         s = s + `schemas:${NEW_LINE}` +
             `${tab()}objects:${NEW_LINE}` +
             `${tab(1)}all:${NEW_LINE}`.concat(codeModel.schemas.objects.map(
@@ -295,22 +345,6 @@ export class Helper {
                             isNullOrUndefined(v.choices) ? '' : v.choices.map(vv => `${tab(4)}- choiceValue: ${generateCliValue(vv, 5)}${NEW_LINE}`)
                                 .join(''))).join('')).join(''));
         return s;
-    }
-
-    public static isBaseClass(o: ObjectSchema) {
-        const DISCRIMINATOR = 'discriminator';
-
-        return !isNullOrUndefined(o[DISCRIMINATOR]);
-    }
-
-    public static setFlatten(p: Extensions, isFlatten: boolean) {
-        if (isNullOrUndefined(p.extensions))
-            p.extensions = {};
-        p.extensions[CliConst.FLATTEN_FLAG] = isFlatten;
-    }
-
-    public static isFlattened(p: Extensions) {
-        return !isNullOrUndefined(p.extensions) && p.extensions[CliConst.FLATTEN_FLAG] == true;
     }
 
     public static getDefaultValue(schema: Schema) {
@@ -374,12 +408,6 @@ export class Helper {
         }
     }
 
-    public static setCliProperty(node: M4Node, key: string, value: any): void {
-        if (isNullOrUndefined(node.language[CliConst.CLI]))
-            node.language[CliConst.CLI] = {};
-        node.language[CliConst.CLI][key] = value;
-    }
-
     /**
      * following nodes will be gone through now:
      *   - choice
@@ -394,7 +422,7 @@ export class Helper {
      * @param codeModel
      * @param action
      */
-    public static enumerateCodeMode(codeModel: CodeModel, action: (nodeDescriptor: CliCommonSchema.CodeModel.NodeDescriptor) => void) {
+    public static enumerateCodeModel(codeModel: CodeModel, action: (nodeDescriptor: CliCommonSchema.CodeModel.NodeDescriptor) => void) {
         if (isNullOrUndefined(action))
             throw Error("empty action for going through code model")
 
@@ -404,7 +432,7 @@ export class Helper {
             for (i = arr.length - 1; i >= 0; i--) {
                 let s = arr[i];
                 action({
-                    choiceSchemaCliKey: PreNamer.getCliKey(s),
+                    choiceSchemaCliKey: NodeHelper.getCliKey(s),
                     parent: arr,
                     target: s,
                     targetIndex: i
@@ -413,8 +441,8 @@ export class Helper {
                 for (let j = s.choices.length - 1; j >= 0; j--) {
                     let ss = s.choices[j];
                     action({
-                        choiceSchemaCliKey: PreNamer.getCliKey(s),
-                        choiceValueCliKey: PreNamer.getCliKey(ss),
+                        choiceSchemaCliKey: NodeHelper.getCliKey(s),
+                        choiceValueCliKey: NodeHelper.getCliKey(ss),
                         parent: s.choices,
                         target: ss,
                         targetIndex: j
@@ -426,7 +454,7 @@ export class Helper {
         for (i = codeModel.schemas.objects.length - 1; i >= 0; i--) {
             let s = codeModel.schemas.objects[i];
             action({
-                objectSchemaCliKey: PreNamer.getCliKey(s),
+                objectSchemaCliKey: NodeHelper.getCliKey(s),
                 parent: codeModel.schemas.objects,
                 target: s,
                 targetIndex: i
@@ -435,8 +463,8 @@ export class Helper {
                 for (let j = s.properties.length - 1; j >= 0; j--) {
                     let p = s.properties[j];
                     action({
-                        objectSchemaCliKey: PreNamer.getCliKey(s),
-                        propertyCliKey: PreNamer.getCliKey(p),
+                        objectSchemaCliKey: NodeHelper.getCliKey(s),
+                        propertyCliKey: NodeHelper.getCliKey(p),
                         parent: s.properties,
                         target: p,
                         targetIndex: j
@@ -448,7 +476,7 @@ export class Helper {
         for (i = codeModel.operationGroups.length - 1; i >= 0; i--) {
             let group = codeModel.operationGroups[i];
             action({
-                operationGroupCliKey: PreNamer.getCliKey(group),
+                operationGroupCliKey: NodeHelper.getCliKey(group),
                 parent: codeModel.operationGroups,
                 target: group,
                 targetIndex: i,
@@ -456,22 +484,41 @@ export class Helper {
             for (let j = group.operations.length - 1; j >= 0; j--) {
                 let op = group.operations[j];
                 action({
-                    operationGroupCliKey: PreNamer.getCliKey(group),
-                    operationCliKey: PreNamer.getCliKey(op), 
+                    operationGroupCliKey: NodeHelper.getCliKey(group),
+                    operationCliKey: NodeHelper.getCliKey(op), 
                     parent: group.operations,
                     target: op,
                     targetIndex: j,
                 })
-                for (let k = op.request.parameters.length - 1; k >= 0; k--) {
-                    let param = op.request.parameters[k];
+
+                for (let k = op.parameters.length - 1; k >= 0; k--) {
+                    let param = op.parameters[k];
                     action({
-                        operationGroupCliKey: PreNamer.getCliKey(group),
-                        operationCliKey: PreNamer.getCliKey(op),
-                        parameterCliKey: PreNamer.getCliKey(param),
-                        parent: op.request.parameters,
+                        operationGroupCliKey: NodeHelper.getCliKey(group),
+                        operationCliKey: NodeHelper.getCliKey(op),
+                        requestIndex: CliConst.DEFAULT_OPERATION_PARAMETER_INDEX,
+                        parameterCliKey: NodeHelper.getCliKey(param),
+                        parent: op.parameters,
                         target: param,
                         targetIndex: k,
                     })
+                }
+
+                for (let m = op.requests.length - 1; m >= 0; m--) {
+                    if (!isNullOrUndefined(op.requests[m].parameters)) {
+                        for (let k = op.requests[m].parameters.length - 1; k >= 0; k--) {
+                            let param = op.requests[m].parameters[k];
+                            action({
+                                operationGroupCliKey: NodeHelper.getCliKey(group),
+                                operationCliKey: NodeHelper.getCliKey(op),
+                                requestIndex: m,
+                                parameterCliKey: NodeHelper.getCliKey(param),
+                                parent: op.requests[m].parameters,
+                                target: param,
+                                targetIndex: k,
+                            })
+                        }
+                    }
                 }
             }
         }

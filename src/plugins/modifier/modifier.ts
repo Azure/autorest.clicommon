@@ -28,8 +28,7 @@ export class Modifier {
 
     public process(): CodeModel {
 
-        Helper.enumerateCodeMode(this.codeModel, (n: CliCommonSchema.CodeModel.NodeDescriptor) => this.manager.process(n));
-
+        Helper.enumerateCodeModel(this.codeModel, n => this.manager.process(n));
         return this.codeModel;
     }
 
