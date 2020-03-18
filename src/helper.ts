@@ -42,6 +42,12 @@ export class Helper {
         Helper.session.warning(msg, []);
     }
 
+    public static logError(msg: string) {
+        if (isNullOrUndefined(Helper.session))
+            throw Error("Helper not init yet, please call Helper.init() to init the Helper");
+        Helper.session.error(msg, []);
+    }
+
     public static outputToModelerfour() {
         if (isNullOrUndefined(Helper.session))
             throw Error("Helper not init yet, please call Helper.init() to init the Helper");
@@ -292,13 +298,17 @@ export class Helper {
                 return o;
             else if (isArray(o))
                 return o.map(v => NEW_LINE + tab(i) + "- " + formatValue(v, i + 2/* one more indent for array*/)).join('');
+            else if (o instanceof ObjectSchema)
+                return `<${(o as ObjectSchema).language.default.name}>`;
+            else if (o instanceof Operation)
+                return `<${(o as Operation).language.default.name}>`;
             else if (isObject(o))
                 return keys(o).select(k => NEW_LINE + tab(i) + `${k}: ${formatValue(o[k], i + 1)}`).join('');
             else
                 return isUndefined(o) ? '{undefined}' : isNull(o) ? '{null}' : o.toString();
         };
 
-        let generateCliValue = (o: any, i: number) => o.language.default.name +
+        let generateCliValue = (o: any, i: number) => o.language.default.name + `${isNullOrUndefined(o.schema) ? '' : '(' + o.schema.language.default.name + ')'}` +
             (isNullOrUndefined(o.language.cli) ? '' : Object.getOwnPropertyNames(o.language.cli)
                 .filter(key => o.language.cli[key] !== o.language.default[key])
                 .reduce((pv, cv, ci) => pv.concat((ci === 0 ? (NEW_LINE + tab(i) + 'cli:') : '') +
@@ -306,8 +316,22 @@ export class Helper {
 
         let generatePropertyFlattenValue = (o: any, i: number) => {
             let v = NodeHelper.getFlattenedValue(o);
-            return (isNullOrUndefined(v))? '' : NEW_LINE + tab(i) + NodeHelper.FLATTEN_FLAG + ': ' + v;
+            return (isNullOrUndefined(v)) ? '' : NEW_LINE + tab(i) + NodeHelper.FLATTEN_FLAG + ': ' + v;
         };
+
+        let generateDiscriminatorValueForSchema = (o: Schema, i: number) => {
+            if (o instanceof ObjectSchema) {
+                let v = NodeHelper.HasSubClass(o);
+                return v ? NEW_LINE + tab(i) + NodeHelper.DISCRIMINATOR_FLAG + ': true' : '';
+            }
+            else {
+                return '';
+            }
+        }
+
+        let generateDiscriminatorValueForParam = (o: Parameter, i: number) => {
+            return generateDiscriminatorValueForSchema(o.schema, i);
+        }
 
         let s = '';
         s = s + `operationGroups:${NEW_LINE}` +
@@ -317,22 +341,22 @@ export class Helper {
                         v.operations.map(vv =>
                             `${tab(2)}- operationName: ${generateCliValue(vv, 3)}` +
                             `${NEW_LINE}${tab(3)}parameters:${NEW_LINE}`.concat(
-                                vv.parameters.map(vvv => `${tab(3)}- parameterName: ${generateCliValue(vvv, 4)}${generatePropertyFlattenValue(vvv, 4)}${NEW_LINE}` +
+                                vv.parameters.map(vvv => `${tab(3)}- parameterName: ${generateCliValue(vvv, 4)}${generatePropertyFlattenValue(vvv, 4)}${generateDiscriminatorValueForParam(vvv, 4)}${NEW_LINE}` +
                                     (((!isNullOrUndefined(vvv.protocol?.http?.in)) && vvv.protocol.http.in === 'body')
                                         ? `${tab(4)}bodySchema: ${vvv.schema.language.default.name}${NEW_LINE}` : '')).join('')) +
                             vv.requests.map((req, index) =>
                                 isNullOrUndefined(req.parameters) ? '' :
-                                    req.parameters.map((vvv) => `${tab(3)}- parameterName[${index}]: ${generateCliValue(vvv, 4)}${generatePropertyFlattenValue(vvv, 4)}${NEW_LINE}` +
+                                    req.parameters.map((vvv) => `${tab(3)}- parameterName[${index}]: ${generateCliValue(vvv, 4)}${generatePropertyFlattenValue(vvv, 4)}${generateDiscriminatorValueForParam(vvv, 4)}${NEW_LINE}` +
                                         (((!isNullOrUndefined(vvv.protocol?.http?.in)) && vvv.protocol.http.in === 'body')
                                             ? `${tab(4)}bodySchema: ${vvv.schema.language.default.name}${NEW_LINE}` : '')).join(''))
-                            ).join(''))
-                ).join('')
+                        ).join(''))
+            ).join('')
             );
 
         s = s + `schemas:${NEW_LINE}` +
             `${tab()}objects:${NEW_LINE}` +
             `${tab(1)}all:${NEW_LINE}`.concat(codeModel.schemas.objects.map(
-                v => `${tab(2)}- schemaName: ${generateCliValue(v, 3)}` +
+                v => `${tab(2)}- schemaName: ${generateCliValue(v, 3)}` + generateDiscriminatorValueForSchema(v, 3) +
                     `${NEW_LINE}${tab(3)}properties:${NEW_LINE}`.concat(
                         isNullOrUndefined(v.properties) ? '' : v.properties.map(vv => `${tab(4)}- propertyName: ${generateCliValue(vv, 5)}${generatePropertyFlattenValue(vv, 5)} ${NEW_LINE}`)
                             .join('')))
@@ -485,7 +509,7 @@ export class Helper {
                 let op = group.operations[j];
                 action({
                     operationGroupCliKey: NodeHelper.getCliKey(group),
-                    operationCliKey: NodeHelper.getCliKey(op), 
+                    operationCliKey: NodeHelper.getCliKey(op),
                     parent: group.operations,
                     target: op,
                     targetIndex: j,

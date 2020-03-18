@@ -4,11 +4,10 @@ import { CodeModel, codeModelSchema, OperationGroup, Operation, Schema, ObjectSc
 import { Helper } from './helper';
 import { Modifier } from './plugins/modifier/modifier';
 import { CommonNamer } from './plugins/namer';
-import { processRequest as configTwitter } from './plugins/configTwitter';
 import { processRequest as flattenSetter } from './plugins/flattenSetter/flattenSetter';
 import { processRequest as preNamer } from './plugins/prenamer';
 import { CliConst } from './schema';
-import { isNullOrUndefined } from 'util';
+import { processRequest as polyModifier } from './plugins/polyModifier';
 
 const extension = new AutoRestExtension();
 
@@ -40,5 +39,5 @@ extension.Add("clicommon", async host => {
 
 extension.Add("cli-flatten-setter", flattenSetter);
 extension.Add("cli-prenamer", preNamer);
-extension.Add("cli-config-twitter", configTwitter)
+extension.Add("cli-poly-modifier", polyModifier);
 extension.Run();

@@ -13,9 +13,6 @@ pipeline:
     modelerfour/new-transform:
         input: clicommon/cli-flatten-setter
 	
-#    clicommon/cli-config-twitter:
-#        input: modelerfour 
-
     clicommon/cli-prenamer:
         input: modelerfour
         output-artifact: clicommon-prenamer
@@ -28,14 +25,19 @@ pipeline:
         input: modelerfour/identity
         output-artifact: clicommon-output
 
-    clicommon/identity:
+    clicommon/cli-poly-modifier:
         input: clicommon
+        output-artifact: clicommon-poly-modifier
+    
+    clicommon/identity:
+        input: clicommon/cli-poly-modifier
 
     clicommon/emitter:
         input: 
           - clicommon
           - clicommon/cli-prenamer
           - clicommon/cli-flatten-setter
+          - clicommon/cli-poly-modifier
         scope: scope-clicommon
 
 scope-clicommon:
@@ -44,6 +46,7 @@ scope-clicommon:
         - clicommon-output
         - clicommon-prenamer
         - clicommon-flatten-setter
+        - clicommon-poly-modifier
 
 modelerfour:
     #group-parameters: true

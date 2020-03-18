@@ -4,15 +4,18 @@ import { CliConst, M4Node, M4NodeType, NamingType, CliCommonSchema } from "./sch
 
 export class NodeHelper {
     private static readonly CLI: string = "cli";
+    private static readonly DESCRIPTION: string = "description";
     private static readonly CLI_KEY: string = "cliKey";
     private static readonly JSON: string = "json";
     public static readonly FLATTEN_FLAG: string = 'x-ms-client-flatten';
+    public static readonly DISCRIMINATOR_FLAG: string = 'discriminator';
+    public static readonly POLY_RESOURCE: string = 'poly-resource';
 
     /**
      * Check whether the obj has discriminator property
      * @param o
      */
-    public static isBaseClass(node: ObjectSchema) {
+    public static HasSubClass(node: ObjectSchema) {
         return !isNullOrUndefined(node.discriminator);
     }
 
@@ -72,6 +75,18 @@ export class NodeHelper {
      */
     public static getCliKey(node: M4Node) {
         return isNullOrUndefined(node.language[NodeHelper.CLI]) ? '<missing_cli_key>' : node.language[NodeHelper.CLI][NodeHelper.CLI_KEY];
+    }
+
+    public static getCliDescription(node: M4Node) {
+        return isNullOrUndefined(node.language[NodeHelper.CLI]) ? '' : node.language[NodeHelper.CLI][NodeHelper.DESCRIPTION];
+    }
+
+    public static setPolyAsResource(node: Parameter, value: boolean) {
+        NodeHelper.setCliProperty(node, this.POLY_RESOURCE, value);
+    }
+
+    public static isPolyAsResource(node: Parameter): boolean {
+        return NodeHelper.getCliProperty(node, this.POLY_RESOURCE, () => false);
     }
 
     /**
