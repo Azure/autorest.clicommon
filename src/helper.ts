@@ -340,13 +340,20 @@ export class Helper {
                     `${NEW_LINE}${tab(2)}operations:${NEW_LINE}`.concat(
                         v.operations.map(vv =>
                             `${tab(2)}- operationName: ${generateCliValue(vv, 3)}` +
+                            (isNullOrUndefined(NodeHelper.getPolyAsResourceParam(vv)) ? '' : `${NEW_LINE}${tab(3)}polyAsResourceParam: ${NodeHelper.getCliKey(NodeHelper.getPolyAsResourceParam(vv), '<missing-clikey>')}`) +
                             `${NEW_LINE}${tab(3)}parameters:${NEW_LINE}`.concat(
                                 vv.parameters.map(vvv => `${tab(3)}- parameterName: ${generateCliValue(vvv, 4)}${generatePropertyFlattenValue(vvv, 4)}${generateDiscriminatorValueForParam(vvv, 4)}${NEW_LINE}` +
+                                    (isNullOrUndefined(NodeHelper.getPolyAsResourceBaseSchema(vvv)) ? '' : `${tab(4)}polyAsResourceBaseSchema: ${NodeHelper.getCliKey(NodeHelper.getPolyAsResourceBaseSchema(vvv), '<baseSchemaCliKeyMissing>')}${NEW_LINE}`) +
+                                    (isNullOrUndefined(NodeHelper.getPolyAsParamBaseSchema(vvv)) ? '' : `${tab(4)}polyAsParamBaseSchema: ${NodeHelper.getCliKey(NodeHelper.getPolyAsParamBaseSchema(vvv), '<baseSchemaCliKeyMissing>')}${NEW_LINE}`) +
+                                    (isNullOrUndefined(NodeHelper.getPolyAsParamOriginalParam(vvv)) ? '' : `${tab(4)}polyAsParamOriginalParam: ${NodeHelper.getCliKey(NodeHelper.getPolyAsParamOriginalParam(vvv), '<oriParamCliKeyMissing>')}${NEW_LINE}`) +
                                     (((!isNullOrUndefined(vvv.protocol?.http?.in)) && vvv.protocol.http.in === 'body')
                                         ? `${tab(4)}bodySchema: ${vvv.schema.language.default.name}${NEW_LINE}` : '')).join('')) +
                             vv.requests.map((req, index) =>
                                 isNullOrUndefined(req.parameters) ? '' :
                                     req.parameters.map((vvv) => `${tab(3)}- parameterName[${index}]: ${generateCliValue(vvv, 4)}${generatePropertyFlattenValue(vvv, 4)}${generateDiscriminatorValueForParam(vvv, 4)}${NEW_LINE}` +
+                                        (isNullOrUndefined(NodeHelper.getPolyAsResourceBaseSchema(vvv)) ? '' : `${tab(4)}polyAsResourceBaseSchema: ${NodeHelper.getCliKey(NodeHelper.getPolyAsResourceBaseSchema(vvv), '<baseSchemaCliKeyMissing>')}${NEW_LINE}`) +
+                                        (isNullOrUndefined(NodeHelper.getPolyAsParamBaseSchema(vvv)) ? '' : `${tab(4)}polyAsParamBaseSchema: ${NodeHelper.getCliKey(NodeHelper.getPolyAsParamBaseSchema(vvv), '<baseSchemaCliKeyMissing>')}${NEW_LINE}`) +
+                                        (isNullOrUndefined(NodeHelper.getPolyAsParamOriginalParam(vvv)) ? '' : `${tab(4)}polyAsParamOriginalParam: ${NodeHelper.getCliKey(NodeHelper.getPolyAsParamOriginalParam(vvv), '<oriParamCliKeyMissing>')}${NEW_LINE}`) +
                                         (((!isNullOrUndefined(vvv.protocol?.http?.in)) && vvv.protocol.http.in === 'body')
                                             ? `${tab(4)}bodySchema: ${vvv.schema.language.default.name}${NEW_LINE}` : '')).join(''))
                         ).join(''))
@@ -446,101 +453,117 @@ export class Helper {
      * @param codeModel
      * @param action
      */
-    public static enumerateCodeModel(codeModel: CodeModel, action: (nodeDescriptor: CliCommonSchema.CodeModel.NodeDescriptor) => void) {
+    public static enumerateCodeModel(codeModel: CodeModel, action: (nodeDescriptor: CliCommonSchema.CodeModel.NodeDescriptor) => void, flag: CliCommonSchema.CodeModel.NodeTypeFlag = null) {
         if (isNullOrUndefined(action))
             throw Error("empty action for going through code model")
-
+        const cliKeyMissing = '<clikey-missing>';
         let choices = [codeModel.schemas.choices ?? [], codeModel.schemas.sealedChoices ?? []];
         let i = -1;
         choices.forEach(arr => {
             for (i = arr.length - 1; i >= 0; i--) {
                 let s = arr[i];
-                action({
-                    choiceSchemaCliKey: NodeHelper.getCliKey(s),
-                    parent: arr,
-                    target: s,
-                    targetIndex: i
-                });
+                if (isNullOrUndefined(flag) || (flag | CliCommonSchema.CodeModel.NodeTypeFlag.choiceSchema)) {
+                    action({
+                        choiceSchemaCliKey: NodeHelper.getCliKey(s, cliKeyMissing),
+                        parent: arr,
+                        target: s,
+                        targetIndex: i
+                    });
+                }
 
                 for (let j = s.choices.length - 1; j >= 0; j--) {
                     let ss = s.choices[j];
-                    action({
-                        choiceSchemaCliKey: NodeHelper.getCliKey(s),
-                        choiceValueCliKey: NodeHelper.getCliKey(ss),
-                        parent: s.choices,
-                        target: ss,
-                        targetIndex: j
-                    });
+                    if (isNullOrUndefined(flag) || (flag | CliCommonSchema.CodeModel.NodeTypeFlag.choiceValue)) {
+                        action({
+                            choiceSchemaCliKey: NodeHelper.getCliKey(s, cliKeyMissing),
+                            choiceValueCliKey: NodeHelper.getCliKey(ss, cliKeyMissing),
+                            parent: s.choices,
+                            target: ss,
+                            targetIndex: j
+                        });
+                    }
                 }
             }
         });
 
         for (i = codeModel.schemas.objects.length - 1; i >= 0; i--) {
             let s = codeModel.schemas.objects[i];
-            action({
-                objectSchemaCliKey: NodeHelper.getCliKey(s),
-                parent: codeModel.schemas.objects,
-                target: s,
-                targetIndex: i
-            });
+            if (isNullOrUndefined(flag) || (flag | CliCommonSchema.CodeModel.NodeTypeFlag.objectSchema)) {
+                action({
+                    objectSchemaCliKey: NodeHelper.getCliKey(s, cliKeyMissing),
+                    parent: codeModel.schemas.objects,
+                    target: s,
+                    targetIndex: i
+                });
+            }
             if (!isNullOrUndefined(s.properties)) {
                 for (let j = s.properties.length - 1; j >= 0; j--) {
                     let p = s.properties[j];
-                    action({
-                        objectSchemaCliKey: NodeHelper.getCliKey(s),
-                        propertyCliKey: NodeHelper.getCliKey(p),
-                        parent: s.properties,
-                        target: p,
-                        targetIndex: j
-                    })
+                    if (isNullOrUndefined(flag) || (flag | CliCommonSchema.CodeModel.NodeTypeFlag.property)) {
+                        action({
+                            objectSchemaCliKey: NodeHelper.getCliKey(s, cliKeyMissing),
+                            propertyCliKey: NodeHelper.getCliKey(p, cliKeyMissing),
+                            parent: s.properties,
+                            target: p,
+                            targetIndex: j
+                        })
+                    }
                 }
             }
         }
 
         for (i = codeModel.operationGroups.length - 1; i >= 0; i--) {
             let group = codeModel.operationGroups[i];
-            action({
-                operationGroupCliKey: NodeHelper.getCliKey(group),
-                parent: codeModel.operationGroups,
-                target: group,
-                targetIndex: i,
-            })
+            if (isNullOrUndefined(flag) || (flag | CliCommonSchema.CodeModel.NodeTypeFlag.operationGroup)) {
+                action({
+                    operationGroupCliKey: NodeHelper.getCliKey(group, cliKeyMissing),
+                    parent: codeModel.operationGroups,
+                    target: group,
+                    targetIndex: i,
+                })
+            }
             for (let j = group.operations.length - 1; j >= 0; j--) {
                 let op = group.operations[j];
-                action({
-                    operationGroupCliKey: NodeHelper.getCliKey(group),
-                    operationCliKey: NodeHelper.getCliKey(op),
-                    parent: group.operations,
-                    target: op,
-                    targetIndex: j,
-                })
+                if (isNullOrUndefined(flag) || (flag | CliCommonSchema.CodeModel.NodeTypeFlag.operation)) {
+                    action({
+                        operationGroupCliKey: NodeHelper.getCliKey(group, cliKeyMissing),
+                        operationCliKey: NodeHelper.getCliKey(op, cliKeyMissing),
+                        parent: group.operations,
+                        target: op,
+                        targetIndex: j,
+                    })
+                }
 
                 for (let k = op.parameters.length - 1; k >= 0; k--) {
                     let param = op.parameters[k];
-                    action({
-                        operationGroupCliKey: NodeHelper.getCliKey(group),
-                        operationCliKey: NodeHelper.getCliKey(op),
-                        requestIndex: CliConst.DEFAULT_OPERATION_PARAMETER_INDEX,
-                        parameterCliKey: NodeHelper.getCliKey(param),
-                        parent: op.parameters,
-                        target: param,
-                        targetIndex: k,
-                    })
+                    if (isNullOrUndefined(flag) || (flag | CliCommonSchema.CodeModel.NodeTypeFlag.parameter)) {
+                        action({
+                            operationGroupCliKey: NodeHelper.getCliKey(group, cliKeyMissing),
+                            operationCliKey: NodeHelper.getCliKey(op, cliKeyMissing),
+                            requestIndex: CliConst.DEFAULT_OPERATION_PARAMETER_INDEX,
+                            parameterCliKey: NodeHelper.getCliKey(param, cliKeyMissing),
+                            parent: op.parameters,
+                            target: param,
+                            targetIndex: k,
+                        })
+                    }
                 }
 
                 for (let m = op.requests.length - 1; m >= 0; m--) {
                     if (!isNullOrUndefined(op.requests[m].parameters)) {
                         for (let k = op.requests[m].parameters.length - 1; k >= 0; k--) {
                             let param = op.requests[m].parameters[k];
-                            action({
-                                operationGroupCliKey: NodeHelper.getCliKey(group),
-                                operationCliKey: NodeHelper.getCliKey(op),
-                                requestIndex: m,
-                                parameterCliKey: NodeHelper.getCliKey(param),
-                                parent: op.requests[m].parameters,
-                                target: param,
-                                targetIndex: k,
-                            })
+                            if (isNullOrUndefined(flag) || (flag | CliCommonSchema.CodeModel.NodeTypeFlag.parameter)) {
+                                action({
+                                    operationGroupCliKey: NodeHelper.getCliKey(group, cliKeyMissing),
+                                    operationCliKey: NodeHelper.getCliKey(op, cliKeyMissing),
+                                    requestIndex: m,
+                                    parameterCliKey: NodeHelper.getCliKey(param, cliKeyMissing),
+                                    parent: op.requests[m].parameters,
+                                    target: param,
+                                    targetIndex: k,
+                                })
+                            }
                         }
                     }
                 }

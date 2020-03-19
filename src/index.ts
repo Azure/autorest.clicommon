@@ -7,7 +7,9 @@ import { CommonNamer } from './plugins/namer';
 import { processRequest as flattenSetter } from './plugins/flattenSetter/flattenSetter';
 import { processRequest as preNamer } from './plugins/prenamer';
 import { CliConst } from './schema';
-import { processRequest as polyModifier } from './plugins/polyModifier';
+import { processRequest as polyAsResourceModifier } from './plugins/polyAsResourceModifier';
+import { processRequest as polyAsParamModifier } from './plugins/polyAsParamModifier';
+import { processRequest as complexMarker } from './plugins/complexMarker';
 
 const extension = new AutoRestExtension();
 
@@ -39,5 +41,7 @@ extension.Add("clicommon", async host => {
 
 extension.Add("cli-flatten-setter", flattenSetter);
 extension.Add("cli-prenamer", preNamer);
-extension.Add("cli-poly-modifier", polyModifier);
+extension.Add("cli-poly-as-resource-modifier", polyAsResourceModifier);
+extension.Add("cli-poly-as-param-modifier", polyAsParamModifier);
+extension.Add("cli-complex-marker", complexMarker);
 extension.Run();

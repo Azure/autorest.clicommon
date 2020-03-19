@@ -25,19 +25,29 @@ pipeline:
         input: modelerfour/identity
         output-artifact: clicommon-output
 
-    clicommon/cli-poly-modifier:
+    clicommon/cli-poly-as-resource-modifier:
         input: clicommon
-        output-artifact: clicommon-poly-modifier
+        output-artifact: clicommon-poly-as-resource-modifier
+
+    clicommon/cli-complex-marker:
+        input: clicommon/cli-poly-as-resource-modifier
+        output-artifact: clicommon-complex-marker
     
+    #clicommon/cli-poly-as-param-modifier:
+    #    input: clicommon/cli-complex-marker
+    #    output-artifact: clicommon-poly-as-param-modifier
+
     clicommon/identity:
-        input: clicommon/cli-poly-modifier
+        input: clicommon/cli-complex-marker
 
     clicommon/emitter:
         input: 
           - clicommon
           - clicommon/cli-prenamer
           - clicommon/cli-flatten-setter
-          - clicommon/cli-poly-modifier
+          #- clicommon/cli-poly-as-param-modifier
+          - clicommon/cli-poly-as-resource-modifier
+          - clicommon/cli-complex-marker
         scope: scope-clicommon
 
 scope-clicommon:
@@ -46,7 +56,9 @@ scope-clicommon:
         - clicommon-output
         - clicommon-prenamer
         - clicommon-flatten-setter
-        - clicommon-poly-modifier
+        - clicommon-poly-as-resource-modifier
+        #- clicommon-poly-as-param-modifier
+        - clicommon-complex-marker
 
 modelerfour:
     #group-parameters: true
@@ -82,6 +94,8 @@ cli:
     #            type: SchemaType
     #            prop: propertyName
     #          flatten: true
+    polymorphism:
+        expand-as-resource: true
     naming:
         cli:
             appliedTo:
