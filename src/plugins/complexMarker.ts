@@ -14,8 +14,17 @@ class ComplexMarker {
 
     private calculateDict(dict: DictionarySchema) {
         let complexity = NodeHelper.getComplexity(dict);
-        if (!isNullOrUndefined(complexity))
-            return complexity;
+        if (!isNullOrUndefined(complexity)) {
+            if (complexity === CliCommonSchema.CodeModel.Complexity.unknown) {
+                // we have been here before, a circle found
+                NodeHelper.setComplex(dict, CliCommonSchema.CodeModel.Complexity.dictionary_complex)
+                return CliCommonSchema.CodeModel.Complexity.dictionary_complex;
+            }
+            else {
+                return complexity;
+            }
+        }
+        NodeHelper.setComplex(dict, CliCommonSchema.CodeModel.Complexity.unknown);
 
         if (dict.elementType instanceof ObjectSchema ||
             dict.elementType instanceof ArraySchema ||
@@ -29,8 +38,17 @@ class ComplexMarker {
 
     private calculateArray(arr: ArraySchema) {
         let complexity = NodeHelper.getComplexity(arr);
-        if (!isNullOrUndefined(complexity))
-            return complexity;
+        if (!isNullOrUndefined(complexity)) {
+            if (complexity === CliCommonSchema.CodeModel.Complexity.unknown) {
+                // we have been here before, a circle found
+                NodeHelper.setComplex(arr, CliCommonSchema.CodeModel.Complexity.array_complex)
+                return CliCommonSchema.CodeModel.Complexity.array_complex;
+            }
+            else {
+                return complexity;
+            }
+        }
+        NodeHelper.setComplex(arr, CliCommonSchema.CodeModel.Complexity.unknown);
 
         if (arr.elementType instanceof ObjectSchema ||
             arr.elementType instanceof ArraySchema ||
@@ -45,8 +63,17 @@ class ComplexMarker {
     private calculateObject(obj: ObjectSchema) {
 
         let complexity = NodeHelper.getComplexity(obj);
-        if (!isNullOrUndefined(complexity))
-            return complexity;
+        if (!isNullOrUndefined(complexity)) {
+            if (complexity === CliCommonSchema.CodeModel.Complexity.unknown) {
+                // we have been here before, a circle found
+                NodeHelper.setComplex(obj, CliCommonSchema.CodeModel.Complexity.object_complex)
+                return CliCommonSchema.CodeModel.Complexity.object_complex;
+            }
+            else {
+                return complexity;
+            }
+        }
+        NodeHelper.setComplex(obj, CliCommonSchema.CodeModel.Complexity.unknown);
 
         complexity = CliCommonSchema.CodeModel.Complexity.object_simple;
         if (obj.properties && obj.properties.length > 0) {
@@ -71,7 +98,6 @@ class ComplexMarker {
                     return CliCommonSchema.CodeModel.Complexity.object_complex;
                 }
             }
-            NodeHelper.setComplex(obj, CliCommonSchema.CodeModel.Complexity.object_simple);
         }
         NodeHelper.setComplex(obj, CliCommonSchema.CodeModel.Complexity.object_simple);
         return CliCommonSchema.CodeModel.Complexity.object_simple;
