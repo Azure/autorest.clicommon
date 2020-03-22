@@ -156,6 +156,8 @@ export class PolyAsResourceModifier {
                         FlattenHelper.flattenParameter(req, polyParam, `${subClass.discriminatorValue}_`);
                     }
                 }
+
+                NodeHelper.setHidden(op, true);
             });
         });
     }

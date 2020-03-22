@@ -7,6 +7,8 @@ export class NodeHelper {
     private static readonly NAME: string = "name";
     private static readonly DESCRIPTION: string = "description";
     private static readonly CLI_KEY: string = "cliKey";
+    private static readonly CLI_HIDDEN: string = "hidden";
+    private static readonly CLI_REMOVED: string = "removed";
     private static readonly CLI_COMPLEXITY: string = "cli-complexity";
     private static readonly CLI_IS_VISIBLE: string = "cli-is-visible";
     private static readonly JSON: string = "json";
@@ -99,6 +101,22 @@ export class NodeHelper {
         return isNullOrUndefined(node?.language[NodeHelper.CLI]) ? defaultValue : node.language[NodeHelper.CLI][NodeHelper.NAME];
     }
 
+    public static setHidden(node: M4Node, value: boolean) {
+        NodeHelper.setCliProperty(node, NodeHelper.CLI_HIDDEN, value);
+    }
+
+    public static getHidden(node: M4Node, defaultValue: boolean) {
+        return NodeHelper.getCliProperty(node, NodeHelper.CLI_HIDDEN, () => false);
+    }
+
+    public static setRemoved(node: M4Node, value: boolean) {
+        NodeHelper.setCliProperty(node, NodeHelper.CLI_REMOVED, value);
+    }
+
+    public static getRemoved(node: M4Node, defaultValue: boolean) {
+        return NodeHelper.getCliProperty(node, NodeHelper.CLI_REMOVED, () => false);
+    }
+
     public static getCliDescription(node: M4Node) {
         return isNullOrUndefined(node.language[NodeHelper.CLI]) ? '' : node.language[NodeHelper.CLI][NodeHelper.DESCRIPTION];
     }
@@ -160,7 +178,7 @@ export class NodeHelper {
     }
 
     public static setIsVisibleFlag(node: M4Node, visiblity: CliCommonSchema.CodeModel.Visibility) {
-        NodeHelper.setCliProperty(node, NodeHelper.CLI_IS_VISIBLE, this.visitedKeyDict);
+        NodeHelper.setCliProperty(node, NodeHelper.CLI_IS_VISIBLE, visiblity);
     }
 
     public static getIsVisibleFlag(node: M4Node): CliCommonSchema.CodeModel.Visibility {
@@ -188,7 +206,7 @@ export class NodeHelper {
             if (isNullOrUndefined(defaultWhenNotExist))
                 return undefined;
             else
-                defaultWhenNotExist();
+                return defaultWhenNotExist();
         }
         if (isNullOrUndefined(node.language[NodeHelper.CLI][propertyName])) {
             if (isNullOrUndefined(defaultWhenNotExist))

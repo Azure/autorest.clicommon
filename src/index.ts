@@ -10,6 +10,7 @@ import { CliConst } from './schema';
 import { processRequest as polyAsResourceModifier } from './plugins/polyAsResourceModifier';
 import { processRequest as polyAsParamModifier } from './plugins/polyAsParamModifier';
 import { processRequest as complexMarker } from './plugins/complexMarker';
+import { processRequest as visibilityCleaner } from './plugins/visibilityCleaner';
 
 const extension = new AutoRestExtension();
 
@@ -44,4 +45,5 @@ extension.Add("cli-prenamer", preNamer);
 extension.Add("cli-poly-as-resource-modifier", polyAsResourceModifier);
 extension.Add("cli-poly-as-param-modifier", polyAsParamModifier);
 extension.Add("cli-complex-marker", complexMarker);
+extension.Add("cli-visibility-cleaner", visibilityCleaner)
 extension.Run();

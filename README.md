@@ -37,8 +37,12 @@ pipeline:
     #    input: clicommon/cli-complex-marker
     #    output-artifact: clicommon-poly-as-param-modifier
 
-    clicommon/identity:
+    clicommon/cli-visibility-cleaner:
         input: clicommon/cli-complex-marker
+        output-artifact: clicommon-visibility-cleaner
+
+    clicommon/identity:
+        input: clicommon/cli-visibility-cleaner
 
     clicommon/emitter:
         input: 
@@ -48,6 +52,7 @@ pipeline:
           #- clicommon/cli-poly-as-param-modifier
           - clicommon/cli-poly-as-resource-modifier
           - clicommon/cli-complex-marker
+          - clicommon/cli-visibility-cleaner
         scope: scope-clicommon
 
 scope-clicommon:
@@ -59,6 +64,7 @@ scope-clicommon:
         - clicommon-poly-as-resource-modifier
         #- clicommon-poly-as-param-modifier
         - clicommon-complex-marker
+        - clicommon-visibility-cleaner
 
 modelerfour:
     #group-parameters: true
@@ -95,7 +101,8 @@ cli:
     #            prop: propertyName
     #          flatten: true
     polymorphism:
-        expand-as-resource: true
+        expand-as-resource: false
+    auto-parameter-hidden: true
     naming:
         cli:
             appliedTo:
