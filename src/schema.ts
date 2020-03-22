@@ -163,6 +163,13 @@ export namespace CliCommonSchema {
             dictionary_complex = 'dictionary_complex'
         }
 
+        export enum Visibility {
+            unknown = "unknown",
+            unknownInCircle = "unknownInCircle",
+            false = "false",
+            true = "true",
+        }
+
         export interface NodeDescriptor {
             operationGroupCliKey?: string;
             operationCliKey?: string;
