@@ -19,7 +19,7 @@ export class NodeHelper {
     private static readonly POLY_AS_RESOURCE_BASE_SCHEMA = 'cli-poly-as-resource-base-schema';
     private static readonly POLY_AS_PARAM_BASE_SCHEMA = 'cli-poly-as-param-base-schema';
     private static readonly POLY_AS_PARAM_ORIGINIAL_PARAMETER = 'cli-poly-as-param-original-parameter';
-    private static readonly POLY_AS_PARAM_EXPANDED = 'cli-poly-asparam-expanded';
+    private static readonly POLY_AS_PARAM_EXPANDED = 'cli-poly-as-param-expanded';
 
     private static visitedKeyDict = {};
 

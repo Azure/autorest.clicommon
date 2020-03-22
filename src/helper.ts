@@ -340,20 +340,20 @@ export class Helper {
                     `${NEW_LINE}${tab(2)}operations:${NEW_LINE}`.concat(
                         v.operations.map(vv =>
                             `${tab(2)}- operationName: ${generateCliValue(vv, 3)}` +
-                            (isNullOrUndefined(NodeHelper.getPolyAsResourceParam(vv)) ? '' : `${NEW_LINE}${tab(3)}polyAsResourceParam: ${NodeHelper.getCliKey(NodeHelper.getPolyAsResourceParam(vv), '<missing-clikey>')}`) +
+                            (isNullOrUndefined(NodeHelper.getPolyAsResourceParam(vv)) ? '' : `${NEW_LINE}${tab(3)}cli-poly-as-resource-subclass-param: ${NodeHelper.getCliKey(NodeHelper.getPolyAsResourceParam(vv), '<missing-clikey>')}`) +
                             `${NEW_LINE}${tab(3)}parameters:${NEW_LINE}`.concat(
                                 vv.parameters.map(vvv => `${tab(3)}- parameterName: ${generateCliValue(vvv, 4)}${generatePropertyFlattenValue(vvv, 4)}${generateDiscriminatorValueForParam(vvv, 4)}${NEW_LINE}` +
-                                    (isNullOrUndefined(NodeHelper.getPolyAsResourceBaseSchema(vvv)) ? '' : `${tab(4)}polyAsResourceBaseSchema: ${NodeHelper.getCliKey(NodeHelper.getPolyAsResourceBaseSchema(vvv), '<baseSchemaCliKeyMissing>')}${NEW_LINE}`) +
-                                    (isNullOrUndefined(NodeHelper.getPolyAsParamBaseSchema(vvv)) ? '' : `${tab(4)}polyAsParamBaseSchema: ${NodeHelper.getCliKey(NodeHelper.getPolyAsParamBaseSchema(vvv), '<baseSchemaCliKeyMissing>')}${NEW_LINE}`) +
-                                    (isNullOrUndefined(NodeHelper.getPolyAsParamOriginalParam(vvv)) ? '' : `${tab(4)}polyAsParamOriginalParam: ${NodeHelper.getCliKey(NodeHelper.getPolyAsParamOriginalParam(vvv), '<oriParamCliKeyMissing>')}${NEW_LINE}`) +
+                                    (isNullOrUndefined(NodeHelper.getPolyAsResourceBaseSchema(vvv)) ? '' : `${tab(4)}cli-poly-as-resource-base-schema: ${NodeHelper.getCliKey(NodeHelper.getPolyAsResourceBaseSchema(vvv), '<baseSchemaCliKeyMissing>')}${NEW_LINE}`) +
+                                    (isNullOrUndefined(NodeHelper.getPolyAsParamBaseSchema(vvv)) ? '' : `${tab(4)}cli-poly-as-param-base-schema: ${NodeHelper.getCliKey(NodeHelper.getPolyAsParamBaseSchema(vvv), '<baseSchemaCliKeyMissing>')}${NEW_LINE}`) +
+                                    (isNullOrUndefined(NodeHelper.getPolyAsParamOriginalParam(vvv)) ? '' : `${tab(4)}cli-poly-as-param-expanded: ${NodeHelper.getCliKey(NodeHelper.getPolyAsParamOriginalParam(vvv), '<oriParamCliKeyMissing>')}${NEW_LINE}`) +
                                     (((!isNullOrUndefined(vvv.protocol?.http?.in)) && vvv.protocol.http.in === 'body')
                                         ? `${tab(4)}bodySchema: ${vvv.schema.language.default.name}${NEW_LINE}` : '')).join('')) +
                             vv.requests.map((req, index) =>
                                 isNullOrUndefined(req.parameters) ? '' :
                                     req.parameters.map((vvv) => `${tab(3)}- parameterName[${index}]: ${generateCliValue(vvv, 4)}${generatePropertyFlattenValue(vvv, 4)}${generateDiscriminatorValueForParam(vvv, 4)}${NEW_LINE}` +
-                                        (isNullOrUndefined(NodeHelper.getPolyAsResourceBaseSchema(vvv)) ? '' : `${tab(4)}polyAsResourceBaseSchema: ${NodeHelper.getCliKey(NodeHelper.getPolyAsResourceBaseSchema(vvv), '<baseSchemaCliKeyMissing>')}${NEW_LINE}`) +
-                                        (isNullOrUndefined(NodeHelper.getPolyAsParamBaseSchema(vvv)) ? '' : `${tab(4)}polyAsParamBaseSchema: ${NodeHelper.getCliKey(NodeHelper.getPolyAsParamBaseSchema(vvv), '<baseSchemaCliKeyMissing>')}${NEW_LINE}`) +
-                                        (isNullOrUndefined(NodeHelper.getPolyAsParamOriginalParam(vvv)) ? '' : `${tab(4)}polyAsParamOriginalParam: ${NodeHelper.getCliKey(NodeHelper.getPolyAsParamOriginalParam(vvv), '<oriParamCliKeyMissing>')}${NEW_LINE}`) +
+                                        (isNullOrUndefined(NodeHelper.getPolyAsResourceBaseSchema(vvv)) ? '' : `${tab(4)}cli-poly-as-resource-base-schema: ${NodeHelper.getCliKey(NodeHelper.getPolyAsResourceBaseSchema(vvv), '<baseSchemaCliKeyMissing>')}${NEW_LINE}`) +
+                                        (isNullOrUndefined(NodeHelper.getPolyAsParamBaseSchema(vvv)) ? '' : `${tab(4)}cli-poly-as-param-base-schema: ${NodeHelper.getCliKey(NodeHelper.getPolyAsParamBaseSchema(vvv), '<baseSchemaCliKeyMissing>')}${NEW_LINE}`) +
+                                        (isNullOrUndefined(NodeHelper.getPolyAsParamOriginalParam(vvv)) ? '' : `${tab(4)}cli-poly-as-param-expanded: ${NodeHelper.getCliKey(NodeHelper.getPolyAsParamOriginalParam(vvv), '<oriParamCliKeyMissing>')}${NEW_LINE}`) +
                                         (((!isNullOrUndefined(vvv.protocol?.http?.in)) && vvv.protocol.http.in === 'body')
                                             ? `${tab(4)}bodySchema: ${vvv.schema.language.default.name}${NEW_LINE}` : '')).join(''))
                         ).join(''))

@@ -101,8 +101,8 @@ cli:
     #            prop: propertyName
     #          flatten: true
     polymorphism:
-        expand-as-resource: false
-    auto-parameter-hidden: true
+        expand-as-resource: true
+    auto-parameter-hidden: false
     naming:
         cli:
             appliedTo:

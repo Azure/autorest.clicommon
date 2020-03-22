@@ -173,6 +173,9 @@ export async function processRequest(host: Host) {
         let rd = new PolyAsResourceModifier(session);
         rd.process();
     }
+    else {
+        Helper.logWarning("cli.polymorphism.expand-as-resource is not true, poly-resource will be ignored");
+    }
 
     Helper.dumper.dumpCodeModel('poly-as-resource-post');
 
