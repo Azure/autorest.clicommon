@@ -8,6 +8,7 @@ export class NodeHelper {
     private static readonly DESCRIPTION: string = "description";
     private static readonly CLI_KEY: string = "cliKey";
     private static readonly CLI_COMPLEXITY: string = "cli-complexity";
+    private static readonly CLI_IS_VISIBLE: string = "cli-is-visible";
     private static readonly JSON: string = "json";
     public static readonly FLATTEN_FLAG: string = 'x-ms-client-flatten';
     public static readonly DISCRIMINATOR_FLAG: string = 'discriminator';
@@ -18,6 +19,7 @@ export class NodeHelper {
     private static readonly POLY_AS_PARAM_ORIGINIAL_PARAMETER = 'cli-poly-as-param-original-parameter';
     private static readonly POLY_AS_PARAM_EXPANDED = 'cli-poly-asparam-expanded';
 
+    private static visitedKeyDict = {};
 
     /**
      * Check whether the obj has discriminator property
@@ -155,6 +157,18 @@ export class NodeHelper {
 
     public static getComplexity(node: M4Node): CliCommonSchema.CodeModel.Complexity {
         return NodeHelper.getCliProperty(node, NodeHelper.CLI_COMPLEXITY, () => undefined);
+    }
+
+    public static setIsVisibleFlag(node: M4Node, visiblity: CliCommonSchema.CodeModel.Visibility) {
+        NodeHelper.setCliProperty(node, NodeHelper.CLI_IS_VISIBLE, this.visitedKeyDict);
+    }
+
+    public static getIsVisibleFlag(node: M4Node): CliCommonSchema.CodeModel.Visibility {
+        return NodeHelper.getCliProperty(node, NodeHelper.CLI_IS_VISIBLE, () => undefined);
+    }
+
+    public static checkVisibility(prop: Property): boolean {
+        return (!prop.readOnly) && (!NodeHelper.getCliProperty(prop, 'removed', () => false)) && (!NodeHelper.getCliProperty(prop, 'hidden', () => false));
     }
 
     /**

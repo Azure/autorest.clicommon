@@ -30,7 +30,7 @@ export class PolyAsResourceModifier {
      * a simple object clone by using Json serialize and parse
      * @param obj
      */
-    private cloneObject<T>(obj: T) : T {
+    private cloneObject<T>(obj: T): T {
         return JSON.parse(JSON.stringify(obj)) as T;
     }
 
@@ -67,7 +67,7 @@ export class PolyAsResourceModifier {
                     NodeHelper.setPolyAsResourceBaseSchema(vp, baseSchema);
                 }
             }
-            
+
             return vp;
         };
 
@@ -90,8 +90,14 @@ export class PolyAsResourceModifier {
         NodeHelper.setCliKey(op2, newOpName);
         NodeHelper.setCliName(op2, newOpName);
         op2.extensions = this.cloneObjectTopLevel(op2.extensions);
-        op2.parameters = op2.parameters.map(p => cloneParam(p));
+        op2.parameters = op2.parameters.map(p => {
+            if (this.session.model.findGlobalParameter(pp => pp === p))
+                return p;
+            else
+                return cloneParam(p)
+        });
         op2.requests = op2.requests.map(r => cloneRequest(r));
+        op2.updateSignatureParameters();
         NodeHelper.setPolyAsResourceParam(op2, polyParam);
         // Do we need to deep copy response? seems no need
 
@@ -121,7 +127,7 @@ export class PolyAsResourceModifier {
                 if (allPolyParam.length > 1) {
                     throw Error('multiple polymorphism parameter as resource found: ' + allPolyParam.map(p => p.language['cli']));
                 }
-                
+
                 let polyParam = allPolyParam[0];
                 let baseSchema = polyParam.schema as ObjectSchema;
                 let allSubClass = baseSchema.discriminator.all;
@@ -139,11 +145,12 @@ export class PolyAsResourceModifier {
 
                     let op2: Operation = this.cloneOperationForSubclass(op, this.buildSubclassOperationName(op, key), baseSchema, subClass);
                     g.addOperation(op2);
+                    Helper.logDebug(`${g.language.default.name}/${op.language.default.name} cloned for subclass ${key}`);
 
                     let polyParam = NodeHelper.getPolyAsResourceParam(op2);
                     if (isNullOrUndefined(polyParam))
                         throw Error("No poly parameter found? Operation: " + op.language.default.name);
-    
+
                     let req = getDefaultRequest(op2);
                     if (NodeHelper.getJson(subClass) !== true) {
                         FlattenHelper.flattenParameter(req, polyParam, `${subClass.discriminatorValue}_`);
