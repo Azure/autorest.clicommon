@@ -22,10 +22,6 @@ export class PolyAsResourceModifier {
         return (NodeHelper.isPolyAsResource(param));
     }
 
-    private buildSubclassOperationName(op: Operation, subClassName: string) {
-        return `${op.language.default.name}_${subClassName}`;
-    }
-
     /**
      * a simple object clone by using Json serialize and parse
      * @param obj
@@ -42,7 +38,7 @@ export class PolyAsResourceModifier {
         return r;
     }
 
-    private cloneOperationForSubclass(op: Operation, newOpName: string, baseSchema: ObjectSchema, subSchema: ObjectSchema) {
+    private cloneOperationForSubclass(op: Operation, newDefaultName: string, newCliKey: string, newCliName: string, baseSchema: ObjectSchema, subSchema: ObjectSchema) {
 
         let polyParam: Parameter = null;
 
@@ -81,14 +77,14 @@ export class PolyAsResourceModifier {
         }
 
         let op2 = new Operation(
-            newOpName,
+            newDefaultName,
             '',
             op
         );
         op2.language = this.cloneObject(op2.language);
-        op2.language.default.name = newOpName;
-        NodeHelper.setCliKey(op2, newOpName);
-        NodeHelper.setCliName(op2, newOpName);
+        op2.language.default.name = newDefaultName;
+        NodeHelper.setCliKey(op2, newCliKey);
+        NodeHelper.setCliName(op2, newCliName);
         op2.extensions = this.cloneObjectTopLevel(op2.extensions);
         op2.parameters = op2.parameters.map(p => {
             if (this.session.model.findGlobalParameter(pp => pp === p))
@@ -143,7 +139,11 @@ export class PolyAsResourceModifier {
                         continue;
                     }
 
-                    let op2: Operation = this.cloneOperationForSubclass(op, this.buildSubclassOperationName(op, key), baseSchema, subClass);
+                    let op2: Operation = this.cloneOperationForSubclass(op,
+                        `${op.language.default.name}_${key}` /*defaultName*/,
+                        `${op.language.default.name}_${key}` /*cliKey*/,
+                        `${op.language.default.name}#${key}` /*cliName*/,
+                        baseSchema, subClass);
                     g.addOperation(op2);
                     Helper.logDebug(`${g.language.default.name}/${op.language.default.name} cloned for subclass ${key}`);
 
