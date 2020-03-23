@@ -110,11 +110,11 @@ class ComplexMarker {
             this.calculateObject(obj);
         });
 
-        this.session.model.schemas.dictionaries.forEach(dict => {
+        this.session.model.schemas.dictionaries?.forEach(dict => {
             this.calculateDict(dict);
         });
 
-        this.session.model.schemas.arrays.forEach(arr => {
+        this.session.model.schemas.arrays?.forEach(arr => {
             this.calculateArray(arr);
         })
 
