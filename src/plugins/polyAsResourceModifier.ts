@@ -83,8 +83,8 @@ export class PolyAsResourceModifier {
         );
         op2.language = this.cloneObject(op2.language);
         op2.language.default.name = newDefaultName;
-        NodeHelper.setCliKey(op2, newCliKey);
         NodeHelper.setCliName(op2, newCliName);
+        NodeHelper.setCliKey(op2, newCliKey);
         op2.extensions = this.cloneObjectTopLevel(op2.extensions);
         op2.parameters = op2.parameters.map(p => {
             if (this.session.model.findGlobalParameter(pp => pp === p))
@@ -141,8 +141,8 @@ export class PolyAsResourceModifier {
 
                     let op2: Operation = this.cloneOperationForSubclass(op,
                         `${op.language.default.name}_${key}` /*defaultName*/,
-                        `${op.language.default.name}_${key}` /*cliKey*/,
-                        `${op.language.default.name}#${key}` /*cliName*/,
+                        `${NodeHelper.getCliKey(op, op.language.default.name)}#${key}` /*cliKey*/,
+                        `${NodeHelper.getCliName(op, op.language.default.name)}#${key}` /*cliName*/,
                         baseSchema, subClass);
                     g.addOperation(op2);
                     Helper.logDebug(`${g.language.default.name}/${op.language.default.name} cloned for subclass ${key}`);
