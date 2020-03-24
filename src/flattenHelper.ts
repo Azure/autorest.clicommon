@@ -1,5 +1,6 @@
 import { getAllProperties, ImplementationLocation, ObjectSchema, Parameter, Property, Request, VirtualParameter } from "@azure-tools/codemodel";
 import { values } from "@azure-tools/linq";
+import { isNull, isNullOrUndefined } from "util";
 
 export class FlattenHelper {
 
@@ -33,6 +34,7 @@ export class FlattenHelper {
         // hide the original parameter
         parameter.flattened = true;
 
+        let arr: Parameter[] = [];
         for (const property of values(getAllProperties(schema))) {
             if (property.readOnly) {
                 // skip read-only properties
@@ -41,8 +43,25 @@ export class FlattenHelper {
             for (const vp of this.getFlattenedParameters(parameter, property)) {
                 vp.language.default.name = `${prefix}${vp.language.default.name}`;
                 vp.language['cli'].name = `${prefix}${vp.language['cli'].name}`;
-                request.parameters?.push(vp);
+                arr.push(vp);
             }
+        }
+
+        let arr2: Parameter[] = [];
+        let hash: Set<string> = new Set<string>();
+        // base class's property is before the subclass's
+        for (let i = 0; i < arr.length; i++) {
+            let cur = arr[i];
+            if (!hash.has(cur.language.default.name)) {
+                arr2.push(cur);
+                hash.add(cur.language.default.name);
+            }
+        }
+
+        if (arr2.length > 0) {
+            if (isNullOrUndefined(request.parameters))
+                request.parameters = [];
+            request.parameters = request.parameters.concat(arr2);
         }
     }
 
