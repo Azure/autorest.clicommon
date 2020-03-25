@@ -30,7 +30,7 @@ export class FlattenHelper {
         yield vp;
     }
 
-    private static flattenPorperties(request: Request, parameter: Parameter, schema: ObjectSchema, prefix: string) {
+    private static flattenPorperties(request: Request, parameter: Parameter, schema: ObjectSchema, path: Property[], prefix: string) {
         // hide the original parameter
         parameter.flattened = true;
         // we need this for the further flatten be recognized by python codegen
@@ -48,7 +48,7 @@ export class FlattenHelper {
                 // skip read-only properties
                 continue;
             }
-            for (const vp of this.getFlattenedParameters(parameter, property)) {
+            for (const vp of this.getFlattenedParameters(parameter, property, path)) {
                 vp.language.default.name = `${prefix}${vp.language.default.name}`;
                 vp.language['cli'].name = `${prefix}${vp.language['cli'].name}`;
                 arr.push(vp);
@@ -74,11 +74,11 @@ export class FlattenHelper {
     }
 
 
-    public static flattenParameter(req: Request, param: Parameter, prefix: string) {
+    public static flattenParameter(req: Request, param: Parameter, path: Property[], prefix: string) {
         if (!(param.schema instanceof ObjectSchema))
             throw Error(`Try to flatten non-object schema: param = '${param.language.default.name}', schema= '${param.schema.language.default.name}'`);
 
-        FlattenHelper.flattenPorperties(req, param, param.schema as ObjectSchema, prefix);
+        FlattenHelper.flattenPorperties(req, param, param.schema as ObjectSchema, path, prefix);
         req.updateSignatureParameters();
     }
 }

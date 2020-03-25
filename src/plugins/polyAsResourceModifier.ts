@@ -1,6 +1,6 @@
 import { Host, Session, startSession } from "@azure-tools/autorest-extension-base";
 import { CodeModel, Request, codeModelSchema, Metadata, ObjectSchema, isObjectSchema, Property, Extensions, Scheme, ComplexSchema, Operation, OperationGroup, Parameter, VirtualParameter, ImplementationLocation } from "@azure-tools/codemodel";
-import { isNullOrUndefined, isArray } from "util";
+import { isNullOrUndefined, isArray, isNull } from "util";
 import { Helper } from "../helper";
 import { CliConst, M4Node } from "../schema";
 import { Dumper } from "../dumper";
@@ -153,7 +153,8 @@ export class PolyAsResourceModifier {
 
                     let req = getDefaultRequest(op2);
                     if (NodeHelper.getJson(subClass) !== true) {
-                        FlattenHelper.flattenParameter(req, polyParam, `${subClass.discriminatorValue}_`);
+                        let path = isNullOrUndefined(polyParam['targetProperty']) ? [] : [polyParam['targetProperty']];
+                        FlattenHelper.flattenParameter(req, polyParam, path, `${subClass.discriminatorValue}_`);
                     }
                 }
 

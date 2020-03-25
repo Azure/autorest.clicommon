@@ -25,8 +25,11 @@ pipeline:
         input: modelerfour/identity
         output-artifact: clicommon-output
 
-    clicommon/cli-poly-as-resource-modifier:
+    clicommon/pre-cli-poly/identity:
         input: clicommon
+
+    clicommon/cli-poly-as-resource-modifier:
+        input: clicommon/pre-cli-poly/identity
         output-artifact: clicommon-poly-as-resource-modifier
 
     clicommon/cli-complex-marker:
