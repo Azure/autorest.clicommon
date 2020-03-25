@@ -33,6 +33,14 @@ export class FlattenHelper {
     private static flattenPorperties(request: Request, parameter: Parameter, schema: ObjectSchema, prefix: string) {
         // hide the original parameter
         parameter.flattened = true;
+        // we need this for the further flatten be recognized by python codegen
+        let protocal: any = {
+            http: {
+                in: 'body'
+            },
+            style: 'json'
+        };
+        parameter.protocol = protocal;
 
         let arr: Parameter[] = [];
         for (const property of values(getAllProperties(schema))) {
