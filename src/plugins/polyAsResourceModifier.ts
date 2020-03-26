@@ -95,6 +95,7 @@ export class PolyAsResourceModifier {
         op2.requests = op2.requests.map(r => cloneRequest(r));
         op2.updateSignatureParameters();
         NodeHelper.setPolyAsResourceParam(op2, polyParam);
+        NodeHelper.setPolyAsResourceOriginalOperation(op2, op);
         // Do we need to deep copy response? seems no need
 
         return op2;

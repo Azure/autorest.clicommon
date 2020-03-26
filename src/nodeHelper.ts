@@ -17,6 +17,7 @@ export class NodeHelper {
     public static readonly POLY_RESOURCE: string = 'poly-resource';
     private static readonly POLY_AS_RESOURCE_SUBCLASS_PARAM = "cli-poly-as-resource-subclass-param";
     private static readonly POLY_AS_RESOURCE_BASE_SCHEMA = 'cli-poly-as-resource-base-schema';
+    private static readonly POLY_AS_RESOURCE_ORIGINAL_OPERATION = 'cli-poly-as-resource-original-operation';
     private static readonly POLY_AS_PARAM_BASE_SCHEMA = 'cli-poly-as-param-base-schema';
     private static readonly POLY_AS_PARAM_ORIGINIAL_PARAMETER = 'cli-poly-as-param-original-parameter';
     private static readonly POLY_AS_PARAM_EXPANDED = 'cli-poly-as-param-expanded';
@@ -143,6 +144,14 @@ export class NodeHelper {
 
     public static getPolyAsResourceBaseSchema(param: Parameter): Schema {
         return NodeHelper.getExtensionsProperty(param, NodeHelper.POLY_AS_RESOURCE_BASE_SCHEMA, null);
+    }
+
+    public static setPolyAsResourceOriginalOperation(op: Operation, ori: Operation) {
+        NodeHelper.setExtensionsProperty(op, NodeHelper.POLY_AS_RESOURCE_ORIGINAL_OPERATION, ori);
+    }
+
+    public static getPolyAsResourceOriginalOperation(op: Operation): Schema {
+        return NodeHelper.getExtensionsProperty(op, NodeHelper.POLY_AS_RESOURCE_ORIGINAL_OPERATION, null);
     }
 
     public static setPolyAsParamBaseSchema(param: Parameter, base: Schema) {
