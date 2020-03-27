@@ -30,11 +30,11 @@ export class FlattenSetter {
         // by default on when the flatten_all flag is one
         if (flattenSchema === true || flattenAll === true) {
             this.codeModel.schemas.objects.forEach(o => {
-                if (!NodeHelper.isBaseClass(o)) {
+                if (!NodeHelper.HasSubClass(o)) {
                     if (!isNullOrUndefined(o.properties)) {
                         o.properties.forEach(p => {
                             if (isObjectSchema(p.schema)) {
-	                            NodeHelper.setFlatten(p, !NodeHelper.isBaseClass(p.schema as ObjectSchema), overwriteSwagger);
+                                NodeHelper.setFlatten(p, !NodeHelper.HasSubClass(p.schema as ObjectSchema), overwriteSwagger);
                             }
                         })
                     }
@@ -47,14 +47,14 @@ export class FlattenSetter {
             this.codeModel.operationGroups.forEach(group => {
                 group.operations.forEach(operation => {
 	                values(operation.parameters)
-	                    .where(p => p.protocol.http?.in === 'body' && p.implementation === 'Method')
-	                    .forEach(p => NodeHelper.setFlatten(p, !NodeHelper.isBaseClass(p.schema as ObjectSchema), overwriteSwagger));
+                        .where(p => p.protocol.http?.in === 'body' && p.implementation === 'Method')
+                        .forEach(p => NodeHelper.setFlatten(p, !NodeHelper.HasSubClass(p.schema as ObjectSchema), overwriteSwagger));
 
 	                operation.requests.forEach(request => {
 	                    if (!isNullOrUndefined(request.parameters)) {
 	                        values(request.parameters)
-	                            .where(p => p.protocol.http?.in === 'body' && p.implementation === 'Method')
-	                            .forEach(p => NodeHelper.setFlatten(p, !NodeHelper.isBaseClass(p.schema as ObjectSchema), overwriteSwagger));
+                                .where(p => p.protocol.http?.in === 'body' && p.implementation === 'Method')
+                                .forEach(p => NodeHelper.setFlatten(p, !NodeHelper.HasSubClass(p.schema as ObjectSchema), overwriteSwagger));
 	                    }
 	                });
 

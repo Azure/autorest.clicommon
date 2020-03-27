@@ -4,11 +4,13 @@ import { CodeModel, codeModelSchema, OperationGroup, Operation, Schema, ObjectSc
 import { Helper } from './helper';
 import { Modifier } from './plugins/modifier/modifier';
 import { CommonNamer } from './plugins/namer';
-import { processRequest as configTwitter } from './plugins/configTwitter';
 import { processRequest as flattenSetter } from './plugins/flattenSetter/flattenSetter';
 import { processRequest as preNamer } from './plugins/prenamer';
 import { CliConst } from './schema';
-import { isNullOrUndefined } from 'util';
+import { processRequest as polyAsResourceModifier } from './plugins/polyAsResourceModifier';
+import { processRequest as polyAsParamModifier } from './plugins/polyAsParamModifier';
+import { processRequest as complexMarker } from './plugins/complexMarker';
+import { processRequest as visibilityCleaner } from './plugins/visibilityCleaner';
 
 const extension = new AutoRestExtension();
 
@@ -40,5 +42,8 @@ extension.Add("clicommon", async host => {
 
 extension.Add("cli-flatten-setter", flattenSetter);
 extension.Add("cli-prenamer", preNamer);
-extension.Add("cli-config-twitter", configTwitter)
+extension.Add("cli-poly-as-resource-modifier", polyAsResourceModifier);
+extension.Add("cli-poly-as-param-modifier", polyAsParamModifier);
+extension.Add("cli-complex-marker", complexMarker);
+extension.Add("cli-visibility-cleaner", visibilityCleaner)
 extension.Run();

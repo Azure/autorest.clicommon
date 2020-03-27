@@ -31,6 +31,7 @@ export abstract class Action {
                 case 'hidden':
                 case 'removed':
                 case 'required':
+                case 'poly-resource':
                     arr.push(new ActionSetProperty(value, key, () => true));
                     break;
                 case 'delete':

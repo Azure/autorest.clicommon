@@ -135,6 +135,41 @@ export namespace CliCommonSchema {
     }
 
     export namespace CodeModel {
+        export enum NodeTypeFlag {
+            operationGroup = 1,
+            operation = 2,
+            parameter = 4, 
+            objectSchema = 8,
+            property = 16,
+            choiceSchema = 32,
+            choiceValue = 64
+        }
+
+        export enum Complexity {
+            unknown = 'unknown',
+            /** normal type like int, string, boolean... */
+            simple = 'simple',
+            /** object that only contains 'simple', 'simple array' properties */
+            object_simple = 'object_simple',
+            /** object that's not object_simple  */
+            object_complex = 'object_complex',
+            /** array of 'simple' */
+            array_simple = 'array_simple',
+            /** array of non-simple */
+            array_complex = 'array_complex',
+            /** dictionary of simple */
+            dictionary_simple = 'dictionary_simple',
+            /** dictionary of non-simple */
+            dictionary_complex = 'dictionary_complex'
+        }
+
+        export enum Visibility {
+            unknown = "unknown",
+            unknownInCircle = "unknownInCircle",
+            false = "false",
+            true = "true",
+        }
+
         export interface NodeDescriptor {
             operationGroupCliKey?: string;
             operationCliKey?: string;

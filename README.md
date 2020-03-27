@@ -13,9 +13,6 @@ pipeline:
     modelerfour/new-transform:
         input: clicommon/cli-flatten-setter
 	
-#    clicommon/cli-config-twitter:
-#        input: modelerfour 
-
     clicommon/cli-prenamer:
         input: modelerfour
         output-artifact: clicommon-prenamer
@@ -28,14 +25,34 @@ pipeline:
         input: modelerfour/identity
         output-artifact: clicommon-output
 
-    clicommon/identity:
+    clicommon/cli-poly-as-resource-modifier:
         input: clicommon
+        output-artifact: clicommon-poly-as-resource-modifier
+
+    clicommon/cli-complex-marker:
+        input: clicommon/cli-poly-as-resource-modifier
+        output-artifact: clicommon-complex-marker
+    
+    #clicommon/cli-poly-as-param-modifier:
+    #    input: clicommon/cli-complex-marker
+    #    output-artifact: clicommon-poly-as-param-modifier
+
+    clicommon/cli-visibility-cleaner:
+        input: clicommon/cli-complex-marker
+        output-artifact: clicommon-visibility-cleaner
+
+    clicommon/identity:
+        input: clicommon/cli-visibility-cleaner
 
     clicommon/emitter:
         input: 
           - clicommon
           - clicommon/cli-prenamer
           - clicommon/cli-flatten-setter
+          #- clicommon/cli-poly-as-param-modifier
+          - clicommon/cli-poly-as-resource-modifier
+          - clicommon/cli-complex-marker
+          - clicommon/cli-visibility-cleaner
         scope: scope-clicommon
 
 scope-clicommon:
@@ -44,6 +61,10 @@ scope-clicommon:
         - clicommon-output
         - clicommon-prenamer
         - clicommon-flatten-setter
+        - clicommon-poly-as-resource-modifier
+        #- clicommon-poly-as-param-modifier
+        - clicommon-complex-marker
+        - clicommon-visibility-cleaner
 
 modelerfour:
     #group-parameters: true
@@ -79,6 +100,12 @@ cli:
     #            type: SchemaType
     #            prop: propertyName
     #          flatten: true
+    polymorphism:
+        # if true, polymorphism parameter with 'poly-resource' marked as true will be
+        # expanded into multiple operations for each subclasses
+        expand-as-resource: true
+    # add hidden=true to all the parameters whose properties are all hidden or constant
+    auto-parameter-hidden: false
     naming:
         cli:
             appliedTo:

@@ -19,7 +19,7 @@ class PropertyInfo {
 
     constructor(public property: Property) {
         this.isFlatten = NodeHelper.isFlattened(property);
-        this.isPointToBaseClass = NodeHelper.isBaseClass(property.schema as ObjectSchema);
+        this.isPointToBaseClass = NodeHelper.HasSubClass(property.schema as ObjectSchema);
     }
 
     public toOutputString(withClass: boolean) {
@@ -46,7 +46,7 @@ class NodeInfo {
     }
 
     public refresh() {
-        this.isBaseClass = NodeHelper.isBaseClass(this.node);
+        this.isBaseClass = NodeHelper.HasSubClass(this.node);
         this.flattenProperty = [];
         this.unflattenProperty = [];
         if (!isNullOrUndefined(this.node.properties) && this.node.properties.length > 0) {
