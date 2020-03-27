@@ -119,6 +119,7 @@ cli:
                 $host: $host
                 LRO: LRO
                 rp: RP
+                db: DB
                 # workaround for modelerfour issue
                 # https://github.com/Azure/autorest.modelerfour/issues/195
                 SubscriptionId: SubscriptionId
@@ -136,6 +137,7 @@ cli:
                 $host: $host
                 LRO: LRO
                 rp: RP
+                db: DB
                 # workaround for modelerfour issue
                 SubscriptionId: SubscriptionId
             parameter: 'camel'
