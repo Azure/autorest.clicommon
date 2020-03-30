@@ -308,7 +308,7 @@ export class Helper {
                 return isUndefined(o) ? '{undefined}' : isNull(o) ? '{null}' : o.toString();
         };
 
-        let generateCliValue = (o: any, i: number) => o.language.default.name + `${isNullOrUndefined(o.schema) ? '' : '(' + o.schema.language.default.name + ')'}` +
+        let generateCliValue = (o: any, i: number) => o.language.default.name + `${isNullOrUndefined(o.schema) ? '' : ('(' + o.schema.language.default.name + '^' + o.schema.type + ')')}` +
             (isNullOrUndefined(o.language.cli) ? '' : Object.getOwnPropertyNames(o.language.cli)
                 .filter(key => o.language.cli[key] !== o.language.default[key])
                 .reduce((pv, cv, ci) => pv.concat((ci === 0 ? (NEW_LINE + tab(i) + 'cli:') : '') +
