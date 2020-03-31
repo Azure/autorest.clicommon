@@ -120,6 +120,7 @@ cli:
                 LRO: LRO
                 rp: RP
                 db: DB
+                adls: Adls
                 # workaround for modelerfour issue
                 # https://github.com/Azure/autorest.modelerfour/issues/195
                 SubscriptionId: SubscriptionId
@@ -138,6 +139,7 @@ cli:
                 LRO: LRO
                 rp: RP
                 db: DB
+                adls: Adls
                 # workaround for modelerfour issue
                 SubscriptionId: SubscriptionId
             parameter: 'camel'
