@@ -79,11 +79,9 @@ class ComplexMarker {
         if (obj.properties && obj.properties.length > 0) {
             for (let prop of obj.properties) {
                 if (isObjectSchema(prop.schema)) {
-                    let c = this.calculateObject(prop.schema);
-                    if (c == CliCommonSchema.CodeModel.Complexity.object_complex) {
-                        NodeHelper.setComplex(obj, CliCommonSchema.CodeModel.Complexity.object_complex);
-                        return CliCommonSchema.CodeModel.Complexity.object_complex;
-                    }
+                    this.calculateObject(prop.schema);
+                    NodeHelper.setComplex(obj, CliCommonSchema.CodeModel.Complexity.object_complex);
+                    return CliCommonSchema.CodeModel.Complexity.object_complex;
                 }
                 else if (prop.schema instanceof ArraySchema) {
                     let c = this.calculateArray(prop.schema);
@@ -104,7 +102,23 @@ class ComplexMarker {
 
     }
 
+    private clearComplexMarker() {
+
+    }
+
     public process() {
+
+        this.session.model.schemas.objects.forEach(obj => {
+            NodeHelper.clearComplex(obj);
+        });
+
+        this.session.model.schemas.dictionaries?.forEach(dict => {
+            NodeHelper.clearComplex(dict);
+        });
+
+        this.session.model.schemas.arrays?.forEach(arr => {
+            NodeHelper.clearComplex(arr);
+        })
 
         this.session.model.schemas.objects.forEach(obj => {
             this.calculateObject(obj);

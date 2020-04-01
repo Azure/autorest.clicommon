@@ -17,8 +17,12 @@ pipeline:
         input: modelerfour
         output-artifact: clicommon-prenamer
 
-    clicommon/cli-flatten-setter:
+    clicommon/pre/cli-complex-marker:
         input: clicommon/cli-prenamer
+        output-artifact: clicommon-complex-marker-pre
+
+    clicommon/cli-flatten-setter:
+        input: clicommon/pre/cli-complex-marker
         output-artifact: clicommon-flatten-setter
 
     clicommon:
@@ -52,6 +56,7 @@ pipeline:
           #- clicommon/cli-poly-as-param-modifier
           - clicommon/cli-poly-as-resource-modifier
           - clicommon/cli-complex-marker
+          - clicommon/pre/cli-complex-marker
           - clicommon/cli-visibility-cleaner
         scope: scope-clicommon
 
@@ -64,6 +69,7 @@ scope-clicommon:
         - clicommon-poly-as-resource-modifier
         #- clicommon-poly-as-param-modifier
         - clicommon-complex-marker
+        - clicommon-complex-marker-pre
         - clicommon-visibility-cleaner
 
 modelerfour:

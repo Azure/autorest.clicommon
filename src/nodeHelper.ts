@@ -178,8 +178,13 @@ export class NodeHelper {
         return NodeHelper.getCliProperty(param, NodeHelper.POLY_AS_PARAM_EXPANDED, () => false);
     }
 
-    public static setComplex(node: M4Node, complexity: CliCommonSchema.CodeModel.Complexity) {
+    public static setComplex(node: M4Node, complexity: CliCommonSchema.CodeModel.Complexity): CliCommonSchema.CodeModel.Complexity {
         NodeHelper.setCliProperty(node, NodeHelper.CLI_COMPLEXITY, complexity);
+        return complexity;
+    }
+
+    public static clearComplex(node: M4Node) {
+        NodeHelper.clearCliProperty(node, NodeHelper.CLI_COMPLEXITY);
     }
 
     public static getComplexity(node: M4Node): CliCommonSchema.CodeModel.Complexity {
@@ -208,6 +213,11 @@ export class NodeHelper {
         if (isNullOrUndefined(node.language[NodeHelper.CLI]))
             node.language[NodeHelper.CLI] = {};
         node.language[NodeHelper.CLI][key] = value;
+    }
+
+    public static clearCliProperty(node: M4Node, key: string): void {
+        if (!isNullOrUndefined(node.language[NodeHelper.CLI]) && !isUndefined(node.language[NodeHelper.CLI][key]))
+            delete node.language[NodeHelper.CLI][key];
     }
 
     public static getCliProperty(node: M4Node, propertyName: string, defaultWhenNotExist: () => any): any {
