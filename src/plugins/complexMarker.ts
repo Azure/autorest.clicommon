@@ -1,5 +1,5 @@
 import { Host, Session, startSession } from "@azure-tools/autorest-extension-base";
-import { CodeModel, Request, codeModelSchema, Metadata, ObjectSchema, isObjectSchema, Property, Extensions, Scheme, ComplexSchema, Operation, OperationGroup, Parameter, VirtualParameter, ImplementationLocation, ArraySchema, DictionarySchema } from "@azure-tools/codemodel";
+import { CodeModel, Request, codeModelSchema, Metadata, ObjectSchema, isObjectSchema, Property, Extensions, Scheme, ComplexSchema, Operation, OperationGroup, Parameter, VirtualParameter, ImplementationLocation, ArraySchema, DictionarySchema, AnySchema, ConstantSchema } from "@azure-tools/codemodel";
 import { isNullOrUndefined, isArray, isNull } from "util";
 import { Helper } from "../helper";
 import { CliConst, M4Node, CliCommonSchema } from "../schema";
@@ -28,7 +28,8 @@ class ComplexMarker {
 
         if (dict.elementType instanceof ObjectSchema ||
             dict.elementType instanceof ArraySchema ||
-            dict.elementType instanceof DictionarySchema) {
+            dict.elementType instanceof DictionarySchema ||
+            dict.elementType instanceof AnySchema) {
             NodeHelper.setComplex(dict, CliCommonSchema.CodeModel.Complexity.dictionary_complex);
             return CliCommonSchema.CodeModel.Complexity.dictionary_complex;
         }
@@ -52,7 +53,8 @@ class ComplexMarker {
 
         if (arr.elementType instanceof ObjectSchema ||
             arr.elementType instanceof ArraySchema ||
-            arr.elementType instanceof DictionarySchema) {
+            arr.elementType instanceof DictionarySchema ||
+            arr.elementType instanceof AnySchema) {
             NodeHelper.setComplex(arr, CliCommonSchema.CodeModel.Complexity.array_complex);
             return CliCommonSchema.CodeModel.Complexity.array_complex;
         }
@@ -73,6 +75,10 @@ class ComplexMarker {
                 return complexity;
             }
         }
+
+        if (NodeHelper.HasSubClass(obj))
+            return NodeHelper.setComplex(obj, CliCommonSchema.CodeModel.Complexity.object_complex);
+
         NodeHelper.setComplex(obj, CliCommonSchema.CodeModel.Complexity.unknown);
 
         complexity = CliCommonSchema.CodeModel.Complexity.object_simple;
@@ -80,36 +86,83 @@ class ComplexMarker {
             for (let prop of obj.properties) {
                 if (isObjectSchema(prop.schema)) {
                     this.calculateObject(prop.schema);
-                    NodeHelper.setComplex(obj, CliCommonSchema.CodeModel.Complexity.object_complex);
-                    return CliCommonSchema.CodeModel.Complexity.object_complex;
+                    return NodeHelper.setComplex(obj, CliCommonSchema.CodeModel.Complexity.object_complex);
                 }
                 else if (prop.schema instanceof ArraySchema) {
                     let c = this.calculateArray(prop.schema);
                     if (c == CliCommonSchema.CodeModel.Complexity.array_complex) {
-                        NodeHelper.setComplex(obj, CliCommonSchema.CodeModel.Complexity.object_complex);
-                        return CliCommonSchema.CodeModel.Complexity.object_complex;
+                        return NodeHelper.setComplex(obj, CliCommonSchema.CodeModel.Complexity.object_complex);
                     }
                 }
                 else if (prop.schema instanceof DictionarySchema) {
                     this.calculateDict(prop.schema);
-                    NodeHelper.setComplex(obj, CliCommonSchema.CodeModel.Complexity.object_complex);
-                    return CliCommonSchema.CodeModel.Complexity.object_complex;
+                    return NodeHelper.setComplex(obj, CliCommonSchema.CodeModel.Complexity.object_complex);
+                }
+                else if (prop.schema instanceof AnySchema) {
+                    return NodeHelper.setComplex(obj, CliCommonSchema.CodeModel.Complexity.object_complex);
                 }
             }
         }
-        NodeHelper.setComplex(obj, CliCommonSchema.CodeModel.Complexity.object_simple);
-        return CliCommonSchema.CodeModel.Complexity.object_simple;
-
+        return NodeHelper.setComplex(obj, CliCommonSchema.CodeModel.Complexity.object_simple);
     }
 
-    private clearComplexMarker() {
+    private setSimplifyIndicator(schema: ObjectSchema) {
+        let indicator: CliCommonSchema.CodeModel.SimplifyIndicator = {
+            simplifiable: true,
+            propertyCountIfSimplify: 0,
+        };
+        let impossible: CliCommonSchema.CodeModel.SimplifyIndicator = {
+            simplifiable: false,
+            propertyCountIfSimplify: 10000
+        };
+        let flag: CliCommonSchema.CodeModel.SimplifyIndicator = {
+            simplifiable: false,
+            propertyCountIfSimplify: -1
+        };
 
+        let pre = NodeHelper.getSimplifyIndicator(schema);
+        if (!isNullOrUndefined(pre) && pre.propertyCountIfSimplify === -1) {
+            // circle found
+            return NodeHelper.setSimplifyIndicator(schema, impossible);
+        }
+
+        NodeHelper.setSimplifyIndicator(schema, flag);
+
+        for (let p of schema.properties) {
+            if (p.readOnly)
+                continue;
+            if (p.schema instanceof ConstantSchema)
+                continue;
+            if (p.schema instanceof AnySchema ||
+                p.schema instanceof ArraySchema ||
+                p.schema instanceof DictionarySchema) {
+                return NodeHelper.setSimplifyIndicator(schema, impossible);
+            }
+            else if (p.schema instanceof ObjectSchema) {
+                if (NodeHelper.HasSubClass(p.schema)) {
+                    return NodeHelper.setSimplifyIndicator(schema, impossible);
+                }
+                let pi = this.setSimplifyIndicator(p.schema);
+                if (pi.simplifiable === true) {
+                    indicator.propertyCountIfSimplify += (pi.propertyCountIfSimplify);
+                }
+                else {
+                    return NodeHelper.setSimplifyIndicator(schema, impossible);
+                }
+            }
+            else {
+                indicator.propertyCountIfSimplify++;
+            }
+        }
+
+        return NodeHelper.setSimplifyIndicator(schema, indicator);
     }
 
     public process() {
 
         this.session.model.schemas.objects.forEach(obj => {
             NodeHelper.clearComplex(obj);
+            NodeHelper.clearSimplifyIndicator(obj);
         });
 
         this.session.model.schemas.dictionaries?.forEach(dict => {
@@ -122,6 +175,7 @@ class ComplexMarker {
 
         this.session.model.schemas.objects.forEach(obj => {
             this.calculateObject(obj);
+            this.setSimplifyIndicator(obj);
         });
 
         this.session.model.schemas.dictionaries?.forEach(dict => {

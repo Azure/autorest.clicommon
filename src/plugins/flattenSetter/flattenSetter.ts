@@ -25,13 +25,21 @@ export class FlattenSetter {
         this.codeModel = session.model;
     }
 
+    private canArrayObjectSimplified(schema: Schema, maxArrayObjProp: number) {
+        if (schema instanceof ObjectSchema && !NodeHelper.HasSubClass(schema)) {
+            let sim = NodeHelper.getSimplifyIndicator(schema);
+            return ((!isNullOrUndefined(sim)) && sim.simplifiable === true && sim.propertyCountIfSimplify <= maxArrayObjProp);
+        }
+        return false;
+    }
+
     /**
      * level N means this is the Nth flatten, 0 means no flatten done which means the top level
      * @param schema
      * @param info - should be pre-prepared
      * @param level
      */
-    private calcSchemaForPayloadFlatten(schema: Schema, info: flattenInfo[], level: number, required: boolean): number {
+    private calcSchemaForPayloadFlatten(schema: Schema, info: flattenInfo[], level: number, required: boolean, maxArrayObjProp: number): number {
 
         let weight = required ? 1 : 0.5;
 
@@ -49,8 +57,10 @@ export class FlattenSetter {
 
         if (schema instanceof ArraySchema) {
             increasePropCount();
-            if (NodeHelper.getComplexity(schema) === CliCommonSchema.CodeModel.Complexity.array_complex)
-                increaseComplexity();
+            if (NodeHelper.getComplexity(schema) === CliCommonSchema.CodeModel.Complexity.array_complex) {
+                if (!this.canArrayObjectSimplified(schema, maxArrayObjProp))
+                    increaseComplexity();
+            }
         }
         else if (schema instanceof DictionarySchema) {
             increasePropCount();
@@ -78,7 +88,7 @@ export class FlattenSetter {
                     if (prop.readOnly)
                         continue;
                     if (level + 1 < info.length) {
-                        r = this.calcSchemaForPayloadFlatten(prop.schema, info, level + 1, prop.required);
+                        r = this.calcSchemaForPayloadFlatten(prop.schema, info, level + 1, prop.required, maxArrayObjProp);
                     }
                 }
             }
@@ -89,13 +99,13 @@ export class FlattenSetter {
         return r;
     }
 
-    private calcPayloadFlatten(param: Parameter, maxLevel: number, maxPropCount: number, maxComplexity: number): number {
+    private calcPayloadFlatten(param: Parameter, maxLevel: number, maxPropCount: number, maxComplexity: number, maxArrayObjProp): number {
         let defaultLevel = 1;
         let info: flattenInfo[] = [];
         for (let i = maxLevel; i >= 0; i--)
             info.push(new flattenInfo());
 
-        let r = this.calcSchemaForPayloadFlatten(param.schema, info, 0, true);
+        let r = this.calcSchemaForPayloadFlatten(param.schema, info, 0, true, maxArrayObjProp);
 
         for (let i = 0; i <= r; i++) {
             Helper.logDebug(`Level-${i}: propCount=${info[i].propCount}, complexity=${info[i].complexity}`)
@@ -104,7 +114,7 @@ export class FlattenSetter {
         for (let i = r; i >= 0; i--) {
             if (info[i].propCount <= maxPropCount && info[i].complexity <= maxComplexity) {
                 if (i == 0 && NodeHelper.getComplexity(param.schema) === CliCommonSchema.CodeModel.Complexity.object_simple) {
-                    Helper.logDebug(`flatten to level ${i} and ajusted to 1 for top level simple object with maxLevel=${maxLevel}, maxPropCount=${maxPropCount}, maxComplexity=${maxComplexity}`);
+                    Helper.logDebug(`flatten to level ${i} and adjusted to 1 for top level simple object with maxLevel=${maxLevel}, maxPropCount=${maxPropCount}, maxComplexity=${maxComplexity}`);
                     return 1;
                 }
                 else {
@@ -117,7 +127,7 @@ export class FlattenSetter {
         return defaultLevel;
     }
 
-    private flattenSchemaFromPayload(schema: Schema, curLevel: number, maxLevel: number, overwritten: boolean) {
+    private flattenSchemaFromPayload(schema: Schema, curLevel: number, maxLevel: number, overwritten: boolean, maxArrayObjProp: number) {
 
         if (curLevel >= maxLevel)
             return;
@@ -131,17 +141,25 @@ export class FlattenSetter {
                 if (!NodeHelper.HasSubClass(prop.schema) && NodeHelper.getComplexity(prop.schema) !== CliCommonSchema.CodeModel.Complexity.object_simple)
                     NodeHelper.setFlatten(prop, true, overwritten);
             }
-            this.flattenSchemaFromPayload(prop.schema, curLevel + 1, maxLevel, overwritten);
+            else if (prop.schema instanceof ArraySchema) {
+                if (this.canArrayObjectSimplified(prop.schema.elementType, maxArrayObjProp)) {
+                    // put 32 as max flatten level for array object flatten here just in case, 
+                    // it should be big enough value for array object flattening, but handle unexpected circle
+                    // situation though it's not expected
+                    this.flattenSchemaFromPayload(prop.schema.elementType, curLevel, Math.max(32, maxLevel), false, maxArrayObjProp);
+                }
+            }
+            this.flattenSchemaFromPayload(prop.schema, curLevel + 1, maxLevel, overwritten, maxArrayObjProp);
         }
 
     }
 
-    private flattenPayload(param: Parameter, maxLevel: number, maxPropCount: number, maxComplexity: number, overwritten: boolean) {
+    private flattenPayload(param: Parameter, maxLevel: number, maxPropCount: number, maxComplexity: number, overwritten: boolean, maxArrayObjProp: number) {
 
-        let r = this.calcPayloadFlatten(param, maxLevel, maxPropCount, maxComplexity);
+        let r = this.calcPayloadFlatten(param, maxLevel, maxPropCount, maxComplexity, maxArrayObjProp);
         if (r > 0) {
             NodeHelper.setFlatten(param, true, overwritten);
-            this.flattenSchemaFromPayload(param.schema, 1, r, overwritten);
+            this.flattenSchemaFromPayload(param.schema, 1, r, overwritten, maxArrayObjProp);
         }
     }
 
@@ -168,6 +186,7 @@ export class FlattenSetter {
         let maxPropCount = await this.session.getValue(CliConst.CLI_FLATTEN_SET_FLATTEN_PAYLOAD_MAX_PROP_KEY, 32);
         let maxLevel = await this.session.getValue(CliConst.CLI_FLATTEN_SET_FLATTEN_PAYLOAD_MAX_LEVEL_KEY, 5);
         let maxComplexity = await this.session.getValue(CliConst.CLI_FLATTEN_SET_FLATTEN_PAYLOAD_MAX_COMPLEXITY_KEY, 1);
+        let maxArrayPropCount = await this.session.getValue(CliConst.CLI_FLATTEN_SET_FLATTEN_PAYLOAD_MAX_ARRAY_OBJECT_PROP_KEY, 8);
         let flattenPayload = await this.session.getValue(CliConst.CLI_FLATTEN_SET_FLATTEN_PAYLOAD_KEY, false);
 
         if (flattenPayload === true || flattenAll === true) {
@@ -178,7 +197,7 @@ export class FlattenSetter {
                         .forEach(p => {
                             if (p.schema instanceof ObjectSchema && !NodeHelper.HasSubClass(p.schema)) {
                                 Helper.logDebug(`Try to set flatten for ${group.language.default.name}/${operation.language.default.name}/${p.language.default.name}`);
-                                this.flattenPayload(p, maxLevel, maxPropCount, maxComplexity, overwriteSwagger);
+                                this.flattenPayload(p, maxLevel, maxPropCount, maxComplexity, overwriteSwagger, maxArrayPropCount);
                             }
                         });
 
@@ -187,9 +206,10 @@ export class FlattenSetter {
                             values(request.parameters)
                                 .where(p => p.protocol.http?.in === 'body' && p.implementation === 'Method')
                                 .forEach(p => {
-                                    if (p.schema instanceof ObjectSchema && !NodeHelper.HasSubClass(p.schema))
+                                    if (p.schema instanceof ObjectSchema && !NodeHelper.HasSubClass(p.schema)) {
                                         Helper.logDebug(`Try to set flatten for ${group.language.default.name}/${operation.language.default.name}/${p.language.default.name}`);
-                                    this.flattenPayload(p, maxLevel, maxPropCount, maxComplexity, overwriteSwagger);
+                                        this.flattenPayload(p, maxLevel, maxPropCount, maxComplexity, overwriteSwagger, maxArrayPropCount);
+                                    }
                                 });
                         }
                     });

@@ -10,6 +10,7 @@ export class NodeHelper {
     private static readonly CLI_HIDDEN: string = "hidden";
     private static readonly CLI_REMOVED: string = "removed";
     private static readonly CLI_COMPLEXITY: string = "cli-complexity";
+    private static readonly CLI_SIMPLIFIER_INDICATOR: string = "cli-simplify-indicator";
     private static readonly CLI_IS_VISIBLE: string = "cli-is-visible";
     private static readonly JSON: string = "json";
     public static readonly FLATTEN_FLAG: string = 'x-ms-client-flatten';
@@ -256,5 +257,18 @@ export class NodeHelper {
                 return defaultWhenNotExist();
         }
         return node.extensions[propertyName];
+    }
+
+    public static setSimplifyIndicator(schema: ObjectSchema, indicator: CliCommonSchema.CodeModel.SimplifyIndicator): CliCommonSchema.CodeModel.SimplifyIndicator {
+        this.setCliProperty(schema, this.CLI_SIMPLIFIER_INDICATOR, indicator);
+        return indicator;
+    }
+
+    public static getSimplifyIndicator(schema: ObjectSchema): CliCommonSchema.CodeModel.SimplifyIndicator {
+        return this.getCliProperty(schema, this.CLI_SIMPLIFIER_INDICATOR, () => undefined);
+    }
+
+    public static clearSimplifyIndicator(schema: ObjectSchema) {
+        return this.clearCliProperty(schema, this.CLI_SIMPLIFIER_INDICATOR);
     }
 }
