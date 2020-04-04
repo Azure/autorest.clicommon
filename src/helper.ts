@@ -342,7 +342,7 @@ export class Helper {
             `${tab()}all:${NEW_LINE}`.concat(codeModel.operationGroups.map(
                 v => `${tab(1)}- operationGroupName: ${generateCliValue(v, 2)}` +
                     `${NEW_LINE}${tab(2)}operations:${NEW_LINE}`.concat(
-                        v.operations.map(vv =>
+                        values(v.operations).selectMany(op => [op].concat(NodeHelper.getCliOperation(op, () => []))).select(vv =>
                             `${tab(2)}- operationName: ${generateCliValue(vv, 3)}` +
                             (isNullOrUndefined(NodeHelper.getPolyAsResourceParam(vv)) ? '' : `${NEW_LINE}${tab(3)}cli-poly-as-resource-subclass-param: ${NodeHelper.getCliKey(NodeHelper.getPolyAsResourceParam(vv), '<missing-clikey>')}`) +
                             (isNullOrUndefined(NodeHelper.getPolyAsResourceOriginalOperation(vv)) ? '' : `${NEW_LINE}${tab(3)}cli-poly-as-resource-original-operation: ${NodeHelper.getCliKey(NodeHelper.getPolyAsResourceOriginalOperation(vv), '<missing-clikey>')}`) +

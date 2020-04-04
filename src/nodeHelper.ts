@@ -311,4 +311,8 @@ export class NodeHelper {
         v.push(cliOperation);
         NodeHelper.setExtensionsProperty(originalOperation, this.CLI_OPERATIONS, v);
     }
+
+    public static getCliOperation(originalOperation: Operation, defaultValue: () => any): Operation[] {
+        return NodeHelper.getExtensionsProperty(originalOperation, this.CLI_OPERATIONS, defaultValue);
+    }
 }
