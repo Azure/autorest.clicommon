@@ -1,6 +1,7 @@
-import { codeModelSchema, ChoiceSchema, ChoiceValue, Extensions, CodeModel, ObjectSchema, Operation, OperationGroup, Parameter, Property, SealedChoiceSchema, Schema, ConstantSchema, SchemaType } from "@azure-tools/codemodel";
+import { codeModelSchema, ChoiceSchema, ChoiceValue, Extensions, CodeModel, ObjectSchema, Operation, OperationGroup, Parameter, Property, SealedChoiceSchema, Schema, ConstantSchema, SchemaType, ArraySchema, DictionarySchema } from "@azure-tools/codemodel";
 import { isArray, isNull, isNullOrUndefined, isObject, isString, isUndefined } from "util";
 import { CliConst, M4Node, M4NodeType, NamingType, CliCommonSchema } from "./schema";
+import { Dictionary } from "@azure-tools/codegen/node_modules/@azure-tools/linq";
 
 export class NodeHelper {
     private static readonly CLI: string = "cli";
@@ -11,7 +12,10 @@ export class NodeHelper {
     private static readonly CLI_REMOVED: string = "removed";
     private static readonly CLI_COMPLEXITY: string = "cli-complexity";
     private static readonly CLI_SIMPLIFIER_INDICATOR: string = "cli-simplify-indicator";
+    private static readonly CLI_IN_CIRCLE: string = "cli-in-circle";
+    private static readonly CLI_MARK: string = "cli-mark";
     private static readonly CLI_IS_VISIBLE: string = "cli-is-visible";
+    private static readonly CLI_OPERATIONS: string = "cli-operations";
     private static readonly JSON: string = "json";
     public static readonly FLATTEN_FLAG: string = 'x-ms-client-flatten';
     public static readonly DISCRIMINATOR_FLAG: string = 'discriminator';
@@ -101,6 +105,10 @@ export class NodeHelper {
 
     public static getCliName(node: M4Node, defaultValue: string) {
         return isNullOrUndefined(node?.language[NodeHelper.CLI]) ? defaultValue : node.language[NodeHelper.CLI][NodeHelper.NAME];
+    }
+
+    public static getDefaultNameWithType(node: ObjectSchema | DictionarySchema | ArraySchema) {
+        return `${node.language.default.name}(${node instanceof ObjectSchema ? node.type : node instanceof DictionarySchema ? (node.elementType.language.default.name + '^dictionary') : (node.elementType.language.default.name + '^array')})`;
     }
 
     public static setHidden(node: M4Node, value: boolean) {
@@ -270,5 +278,38 @@ export class NodeHelper {
 
     public static clearSimplifyIndicator(schema: ObjectSchema) {
         return this.clearCliProperty(schema, this.CLI_SIMPLIFIER_INDICATOR);
+    }
+
+    public static setInCircle(schema: ObjectSchema | ArraySchema | DictionarySchema, inCircle: boolean): boolean {
+        this.setCliProperty(schema, this.CLI_IN_CIRCLE, inCircle);
+        return inCircle;
+    }
+
+    public static getInCircle(schema: ObjectSchema | ArraySchema | DictionarySchema): boolean {
+        return this.getCliProperty(schema, this.CLI_IN_CIRCLE, () => undefined);
+    }
+
+    public static clearInCircle(schema: ObjectSchema | ArraySchema | DictionarySchema) {
+        return this.clearCliProperty(schema, this.CLI_IN_CIRCLE);
+    }
+
+
+    public static setMark(node: M4Node, mark: string): string {
+        NodeHelper.setCliProperty(node, NodeHelper.CLI_MARK, mark);
+        return mark;
+    }
+
+    public static getMark(node: M4Node): string {
+        return NodeHelper.getCliProperty(node, NodeHelper.CLI_MARK, () => undefined);
+    }
+
+    public static clearMark(node: M4Node) {
+        NodeHelper.clearCliProperty(node, NodeHelper.CLI_MARK);
+    }
+
+    public static addCliOperation(originalOperation: Operation, cliOperation: Operation) {
+        let v : Operation[] = NodeHelper.getExtensionsProperty(originalOperation, this.CLI_OPERATIONS, () => []);
+        v.push(cliOperation);
+        NodeHelper.setExtensionsProperty(originalOperation, this.CLI_OPERATIONS, v);
     }
 }

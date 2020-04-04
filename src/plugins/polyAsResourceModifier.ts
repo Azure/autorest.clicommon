@@ -111,7 +111,7 @@ export class PolyAsResourceModifier {
 
             // we need to modify the operations array, so get a copy of it first
             let operations = g.operations.filter(op => op.requests?.length == 1);
-
+            
             operations.forEach(op => {
 
                 let request = getDefaultRequest(op);
@@ -145,8 +145,9 @@ export class PolyAsResourceModifier {
                         `${NodeHelper.getCliKey(op, op.language.default.name)}#${key}` /*cliKey*/,
                         `${NodeHelper.getCliName(op, op.language.default.name)}#${key}` /*cliName*/,
                         baseSchema, subClass);
-                    g.addOperation(op2);
+                    
                     Helper.logDebug(`${g.language.default.name}/${op.language.default.name} cloned for subclass ${key}`);
+                    NodeHelper.addCliOperation(op, op2);
 
                     let polyParam = NodeHelper.getPolyAsResourceParam(op2);
                     if (isNullOrUndefined(polyParam))
@@ -155,7 +156,7 @@ export class PolyAsResourceModifier {
                     let req = getDefaultRequest(op2);
                     if (NodeHelper.getJson(subClass) !== true) {
                         let path = isNullOrUndefined(polyParam['targetProperty']) ? [] : [polyParam['targetProperty']];
-                        FlattenHelper.flattenParameter(req, polyParam, path, `${subClass.discriminatorValue}_`);
+                        FlattenHelper.flattenParameter(req, polyParam, path, `${subClass.discriminatorValue.toLowerCase()}_`);
                     }
                 }
 

@@ -138,7 +138,9 @@ export class FlattenSetter {
             if (prop.readOnly)
                 continue;
             if (prop.schema instanceof ObjectSchema) {
-                if (!NodeHelper.HasSubClass(prop.schema) && NodeHelper.getComplexity(prop.schema) !== CliCommonSchema.CodeModel.Complexity.object_simple)
+                if (!NodeHelper.HasSubClass(prop.schema) &&
+                    NodeHelper.getComplexity(prop.schema) !== CliCommonSchema.CodeModel.Complexity.object_simple &&
+                    NodeHelper.getInCircle(prop.schema) !== true)
                     NodeHelper.setFlatten(prop, true, overwritten);
             }
             else if (prop.schema instanceof ArraySchema) {

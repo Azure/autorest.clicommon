@@ -1,10 +1,10 @@
 import { Host, Session, startSession } from "@azure-tools/autorest-extension-base";
-import { CodeModel, Request, codeModelSchema, Metadata, ObjectSchema, isObjectSchema, Property, Extensions, Scheme, ComplexSchema, Operation, OperationGroup, Parameter, VirtualParameter, ImplementationLocation, ArraySchema, DictionarySchema, AnySchema, ConstantSchema } from "@azure-tools/codemodel";
+import { CodeModel, Request, codeModelSchema, Metadata, ObjectSchema, isObjectSchema, Property, Extensions, Scheme, ComplexSchema, Operation, OperationGroup, Parameter, VirtualParameter, ImplementationLocation, ArraySchema, DictionarySchema, AnySchema, ConstantSchema, getAllProperties } from "@azure-tools/codemodel";
 import { isNullOrUndefined, isArray, isNull } from "util";
 import { Helper } from "../helper";
 import { CliConst, M4Node, CliCommonSchema } from "../schema";
 import { Dumper } from "../dumper";
-import { Dictionary, values } from '@azure-tools/linq';
+import { values } from '@azure-tools/linq';
 import { NodeHelper } from "../nodeHelper";
 import { FlattenHelper } from "../flattenHelper";
 
@@ -128,7 +128,7 @@ class ComplexMarker {
 
         NodeHelper.setSimplifyIndicator(schema, flag);
 
-        for (let p of schema.properties) {
+        for (let p of getAllProperties(schema)) {
             if (p.readOnly)
                 continue;
             if (p.schema instanceof ConstantSchema)
@@ -158,34 +158,89 @@ class ComplexMarker {
         return NodeHelper.setSimplifyIndicator(schema, indicator);
     }
 
+    public setInCircle(schema: ObjectSchema | DictionarySchema | ArraySchema, stack: (ObjectSchema | DictionarySchema | ArraySchema)[], tag: string) {
+
+        let flag = NodeHelper.getMark(schema);
+        if (!isNullOrUndefined(flag)) {
+            if (flag === tag) {
+                // we find a circle
+                let msg = "Circle Found: " + NodeHelper.getDefaultNameWithType(schema);
+                for (let i = stack.length - 1; i >= 0; i--) {
+                    msg += '->' + NodeHelper.getDefaultNameWithType(stack[i]);
+                    NodeHelper.setInCircle(stack[i], true);
+                    if (stack[i] === schema)
+                        break;
+                }
+                Helper.logDebug(msg);
+            }
+            else {
+                // we have been here before when iterating other schema
+            }
+        }
+        else {
+            NodeHelper.setMark(schema, tag);
+
+            if (schema instanceof ArraySchema || schema instanceof DictionarySchema) {
+                if (schema.elementType instanceof ObjectSchema ||
+                    schema.elementType instanceof DictionarySchema ||
+                    schema.elementType instanceof ArraySchema) {
+                    stack.push(schema);
+                    this.setInCircle(schema.elementType, stack, tag);
+                    stack.splice(stack.length - 1, 1);
+                }
+            }
+            else if (schema instanceof ObjectSchema) {
+                for (let prop of getAllProperties(schema)) {
+                    if (prop.schema instanceof ObjectSchema ||
+                        prop.schema instanceof DictionarySchema ||
+                        prop.schema instanceof ArraySchema) {
+                        stack.push(schema);
+                        this.setInCircle(prop.schema, stack, tag);
+                        stack.splice(stack.length - 1, 1);
+                    }
+                }
+            }
+        }
+        NodeHelper.setMark(schema, "checked");
+    }
+
     public process() {
 
         this.session.model.schemas.objects.forEach(obj => {
             NodeHelper.clearComplex(obj);
             NodeHelper.clearSimplifyIndicator(obj);
+            NodeHelper.clearMark(obj);
         });
 
         this.session.model.schemas.dictionaries?.forEach(dict => {
             NodeHelper.clearComplex(dict);
+            NodeHelper.clearMark(dict);
         });
 
         this.session.model.schemas.arrays?.forEach(arr => {
             NodeHelper.clearComplex(arr);
+            NodeHelper.clearMark(arr);
         })
 
+        let tag = 1;
         this.session.model.schemas.objects.forEach(obj => {
             this.calculateObject(obj);
             this.setSimplifyIndicator(obj);
+            this.setInCircle(obj, [], tag.toString());
+            tag++;
         });
 
         this.session.model.schemas.dictionaries?.forEach(dict => {
             this.calculateDict(dict);
+            this.setInCircle(dict, [], tag.toString());
+            tag++;
         });
 
         this.session.model.schemas.arrays?.forEach(arr => {
             this.calculateArray(arr);
+            this.setInCircle(arr, [], tag.toString());
+            tag++;
         })
-
     }
 }
 
