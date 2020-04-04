@@ -135,18 +135,19 @@ export class PolyAsResourceModifier {
                         Helper.logWarning("subclass is not ObjectSchema: " + subClass.language.default.name);
                         continue;
                     }
+                    let discriminatorValue = NodeHelper.GetDiscriminatorValue(subClass);
                     if (NodeHelper.HasSubClass(subClass)) {
                         Helper.logWarning("skip subclass which also has subclass: " + subClass.language.default.name);
                         continue;
                     }
 
                     let op2: Operation = this.cloneOperationForSubclass(op,
-                        `${op.language.default.name}_${key}` /*defaultName*/,
-                        `${NodeHelper.getCliKey(op, op.language.default.name)}#${key}` /*cliKey*/,
-                        `${NodeHelper.getCliName(op, op.language.default.name)}#${key}` /*cliName*/,
+                        `${op.language.default.name}_${discriminatorValue}` /*defaultName*/,
+                        `${NodeHelper.getCliKey(op, op.language.default.name)}#${discriminatorValue}` /*cliKey*/,
+                        `${NodeHelper.getCliName(op, op.language.default.name)}#${discriminatorValue}` /*cliName*/,
                         baseSchema, subClass);
                     
-                    Helper.logDebug(`${g.language.default.name}/${op.language.default.name} cloned for subclass ${key}`);
+                    Helper.logDebug(`${g.language.default.name}/${op.language.default.name} cloned for subclass ${discriminatorValue}`);
                     NodeHelper.addCliOperation(op, op2);
 
                     let polyParam = NodeHelper.getPolyAsResourceParam(op2);
@@ -156,7 +157,7 @@ export class PolyAsResourceModifier {
                     let req = getDefaultRequest(op2);
                     if (NodeHelper.getJson(subClass) !== true) {
                         let path = isNullOrUndefined(polyParam['targetProperty']) ? [] : [polyParam['targetProperty']];
-                        FlattenHelper.flattenParameter(req, polyParam, path, `${subClass.discriminatorValue}_`);
+                        FlattenHelper.flattenParameter(req, polyParam, path, `${discriminatorValue}_`);
                     }
                 }
 

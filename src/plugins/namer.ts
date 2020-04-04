@@ -47,6 +47,13 @@ export class CommonNamer {
         if (isNullOrUndefined(obj.language['cli']['description']))
             obj.language['cli']['description'] = obj.language.default.description;
 
+        if (!isNullOrUndefined(obj['discriminatorValue'])) {
+            let dv: string = obj['discriminatorValue'];
+            // dv should be in pascal format, let's do a simple convert to snake
+            let newValue = dv.replace(/([A-Z][a-z0-9]+)|([A-Z]+(?=[A-Z][a-z0-9]+))|([A-Z]+$)/g, '_$1$2$3').substr(1).toLowerCase();
+            obj.language.cli.discriminatorValue = newValue;
+        }
+
         let lan = 'cli';
         if (!this.flag.has(obj.language[lan])) {
             this.flag.add(obj.language[lan]);

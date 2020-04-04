@@ -18,6 +18,7 @@ export class NodeHelper {
     private static readonly JSON: string = "json";
     public static readonly FLATTEN_FLAG: string = 'x-ms-client-flatten';
     public static readonly DISCRIMINATOR_FLAG: string = 'discriminator';
+    public static readonly CLI_DISCRIMINATOR_VALUE: string = 'discriminatorValue';
     public static readonly POLY_RESOURCE: string = 'poly-resource';
     private static readonly POLY_AS_RESOURCE_SUBCLASS_PARAM = "cli-poly-as-resource-subclass-param";
     private static readonly POLY_AS_RESOURCE_BASE_SCHEMA = 'cli-poly-as-resource-base-schema';
@@ -34,6 +35,10 @@ export class NodeHelper {
      */
     public static HasSubClass(node: ObjectSchema) {
         return !isNullOrUndefined(node.discriminator);
+    }
+
+    public static GetDiscriminatorValue(node: ObjectSchema) {
+        return NodeHelper.getCliProperty(node, this.CLI_DISCRIMINATOR_VALUE, () => node.discriminatorValue);
     }
 
     public static setJson(node: M4Node, isJson: boolean, modifyFlatten: boolean) {
