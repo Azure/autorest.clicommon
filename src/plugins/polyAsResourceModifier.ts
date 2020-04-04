@@ -135,7 +135,7 @@ export class PolyAsResourceModifier {
                         Helper.logWarning("subclass is not ObjectSchema: " + subClass.language.default.name);
                         continue;
                     }
-                    let discriminatorValue = NodeHelper.GetDiscriminatorValue(subClass);
+                    let discriminatorValue = NodeHelper.getCliDiscriminatorValue(subClass);
                     if (NodeHelper.HasSubClass(subClass)) {
                         Helper.logWarning("skip subclass which also has subclass: " + subClass.language.default.name);
                         continue;

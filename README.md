@@ -117,7 +117,7 @@ cli:
             appliedTo:
               - name
               - alias
-              - discriminatorValue
+              - cli-discriminator-value
             singularize:
               - operationGroup
               - operation

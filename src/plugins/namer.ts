@@ -5,6 +5,7 @@ import { values, items, length, Dictionary, keys } from '@azure-tools/linq';
 import { isNullOrUndefined } from 'util';
 import { CliCommonSchema, CliConst, LanguageType, M4Node } from '../schema';
 import { Helper } from '../helper';
+import { NodeHelper } from '../nodeHelper';
 
 export class CommonNamer {
     codeModel: CodeModel
@@ -51,7 +52,7 @@ export class CommonNamer {
             let dv: string = obj['discriminatorValue'];
             // dv should be in pascal format, let's do a simple convert to snake
             let newValue = dv.replace(/([A-Z][a-z0-9]+)|([A-Z]+(?=[A-Z][a-z0-9]+))|([A-Z]+$)/g, '_$1$2$3').substr(1).toLowerCase();
-            obj.language.cli.discriminatorValue = newValue;
+            NodeHelper.setCliDiscriminatorValue(obj, newValue);
         }
 
         let lan = 'cli';
