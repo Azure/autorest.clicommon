@@ -1,7 +1,6 @@
-import { codeModelSchema, ChoiceSchema, ChoiceValue, Extensions, CodeModel, ObjectSchema, Operation, OperationGroup, Parameter, Property, SealedChoiceSchema, Schema, ConstantSchema, SchemaType, ArraySchema, DictionarySchema } from "@azure-tools/codemodel";
-import { isArray, isNull, isNullOrUndefined, isObject, isString, isUndefined } from "util";
-import { CliConst, M4Node, M4NodeType, NamingType, CliCommonSchema } from "./schema";
-import { Dictionary } from "@azure-tools/codegen/node_modules/@azure-tools/linq";
+import { ArraySchema, DictionarySchema, Extensions, ObjectSchema, Operation, Parameter, Property, Schema } from "@azure-tools/codemodel";
+import { isNullOrUndefined, isUndefined } from "util";
+import { CliCommonSchema, M4Node } from "./schema";
 
 export class NodeHelper {
     private static readonly CLI: string = "cli";
@@ -308,7 +307,7 @@ export class NodeHelper {
     }
 
     public static addCliOperation(originalOperation: Operation, cliOperation: Operation) {
-        let v : Operation[] = NodeHelper.getExtensionsProperty(originalOperation, this.CLI_OPERATIONS, () => []);
+        let v: Operation[] = NodeHelper.getExtensionsProperty(originalOperation, this.CLI_OPERATIONS, () => []);
         v.push(cliOperation);
         NodeHelper.setExtensionsProperty(originalOperation, this.CLI_OPERATIONS, v);
     }
