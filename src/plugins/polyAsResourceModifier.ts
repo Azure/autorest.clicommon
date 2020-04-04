@@ -156,7 +156,7 @@ export class PolyAsResourceModifier {
                     let req = getDefaultRequest(op2);
                     if (NodeHelper.getJson(subClass) !== true) {
                         let path = isNullOrUndefined(polyParam['targetProperty']) ? [] : [polyParam['targetProperty']];
-                        FlattenHelper.flattenParameter(req, polyParam, path, `${subClass.discriminatorValue.toLowerCase()}_`);
+                        FlattenHelper.flattenParameter(req, polyParam, path, `${subClass.discriminatorValue}_`);
                     }
                 }
 
