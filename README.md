@@ -106,6 +106,18 @@ cli:
     #            type: SchemaType
     #            prop: propertyName
     #          flatten: true
+    #    # max properties allowed from flatten
+    #    cli-flatten-payload-max-prop: 32
+    #    # max complexity allowed from flatten
+    #    #   a required json argument counted as 1
+    #    #   an optional json argument counted as 0.5
+    #    cli-flatten-payload-max-complexity: 1
+    #    # max depth of flatten
+    #    cli-flatten-payload-max-level: 5
+    #    # max properties allowed from flatten of object in array to avoid json
+    #    cli-flatten-payload-max-array-object-prop: 8
+    #    # max properties allowed from flatten of sub-class to avoid json
+    #    cli-flatten-payload-max-subclass-prop: 8
     polymorphism:
         # if true, polymorphism parameter with 'poly-resource' marked as true will be
         # expanded into multiple operations for each subclasses

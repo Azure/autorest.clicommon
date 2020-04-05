@@ -1,6 +1,7 @@
 import { ArraySchema, DictionarySchema, Extensions, ObjectSchema, Operation, Parameter, Property, Schema } from "@azure-tools/codemodel";
 import { isNullOrUndefined, isUndefined } from "util";
 import { CliCommonSchema, M4Node } from "./schema";
+import { Helper } from "./helper";
 
 export class NodeHelper {
     private static readonly CLI: string = "cli";
@@ -35,6 +36,26 @@ export class NodeHelper {
      */
     public static HasSubClass(node: ObjectSchema) {
         return !isNullOrUndefined(node.discriminator);
+    }
+
+    public static *getSubClasses(baseSchema: ObjectSchema, leafOnly: boolean) {
+
+        let allSubs = baseSchema.discriminator?.all;
+        if (isNullOrUndefined(allSubs))
+            return [];
+
+        for (let key in allSubs) {
+            let subClass = allSubs[key];
+            if (!(subClass instanceof ObjectSchema)) {
+                Helper.logWarning("subclass is not ObjectSchema: " + subClass.language.default.name);
+                continue;
+            }
+            if (NodeHelper.HasSubClass(subClass) && leafOnly) {
+                Helper.logWarning("skip subclass which also has subclass: " + subClass.language.default.name);
+                continue;
+            }
+            yield subClass;
+        }
     }
 
     public static setCliDiscriminatorValue(node: ObjectSchema, value: string) {

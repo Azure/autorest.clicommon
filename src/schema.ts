@@ -22,6 +22,7 @@ export namespace CliConst {
     export const CLI_FLATTEN_SET_FLATTEN_PAYLOAD_MAX_COMPLEXITY_KEY: string = 'cli.flatten.cli-flatten-payload-max-complexity';
     export const CLI_FLATTEN_SET_FLATTEN_PAYLOAD_MAX_LEVEL_KEY: string = 'cli.flatten.cli-flatten-payload-max-level';
     export const CLI_FLATTEN_SET_FLATTEN_PAYLOAD_MAX_ARRAY_OBJECT_PROP_KEY: string = 'cli.flatten.cli-flatten-payload-max-array-object-prop';
+    export const CLI_FLATTEN_SET_FLATTEN_PAYLOAD_MAX_SUBCLASS_PROP_KEY: string = 'cli.flatten.cli-flatten-payload-max-subclass-prop';
     export const CLI_FLATTEN_SET_FLATTEN_ALL_OVERWRITE_SWAGGER_KEY: string = 'cli.flatten.cli-flatten-all-overwrite-swagger';
 
     export const DEFAULT_OPERATION_PARAMETER_INDEX = -1;

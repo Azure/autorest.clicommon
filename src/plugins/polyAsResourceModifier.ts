@@ -127,19 +127,10 @@ export class PolyAsResourceModifier {
 
                 let polyParam = allPolyParam[0];
                 let baseSchema = polyParam.schema as ObjectSchema;
-                let allSubClass = baseSchema.discriminator.all;
 
-                for (let key in allSubClass) {
-                    let subClass = allSubClass[key];
-                    if (!(subClass instanceof ObjectSchema)) {
-                        Helper.logWarning("subclass is not ObjectSchema: " + subClass.language.default.name);
-                        continue;
-                    }
+                for (let subClass of NodeHelper.getSubClasses(baseSchema, true)) {
+
                     let discriminatorValue = NodeHelper.getCliDiscriminatorValue(subClass);
-                    if (NodeHelper.HasSubClass(subClass)) {
-                        Helper.logWarning("skip subclass which also has subclass: " + subClass.language.default.name);
-                        continue;
-                    }
 
                     let op2: Operation = this.cloneOperationForSubclass(op,
                         `${op.language.default.name}_${discriminatorValue}` /*defaultName*/,
