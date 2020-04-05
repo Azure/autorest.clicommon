@@ -111,7 +111,7 @@ export class PolyAsResourceModifier {
 
             // we need to modify the operations array, so get a copy of it first
             let operations = g.operations.filter(op => op.requests?.length == 1);
-
+            
             operations.forEach(op => {
 
                 let request = getDefaultRequest(op);
@@ -127,26 +127,19 @@ export class PolyAsResourceModifier {
 
                 let polyParam = allPolyParam[0];
                 let baseSchema = polyParam.schema as ObjectSchema;
-                let allSubClass = baseSchema.discriminator.all;
 
-                for (let key in allSubClass) {
-                    let subClass = allSubClass[key];
-                    if (!(subClass instanceof ObjectSchema)) {
-                        Helper.logWarning("subclass is not ObjectSchema: " + subClass.language.default.name);
-                        continue;
-                    }
-                    if (NodeHelper.HasSubClass(subClass)) {
-                        Helper.logWarning("skip subclass which also has subclass: " + subClass.language.default.name);
-                        continue;
-                    }
+                for (let subClass of NodeHelper.getSubClasses(baseSchema, true)) {
+
+                    let discriminatorValue = NodeHelper.getCliDiscriminatorValue(subClass);
 
                     let op2: Operation = this.cloneOperationForSubclass(op,
-                        `${op.language.default.name}_${key}` /*defaultName*/,
-                        `${NodeHelper.getCliKey(op, op.language.default.name)}#${key}` /*cliKey*/,
-                        `${NodeHelper.getCliName(op, op.language.default.name)}#${key}` /*cliName*/,
+                        `${op.language.default.name}_${discriminatorValue}` /*defaultName*/,
+                        `${NodeHelper.getCliKey(op, op.language.default.name)}#${discriminatorValue}` /*cliKey*/,
+                        `${NodeHelper.getCliName(op, op.language.default.name)}#${discriminatorValue}` /*cliName*/,
                         baseSchema, subClass);
-                    g.addOperation(op2);
-                    Helper.logDebug(`${g.language.default.name}/${op.language.default.name} cloned for subclass ${key}`);
+                    
+                    Helper.logDebug(`${g.language.default.name}/${op.language.default.name} cloned for subclass ${discriminatorValue}`);
+                    NodeHelper.addCliOperation(op, op2);
 
                     let polyParam = NodeHelper.getPolyAsResourceParam(op2);
                     if (isNullOrUndefined(polyParam))
@@ -155,7 +148,7 @@ export class PolyAsResourceModifier {
                     let req = getDefaultRequest(op2);
                     if (NodeHelper.getJson(subClass) !== true) {
                         let path = isNullOrUndefined(polyParam['targetProperty']) ? [] : [polyParam['targetProperty']];
-                        FlattenHelper.flattenParameter(req, polyParam, path, `${subClass.discriminatorValue}_`);
+                        FlattenHelper.flattenParameter(req, polyParam, path, `${discriminatorValue}_`);
                     }
                 }
 

@@ -17,8 +17,12 @@ pipeline:
         input: modelerfour
         output-artifact: clicommon-prenamer
 
-    clicommon/cli-flatten-setter:
+    clicommon/pre/cli-complex-marker:
         input: clicommon/cli-prenamer
+        output-artifact: clicommon-complex-marker-pre
+
+    clicommon/cli-flatten-setter:
+        input: clicommon/pre/cli-complex-marker
         output-artifact: clicommon-flatten-setter
 
     clicommon:
@@ -52,6 +56,7 @@ pipeline:
           #- clicommon/cli-poly-as-param-modifier
           - clicommon/cli-poly-as-resource-modifier
           - clicommon/cli-complex-marker
+          - clicommon/pre/cli-complex-marker
           - clicommon/cli-visibility-cleaner
         scope: scope-clicommon
 
@@ -64,6 +69,7 @@ scope-clicommon:
         - clicommon-poly-as-resource-modifier
         #- clicommon-poly-as-param-modifier
         - clicommon-complex-marker
+        - clicommon-complex-marker-pre
         - clicommon-visibility-cleaner
 
 modelerfour:
@@ -100,6 +106,18 @@ cli:
     #            type: SchemaType
     #            prop: propertyName
     #          flatten: true
+    #    # max properties allowed from flatten
+    #    cli-flatten-payload-max-prop: 32
+    #    # max complexity allowed from flatten
+    #    #   a required json argument counted as 1
+    #    #   an optional json argument counted as 0.5
+    #    cli-flatten-payload-max-complexity: 1
+    #    # max depth of flatten
+    #    cli-flatten-payload-max-level: 5
+    #    # max properties allowed from flatten of object in array to avoid json
+    #    cli-flatten-payload-max-array-object-prop: 8
+    #    # max properties allowed from flatten of sub-class to avoid json
+    #    cli-flatten-payload-max-subclass-prop: 8
     polymorphism:
         # if true, polymorphism parameter with 'poly-resource' marked as true will be
         # expanded into multiple operations for each subclasses
@@ -111,6 +129,7 @@ cli:
             appliedTo:
               - name
               - alias
+              - cli-discriminator-value
             singularize:
               - operationGroup
               - operation

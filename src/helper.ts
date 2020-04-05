@@ -319,6 +319,10 @@ export class Helper {
             return (isNullOrUndefined(v)) ? '' : NEW_LINE + tab(i) + NodeHelper.FLATTEN_FLAG + ': ' + v;
         };
 
+        let generatePropertyReadonlyValue = (o: any, i: number) => {
+            return (o['readOnly'] === true) ? (NEW_LINE + tab(i) + 'readOnly: true') : '';
+        };
+
         let generateDiscriminatorValueForSchema = (o: Schema, i: number) => {
             if (o instanceof ObjectSchema) {
                 let v = NodeHelper.HasSubClass(o);
@@ -338,12 +342,12 @@ export class Helper {
             `${tab()}all:${NEW_LINE}`.concat(codeModel.operationGroups.map(
                 v => `${tab(1)}- operationGroupName: ${generateCliValue(v, 2)}` +
                     `${NEW_LINE}${tab(2)}operations:${NEW_LINE}`.concat(
-                        v.operations.map(vv =>
+                        values(v.operations).selectMany(op => [op].concat(NodeHelper.getCliOperation(op, () => []))).select(vv =>
                             `${tab(2)}- operationName: ${generateCliValue(vv, 3)}` +
                             (isNullOrUndefined(NodeHelper.getPolyAsResourceParam(vv)) ? '' : `${NEW_LINE}${tab(3)}cli-poly-as-resource-subclass-param: ${NodeHelper.getCliKey(NodeHelper.getPolyAsResourceParam(vv), '<missing-clikey>')}`) +
                             (isNullOrUndefined(NodeHelper.getPolyAsResourceOriginalOperation(vv)) ? '' : `${NEW_LINE}${tab(3)}cli-poly-as-resource-original-operation: ${NodeHelper.getCliKey(NodeHelper.getPolyAsResourceOriginalOperation(vv), '<missing-clikey>')}`) +
                             `${NEW_LINE}${tab(3)}parameters:${NEW_LINE}`.concat(
-                                vv.parameters.map(vvv => `${tab(3)}- parameterName: ${generateCliValue(vvv, 4)}${generatePropertyFlattenValue(vvv, 4)}${generateDiscriminatorValueForParam(vvv, 4)}${NEW_LINE}` +
+                                vv.parameters.map(vvv => `${tab(3)}- parameterName: ${generateCliValue(vvv, 4)}${generatePropertyFlattenValue(vvv, 4)}${generatePropertyReadonlyValue(vvv, 4)}${generateDiscriminatorValueForParam(vvv, 4)}${NEW_LINE}` +
                                     (isNullOrUndefined(NodeHelper.getPolyAsResourceBaseSchema(vvv)) ? '' : `${tab(4)}cli-poly-as-resource-base-schema: ${NodeHelper.getCliKey(NodeHelper.getPolyAsResourceBaseSchema(vvv), '<baseSchemaCliKeyMissing>')}${NEW_LINE}`) +
                                     (isNullOrUndefined(NodeHelper.getPolyAsParamBaseSchema(vvv)) ? '' : `${tab(4)}cli-poly-as-param-base-schema: ${NodeHelper.getCliKey(NodeHelper.getPolyAsParamBaseSchema(vvv), '<baseSchemaCliKeyMissing>')}${NEW_LINE}`) +
                                     (isNullOrUndefined(NodeHelper.getPolyAsParamOriginalParam(vvv)) ? '' : `${tab(4)}cli-poly-as-param-expanded: ${NodeHelper.getCliKey(NodeHelper.getPolyAsParamOriginalParam(vvv), '<oriParamCliKeyMissing>')}${NEW_LINE}`) +
@@ -351,7 +355,7 @@ export class Helper {
                                         ? `${tab(4)}bodySchema: ${vvv.schema.language.default.name}${NEW_LINE}` : '')).join('')) +
                             vv.requests.map((req, index) =>
                                 isNullOrUndefined(req.parameters) ? '' :
-                                    req.parameters.map((vvv) => `${tab(3)}- parameterName[${index}]: ${generateCliValue(vvv, 4)}${generatePropertyFlattenValue(vvv, 4)}${generateDiscriminatorValueForParam(vvv, 4)}${NEW_LINE}` +
+                                    req.parameters.map((vvv) => `${tab(3)}- parameterName[${index}]: ${generateCliValue(vvv, 4)}${generatePropertyFlattenValue(vvv, 4)}${generatePropertyReadonlyValue(vvv, 4)}${generateDiscriminatorValueForParam(vvv, 4)}${NEW_LINE}` +
                                         (isNullOrUndefined(NodeHelper.getPolyAsResourceBaseSchema(vvv)) ? '' : `${tab(4)}cli-poly-as-resource-base-schema: ${NodeHelper.getCliKey(NodeHelper.getPolyAsResourceBaseSchema(vvv), '<baseSchemaCliKeyMissing>')}${NEW_LINE}`) +
                                         (isNullOrUndefined(NodeHelper.getPolyAsParamBaseSchema(vvv)) ? '' : `${tab(4)}cli-poly-as-param-base-schema: ${NodeHelper.getCliKey(NodeHelper.getPolyAsParamBaseSchema(vvv), '<baseSchemaCliKeyMissing>')}${NEW_LINE}`) +
                                         (isNullOrUndefined(NodeHelper.getPolyAsParamOriginalParam(vvv)) ? '' : `${tab(4)}cli-poly-as-param-expanded: ${NodeHelper.getCliKey(NodeHelper.getPolyAsParamOriginalParam(vvv), '<oriParamCliKeyMissing>')}${NEW_LINE}`) +
@@ -366,7 +370,7 @@ export class Helper {
             `${tab(1)}all:${NEW_LINE}`.concat(codeModel.schemas.objects.map(
                 v => `${tab(2)}- schemaName: ${generateCliValue(v, 3)}` + generateDiscriminatorValueForSchema(v, 3) +
                     `${NEW_LINE}${tab(3)}properties:${NEW_LINE}`.concat(
-                        isNullOrUndefined(v.properties) ? '' : v.properties.map(vv => `${tab(4)}- propertyName: ${generateCliValue(vv, 5)}${generatePropertyFlattenValue(vv, 5)} ${NEW_LINE}`)
+                        isNullOrUndefined(v.properties) ? '' : v.properties.map(vv => `${tab(4)}- propertyName: ${generateCliValue(vv, 5)}${generatePropertyFlattenValue(vv, 5)}${generatePropertyReadonlyValue(vv, 5)} ${NEW_LINE}`)
                             .join('')))
                 .join(''));
         s = s + `${tab()}choices:${NEW_LINE}` +
