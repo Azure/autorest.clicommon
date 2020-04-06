@@ -11,15 +11,41 @@ import { Modifier } from "../modifier/modifier";
 import { FlattenValidator } from "./flattenValidator";
 import { values, Dictionary } from "@azure-tools/linq";
 import { Z_DEFLATED } from "zlib";
+import { ActionHitCount } from "../modifier/cliDirectiveAction";
 
 class flattenInfo {
     public constructor(public propCount: number = 0, public complexity: number = 0) { }
 };
 
+interface FlattenConfig {
+    maxComplexity: number;
+    maxLevel: number;
+    maxPropCount: number;
+    maxPolyAsResourcePropCount: number;
+    maxPolyAsParamPropCount: number;
+    maxArrayPropCount: number;
+    overwriteSwagger: boolean;
+    nodeDescripter: CliCommonSchema.CodeModel.NodeDescriptor;
+}
+
+function cloneFlattenConfig(config: FlattenConfig): FlattenConfig {
+    return {
+        maxComplexity: config.maxComplexity,
+        maxLevel: config.maxLevel,
+        maxPropCount: config.maxPropCount,
+        maxPolyAsParamPropCount: config.maxPolyAsParamPropCount,
+        maxPolyAsResourcePropCount: config.maxPolyAsResourcePropCount,
+        maxArrayPropCount: config.maxArrayPropCount,
+        overwriteSwagger: config.overwriteSwagger,
+        nodeDescripter: config.nodeDescripter,
+    };
+}
+
 export class FlattenSetter {
     codeModel: CodeModel;
     cliConfig: any;
     manager: CliDirectiveManager;
+
 
     constructor(protected session: Session<CodeModel>) {
         this.codeModel = session.model;
@@ -33,10 +59,13 @@ export class FlattenSetter {
         return false;
     }
 
-    private canSubclassSimplified(schema: Schema, maxSubclassProp: number) {
+    private canSubclassSimplified(schema: Schema, flattenConfig: FlattenConfig, isPolyAsResource: boolean) {
         if (schema instanceof ObjectSchema && !isNullOrUndefined(schema.discriminatorValue) && !NodeHelper.HasSubClass(schema)) {
             let sim = NodeHelper.getSimplifyIndicator(schema);
-            return ((!isNullOrUndefined(sim)) && sim.simplifiable === true && sim.propertyCountIfSimplify <= maxSubclassProp);
+            if (isPolyAsResource)
+                return ((!isNullOrUndefined(sim)) && sim.simplifiable === true && sim.propertyCountIfSimplifyWithoutSimpleObject <= flattenConfig.maxPolyAsResourcePropCount);
+            else
+                return ((!isNullOrUndefined(sim)) && sim.simplifiable === true && sim.propertyCountIfSimplify <= flattenConfig.maxPolyAsParamPropCount);
         }
         return false;
     }
@@ -47,7 +76,7 @@ export class FlattenSetter {
      * @param info - should be pre-prepared
      * @param level
      */
-    private calcSchemaForPayloadFlatten(schema: Schema, info: flattenInfo[], level: number, required: boolean, maxArrayObjProp: number): number {
+    private calcSchemaForPayloadFlatten(schema: Schema, info: flattenInfo[], level: number, required: boolean, flattenConfig: FlattenConfig): number {
 
         let weight = required ? 1 : 0.5;
 
@@ -66,7 +95,7 @@ export class FlattenSetter {
         if (schema instanceof ArraySchema) {
             increasePropCount();
             if (NodeHelper.getComplexity(schema) === CliCommonSchema.CodeModel.Complexity.array_complex) {
-                if (!this.canArrayObjectSimplified(schema, maxArrayObjProp))
+                if (!this.canArrayObjectSimplified(schema, flattenConfig.maxArrayPropCount))
                     increaseComplexity();
             }
         }
@@ -96,7 +125,7 @@ export class FlattenSetter {
                     if (prop.readOnly)
                         continue;
                     if (level + 1 < info.length) {
-                        r = this.calcSchemaForPayloadFlatten(prop.schema, info, level + 1, prop.required, maxArrayObjProp);
+                        r = this.calcSchemaForPayloadFlatten(prop.schema, info, level + 1, prop.required, flattenConfig);
                     }
                 }
             }
@@ -107,13 +136,16 @@ export class FlattenSetter {
         return r;
     }
 
-    private calcPayloadFlatten(param: Parameter, maxLevel: number, maxPropCount: number, maxComplexity: number, maxArrayObjProp): number {
+    private calcPayloadFlatten(paramSchema: Schema, flattenConfig: FlattenConfig): number {
         let defaultLevel = 1;
         let info: flattenInfo[] = [];
+        let maxLevel = flattenConfig.maxLevel;
+        let maxComplexity = flattenConfig.maxComplexity;
+        let maxPropCount = flattenConfig.maxPropCount;
         for (let i = maxLevel; i >= 0; i--)
             info.push(new flattenInfo());
 
-        let r = this.calcSchemaForPayloadFlatten(param.schema, info, 0, true, maxArrayObjProp);
+        let r = this.calcSchemaForPayloadFlatten(paramSchema, info, 0, true, flattenConfig);
 
         for (let i = 0; i <= r; i++) {
             Helper.logDebug(`Level-${i}: propCount=${info[i].propCount}, complexity=${info[i].complexity}`)
@@ -121,7 +153,7 @@ export class FlattenSetter {
 
         for (let i = r; i >= 0; i--) {
             if (info[i].propCount <= maxPropCount && info[i].complexity <= maxComplexity) {
-                if (i == 0 && NodeHelper.getComplexity(param.schema) === CliCommonSchema.CodeModel.Complexity.object_simple) {
+                if (i == 0 && NodeHelper.getComplexity(paramSchema) === CliCommonSchema.CodeModel.Complexity.object_simple) {
                     Helper.logDebug(`flatten to level ${i} and adjusted to 1 for top level simple object with maxLevel=${maxLevel}, maxPropCount=${maxPropCount}, maxComplexity=${maxComplexity}`);
                     return 1;
                 }
@@ -135,9 +167,32 @@ export class FlattenSetter {
         return defaultLevel;
     }
 
-    private flattenSchemaFromPayload(schema: Schema, curLevel: number, maxLevel: number, overwritten: boolean, maxArrayObjPropCount: number, maxSubclassPropCount: number) {
+    private isPolyAsResource(schema: Schema, paramName: string, flattenConfig: FlattenConfig): boolean {
 
-        if (curLevel >= maxLevel)
+        ActionHitCount.hitCount = 0;
+        let desc = flattenConfig.nodeDescripter;
+        desc.parameterCliKey = paramName;
+        this.manager.process(desc);
+        return (ActionHitCount.hitCount > 0);
+    }
+
+    private flattenPolySchema(baseSchema: ObjectSchema, paramName: string, curLevel: number, flattenSimpleObject: boolean, flattenConfig: FlattenConfig) {
+        if (NodeHelper.HasSubClass(baseSchema)) {
+            let isPolyAsResource: boolean = this.isPolyAsResource(baseSchema, paramName, flattenConfig);
+            for (let subClass of NodeHelper.getSubClasses(baseSchema, true)) {
+                if (this.canSubclassSimplified(subClass, flattenConfig, isPolyAsResource)) {
+                    let config = cloneFlattenConfig(flattenConfig);
+                    config.maxLevel = Math.max(32, config.maxLevel);
+                    Helper.logDebug(`Try to flatten poly schema ${subClass.language.default.name} from ${baseSchema.language.default.name} with paramName ${paramName}, polyAsResource=${isPolyAsResource}`)
+                    this.flattenSchemaFromPayload(subClass, curLevel, flattenSimpleObject || (!isPolyAsResource), config);
+                }
+            }
+        }
+    }
+
+    private flattenSchemaFromPayload(schema: Schema, curLevel: number, flattenSimpleObject: boolean, flattenConfig: FlattenConfig) {
+
+        if (curLevel >= flattenConfig.maxLevel)
             return;
         if (!(schema instanceof ObjectSchema))
             return;
@@ -147,35 +202,41 @@ export class FlattenSetter {
                 continue;
             if (prop.schema instanceof ObjectSchema) {
                 if (NodeHelper.HasSubClass(prop.schema)) {
-                    for (let subClass of NodeHelper.getSubClasses(prop.schema, true)) {
-                        if (this.canSubclassSimplified(subClass, maxSubclassPropCount)) {
-                            this.flattenSchemaFromPayload(subClass, curLevel, Math.max(32, maxLevel), overwritten, maxArrayObjPropCount, maxSubclassPropCount);
-                        }
-                    }
+                    this.flattenPolySchema(prop.schema, NodeHelper.getCliKey(prop, "noParamCliKey"), curLevel, flattenSimpleObject, flattenConfig);
                 }
-                else if (NodeHelper.getComplexity(prop.schema) !== CliCommonSchema.CodeModel.Complexity.object_simple && NodeHelper.getInCircle(prop.schema) !== true) {
-                    NodeHelper.setFlatten(prop, true, overwritten);
+                else if (NodeHelper.getInCircle(prop.schema) !== true) {
+                    if (flattenSimpleObject || NodeHelper.getComplexity(prop.schema) !== CliCommonSchema.CodeModel.Complexity.object_simple)
+                        NodeHelper.setFlatten(prop, true, flattenConfig.overwriteSwagger);
                 }
             }
             else if (prop.schema instanceof ArraySchema) {
-                if (this.canArrayObjectSimplified(prop.schema.elementType, maxArrayObjPropCount)) {
+                if (this.canArrayObjectSimplified(prop.schema.elementType, flattenConfig.maxArrayPropCount)) {
                     // put 32 as max flatten level for array object flatten here just in case, 
                     // it should be big enough value for array object flattening, but handle unexpected circle
                     // situation though it's not expected
-                    this.flattenSchemaFromPayload(prop.schema.elementType, curLevel, Math.max(32, maxLevel), overwritten, maxArrayObjPropCount, maxSubclassPropCount);
+                    let config = cloneFlattenConfig(flattenConfig);
+                    config.maxLevel = Math.max(32, config.maxLevel);
+                    this.flattenSchemaFromPayload(prop.schema.elementType, curLevel, true, config);
                 }
             }
-            this.flattenSchemaFromPayload(prop.schema, curLevel + 1, maxLevel, overwritten, maxArrayObjPropCount, maxSubclassPropCount);
+            this.flattenSchemaFromPayload(prop.schema, curLevel + 1, flattenSimpleObject, flattenConfig);
         }
-
     }
 
-    private flattenPayload(param: Parameter, maxLevel: number, maxPropCount: number, maxComplexity: number, overwritten: boolean, maxArrayObjProp: number, maxSubclassProp: number) {
-
-        let r = this.calcPayloadFlatten(param, maxLevel, maxPropCount, maxComplexity, maxArrayObjProp);
-        if (r > 0) {
-            NodeHelper.setFlatten(param, true, overwritten);
-            this.flattenSchemaFromPayload(param.schema, 0, r, overwritten, maxArrayObjProp, maxSubclassProp);
+    private flattenPayload(param: Parameter, flattenConfig: FlattenConfig) {
+        if (!(param.schema instanceof ObjectSchema))
+            return;
+        if (NodeHelper.HasSubClass(param.schema)) {
+            this.flattenPolySchema(param.schema, NodeHelper.getCliKey(param, "noParamCliKey"), 0, true, flattenConfig);
+        }
+        else {
+            let r = this.calcPayloadFlatten(param.schema, flattenConfig);
+            if (r > 0) {
+                NodeHelper.setFlatten(param, true, flattenConfig.overwriteSwagger);
+                let config = cloneFlattenConfig(flattenConfig);
+                config.maxLevel = r;
+                this.flattenSchemaFromPayload(param.schema, 0, false, config);
+            }
         }
     }
 
@@ -203,29 +264,75 @@ export class FlattenSetter {
         let maxLevel = await this.session.getValue(CliConst.CLI_FLATTEN_SET_FLATTEN_PAYLOAD_MAX_LEVEL_KEY, 5);
         let maxComplexity = await this.session.getValue(CliConst.CLI_FLATTEN_SET_FLATTEN_PAYLOAD_MAX_COMPLEXITY_KEY, 1);
         let maxArrayPropCount = await this.session.getValue(CliConst.CLI_FLATTEN_SET_FLATTEN_PAYLOAD_MAX_ARRAY_OBJECT_PROP_KEY, 8);
-        let maxSubclassPropCount = await this.session.getValue(CliConst.CLI_FLATTEN_SET_FLATTEN_PAYLOAD_MAX_SUBCLASS_PROP_KEY, 8);
+        let maxPolyAsResourcePropCount = await this.session.getValue(CliConst.CLI_FLATTEN_SET_FLATTEN_PAYLOAD_MAX_POLY_AS_RESOURCE_PROP_KEY, 8);
+        let maxPolyAsParamPropCount = await this.session.getValue(CliConst.CLI_FLATTEN_SET_FLATTEN_PAYLOAD_MAX_POLY_AS_PARAM_PROP_KEY, 8);
         let flattenPayload = await this.session.getValue(CliConst.CLI_FLATTEN_SET_FLATTEN_PAYLOAD_KEY, false);
 
+        let cliDirectives = await this.session.getValue(CliConst.CLI_DIRECTIVE_KEY, []);
+        this.manager = new CliDirectiveManager();
+        await this.manager.LoadDirective(
+            cliDirectives.filter((d: CliCommonSchema.CliDirective.Directive) => (!isNullOrUndefined(d["poly-resource"]) && d["poly-resource"] === true))
+                .map((d: CliCommonSchema.CliDirective.Directive) => {
+                    let r: CliCommonSchema.CliDirective.Directive = {
+                        select: d.select,
+                        where: JSON.parse(JSON.stringify(d.where)),
+                        "poly-resource": d["poly-resource"],
+                        hitCount: true,
+                    };
+                    return r;
+                }));
+
+        let flattenConfig: FlattenConfig = {
+            maxComplexity: maxComplexity,
+            maxLevel: maxLevel,
+            maxPropCount: maxPropCount,
+            maxArrayPropCount: maxArrayPropCount,
+            maxPolyAsParamPropCount: maxPolyAsParamPropCount,
+            maxPolyAsResourcePropCount: maxPolyAsResourcePropCount,
+            overwriteSwagger: overwriteSwagger,
+            nodeDescripter: null,
+        };
+
+        let match = (e, v) => isNullOrUndefined(e) || Helper.matchRegex(Helper.createRegex(e), v);
         if (flattenPayload === true || flattenAll === true) {
             this.codeModel.operationGroups.forEach(group => {
                 group.operations.forEach(operation => {
                     values(operation.parameters)
                         .where(p => p.protocol.http?.in === 'body' && p.implementation === 'Method')
-                        .forEach(p => {
-                            if (p.schema instanceof ObjectSchema && !NodeHelper.HasSubClass(p.schema)) {
+                        .forEach((p) => {
+                            if (p.schema instanceof ObjectSchema) {
                                 Helper.logDebug(`Try to set flatten for ${group.language.default.name}/${operation.language.default.name}/${p.language.default.name}`);
-                                this.flattenPayload(p, maxLevel, maxPropCount, maxComplexity, overwriteSwagger, maxArrayPropCount, maxSubclassPropCount);
+
+                                flattenConfig.nodeDescripter = {
+                                    operationGroupCliKey: NodeHelper.getCliKey(group, "<noGroupCliKey>"),
+                                    operationCliKey: NodeHelper.getCliKey(operation, "<noOpCliKey>"),
+                                    parameterCliKey: NodeHelper.getCliKey(p, "noParamCliKey"),
+                                    target: p,
+                                    targetIndex: -1,
+                                    parent: operation.parameters
+                                };
+                                this.flattenPayload(p, flattenConfig);
                             }
                         });
 
-                    operation.requests.forEach(request => {
+                    operation.requests.forEach((request, index) => {
                         if (!isNullOrUndefined(request.parameters)) {
                             values(request.parameters)
                                 .where(p => p.protocol.http?.in === 'body' && p.implementation === 'Method')
                                 .forEach(p => {
-                                    if (p.schema instanceof ObjectSchema && !NodeHelper.HasSubClass(p.schema)) {
+                                    if (p.schema instanceof ObjectSchema) {
                                         Helper.logDebug(`Try to set flatten for ${group.language.default.name}/${operation.language.default.name}/${p.language.default.name}`);
-                                        this.flattenPayload(p, maxLevel, maxPropCount, maxComplexity, overwriteSwagger, maxArrayPropCount, maxSubclassPropCount);
+
+                                        flattenConfig.nodeDescripter = {
+                                            operationGroupCliKey: NodeHelper.getCliKey(group, "<noGroupCliKey>"),
+                                            operationCliKey: NodeHelper.getCliKey(operation, "<noOpCliKey>"),
+                                            parameterCliKey: NodeHelper.getCliKey(p, "noParamCliKey"),
+                                            requestIndex: index,
+                                            target: p,
+                                            targetIndex: -1,
+                                            parent: operation.parameters
+                                        };
+                                        this.flattenPayload(p, flattenConfig);
                                     }
                                 });
                         }

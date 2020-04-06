@@ -110,14 +110,18 @@ class ComplexMarker {
         let indicator: CliCommonSchema.CodeModel.SimplifyIndicator = {
             simplifiable: true,
             propertyCountIfSimplify: 0,
+            propertyCountIfSimplifyWithoutSimpleObject: 0,
         };
         let impossible: CliCommonSchema.CodeModel.SimplifyIndicator = {
             simplifiable: false,
-            propertyCountIfSimplify: 10000
+            propertyCountIfSimplify: 10000,
+            propertyCountIfSimplifyWithoutSimpleObject: 10000,
         };
         let flag: CliCommonSchema.CodeModel.SimplifyIndicator = {
             simplifiable: false,
-            propertyCountIfSimplify: -1
+            propertyCountIfSimplify: -1,
+            propertyCountIfSimplifyWithoutSimpleObject: -1,
+            
         };
 
         let pre = NodeHelper.getSimplifyIndicator(schema);
@@ -144,6 +148,10 @@ class ComplexMarker {
                 }
                 let pi = this.setSimplifyIndicator(p.schema);
                 if (pi.simplifiable === true) {
+                    if (NodeHelper.getComplexity(p.schema) === CliCommonSchema.CodeModel.Complexity.object_simple)
+                        indicator.propertyCountIfSimplifyWithoutSimpleObject++;
+                    else
+                        indicator.propertyCountIfSimplifyWithoutSimpleObject += (pi.propertyCountIfSimplifyWithoutSimpleObject)
                     indicator.propertyCountIfSimplify += (pi.propertyCountIfSimplify);
                 }
                 else {
@@ -151,6 +159,7 @@ class ComplexMarker {
                 }
             }
             else {
+                indicator.propertyCountIfSimplifyWithoutSimpleObject++;
                 indicator.propertyCountIfSimplify++;
             }
         }
@@ -225,19 +234,31 @@ class ComplexMarker {
         let tag = 1;
         this.session.model.schemas.objects.forEach(obj => {
             this.calculateObject(obj);
+            tag++;
+        });
+        this.session.model.schemas.dictionaries?.forEach(dict => {
+            this.calculateDict(dict);
+            tag++;
+        });
+        this.session.model.schemas.arrays?.forEach(arr => {
+            this.calculateArray(arr);
+            tag++;
+        })
+
+        this.session.model.schemas.objects.forEach(obj => {
             this.setSimplifyIndicator(obj);
+            tag++;
+        });
+
+        this.session.model.schemas.objects.forEach(obj => {
             this.setInCircle(obj, [], tag.toString());
             tag++;
         });
-
         this.session.model.schemas.dictionaries?.forEach(dict => {
-            this.calculateDict(dict);
             this.setInCircle(dict, [], tag.toString());
             tag++;
         });
-
         this.session.model.schemas.arrays?.forEach(arr => {
-            this.calculateArray(arr);
             this.setInCircle(arr, [], tag.toString());
             tag++;
         })
