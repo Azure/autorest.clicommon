@@ -53,12 +53,28 @@ export abstract class Action {
                 case 'json':
                     arr.push(new ActionJson(value));
                     break;
+                case 'hitcount':
+                    arr.push(new ActionHitCount(value));
+                    break;
                 default:
                     // TODO: better to log instead of throw here?
                     throw Error(`Unknown directive operation: '${key}'`);
             }
         }
         return arr;
+    }
+}
+
+export class ActionHitCount extends Action {
+
+    public static hitCount = 0;
+
+    constructor(private directiveValue: CliCommonSchema.CliDirective.ValueClause) {
+        super();
+    }
+
+    public process(descriptor: CliCommonSchema.CodeModel.NodeDescriptor): void {
+        ActionHitCount.hitCount++;
     }
 }
 

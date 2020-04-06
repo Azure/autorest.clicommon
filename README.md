@@ -115,9 +115,11 @@ cli:
     #    # max depth of flatten
     #    cli-flatten-payload-max-level: 5
     #    # max properties allowed from flatten of object in array to avoid json
-    #    cli-flatten-payload-max-array-object-prop: 8
-    #    # max properties allowed from flatten of sub-class to avoid json
-    #    cli-flatten-payload-max-subclass-prop: 8
+    #    cli-flatten-payload-max-array-object-prop-count: 8
+    #    # max properties allowed from flatten of sub-class as resource
+    #    cli-flatten-payload-max-poly-as-resource-prop-count: 8
+    #    # max properties allowed from flatten of sub-class as param
+    #    cli-flatten-payload-max-poly-as-param-prop-count: 8
     polymorphism:
         # if true, polymorphism parameter with 'poly-resource' marked as true will be
         # expanded into multiple operations for each subclasses

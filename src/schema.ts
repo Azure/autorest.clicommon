@@ -21,8 +21,9 @@ export namespace CliConst {
     export const CLI_FLATTEN_SET_FLATTEN_PAYLOAD_MAX_PROP_KEY: string = 'cli.flatten.cli-flatten-payload-max-prop';
     export const CLI_FLATTEN_SET_FLATTEN_PAYLOAD_MAX_COMPLEXITY_KEY: string = 'cli.flatten.cli-flatten-payload-max-complexity';
     export const CLI_FLATTEN_SET_FLATTEN_PAYLOAD_MAX_LEVEL_KEY: string = 'cli.flatten.cli-flatten-payload-max-level';
-    export const CLI_FLATTEN_SET_FLATTEN_PAYLOAD_MAX_ARRAY_OBJECT_PROP_KEY: string = 'cli.flatten.cli-flatten-payload-max-array-object-prop';
-    export const CLI_FLATTEN_SET_FLATTEN_PAYLOAD_MAX_SUBCLASS_PROP_KEY: string = 'cli.flatten.cli-flatten-payload-max-subclass-prop';
+    export const CLI_FLATTEN_SET_FLATTEN_PAYLOAD_MAX_ARRAY_OBJECT_PROP_KEY: string = 'cli.flatten.cli-flatten-payload-max-array-object-prop-count';
+    export const CLI_FLATTEN_SET_FLATTEN_PAYLOAD_MAX_POLY_AS_RESOURCE_PROP_KEY: string = 'cli.flatten.cli-flatten-payload-max-poly-as-resource-prop-count';
+    export const CLI_FLATTEN_SET_FLATTEN_PAYLOAD_MAX_POLY_AS_PARAM_PROP_KEY: string = 'cli.flatten.cli-flatten-payload-max-poly-as-param-prop-count';
     export const CLI_FLATTEN_SET_FLATTEN_ALL_OVERWRITE_SWAGGER_KEY: string = 'cli.flatten.cli-flatten-all-overwrite-swagger';
 
     export const DEFAULT_OPERATION_PARAMETER_INDEX = -1;
@@ -116,7 +117,9 @@ export namespace CliCommonSchema {
             removed?: ValueClause;
             required?: ValueClause;
             json?: ValueClause;
-            flatten?: ValueClause
+            flatten?: ValueClause;
+            "poly-resource"?: ValueClause;
+            hitCount?: ValueClause;
             name?: ValueClause;
             /** in kebab-case */
             setName?: SetNameClause;
@@ -178,6 +181,7 @@ export namespace CliCommonSchema {
         export interface SimplifyIndicator {
             simplifiable: boolean;
             propertyCountIfSimplify: number;
+            propertyCountIfSimplifyWithoutSimpleObject: number
         }
 
         export interface NodeDescriptor {
