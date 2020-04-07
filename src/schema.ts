@@ -121,6 +121,8 @@ export namespace CliCommonSchema {
             "poly-resource"?: ValueClause;
             hitCount?: ValueClause;
             name?: ValueClause;
+            description?: ValueClause;
+            "default-value"?: ValueClause;
             /** in kebab-case */
             setName?: SetNameClause;
             replace?: ReplaceClause;
