@@ -39,6 +39,8 @@ export abstract class Action {
                     break;
                 case 'name':
                 case 'alias':
+                case 'description':
+                case 'default-value':
                     arr.push(new ActionSetProperty(value, key, () => { throw Error(`${key} missing in directive`) }))
                     break;
                 case 'replace':
