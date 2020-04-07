@@ -1,6 +1,6 @@
 # About cli-directive
 
-#### How to figure out the name for group, operation, parameter, type and property in cli directives
+## How to figure out the name for group, operation, parameter, type and property in cli directives
 For groupName, operationName, parameterName, typeName, propertyName, usually you can find them at swagger at:
 * Usually the operationId is in format {groupName}_{operationName}, and the parameterName is the parameters->name
 ![group, operation and parameter's name](images/cli-directive-name1.png)
@@ -8,13 +8,13 @@ For groupName, operationName, parameterName, typeName, propertyName, usually you
 ![group, operation and parameter's name](images/cli-directive-name2.png)
 
 
-#### Name convention used in directive
+## Name convention used in directive
 
 > so please make sure **snake_naming_convention** is used for 'name' and 'alias' clause in directive 
 > so that the naming convention configured in clicommon can be applied correctly
 > when generating the output
 
-#### Supported clause in directive
+## Supported clause in directive
 - select: 
   - the target object type of directive
   - optional (then will be figured out automatically from where clause)
@@ -80,10 +80,10 @@ For groupName, operationName, parameterName, typeName, propertyName, usually you
     - new: 'new_value'
     - isRegex: true | false
 
-#### How to troubleshooting
+## How to troubleshooting
 > Add --debug in your command line to have more intermedia output files for troubleshooting
 
-#### Samples
+## Samples
 
 ``` $(sample-cli-directive)
 cli:
