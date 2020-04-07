@@ -293,6 +293,12 @@ cli:
 - name:
   - add 'name: ...' under 'language->cli'. Please make sure **snake_naming_convention** is used
   - optional
+- description:
+  - add 'description: ...' under 'language->cli'.
+  - optional
+- default-value:
+  - add 'default-value: ...' under 'language->cli'
+  - optional
 - hidden:
   - add 'hidden: ...' under 'language->cli'.
   - optional
@@ -340,6 +346,7 @@ cli:
         where:
             operationGroup: 'OldName'
         name: 'new_name'   
+        description: 'new description'
       - where:
             resource: 'OldName'
         hidden: true
@@ -366,6 +373,7 @@ cli:
             op: 'OperationName'
             param: 'ParameterName'
         required: true
+        default-value: 'default value of the param'
     # add hidden property for all parameter start with 'abc'
       - where:
             parameter: '^abc.*$'
