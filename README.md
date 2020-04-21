@@ -142,6 +142,9 @@ cli:
                 rp: RP
                 db: DB
                 adls: Adls
+                dw: DW
+                ti: TI
+                MCAS: MCAS
                 # workaround for modelerfour issue
                 # https://github.com/Azure/autorest.modelerfour/issues/195
                 SubscriptionId: SubscriptionId
@@ -161,6 +164,9 @@ cli:
                 rp: RP
                 db: DB
                 adls: Adls
+                dw: DW
+                ti: TI
+                MCAS: MCAS
                 # workaround for modelerfour issue
                 SubscriptionId: SubscriptionId
             parameter: 'camel'

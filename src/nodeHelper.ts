@@ -285,7 +285,7 @@ export class NodeHelper {
             if (isNullOrUndefined(defaultWhenNotExist))
                 return undefined;
             else
-                defaultWhenNotExist();
+                return defaultWhenNotExist();
         }
         if (isNullOrUndefined(node.extensions[propertyName])) {
             if (isNullOrUndefined(defaultWhenNotExist))
