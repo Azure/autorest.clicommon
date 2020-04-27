@@ -141,7 +141,7 @@ cli:
                 LRO: LRO
                 rp: RP
                 db: DB
-                adls: Adls
+                adls: ADLS
                 dw: DW
                 ti: TI
                 MCAS: MCAS
@@ -163,7 +163,7 @@ cli:
                 LRO: LRO
                 rp: RP
                 db: DB
-                adls: Adls
+                adls: ADLS
                 dw: DW
                 ti: TI
                 MCAS: MCAS
