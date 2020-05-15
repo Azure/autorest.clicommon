@@ -190,12 +190,31 @@ export class FlattenSetter {
         }
     }
 
+    private flattenSchemaWithSingleProperty(schema: ObjectSchema, flattenConfig: FlattenConfig) {
+        let propCount = 0;
+        if (NodeHelper.getSimplifyIndicator(schema).propertyCountIfSimplify != 1) {
+            return;
+        }
+        for (let prop of getAllProperties(schema)) {
+            if (prop.readOnly)
+                continue;
+            if (prop.schema instanceof ObjectSchema) {
+                if (NodeHelper.HasSubClass(prop.schema) !== true && NodeHelper.getInCircle(prop.schema) !== true) {
+                    NodeHelper.setFlatten(prop, true, flattenConfig.overwriteSwagger);
+                    this.flattenSchemaWithSingleProperty(prop.schema, flattenConfig);
+                }
+            }
+        }
+    }
+
     private flattenSchemaFromPayload(schema: Schema, curLevel: number, flattenSimpleObject: boolean, flattenConfig: FlattenConfig) {
 
-        if (curLevel >= flattenConfig.maxLevel)
-            return;
         if (!(schema instanceof ObjectSchema))
             return;
+        if (curLevel >= flattenConfig.maxLevel) {
+            this.flattenSchemaWithSingleProperty(schema, flattenConfig);
+            return;
+        }
 
         for (let prop of getAllProperties(schema)) {
             if (prop.readOnly)
@@ -205,8 +224,11 @@ export class FlattenSetter {
                     this.flattenPolySchema(prop.schema, NodeHelper.getCliKey(prop, "noParamCliKey"), curLevel, flattenSimpleObject, flattenConfig);
                 }
                 else if (NodeHelper.getInCircle(prop.schema) !== true) {
-                    if (flattenSimpleObject || NodeHelper.getComplexity(prop.schema) !== CliCommonSchema.CodeModel.Complexity.object_simple)
+                    if (flattenSimpleObject ||
+                        NodeHelper.getComplexity(prop.schema) !== CliCommonSchema.CodeModel.Complexity.object_simple ||
+                        NodeHelper.getSimplifyIndicator(prop.schema).propertyCountIfSimplify == 1) {
                         NodeHelper.setFlatten(prop, true, flattenConfig.overwriteSwagger);
+                    }
                 }
             }
             else if (prop.schema instanceof ArraySchema) {
