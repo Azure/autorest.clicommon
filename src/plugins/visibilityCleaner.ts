@@ -1,5 +1,5 @@
 import { Host, Session, startSession } from "@azure-tools/autorest-extension-base";
-import { CodeModel, Request, codeModelSchema, Metadata, ObjectSchema, isObjectSchema, Property, Extensions, Scheme, ComplexSchema, Operation, OperationGroup, Parameter, VirtualParameter, ImplementationLocation, ArraySchema, DictionarySchema, ConstantSchema } from "@azure-tools/codemodel";
+import { CodeModel, Request, codeModelSchema, Metadata, ObjectSchema, isObjectSchema, Property, Extensions, Scheme, ComplexSchema, Operation, OperationGroup, Parameter, VirtualParameter, ImplementationLocation, ArraySchema, DictionarySchema, ConstantSchema, getAllProperties } from "@azure-tools/codemodel";
 import { isNullOrUndefined, isArray, isNull } from "util";
 import { Helper } from "../helper";
 import { CliConst, M4Node, CliCommonSchema } from "../schema";
@@ -52,6 +52,16 @@ class VisibilityCleaner {
                 }
             }
         }
+
+        if (visible === CliCommonSchema.CodeModel.Visibility.false) {
+            if (NodeHelper.HasSubClass(schema)) {
+                for (let subClass of NodeHelper.getSubClasses(schema, true)) {
+                    if (this.calcObject(subClass) === CliCommonSchema.CodeModel.Visibility.true)
+                        visible = CliCommonSchema.CodeModel.Visibility.true;
+                }
+            }
+        }
+
         NodeHelper.setIsVisibleFlag(schema, visible);
         return visible;
     }

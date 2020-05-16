@@ -201,6 +201,7 @@ export class FlattenSetter {
             if (prop.schema instanceof ObjectSchema) {
                 if (NodeHelper.HasSubClass(prop.schema) !== true && NodeHelper.getInCircle(prop.schema) !== true) {
                     NodeHelper.setFlatten(prop, true, flattenConfig.overwriteSwagger);
+                    Helper.logDebug("single property schema to flatten: " + schema.language.default.name);
                     this.flattenSchemaWithSingleProperty(prop.schema, flattenConfig);
                 }
             }
