@@ -190,31 +190,16 @@ export class FlattenSetter {
         }
     }
 
-    private flattenSchemaWithSingleProperty(schema: ObjectSchema, flattenConfig: FlattenConfig) {
-        let propCount = 0;
-        if (NodeHelper.getSimplifyIndicator(schema).propertyCountIfSimplify != 1) {
-            return;
-        }
-        for (let prop of getAllProperties(schema)) {
-            if (prop.readOnly)
-                continue;
-            if (prop.schema instanceof ObjectSchema) {
-                if (NodeHelper.HasSubClass(prop.schema) !== true && NodeHelper.getInCircle(prop.schema) !== true) {
-                    NodeHelper.setFlatten(prop, true, flattenConfig.overwriteSwagger);
-                    Helper.logDebug("single property schema to flatten: " + schema.language.default.name);
-                    this.flattenSchemaWithSingleProperty(prop.schema, flattenConfig);
-                }
-            }
-        }
-    }
-
     private flattenSchemaFromPayload(schema: Schema, curLevel: number, flattenSimpleObject: boolean, flattenConfig: FlattenConfig) {
 
         if (!(schema instanceof ObjectSchema))
             return;
         if (curLevel >= flattenConfig.maxLevel) {
-            this.flattenSchemaWithSingleProperty(schema, flattenConfig);
-            return;
+            let indicator = NodeHelper.getSimplifyIndicator(schema);
+            // Continue flatten if there is only one property even when we hit the max level
+            if (indicator.simplifiable !== true || indicator.propertyCountIfSimplify !== 1)
+                return;
+            Helper.logDebug(`continue flatten ${schema.language.default.name} when maxLevel is met because it's simplifiyIndicator.propertyCountIfSimplify is ${indicator.propertyCountIfSimplify}`);
         }
 
         for (let prop of getAllProperties(schema)) {
