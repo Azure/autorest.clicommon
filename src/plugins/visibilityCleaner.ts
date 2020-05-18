@@ -56,8 +56,10 @@ class VisibilityCleaner {
         if (visible === CliCommonSchema.CodeModel.Visibility.false) {
             if (NodeHelper.HasSubClass(schema)) {
                 for (let subClass of NodeHelper.getSubClasses(schema, true)) {
-                    if (this.calcObject(subClass) === CliCommonSchema.CodeModel.Visibility.true)
+                    if (this.calcObject(subClass) === CliCommonSchema.CodeModel.Visibility.true) {
                         visible = CliCommonSchema.CodeModel.Visibility.true;
+                        break;
+                    }                    
                 }
             }
         }
