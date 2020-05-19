@@ -192,10 +192,15 @@ export class FlattenSetter {
 
     private flattenSchemaFromPayload(schema: Schema, curLevel: number, flattenSimpleObject: boolean, flattenConfig: FlattenConfig) {
 
-        if (curLevel >= flattenConfig.maxLevel)
-            return;
         if (!(schema instanceof ObjectSchema))
             return;
+        if (curLevel >= flattenConfig.maxLevel) {
+            let indicator = NodeHelper.getSimplifyIndicator(schema);
+            // Continue flatten if there is only one property even when we hit the max level
+            if (indicator.simplifiable !== true || indicator.propertyCountIfSimplify !== 1)
+                return;
+            Helper.logDebug(`continue flatten ${schema.language.default.name} when maxLevel is met because it's simplifiyIndicator.propertyCountIfSimplify is ${indicator.propertyCountIfSimplify}`);
+        }
 
         for (let prop of getAllProperties(schema)) {
             if (prop.readOnly)
@@ -205,8 +210,11 @@ export class FlattenSetter {
                     this.flattenPolySchema(prop.schema, NodeHelper.getCliKey(prop, "noParamCliKey"), curLevel, flattenSimpleObject, flattenConfig);
                 }
                 else if (NodeHelper.getInCircle(prop.schema) !== true) {
-                    if (flattenSimpleObject || NodeHelper.getComplexity(prop.schema) !== CliCommonSchema.CodeModel.Complexity.object_simple)
+                    if (flattenSimpleObject ||
+                        NodeHelper.getComplexity(prop.schema) !== CliCommonSchema.CodeModel.Complexity.object_simple ||
+                        NodeHelper.getSimplifyIndicator(prop.schema).propertyCountIfSimplify == 1) {
                         NodeHelper.setFlatten(prop, true, flattenConfig.overwriteSwagger);
+                    }
                 }
             }
             else if (prop.schema instanceof ArraySchema) {
