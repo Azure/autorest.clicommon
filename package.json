@@ -1,6 +1,6 @@
 {
     "name": "@autorest/clicommon",
-    "version": "0.4.8",
+    "version": "0.4.9",
     "description": "Autorest Azure Cli Common Module",
     "main": "dist/index.js",
     "engines": {
@@ -48,8 +48,8 @@
     },
     "dependencies": {
         "@azure-tools/autorest-extension-base": "^3.1.235",
-        "@azure-tools/codegen": "^2.4.257",
-        "@azure-tools/codemodel": "3.4.302",
+        "@azure-tools/codegen": "^2.5.276",
+        "@azure-tools/codemodel": "4.13.325",
         "@azure-tools/linq": "^3.1.232",
         "node-yaml": "^3.2.0"
     },
