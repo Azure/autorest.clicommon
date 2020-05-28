@@ -5,6 +5,7 @@ import { Helper } from './helper';
 import { Modifier } from './plugins/modifier/modifier';
 import { CommonNamer } from './plugins/namer';
 import { processRequest as flattenSetter } from './plugins/flattenSetter/flattenSetter';
+import { processRequest as expandOperation } from './plugins/expandOperation';
 import { processRequest as preNamer } from './plugins/prenamer';
 import { CliConst } from './schema';
 import { processRequest as polyAsResourceModifier } from './plugins/polyAsResourceModifier';
@@ -42,6 +43,7 @@ extension.Add("clicommon", async host => {
 
 extension.Add("cli-flatten-setter", flattenSetter);
 extension.Add("cli-prenamer", preNamer);
+extension.Add("cli-expand-operation", expandOperation);
 extension.Add("cli-poly-as-resource-modifier", polyAsResourceModifier);
 extension.Add("cli-poly-as-param-modifier", polyAsParamModifier);
 extension.Add("cli-complex-marker", complexMarker);

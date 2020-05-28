@@ -27,6 +27,8 @@ export class NodeHelper {
     private static readonly POLY_AS_PARAM_BASE_SCHEMA = 'cli-poly-as-param-base-schema';
     private static readonly POLY_AS_PARAM_ORIGINIAL_PARAMETER = 'cli-poly-as-param-original-parameter';
     private static readonly POLY_AS_PARAM_EXPANDED = 'cli-poly-as-param-expanded';
+    private static readonly EXPAND_OPERATION_ORIGINAL_OPERATION = 'cli-expand-operation-original-operation';
+    private static readonly EXPAND_OPERATION_NAMES = 'expand-operation-names';
 
     private static visitedKeyDict = {};
 
@@ -160,6 +162,14 @@ export class NodeHelper {
         return isNullOrUndefined(node.language[NodeHelper.CLI]) ? '' : node.language[NodeHelper.CLI][NodeHelper.DESCRIPTION];
     }
 
+    public static getCliExpandOperationNames(node: Operation): string[] {
+        return NodeHelper.getCliProperty(node, this.EXPAND_OPERATION_NAMES, () => null);
+    }
+
+    public static clearCliExpandOperationNames(node: Operation) {
+        NodeHelper.clearCliProperty(node, this.EXPAND_OPERATION_NAMES);
+    }
+
     public static setPolyAsResource(node: Parameter, value: boolean) {
         NodeHelper.setCliProperty(node, this.POLY_RESOURCE, value);
     }
@@ -190,6 +200,14 @@ export class NodeHelper {
 
     public static getPolyAsResourceOriginalOperation(op: Operation): Schema {
         return NodeHelper.getExtensionsProperty(op, NodeHelper.POLY_AS_RESOURCE_ORIGINAL_OPERATION, null);
+    }
+
+    public static setExpandOperationOriginalOperation(op: Operation, ori: Operation) {
+        NodeHelper.setExtensionsProperty(op, NodeHelper.EXPAND_OPERATION_ORIGINAL_OPERATION, ori);
+    }
+
+    public static getExpandOperationOriginalOperation(op: Operation): Schema {
+        return NodeHelper.getExtensionsProperty(op, NodeHelper.EXPAND_OPERATION_ORIGINAL_OPERATION, null);
     }
 
     public static setPolyAsParamBaseSchema(param: Parameter, base: Schema) {

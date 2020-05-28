@@ -26,6 +26,9 @@ export namespace CliConst {
     export const CLI_FLATTEN_SET_FLATTEN_PAYLOAD_MAX_POLY_AS_PARAM_PROP_KEY: string = 'cli.flatten.cli-flatten-payload-max-poly-as-param-prop-count';
     export const CLI_FLATTEN_SET_FLATTEN_ALL_OVERWRITE_SWAGGER_KEY: string = 'cli.flatten.cli-flatten-all-overwrite-swagger';
 
+    export const CLI_EXPAND_OPERATION_ENABLED_KEY: string = 'cli.expand-operation.cli-expand-operation-enabled';
+    export const CLI_EXPAND_OPERATION_DIRECTIVE_KEY: string = 'cli.expand-operation.cli-expand-operation-directive';
+
     export const DEFAULT_OPERATION_PARAMETER_INDEX = -1;
 
     export class NamingStyle {

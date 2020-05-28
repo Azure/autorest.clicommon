@@ -17,8 +17,12 @@ pipeline:
         input: modelerfour
         output-artifact: clicommon-prenamer
 
-    clicommon/pre/cli-complex-marker:
+    clicommon/cli-expand-operation:
         input: clicommon/cli-prenamer
+        output-artifact: clicommon-expand-operation
+
+    clicommon/pre/cli-complex-marker:
+        input: clicommon/cli-expand-operation
         output-artifact: clicommon-complex-marker-pre
 
     clicommon/cli-flatten-setter:
@@ -52,6 +56,7 @@ pipeline:
         input: 
           - clicommon
           - clicommon/cli-prenamer
+          - clicommon/cli-expand-operation
           - clicommon/cli-flatten-setter
           #- clicommon/cli-poly-as-param-modifier
           - clicommon/cli-poly-as-resource-modifier
@@ -65,6 +70,7 @@ scope-clicommon:
     output-artifact:
         - clicommon-output
         - clicommon-prenamer
+        - clicommon-expand-operation
         - clicommon-flatten-setter
         - clicommon-poly-as-resource-modifier
         #- clicommon-poly-as-param-modifier
@@ -95,7 +101,7 @@ modelerfour:
           LRO: LRO
 
 cli:
-    #flatten:
+    # flatten:
     #    cli-flatten-set-enabled: true
     #    cli-flatten-all: true
     #    cli-flatten-payload: true
@@ -120,6 +126,22 @@ cli:
     #    cli-flatten-payload-max-poly-as-resource-prop-count: 8
     #    # max properties allowed from flatten of sub-class as param
     #    cli-flatten-payload-max-poly-as-param-prop-count: 8
+
+    expand-operation:
+        # if true, operation with 'expand-operation-names' will be expanded into multiple 
+        # operation for ecah operation name. 
+        # Notice: expaneded operation's key is in formate: <OriginalOperation>#<ExpandedName>. 
+        # For example, in following case, the expanded operation keys are 'CreateOrUpdate#Create'
+        # and 'CreateOrUpdate#Update'. To make direcitve works on expended operation, please use
+        # the new key
+        cli-expand-operation-enabled: true
+        # cli-expand-operation-directive:
+        #     - where:
+        #         group: OperationGroupName
+        #         op: CreateOrUpdate
+        #       expand-operation-names:
+        #         - Create
+        #         - Update
     polymorphism:
         # if true, polymorphism parameter with 'poly-resource' marked as true will be
         # expanded into multiple operations for each subclasses
