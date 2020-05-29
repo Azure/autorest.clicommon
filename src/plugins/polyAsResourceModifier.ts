@@ -1,12 +1,10 @@
-import { Host, Session, startSession } from "@azure-tools/autorest-extension-base";
-import { CodeModel, Request, codeModelSchema, Metadata, ObjectSchema, isObjectSchema, Property, Extensions, Scheme, ComplexSchema, Operation, OperationGroup, Parameter, VirtualParameter, ImplementationLocation } from "@azure-tools/codemodel";
-import { isNullOrUndefined, isArray, isNull } from "util";
+import { Host, Session } from "@azure-tools/autorest-extension-base";
+import { CodeModel, Request, ObjectSchema, Operation, OperationGroup, Parameter } from "@azure-tools/codemodel";
+import { isNullOrUndefined } from "util";
 import { Helper } from "../helper";
-import { CliConst, M4Node } from "../schema";
-import { Dumper } from "../dumper";
-import { Dictionary, values } from '@azure-tools/linq';
 import { NodeHelper } from "../nodeHelper";
 import { FlattenHelper } from "../flattenHelper";
+import { CopyHelper } from "../copyHelper";
 
 
 export class PolyAsResourceModifier {
@@ -22,81 +20,31 @@ export class PolyAsResourceModifier {
         return (NodeHelper.isPolyAsResource(param));
     }
 
-    /**
-     * a simple object clone by using Json serialize and parse
-     * @param obj
-     */
-    private cloneObject<T>(obj: T): T {
-        return JSON.parse(JSON.stringify(obj)) as T;
-    }
-
-    private cloneObjectTopLevel(obj: any) {
-        let r = {};
-        for (let key in obj) {
-            r[key] = obj[key];
-        }
-        return r;
-    }
-
     private cloneOperationForSubclass(op: Operation, newDefaultName: string, newCliKey: string, newCliName: string, baseSchema: ObjectSchema, subSchema: ObjectSchema) {
 
         let polyParam: Parameter = null;
 
-        let cloneParam = (p: Parameter): Parameter => {
-
-            const vp = new Parameter(p.language.default.name, p.language.default.description, p.schema === baseSchema ? subSchema : p.schema, {
-                implementation: p.implementation,
-                extensions: {},
-                language: this.cloneObject(p.language),
-                protocol: p.protocol,
-            });
-
-            for (let key in p)
-                if (isNullOrUndefined(vp[key]))
-                    vp[key] = p[key];
-
+        const cloneParam = (p: Parameter): Parameter => {
+            const vp = CopyHelper.copyParameter(p, p.schema === baseSchema ? subSchema : p.schema);
             if (p.schema === baseSchema) {
-                if (polyParam !== null)
+                if (polyParam !== null) {
                     throw Error(`Mulitple poly as resource Parameter found: 1) ${polyParam.language.default.name}, 2) ${p.language.default.name}`);
-                else {
+                } else {
                     polyParam = vp;
                     NodeHelper.setPolyAsResourceBaseSchema(vp, baseSchema);
                 }
             }
-
             return vp;
         };
 
-        let cloneRequest = (req: Request): Request => {
-            let rr = new Request(req);
-            rr.extensions = this.cloneObjectTopLevel(rr.extensions);
-            rr.language = this.cloneObject(rr.language);
-            rr.parameters = rr.parameters.map(p => cloneParam(p));
-            rr.updateSignatureParameters();
-            return rr;
-        }
+        const cloneRequest = (req: Request): Request => CopyHelper.copyRequest(req, cloneParam);
 
-        let op2 = new Operation(
-            newDefaultName,
-            '',
-            op
-        );
-        op2.language = this.cloneObject(op2.language);
+        const op2 = CopyHelper.copyOperation(op, this.session.model.globalParameters, cloneRequest, cloneParam);
         op2.language.default.name = newDefaultName;
         NodeHelper.setCliName(op2, newCliName);
         NodeHelper.setCliKey(op2, newCliKey);
-        op2.extensions = this.cloneObjectTopLevel(op2.extensions);
-        op2.parameters = op2.parameters.map(p => {
-            if (this.session.model.findGlobalParameter(pp => pp === p))
-                return p;
-            else
-                return cloneParam(p)
-        });
-        op2.requests = op2.requests.map(r => cloneRequest(r));
-        op2.updateSignatureParameters();
         NodeHelper.setPolyAsResourceParam(op2, polyParam);
         NodeHelper.setPolyAsResourceOriginalOperation(op2, op);
-        // Do we need to deep copy response? seems no need
 
         return op2;
     }
