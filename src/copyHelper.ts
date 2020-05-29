@@ -13,7 +13,7 @@ export class CopyHelper {
             } else if (customizedParamCopy) {
                 return customizedParamCopy(op);
             } else {
-                CopyHelper.copyParameter(op)
+                return CopyHelper.copyParameter(op)
             }
         });
         copy.requests = source.requests?.map((req) => customizedReqCopy == null ? CopyHelper.copyRequest(req) : customizedReqCopy(req));

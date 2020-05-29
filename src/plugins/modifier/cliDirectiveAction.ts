@@ -34,7 +34,7 @@ export abstract class Action {
                 case 'poly-resource':
                     arr.push(new ActionSetProperty(value, key, () => true));
                     break;
-                case 'expand-operation-names':
+                case 'split-operation-names':
                     arr.push(new ActionSetProperty(value, key, () => null));
                     break;
                 case 'delete':

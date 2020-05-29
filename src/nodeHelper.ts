@@ -16,6 +16,7 @@ export class NodeHelper {
     private static readonly CLI_MARK: string = "cli-mark";
     private static readonly CLI_IS_VISIBLE: string = "cli-is-visible";
     private static readonly CLI_OPERATIONS: string = "cli-operations";
+    private static readonly CLI_OPERATION_SPLITTED = 'cli-operation-splitted';
     private static readonly JSON: string = "json";
     public static readonly FLATTEN_FLAG: string = 'x-ms-client-flatten';
     public static readonly DISCRIMINATOR_FLAG: string = 'discriminator';
@@ -27,8 +28,8 @@ export class NodeHelper {
     private static readonly POLY_AS_PARAM_BASE_SCHEMA = 'cli-poly-as-param-base-schema';
     private static readonly POLY_AS_PARAM_ORIGINIAL_PARAMETER = 'cli-poly-as-param-original-parameter';
     private static readonly POLY_AS_PARAM_EXPANDED = 'cli-poly-as-param-expanded';
-    private static readonly EXPAND_OPERATION_ORIGINAL_OPERATION = 'cli-expand-operation-original-operation';
-    private static readonly EXPAND_OPERATION_NAMES = 'expand-operation-names';
+    private static readonly SPLIT_OPERATION_ORIGINAL_OPERATION = 'cli-split-operation-original-operation';
+    private static readonly SPLIT_OPERATION_NAMES = 'split-operation-names';
 
     private static visitedKeyDict = {};
 
@@ -162,12 +163,20 @@ export class NodeHelper {
         return isNullOrUndefined(node.language[NodeHelper.CLI]) ? '' : node.language[NodeHelper.CLI][NodeHelper.DESCRIPTION];
     }
 
-    public static getCliExpandOperationNames(node: Operation): string[] {
-        return NodeHelper.getCliProperty(node, this.EXPAND_OPERATION_NAMES, () => null);
+    public static setCliOperationSplitted(op: Operation, value: boolean) {
+        NodeHelper.setCliProperty(op, NodeHelper.CLI_OPERATION_SPLITTED, value);
     }
 
-    public static clearCliExpandOperationNames(node: Operation) {
-        NodeHelper.clearCliProperty(node, this.EXPAND_OPERATION_NAMES);
+    public static getCliOperationSplitted(op: Operation): boolean {
+        return NodeHelper.getCliProperty(op, NodeHelper.CLI_OPERATION_SPLITTED, () => null);
+    }
+
+    public static getCliSplitOperationNames(node: Operation): string[] {
+        return NodeHelper.getCliProperty(node, this.SPLIT_OPERATION_NAMES, () => null);
+    }
+
+    public static clearCliSplitOperationNames(node: Operation) {
+        NodeHelper.clearCliProperty(node, this.SPLIT_OPERATION_NAMES);
     }
 
     public static setPolyAsResource(node: Parameter, value: boolean) {
@@ -202,12 +211,12 @@ export class NodeHelper {
         return NodeHelper.getExtensionsProperty(op, NodeHelper.POLY_AS_RESOURCE_ORIGINAL_OPERATION, null);
     }
 
-    public static setExpandOperationOriginalOperation(op: Operation, ori: Operation) {
-        NodeHelper.setExtensionsProperty(op, NodeHelper.EXPAND_OPERATION_ORIGINAL_OPERATION, ori);
+    public static setSplitOperationOriginalOperation(op: Operation, ori: Operation) {
+        NodeHelper.setExtensionsProperty(op, NodeHelper.SPLIT_OPERATION_ORIGINAL_OPERATION, ori);
     }
 
-    public static getExpandOperationOriginalOperation(op: Operation): Schema {
-        return NodeHelper.getExtensionsProperty(op, NodeHelper.EXPAND_OPERATION_ORIGINAL_OPERATION, null);
+    public static getSplitOperationOriginalOperation(op: Operation): Schema {
+        return NodeHelper.getExtensionsProperty(op, NodeHelper.SPLIT_OPERATION_ORIGINAL_OPERATION, null);
     }
 
     public static setPolyAsParamBaseSchema(param: Parameter, base: Schema) {
