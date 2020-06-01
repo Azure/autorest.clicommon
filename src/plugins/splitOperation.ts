@@ -17,6 +17,8 @@ export class SplitOperation{
         await this.modifier();
 
         for (const group of this.session.model.operationGroups) {
+            // Operation will be splitted with given names. To avoid duplicated operation name error in modelerfour, we compare 
+            // split names with existed names. If it has already existed, skip this split name. 
             const existedNames = new Set<string>(group.operations.map((op) => op.language.default.name.toUpperCase()));
             const splittedGroupOperations = [];
             for (const operation of group.operations) {

@@ -79,6 +79,12 @@ For groupName, operationName, parameterName, typeName, propertyName, usually you
     - old: 'old_value'
     - new: 'new_value'
     - isRegex: true | false
+- split-operation-names
+  - split operation into multiple operations with given names
+  - value format:
+    - opName1
+    - opName2
+    - ...
 
 ## How to troubleshooting
 > Add --debug in your command line to have more intermedia output files for troubleshooting
