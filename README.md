@@ -17,8 +17,12 @@ pipeline:
         input: modelerfour
         output-artifact: clicommon-prenamer
 
-    clicommon/pre/cli-complex-marker:
+    clicommon/cli-split-operation:
         input: clicommon/cli-prenamer
+        output-artifact: clicommon-split-operation
+
+    clicommon/pre/cli-complex-marker:
+        input: clicommon/cli-split-operation
         output-artifact: clicommon-complex-marker-pre
 
     clicommon/cli-flatten-setter:
@@ -52,6 +56,7 @@ pipeline:
         input: 
           - clicommon
           - clicommon/cli-prenamer
+          - clicommon/cli-split-operation
           - clicommon/cli-flatten-setter
           #- clicommon/cli-poly-as-param-modifier
           - clicommon/cli-poly-as-resource-modifier
@@ -65,6 +70,7 @@ scope-clicommon:
     output-artifact:
         - clicommon-output
         - clicommon-prenamer
+        - clicommon-split-operation
         - clicommon-flatten-setter
         - clicommon-poly-as-resource-modifier
         #- clicommon-poly-as-param-modifier
@@ -95,7 +101,7 @@ modelerfour:
           LRO: LRO
 
 cli:
-    #flatten:
+    # flatten:
     #    cli-flatten-set-enabled: true
     #    cli-flatten-all: true
     #    cli-flatten-payload: true
@@ -120,6 +126,27 @@ cli:
     #    cli-flatten-payload-max-poly-as-resource-prop-count: 8
     #    # max properties allowed from flatten of sub-class as param
     #    cli-flatten-payload-max-poly-as-param-prop-count: 8
+
+    # example for split-operation
+    # cli-directive:
+    #     - where:
+    #         group: OperationGroupName
+    #         op: CreateOrUpdate
+    #       split-operation-names:
+    #         - Create
+    #         - Update
+
+    split-operation:
+        # if true, operation with 'split-operation-names' will be splited into multiple 
+        # operations with given names. 
+        # Notice: 
+        # 1. Splitted operation's key is in formate: <OriginalOperationName>#<SplitName>. 
+        #    For example, in above case, the splitted operation keys are 'CreateOrUpdate#Create'
+        #    and 'CreateOrUpdate#Update'. To make direcitve works on splitted operation, please 
+        #    use the new key.
+        # 2. If operation with split name has already existed in operation group, you will get 
+        #    a warning and this split name will be skipped.
+        cli-split-operation-enabled: true
     polymorphism:
         # if true, polymorphism parameter with 'poly-resource' marked as true will be
         # expanded into multiple operations for each subclasses
