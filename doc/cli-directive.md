@@ -196,5 +196,13 @@ cli:
             enum: 'enumTyp'
             value: 'enumValue'
         alias: NewAlias
+    # split operation into multiple operations
+      - where:
+          group: OperationGroupName
+          op: CreateOrUpdate
+        split-operation-names:
+          - Create
+          - Update
+
 ```
 
