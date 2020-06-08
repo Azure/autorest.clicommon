@@ -29,8 +29,6 @@ export class SplitOperation{
                 const splittedOperations = this.splitOperations(splitNames, operation, existedNames);
                 
                 splittedOperations.forEach((splittedOperation) => {
-                    // Link src operation to splitted operation
-                    NodeHelper.addSplitOperationIntoOperations(operation, splittedOperation);
                     // Link splitted operation to src opreation
                     NodeHelper.setSplitOperationOriginalOperation(splittedOperation, operation);
     
