@@ -30,7 +30,7 @@ export class SplitOperation{
                 
                 splittedOperations.forEach((splittedOperation) => {
                     // Link src operation to splitted operation
-                    NodeHelper.addCliOperation(operation, splittedOperation);
+                    NodeHelper.addSplitOperationSplittedOperations(operation, splittedOperation);
                     // Link splitted operation to src opreation
                     NodeHelper.setSplitOperationOriginalOperation(splittedOperation, operation);
     

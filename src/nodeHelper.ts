@@ -29,6 +29,7 @@ export class NodeHelper {
     private static readonly POLY_AS_PARAM_ORIGINIAL_PARAMETER = 'cli-poly-as-param-original-parameter';
     private static readonly POLY_AS_PARAM_EXPANDED = 'cli-poly-as-param-expanded';
     private static readonly SPLIT_OPERATION_ORIGINAL_OPERATION = 'cli-split-operation-original-operation';
+    private static readonly SPLIT_OPERATION_SPLITTED_OPERATIONS = 'cli-split-operation-splitted-operations';
     private static readonly SPLIT_OPERATION_NAMES = 'split-operation-names';
 
     private static visitedKeyDict = {};
@@ -217,6 +218,16 @@ export class NodeHelper {
 
     public static getSplitOperationOriginalOperation(op: Operation): Schema {
         return NodeHelper.getExtensionsProperty(op, NodeHelper.SPLIT_OPERATION_ORIGINAL_OPERATION, null);
+    }
+
+    public static addSplitOperationSplittedOperations(op: Operation, splittedOp: Operation) {
+        const ops: Operation[] = NodeHelper.getExtensionsProperty(op, NodeHelper.SPLIT_OPERATION_SPLITTED_OPERATIONS, () => []);
+        ops.push(splittedOp);
+        NodeHelper.setExtensionsProperty(op, NodeHelper.SPLIT_OPERATION_SPLITTED_OPERATIONS, ops);
+    }
+
+    public static getSplitOperationSplittedOperations(originalOperation: Operation, defaultValue: () => any): Operation[] {
+        return NodeHelper.getExtensionsProperty(originalOperation, NodeHelper.SPLIT_OPERATION_SPLITTED_OPERATIONS, defaultValue);
     }
 
     public static setPolyAsParamBaseSchema(param: Parameter, base: Schema) {
