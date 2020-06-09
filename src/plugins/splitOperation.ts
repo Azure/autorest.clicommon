@@ -44,7 +44,9 @@ export class SplitOperation{
     }
 
     private async modifier() {
-        const directives = (await this.session.getValue(CliConst.CLI_DIRECTIVE_KEY, [])).filter((dir) => dir[CliConst.CLI_SPLIT_OPERATION_NAMES_KEY]);
+        const directives = (await this.session.getValue(CliConst.CLI_DIRECTIVE_KEY, []))
+            .filter((dir) => dir[CliConst.CLI_SPLIT_OPERATION_NAMES_KEY])
+            .map((dir) => this.copyDirectiveOnlyForSplit(dir));
         if (directives && directives.length > 0) {
             Helper.dumper.dumpCodeModel('split-operation-modifier-pre');
             const modifier = await new Modifier(this.session).init(directives);
@@ -76,6 +78,15 @@ export class SplitOperation{
         NodeHelper.clearCliSplitOperationNames(operation);
         return operation;
     }
+
+    private copyDirectiveOnlyForSplit(src: CliCommonSchema.CliDirective.Directive): CliCommonSchema.CliDirective.Directive {
+        const copy: CliCommonSchema.CliDirective.Directive = {
+            select: src.select,
+            where: CopyHelper.deepCopy(src.where),
+        }
+        copy[CliConst.CLI_SPLIT_OPERATION_NAMES_KEY] = src[CliConst.CLI_SPLIT_OPERATION_NAMES_KEY];
+        return copy;
+    }
 }
 
 export async function processRequest(host: Host) {
@@ -83,8 +94,8 @@ export async function processRequest(host: Host) {
     const session = await Helper.init(host);
     Helper.dumper.dumpCodeModel("split-operation-pre");
 
-    const expandEnabled = (await session.getValue(CliConst.CLI_SPLIT_OPERATION_ENABLED_KEY, false)) === true;
-    if (!expandEnabled) {
+    const splitEnabled = (await session.getValue(CliConst.CLI_SPLIT_OPERATION_ENABLED_KEY, false)) === true;
+    if (!splitEnabled) {
         Helper.logDebug(`cli-split-operation-enabled is not true. Skip split operation`);
     } else {
         const splitOperation = new SplitOperation(session);
