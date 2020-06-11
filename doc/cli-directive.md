@@ -203,6 +203,12 @@ cli:
         split-operation-names:
           - Create
           - Update
+    # flatten parameter
+      - where:
+          group: OperationGroupName
+          op: CreateOrUpdate#Update
+        flatten-params:
+          - properties
 
 ```
 

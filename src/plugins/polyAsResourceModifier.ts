@@ -5,6 +5,9 @@ import { Helper } from "../helper";
 import { NodeHelper } from "../nodeHelper";
 import { FlattenHelper } from "../flattenHelper";
 import { CopyHelper } from "../copyHelper";
+import { CliConst, CliCommonSchema } from "../schema";
+import { Modifier } from "./modifier/modifier";
+import { CommonNamer } from "./namer";
 
 
 export class PolyAsResourceModifier {
@@ -12,44 +15,35 @@ export class PolyAsResourceModifier {
     constructor(protected session: Session<CodeModel>) {
     }
 
-    public process() {
+    public async process() {
+        await this.modifier();
         this.processPolyAsResource();
     }
 
-    private isPolyAsResource(group: OperationGroup, op: Operation, param: Parameter) {
-        return (NodeHelper.isPolyAsResource(param));
+    private async modifier() {
+        const directives = (await this.session.getValue(CliConst.CLI_DIRECTIVE_KEY, []))
+            .filter((dir) => dir[NodeHelper.POLY_RESOURCE])
+            .map((dir) => this.copyDirectiveOnlyForPolyResource(dir));
+        if (directives && directives.length > 0) {
+            Helper.dumper.dumpCodeModel('poly-as-resource-modifier-pre');
+            const modifier = await new Modifier(this.session).init(directives);
+            modifier.process();
+            Helper.dumper.dumpCodeModel('poly-as-resource-modifier-post');
+        } else {
+            Helper.logDebug('No poly resource directive is found!');
+        }
     }
 
-    private cloneOperationForSubclass(op: Operation, newDefaultName: string, newCliKey: string, newCliName: string, baseSchema: ObjectSchema, subSchema: ObjectSchema) {
-
-        let polyParam: Parameter = null;
-
-        const cloneParam = (p: Parameter): Parameter => {
-            const vp = CopyHelper.copyParameter(p, p.schema === baseSchema ? subSchema : p.schema);
-            if (p.schema === baseSchema) {
-                if (polyParam !== null) {
-                    throw Error(`Mulitple poly as resource Parameter found: 1) ${polyParam.language.default.name}, 2) ${p.language.default.name}`);
-                } else {
-                    polyParam = vp;
-                    NodeHelper.setPolyAsResourceBaseSchema(vp, baseSchema);
-                }
-            }
-            return vp;
-        };
-
-        const cloneRequest = (req: Request): Request => CopyHelper.copyRequest(req, cloneParam);
-
-        const op2 = CopyHelper.copyOperation(op, this.session.model.globalParameters, cloneRequest, cloneParam);
-        op2.language.default.name = newDefaultName;
-        NodeHelper.setCliName(op2, newCliName);
-        NodeHelper.setCliKey(op2, newCliKey);
-        NodeHelper.setPolyAsResourceParam(op2, polyParam);
-        NodeHelper.setPolyAsResourceOriginalOperation(op2, op);
-
-        return op2;
+    private copyDirectiveOnlyForPolyResource(src: CliCommonSchema.CliDirective.Directive): CliCommonSchema.CliDirective.Directive {
+        const copy: CliCommonSchema.CliDirective.Directive = {
+            select: src.select,
+            where: CopyHelper.deepCopy(src.where),
+        }
+        copy[NodeHelper.POLY_RESOURCE] = src[NodeHelper.POLY_RESOURCE];
+        return copy;
     }
 
-    public processPolyAsResource() {
+    private processPolyAsResource() {
 
         let getDefaultRequest = (op: Operation) => op.requests[0];
 
@@ -83,26 +77,47 @@ export class PolyAsResourceModifier {
                     let op2: Operation = this.cloneOperationForSubclass(op,
                         `${op.language.default.name}_${discriminatorValue}` /*defaultName*/,
                         `${NodeHelper.getCliKey(op, op.language.default.name)}#${discriminatorValue}` /*cliKey*/,
-                        `${NodeHelper.getCliName(op, op.language.default.name)}#${discriminatorValue}` /*cliName*/,
                         baseSchema, subClass);
                     
                     Helper.logDebug(`${g.language.default.name}/${op.language.default.name} cloned for subclass ${discriminatorValue}`);
                     NodeHelper.addCliOperation(op, op2);
-
-                    let polyParam = NodeHelper.getPolyAsResourceParam(op2);
-                    if (isNullOrUndefined(polyParam))
-                        throw Error("No poly parameter found? Operation: " + op.language.default.name);
-
-                    let req = getDefaultRequest(op2);
-                    if (NodeHelper.getJson(subClass) !== true) {
-                        let path = isNullOrUndefined(polyParam['targetProperty']) ? [] : [polyParam['targetProperty']];
-                        FlattenHelper.flattenParameter(req, polyParam, path, `${discriminatorValue}_`);
-                    }
                 }
 
                 NodeHelper.setHidden(op, true);
             });
         });
+    }
+
+    private isPolyAsResource(group: OperationGroup, op: Operation, param: Parameter) {
+        return (NodeHelper.isPolyAsResource(param));
+    }
+
+    private cloneOperationForSubclass(op: Operation, newDefaultName: string, newCliKey: string, baseSchema: ObjectSchema, subSchema: ObjectSchema) {
+
+        let polyParam: Parameter = null;
+
+        const cloneParam = (p: Parameter): Parameter => {
+            const vp = CopyHelper.copyParameter(p, p.schema === baseSchema ? subSchema : p.schema);
+            if (p.schema === baseSchema) {
+                if (polyParam !== null) {
+                    throw Error(`Mulitple poly as resource Parameter found: 1) ${polyParam.language.default.name}, 2) ${p.language.default.name}`);
+                } else {
+                    polyParam = vp;
+                    NodeHelper.setPolyAsResourceBaseSchema(vp, baseSchema);
+                }
+            }
+            return vp;
+        };
+
+        const cloneRequest = (req: Request): Request => CopyHelper.copyRequest(req, cloneParam);
+
+        const op2 = CopyHelper.copyOperation(op, this.session.model.globalParameters, cloneRequest, cloneParam);
+        op2.language.default.name = newDefaultName;
+        NodeHelper.setCliKey(op2, newCliKey);
+        NodeHelper.setPolyAsResourceParam(op2, polyParam);
+        NodeHelper.setPolyAsResourceOriginalOperation(op2, op);
+
+        return op2;
     }
 }
 
@@ -114,7 +129,7 @@ export async function processRequest(host: Host) {
 
     if ((await session.getValue('cli.polymorphism.expand-as-resource', false)) === true) {
         let rd = new PolyAsResourceModifier(session);
-        rd.process();
+        await rd.process();
     }
     else {
         Helper.logWarning("cli.polymorphism.expand-as-resource is not true, poly-resource will be ignored");

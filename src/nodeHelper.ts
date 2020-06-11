@@ -21,7 +21,12 @@ export class NodeHelper {
     public static readonly FLATTEN_FLAG: string = 'x-ms-client-flatten';
     public static readonly DISCRIMINATOR_FLAG: string = 'discriminator';
     public static readonly CLI_DISCRIMINATOR_VALUE: string = 'cli-discriminator-value';
+
+    // TODO: Consider add specific class for directive keys
     public static readonly POLY_RESOURCE: string = 'poly-resource';
+    public static readonly FLATTEN_PARAMS: string = 'flatten-params';
+    public static readonly SPLIT_OPERATION_NAMES = 'split-operation-names';
+
     private static readonly POLY_AS_RESOURCE_SUBCLASS_PARAM = "cli-poly-as-resource-subclass-param";
     private static readonly POLY_AS_RESOURCE_BASE_SCHEMA = 'cli-poly-as-resource-base-schema';
     private static readonly POLY_AS_RESOURCE_ORIGINAL_OPERATION = 'cli-poly-as-resource-original-operation';
@@ -29,9 +34,8 @@ export class NodeHelper {
     private static readonly POLY_AS_PARAM_ORIGINIAL_PARAMETER = 'cli-poly-as-param-original-parameter';
     private static readonly POLY_AS_PARAM_EXPANDED = 'cli-poly-as-param-expanded';
     private static readonly SPLIT_OPERATION_ORIGINAL_OPERATION = 'cli-split-operation-original-operation';
-    private static readonly SPLIT_OPERATION_NAMES = 'split-operation-names';
-
-    private static visitedKeyDict = {};
+    private static readonly FLATTENED_NAMES = 'flattenedNames';
+    private static readonly FLATTENED_PARAM = 'cli-flattened-param';
 
     /**
      * Check whether the obj has discriminator property
@@ -179,6 +183,18 @@ export class NodeHelper {
         NodeHelper.clearCliProperty(node, this.SPLIT_OPERATION_NAMES);
     }
 
+    public static getFlattenParams(node: Operation): string[] {
+        return NodeHelper.getCliProperty(node, this.FLATTEN_PARAMS, () => []);
+    }
+
+    public static getCliFlattenedNames(param: Parameter): string[] {
+        return NodeHelper.getCliProperty(param, this.FLATTENED_NAMES, () => []);
+    }
+
+    public static setCliFlattenedNames(param: Parameter, flattenedNames: string[]) {
+        NodeHelper.setCliProperty(param, this.FLATTENED_NAMES, flattenedNames);
+    }
+
     public static setPolyAsResource(node: Parameter, value: boolean) {
         NodeHelper.setCliProperty(node, this.POLY_RESOURCE, value);
     }
@@ -233,6 +249,14 @@ export class NodeHelper {
 
     public static getPolyAsParamOriginalParam(param: Parameter): Schema {
         return NodeHelper.getExtensionsProperty(param, NodeHelper.POLY_AS_PARAM_ORIGINIAL_PARAMETER, null);
+    }
+
+    public static setFlattenedParam(param: Parameter, value: boolean) {
+        NodeHelper.setExtensionsProperty(param, NodeHelper.FLATTENED_PARAM, value);
+    }
+
+    public static isFlattenedParam(param: Parameter): boolean {
+        return NodeHelper.getExtensionsProperty(param, NodeHelper.FLATTENED_PARAM, () => false);
     }
 
     public static setPolyAsParamExpanded(param: Parameter, value: boolean) {

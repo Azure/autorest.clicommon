@@ -36,15 +36,27 @@ export class CommonNamer {
     }
 
 
-    getCliName(obj: any) {
+    getCliName(obj: any, isCliOp: boolean = false) {
         if (obj == null || obj.language == null) {
             this.session.message({ Channel: Channel.Warning, Text: "working in obj has problems" });
             return;
         }
+
+        let baseClass = '';
         if (isNullOrUndefined(obj.language['cli']))
             obj.language['cli'] = new Language();
-        if (isNullOrUndefined(obj.language['cli']['name']))
-            obj.language['cli']['name'] = obj.language.default.name;
+        if (isNullOrUndefined(obj.language['cli']['name'])) {
+            if (isCliOp) {
+                // The expected subclass operation cli name is in format '<name>#<subclass>'. According to 'polyAsResourceModifier', 
+                // current default.name is '<name>_<subclass>'. To avoid name and subclass are mixed during namingConvention, we 
+                // remove the subclass before namingConvention, then add it back with '#'
+                const index = obj.language.default.name.lastIndexOf('_');
+                baseClass = obj.language.default.name.substring(index + 1);
+                obj.language['cli']['name'] = obj.language.default.name.substring(0, index);
+            } else {
+                obj.language['cli']['name'] = obj.language.default.name;
+            }
+        }
         if (isNullOrUndefined(obj.language['cli']['description']))
             obj.language['cli']['description'] = obj.language.default.description;
 
@@ -65,6 +77,10 @@ export class CommonNamer {
         if (!this.flag.has(obj.language[lan])) {
             this.flag.add(obj.language[lan]);
             Helper.applyNamingConvention(this.defaultNamingSettings, obj, lan);
+        }
+
+        if (isCliOp) {
+            obj.language['cli']['name'] += `#${baseClass}`;
         }
     }
 
@@ -116,17 +132,17 @@ export class CommonNamer {
     }
 
     processOperationGroups() {
-        // cleanup 
         for (const operationGroup of values(this.codeModel.operationGroups)) {
             this.getCliName(operationGroup);
 
             for (const operation of values(operationGroup.operations)) {
-                this.getCliName(operation);
 
+                // Handle operations in group
+                this.getCliName(operation);
                 for (const parameter of values(operation.parameters)) {
                     this.getCliName(parameter);
                 }
-
+                
                 for (const request of values(operation.requests)) {
                     if (!isNullOrUndefined(request.parameters)) {
                         for (const parameter of values(request.parameters)) {
@@ -134,6 +150,22 @@ export class CommonNamer {
                         }
                     }
                 }
+
+                // Handle operations in extension
+                NodeHelper.getCliOperation(operation, () => []).forEach((op) => {
+                    this.getCliName(op, true);
+                    for (const parameter of values(op.parameters)) {
+                        this.getCliName(parameter);
+                    }
+                    
+                    for (const request of values(op.requests)) {
+                        if (!isNullOrUndefined(request.parameters)) {
+                            for (const parameter of values(request.parameters)) {
+                                this.getCliName(parameter);
+                            }
+                        }
+                    }
+                });
             }
         }
     }
@@ -146,20 +178,22 @@ export class CommonNamer {
 }
 
 export async function processRequest(host: Host) {
-    const debug = await host.GetValue('debug') || false;
-    //host.Message({Channel:Channel.Warning, Text:"in aznamer processRequest"});
+    const session = await Helper.init(host);
+    Helper.dumper.dumpCodeModel("namer-pre");
 
-    //console.error(extensionName);
+    const debug = await host.GetValue('debug') || false;
     try {
-        const session = await startSession<CodeModel>(host, {}, codeModelSchema);
-        const plugin = new CommonNamer(session);
-        let result = plugin.process();
-        host.WriteFile('namer-code-model-v4-cli.yaml', serialize(result));
+        const plugin = await new CommonNamer(session).init();
+        plugin.process();
     } catch (E) {
         if (debug) {
             console.error(`${__filename} - FAILURE  ${JSON.stringify(E)} ${E.stack}`);
         }
         throw E;
     }
+    Helper.dumper.dumpCodeModel("namer-post");
+
+    Helper.outputToModelerfour();
+    await Helper.dumper.persistAsync();
 
 }

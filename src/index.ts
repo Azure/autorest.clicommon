@@ -1,6 +1,4 @@
 import { AutoRestExtension, startSession } from '@azure-tools/autorest-extension-base';
-import { serialize } from '@azure-tools/codegen';
-import { CodeModel, codeModelSchema, OperationGroup, Operation, Schema, ObjectSchema, Property } from '@azure-tools/codemodel';
 import { Helper } from './helper';
 import { Modifier } from './plugins/modifier/modifier';
 import { CommonNamer } from './plugins/namer';
@@ -12,6 +10,7 @@ import { processRequest as polyAsResourceModifier } from './plugins/polyAsResour
 import { processRequest as polyAsParamModifier } from './plugins/polyAsParamModifier';
 import { processRequest as complexMarker } from './plugins/complexMarker';
 import { processRequest as visibilityCleaner } from './plugins/visibilityCleaner';
+import { processRequest as flattenParamModifier } from './plugins/flattenParamModifier';
 
 const extension = new AutoRestExtension();
 
@@ -45,6 +44,7 @@ extension.Add("cli-flatten-setter", flattenSetter);
 extension.Add("cli-prenamer", preNamer);
 extension.Add("cli-split-operation", splitOperation);
 extension.Add("cli-poly-as-resource-modifier", polyAsResourceModifier);
+extension.Add("cli-flatten-param-modifier", flattenParamModifier);
 extension.Add("cli-poly-as-param-modifier", polyAsParamModifier);
 extension.Add("cli-complex-marker", complexMarker);
 extension.Add("cli-visibility-cleaner", visibilityCleaner)

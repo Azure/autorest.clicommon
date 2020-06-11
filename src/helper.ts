@@ -1,4 +1,4 @@
-import { codeModelSchema, ChoiceSchema, ChoiceValue, Extensions, CodeModel, ObjectSchema, Operation, OperationGroup, Parameter, Property, SealedChoiceSchema, Schema, ConstantSchema, SchemaType } from "@azure-tools/codemodel";
+import { codeModelSchema, ChoiceSchema, ChoiceValue, Extensions, CodeModel, ObjectSchema, Operation, OperationGroup, Parameter, Property, SealedChoiceSchema, Schema, ConstantSchema, SchemaType, StringSchema, Metadata, Language } from "@azure-tools/codemodel";
 import { keys, values } from "@azure-tools/linq";
 import { isArray, isNull, isNullOrUndefined, isObject, isString, isUndefined } from "util";
 import { CliConst, M4Node, M4NodeType, NamingType, CliCommonSchema } from "./schema";
@@ -360,6 +360,7 @@ export class Helper {
                                         (isNullOrUndefined(NodeHelper.getPolyAsResourceBaseSchema(vvv)) ? '' : `${tab(4)}cli-poly-as-resource-base-schema: ${NodeHelper.getCliKey(NodeHelper.getPolyAsResourceBaseSchema(vvv), '<baseSchemaCliKeyMissing>')}${NEW_LINE}`) +
                                         (isNullOrUndefined(NodeHelper.getPolyAsParamBaseSchema(vvv)) ? '' : `${tab(4)}cli-poly-as-param-base-schema: ${NodeHelper.getCliKey(NodeHelper.getPolyAsParamBaseSchema(vvv), '<baseSchemaCliKeyMissing>')}${NEW_LINE}`) +
                                         (isNullOrUndefined(NodeHelper.getPolyAsParamOriginalParam(vvv)) ? '' : `${tab(4)}cli-poly-as-param-expanded: ${NodeHelper.getCliKey(NodeHelper.getPolyAsParamOriginalParam(vvv), '<oriParamCliKeyMissing>')}${NEW_LINE}`) +
+                                        (!NodeHelper.isFlattenedParam(vvv) ? '' : `${tab(4)}cli-flattened-param: true${NEW_LINE}`) +
                                         (((!isNullOrUndefined(vvv.protocol?.http?.in)) && vvv.protocol.http.in === 'body')
                                             ? `${tab(4)}bodySchema: ${vvv.schema.language.default.name}${NEW_LINE}` : '')).join(''))
                         ).join(''))
@@ -456,130 +457,191 @@ export class Helper {
      *   - OperationGroup
      *     - operation
      *       - parameter
+     *       - extension
+     *         - cli-operations
      * @param codeModel
      * @param action
      */
     public static enumerateCodeModel(codeModel: CodeModel, action: (nodeDescriptor: CliCommonSchema.CodeModel.NodeDescriptor) => void, flag: CliCommonSchema.CodeModel.NodeTypeFlag = null) {
-        if (isNullOrUndefined(action))
+        if (isNullOrUndefined(action)) {
             throw Error("empty action for going through code model")
-        const cliKeyMissing = '<clikey-missing>';
-        let choices = [codeModel.schemas.choices ?? [], codeModel.schemas.sealedChoices ?? []];
-        let i = -1;
+        }
+            
+        // choice/sealedChoice/choiceValue
         if (isNullOrUndefined(flag) || (flag & CliCommonSchema.CodeModel.NodeTypeFlag.choiceSchema) || (flag & CliCommonSchema.CodeModel.NodeTypeFlag.choiceValue)) {
-            choices.forEach(arr => {
-                for (i = arr.length - 1; i >= 0; i--) {
-                    let s = arr[i];
-                    if (isNullOrUndefined(flag) || (flag & CliCommonSchema.CodeModel.NodeTypeFlag.choiceSchema)) {
-                        action({
-                            choiceSchemaCliKey: NodeHelper.getCliKey(s, cliKeyMissing),
-                            parent: arr,
-                            target: s,
-                            targetIndex: i
-                        });
-                    }
-
-                    if (isNullOrUndefined(flag) || (flag & CliCommonSchema.CodeModel.NodeTypeFlag.choiceValue)) {
-                        for (let j = s.choices.length - 1; j >= 0; j--) {
-                            let ss = s.choices[j];
-                            action({
-                                choiceSchemaCliKey: NodeHelper.getCliKey(s, cliKeyMissing),
-                                choiceValueCliKey: NodeHelper.getCliKey(ss, cliKeyMissing),
-                                parent: s.choices,
-                                target: ss,
-                                targetIndex: j
-                            });
-                        }
-                    }
-                }
-            });
+            Helper.enumerateChoices(codeModel.schemas.choices ?? [], action, flag);
+            Helper.enumerateChoices(codeModel.schemas.sealedChoices ?? [], action, flag);
         }
 
+        // schemaObject/property
         if (isNullOrUndefined(flag) || (flag & CliCommonSchema.CodeModel.NodeTypeFlag.objectSchema) || (flag & CliCommonSchema.CodeModel.NodeTypeFlag.property)) {
-            for (i = codeModel.schemas.objects.length - 1; i >= 0; i--) {
-                let s = codeModel.schemas.objects[i];
-                if (isNullOrUndefined(flag) || (flag & CliCommonSchema.CodeModel.NodeTypeFlag.objectSchema)) {
-                    action({
-                        objectSchemaCliKey: NodeHelper.getCliKey(s, cliKeyMissing),
-                        parent: codeModel.schemas.objects,
-                        target: s,
-                        targetIndex: i
-                    });
-                }
+            Helper.enumrateSchemas(codeModel.schemas.objects, action, flag);
+        }
 
-                if (isNullOrUndefined(flag) || (flag & CliCommonSchema.CodeModel.NodeTypeFlag.property)) {
-                    if (!isNullOrUndefined(s.properties)) {
-                        for (let j = s.properties.length - 1; j >= 0; j--) {
-                            let p = s.properties[j];
-                            action({
-                                objectSchemaCliKey: NodeHelper.getCliKey(s, cliKeyMissing),
-                                propertyCliKey: NodeHelper.getCliKey(p, cliKeyMissing),
-                                parent: s.properties,
-                                target: p,
-                                targetIndex: j
-                            })
-                        }
-                    }
-                }
+        // operationGroup/operation/parameter
+        if (isNullOrUndefined(flag) || (flag & CliCommonSchema.CodeModel.NodeTypeFlag.operationGroup) || (flag & CliCommonSchema.CodeModel.NodeTypeFlag.operation) || (flag & CliCommonSchema.CodeModel.NodeTypeFlag.parameter)) {
+            Helper.enumrateOperationGroups(codeModel.operationGroups, action, flag);
+        }
+    }
+
+    public static enumerateChoices(choices: ChoiceSchema<StringSchema>[] | SealedChoiceSchema<StringSchema>[], action: (nodeDescriptor: CliCommonSchema.CodeModel.NodeDescriptor) => void, flag: CliCommonSchema.CodeModel.NodeTypeFlag) {
+        const enumSchema = isNullOrUndefined(flag) || ((flag & CliCommonSchema.CodeModel.NodeTypeFlag.choiceSchema) > 0);
+        const cliKeyMissing = '<clikey-missing>';
+
+        for (let i = choices.length - 1; i >= 0; i--) {
+            const choice = choices[i];
+            if (enumSchema) {
+                action({
+                    choiceSchemaCliKey: NodeHelper.getCliKey(choice, cliKeyMissing),
+                    parent: choices,
+                    target: choice,
+                    targetIndex: i
+                });
+            }
+
+            Helper.enumerateChoiceValues(choice, action, flag);
+        }
+    }
+
+    public static enumerateChoiceValues(choice: ChoiceSchema<StringSchema> | SealedChoiceSchema<StringSchema>, action: (nodeDescriptor: CliCommonSchema.CodeModel.NodeDescriptor) => void, flag: CliCommonSchema.CodeModel.NodeTypeFlag) {
+        const enumValue = isNullOrUndefined(flag) || ((flag & CliCommonSchema.CodeModel.NodeTypeFlag.choiceValue) > 0);
+        const cliKeyMissing = '<clikey-missing>';
+
+        for (let j = choice.choices.length - 1; j >= 0; j--) {
+            const choiceValue = choice.choices[j];
+            if (enumValue) {
+                action({
+                    choiceSchemaCliKey: NodeHelper.getCliKey(choice, cliKeyMissing),
+                    choiceValueCliKey: NodeHelper.getCliKey(choiceValue, cliKeyMissing),
+                    parent: choice.choices,
+                    target: choiceValue,
+                    targetIndex: j
+                });
             }
         }
+    }
 
-        if (isNullOrUndefined(flag) || (flag & CliCommonSchema.CodeModel.NodeTypeFlag.operationGroup) || (flag & CliCommonSchema.CodeModel.NodeTypeFlag.operation) || (flag & CliCommonSchema.CodeModel.NodeTypeFlag.parameter)) {
+    public static enumrateSchemas(schemas: ObjectSchema[], action: (nodeDescriptor: CliCommonSchema.CodeModel.NodeDescriptor) => void, flag: CliCommonSchema.CodeModel.NodeTypeFlag) {
+        const enumObjectSchema = isNullOrUndefined(flag) || ((flag & CliCommonSchema.CodeModel.NodeTypeFlag.objectSchema) > 0);
+        const cliKeyMissing = '<clikey-missing>';
 
-            for (i = codeModel.operationGroups.length - 1; i >= 0; i--) {
-                let group = codeModel.operationGroups[i];
-                if (isNullOrUndefined(flag) || (flag & CliCommonSchema.CodeModel.NodeTypeFlag.operationGroup)) {
+        for (let i = schemas.length - 1; i >= 0; i--) {
+            const schema = schemas[i];
+            if (enumObjectSchema) {
+                action({
+                    objectSchemaCliKey: NodeHelper.getCliKey(schema, cliKeyMissing),
+                    parent: schemas,
+                    target: schema,
+                    targetIndex: i
+                });
+            }
+            Helper.enumrateSchemaProperties(schema, action, flag);
+        }
+    }
+
+    public static enumrateSchemaProperties(schema: ObjectSchema, action: (nodeDescriptor: CliCommonSchema.CodeModel.NodeDescriptor) => void, flag: CliCommonSchema.CodeModel.NodeTypeFlag) {
+        const enumProperty = isNullOrUndefined(flag) || ((flag & CliCommonSchema.CodeModel.NodeTypeFlag.property) > 0);
+        if (isNullOrUndefined(schema.properties)) {
+            return;
+        }
+        const cliKeyMissing = '<clikey-missing>';
+        for (let j = schema.properties.length - 1; j >= 0; j--) {
+            const prop = schema.properties[j];
+            if (enumProperty) {
+                action({
+                    objectSchemaCliKey: NodeHelper.getCliKey(schema, cliKeyMissing),
+                    propertyCliKey: NodeHelper.getCliKey(prop, cliKeyMissing),
+                    parent: schema.properties,
+                    target: prop,
+                    targetIndex: j
+                })
+            }
+        }
+    }
+
+    public static enumrateOperationGroups(groups: OperationGroup[], action: (nodeDescriptor: CliCommonSchema.CodeModel.NodeDescriptor) => void, flag: CliCommonSchema.CodeModel.NodeTypeFlag) {
+        const enumGroup = isNullOrUndefined(flag) || ((flag & CliCommonSchema.CodeModel.NodeTypeFlag.operationGroup) > 0);
+        const cliKeyMissing = '<clikey-missing>';
+
+        for (let i = groups.length - 1; i >= 0; i--) {
+            const group = groups[i];
+            if (enumGroup) {
+                action({
+                    operationGroupCliKey: NodeHelper.getCliKey(group, cliKeyMissing),
+                    parent: groups,
+                    target: group,
+                    targetIndex: i,
+                })
+            }
+            Helper.enumrateOperations(group, action, flag);
+        }
+    }
+
+    public static enumrateOperations(group: OperationGroup, action: (nodeDescriptor: CliCommonSchema.CodeModel.NodeDescriptor) => void, flag: CliCommonSchema.CodeModel.NodeTypeFlag) {
+        const enumOperation = isNullOrUndefined(flag) || ((flag & CliCommonSchema.CodeModel.NodeTypeFlag.operation) > 0);
+        const cliKeyMissing = '<clikey-missing>';
+
+        // collect operations in cli-operations
+        const operations = [];
+        const cliOps = [];
+        group.operations.forEach((op) => {
+            operations.push(op);
+            cliOps.push(...NodeHelper.getCliOperation((op), () => []));
+        });
+
+        // put all cli operations at the end of array. So we can use targetIndex and parent.length to know whehter this operation is in cli.
+        operations.push(...cliOps);
+
+        for (let j = operations.length - 1; j >= 0; j--) {
+            let op = operations[j];
+            if (enumOperation) {
+                action({
+                    operationGroupCliKey: NodeHelper.getCliKey(group, cliKeyMissing),
+                    operationCliKey: NodeHelper.getCliKey(op, cliKeyMissing),
+                    parent: group.operations,
+                    target: op,
+                    targetIndex: j,
+                })
+            }
+            Helper.enumrateParameters(group, op, action, flag);
+        }
+    }
+
+    public static enumrateParameters(group: OperationGroup, op: Operation, action: (nodeDescriptor: CliCommonSchema.CodeModel.NodeDescriptor) => void, flag: CliCommonSchema.CodeModel.NodeTypeFlag) {
+        const enumParam = isNullOrUndefined(flag) || ((flag & CliCommonSchema.CodeModel.NodeTypeFlag.parameter) > 0);
+        const cliKeyMissing = '<clikey-missing>';
+       
+        for (let k = op.parameters.length - 1; k >= 0; k--) {
+            const param = op.parameters[k];
+            if (enumParam) {
+                action({
+                    operationGroupCliKey: NodeHelper.getCliKey(group, cliKeyMissing),
+                    operationCliKey: NodeHelper.getCliKey(op, cliKeyMissing),
+                    requestIndex: CliConst.DEFAULT_OPERATION_PARAMETER_INDEX,
+                    parameterCliKey: NodeHelper.getCliKey(param, cliKeyMissing),
+                    parent: op.parameters,
+                    target: param,
+                    targetIndex: k,
+                })
+            }
+        }
+        
+        for (let m = op.requests.length - 1; m >= 0; m--) {
+            if (isNullOrUndefined(op.requests[m].parameters)) {
+                continue;
+            }
+            for (let k = op.requests[m].parameters.length - 1; k >= 0; k--) {
+                const param = op.requests[m].parameters[k];
+                if (enumParam) {
                     action({
                         operationGroupCliKey: NodeHelper.getCliKey(group, cliKeyMissing),
-                        parent: codeModel.operationGroups,
-                        target: group,
-                        targetIndex: i,
+                        operationCliKey: NodeHelper.getCliKey(op, cliKeyMissing),
+                        requestIndex: m,
+                        parameterCliKey: NodeHelper.getCliKey(param, cliKeyMissing),
+                        parent: op.requests[m].parameters,
+                        target: param,
+                        targetIndex: k,
                     })
-                }
-                for (let j = group.operations.length - 1; j >= 0; j--) {
-                    let op = group.operations[j];
-                    if (isNullOrUndefined(flag) || (flag & CliCommonSchema.CodeModel.NodeTypeFlag.operation)) {
-                        action({
-                            operationGroupCliKey: NodeHelper.getCliKey(group, cliKeyMissing),
-                            operationCliKey: NodeHelper.getCliKey(op, cliKeyMissing),
-                            parent: group.operations,
-                            target: op,
-                            targetIndex: j,
-                        })
-                    }
-
-                    if (isNullOrUndefined(flag) || (flag & CliCommonSchema.CodeModel.NodeTypeFlag.parameter)) {
-                        for (let k = op.parameters.length - 1; k >= 0; k--) {
-                            let param = op.parameters[k];
-                            action({
-                                operationGroupCliKey: NodeHelper.getCliKey(group, cliKeyMissing),
-                                operationCliKey: NodeHelper.getCliKey(op, cliKeyMissing),
-                                requestIndex: CliConst.DEFAULT_OPERATION_PARAMETER_INDEX,
-                                parameterCliKey: NodeHelper.getCliKey(param, cliKeyMissing),
-                                parent: op.parameters,
-                                target: param,
-                                targetIndex: k,
-                            })
-                        }
-                    }
-
-                    for (let m = op.requests.length - 1; m >= 0; m--) {
-                        if (!isNullOrUndefined(op.requests[m].parameters)) {
-                            if (isNullOrUndefined(flag) || (flag & CliCommonSchema.CodeModel.NodeTypeFlag.parameter)) {
-                                for (let k = op.requests[m].parameters.length - 1; k >= 0; k--) {
-                                    let param = op.requests[m].parameters[k];
-                                    action({
-                                        operationGroupCliKey: NodeHelper.getCliKey(group, cliKeyMissing),
-                                        operationCliKey: NodeHelper.getCliKey(op, cliKeyMissing),
-                                        requestIndex: m,
-                                        parameterCliKey: NodeHelper.getCliKey(param, cliKeyMissing),
-                                        parent: op.requests[m].parameters,
-                                        target: param,
-                                        targetIndex: k,
-                                    })
-                                }
-                            }
-                        }
-                    }
                 }
             }
         }

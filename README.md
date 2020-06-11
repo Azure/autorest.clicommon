@@ -10,9 +10,6 @@ pipeline-model: v3
 
 pipeline:
 
-    modelerfour/new-transform:
-        input: clicommon/cli-flatten-setter
-	
     clicommon/cli-prenamer:
         input: modelerfour
         output-artifact: clicommon-prenamer
@@ -28,17 +25,24 @@ pipeline:
     clicommon/cli-flatten-setter:
         input: clicommon/pre/cli-complex-marker
         output-artifact: clicommon-flatten-setter
-
-    clicommon:
-        input: modelerfour/identity
-        output-artifact: clicommon-output
+        
+    modelerfour/new-transform:
+        input: clicommon/cli-flatten-setter
 
     clicommon/cli-poly-as-resource-modifier:
-        input: clicommon
+        input: modelerfour/identity
         output-artifact: clicommon-poly-as-resource-modifier
 
-    clicommon/cli-complex-marker:
+    clicommon/cli-flatten-param-modifier:
         input: clicommon/cli-poly-as-resource-modifier
+        output-artifact: clicommon-flatten-param-modifier
+
+    clicommon:
+        input: clicommon/cli-flatten-param-modifier
+        output-artifact: clicommon-output
+
+    clicommon/cli-complex-marker:
+        input: clicommon
         output-artifact: clicommon-complex-marker
     
     #clicommon/cli-poly-as-param-modifier:
@@ -60,6 +64,7 @@ pipeline:
           - clicommon/cli-flatten-setter
           #- clicommon/cli-poly-as-param-modifier
           - clicommon/cli-poly-as-resource-modifier
+          - clicommon/cli-flatten-param-modifier
           - clicommon/cli-complex-marker
           - clicommon/pre/cli-complex-marker
           - clicommon/cli-visibility-cleaner
@@ -73,15 +78,17 @@ scope-clicommon:
         - clicommon-split-operation
         - clicommon-flatten-setter
         - clicommon-poly-as-resource-modifier
+        - clicommon-flatten-param-modifier
         #- clicommon-poly-as-param-modifier
         - clicommon-complex-marker
         - clicommon-complex-marker-pre
         - clicommon-visibility-cleaner
 
 modelerfour:
-    #group-parameters: true
-    #flatten-models: true
-    #flatten-payloads: true    
+    # group-parameters: true
+    # flatten-models: true
+    # flatten-payloads: true    
+    # lenient-model-deduplication: true
 
     # standardize to snake in modelerfour for selecting and formatting in clicommon
     # further naming will be done in clicommon to corresonding convention
@@ -126,6 +133,11 @@ cli:
     #    cli-flatten-payload-max-poly-as-resource-prop-count: 8
     #    # max properties allowed from flatten of sub-class as param
     #    cli-flatten-payload-max-poly-as-param-prop-count: 8
+
+    flatten-param:
+        # if true, parameter mentioned in 'fatten-params' will be flattened. The flatten will do one level. 
+        # The flatten parameter should be object and in payload 
+        cli-flatten-param-enabled: true
 
     # example for split-operation
     # cli-directive:

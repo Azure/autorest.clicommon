@@ -1,4 +1,4 @@
-import { Session } from "@azure-tools/autorest-extension-base";
+import { Session, Host } from "@azure-tools/autorest-extension-base";
 import { CodeModel } from "@azure-tools/codemodel";
 import { CliDirectiveManager } from "./cliDirective";
 import { isNullOrUndefined } from "util";
@@ -32,4 +32,19 @@ export class Modifier {
         return this.codeModel;
     }
 
+}
+
+export async function processRequest(host: Host) {
+    const session = await Helper.init(host);
+
+    Helper.dumper.dumpCodeModel("modifier-pre");
+    
+    const arr = await session.getValue(CliConst.CLI_DIRECTIVE_KEY, null);
+    const modifier = await new Modifier(session).init(arr);
+    modifier.process();
+
+    Helper.dumper.dumpCodeModel("modifier-post");
+
+    Helper.outputToModelerfour();
+    await Helper.dumper.persistAsync();
 }

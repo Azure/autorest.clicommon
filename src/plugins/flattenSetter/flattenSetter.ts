@@ -279,14 +279,14 @@ export class FlattenSetter {
         let cliDirectives = await this.session.getValue(CliConst.CLI_DIRECTIVE_KEY, []);
         this.manager = new CliDirectiveManager();
         await this.manager.LoadDirective(
-            cliDirectives.filter((d: CliCommonSchema.CliDirective.Directive) => (!isNullOrUndefined(d["poly-resource"]) && d["poly-resource"] === true))
+            cliDirectives.filter((d: CliCommonSchema.CliDirective.Directive) => (!isNullOrUndefined(d[NodeHelper.POLY_RESOURCE]) && d[NodeHelper.POLY_RESOURCE] === true))
                 .map((d: CliCommonSchema.CliDirective.Directive) => {
                     let r: CliCommonSchema.CliDirective.Directive = {
                         select: d.select,
                         where: JSON.parse(JSON.stringify(d.where)),
-                        "poly-resource": d["poly-resource"],
                         hitCount: true,
                     };
+                    r[NodeHelper.POLY_RESOURCE] = d[NodeHelper.POLY_RESOURCE];
                     return r;
                 }));
 
