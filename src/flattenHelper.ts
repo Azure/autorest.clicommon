@@ -1,9 +1,35 @@
 import { getAllProperties, ImplementationLocation, ObjectSchema, Parameter, Property, Request, VirtualParameter } from "@azure-tools/codemodel";
 import { values } from "@azure-tools/linq";
-import { isNull, isNullOrUndefined } from "util";
+import { isNullOrUndefined } from "util";
 import { NodeHelper } from "./nodeHelper";
 
 export class FlattenHelper {
+
+    public static flattenParameter(req: Request, param: Parameter, path: Property[], prefix: string) {
+        if (!(param.schema instanceof ObjectSchema))
+            throw Error(`Try to flatten non-object schema: param = '${param.language.default.name}', schema= '${param.schema.language.default.name}'`);
+
+        FlattenHelper.flattenPorperties(req, param, param.schema as ObjectSchema, path, prefix);
+        req.updateSignatureParameters();
+    }
+
+    public static createFlattenedParameterDefaultName(baseProperty: Property, prefix: string): string {
+        if (isNullOrUndefined(prefix) || prefix.indexOf('_') >= 0) {
+            throw Error('invalide prefix');
+        }
+        return `${prefix}_${baseProperty.language.default.name}`;
+    }
+
+    public static createFlattenedParameterCliName(baseProperty: Property, prefix: string): string {
+        if (isNullOrUndefined(prefix) || prefix.indexOf('_') >= 0) {
+            throw Error('invalide prefix');
+        }
+        return `${prefix}_${baseProperty.language['cli'].name}`;
+    }
+
+    public static getPrefix(flattenedParam: Parameter): string {
+        return flattenedParam.language.default.name.split('_')[0];
+    }
 
     private static *getFlattenedParameters(parameter: Parameter, property: Property, path: Array<Property> = []): Iterable<VirtualParameter> {
         if (property.readOnly) {
@@ -52,11 +78,9 @@ export class FlattenHelper {
                 continue;
             }
             for (const vp of this.getFlattenedParameters(parameter, property, path)) {
-                vp.language.default.name = `${prefix}${vp.language.default.name}`;
-                if (vp.language['cli'].name) {
-                    vp.language['cli'].name = `${prefix}${vp.language['cli'].name}`;
-                }
+                vp.language.default.name = FlattenHelper.createFlattenedParameterDefaultName(property, prefix);
                 NodeHelper.setCliFlattenedNames(vp, [NodeHelper.getCliKey(parameter, null), NodeHelper.getCliKey(property, null)]);
+                NodeHelper.setFlattenParamOriginalProperty(vp, property);
                 arr.push(vp);
             }
         }
@@ -77,14 +101,5 @@ export class FlattenHelper {
                 request.parameters = [];
             request.parameters = request.parameters.concat(arr2);
         }
-    }
-
-
-    public static flattenParameter(req: Request, param: Parameter, path: Property[], prefix: string) {
-        if (!(param.schema instanceof ObjectSchema))
-            throw Error(`Try to flatten non-object schema: param = '${param.language.default.name}', schema= '${param.schema.language.default.name}'`);
-
-        FlattenHelper.flattenPorperties(req, param, param.schema as ObjectSchema, path, prefix);
-        req.updateSignatureParameters();
     }
 }

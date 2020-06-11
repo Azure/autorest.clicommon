@@ -3,6 +3,7 @@ import { CodeModel, Request, ObjectSchema, Operation, OperationGroup, Parameter 
 import { isNullOrUndefined } from "util";
 import { Helper } from "../helper";
 import { NodeHelper } from "../nodeHelper";
+import { PolyHelper } from "../polyHelper";
 import { FlattenHelper } from "../flattenHelper";
 import { CopyHelper } from "../copyHelper";
 import { CliConst, CliCommonSchema } from "../schema";
@@ -75,8 +76,8 @@ export class PolyAsResourceModifier {
                     let discriminatorValue = NodeHelper.getCliDiscriminatorValue(subClass);
 
                     let op2: Operation = this.cloneOperationForSubclass(op,
-                        `${op.language.default.name}_${discriminatorValue}` /*defaultName*/,
-                        `${NodeHelper.getCliKey(op, op.language.default.name)}#${discriminatorValue}` /*cliKey*/,
+                        PolyHelper.createPolyOperationDefaultName(op, discriminatorValue),
+                        PolyHelper.createPolyOperationCliKey(op, discriminatorValue),
                         baseSchema, subClass);
                     
                     Helper.logDebug(`${g.language.default.name}/${op.language.default.name} cloned for subclass ${discriminatorValue}`);

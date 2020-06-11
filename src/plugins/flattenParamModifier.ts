@@ -70,7 +70,7 @@ export class FlattenParamModifier {
         }
         if (NodeHelper.getJson(subClass) !== true) {
             const path = isNullOrUndefined(polyParam['targetProperty']) ? [] : [polyParam['targetProperty']];
-            FlattenHelper.flattenParameter(request, polyParam, path, `${discriminatorValue}_`);
+            FlattenHelper.flattenParameter(request, polyParam, path, `${discriminatorValue}`);
         }
     }
 
@@ -125,7 +125,7 @@ export class FlattenParamModifier {
             
             let path = isNullOrUndefined(clonedParam['targetProperty']) ? [] : [clonedParam['targetProperty']];
             // Use parameter's default name as perfix
-            FlattenHelper.flattenParameter(request, clonedParam, path, `${clonedParam.language.default.name}_`);
+            FlattenHelper.flattenParameter(request, clonedParam, path, `${clonedParam.language.default.name}`);
             
             return true;
         }

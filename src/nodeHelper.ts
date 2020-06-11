@@ -36,6 +36,7 @@ export class NodeHelper {
     private static readonly SPLIT_OPERATION_ORIGINAL_OPERATION = 'cli-split-operation-original-operation';
     private static readonly FLATTENED_NAMES = 'flattenedNames';
     private static readonly FLATTENED_PARAM = 'cli-flattened-param';
+    private static readonly FLATTEN_PARAM_ORIGINAL_PROPERTY = 'cli-flatten-param-original-property';
 
     /**
      * Check whether the obj has discriminator property
@@ -193,6 +194,14 @@ export class NodeHelper {
 
     public static setCliFlattenedNames(param: Parameter, flattenedNames: string[]) {
         NodeHelper.setCliProperty(param, this.FLATTENED_NAMES, flattenedNames);
+    }
+
+    public static setFlattenParamOriginalProperty(param: Parameter, prop: Property) {
+        NodeHelper.setExtensionsProperty(param, NodeHelper.FLATTEN_PARAM_ORIGINAL_PROPERTY, prop);
+    }
+
+    public static getFlattenParamOriginalProperty(param: Parameter): Property {
+        return NodeHelper.getExtensionsProperty(param, NodeHelper.FLATTEN_PARAM_ORIGINAL_PROPERTY, () => null);
     }
 
     public static setPolyAsResource(node: Parameter, value: boolean) {

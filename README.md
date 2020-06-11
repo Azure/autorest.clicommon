@@ -217,6 +217,3 @@ cli:
             choiceValue: 'pascal'
             constant: 'pascal'
 ```
-
-
-
