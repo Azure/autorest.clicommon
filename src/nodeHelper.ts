@@ -24,7 +24,7 @@ export class NodeHelper {
 
     // TODO: Consider add specific class for directive keys
     public static readonly POLY_RESOURCE: string = 'poly-resource';
-    public static readonly FLATTEN_PARAMS: string = 'flatten-params';
+    public static readonly CLI_FLATTEN: string = 'cli-flatten';
     public static readonly SPLIT_OPERATION_NAMES = 'split-operation-names';
 
     private static readonly POLY_AS_RESOURCE_SUBCLASS_PARAM = "cli-poly-as-resource-subclass-param";
@@ -38,9 +38,9 @@ export class NodeHelper {
     private static readonly SPLIT_OPERATION_ORIGINAL_OPERATION = 'cli-split-operation-original-operation';
 
     private static readonly FLATTENED_NAMES = 'flattenedNames';
-    private static readonly FLATTENED_PARAM = 'cli-flattened-param';
-    private static readonly FLATTEN_PARAM_ORIGINAL_PROPERTY = 'cli-flatten-param-original-property';
-    private static readonly FLATTEN_PARAM_PREFIX = 'cli-flatten-param-prefix';
+    private static readonly CLI_FLATTENED = 'cli-flattened';
+    private static readonly CLI_FLATTEN_ORIGIN = 'cli-flatten-origin';
+    private static readonly CLI_FLATTEN_PREFIX = 'cli-flatten-prefix';
 
     /**
      * Check whether the obj has discriminator property
@@ -188,8 +188,8 @@ export class NodeHelper {
         NodeHelper.clearCliProperty(node, this.SPLIT_OPERATION_NAMES);
     }
 
-    public static getFlattenParams(node: Operation): string[] {
-        return NodeHelper.getCliProperty(node, this.FLATTEN_PARAMS, () => []);
+    public static isCliFlatten(node: M4Node): boolean {
+        return NodeHelper.getCliProperty(node, this.CLI_FLATTEN, () => false);
     }
 
     public static getCliFlattenedNames(param: Parameter): string[] {
@@ -200,20 +200,20 @@ export class NodeHelper {
         NodeHelper.setCliProperty(param, this.FLATTENED_NAMES, flattenedNames);
     }
 
-    public static setFlattenParamOriginalProperty(param: Parameter, prop: Property) {
-        NodeHelper.setExtensionsProperty(param, NodeHelper.FLATTEN_PARAM_ORIGINAL_PROPERTY, prop);
+    public static setCliFlattenOrigin(node: M4Node, ori: M4Node) {
+        NodeHelper.setExtensionsProperty(node, NodeHelper.CLI_FLATTEN_ORIGIN, ori);
     }
 
-    public static getFlattenParamOriginalProperty(param: Parameter): Property {
-        return NodeHelper.getExtensionsProperty(param, NodeHelper.FLATTEN_PARAM_ORIGINAL_PROPERTY, () => null);
+    public static getCliFlattenOrigin(node: M4Node): Property {
+        return NodeHelper.getExtensionsProperty(node, NodeHelper.CLI_FLATTEN_ORIGIN, () => null);
     }
 
-    public static setFlattenParamPrefix(param: Parameter, value: string) {
-        NodeHelper.setExtensionsProperty(param, NodeHelper.FLATTEN_PARAM_PREFIX, value);
+    public static setCliFlattenPrefix(node: M4Node, value: string) {
+        NodeHelper.setExtensionsProperty(node, NodeHelper.CLI_FLATTEN_PREFIX, value);
     }
 
-    public static getFlattenParamPrefix(param: Parameter): string {
-        return NodeHelper.getExtensionsProperty(param, NodeHelper.FLATTEN_PARAM_PREFIX, () => null);
+    public static getCliFlattenPrefix(param: Parameter): string {
+        return NodeHelper.getExtensionsProperty(param, NodeHelper.CLI_FLATTEN_PREFIX, () => null);
     }
 
     public static setPolyAsResource(node: Parameter, value: boolean) {
@@ -280,12 +280,12 @@ export class NodeHelper {
         return NodeHelper.getExtensionsProperty(param, NodeHelper.POLY_AS_PARAM_ORIGINIAL_PARAMETER, null);
     }
 
-    public static setFlattenedParam(param: Parameter, value: boolean) {
-        NodeHelper.setExtensionsProperty(param, NodeHelper.FLATTENED_PARAM, value);
+    public static setCliFlattened(node: M4Node, value: boolean) {
+        NodeHelper.setExtensionsProperty(node, NodeHelper.CLI_FLATTENED, value);
     }
 
-    public static isFlattenedParam(param: Parameter): boolean {
-        return NodeHelper.getExtensionsProperty(param, NodeHelper.FLATTENED_PARAM, () => false);
+    public static isCliFlattened(node: M4Node): boolean {
+        return NodeHelper.getExtensionsProperty(node, NodeHelper.CLI_FLATTENED, () => false);
     }
 
     public static setPolyAsParamExpanded(param: Parameter, value: boolean) {

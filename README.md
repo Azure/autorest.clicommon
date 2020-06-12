@@ -29,16 +29,20 @@ pipeline:
     modelerfour/new-transform:
         input: clicommon/cli-flatten-setter
 
-    clicommon/cli-poly-as-resource-modifier:
+    clicommon/cli-modeler-post-processor:
         input: modelerfour/identity
+        output-artifact: clicommon-modeler-post-processor
+
+    clicommon/cli-poly-as-resource-modifier:
+        input: clicommon/cli-modeler-post-processor
         output-artifact: clicommon-poly-as-resource-modifier
 
-    clicommon/cli-flatten-param-modifier:
+    clicommon/cli-flatten-modifier:
         input: clicommon/cli-poly-as-resource-modifier
-        output-artifact: clicommon-flatten-param-modifier
+        output-artifact: clicommon-flatten-modifier
 
     clicommon:
-        input: clicommon/cli-flatten-param-modifier
+        input: clicommon/cli-flatten-modifier
         output-artifact: clicommon-output
 
     clicommon/cli-complex-marker:
@@ -62,9 +66,10 @@ pipeline:
           - clicommon/cli-prenamer
           - clicommon/cli-split-operation
           - clicommon/cli-flatten-setter
+          - clicommon/cli-modeler-post-processor
           #- clicommon/cli-poly-as-param-modifier
           - clicommon/cli-poly-as-resource-modifier
-          - clicommon/cli-flatten-param-modifier
+          - clicommon/cli-flatten-modifier
           - clicommon/cli-complex-marker
           - clicommon/pre/cli-complex-marker
           - clicommon/cli-visibility-cleaner
@@ -77,8 +82,9 @@ scope-clicommon:
         - clicommon-prenamer
         - clicommon-split-operation
         - clicommon-flatten-setter
+        - clicommon-modeler-post-processor
         - clicommon-poly-as-resource-modifier
-        - clicommon-flatten-param-modifier
+        - clicommon-flatten-modifier
         #- clicommon-poly-as-param-modifier
         - clicommon-complex-marker
         - clicommon-complex-marker-pre
@@ -133,11 +139,6 @@ cli:
     #    cli-flatten-payload-max-poly-as-resource-prop-count: 8
     #    # max properties allowed from flatten of sub-class as param
     #    cli-flatten-payload-max-poly-as-param-prop-count: 8
-
-    flatten-param:
-        # if true, parameter mentioned in 'fatten-params' will be flattened. The flatten will do one level. 
-        # The flatten parameter should be object and in payload 
-        cli-flatten-param-enabled: true
 
     # example for split-operation
     # cli-directive:

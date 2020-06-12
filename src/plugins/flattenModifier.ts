@@ -8,7 +8,7 @@ import { CopyHelper } from "../copyHelper";
 import { isNullOrUndefined } from "util";
 import { FlattenHelper } from "../flattenHelper";
 
-export class FlattenParamModifier {
+export class FlattenModifier {
 
     constructor(protected session: Session<CodeModel>){
     }
@@ -28,25 +28,28 @@ export class FlattenParamModifier {
     }
 
     private async modifier() {
-        const directives = (await this.session.getValue(CliConst.CLI_DIRECTIVE_KEY, []))
-            .filter((dir) => dir[NodeHelper.FLATTEN_PARAMS])
-            .map((dir) => this.copyDirectiveOnlyForFlattenParams(dir));
-        if (directives && directives.length > 0) {
-            Helper.dumper.dumpCodeModel('flatten-param-modifier-pre');
-            const modifier = await new Modifier(this.session).init(directives);
+        let directives = await this.session.getValue(CliConst.CLI_FLATTEN_DIRECTIVE_KEY, []);
+        let cliDirectives = await this.session.getValue(CliConst.CLI_DIRECTIVE_KEY, []);
+
+        const flattenDirectives = [...directives, ...cliDirectives]
+            .filter((dir) => dir[NodeHelper.CLI_FLATTEN])
+            .map((dir) => this.copyDirectiveOnlyForCliFlatten(dir));
+        if (flattenDirectives && flattenDirectives.length > 0) {
+            Helper.dumper.dumpCodeModel('flatten-modifier-pre');
+            const modifier = await new Modifier(this.session).init(flattenDirectives);
             modifier.process();
-            Helper.dumper.dumpCodeModel('flatten-param-modifier-post');
+            Helper.dumper.dumpCodeModel('flatten-modifier-post');
         } else {
-            Helper.logDebug('No flatten-params directive is found!');
+            Helper.logDebug('No flatten directive is found!');
         }
     }
 
-    private copyDirectiveOnlyForFlattenParams(src: CliCommonSchema.CliDirective.Directive): CliCommonSchema.CliDirective.Directive {
+    private copyDirectiveOnlyForCliFlatten(src: CliCommonSchema.CliDirective.Directive): CliCommonSchema.CliDirective.Directive {
         const copy: CliCommonSchema.CliDirective.Directive = {
             select: src.select,
             where: CopyHelper.deepCopy(src.where),
         }
-        copy[NodeHelper.FLATTEN_PARAMS] = src[NodeHelper.FLATTEN_PARAMS];
+        copy[NodeHelper.CLI_FLATTEN] = src[NodeHelper.CLI_FLATTEN];
         return copy;
     }
     
@@ -59,13 +62,13 @@ export class FlattenParamModifier {
         const subClass = polyParam.schema as ObjectSchema;
         const discriminatorValue = NodeHelper.getCliDiscriminatorValue(subClass);
         if (isNullOrUndefined(polyParam)) {
-            Helper.logWarning(`operation ${NodeHelper.getCliKey(operation, null)} has no poly parameter! Skip flatten param`);
+            Helper.logWarning(`operation ${NodeHelper.getCliKey(operation, null)} has no poly parameter! Skip flatten`);
             return;
         }
 
         const request = operation.requests?.[0];
         if (!request) {
-            Helper.logWarning(`operation ${NodeHelper.getCliKey(operation, null)} has no request! Skip flatten param`);
+            Helper.logWarning(`operation ${NodeHelper.getCliKey(operation, null)} has no request! Skip flatten`);
             return;
         }
         if (NodeHelper.getJson(subClass) !== true) {
@@ -79,13 +82,8 @@ export class FlattenParamModifier {
             return;
         }
         const operation = desc.target as Operation;
-        const flattenParams = new Set<String>(NodeHelper.getFlattenParams(operation));
-        if (flattenParams.size === 0) {
-            return;
-        }
         const request = operation.requests?.[0];
-        if (!request || !request.parameters || request.parameters.length === 0) {
-            Helper.logWarning(`operation ${NodeHelper.getCliKey(operation, null)} has flatten-params, but request is null or has no parameters! Skip flatten param`);
+        if (isNullOrUndefined(request) || isNullOrUndefined(request.parameters)) {
             return;
         }
 
@@ -96,11 +94,9 @@ export class FlattenParamModifier {
 
             for (let i = 0; i < request.parameters.length; i++) {
                 const param = request.parameters[i];
-                if (!flattenParams.has(NodeHelper.getCliKey(param, null))) {
+                if (!NodeHelper.isCliFlatten(param) || NodeHelper.isCliFlattened(param)) {
                     continue;
                 }
-                // Next round we do not handle it again
-                flattenParams.delete(NodeHelper.getCliKey(param, null));
 
                 if (this.flattenNormalOperationParam(request, i)) {
                     // After flatten, index is changed. Break to start another round loop
@@ -114,7 +110,7 @@ export class FlattenParamModifier {
         const parameter = request.parameters[index];
         const paramSchema = parameter.schema;
         if (!(paramSchema instanceof ObjectSchema)) {
-            Helper.logWarning(`flatten param ${NodeHelper.getCliKey(parameter, null)} is not object! Skip flatten param`);
+            Helper.logWarning(`flatten param ${NodeHelper.getCliKey(parameter, null)} is not object! Skip flatten`);
             return false;
         }
         if (NodeHelper.getJson(paramSchema) !== true) {
@@ -141,28 +137,28 @@ export class FlattenParamModifier {
 export async function processRequest(host: Host) {
 
     const session = await Helper.init(host);
-    Helper.dumper.dumpCodeModel("flatten-param-pre");
+    Helper.dumper.dumpCodeModel("flatten-pre");
 
-    const flattenEnabled = (await session.getValue(CliConst.CLI_FLATTEN_PARAM_ENABLED_KEY, false)) === true;
+    const flattenEnabled = (await session.getValue(CliConst.CLI_FLATTEN_SET_ENABLED_KEY, false)) === true;
     const polyEnabled = (await session.getValue(CliConst.CLI_POLYMORPHISM_EXPAND_AS_RESOURCE_KEY, false)) === true;
 
-    const flattenParam = new FlattenParamModifier(session);
+    const flattenParam = new FlattenModifier(session);
     if (!flattenEnabled && !polyEnabled) {
-        Helper.logDebug(`cli.flatten-param.cli-flatten-param-enabled and cli.polymorphism.expand-as-resource are not true. Skip flatten params!`);
+        Helper.logDebug(`${CliConst.CLI_FLATTEN_SET_ENABLED_KEY} and ${CliConst.CLI_POLYMORPHISM_EXPAND_AS_RESOURCE_KEY} are not true. Skip flatten params!`);
     } else if (!flattenEnabled && polyEnabled) {
-        Helper.logDebug(`cli.flatten-param.cli-flatten-param-enabled is not true, cli.polymorphism.expand-as-resource is true. Only poly parameter will be flatten!`);
+        Helper.logDebug(`${CliConst.CLI_FLATTEN_SET_ENABLED_KEY} is not true, ${CliConst.CLI_POLYMORPHISM_EXPAND_AS_RESOURCE_KEY} is true. Only poly parameter will be flatten!`);
         
     } else if (flattenEnabled && !polyEnabled){
-        Helper.logDebug(`cli.flatten-param.cli-flatten-param-enabled is true, cli.polymorphism.expand-as-resource is not true. Only paramter in flatten-params will be flatten!`);
+        Helper.logDebug(`${CliConst.CLI_FLATTEN_SET_ENABLED_KEY} is true, ${CliConst.CLI_POLYMORPHISM_EXPAND_AS_RESOURCE_KEY} is not true. Only paramter in flatten-params will be flatten!`);
 
     } else if (flattenEnabled && polyEnabled) {
-        Helper.logDebug(`cli.flatten-param.cli-flatten-param-enabled and cli.polymorphism.expand-as-resource are true.`);
+        Helper.logDebug(`${CliConst.CLI_FLATTEN_SET_ENABLED_KEY} and ${CliConst.CLI_POLYMORPHISM_EXPAND_AS_RESOURCE_KEY} are true.`);
     }
     
     await flattenParam.process(flattenEnabled, polyEnabled);
     
     
-    Helper.dumper.dumpCodeModel("flatten-param-post");
+    Helper.dumper.dumpCodeModel("flatten-post");
 
     Helper.outputToModelerfour();
     await Helper.dumper.persistAsync();

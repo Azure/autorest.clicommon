@@ -31,10 +31,10 @@ export abstract class Action {
                 case 'hidden':
                 case 'removed':
                 case 'required':
+                case NodeHelper.CLI_FLATTEN:
                 case NodeHelper.POLY_RESOURCE:
                     arr.push(new ActionSetProperty(value, key, () => true));
                     break;
-                case NodeHelper.FLATTEN_PARAMS:
                 case NodeHelper.SPLIT_OPERATION_NAMES:
                     arr.push(new ActionSetProperty(value, key, () => null));
                     break;

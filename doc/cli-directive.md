@@ -81,10 +81,16 @@ For groupName, operationName, parameterName, typeName, propertyName, usually you
     - isRegex: true | false
 - split-operation-names
   - split operation into multiple operations with given names
+  - add 'split-operation-names" under 'language->cli'
+  - optional
   - value format:
     - opName1
     - opName2
     - ...
+- cli-flatten
+  - flatten object
+  - add 'cli-flatten: ..." under 'language->cli'
+  - optional
 
 ## How to troubleshooting
 > Add --debug in your command line to have more intermedia output files for troubleshooting
@@ -207,8 +213,8 @@ cli:
       - where:
           group: OperationGroupName
           op: CreateOrUpdate#Update
-        flatten-params:
-          - properties
+          param: properties
+        cli-flatten: true
 
 ```
 

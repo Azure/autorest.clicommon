@@ -10,7 +10,8 @@ import { processRequest as polyAsResourceModifier } from './plugins/polyAsResour
 import { processRequest as polyAsParamModifier } from './plugins/polyAsParamModifier';
 import { processRequest as complexMarker } from './plugins/complexMarker';
 import { processRequest as visibilityCleaner } from './plugins/visibilityCleaner';
-import { processRequest as flattenParamModifier } from './plugins/flattenParamModifier';
+import { processRequest as flattenModifier } from './plugins/flattenModifier';
+import { processRequest as modelerPostProcessor } from './plugins/modelerPostProcessor';
 
 const extension = new AutoRestExtension();
 
@@ -43,8 +44,9 @@ extension.Add("clicommon", async host => {
 extension.Add("cli-flatten-setter", flattenSetter);
 extension.Add("cli-prenamer", preNamer);
 extension.Add("cli-split-operation", splitOperation);
+extension.Add("cli-modeler-post-processor", modelerPostProcessor);
 extension.Add("cli-poly-as-resource-modifier", polyAsResourceModifier);
-extension.Add("cli-flatten-param-modifier", flattenParamModifier);
+extension.Add("cli-flatten-modifier", flattenModifier);
 extension.Add("cli-poly-as-param-modifier", polyAsParamModifier);
 extension.Add("cli-complex-marker", complexMarker);
 extension.Add("cli-visibility-cleaner", visibilityCleaner)

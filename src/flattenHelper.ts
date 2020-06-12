@@ -50,7 +50,7 @@ export class FlattenHelper {
     private static flattenPorperties(request: Request, parameter: Parameter, schema: ObjectSchema, path: Property[], prefix: string) {
         // hide the original parameter
         parameter.flattened = true;
-        NodeHelper.setFlattenedParam(parameter, true);
+        NodeHelper.setCliFlattened(parameter, true);
 
         // we need this for the further flatten be recognized by python codegen
         let protocal: any = {
@@ -70,8 +70,8 @@ export class FlattenHelper {
             for (const vp of this.getFlattenedParameters(parameter, property, path)) {
                 vp.language.default.name = FlattenHelper.createFlattenedParameterDefaultName(property, prefix);
                 NodeHelper.setCliFlattenedNames(vp, [NodeHelper.getCliKey(parameter, null), NodeHelper.getCliKey(property, null)]);
-                NodeHelper.setFlattenParamOriginalProperty(vp, property);
-                NodeHelper.setFlattenParamPrefix(vp, prefix);
+                NodeHelper.setCliFlattenOrigin(vp, property);
+                NodeHelper.setCliFlattenPrefix(vp, prefix);
                 arr.push(vp);
             }
         }

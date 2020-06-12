@@ -162,7 +162,7 @@ export class CommonNamer {
             cliParameter.language['cli'] = new Language();
         }
 
-        const prop = NodeHelper.getFlattenParamOriginalProperty(cliParameter);
+        const prop = NodeHelper.getCliFlattenOrigin(cliParameter);
         if (isNullOrUndefined(prop)) {
             // Is not flattened parameter, use default naming
             this.applyNamingConvention(cliParameter);
@@ -171,7 +171,7 @@ export class CommonNamer {
 
         cliParameter.language['cli']['description'] = prop.language.default.description;
 
-        const prefix = NodeHelper.getFlattenParamPrefix(cliParameter);
+        const prefix = NodeHelper.getCliFlattenPrefix(cliParameter);
         cliParameter.language.default.name = FlattenHelper.createFlattenedParameterDefaultName(prop, prefix);
         cliParameter.language['cli']['name'] = FlattenHelper.createFlattenedParameterCliName(prop, prefix);
     }

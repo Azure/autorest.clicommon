@@ -28,8 +28,6 @@ export namespace CliConst {
 
     export const CLI_POLYMORPHISM_EXPAND_AS_RESOURCE_KEY: string = 'cli.polymorphism.expand-as-resource';
 
-    export const CLI_FLATTEN_PARAM_ENABLED_KEY: string = 'cli.flatten-param.cli-flatten-param-enabled';
-
     export const CLI_SPLIT_OPERATION_ENABLED_KEY: string = 'cli.split-operation.cli-split-operation-enabled';
 
     export const DEFAULT_OPERATION_PARAMETER_INDEX = -1;
