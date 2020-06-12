@@ -30,13 +30,17 @@ export class NodeHelper {
     private static readonly POLY_AS_RESOURCE_SUBCLASS_PARAM = "cli-poly-as-resource-subclass-param";
     private static readonly POLY_AS_RESOURCE_BASE_SCHEMA = 'cli-poly-as-resource-base-schema';
     private static readonly POLY_AS_RESOURCE_ORIGINAL_OPERATION = 'cli-poly-as-resource-original-operation';
+    private static readonly POLY_AS_RESOURCE_DISCRIMINATOR_VALUE = 'cli-poly-as-resource-discriminator-value';
     private static readonly POLY_AS_PARAM_BASE_SCHEMA = 'cli-poly-as-param-base-schema';
     private static readonly POLY_AS_PARAM_ORIGINIAL_PARAMETER = 'cli-poly-as-param-original-parameter';
     private static readonly POLY_AS_PARAM_EXPANDED = 'cli-poly-as-param-expanded';
+
     private static readonly SPLIT_OPERATION_ORIGINAL_OPERATION = 'cli-split-operation-original-operation';
+
     private static readonly FLATTENED_NAMES = 'flattenedNames';
     private static readonly FLATTENED_PARAM = 'cli-flattened-param';
     private static readonly FLATTEN_PARAM_ORIGINAL_PROPERTY = 'cli-flatten-param-original-property';
+    private static readonly FLATTEN_PARAM_PREFIX = 'cli-flatten-param-prefix';
 
     /**
      * Check whether the obj has discriminator property
@@ -204,6 +208,14 @@ export class NodeHelper {
         return NodeHelper.getExtensionsProperty(param, NodeHelper.FLATTEN_PARAM_ORIGINAL_PROPERTY, () => null);
     }
 
+    public static setFlattenParamPrefix(param: Parameter, value: string) {
+        NodeHelper.setExtensionsProperty(param, NodeHelper.FLATTEN_PARAM_PREFIX, value);
+    }
+
+    public static getFlattenParamPrefix(param: Parameter): string {
+        return NodeHelper.getExtensionsProperty(param, NodeHelper.FLATTEN_PARAM_PREFIX, () => null);
+    }
+
     public static setPolyAsResource(node: Parameter, value: boolean) {
         NodeHelper.setCliProperty(node, this.POLY_RESOURCE, value);
     }
@@ -234,6 +246,14 @@ export class NodeHelper {
 
     public static getPolyAsResourceOriginalOperation(op: Operation): Schema {
         return NodeHelper.getExtensionsProperty(op, NodeHelper.POLY_AS_RESOURCE_ORIGINAL_OPERATION, null);
+    }
+
+    public static setPolyAsResourceDiscriminatorValue(op: Operation, value: string) {
+        NodeHelper.setExtensionsProperty(op, NodeHelper.POLY_AS_RESOURCE_DISCRIMINATOR_VALUE, value);
+    }
+
+    public static getPolyAsResourceDiscriminatorValue(op: Operation): string {
+        return NodeHelper.getExtensionsProperty(op, NodeHelper.POLY_AS_RESOURCE_DISCRIMINATOR_VALUE, null);
     }
 
     public static setSplitOperationOriginalOperation(op: Operation, ori: Operation) {

@@ -147,7 +147,7 @@ export class CommonNamer {
         }
         cliOperation.language['cli']['description'] = operation.language.default.description;
 
-        const discriminatorValue = PolyHelper.getDiscriminatorValue(cliOperation);
+        const discriminatorValue = NodeHelper.getPolyAsResourceDiscriminatorValue(cliOperation);
         cliOperation.language.default.name = PolyHelper.createPolyOperationDefaultName(operation, discriminatorValue);
         cliOperation.language['cli']['name'] = PolyHelper.createPolyOperationCliName(operation, discriminatorValue);
     }
@@ -171,7 +171,7 @@ export class CommonNamer {
 
         cliParameter.language['cli']['description'] = prop.language.default.description;
 
-        const prefix = FlattenHelper.getPrefix(cliParameter);
+        const prefix = NodeHelper.getFlattenParamPrefix(cliParameter);
         cliParameter.language.default.name = FlattenHelper.createFlattenedParameterDefaultName(prop, prefix);
         cliParameter.language['cli']['name'] = FlattenHelper.createFlattenedParameterCliName(prop, prefix);
     }

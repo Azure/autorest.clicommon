@@ -14,16 +14,4 @@ export class PolyHelper {
     public static createPolyOperationCliName(baseOperation: Operation, discriminatorValue: string): string {
         return `${NodeHelper.getCliName(baseOperation, baseOperation.language.default.name)}#${discriminatorValue}`
     }
-
-    public static getDiscriminatorValue(polyOperation: Operation): string {
-        const cliKey = NodeHelper.getCliKey(polyOperation, null);
-        if (isNullOrUndefined(cliKey)) {
-            return null;
-        }
-        const arr = (cliKey as string).split('#');
-        if (!arr || arr.length !== 2) {
-            return null;
-        }
-        return arr[1];
-    }
 }

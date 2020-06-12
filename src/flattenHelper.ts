@@ -14,21 +14,11 @@ export class FlattenHelper {
     }
 
     public static createFlattenedParameterDefaultName(baseProperty: Property, prefix: string): string {
-        if (isNullOrUndefined(prefix) || prefix.indexOf('_') >= 0) {
-            throw Error('invalide prefix');
-        }
         return `${prefix}_${baseProperty.language.default.name}`;
     }
 
     public static createFlattenedParameterCliName(baseProperty: Property, prefix: string): string {
-        if (isNullOrUndefined(prefix) || prefix.indexOf('_') >= 0) {
-            throw Error('invalide prefix');
-        }
         return `${prefix}_${baseProperty.language['cli'].name}`;
-    }
-
-    public static getPrefix(flattenedParam: Parameter): string {
-        return flattenedParam.language.default.name.split('_')[0];
     }
 
     private static *getFlattenedParameters(parameter: Parameter, property: Property, path: Array<Property> = []): Iterable<VirtualParameter> {
@@ -81,6 +71,7 @@ export class FlattenHelper {
                 vp.language.default.name = FlattenHelper.createFlattenedParameterDefaultName(property, prefix);
                 NodeHelper.setCliFlattenedNames(vp, [NodeHelper.getCliKey(parameter, null), NodeHelper.getCliKey(property, null)]);
                 NodeHelper.setFlattenParamOriginalProperty(vp, property);
+                NodeHelper.setFlattenParamPrefix(vp, prefix);
                 arr.push(vp);
             }
         }

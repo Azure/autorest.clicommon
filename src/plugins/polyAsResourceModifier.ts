@@ -75,10 +75,7 @@ export class PolyAsResourceModifier {
 
                     let discriminatorValue = NodeHelper.getCliDiscriminatorValue(subClass);
 
-                    let op2: Operation = this.cloneOperationForSubclass(op,
-                        PolyHelper.createPolyOperationDefaultName(op, discriminatorValue),
-                        PolyHelper.createPolyOperationCliKey(op, discriminatorValue),
-                        baseSchema, subClass);
+                    let op2: Operation = this.cloneOperationForSubclass(op, baseSchema, subClass);
                     
                     Helper.logDebug(`${g.language.default.name}/${op.language.default.name} cloned for subclass ${discriminatorValue}`);
                     NodeHelper.addCliOperation(op, op2);
@@ -93,9 +90,12 @@ export class PolyAsResourceModifier {
         return (NodeHelper.isPolyAsResource(param));
     }
 
-    private cloneOperationForSubclass(op: Operation, newDefaultName: string, newCliKey: string, baseSchema: ObjectSchema, subSchema: ObjectSchema) {
+    private cloneOperationForSubclass(op: Operation, baseSchema: ObjectSchema, subSchema: ObjectSchema) {
 
         let polyParam: Parameter = null;
+        const discriminatorValue = NodeHelper.getCliDiscriminatorValue(subSchema);
+        const newDefaultName = PolyHelper.createPolyOperationDefaultName(op, discriminatorValue);
+        const newCliKey = PolyHelper.createPolyOperationCliKey(op, discriminatorValue)
 
         const cloneParam = (p: Parameter): Parameter => {
             const vp = CopyHelper.copyParameter(p, p.schema === baseSchema ? subSchema : p.schema);
@@ -117,7 +117,7 @@ export class PolyAsResourceModifier {
         NodeHelper.setCliKey(op2, newCliKey);
         NodeHelper.setPolyAsResourceParam(op2, polyParam);
         NodeHelper.setPolyAsResourceOriginalOperation(op2, op);
-
+        NodeHelper.setPolyAsResourceDiscriminatorValue(op2, discriminatorValue);
         return op2;
     }
 }
