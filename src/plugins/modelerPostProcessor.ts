@@ -3,7 +3,7 @@ import { serialize } from "@azure-tools/codegen";
 import { CodeModel, codeModelSchema, Metadata, ObjectSchema, isObjectSchema, Property, Extensions, Scheme } from "@azure-tools/codemodel";
 import { isNullOrUndefined, isArray } from "util";
 import { Helper } from "../helper";
-import { CopyHelper } from "../copyhelper";
+import { CopyHelper } from "../copyHelper";
 import { CliConst, M4Node } from "../schema";
 import { NodeHelper } from "../nodeHelper";
 import { normalize } from "path";

@@ -5,8 +5,7 @@ import { values, items, length, Dictionary, keys } from '@azure-tools/linq';
 import { isNullOrUndefined } from 'util';
 import { CliCommonSchema, CliConst, LanguageType, M4Node } from '../schema';
 import { Helper } from '../helper';
-import { NodeHelper } from '../nodeHelper';
-import { PolyHelper } from '../polyHelper';
+import { NodeHelper, NodeExtensionHelper, NodeCliHelper } from '../nodeHelper';
 import { FlattenHelper } from '../flattenHelper';
 
 export class CommonNamer {
@@ -119,7 +118,7 @@ export class CommonNamer {
         // To be backward compatiable, reassign poly operations and parameters' default name and cli name
         for (const operationGroup of values(this.codeModel.operationGroups)) {
             for (const operation of values(operationGroup.operations)) {
-                for (const op of values(NodeHelper.getCliOperation(operation, () => []))) {
+                for (const op of values(NodeExtensionHelper.getCliOperation(operation, () => []))) {
                     this.applyNamingConventionOnCliOperation(operation, op);
                     for (const parameter of values(op.parameters)) {
                         this.applyNamingConvention(parameter);
@@ -147,9 +146,9 @@ export class CommonNamer {
         }
         cliOperation.language['cli']['description'] = operation.language.default.description;
 
-        const discriminatorValue = NodeHelper.getPolyAsResourceDiscriminatorValue(cliOperation);
-        cliOperation.language.default.name = PolyHelper.createPolyOperationDefaultName(operation, discriminatorValue);
-        cliOperation.language['cli']['name'] = PolyHelper.createPolyOperationCliName(operation, discriminatorValue);
+        const discriminatorValue = NodeExtensionHelper.getPolyAsResourceDiscriminatorValue(cliOperation);
+        cliOperation.language.default.name = Helper.createPolyOperationDefaultName(operation, discriminatorValue);
+        cliOperation.language['cli']['name'] = Helper.createPolyOperationCliName(operation, discriminatorValue);
     }
 
     private applyNamingConventionOnCliParameter(cliParameter: Parameter) {
@@ -162,7 +161,7 @@ export class CommonNamer {
             cliParameter.language['cli'] = new Language();
         }
 
-        const prop = NodeHelper.getCliFlattenOrigin(cliParameter);
+        const prop = NodeExtensionHelper.getCliFlattenOrigin(cliParameter);
         if (isNullOrUndefined(prop)) {
             // Is not flattened parameter, use default naming
             this.applyNamingConvention(cliParameter);
@@ -171,7 +170,7 @@ export class CommonNamer {
 
         cliParameter.language['cli']['description'] = prop.language.default.description;
 
-        const prefix = NodeHelper.getCliFlattenPrefix(cliParameter);
+        const prefix = NodeExtensionHelper.getCliFlattenPrefix(cliParameter);
         cliParameter.language.default.name = FlattenHelper.createFlattenedParameterDefaultName(prop, prefix);
         cliParameter.language['cli']['name'] = FlattenHelper.createFlattenedParameterCliName(prop, prefix);
     }
@@ -194,7 +193,7 @@ export class CommonNamer {
             let dv: string = obj['discriminatorValue'];
             // dv should be in pascal format, let's do a simple convert to snake
             let newValue = dv.replace(/([A-Z][a-z0-9]+)|([A-Z]+(?=[A-Z][a-z0-9]+))|([A-Z]+$)/g, '_$1$2$3').substr(1).toLowerCase();
-            NodeHelper.setCliDiscriminatorValue(obj, newValue);
+            NodeCliHelper.setCliDiscriminatorValue(obj, newValue);
         }
 
         let lan = 'cli';

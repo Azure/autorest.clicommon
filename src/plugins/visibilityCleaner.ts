@@ -5,7 +5,7 @@ import { Helper } from "../helper";
 import { CliConst, M4Node, CliCommonSchema } from "../schema";
 import { Dumper } from "../dumper";
 import { Dictionary, values } from '@azure-tools/linq';
-import { NodeHelper } from "../nodeHelper";
+import { NodeHelper, NodeCliHelper } from "../nodeHelper";
 import { FlattenHelper } from "../flattenHelper";
 
 class VisibilityCleaner {
@@ -15,11 +15,11 @@ class VisibilityCleaner {
 
     private calcObject(schema: ObjectSchema): CliCommonSchema.CodeModel.Visibility {
 
-        let visibleProperty = NodeHelper.getIsVisibleFlag(schema);
+        let visibleProperty = NodeCliHelper.getIsVisibleFlag(schema);
         if (visibleProperty) {
             if (visibleProperty === CliCommonSchema.CodeModel.Visibility.unknown) {
                 // a circle found, lets go around it again to calculate the correct visibility
-                NodeHelper.setIsVisibleFlag(schema, CliCommonSchema.CodeModel.Visibility.unknownInCircle);
+                NodeCliHelper.setIsVisibleFlag(schema, CliCommonSchema.CodeModel.Visibility.unknownInCircle);
             }
             else if (visibleProperty === CliCommonSchema.CodeModel.Visibility.unknownInCircle) {
                 // it's the 3rd time we reach here, return isVisibility = false should be safe now
@@ -64,7 +64,7 @@ class VisibilityCleaner {
             }
         }
 
-        NodeHelper.setIsVisibleFlag(schema, visible);
+        NodeCliHelper.setIsVisibleFlag(schema, visible);
         return visible;
     }
 
@@ -76,9 +76,9 @@ class VisibilityCleaner {
 
         Helper.enumerateCodeModel(this.session.model, (descriptor) => {
             if (descriptor.target instanceof Parameter) {
-                if (NodeHelper.getIsVisibleFlag(descriptor.target.schema) === CliCommonSchema.CodeModel.Visibility.false) {
-                    NodeHelper.setHidden(descriptor.target, true);
-                    NodeHelper.setIsVisibleFlag(descriptor.target, CliCommonSchema.CodeModel.Visibility.false);
+                if (NodeCliHelper.getIsVisibleFlag(descriptor.target.schema) === CliCommonSchema.CodeModel.Visibility.false) {
+                    NodeCliHelper.setHidden(descriptor.target, true);
+                    NodeCliHelper.setIsVisibleFlag(descriptor.target, CliCommonSchema.CodeModel.Visibility.false);
                 }
             }
         }, CliCommonSchema.CodeModel.NodeTypeFlag.parameter);

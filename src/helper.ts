@@ -6,7 +6,7 @@ import { pascalCase, EnglishPluralizationService, guid } from '@azure-tools/code
 import { Session, Host, startSession } from "@azure-tools/autorest-extension-base";
 import { PreNamer } from "./plugins/prenamer";
 import { serialize } from "@azure-tools/codegen";
-import { NodeHelper } from "./nodeHelper";
+import { NodeHelper, NodeCliHelper, NodeExtensionHelper } from "./nodeHelper";
 import { Dumper } from "./dumper";
 
 export class Helper {
@@ -315,8 +315,8 @@ export class Helper {
                     NEW_LINE + tab(i + 1) + `${cv}: ${formatValue(o.language.cli[cv], i + 2)}`), ''));
 
         let generatePropertyFlattenValue = (o: any, i: number) => {
-            let v = NodeHelper.getFlattenedValue(o);
-            return (isNullOrUndefined(v)) ? '' : NEW_LINE + tab(i) + NodeHelper.FLATTEN_FLAG + ': ' + v;
+            let v = NodeExtensionHelper.getFlattenedValue(o);
+            return (isNullOrUndefined(v)) ? '' : NEW_LINE + tab(i) + NodeExtensionHelper.FLATTEN_FLAG + ': ' + v;
         };
 
         let generatePropertyReadonlyValue = (o: any, i: number) => {
@@ -342,26 +342,26 @@ export class Helper {
             `${tab()}all:${NEW_LINE}`.concat(codeModel.operationGroups.map(
                 v => `${tab(1)}- operationGroupName: ${generateCliValue(v, 2)}` +
                     `${NEW_LINE}${tab(2)}operations:${NEW_LINE}`.concat(
-                        values(v.operations).selectMany(op => [op].concat(NodeHelper.getCliOperation(op, () => []))).select(vv =>
+                        values(v.operations).selectMany(op => [op].concat(NodeExtensionHelper.getCliOperation(op, () => []))).select(vv =>
                             `${tab(2)}- operationName: ${generateCliValue(vv, 3)}` +
-                            (isNullOrUndefined(NodeHelper.getPolyAsResourceParam(vv)) ? '' : `${NEW_LINE}${tab(3)}cli-poly-as-resource-subclass-param: ${NodeHelper.getCliKey(NodeHelper.getPolyAsResourceParam(vv), '<missing-clikey>')}`) +
-                            (isNullOrUndefined(NodeHelper.getPolyAsResourceOriginalOperation(vv)) ? '' : `${NEW_LINE}${tab(3)}cli-poly-as-resource-original-operation: ${NodeHelper.getCliKey(NodeHelper.getPolyAsResourceOriginalOperation(vv), '<missing-clikey>')}`) +
-                            (isNullOrUndefined(NodeHelper.getPolyAsResourceDiscriminatorValue(vv)) ? '' : `${NEW_LINE}${tab(3)}cli-poly-as-resource-discriminator-value: ${NodeHelper.getPolyAsResourceDiscriminatorValue(vv)}`) +
-                            (isNullOrUndefined(NodeHelper.getSplitOperationOriginalOperation(vv)) ? '' : `${NEW_LINE}${tab(3)}cli-split-operation-original-operation: ${NodeHelper.getCliKey(NodeHelper.getSplitOperationOriginalOperation(vv), '<missing-clikey>')}`) +
+                            (isNullOrUndefined(NodeExtensionHelper.getPolyAsResourceParam(vv)) ? '' : `${NEW_LINE}${tab(3)}cli-poly-as-resource-subclass-param: ${NodeCliHelper.getCliKey(NodeExtensionHelper.getPolyAsResourceParam(vv), '<missing-clikey>')}`) +
+                            (isNullOrUndefined(NodeExtensionHelper.getPolyAsResourceOriginalOperation(vv)) ? '' : `${NEW_LINE}${tab(3)}cli-poly-as-resource-original-operation: ${NodeCliHelper.getCliKey(NodeExtensionHelper.getPolyAsResourceOriginalOperation(vv), '<missing-clikey>')}`) +
+                            (isNullOrUndefined(NodeExtensionHelper.getPolyAsResourceDiscriminatorValue(vv)) ? '' : `${NEW_LINE}${tab(3)}cli-poly-as-resource-discriminator-value: ${NodeExtensionHelper.getPolyAsResourceDiscriminatorValue(vv)}`) +
+                            (isNullOrUndefined(NodeExtensionHelper.getSplitOperationOriginalOperation(vv)) ? '' : `${NEW_LINE}${tab(3)}cli-split-operation-original-operation: ${NodeCliHelper.getCliKey(NodeExtensionHelper.getSplitOperationOriginalOperation(vv), '<missing-clikey>')}`) +
                             `${NEW_LINE}${tab(3)}parameters:${NEW_LINE}`.concat(
                                 vv.parameters.map(vvv => `${tab(3)}- parameterName: ${generateCliValue(vvv, 4)}${generatePropertyFlattenValue(vvv, 4)}${generatePropertyReadonlyValue(vvv, 4)}${generateDiscriminatorValueForParam(vvv, 4)}${NEW_LINE}` +
-                                    (isNullOrUndefined(NodeHelper.getPolyAsResourceBaseSchema(vvv)) ? '' : `${tab(4)}cli-poly-as-resource-base-schema: ${NodeHelper.getCliKey(NodeHelper.getPolyAsResourceBaseSchema(vvv), '<baseSchemaCliKeyMissing>')}${NEW_LINE}`) +
-                                    (isNullOrUndefined(NodeHelper.getPolyAsParamBaseSchema(vvv)) ? '' : `${tab(4)}cli-poly-as-param-base-schema: ${NodeHelper.getCliKey(NodeHelper.getPolyAsParamBaseSchema(vvv), '<baseSchemaCliKeyMissing>')}${NEW_LINE}`) +
-                                    (isNullOrUndefined(NodeHelper.getPolyAsParamOriginalParam(vvv)) ? '' : `${tab(4)}cli-poly-as-param-expanded: ${NodeHelper.getCliKey(NodeHelper.getPolyAsParamOriginalParam(vvv), '<oriParamCliKeyMissing>')}${NEW_LINE}`) +
+                                    (isNullOrUndefined(NodeExtensionHelper.getPolyAsResourceBaseSchema(vvv)) ? '' : `${tab(4)}cli-poly-as-resource-base-schema: ${NodeCliHelper.getCliKey(NodeExtensionHelper.getPolyAsResourceBaseSchema(vvv), '<baseSchemaCliKeyMissing>')}${NEW_LINE}`) +
+                                    (isNullOrUndefined(NodeExtensionHelper.getPolyAsParamBaseSchema(vvv)) ? '' : `${tab(4)}cli-poly-as-param-base-schema: ${NodeCliHelper.getCliKey(NodeExtensionHelper.getPolyAsParamBaseSchema(vvv), '<baseSchemaCliKeyMissing>')}${NEW_LINE}`) +
+                                    (isNullOrUndefined(NodeExtensionHelper.getPolyAsParamOriginalParam(vvv)) ? '' : `${tab(4)}cli-poly-as-param-expanded: ${NodeCliHelper.getCliKey(NodeExtensionHelper.getPolyAsParamOriginalParam(vvv), '<oriParamCliKeyMissing>')}${NEW_LINE}`) +
                                     (((!isNullOrUndefined(vvv.protocol?.http?.in)) && vvv.protocol.http.in === 'body')
                                         ? `${tab(4)}bodySchema: ${vvv.schema.language.default.name}${NEW_LINE}` : '')).join('')) +
                             vv.requests.map((req, index) =>
                                 isNullOrUndefined(req.parameters) ? '' :
                                     req.parameters.map((vvv) => `${tab(3)}- parameterName[${index}]: ${generateCliValue(vvv, 4)}${generatePropertyFlattenValue(vvv, 4)}${generatePropertyReadonlyValue(vvv, 4)}${generateDiscriminatorValueForParam(vvv, 4)}${NEW_LINE}` +
-                                        (isNullOrUndefined(NodeHelper.getPolyAsResourceBaseSchema(vvv)) ? '' : `${tab(4)}cli-poly-as-resource-base-schema: ${NodeHelper.getCliKey(NodeHelper.getPolyAsResourceBaseSchema(vvv), '<baseSchemaCliKeyMissing>')}${NEW_LINE}`) +
-                                        (isNullOrUndefined(NodeHelper.getPolyAsParamBaseSchema(vvv)) ? '' : `${tab(4)}cli-poly-as-param-base-schema: ${NodeHelper.getCliKey(NodeHelper.getPolyAsParamBaseSchema(vvv), '<baseSchemaCliKeyMissing>')}${NEW_LINE}`) +
-                                        (isNullOrUndefined(NodeHelper.getPolyAsParamOriginalParam(vvv)) ? '' : `${tab(4)}cli-poly-as-param-expanded: ${NodeHelper.getCliKey(NodeHelper.getPolyAsParamOriginalParam(vvv), '<oriParamCliKeyMissing>')}${NEW_LINE}`) +
-                                        (!NodeHelper.isFlattened(vvv) ? '' : `${tab(4)}cli-flattened: true${NEW_LINE}`) +
+                                        (isNullOrUndefined(NodeExtensionHelper.getPolyAsResourceBaseSchema(vvv)) ? '' : `${tab(4)}cli-poly-as-resource-base-schema: ${NodeCliHelper.getCliKey(NodeExtensionHelper.getPolyAsResourceBaseSchema(vvv), '<baseSchemaCliKeyMissing>')}${NEW_LINE}`) +
+                                        (isNullOrUndefined(NodeExtensionHelper.getPolyAsParamBaseSchema(vvv)) ? '' : `${tab(4)}cli-poly-as-param-base-schema: ${NodeCliHelper.getCliKey(NodeExtensionHelper.getPolyAsParamBaseSchema(vvv), '<baseSchemaCliKeyMissing>')}${NEW_LINE}`) +
+                                        (isNullOrUndefined(NodeExtensionHelper.getPolyAsParamOriginalParam(vvv)) ? '' : `${tab(4)}cli-poly-as-param-expanded: ${NodeCliHelper.getCliKey(NodeExtensionHelper.getPolyAsParamOriginalParam(vvv), '<oriParamCliKeyMissing>')}${NEW_LINE}`) +
+                                        (!NodeExtensionHelper.isFlattened(vvv) ? '' : `${tab(4)}cli-flattened: true${NEW_LINE}`) +
                                         (((!isNullOrUndefined(vvv.protocol?.http?.in)) && vvv.protocol.http.in === 'body')
                                             ? `${tab(4)}bodySchema: ${vvv.schema.language.default.name}${NEW_LINE}` : '')).join(''))
                         ).join(''))
@@ -447,6 +447,22 @@ export class Helper {
         }
     }
 
+    public static createPolyOperationDefaultName(baseOperation: Operation, discriminatorValue: string): string {
+        return `${baseOperation.language.default.name}_${discriminatorValue}`;
+    }
+
+    public static createPolyOperationCliKey(baseOperation: Operation, discriminatorValue: string): string {
+        return `${NodeCliHelper.getCliKey(baseOperation, baseOperation.language.default.name)}#${discriminatorValue}`
+    }
+    
+    public static createPolyOperationCliName(baseOperation: Operation, discriminatorValue: string): string {
+        return `${NodeCliHelper.getCliName(baseOperation, baseOperation.language.default.name)}#${discriminatorValue}`
+    }
+
+    public static createSplitOperationCliKey(baseOperation: Operation, splitName: string): string {
+        return `${NodeCliHelper.getCliKey(baseOperation, baseOperation.language.default.name)}#${splitName}`;
+    }
+
     /**
      * following nodes will be gone through now:
      *   - choice
@@ -493,7 +509,7 @@ export class Helper {
             const choice = choices[i];
             if (enumSchema) {
                 action({
-                    choiceSchemaCliKey: NodeHelper.getCliKey(choice, cliKeyMissing),
+                    choiceSchemaCliKey: NodeCliHelper.getCliKey(choice, cliKeyMissing),
                     parent: choices,
                     target: choice,
                     targetIndex: i
@@ -512,8 +528,8 @@ export class Helper {
             const choiceValue = choice.choices[j];
             if (enumValue) {
                 action({
-                    choiceSchemaCliKey: NodeHelper.getCliKey(choice, cliKeyMissing),
-                    choiceValueCliKey: NodeHelper.getCliKey(choiceValue, cliKeyMissing),
+                    choiceSchemaCliKey: NodeCliHelper.getCliKey(choice, cliKeyMissing),
+                    choiceValueCliKey: NodeCliHelper.getCliKey(choiceValue, cliKeyMissing),
                     parent: choice.choices,
                     target: choiceValue,
                     targetIndex: j
@@ -530,7 +546,7 @@ export class Helper {
             const schema = schemas[i];
             if (enumObjectSchema) {
                 action({
-                    objectSchemaCliKey: NodeHelper.getCliKey(schema, cliKeyMissing),
+                    objectSchemaCliKey: NodeCliHelper.getCliKey(schema, cliKeyMissing),
                     parent: schemas,
                     target: schema,
                     targetIndex: i
@@ -550,8 +566,8 @@ export class Helper {
             const prop = schema.properties[j];
             if (enumProperty) {
                 action({
-                    objectSchemaCliKey: NodeHelper.getCliKey(schema, cliKeyMissing),
-                    propertyCliKey: NodeHelper.getCliKey(prop, cliKeyMissing),
+                    objectSchemaCliKey: NodeCliHelper.getCliKey(schema, cliKeyMissing),
+                    propertyCliKey: NodeCliHelper.getCliKey(prop, cliKeyMissing),
                     parent: schema.properties,
                     target: prop,
                     targetIndex: j
@@ -568,7 +584,7 @@ export class Helper {
             const group = groups[i];
             if (enumGroup) {
                 action({
-                    operationGroupCliKey: NodeHelper.getCliKey(group, cliKeyMissing),
+                    operationGroupCliKey: NodeCliHelper.getCliKey(group, cliKeyMissing),
                     parent: groups,
                     target: group,
                     targetIndex: i,
@@ -587,7 +603,7 @@ export class Helper {
         const cliOps = [];
         group.operations.forEach((op) => {
             operations.push(op);
-            cliOps.push(...NodeHelper.getCliOperation((op), () => []));
+            cliOps.push(...NodeExtensionHelper.getCliOperation((op), () => []));
         });
 
         // put all cli operations at the end of array. So we can use targetIndex and parent.length to know whehter this operation is in cli.
@@ -597,8 +613,8 @@ export class Helper {
             let op = operations[j];
             if (enumOperation) {
                 action({
-                    operationGroupCliKey: NodeHelper.getCliKey(group, cliKeyMissing),
-                    operationCliKey: NodeHelper.getCliKey(op, cliKeyMissing),
+                    operationGroupCliKey: NodeCliHelper.getCliKey(group, cliKeyMissing),
+                    operationCliKey: NodeCliHelper.getCliKey(op, cliKeyMissing),
                     parent: group.operations,
                     target: op,
                     targetIndex: j,
@@ -616,10 +632,10 @@ export class Helper {
             const param = op.parameters[k];
             if (enumParam) {
                 action({
-                    operationGroupCliKey: NodeHelper.getCliKey(group, cliKeyMissing),
-                    operationCliKey: NodeHelper.getCliKey(op, cliKeyMissing),
+                    operationGroupCliKey: NodeCliHelper.getCliKey(group, cliKeyMissing),
+                    operationCliKey: NodeCliHelper.getCliKey(op, cliKeyMissing),
                     requestIndex: CliConst.DEFAULT_OPERATION_PARAMETER_INDEX,
-                    parameterCliKey: NodeHelper.getCliKey(param, cliKeyMissing),
+                    parameterCliKey: NodeCliHelper.getCliKey(param, cliKeyMissing),
                     parent: op.parameters,
                     target: param,
                     targetIndex: k,
@@ -635,10 +651,10 @@ export class Helper {
                 const param = op.requests[m].parameters[k];
                 if (enumParam) {
                     action({
-                        operationGroupCliKey: NodeHelper.getCliKey(group, cliKeyMissing),
-                        operationCliKey: NodeHelper.getCliKey(op, cliKeyMissing),
+                        operationGroupCliKey: NodeCliHelper.getCliKey(group, cliKeyMissing),
+                        operationCliKey: NodeCliHelper.getCliKey(op, cliKeyMissing),
                         requestIndex: m,
-                        parameterCliKey: NodeHelper.getCliKey(param, cliKeyMissing),
+                        parameterCliKey: NodeCliHelper.getCliKey(param, cliKeyMissing),
                         parent: op.requests[m].parameters,
                         target: param,
                         targetIndex: k,

@@ -2,7 +2,7 @@ import { Host, Session } from "@azure-tools/autorest-extension-base";
 import { CodeModel, Operation, Request, ObjectSchema, Parameter } from "@azure-tools/codemodel";
 import { Helper } from "../helper";
 import { CliConst, CliCommonSchema } from "../schema";
-import { NodeHelper } from "../nodeHelper";
+import { NodeHelper, NodeCliHelper, NodeExtensionHelper } from "../nodeHelper";
 import { Modifier } from "./modifier/modifier";
 import { CopyHelper } from "../copyHelper";
 import { isNullOrUndefined } from "util";
@@ -32,7 +32,7 @@ export class FlattenModifier {
         let cliDirectives = await this.session.getValue(CliConst.CLI_DIRECTIVE_KEY, []);
 
         const flattenDirectives = [...directives, ...cliDirectives]
-            .filter((dir) => dir[NodeHelper.CLI_FLATTEN])
+            .filter((dir) => dir[NodeCliHelper.CLI_FLATTEN])
             .map((dir) => this.copyDirectiveOnlyForCliFlatten(dir));
         if (flattenDirectives && flattenDirectives.length > 0) {
             Helper.dumper.dumpCodeModel('flatten-modifier-pre');
@@ -49,7 +49,7 @@ export class FlattenModifier {
             select: src.select,
             where: CopyHelper.deepCopy(src.where),
         }
-        copy[NodeHelper.CLI_FLATTEN] = src[NodeHelper.CLI_FLATTEN];
+        copy[NodeCliHelper.CLI_FLATTEN] = src[NodeCliHelper.CLI_FLATTEN];
         return copy;
     }
     
@@ -58,17 +58,17 @@ export class FlattenModifier {
             return;
         }
         const operation = desc.target as Operation;
-        const polyParam = NodeHelper.getPolyAsResourceParam(operation);
+        const polyParam = NodeExtensionHelper.getPolyAsResourceParam(operation);
         const subClass = polyParam.schema as ObjectSchema;
-        const discriminatorValue = NodeHelper.getCliDiscriminatorValue(subClass);
+        const discriminatorValue = NodeCliHelper.getCliDiscriminatorValue(subClass);
         if (isNullOrUndefined(polyParam)) {
-            Helper.logWarning(`operation ${NodeHelper.getCliKey(operation, null)} has no poly parameter! Skip flatten`);
+            Helper.logWarning(`operation ${NodeCliHelper.getCliKey(operation, null)} has no poly parameter! Skip flatten`);
             return;
         }
 
         const request = operation.requests?.[0];
         if (!request) {
-            Helper.logWarning(`operation ${NodeHelper.getCliKey(operation, null)} has no request! Skip flatten`);
+            Helper.logWarning(`operation ${NodeCliHelper.getCliKey(operation, null)} has no request! Skip flatten`);
             return;
         }
         if (NodeHelper.getJson(subClass) !== true) {
@@ -94,7 +94,7 @@ export class FlattenModifier {
 
             for (let i = 0; i < request.parameters.length; i++) {
                 const param = request.parameters[i];
-                if (!NodeHelper.isCliFlatten(param) || NodeHelper.isCliFlattened(param)) {
+                if (!NodeCliHelper.isCliFlatten(param) || NodeExtensionHelper.isCliFlattened(param)) {
                     continue;
                 }
 
@@ -110,7 +110,7 @@ export class FlattenModifier {
         const parameter = request.parameters[index];
         const paramSchema = parameter.schema;
         if (!(paramSchema instanceof ObjectSchema)) {
-            Helper.logWarning(`flatten param ${NodeHelper.getCliKey(parameter, null)} is not object! Skip flatten`);
+            Helper.logWarning(`flatten param ${NodeCliHelper.getCliKey(parameter, null)} is not object! Skip flatten`);
             return false;
         }
         if (NodeHelper.getJson(paramSchema) !== true) {

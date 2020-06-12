@@ -4,7 +4,7 @@ import { CodeModel, codeModelSchema, Metadata, ObjectSchema, isObjectSchema, Pro
 import { isNullOrUndefined, isArray } from "util";
 import { Helper } from "../helper";
 import { CliConst, M4Node } from "../schema";
-import { NodeHelper } from "../nodeHelper";
+import { NodeHelper, NodeCliHelper } from "../nodeHelper";
 
 export class PreNamer{
 
@@ -14,7 +14,7 @@ export class PreNamer{
     public process() {
         Helper.enumerateCodeModel(this.session.model, (n) => {
             if (!isNullOrUndefined(n.target.language.default.name))
-                NodeHelper.setCliKey(n.target, n.target.language.default.name);
+                NodeCliHelper.setCliKey(n.target, n.target.language.default.name);
         });
     }
 }

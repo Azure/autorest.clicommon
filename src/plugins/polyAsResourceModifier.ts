@@ -2,8 +2,7 @@ import { Host, Session } from "@azure-tools/autorest-extension-base";
 import { CodeModel, Request, ObjectSchema, Operation, OperationGroup, Parameter } from "@azure-tools/codemodel";
 import { isNullOrUndefined } from "util";
 import { Helper } from "../helper";
-import { NodeHelper } from "../nodeHelper";
-import { PolyHelper } from "../polyHelper";
+import { NodeHelper, NodeCliHelper, NodeExtensionHelper } from "../nodeHelper";
 import { FlattenHelper } from "../flattenHelper";
 import { CopyHelper } from "../copyHelper";
 import { CliConst, CliCommonSchema } from "../schema";
@@ -23,7 +22,7 @@ export class PolyAsResourceModifier {
 
     private async modifier() {
         const directives = (await this.session.getValue(CliConst.CLI_DIRECTIVE_KEY, []))
-            .filter((dir) => dir[NodeHelper.POLY_RESOURCE])
+            .filter((dir) => dir[NodeCliHelper.POLY_RESOURCE])
             .map((dir) => this.copyDirectiveOnlyForPolyResource(dir));
         if (directives && directives.length > 0) {
             Helper.dumper.dumpCodeModel('poly-as-resource-modifier-pre');
@@ -40,7 +39,7 @@ export class PolyAsResourceModifier {
             select: src.select,
             where: CopyHelper.deepCopy(src.where),
         }
-        copy[NodeHelper.POLY_RESOURCE] = src[NodeHelper.POLY_RESOURCE];
+        copy[NodeCliHelper.POLY_RESOURCE] = src[NodeCliHelper.POLY_RESOURCE];
         return copy;
     }
 
@@ -73,29 +72,29 @@ export class PolyAsResourceModifier {
 
                 for (let subClass of NodeHelper.getSubClasses(baseSchema, true)) {
 
-                    let discriminatorValue = NodeHelper.getCliDiscriminatorValue(subClass);
+                    let discriminatorValue = NodeCliHelper.getCliDiscriminatorValue(subClass);
 
                     let op2: Operation = this.cloneOperationForSubclass(op, baseSchema, subClass);
                     
                     Helper.logDebug(`${g.language.default.name}/${op.language.default.name} cloned for subclass ${discriminatorValue}`);
-                    NodeHelper.addCliOperation(op, op2);
+                    NodeExtensionHelper.addCliOperation(op, op2);
                 }
 
-                NodeHelper.setHidden(op, true);
+                NodeCliHelper.setHidden(op, true);
             });
         });
     }
 
     private isPolyAsResource(group: OperationGroup, op: Operation, param: Parameter) {
-        return (NodeHelper.isPolyAsResource(param));
+        return (NodeCliHelper.isPolyAsResource(param));
     }
 
     private cloneOperationForSubclass(op: Operation, baseSchema: ObjectSchema, subSchema: ObjectSchema) {
 
         let polyParam: Parameter = null;
-        const discriminatorValue = NodeHelper.getCliDiscriminatorValue(subSchema);
-        const newDefaultName = PolyHelper.createPolyOperationDefaultName(op, discriminatorValue);
-        const newCliKey = PolyHelper.createPolyOperationCliKey(op, discriminatorValue)
+        const discriminatorValue = NodeCliHelper.getCliDiscriminatorValue(subSchema);
+        const newDefaultName = Helper.createPolyOperationDefaultName(op, discriminatorValue);
+        const newCliKey = Helper.createPolyOperationCliKey(op, discriminatorValue)
 
         const cloneParam = (p: Parameter): Parameter => {
             const vp = CopyHelper.copyParameter(p, p.schema === baseSchema ? subSchema : p.schema);
@@ -104,7 +103,7 @@ export class PolyAsResourceModifier {
                     throw Error(`Mulitple poly as resource Parameter found: 1) ${polyParam.language.default.name}, 2) ${p.language.default.name}`);
                 } else {
                     polyParam = vp;
-                    NodeHelper.setPolyAsResourceBaseSchema(vp, baseSchema);
+                    NodeExtensionHelper.setPolyAsResourceBaseSchema(vp, baseSchema);
                 }
             }
             return vp;
@@ -114,10 +113,10 @@ export class PolyAsResourceModifier {
 
         const op2 = CopyHelper.copyOperation(op, this.session.model.globalParameters, cloneRequest, cloneParam);
         op2.language.default.name = newDefaultName;
-        NodeHelper.setCliKey(op2, newCliKey);
-        NodeHelper.setPolyAsResourceParam(op2, polyParam);
-        NodeHelper.setPolyAsResourceOriginalOperation(op2, op);
-        NodeHelper.setPolyAsResourceDiscriminatorValue(op2, discriminatorValue);
+        NodeCliHelper.setCliKey(op2, newCliKey);
+        NodeExtensionHelper.setPolyAsResourceParam(op2, polyParam);
+        NodeExtensionHelper.setPolyAsResourceOriginalOperation(op2, op);
+        NodeExtensionHelper.setPolyAsResourceDiscriminatorValue(op2, discriminatorValue);
         return op2;
     }
 }

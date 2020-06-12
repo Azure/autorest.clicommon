@@ -3,7 +3,7 @@ import { CodeModel, isObjectSchema, ObjectSchema, Property } from "@azure-tools/
 import { isNullOrUndefined } from "util";
 import { CliConst } from "../../schema";
 import { Helper } from "../../helper";
-import { NodeHelper } from "../../nodeHelper";
+import { NodeHelper, NodeExtensionHelper } from "../../nodeHelper";
 
 const BASECLASS_INDICATOR = '*';
 const CIRCLE_VICIM_INDICATOR = '#';
@@ -18,7 +18,7 @@ class PropertyInfo {
     }
 
     constructor(public property: Property) {
-        this.isFlatten = NodeHelper.isFlattened(property);
+        this.isFlatten = NodeExtensionHelper.isFlattened(property);
         this.isPointToBaseClass = NodeHelper.HasSubClass(property.schema as ObjectSchema);
     }
 
@@ -27,7 +27,7 @@ class PropertyInfo {
     }
 
     public unflattenAsCirculeVictim() {
-        NodeHelper.setFlatten(this.property, false, true);
+        NodeExtensionHelper.setFlatten(this.property, false, true);
         this.isCirculeVictim = true;
     }
 }
@@ -53,7 +53,7 @@ class NodeInfo {
             for (let i = 0; i < this.node.properties.length; i++) {
                 let p = this.node.properties[i];
                 if (isObjectSchema(p.schema)) {
-                    NodeHelper.isFlattened(p) ? this.flattenProperty.push(new PropertyInfo(p)) : this.unflattenProperty.push(new PropertyInfo(p));
+                    NodeExtensionHelper.isFlattened(p) ? this.flattenProperty.push(new PropertyInfo(p)) : this.unflattenProperty.push(new PropertyInfo(p));
                 }
             }
         }

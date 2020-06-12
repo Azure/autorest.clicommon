@@ -5,7 +5,7 @@ import { Helper } from "../helper";
 import { CliConst, M4Node, CliCommonSchema } from "../schema";
 import { Dumper } from "../dumper";
 import { Dictionary, values } from '@azure-tools/linq';
-import { NodeHelper } from "../nodeHelper";
+import { NodeHelper, NodeCliHelper, NodeExtensionHelper } from "../nodeHelper";
 import { FlattenHelper } from "../flattenHelper";
 
 
@@ -45,7 +45,7 @@ export class PolyAsParamModifier {
             if (isNullOrUndefined(newParam[key]))
                 newParam[key] = p[key];
 
-        NodeHelper.setPolyAsParamBaseSchema(newParam, p.schema);
+        NodeExtensionHelper.setPolyAsParamBaseSchema(newParam, p.schema);
         return newParam
     }
 
@@ -72,13 +72,13 @@ export class PolyAsParamModifier {
                     return;
 
                 for (let polyParam of allPolyParam) {
-                    if (NodeHelper.getComplexity(polyParam.schema) !== CliCommonSchema.CodeModel.Complexity.object_simple) {
-                        Helper.logWarning(`Skip on complex poly param: ${NodeHelper.getCliKey(polyParam, '<clikey-missing>')}(${NodeHelper.getCliKey(polyParam, '<clikey-missing>')})`)
+                    if (NodeCliHelper.getComplexity(polyParam.schema) !== CliCommonSchema.CodeModel.Complexity.object_simple) {
+                        Helper.logWarning(`Skip on complex poly param: ${NodeCliHelper.getCliKey(polyParam, '<clikey-missing>')}(${NodeCliHelper.getCliKey(polyParam, '<clikey-missing>')})`)
                         continue;
                     }
 
                     if (NodeHelper.getJson(polyParam)) {
-                        Helper.logWarning(`Skip poly object with json flag: ${NodeHelper.getCliKey(polyParam, '<clikey-missing>')}(${NodeHelper.getCliKey(polyParam, '<clikey-missing>')})`);
+                        Helper.logWarning(`Skip poly object with json flag: ${NodeCliHelper.getCliKey(polyParam, '<clikey-missing>')}(${NodeCliHelper.getCliKey(polyParam, '<clikey-missing>')})`);
                         continue;
                     }
 
@@ -97,11 +97,11 @@ export class PolyAsParamModifier {
                         }
 
                         let param2: Parameter = this.cloneParamForSubclass(polyParam, this.buildSubclassParamName(polyParam, key), subClass);
-                        NodeHelper.setPolyAsParamOriginalParam(param2, polyParam);
+                        NodeExtensionHelper.setPolyAsParamOriginalParam(param2, polyParam);
                         request.addParameter(param2);
                     }
 
-                    NodeHelper.setPolyAsParamExpanded(polyParam, true);
+                    NodeCliHelper.setPolyAsParamExpanded(polyParam, true);
                 }
             });
         });

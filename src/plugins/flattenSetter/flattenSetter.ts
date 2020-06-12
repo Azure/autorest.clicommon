@@ -4,7 +4,7 @@ import { CodeModel, codeModelSchema, Metadata, ObjectSchema, isObjectSchema, Pro
 import { isNullOrUndefined, isArray } from "util";
 import { DESTRUCTION } from "dns";
 import { Helper } from "../../helper";
-import { NodeHelper } from "../../nodeHelper"
+import { NodeHelper, NodeCliHelper, NodeExtensionHelper } from "../../nodeHelper"
 import { CliConst, CliCommonSchema } from "../../schema";
 import { CliDirectiveManager } from "../modifier/cliDirective";
 import { Modifier } from "../modifier/modifier";
@@ -53,7 +53,7 @@ export class FlattenSetter {
 
     private canArrayObjectSimplified(schema: Schema, maxArrayObjProp: number) {
         if (schema instanceof ObjectSchema && !NodeHelper.HasSubClass(schema)) {
-            let sim = NodeHelper.getSimplifyIndicator(schema);
+            let sim = NodeCliHelper.getSimplifyIndicator(schema);
             return ((!isNullOrUndefined(sim)) && sim.simplifiable === true && sim.propertyCountIfSimplify <= maxArrayObjProp);
         }
         return false;
@@ -61,7 +61,7 @@ export class FlattenSetter {
 
     private canSubclassSimplified(schema: Schema, flattenConfig: FlattenConfig, isPolyAsResource: boolean) {
         if (schema instanceof ObjectSchema && !isNullOrUndefined(schema.discriminatorValue) && !NodeHelper.HasSubClass(schema)) {
-            let sim = NodeHelper.getSimplifyIndicator(schema);
+            let sim = NodeCliHelper.getSimplifyIndicator(schema);
             if (isPolyAsResource)
                 return ((!isNullOrUndefined(sim)) && sim.simplifiable === true && sim.propertyCountIfSimplifyWithoutSimpleObject <= flattenConfig.maxPolyAsResourcePropCount);
             else
@@ -94,14 +94,14 @@ export class FlattenSetter {
 
         if (schema instanceof ArraySchema) {
             increasePropCount();
-            if (NodeHelper.getComplexity(schema) === CliCommonSchema.CodeModel.Complexity.array_complex) {
+            if (NodeCliHelper.getComplexity(schema) === CliCommonSchema.CodeModel.Complexity.array_complex) {
                 if (!this.canArrayObjectSimplified(schema, flattenConfig.maxArrayPropCount))
                     increaseComplexity();
             }
         }
         else if (schema instanceof DictionarySchema) {
             increasePropCount();
-            if (NodeHelper.getComplexity(schema) === CliCommonSchema.CodeModel.Complexity.dictionary_complex)
+            if (NodeCliHelper.getComplexity(schema) === CliCommonSchema.CodeModel.Complexity.dictionary_complex)
                 increaseComplexity();
         }
         else if (schema instanceof AnySchema) {
@@ -115,7 +115,7 @@ export class FlattenSetter {
                 increasePropCount();
                 increaseComplexity();
             }
-            else if (NodeHelper.getComplexity(schema) === CliCommonSchema.CodeModel.Complexity.object_simple) {
+            else if (NodeCliHelper.getComplexity(schema) === CliCommonSchema.CodeModel.Complexity.object_simple) {
                 increasePropCount();
             }
             else {
@@ -153,7 +153,7 @@ export class FlattenSetter {
 
         for (let i = r; i >= 0; i--) {
             if (info[i].propCount <= maxPropCount && info[i].complexity <= maxComplexity) {
-                if (i == 0 && NodeHelper.getComplexity(paramSchema) === CliCommonSchema.CodeModel.Complexity.object_simple) {
+                if (i == 0 && NodeCliHelper.getComplexity(paramSchema) === CliCommonSchema.CodeModel.Complexity.object_simple) {
                     Helper.logDebug(`flatten to level ${i} and adjusted to 1 for top level simple object with maxLevel=${maxLevel}, maxPropCount=${maxPropCount}, maxComplexity=${maxComplexity}`);
                     return 1;
                 }
@@ -195,7 +195,7 @@ export class FlattenSetter {
         if (!(schema instanceof ObjectSchema))
             return;
         if (curLevel >= flattenConfig.maxLevel) {
-            let indicator = NodeHelper.getSimplifyIndicator(schema);
+            let indicator = NodeCliHelper.getSimplifyIndicator(schema);
             // Continue flatten if there is only one property even when we hit the max level
             if (indicator.simplifiable !== true || indicator.propertyCountIfSimplify !== 1)
                 return;
@@ -207,13 +207,13 @@ export class FlattenSetter {
                 continue;
             if (prop.schema instanceof ObjectSchema) {
                 if (NodeHelper.HasSubClass(prop.schema)) {
-                    this.flattenPolySchema(prop.schema, NodeHelper.getCliKey(prop, "noParamCliKey"), curLevel, flattenSimpleObject, flattenConfig);
+                    this.flattenPolySchema(prop.schema, NodeCliHelper.getCliKey(prop, "noParamCliKey"), curLevel, flattenSimpleObject, flattenConfig);
                 }
-                else if (NodeHelper.getInCircle(prop.schema) !== true) {
+                else if (NodeCliHelper.getInCircle(prop.schema) !== true) {
                     if (flattenSimpleObject ||
-                        NodeHelper.getComplexity(prop.schema) !== CliCommonSchema.CodeModel.Complexity.object_simple ||
-                        NodeHelper.getSimplifyIndicator(prop.schema).propertyCountIfSimplify == 1) {
-                        NodeHelper.setFlatten(prop, true, flattenConfig.overwriteSwagger);
+                        NodeCliHelper.getComplexity(prop.schema) !== CliCommonSchema.CodeModel.Complexity.object_simple ||
+                        NodeCliHelper.getSimplifyIndicator(prop.schema).propertyCountIfSimplify == 1) {
+                        NodeExtensionHelper.setFlatten(prop, true, flattenConfig.overwriteSwagger);
                     }
                 }
             }
@@ -235,12 +235,12 @@ export class FlattenSetter {
         if (!(param.schema instanceof ObjectSchema))
             return;
         if (NodeHelper.HasSubClass(param.schema)) {
-            this.flattenPolySchema(param.schema, NodeHelper.getCliKey(param, "noParamCliKey"), 0, true, flattenConfig);
+            this.flattenPolySchema(param.schema, NodeCliHelper.getCliKey(param, "noParamCliKey"), 0, true, flattenConfig);
         }
         else {
             let r = this.calcPayloadFlatten(param.schema, flattenConfig);
             if (r > 0) {
-                NodeHelper.setFlatten(param, true, flattenConfig.overwriteSwagger);
+                NodeExtensionHelper.setFlatten(param, true, flattenConfig.overwriteSwagger);
                 let config = cloneFlattenConfig(flattenConfig);
                 config.maxLevel = r;
                 this.flattenSchemaFromPayload(param.schema, 0, false, config);
@@ -261,7 +261,7 @@ export class FlattenSetter {
                 if (!NodeHelper.HasSubClass(o)) {
                     for (let p of getAllProperties(o)) {
                         if (isObjectSchema(p.schema)) {
-                            NodeHelper.setFlatten(p, !NodeHelper.HasSubClass(p.schema as ObjectSchema), overwriteSwagger);
+                            NodeExtensionHelper.setFlatten(p, !NodeHelper.HasSubClass(p.schema as ObjectSchema), overwriteSwagger);
                         }
                     }
                 }
@@ -279,14 +279,14 @@ export class FlattenSetter {
         let cliDirectives = await this.session.getValue(CliConst.CLI_DIRECTIVE_KEY, []);
         this.manager = new CliDirectiveManager();
         await this.manager.LoadDirective(
-            cliDirectives.filter((d: CliCommonSchema.CliDirective.Directive) => (!isNullOrUndefined(d[NodeHelper.POLY_RESOURCE]) && d[NodeHelper.POLY_RESOURCE] === true))
+            cliDirectives.filter((d: CliCommonSchema.CliDirective.Directive) => (!isNullOrUndefined(d[NodeCliHelper.POLY_RESOURCE]) && d[NodeCliHelper.POLY_RESOURCE] === true))
                 .map((d: CliCommonSchema.CliDirective.Directive) => {
                     let r: CliCommonSchema.CliDirective.Directive = {
                         select: d.select,
                         where: JSON.parse(JSON.stringify(d.where)),
                         hitCount: true,
                     };
-                    r[NodeHelper.POLY_RESOURCE] = d[NodeHelper.POLY_RESOURCE];
+                    r[NodeCliHelper.POLY_RESOURCE] = d[NodeCliHelper.POLY_RESOURCE];
                     return r;
                 }));
 
@@ -312,9 +312,9 @@ export class FlattenSetter {
                                 Helper.logDebug(`Try to set flatten for ${group.language.default.name}/${operation.language.default.name}/${p.language.default.name}`);
 
                                 flattenConfig.nodeDescripter = {
-                                    operationGroupCliKey: NodeHelper.getCliKey(group, "<noGroupCliKey>"),
-                                    operationCliKey: NodeHelper.getCliKey(operation, "<noOpCliKey>"),
-                                    parameterCliKey: NodeHelper.getCliKey(p, "noParamCliKey"),
+                                    operationGroupCliKey: NodeCliHelper.getCliKey(group, "<noGroupCliKey>"),
+                                    operationCliKey: NodeCliHelper.getCliKey(operation, "<noOpCliKey>"),
+                                    parameterCliKey: NodeCliHelper.getCliKey(p, "noParamCliKey"),
                                     target: p,
                                     targetIndex: -1,
                                     parent: operation.parameters
@@ -332,9 +332,9 @@ export class FlattenSetter {
                                         Helper.logDebug(`Try to set flatten for ${group.language.default.name}/${operation.language.default.name}/${p.language.default.name}`);
 
                                         flattenConfig.nodeDescripter = {
-                                            operationGroupCliKey: NodeHelper.getCliKey(group, "<noGroupCliKey>"),
-                                            operationCliKey: NodeHelper.getCliKey(operation, "<noOpCliKey>"),
-                                            parameterCliKey: NodeHelper.getCliKey(p, "noParamCliKey"),
+                                            operationGroupCliKey: NodeCliHelper.getCliKey(group, "<noGroupCliKey>"),
+                                            operationCliKey: NodeCliHelper.getCliKey(operation, "<noOpCliKey>"),
+                                            parameterCliKey: NodeCliHelper.getCliKey(p, "noParamCliKey"),
                                             requestIndex: index,
                                             target: p,
                                             targetIndex: -1,

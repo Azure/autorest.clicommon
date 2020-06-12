@@ -3,7 +3,7 @@ import { CodeModel } from "@azure-tools/codemodel";
 import { isNullOrUndefined, isArray } from "util";
 import { Helper } from "../../helper";
 import { CliCommonSchema, CliConst, M4Node } from "../../schema";
-import { NodeHelper } from "../../nodeHelper";
+import { NodeHelper, NodeCliHelper, NodeExtensionHelper } from "../../nodeHelper";
 
 export abstract class Action {
     constructor() {
@@ -31,11 +31,11 @@ export abstract class Action {
                 case 'hidden':
                 case 'removed':
                 case 'required':
-                case NodeHelper.CLI_FLATTEN:
-                case NodeHelper.POLY_RESOURCE:
+                case NodeCliHelper.CLI_FLATTEN:
+                case NodeCliHelper.POLY_RESOURCE:
                     arr.push(new ActionSetProperty(value, key, () => true));
                     break;
-                case NodeHelper.SPLIT_OPERATION_NAMES:
+                case NodeCliHelper.SPLIT_OPERATION_NAMES:
                     arr.push(new ActionSetProperty(value, key, () => null));
                     break;
                 case 'delete':
@@ -104,7 +104,7 @@ export class ActionFlatten extends Action {
 
     public process(descriptor: CliCommonSchema.CodeModel.NodeDescriptor): void {
         let node = descriptor.target;
-        NodeHelper.setFlatten(node, this.directiveValue === true, true /*overwrite*/)
+        NodeExtensionHelper.setFlatten(node, this.directiveValue === true, true /*overwrite*/)
     }
 }
 
@@ -116,7 +116,7 @@ export class ActionSetProperty extends Action {
 
     public process(descriptor: CliCommonSchema.CodeModel.NodeDescriptor): void {
         let node = descriptor.target;
-        NodeHelper.setCliProperty(node, this.propertyName, this.directiveValue ?? this.getDefault());
+        NodeCliHelper.setCliProperty(node, this.propertyName, this.directiveValue ?? this.getDefault());
     }
 }
 
@@ -146,7 +146,7 @@ export class ActionSet extends Action {
         let node = descriptor.target;
         for (var key in this.directiveSet) {
             let value = this.directiveSet[key];
-            NodeHelper.setCliProperty(node, key, value);
+            NodeCliHelper.setCliProperty(node, key, value);
         }
     }
 }
@@ -160,7 +160,7 @@ export class ActionFormatTable extends Action {
     public process(descriptor: CliCommonSchema.CodeModel.NodeDescriptor): void {
         let node = descriptor.target;
         if (!isNullOrUndefined(this.directiveFormatTable.properties)) {
-            NodeHelper.setCliProperty(node, CliConst.CLI_FORMATTABLE, {
+            NodeCliHelper.setCliProperty(node, CliConst.CLI_FORMATTABLE, {
                 [CliConst.CLI_FORMATTABLE_PROPERTIES]: this.directiveFormatTable.properties
             });
         }
@@ -180,11 +180,11 @@ export class ActionReplace extends Action {
 
         var original: string = node.language.default[this.actionReplace.field].toString();
         if (isNullOrUndefined(this.actionReplace.isRegex) || this.actionReplace.isRegex == false) {
-            NodeHelper.setCliProperty(node, this.actionReplace.field, original.replace(this.actionReplace.old, this.actionReplace.new));
+            NodeCliHelper.setCliProperty(node, this.actionReplace.field, original.replace(this.actionReplace.old, this.actionReplace.new));
         }
         else {
             var regex = new RegExp(this.actionReplace.old);
-            NodeHelper.setCliProperty(node, this.actionReplace.field, original.replace(regex, this.actionReplace.new));
+            NodeCliHelper.setCliProperty(node, this.actionReplace.field, original.replace(regex, this.actionReplace.new));
         }
     }
 }

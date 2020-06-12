@@ -1,7 +1,7 @@
 import { getAllProperties, ImplementationLocation, ObjectSchema, Parameter, Property, Request, VirtualParameter } from "@azure-tools/codemodel";
 import { values } from "@azure-tools/linq";
 import { isNullOrUndefined } from "util";
-import { NodeHelper } from "./nodeHelper";
+import { NodeHelper, NodeExtensionHelper, NodeCliHelper } from "./nodeHelper";
 
 export class FlattenHelper {
 
@@ -50,7 +50,7 @@ export class FlattenHelper {
     private static flattenPorperties(request: Request, parameter: Parameter, schema: ObjectSchema, path: Property[], prefix: string) {
         // hide the original parameter
         parameter.flattened = true;
-        NodeHelper.setCliFlattened(parameter, true);
+        NodeExtensionHelper.setCliFlattened(parameter, true);
 
         // we need this for the further flatten be recognized by python codegen
         let protocal: any = {
@@ -69,9 +69,9 @@ export class FlattenHelper {
             }
             for (const vp of this.getFlattenedParameters(parameter, property, path)) {
                 vp.language.default.name = FlattenHelper.createFlattenedParameterDefaultName(property, prefix);
-                NodeHelper.setCliFlattenedNames(vp, [NodeHelper.getCliKey(parameter, null), NodeHelper.getCliKey(property, null)]);
-                NodeHelper.setCliFlattenOrigin(vp, property);
-                NodeHelper.setCliFlattenPrefix(vp, prefix);
+                NodeCliHelper.setCliFlattenedNames(vp, [NodeCliHelper.getCliKey(parameter, null), NodeCliHelper.getCliKey(property, null)]);
+                NodeExtensionHelper.setCliFlattenOrigin(vp, property);
+                NodeExtensionHelper.setCliFlattenPrefix(vp, prefix);
                 arr.push(vp);
             }
         }

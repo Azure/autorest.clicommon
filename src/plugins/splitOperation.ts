@@ -3,7 +3,7 @@ import { CodeModel, Request, Operation, Parameter } from "@azure-tools/codemodel
 import { isNullOrUndefined } from "util";
 import { Helper } from "../helper";
 import { CliConst, CliCommonSchema } from "../schema";
-import { NodeHelper } from "../nodeHelper";
+import { NodeHelper, NodeCliHelper, NodeExtensionHelper } from "../nodeHelper";
 import { Modifier } from "./modifier/modifier";
 import { CopyHelper } from "../copyHelper";
 
@@ -22,7 +22,7 @@ export class SplitOperation{
             const existedNames = new Set<string>(group.operations.map((op) => op.language.default.name.toUpperCase()));
             const splittedGroupOperations = [];
             for (const operation of group.operations) {
-                const splitNames = NodeHelper.getCliSplitOperationNames(operation);
+                const splitNames = NodeCliHelper.getCliSplitOperationNames(operation);
                 if (!splitNames || splitNames.length === 0) {
                     continue;
                 }
@@ -30,13 +30,13 @@ export class SplitOperation{
                 
                 splittedOperations.forEach((splittedOperation) => {
                     // Link splitted operation to src opreation
-                    NodeHelper.setSplitOperationOriginalOperation(splittedOperation, operation);
+                    NodeExtensionHelper.setSplitOperationOriginalOperation(splittedOperation, operation);
     
                     splittedGroupOperations.push(splittedOperation);
                 });
 
                 if (splittedOperations.length > 0) {
-                    NodeHelper.setCliOperationSplitted(operation, true);
+                    NodeCliHelper.setCliOperationSplitted(operation, true);
                 }
             }
             splittedGroupOperations.forEach((op) => group.addOperation(op));
@@ -45,7 +45,7 @@ export class SplitOperation{
 
     private async modifier() {
         const directives = (await this.session.getValue(CliConst.CLI_DIRECTIVE_KEY, []))
-            .filter((dir) => dir[NodeHelper.SPLIT_OPERATION_NAMES])
+            .filter((dir) => dir[NodeCliHelper.SPLIT_OPERATION_NAMES])
             .map((dir) => this.copyDirectiveOnlyForSplit(dir));
         if (directives && directives.length > 0) {
             Helper.dumper.dumpCodeModel('split-operation-modifier-pre');
@@ -73,9 +73,8 @@ export class SplitOperation{
     private splitOperation(splitName: string, srcOperation: Operation): Operation {
         const operation = CopyHelper.copyOperation(srcOperation, this.session.model.globalParameters);
         operation.language.default.name = splitName;
-        // Splited operation's cli key in format: <SrcOperationKey>#<SplitName>
-        NodeHelper.setCliKey(operation, `${NodeHelper.getCliKey(srcOperation, srcOperation.language.default.name)}#${splitName}`);
-        NodeHelper.clearCliSplitOperationNames(operation);
+        NodeCliHelper.setCliKey(operation, Helper.createSplitOperationCliKey(srcOperation, splitName));
+        NodeCliHelper.clearCliSplitOperationNames(operation);
         return operation;
     }
 
@@ -84,7 +83,7 @@ export class SplitOperation{
             select: src.select,
             where: CopyHelper.deepCopy(src.where),
         }
-        copy[NodeHelper.SPLIT_OPERATION_NAMES] = src[NodeHelper.SPLIT_OPERATION_NAMES];
+        copy[NodeCliHelper.SPLIT_OPERATION_NAMES] = src[NodeCliHelper.SPLIT_OPERATION_NAMES];
         return copy;
     }
 }
