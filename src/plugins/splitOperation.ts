@@ -46,7 +46,8 @@ export class SplitOperation{
     private async modifier() {
         const directives = (await this.session.getValue(CliConst.CLI_DIRECTIVE_KEY, []))
             .filter((dir) => dir[NodeCliHelper.SPLIT_OPERATION_NAMES])
-            .map((dir) => this.copyDirectiveOnlyForSplit(dir));
+            .map((dir) => this.copyDirective(dir,NodeCliHelper.SPLIT_OPERATION_NAMES));
+        
         if (directives && directives.length > 0) {
             Helper.dumper.dumpCodeModel('split-operation-modifier-pre');
             const modifier = await new Modifier(this.session).init(directives);
@@ -78,12 +79,12 @@ export class SplitOperation{
         return operation;
     }
 
-    private copyDirectiveOnlyForSplit(src: CliCommonSchema.CliDirective.Directive): CliCommonSchema.CliDirective.Directive {
+    private copyDirective(src: CliCommonSchema.CliDirective.Directive, prop: string): CliCommonSchema.CliDirective.Directive {
         const copy: CliCommonSchema.CliDirective.Directive = {
             select: src.select,
             where: CopyHelper.deepCopy(src.where),
         }
-        copy[NodeCliHelper.SPLIT_OPERATION_NAMES] = src[NodeCliHelper.SPLIT_OPERATION_NAMES];
+        copy[prop] = src[prop];
         return copy;
     }
 }

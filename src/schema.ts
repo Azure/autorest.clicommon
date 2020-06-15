@@ -29,6 +29,7 @@ export namespace CliConst {
     export const CLI_POLYMORPHISM_EXPAND_AS_RESOURCE_KEY: string = 'cli.polymorphism.expand-as-resource';
 
     export const CLI_SPLIT_OPERATION_ENABLED_KEY: string = 'cli.split-operation.cli-split-operation-enabled';
+    export const CLI_SPLIT_OPERATION_EXTEND_POLY_RESOURCE_KEY: string = 'cli.split-operation.cli-split-operation-extend-poly-resource';
 
     export const DEFAULT_OPERATION_PARAMETER_INDEX = -1;
 

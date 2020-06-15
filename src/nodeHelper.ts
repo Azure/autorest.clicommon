@@ -328,7 +328,7 @@ export class NodeExtensionHelper {
         NodeExtensionHelper.setExtensionsProperty(op, NodeExtensionHelper.SPLIT_OPERATION_ORIGINAL_OPERATION, ori);
     }
 
-    public static getSplitOperationOriginalOperation(op: Operation): Schema {
+    public static getSplitOperationOriginalOperation(op: Operation): Operation {
         return NodeExtensionHelper.getExtensionsProperty(op, NodeExtensionHelper.SPLIT_OPERATION_ORIGINAL_OPERATION, null);
     }
 

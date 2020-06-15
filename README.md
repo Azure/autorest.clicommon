@@ -160,6 +160,8 @@ cli:
         # 2. If operation with split name has already existed in operation group, you will get 
         #    a warning and this split name will be skipped.
         cli-split-operation-enabled: true
+        # if ture, `poly-resource` on the parameter will be extended by splitted operations
+        cli-split-operation-extend-poly-resource: true
     polymorphism:
         # if true, polymorphism parameter with 'poly-resource' marked as true will be
         # expanded into multiple operations for each subclasses
