@@ -25,7 +25,7 @@ export class CopyHelper {
         const copy = new Request(source);
         copy.extensions = CopyHelper.copy(source.extensions);
         copy.language = CopyHelper.deepCopy(source.language);
-        copy.parameters = copy.parameters?.map((p) => customizedParamCopy == null ? CopyHelper.copyParameter(p) : customizedParamCopy(p));
+        copy.parameters = source.parameters?.map((p) => customizedParamCopy == null ? CopyHelper.copyParameter(p) : customizedParamCopy(p));
         copy.updateSignatureParameters();
         return copy;
     }

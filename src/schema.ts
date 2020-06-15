@@ -26,8 +26,10 @@ export namespace CliConst {
     export const CLI_FLATTEN_SET_FLATTEN_PAYLOAD_MAX_POLY_AS_PARAM_PROP_KEY: string = 'cli.flatten.cli-flatten-payload-max-poly-as-param-prop-count';
     export const CLI_FLATTEN_SET_FLATTEN_ALL_OVERWRITE_SWAGGER_KEY: string = 'cli.flatten.cli-flatten-all-overwrite-swagger';
 
+    export const CLI_POLYMORPHISM_EXPAND_AS_RESOURCE_KEY: string = 'cli.polymorphism.expand-as-resource';
+
     export const CLI_SPLIT_OPERATION_ENABLED_KEY: string = 'cli.split-operation.cli-split-operation-enabled';
-    export const CLI_SPLIT_OPERATION_NAMES_KEY: string = 'split-operation-names';
+    export const CLI_SPLIT_OPERATION_EXTEND_POLY_RESOURCE_KEY: string = 'cli.split-operation.cli-split-operation-extend-poly-resource';
 
     export const DEFAULT_OPERATION_PARAMETER_INDEX = -1;
 
@@ -130,6 +132,7 @@ export namespace CliCommonSchema {
             setName?: SetNameClause;
             replace?: ReplaceClause;
             formatTable?: FormatTableClause;
+            "split-operation-names"?: ValueClause;
         }
     }
 

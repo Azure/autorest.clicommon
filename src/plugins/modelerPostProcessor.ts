@@ -3,18 +3,23 @@ import { serialize } from "@azure-tools/codegen";
 import { CodeModel, codeModelSchema, Metadata, ObjectSchema, isObjectSchema, Property, Extensions, Scheme } from "@azure-tools/codemodel";
 import { isNullOrUndefined, isArray } from "util";
 import { Helper } from "../helper";
+import { CopyHelper } from "../copyHelper";
 import { CliConst, M4Node } from "../schema";
-import { NodeHelper, NodeCliHelper } from "../nodeHelper";
+import { NodeHelper } from "../nodeHelper";
+import { normalize } from "path";
 
-export class PreNamer{
+export class ModelerPostProcessor{
 
     constructor(protected session: Session<CodeModel>){
     }
 
     public process() {
         Helper.enumerateCodeModel(this.session.model, (n) => {
-            if (!isNullOrUndefined(n.target.language.default.name))
-                NodeCliHelper.setCliKey(n.target, n.target.language.default.name);
+
+            // In case cli is shared by multiple instances during modelerfour, do deep copy
+            if (!isNullOrUndefined(n.target.language['cli'])) {
+                n.target.language['cli'] = CopyHelper.deepCopy(n.target.language['cli']);
+            }
         });
     }
 }
@@ -22,12 +27,12 @@ export class PreNamer{
 export async function processRequest(host: Host) {
 
     const session = await Helper.init(host);
-    Helper.dumper.dumpCodeModel("prename-pre");
+    Helper.dumper.dumpCodeModel("modeler-post-processor-pre");
 
-    let pn = new PreNamer(session);
+    let pn = new ModelerPostProcessor(session);
     pn.process();
 
-    Helper.dumper.dumpCodeModel("prename-post");
+    Helper.dumper.dumpCodeModel("modeler-post-processor-post");
 
     Helper.outputToModelerfour();
     await Helper.dumper.persistAsync();

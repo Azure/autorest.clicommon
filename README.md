@@ -10,9 +10,6 @@ pipeline-model: v3
 
 pipeline:
 
-    modelerfour/new-transform:
-        input: clicommon/cli-flatten-setter
-	
     clicommon/cli-prenamer:
         input: modelerfour
         output-artifact: clicommon-prenamer
@@ -28,17 +25,28 @@ pipeline:
     clicommon/cli-flatten-setter:
         input: clicommon/pre/cli-complex-marker
         output-artifact: clicommon-flatten-setter
+        
+    modelerfour/new-transform:
+        input: clicommon/cli-flatten-setter
 
-    clicommon:
+    clicommon/cli-modeler-post-processor:
         input: modelerfour/identity
-        output-artifact: clicommon-output
+        output-artifact: clicommon-modeler-post-processor
 
     clicommon/cli-poly-as-resource-modifier:
-        input: clicommon
+        input: clicommon/cli-modeler-post-processor
         output-artifact: clicommon-poly-as-resource-modifier
 
-    clicommon/cli-complex-marker:
+    clicommon/cli-flatten-modifier:
         input: clicommon/cli-poly-as-resource-modifier
+        output-artifact: clicommon-flatten-modifier
+
+    clicommon:
+        input: clicommon/cli-flatten-modifier
+        output-artifact: clicommon-output
+
+    clicommon/cli-complex-marker:
+        input: clicommon
         output-artifact: clicommon-complex-marker
     
     #clicommon/cli-poly-as-param-modifier:
@@ -58,8 +66,10 @@ pipeline:
           - clicommon/cli-prenamer
           - clicommon/cli-split-operation
           - clicommon/cli-flatten-setter
+          - clicommon/cli-modeler-post-processor
           #- clicommon/cli-poly-as-param-modifier
           - clicommon/cli-poly-as-resource-modifier
+          - clicommon/cli-flatten-modifier
           - clicommon/cli-complex-marker
           - clicommon/pre/cli-complex-marker
           - clicommon/cli-visibility-cleaner
@@ -72,16 +82,19 @@ scope-clicommon:
         - clicommon-prenamer
         - clicommon-split-operation
         - clicommon-flatten-setter
+        - clicommon-modeler-post-processor
         - clicommon-poly-as-resource-modifier
+        - clicommon-flatten-modifier
         #- clicommon-poly-as-param-modifier
         - clicommon-complex-marker
         - clicommon-complex-marker-pre
         - clicommon-visibility-cleaner
 
 modelerfour:
-    #group-parameters: true
-    #flatten-models: true
-    #flatten-payloads: true    
+    # group-parameters: true
+    # flatten-models: true
+    # flatten-payloads: true    
+    # lenient-model-deduplication: true
 
     # standardize to snake in modelerfour for selecting and formatting in clicommon
     # further naming will be done in clicommon to corresonding convention
@@ -147,6 +160,8 @@ cli:
         # 2. If operation with split name has already existed in operation group, you will get 
         #    a warning and this split name will be skipped.
         cli-split-operation-enabled: true
+        # if ture, `poly-resource` on the parameter will be extended by splitted operations
+        cli-split-operation-extend-poly-resource: true
     polymorphism:
         # if true, polymorphism parameter with 'poly-resource' marked as true will be
         # expanded into multiple operations for each subclasses
@@ -205,6 +220,3 @@ cli:
             choiceValue: 'pascal'
             constant: 'pascal'
 ```
-
-
-
