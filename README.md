@@ -187,6 +187,8 @@ cli:
                 dw: DW
                 ti: TI
                 MCAS: MCAS
+                UTC: UTC
+                SSL: SSL
                 # workaround for modelerfour issue
                 # https://github.com/Azure/autorest.modelerfour/issues/195
                 SubscriptionId: SubscriptionId
@@ -209,6 +211,8 @@ cli:
                 dw: DW
                 ti: TI
                 MCAS: MCAS
+                UTC: UTC
+                SSL: SSL
                 # workaround for modelerfour issue
                 SubscriptionId: SubscriptionId
             parameter: 'camel'
