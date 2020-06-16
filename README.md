@@ -172,6 +172,11 @@ cli:
                 dw: DW
                 ti: TI
                 MCAS: MCAS
+                mdatp: MDATP
+                aad: AAD
+                aat: AAT
+                asc: ASC
+                aatp: AATP
                 # workaround for modelerfour issue
                 # https://github.com/Azure/autorest.modelerfour/issues/195
                 SubscriptionId: SubscriptionId
@@ -194,6 +199,12 @@ cli:
                 dw: DW
                 ti: TI
                 MCAS: MCAS
+                mdatp: MDATP
+                aad: AAD
+                aat: AAT
+                asc: ASC
+                aatp: AATP
+
                 # workaround for modelerfour issue
                 SubscriptionId: SubscriptionId
             parameter: 'camel'
