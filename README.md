@@ -204,7 +204,6 @@ cli:
                 aat: AAT
                 asc: ASC
                 aatp: AATP
-
                 # workaround for modelerfour issue
                 SubscriptionId: SubscriptionId
             parameter: 'camel'
