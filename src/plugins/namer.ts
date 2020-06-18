@@ -1,11 +1,10 @@
-import { CodeModel, codeModelSchema, Property, Language, Metadata, Operation, OperationGroup, Parameter, ComplexSchema, ObjectSchema, ChoiceSchema, ChoiceValue, SealedChoiceSchema } from '@azure-tools/codemodel';
-import { Session, Host, startSession, Channel } from '@azure-tools/autorest-extension-base';
-import { serialize, deserialize } from '@azure-tools/codegen';
-import { values, items, length, Dictionary, keys } from '@azure-tools/linq';
+import { CodeModel, Language, Metadata, Operation, Parameter } from '@azure-tools/codemodel';
+import { Session, Host, Channel } from '@azure-tools/autorest-extension-base';
+import { values } from '@azure-tools/linq';
 import { isNullOrUndefined } from 'util';
-import { CliCommonSchema, CliConst, LanguageType, M4Node } from '../schema';
+import { CliCommonSchema } from '../schema';
 import { Helper } from '../helper';
-import { NodeHelper, NodeExtensionHelper, NodeCliHelper } from '../nodeHelper';
+import { NodeExtensionHelper, NodeCliHelper } from '../nodeHelper';
 import { FlattenHelper } from '../flattenHelper';
 
 export class CommonNamer {
@@ -18,7 +17,7 @@ export class CommonNamer {
         this.codeModel = session.model;
     }
 
-    public async init() {
+    public async init(): Promise<CommonNamer> {
         // any configuration if necessary
         this.cliNamingSettings = Helper.normalizeNamingSettings(await this.session.getValue("cli.naming.cli", {}));
         this.defaultNamingSettings = Helper.normalizeNamingSettings(await this.session.getValue("cli.naming.default", {}));
@@ -26,7 +25,7 @@ export class CommonNamer {
         return this;
     }
 
-    public process() {
+    public process(): void {
         this.flag = new Set<Metadata>();
         this.applyNamingConvention(this.codeModel);
         this.processGlobalParam();
@@ -37,54 +36,54 @@ export class CommonNamer {
         return this.codeModel;
     }
 
-    private processSchemas() {
-        let schemas = this.codeModel.schemas;
+    private processSchemas(): void {
+        const schemas = this.codeModel.schemas;
 
-        for (let obj of values(schemas.objects)) {
+        for (const obj of values(schemas.objects)) {
             this.applyNamingConvention(obj);
-            for (let property of values(obj.properties)) {
+            for (const property of values(obj.properties)) {
                 this.applyNamingConvention(property);
             }
         }
 
-        for (let dict of values(schemas.dictionaries)) {
+        for (const dict of values(schemas.dictionaries)) {
             this.applyNamingConvention(dict);
             this.applyNamingConvention(dict.elementType);
         }
 
-        for (let enumn of values(schemas.choices)) {
+        for (const enumn of values(schemas.choices)) {
             this.applyNamingConvention(enumn);
-            for (let item of values(enumn.choices)) {
+            for (const item of values(enumn.choices)) {
                 this.applyNamingConvention(item);
             }
         }
 
-        for (let enumn of values(schemas.sealedChoices)) {
+        for (const enumn of values(schemas.sealedChoices)) {
             this.applyNamingConvention(enumn);
-            for (let item of values(enumn.choices)) {
+            for (const item of values(enumn.choices)) {
                 this.applyNamingConvention(item);
             }
         }
 
-        for (let arr of values(schemas.arrays)) {
+        for (const arr of values(schemas.arrays)) {
             this.applyNamingConvention(arr);
             this.applyNamingConvention(arr.elementType);
         }
 
-        for (let cons of values(schemas.constants)) {
+        for (const cons of values(schemas.constants)) {
             this.applyNamingConvention(cons);
         }
 
-        for (let num of values(schemas.numbers)) {
+        for (const num of values(schemas.numbers)) {
             this.applyNamingConvention(num);
         }
 
-        for (let str of values(schemas.strings)) {
+        for (const str of values(schemas.strings)) {
             this.applyNamingConvention(str);
         }
     }
 
-    private processOperationGroups() {
+    private processOperationGroups(): void {
         for (const operationGroup of values(this.codeModel.operationGroups)) {
             this.applyNamingConvention(operationGroup);
 
@@ -107,13 +106,13 @@ export class CommonNamer {
         }
     }
 
-    private processGlobalParam() {
-        for (let para of values(this.codeModel.globalParameters)) {
+    private processGlobalParam(): void {
+        for (const para of values(this.codeModel.globalParameters)) {
             this.applyNamingConvention(para);
         }
     }
 
-    private processCliOperation() {
+    private processCliOperation(): void {
 
         // To be backward compatiable, reassign poly operations and parameters' default name and cli name
         for (const operationGroup of values(this.codeModel.operationGroups)) {
@@ -136,7 +135,7 @@ export class CommonNamer {
         }
     }
 
-    private applyNamingConventionOnCliOperation(operation: Operation, cliOperation: Operation) {
+    private applyNamingConventionOnCliOperation(operation: Operation, cliOperation: Operation): void {
         if (cliOperation == null || cliOperation.language == null) {
             this.session.message({ Channel: Channel.Warning, Text: "working in obj has problems" });
             return;
@@ -151,7 +150,7 @@ export class CommonNamer {
         cliOperation.language['cli']['name'] = Helper.createPolyOperationCliName(operation, discriminatorValue);
     }
 
-    private applyNamingConventionOnCliParameter(cliParameter: Parameter) {
+    private applyNamingConventionOnCliParameter(cliParameter: Parameter): void {
         if (cliParameter == null || cliParameter.language == null) {
             this.session.message({ Channel: Channel.Warning, Text: "working in obj has problems" });
             return;
@@ -175,7 +174,8 @@ export class CommonNamer {
         cliParameter.language['cli']['name'] = FlattenHelper.createFlattenedParameterCliName(prop, prefix);
     }
 
-    private applyNamingConvention(obj: any) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    private applyNamingConvention(obj: any): void {
         if (obj == null || obj.language == null) {
             this.session.message({ Channel: Channel.Warning, Text: "working in obj has problems" });
             return;
@@ -190,9 +190,9 @@ export class CommonNamer {
             obj.language['cli']['description'] = obj.language.default.description;
 
         if (!isNullOrUndefined(obj['discriminatorValue'])) {
-            let dv: string = obj['discriminatorValue'];
+            const dv: string = obj['discriminatorValue'];
             // dv should be in pascal format, let's do a simple convert to snake
-            let newValue = dv.replace(/([A-Z][a-z0-9]+)|([A-Z]+(?=[A-Z][a-z0-9]+))|([A-Z]+$)/g, '_$1$2$3').substr(1).toLowerCase();
+            const newValue = dv.replace(/([A-Z][a-z0-9]+)|([A-Z]+(?=[A-Z][a-z0-9]+))|([A-Z]+$)/g, '_$1$2$3').substr(1).toLowerCase();
             NodeCliHelper.setCliDiscriminatorValue(obj, newValue);
         }
 
@@ -210,7 +210,7 @@ export class CommonNamer {
     }
 }
 
-export async function processRequest(host: Host) {
+export async function processRequest(host: Host): Promise<void> {
     const session = await Helper.init(host);
     Helper.dumper.dumpCodeModel("namer-pre");
 

@@ -1,10 +1,9 @@
-import { codeModelSchema, ChoiceSchema, ChoiceValue, Extensions, CodeModel, ObjectSchema, Operation, OperationGroup, Parameter, Property, SealedChoiceSchema, Schema, ConstantSchema, SchemaType, StringSchema, Metadata, Language } from "@azure-tools/codemodel";
+import { codeModelSchema, ChoiceSchema, ChoiceValue, CodeModel, ObjectSchema, Operation, OperationGroup, Parameter, Property, SealedChoiceSchema, Schema, ConstantSchema, SchemaType, StringSchema } from "@azure-tools/codemodel";
 import { keys, values } from "@azure-tools/linq";
 import { isArray, isNull, isNullOrUndefined, isObject, isString, isUndefined } from "util";
 import { CliConst, M4Node, M4NodeType, NamingType, CliCommonSchema } from "./schema";
-import { pascalCase, EnglishPluralizationService, guid } from '@azure-tools/codegen';
+import { EnglishPluralizationService, guid } from '@azure-tools/codegen';
 import { Session, Host, startSession } from "@azure-tools/autorest-extension-base";
-import { PreNamer } from "./plugins/prenamer";
 import { serialize } from "@azure-tools/codegen";
 import { NodeHelper, NodeCliHelper, NodeExtensionHelper } from "./nodeHelper";
 import { Dumper } from "./dumper";
@@ -14,12 +13,14 @@ export class Helper {
     private static session: Session<CodeModel>;
     private static host: Host;
     private static _dumper: Dumper;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     private static modelerfourOptions: any;
 
-    public static async init(host: Host) {
-        Helper.session = await startSession<CodeModel>(host, {}, codeModelSchema);;
+    public static async init(host: Host): Promise<Session<CodeModel>> {
+        Helper.session = await startSession<CodeModel>(host, {}, codeModelSchema);
         Helper.host = host;
         Helper._dumper = await (new Dumper(host, Helper.session)).init();
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         Helper.modelerfourOptions = <any>await Helper.session.getValue('modelerfour', {});
         return Helper.session;
     }
@@ -30,25 +31,25 @@ export class Helper {
         return Helper._dumper;
     }
 
-    public static logDebug(msg: string) {
+    public static logDebug(msg: string): void {
         if (isNullOrUndefined(Helper.session))
             throw Error("Helper not init yet, please call Helper.init() to init the Helper");
         Helper.session.debug(msg, []);
     }
 
-    public static logWarning(msg: string) {
+    public static logWarning(msg: string): void {
         if (isNullOrUndefined(Helper.session))
             throw Error("Helper not init yet, please call Helper.init() to init the Helper");
         Helper.session.warning(msg, []);
     }
 
-    public static logError(msg: string) {
+    public static logError(msg: string): void {
         if (isNullOrUndefined(Helper.session))
             throw Error("Helper not init yet, please call Helper.init() to init the Helper");
         Helper.session.error(msg, []);
     }
 
-    public static outputToModelerfour() {
+    public static outputToModelerfour(): void {
         if (isNullOrUndefined(Helper.session))
             throw Error("Helper not init yet, please call Helper.init() to init the Helper");
         if (isNullOrUndefined(Helper.host))
@@ -64,7 +65,7 @@ export class Helper {
         }
     }
 
-    public static isEmptyString(str): boolean {
+    public static isEmptyString(str: string): boolean {
         return isNullOrUndefined(str) || str.length === 0;
     }
 
@@ -101,8 +102,8 @@ export class Helper {
      *  set to 'true' to return MatchAll regex when str is null/undefined/string.empty
      *  set to 'false' to return null when str is null/undefined/string.empty
      */
-    public static createRegex(str: string, emptyAsMatchAll: boolean = false): RegExp {
-        let MATCH_ALL = /^.*$/g;
+    public static createRegex(str: string, emptyAsMatchAll = false): RegExp {
+        const MATCH_ALL = /^.*$/g;
         if (isNullOrUndefined(str) || str.length === 0) {
             if (emptyAsMatchAll)
                 return MATCH_ALL;
@@ -114,11 +115,6 @@ export class Helper {
         if (Helper.containsSpecialChar(str))
             return new RegExp(str, "gi");
         return new RegExp(`^${str}$`, "gi");
-    }
-
-    public static validateNullOrUndefined(obj: any, name: string): void {
-        if (isNullOrUndefined(obj))
-            throw Error(`Validation failed: '${name}' is null or undefined`)
     }
 
     public static ToNamingType(node: M4Node): NamingType | null {
@@ -171,7 +167,7 @@ export class Helper {
     }
 
     public static singularize(settings: CliCommonSchema.NamingConvention, word: string): string {
-        let low = word.toLowerCase();
+        const low = word.toLowerCase();
         if (settings.glossary.findIndex(v => v === low) >= 0)
             return word;
 
@@ -183,7 +179,7 @@ export class Helper {
         return eps.singularize(word);
     }
 
-    public static normalizeNamingSettings(settings: CliCommonSchema.NamingConvention) {
+    public static normalizeNamingSettings(settings: CliCommonSchema.NamingConvention): CliCommonSchema.NamingConvention {
         if (isNullOrUndefined(settings.singularize))
             settings.singularize = [];
         if (isNullOrUndefined(settings.glossary))
@@ -193,7 +189,7 @@ export class Helper {
         if (isNullOrUndefined(settings.override))
             settings.override = {};
         else {
-            for (let key in settings.override)
+            for (const key in settings.override)
                 settings.override[key.toLowerCase()] = settings.override[key];
         }
         if (isNullOrUndefined(settings.appliedTo)) {
@@ -210,58 +206,58 @@ export class Helper {
      * @param node
      * @param languageKey
      */
-    public static applyNamingConvention(settings: CliCommonSchema.NamingConvention, node: M4Node, languageKey: string) {
+    public static applyNamingConvention(settings: CliCommonSchema.NamingConvention, node: M4Node, languageKey: string): void {
         if (isNullOrUndefined(node.language[languageKey]))
             return;
 
-        let namingType = Helper.ToNamingType(node);
+        const namingType = Helper.ToNamingType(node);
         if (isNullOrUndefined(namingType)) {
             // unsupported modelerfour node for naming type, ignore it for now
             return;
         }
 
-        let style = settings[namingType];
-        let single = settings.singularize.includes(namingType) === true;
+        const style = settings[namingType];
+        const single = settings.singularize.includes(namingType) === true;
 
         if (Helper.isEmptyString(style)) {
             // Only process when naming convention is set
             return;
         }
 
-        let up1 = (n: string) => Helper.isEmptyString(n) ? n : n.length == 1 ? n.toUpperCase() : n[0].toUpperCase().concat(n.substr(1).toLowerCase());
-        let op = {};
+        const up1 = (n: string) => Helper.isEmptyString(n) ? n : n.length == 1 ? n.toUpperCase() : n[0].toUpperCase().concat(n.substr(1).toLowerCase());
+        const op = {};
         op[CliConst.NamingStyle.camel] = {
             wording: (v: string, i: number) => i === 0 ? v.toLowerCase() : up1(v),
             sep: '',
         };
         op[CliConst.NamingStyle.pascal] = {
-            wording: (v: string, i: number) => up1(v),
+            wording: (v: string) => up1(v),
             sep: '',
         };
         op[CliConst.NamingStyle.kebab] = {
-            wording: (v: string, i: number) => v.toLowerCase(),
+            wording: (v: string) => v.toLowerCase(),
             sep: '-',
         };
         op[CliConst.NamingStyle.snake] = {
-            wording: (v: string, i: number) => v.toLowerCase(),
+            wording: (v: string) => v.toLowerCase(),
             sep: '_',
         };
         op[CliConst.NamingStyle.space] = {
-            wording: (v: string, i: number) => v.toLowerCase(),
+            wording: (v: string) => v.toLowerCase(),
             sep: ' ',
         };
         op[CliConst.NamingStyle.upper] = {
-            wording: (v: string, i: number) => v.toUpperCase(),
+            wording: (v: string) => v.toUpperCase(),
             sep: '_',
         };
 
-        let convert = (oldName) => {
+        const convert = (oldName) => {
             if (Helper.isEmptyString(oldName))
                 return oldName;
 
             // the oldName should be in snake_naming_convention
             const SEP = '_';
-            let newName = oldName.split(SEP).map((v, i) =>
+            const newName = oldName.split(SEP).map((v, i) =>
                 Helper.isEmptyString(v) ? '_' :
                     (!isNullOrUndefined(settings.override[v.toLowerCase()]))
                         ? settings.override[v.toLowerCase()]
@@ -272,7 +268,7 @@ export class Helper {
 
 
         settings.appliedTo.forEach(field => {
-            let v = node.language[languageKey][field];
+            const v = node.language[languageKey][field];
             if (isNullOrUndefined(v))
                 return;
             else if (isString(v)) {
@@ -291,9 +287,10 @@ export class Helper {
     public static toYamlSimplified(codeModel: CodeModel): string {
         const INDENT = '  ';
         const NEW_LINE = '\n';
-        let initialIndent = 1;
-        let tab = (extra: number = 0) => INDENT.repeat(initialIndent + extra);
-        let formatValue = (o: any, i: number) => {
+        const initialIndent = 1;
+        const tab = (extra = 0) => INDENT.repeat(initialIndent + extra);
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const formatValue = (o: any, i: number) => {
             if (isString(o))
                 return o;
             else if (isArray(o))
@@ -308,34 +305,37 @@ export class Helper {
                 return isUndefined(o) ? '{undefined}' : isNull(o) ? '{null}' : o.toString();
         };
 
-        let generateCliValue = (o: any, i: number) => o.language.default.name + `${isNullOrUndefined(o.schema) ? '' : ('(' + o.schema.language.default.name + '^' + o.schema.type + ')')}` +
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const generateCliValue = (o: any, i: number) => o.language.default.name + `${isNullOrUndefined(o.schema) ? '' : ('(' + o.schema.language.default.name + '^' + o.schema.type + ')')}` +
             (isNullOrUndefined(o.language.cli) ? '' : Object.getOwnPropertyNames(o.language.cli)
                 .filter(key => o.language.cli[key] !== o.language.default[key])
                 .reduce((pv, cv, ci) => pv.concat((ci === 0 ? (NEW_LINE + tab(i) + 'cli:') : '') +
                     NEW_LINE + tab(i + 1) + `${cv}: ${formatValue(o.language.cli[cv], i + 2)}`), ''));
 
-        let generatePropertyFlattenValue = (o: any, i: number) => {
-            let v = NodeExtensionHelper.getFlattenedValue(o);
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const generatePropertyFlattenValue = (o: any, i: number) => {
+            const v = NodeExtensionHelper.getFlattenedValue(o);
             return (isNullOrUndefined(v)) ? '' : NEW_LINE + tab(i) + NodeExtensionHelper.FLATTEN_FLAG + ': ' + v;
         };
 
-        let generatePropertyReadonlyValue = (o: any, i: number) => {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const generatePropertyReadonlyValue = (o: any, i: number) => {
             return (o['readOnly'] === true) ? (NEW_LINE + tab(i) + 'readOnly: true') : '';
         };
 
-        let generateDiscriminatorValueForSchema = (o: Schema, i: number) => {
+        const generateDiscriminatorValueForSchema = (o: Schema, i: number) => {
             if (o instanceof ObjectSchema) {
-                let v = NodeHelper.HasSubClass(o);
+                const v = NodeHelper.HasSubClass(o);
                 return v ? NEW_LINE + tab(i) + NodeHelper.DISCRIMINATOR_FLAG + ': true' : '';
             }
             else {
                 return '';
             }
-        }
+        };
 
-        let generateDiscriminatorValueForParam = (o: Parameter, i: number) => {
+        const generateDiscriminatorValueForParam = (o: Parameter, i: number) => {
             return generateDiscriminatorValueForSchema(o.schema, i);
-        }
+        };
 
         let s = '';
         s = s + `operationGroups:${NEW_LINE}` +
@@ -378,6 +378,7 @@ export class Helper {
                 .join(''));
         s = s + `${tab()}choices:${NEW_LINE}` +
             `${tab(1)}all:${NEW_LINE}`.concat(
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
                 [codeModel.schemas.choices ?? [], codeModel.schemas.sealedChoices ?? []].map((arr: any[]) => arr.map(
                     v => `${tab(2)}- choiceName: ${generateCliValue(v, 3)}` +
                         `${NEW_LINE}${tab(3)}choiceValues:${NEW_LINE}`.concat(
@@ -386,7 +387,8 @@ export class Helper {
         return s;
     }
 
-    public static getDefaultValue(schema: Schema) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    public static getDefaultValue(schema: Schema): any {
         switch (schema.type) {
             case SchemaType.Array:
                 return [];
@@ -406,7 +408,7 @@ export class Helper {
                 return Date.now();
             case SchemaType.ByteArray:
             case SchemaType.Binary:
-                return 'BinaryData'
+                return 'BinaryData';
             case SchemaType.Char:
                 return ' ';
             case SchemaType.Date:
@@ -443,7 +445,7 @@ export class Helper {
             case SchemaType.Group:
                 return 'group';
             default:
-                return 'unknown'
+                return 'unknown';
         }
     }
 
@@ -452,11 +454,11 @@ export class Helper {
     }
 
     public static createPolyOperationCliKey(baseOperation: Operation, discriminatorValue: string): string {
-        return `${NodeCliHelper.getCliKey(baseOperation, baseOperation.language.default.name)}#${discriminatorValue}`
+        return `${NodeCliHelper.getCliKey(baseOperation, baseOperation.language.default.name)}#${discriminatorValue}`;
     }
     
     public static createPolyOperationCliName(baseOperation: Operation, discriminatorValue: string): string {
-        return `${NodeCliHelper.getCliName(baseOperation, baseOperation.language.default.name)}#${discriminatorValue}`
+        return `${NodeCliHelper.getCliName(baseOperation, baseOperation.language.default.name)}#${discriminatorValue}`;
     }
 
     public static createSplitOperationCliKey(baseOperation: Operation, splitName: string): string {
@@ -479,9 +481,9 @@ export class Helper {
      * @param codeModel
      * @param action
      */
-    public static enumerateCodeModel(codeModel: CodeModel, action: (nodeDescriptor: CliCommonSchema.CodeModel.NodeDescriptor) => void, flag: CliCommonSchema.CodeModel.NodeTypeFlag = null) {
+    public static enumerateCodeModel(codeModel: CodeModel, action: (nodeDescriptor: CliCommonSchema.CodeModel.NodeDescriptor) => void, flag: CliCommonSchema.CodeModel.NodeTypeFlag = null): void {
         if (isNullOrUndefined(action)) {
-            throw Error("empty action for going through code model")
+            throw Error("empty action for going through code model");
         }
             
         // choice/sealedChoice/choiceValue
@@ -501,7 +503,7 @@ export class Helper {
         }
     }
 
-    public static enumerateChoices(choices: ChoiceSchema<StringSchema>[] | SealedChoiceSchema<StringSchema>[], action: (nodeDescriptor: CliCommonSchema.CodeModel.NodeDescriptor) => void, flag: CliCommonSchema.CodeModel.NodeTypeFlag) {
+    public static enumerateChoices(choices: ChoiceSchema<StringSchema>[] | SealedChoiceSchema<StringSchema>[], action: (nodeDescriptor: CliCommonSchema.CodeModel.NodeDescriptor) => void, flag: CliCommonSchema.CodeModel.NodeTypeFlag): void {
         const enumSchema = isNullOrUndefined(flag) || ((flag & CliCommonSchema.CodeModel.NodeTypeFlag.choiceSchema) > 0);
         const cliKeyMissing = '<clikey-missing>';
 
@@ -520,7 +522,7 @@ export class Helper {
         }
     }
 
-    public static enumerateChoiceValues(choice: ChoiceSchema<StringSchema> | SealedChoiceSchema<StringSchema>, action: (nodeDescriptor: CliCommonSchema.CodeModel.NodeDescriptor) => void, flag: CliCommonSchema.CodeModel.NodeTypeFlag) {
+    public static enumerateChoiceValues(choice: ChoiceSchema<StringSchema> | SealedChoiceSchema<StringSchema>, action: (nodeDescriptor: CliCommonSchema.CodeModel.NodeDescriptor) => void, flag: CliCommonSchema.CodeModel.NodeTypeFlag): void {
         const enumValue = isNullOrUndefined(flag) || ((flag & CliCommonSchema.CodeModel.NodeTypeFlag.choiceValue) > 0);
         const cliKeyMissing = '<clikey-missing>';
 
@@ -538,7 +540,7 @@ export class Helper {
         }
     }
 
-    public static enumrateSchemas(schemas: ObjectSchema[], action: (nodeDescriptor: CliCommonSchema.CodeModel.NodeDescriptor) => void, flag: CliCommonSchema.CodeModel.NodeTypeFlag) {
+    public static enumrateSchemas(schemas: ObjectSchema[], action: (nodeDescriptor: CliCommonSchema.CodeModel.NodeDescriptor) => void, flag: CliCommonSchema.CodeModel.NodeTypeFlag): void {
         const enumObjectSchema = isNullOrUndefined(flag) || ((flag & CliCommonSchema.CodeModel.NodeTypeFlag.objectSchema) > 0);
         const cliKeyMissing = '<clikey-missing>';
 
@@ -556,7 +558,7 @@ export class Helper {
         }
     }
 
-    public static enumrateSchemaProperties(schema: ObjectSchema, action: (nodeDescriptor: CliCommonSchema.CodeModel.NodeDescriptor) => void, flag: CliCommonSchema.CodeModel.NodeTypeFlag) {
+    public static enumrateSchemaProperties(schema: ObjectSchema, action: (nodeDescriptor: CliCommonSchema.CodeModel.NodeDescriptor) => void, flag: CliCommonSchema.CodeModel.NodeTypeFlag): void {
         const enumProperty = isNullOrUndefined(flag) || ((flag & CliCommonSchema.CodeModel.NodeTypeFlag.property) > 0);
         if (isNullOrUndefined(schema.properties)) {
             return;
@@ -571,12 +573,12 @@ export class Helper {
                     parent: schema.properties,
                     target: prop,
                     targetIndex: j
-                })
+                });
             }
         }
     }
 
-    public static enumrateOperationGroups(groups: OperationGroup[], action: (nodeDescriptor: CliCommonSchema.CodeModel.NodeDescriptor) => void, flag: CliCommonSchema.CodeModel.NodeTypeFlag) {
+    public static enumrateOperationGroups(groups: OperationGroup[], action: (nodeDescriptor: CliCommonSchema.CodeModel.NodeDescriptor) => void, flag: CliCommonSchema.CodeModel.NodeTypeFlag): void {
         const enumGroup = isNullOrUndefined(flag) || ((flag & CliCommonSchema.CodeModel.NodeTypeFlag.operationGroup) > 0);
         const cliKeyMissing = '<clikey-missing>';
 
@@ -588,13 +590,13 @@ export class Helper {
                     parent: groups,
                     target: group,
                     targetIndex: i,
-                })
+                });
             }
             Helper.enumrateOperations(group, action, flag);
         }
     }
 
-    public static enumrateOperations(group: OperationGroup, action: (nodeDescriptor: CliCommonSchema.CodeModel.NodeDescriptor) => void, flag: CliCommonSchema.CodeModel.NodeTypeFlag) {
+    public static enumrateOperations(group: OperationGroup, action: (nodeDescriptor: CliCommonSchema.CodeModel.NodeDescriptor) => void, flag: CliCommonSchema.CodeModel.NodeTypeFlag): void {
         const enumOperation = isNullOrUndefined(flag) || ((flag & CliCommonSchema.CodeModel.NodeTypeFlag.operation) > 0);
         const cliKeyMissing = '<clikey-missing>';
 
@@ -610,7 +612,7 @@ export class Helper {
         operations.push(...cliOps);
 
         for (let j = operations.length - 1; j >= 0; j--) {
-            let op = operations[j];
+            const op = operations[j];
             if (enumOperation) {
                 action({
                     operationGroupCliKey: NodeCliHelper.getCliKey(group, cliKeyMissing),
@@ -618,13 +620,13 @@ export class Helper {
                     parent: group.operations,
                     target: op,
                     targetIndex: j,
-                })
+                });
             }
             Helper.enumrateParameters(group, op, action, flag);
         }
     }
 
-    public static enumrateParameters(group: OperationGroup, op: Operation, action: (nodeDescriptor: CliCommonSchema.CodeModel.NodeDescriptor) => void, flag: CliCommonSchema.CodeModel.NodeTypeFlag) {
+    public static enumrateParameters(group: OperationGroup, op: Operation, action: (nodeDescriptor: CliCommonSchema.CodeModel.NodeDescriptor) => void, flag: CliCommonSchema.CodeModel.NodeTypeFlag): void {
         const enumParam = isNullOrUndefined(flag) || ((flag & CliCommonSchema.CodeModel.NodeTypeFlag.parameter) > 0);
         const cliKeyMissing = '<clikey-missing>';
        
@@ -639,7 +641,7 @@ export class Helper {
                     parent: op.parameters,
                     target: param,
                     targetIndex: k,
-                })
+                });
             }
         }
         
@@ -658,7 +660,7 @@ export class Helper {
                         parent: op.requests[m].parameters,
                         target: param,
                         targetIndex: k,
-                    })
+                    });
                 }
             }
         }

@@ -1,18 +1,17 @@
 import { Host, Session } from "@azure-tools/autorest-extension-base";
-import { CodeModel, Request, Operation, Parameter } from "@azure-tools/codemodel";
-import { isNullOrUndefined } from "util";
+import { CodeModel, Operation } from "@azure-tools/codemodel";
 import { Helper } from "../helper";
 import { CliConst, CliCommonSchema } from "../schema";
-import { NodeHelper, NodeCliHelper, NodeExtensionHelper } from "../nodeHelper";
+import { NodeCliHelper, NodeExtensionHelper } from "../nodeHelper";
 import { Modifier } from "./modifier/modifier";
 import { CopyHelper } from "../copyHelper";
 
 export class SplitOperation{
 
-    constructor(protected session: Session<CodeModel>){
+    constructor(protected session: Session<CodeModel>) {
     }
 
-    public async process() {
+    public async process(): Promise<void> {
 
         await this.modifier();
 
@@ -43,7 +42,7 @@ export class SplitOperation{
         }
     }
 
-    private async modifier() {
+    private async modifier(): Promise<void> {
         const directives = (await this.session.getValue(CliConst.CLI_DIRECTIVE_KEY, []))
             .filter((dir) => dir[NodeCliHelper.SPLIT_OPERATION_NAMES])
             .map((dir) => this.copyDirective(dir,NodeCliHelper.SPLIT_OPERATION_NAMES));
@@ -83,13 +82,13 @@ export class SplitOperation{
         const copy: CliCommonSchema.CliDirective.Directive = {
             select: src.select,
             where: CopyHelper.deepCopy(src.where),
-        }
+        };
         copy[prop] = src[prop];
         return copy;
     }
 }
 
-export async function processRequest(host: Host) {
+export async function processRequest(host: Host): Promise<void> {
 
     const session = await Helper.init(host);
     Helper.dumper.dumpCodeModel("split-operation-pre");

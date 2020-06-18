@@ -29,11 +29,11 @@ export class NodeCliHelper {
 
     private static readonly FLATTENED_NAMES = 'flattenedNames';
 
-    public static setCliDiscriminatorValue(node: ObjectSchema, value: string) {
-        return NodeCliHelper.setCliProperty(node, this.CLI_DISCRIMINATOR_VALUE, value);
+    public static setCliDiscriminatorValue(node: ObjectSchema, value: string): void {
+        NodeCliHelper.setCliProperty(node, this.CLI_DISCRIMINATOR_VALUE, value);
     }
 
-    public static getCliDiscriminatorValue(node: ObjectSchema) {
+    public static getCliDiscriminatorValue(node: ObjectSchema): string {
         return NodeCliHelper.getCliProperty(node, this.CLI_DISCRIMINATOR_VALUE, () => node.discriminatorValue);
     }
 
@@ -42,7 +42,7 @@ export class NodeCliHelper {
      * @param node
      * @param value
      */
-    public static setCliKey(node: M4Node, value: string) {
+    public static setCliKey(node: M4Node, value: string): void {
         NodeCliHelper.setCliProperty(node, NodeCliHelper.CLI_KEY, value);
     }
 
@@ -50,43 +50,39 @@ export class NodeCliHelper {
      * get node.language.cli.cliKey
      * @param node
      */
-    public static getCliKey(node: M4Node, defaultValue: string) {
+    public static getCliKey(node: M4Node, defaultValue: string): string {
         return isNullOrUndefined(node?.language[NodeCliHelper.CLI]) ? defaultValue : node.language[NodeCliHelper.CLI][NodeCliHelper.CLI_KEY];
     }
 
-    public static setCliName(node: M4Node, value: string) {
+    public static setCliName(node: M4Node, value: string): void {
         NodeCliHelper.setCliProperty(node, NodeCliHelper.NAME, value);
     }
 
-    public static getCliName(node: M4Node, defaultValue: string) {
+    public static getCliName(node: M4Node, defaultValue: string): string {
         return isNullOrUndefined(node?.language[NodeCliHelper.CLI]) ? defaultValue : node.language[NodeCliHelper.CLI][NodeCliHelper.NAME];
     }
 
-    public static getDefaultNameWithType(node: ObjectSchema | DictionarySchema | ArraySchema) {
-        return `${node.language.default.name}(${node instanceof ObjectSchema ? node.type : node instanceof DictionarySchema ? (node.elementType.language.default.name + '^dictionary') : (node.elementType.language.default.name + '^array')})`;
-    }
-
-    public static setHidden(node: M4Node, value: boolean) {
+    public static setHidden(node: M4Node, value: boolean): void {
         NodeCliHelper.setCliProperty(node, NodeCliHelper.CLI_HIDDEN, value);
     }
 
-    public static getHidden(node: M4Node, defaultValue: boolean) {
+    public static getHidden(node: M4Node, defaultValue: boolean): boolean {
         return NodeCliHelper.getCliProperty(node, NodeCliHelper.CLI_HIDDEN, () => defaultValue);
     }
 
-    public static setRemoved(node: M4Node, value: boolean) {
+    public static setRemoved(node: M4Node, value: boolean): void {
         NodeCliHelper.setCliProperty(node, NodeCliHelper.CLI_REMOVED, value);
     }
 
-    public static getRemoved(node: M4Node, defaultValue: boolean) {
+    public static getRemoved(node: M4Node): boolean {
         return NodeCliHelper.getCliProperty(node, NodeCliHelper.CLI_REMOVED, () => false);
     }
 
-    public static getCliDescription(node: M4Node) {
+    public static getCliDescription(node: M4Node): string {
         return isNullOrUndefined(node.language[NodeCliHelper.CLI]) ? '' : node.language[NodeCliHelper.CLI][NodeCliHelper.DESCRIPTION];
     }
 
-    public static setCliOperationSplitted(op: Operation, value: boolean) {
+    public static setCliOperationSplitted(op: Operation, value: boolean): void {
         NodeCliHelper.setCliProperty(op, NodeCliHelper.CLI_OPERATION_SPLITTED, value);
     }
 
@@ -98,7 +94,7 @@ export class NodeCliHelper {
         return NodeCliHelper.getCliProperty(node, NodeCliHelper.SPLIT_OPERATION_NAMES, () => null);
     }
 
-    public static clearCliSplitOperationNames(node: Operation) {
+    public static clearCliSplitOperationNames(node: Operation): void {
         NodeCliHelper.clearCliProperty(node, NodeCliHelper.SPLIT_OPERATION_NAMES);
     }
 
@@ -110,11 +106,11 @@ export class NodeCliHelper {
         return NodeCliHelper.getCliProperty(param, NodeCliHelper.FLATTENED_NAMES, () => []);
     }
 
-    public static setCliFlattenedNames(param: Parameter, flattenedNames: string[]) {
+    public static setCliFlattenedNames(param: Parameter, flattenedNames: string[]): void {
         NodeCliHelper.setCliProperty(param, NodeCliHelper.FLATTENED_NAMES, flattenedNames);
     }
 
-    public static setPolyAsResource(node: Parameter, value: boolean) {
+    public static setPolyAsResource(node: Parameter, value: boolean): void {
         NodeCliHelper.setCliProperty(node, NodeCliHelper.POLY_RESOURCE, value);
     }
 
@@ -122,7 +118,7 @@ export class NodeCliHelper {
         return NodeCliHelper.getCliProperty(node, NodeCliHelper.POLY_RESOURCE, () => false);
     }
 
-    public static setPolyAsParamExpanded(param: Parameter, value: boolean) {
+    public static setPolyAsParamExpanded(param: Parameter, value: boolean): void {
         NodeCliHelper.setCliProperty(param, NodeCliHelper.POLY_AS_PARAM_EXPANDED, value);
     }
 
@@ -135,7 +131,7 @@ export class NodeCliHelper {
         return complexity;
     }
 
-    public static clearComplex(node: M4Node) {
+    public static clearComplex(node: M4Node): void {
         NodeCliHelper.clearCliProperty(node, NodeCliHelper.CLI_COMPLEXITY);
     }
 
@@ -143,7 +139,7 @@ export class NodeCliHelper {
         return NodeCliHelper.getCliProperty(node, NodeCliHelper.CLI_COMPLEXITY, () => undefined);
     }
 
-    public static setIsVisibleFlag(node: M4Node, visiblity: CliCommonSchema.CodeModel.Visibility) {
+    public static setIsVisibleFlag(node: M4Node, visiblity: CliCommonSchema.CodeModel.Visibility): void {
         NodeCliHelper.setCliProperty(node, NodeCliHelper.CLI_IS_VISIBLE, visiblity);
     }
 
@@ -157,6 +153,7 @@ export class NodeCliHelper {
      * @param key
      * @param value
      */
+    // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types, @typescript-eslint/no-explicit-any
     public static setCliProperty(node: M4Node, key: string, value: any): void {
         if (isNullOrUndefined(node.language[NodeCliHelper.CLI]))
             node.language[NodeCliHelper.CLI] = {};
@@ -168,6 +165,7 @@ export class NodeCliHelper {
             delete node.language[NodeCliHelper.CLI][key];
     }
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     public static getCliProperty(node: M4Node, propertyName: string, defaultWhenNotExist: () => any): any {
         if (isNullOrUndefined(node.language[NodeCliHelper.CLI])) {
             if (isNullOrUndefined(defaultWhenNotExist))
@@ -193,8 +191,8 @@ export class NodeCliHelper {
         return NodeCliHelper.getCliProperty(schema, NodeCliHelper.CLI_SIMPLIFIER_INDICATOR, () => undefined);
     }
 
-    public static clearSimplifyIndicator(schema: ObjectSchema) {
-        return NodeCliHelper.clearCliProperty(schema, NodeCliHelper.CLI_SIMPLIFIER_INDICATOR);
+    public static clearSimplifyIndicator(schema: ObjectSchema): void {
+        NodeCliHelper.clearCliProperty(schema, NodeCliHelper.CLI_SIMPLIFIER_INDICATOR);
     }
 
     public static setInCircle(schema: ObjectSchema | ArraySchema | DictionarySchema, inCircle: boolean): boolean {
@@ -206,8 +204,8 @@ export class NodeCliHelper {
         return NodeCliHelper.getCliProperty(schema, NodeCliHelper.CLI_IN_CIRCLE, () => undefined);
     }
 
-    public static clearInCircle(schema: ObjectSchema | ArraySchema | DictionarySchema) {
-        return NodeCliHelper.clearCliProperty(schema, NodeCliHelper.CLI_IN_CIRCLE);
+    public static clearInCircle(schema: ObjectSchema | ArraySchema | DictionarySchema): void {
+        NodeCliHelper.clearCliProperty(schema, NodeCliHelper.CLI_IN_CIRCLE);
     }
 
 
@@ -220,7 +218,7 @@ export class NodeCliHelper {
         return NodeCliHelper.getCliProperty(node, NodeCliHelper.CLI_MARK, () => undefined);
     }
 
-    public static clearMark(node: M4Node) {
+    public static clearMark(node: M4Node): void {
         NodeCliHelper.clearCliProperty(node, NodeCliHelper.CLI_MARK);
     }
 }
@@ -249,7 +247,7 @@ export class NodeExtensionHelper {
      * @param isFlatten
      * @param overwrite
      */
-    public static setFlatten(node: Extensions, isFlatten: boolean, overwrite: boolean) {
+    public static setFlatten(node: Extensions, isFlatten: boolean, overwrite: boolean): void {
         if (isNullOrUndefined(node.extensions))
             node.extensions = {};
         if (isNullOrUndefined(node.extensions[NodeExtensionHelper.FLATTEN_FLAG]) || overwrite) {
@@ -261,8 +259,8 @@ export class NodeExtensionHelper {
      *  check node.extensions['x-ms-client-flatten']
      * @param p
      */
-    public static isFlattened(p: Extensions) {
-        return !isNullOrUndefined(p.extensions) && p.extensions[NodeExtensionHelper.FLATTEN_FLAG] == true;
+    public static isFlattened(p: Extensions): boolean {
+        return !isNullOrUndefined(p.extensions) && p.extensions[NodeExtensionHelper.FLATTEN_FLAG] === true;
     }
 
     /**
@@ -270,13 +268,13 @@ export class NodeExtensionHelper {
      * possible value: true | false | undefined
      * @param p
      */
-    public static getFlattenedValue(p: Extensions) {
+    public static getFlattenedValue(p: Extensions): boolean | undefined {
         if (isNullOrUndefined(p.extensions) || isNullOrUndefined(p.extensions[NodeExtensionHelper.FLATTEN_FLAG]))
             return undefined;
         return p.extensions[NodeExtensionHelper.FLATTEN_FLAG];
     }
 
-    public static setCliFlattenOrigin(node: M4Node, ori: M4Node) {
+    public static setCliFlattenOrigin(node: M4Node, ori: M4Node): void {
         NodeExtensionHelper.setExtensionsProperty(node, NodeExtensionHelper.CLI_FLATTEN_ORIGIN, ori);
     }
 
@@ -284,7 +282,7 @@ export class NodeExtensionHelper {
         return NodeExtensionHelper.getExtensionsProperty(node, NodeExtensionHelper.CLI_FLATTEN_ORIGIN, () => null);
     }
 
-    public static setCliFlattenPrefix(node: M4Node, value: string) {
+    public static setCliFlattenPrefix(node: M4Node, value: string): void {
         NodeExtensionHelper.setExtensionsProperty(node, NodeExtensionHelper.CLI_FLATTEN_PREFIX, value);
     }
 
@@ -292,7 +290,7 @@ export class NodeExtensionHelper {
         return NodeExtensionHelper.getExtensionsProperty(param, NodeExtensionHelper.CLI_FLATTEN_PREFIX, () => null);
     }
 
-    public static setPolyAsResourceParam(op: Operation, polyParam: Parameter) {
+    public static setPolyAsResourceParam(op: Operation, polyParam: Parameter): void {
         NodeExtensionHelper.setExtensionsProperty(op, NodeExtensionHelper.POLY_AS_RESOURCE_SUBCLASS_PARAM, polyParam);
     }
 
@@ -300,7 +298,7 @@ export class NodeExtensionHelper {
         return NodeExtensionHelper.getExtensionsProperty(op, NodeExtensionHelper.POLY_AS_RESOURCE_SUBCLASS_PARAM, null);
     }
 
-    public static setPolyAsResourceBaseSchema(param: Parameter, base: Schema) {
+    public static setPolyAsResourceBaseSchema(param: Parameter, base: Schema): void {
         NodeExtensionHelper.setExtensionsProperty(param, NodeExtensionHelper.POLY_AS_RESOURCE_BASE_SCHEMA, base);
     }
 
@@ -308,7 +306,7 @@ export class NodeExtensionHelper {
         return NodeExtensionHelper.getExtensionsProperty(param, NodeExtensionHelper.POLY_AS_RESOURCE_BASE_SCHEMA, null);
     }
 
-    public static setPolyAsResourceOriginalOperation(op: Operation, ori: Operation) {
+    public static setPolyAsResourceOriginalOperation(op: Operation, ori: Operation): void {
         NodeExtensionHelper.setExtensionsProperty(op, NodeExtensionHelper.POLY_AS_RESOURCE_ORIGINAL_OPERATION, ori);
     }
 
@@ -316,7 +314,7 @@ export class NodeExtensionHelper {
         return NodeExtensionHelper.getExtensionsProperty(op, NodeExtensionHelper.POLY_AS_RESOURCE_ORIGINAL_OPERATION, null);
     }
 
-    public static setPolyAsResourceDiscriminatorValue(op: Operation, value: string) {
+    public static setPolyAsResourceDiscriminatorValue(op: Operation, value: string): void {
         NodeExtensionHelper.setExtensionsProperty(op, NodeExtensionHelper.POLY_AS_RESOURCE_DISCRIMINATOR_VALUE, value);
     }
 
@@ -324,7 +322,7 @@ export class NodeExtensionHelper {
         return NodeExtensionHelper.getExtensionsProperty(op, NodeExtensionHelper.POLY_AS_RESOURCE_DISCRIMINATOR_VALUE, null);
     }
 
-    public static setSplitOperationOriginalOperation(op: Operation, ori: Operation) {
+    public static setSplitOperationOriginalOperation(op: Operation, ori: Operation): void {
         NodeExtensionHelper.setExtensionsProperty(op, NodeExtensionHelper.SPLIT_OPERATION_ORIGINAL_OPERATION, ori);
     }
 
@@ -332,7 +330,7 @@ export class NodeExtensionHelper {
         return NodeExtensionHelper.getExtensionsProperty(op, NodeExtensionHelper.SPLIT_OPERATION_ORIGINAL_OPERATION, null);
     }
 
-    public static setPolyAsParamBaseSchema(param: Parameter, base: Schema) {
+    public static setPolyAsParamBaseSchema(param: Parameter, base: Schema): void {
         NodeExtensionHelper.setExtensionsProperty(param, NodeExtensionHelper.POLY_AS_PARAM_BASE_SCHEMA, base);
     }
 
@@ -340,7 +338,7 @@ export class NodeExtensionHelper {
         return NodeExtensionHelper.getExtensionsProperty(param, NodeExtensionHelper.POLY_AS_PARAM_BASE_SCHEMA, null);
     }
 
-    public static setPolyAsParamOriginalParam(param: Parameter, ori: Parameter) {
+    public static setPolyAsParamOriginalParam(param: Parameter, ori: Parameter): void {
         NodeExtensionHelper.setExtensionsProperty(param, NodeExtensionHelper.POLY_AS_PARAM_ORIGINIAL_PARAMETER, ori);
     }
 
@@ -348,7 +346,7 @@ export class NodeExtensionHelper {
         return NodeExtensionHelper.getExtensionsProperty(param, NodeExtensionHelper.POLY_AS_PARAM_ORIGINIAL_PARAMETER, null);
     }
 
-    public static setCliFlattened(node: M4Node, value: boolean) {
+    public static setCliFlattened(node: M4Node, value: boolean): void {
         NodeExtensionHelper.setExtensionsProperty(node, NodeExtensionHelper.CLI_FLATTENED, value);
     }
 
@@ -356,22 +354,24 @@ export class NodeExtensionHelper {
         return NodeExtensionHelper.getExtensionsProperty(node, NodeExtensionHelper.CLI_FLATTENED, () => false);
     }
 
-    public static addCliOperation(originalOperation: Operation, cliOperation: Operation) {
-        let v: Operation[] = NodeExtensionHelper.getExtensionsProperty(originalOperation, NodeExtensionHelper.CLI_OPERATIONS, () => []);
+    public static addCliOperation(originalOperation: Operation, cliOperation: Operation): void {
+        const v: Operation[] = NodeExtensionHelper.getExtensionsProperty(originalOperation, NodeExtensionHelper.CLI_OPERATIONS, () => []);
         v.push(cliOperation);
         NodeExtensionHelper.setExtensionsProperty(originalOperation, NodeExtensionHelper.CLI_OPERATIONS, v);
     }
 
-    public static getCliOperation(originalOperation: Operation, defaultValue: () => any): Operation[] {
+    public static getCliOperation(originalOperation: Operation, defaultValue: () => Operation[]): Operation[] {
         return NodeExtensionHelper.getExtensionsProperty(originalOperation, NodeExtensionHelper.CLI_OPERATIONS, defaultValue);
     }
 
+    // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types, @typescript-eslint/no-explicit-any
     public static setExtensionsProperty(node: M4Node, key: string, value: any): void {
         if (isNullOrUndefined(node.extensions))
             node.extensions = {};
         node.extensions[key] = value;
     }
 
+    // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types, @typescript-eslint/no-explicit-any
     public static getExtensionsProperty(node: M4Node, propertyName: string, defaultWhenNotExist: () => any): any {
         if (isNullOrUndefined(node.extensions)) {
             if (isNullOrUndefined(defaultWhenNotExist))
@@ -398,18 +398,18 @@ export class NodeHelper {
      * Check whether the obj has discriminator property
      * @param o
      */
-    public static HasSubClass(node: ObjectSchema) {
+    public static HasSubClass(node: ObjectSchema): boolean {
         return !isNullOrUndefined(node.discriminator);
     }
 
-    public static *getSubClasses(baseSchema: ObjectSchema, leafOnly: boolean) {
+    public static *getSubClasses(baseSchema: ObjectSchema, leafOnly: boolean): Generator<ObjectSchema, ObjectSchema[], unknown> {
 
-        let allSubs = baseSchema.discriminator?.all;
+        const allSubs = baseSchema.discriminator?.all;
         if (isNullOrUndefined(allSubs))
             return [];
 
-        for (let key in allSubs) {
-            let subClass = allSubs[key];
+        for (const key in allSubs) {
+            const subClass = allSubs[key];
             if (!(subClass instanceof ObjectSchema)) {
                 Helper.logWarning("subclass is not ObjectSchema: " + subClass.language.default.name);
                 continue;
@@ -422,7 +422,7 @@ export class NodeHelper {
         }
     }
 
-    public static setJson(node: M4Node, isJson: boolean, modifyFlatten: boolean) {
+    public static setJson(node: M4Node, isJson: boolean, modifyFlatten: boolean): void {
 
         if (modifyFlatten && isJson) {
             NodeExtensionHelper.setFlatten(node, false /*flatten*/, true /*overwrite flag*/);
@@ -430,11 +430,11 @@ export class NodeHelper {
         NodeCliHelper.setCliProperty(node, NodeHelper.JSON, isJson);
     }
 
-    public static getJson(node: M4Node) {
+    public static getJson(node: M4Node): boolean {
         return NodeCliHelper.getCliProperty(node, NodeHelper.JSON, () => false);
     }
 
-    public static getDefaultNameWithType(node: ObjectSchema | DictionarySchema | ArraySchema) {
+    public static getDefaultNameWithType(node: ObjectSchema | DictionarySchema | ArraySchema): string {
         return `${node.language.default.name}(${node instanceof ObjectSchema ? node.type : node instanceof DictionarySchema ? (node.elementType.language.default.name + '^dictionary') : (node.elementType.language.default.name + '^array')})`;
     }
 

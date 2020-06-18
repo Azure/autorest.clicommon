@@ -1,5 +1,5 @@
 import { Host, Session } from "@azure-tools/autorest-extension-base";
-import { CodeModel, Operation, Request, ObjectSchema, Parameter } from "@azure-tools/codemodel";
+import { CodeModel, Operation, Request, ObjectSchema } from "@azure-tools/codemodel";
 import { Helper } from "../helper";
 import { CliConst, CliCommonSchema } from "../schema";
 import { NodeHelper, NodeCliHelper, NodeExtensionHelper } from "../nodeHelper";
@@ -13,7 +13,7 @@ export class FlattenModifier {
     constructor(protected session: Session<CodeModel>){
     }
 
-    public async process(flattenEnabled: boolean, polyEnabled: boolean) {
+    public async process(flattenEnabled: boolean, polyEnabled: boolean): Promise<void> {
         await this.modifier();
 
         if (!flattenEnabled && !polyEnabled) {
@@ -27,9 +27,9 @@ export class FlattenModifier {
         }
     }
 
-    private async modifier() {
-        let directives = await this.session.getValue(CliConst.CLI_FLATTEN_DIRECTIVE_KEY, []);
-        let cliDirectives = await this.session.getValue(CliConst.CLI_DIRECTIVE_KEY, []);
+    private async modifier(): Promise<void> {
+        const directives = await this.session.getValue(CliConst.CLI_FLATTEN_DIRECTIVE_KEY, []);
+        const cliDirectives = await this.session.getValue(CliConst.CLI_DIRECTIVE_KEY, []);
 
         const flattenDirectives = [...directives, ...cliDirectives]
             .filter((dir) => dir[NodeCliHelper.CLI_FLATTEN])
@@ -48,7 +48,7 @@ export class FlattenModifier {
         const copy: CliCommonSchema.CliDirective.Directive = {
             select: src.select,
             where: CopyHelper.deepCopy(src.where),
-        }
+        };
         copy[NodeCliHelper.CLI_FLATTEN] = src[NodeCliHelper.CLI_FLATTEN];
         return copy;
     }
@@ -119,7 +119,7 @@ export class FlattenModifier {
             const clonedParam = CopyHelper.copyParameter(parameter);
             request.parameters[index] = clonedParam;
             
-            let path = isNullOrUndefined(clonedParam['targetProperty']) ? [] : [clonedParam['targetProperty']];
+            const path = isNullOrUndefined(clonedParam['targetProperty']) ? [] : [clonedParam['targetProperty']];
             // Use parameter's default name as perfix
             FlattenHelper.flattenParameter(request, clonedParam, path, `${clonedParam.language.default.name}`);
             
@@ -128,13 +128,13 @@ export class FlattenModifier {
         return false;
     }
 
-    private isCliOperation(desc: CliCommonSchema.CodeModel.NodeDescriptor) {
+    private isCliOperation(desc: CliCommonSchema.CodeModel.NodeDescriptor): boolean {
         // CliOperation is not in group.operations. So its index is equal or bigger than operation array(desc.parent)'s length
         return desc.targetIndex >= desc.parent.length;
     }
 }
 
-export async function processRequest(host: Host) {
+export async function processRequest(host: Host): Promise<void> {
 
     const session = await Helper.init(host);
     Helper.dumper.dumpCodeModel("flatten-pre");

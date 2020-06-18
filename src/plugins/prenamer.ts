@@ -1,17 +1,15 @@
-import { Host, Session, startSession } from "@azure-tools/autorest-extension-base";
-import { serialize } from "@azure-tools/codegen";
-import { CodeModel, codeModelSchema, Metadata, ObjectSchema, isObjectSchema, Property, Extensions, Scheme } from "@azure-tools/codemodel";
-import { isNullOrUndefined, isArray } from "util";
+import { Host, Session } from "@azure-tools/autorest-extension-base";
+import { CodeModel } from "@azure-tools/codemodel";
+import { isNullOrUndefined } from "util";
 import { Helper } from "../helper";
-import { CliConst, M4Node } from "../schema";
-import { NodeHelper, NodeCliHelper } from "../nodeHelper";
+import { NodeCliHelper } from "../nodeHelper";
 
 export class PreNamer{
 
-    constructor(protected session: Session<CodeModel>){
+    constructor(protected session: Session<CodeModel>) {
     }
 
-    public process() {
+    public process(): void {
         Helper.enumerateCodeModel(this.session.model, (n) => {
             if (!isNullOrUndefined(n.target.language.default.name))
                 NodeCliHelper.setCliKey(n.target, n.target.language.default.name);
@@ -19,12 +17,12 @@ export class PreNamer{
     }
 }
 
-export async function processRequest(host: Host) {
+export async function processRequest(host: Host): Promise<void> {
 
     const session = await Helper.init(host);
     Helper.dumper.dumpCodeModel("prename-pre");
 
-    let pn = new PreNamer(session);
+    const pn = new PreNamer(session);
     pn.process();
 
     Helper.dumper.dumpCodeModel("prename-post");
