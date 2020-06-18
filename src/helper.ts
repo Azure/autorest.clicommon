@@ -1,11 +1,10 @@
 import { codeModelSchema, ChoiceSchema, ChoiceValue, CodeModel, ObjectSchema, Operation, OperationGroup, Parameter, Property, SealedChoiceSchema, Schema, ConstantSchema, SchemaType, StringSchema } from "@azure-tools/codemodel";
-import { keys, values } from "@azure-tools/linq";
-import { isArray, isNull, isNullOrUndefined, isObject, isString, isUndefined } from "util";
+import { isArray, isNullOrUndefined, isString } from "util";
 import { CliConst, M4Node, M4NodeType, NamingType, CliCommonSchema } from "./schema";
 import { EnglishPluralizationService, guid } from '@azure-tools/codegen';
 import { Session, Host, startSession } from "@azure-tools/autorest-extension-base";
 import { serialize } from "@azure-tools/codegen";
-import { NodeHelper, NodeCliHelper, NodeExtensionHelper } from "./nodeHelper";
+import { NodeCliHelper, NodeExtensionHelper } from "./nodeHelper";
 import { Dumper } from "./dumper";
 
 export class Helper {
@@ -282,109 +281,6 @@ export class Helper {
                 throw Error("Only string or string array is supported for naming convention");
             }
         });
-    }
-
-    public static toYamlSimplified(codeModel: CodeModel): string {
-        const INDENT = '  ';
-        const NEW_LINE = '\n';
-        const initialIndent = 1;
-        const tab = (extra = 0) => INDENT.repeat(initialIndent + extra);
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        const formatValue = (o: any, i: number) => {
-            if (isString(o))
-                return o;
-            else if (isArray(o))
-                return o.map(v => NEW_LINE + tab(i) + "- " + formatValue(v, i + 2/* one more indent for array*/)).join('');
-            else if (o instanceof ObjectSchema)
-                return `<${(o as ObjectSchema).language.default.name}>`;
-            else if (o instanceof Operation)
-                return `<${(o as Operation).language.default.name}>`;
-            else if (isObject(o))
-                return keys(o).select(k => NEW_LINE + tab(i) + `${k}: ${formatValue(o[k], i + 1)}`).join('');
-            else
-                return isUndefined(o) ? '{undefined}' : isNull(o) ? '{null}' : o.toString();
-        };
-
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        const generateCliValue = (o: any, i: number) => o.language.default.name + `${isNullOrUndefined(o.schema) ? '' : ('(' + o.schema.language.default.name + '^' + o.schema.type + ')')}` +
-            (isNullOrUndefined(o.language.cli) ? '' : Object.getOwnPropertyNames(o.language.cli)
-                .filter(key => o.language.cli[key] !== o.language.default[key])
-                .reduce((pv, cv, ci) => pv.concat((ci === 0 ? (NEW_LINE + tab(i) + 'cli:') : '') +
-                    NEW_LINE + tab(i + 1) + `${cv}: ${formatValue(o.language.cli[cv], i + 2)}`), ''));
-
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        const generatePropertyFlattenValue = (o: any, i: number) => {
-            const v = NodeExtensionHelper.getFlattenedValue(o);
-            return (isNullOrUndefined(v)) ? '' : NEW_LINE + tab(i) + NodeExtensionHelper.FLATTEN_FLAG + ': ' + v;
-        };
-
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        const generatePropertyReadonlyValue = (o: any, i: number) => {
-            return (o['readOnly'] === true) ? (NEW_LINE + tab(i) + 'readOnly: true') : '';
-        };
-
-        const generateDiscriminatorValueForSchema = (o: Schema, i: number) => {
-            if (o instanceof ObjectSchema) {
-                const v = NodeHelper.HasSubClass(o);
-                return v ? NEW_LINE + tab(i) + NodeHelper.DISCRIMINATOR_FLAG + ': true' : '';
-            }
-            else {
-                return '';
-            }
-        };
-
-        const generateDiscriminatorValueForParam = (o: Parameter, i: number) => {
-            return generateDiscriminatorValueForSchema(o.schema, i);
-        };
-
-        let s = '';
-        s = s + `operationGroups:${NEW_LINE}` +
-            `${tab()}all:${NEW_LINE}`.concat(codeModel.operationGroups.map(
-                v => `${tab(1)}- operationGroupName: ${generateCliValue(v, 2)}` +
-                    `${NEW_LINE}${tab(2)}operations:${NEW_LINE}`.concat(
-                        values(v.operations).selectMany(op => [op].concat(NodeExtensionHelper.getCliOperation(op, () => []))).select(vv =>
-                            `${tab(2)}- operationName: ${generateCliValue(vv, 3)}` +
-                            (isNullOrUndefined(NodeExtensionHelper.getPolyAsResourceParam(vv)) ? '' : `${NEW_LINE}${tab(3)}cli-poly-as-resource-subclass-param: ${NodeCliHelper.getCliKey(NodeExtensionHelper.getPolyAsResourceParam(vv), '<missing-clikey>')}`) +
-                            (isNullOrUndefined(NodeExtensionHelper.getPolyAsResourceOriginalOperation(vv)) ? '' : `${NEW_LINE}${tab(3)}cli-poly-as-resource-original-operation: ${NodeCliHelper.getCliKey(NodeExtensionHelper.getPolyAsResourceOriginalOperation(vv), '<missing-clikey>')}`) +
-                            (isNullOrUndefined(NodeExtensionHelper.getPolyAsResourceDiscriminatorValue(vv)) ? '' : `${NEW_LINE}${tab(3)}cli-poly-as-resource-discriminator-value: ${NodeExtensionHelper.getPolyAsResourceDiscriminatorValue(vv)}`) +
-                            (isNullOrUndefined(NodeExtensionHelper.getSplitOperationOriginalOperation(vv)) ? '' : `${NEW_LINE}${tab(3)}cli-split-operation-original-operation: ${NodeCliHelper.getCliKey(NodeExtensionHelper.getSplitOperationOriginalOperation(vv), '<missing-clikey>')}`) +
-                            `${NEW_LINE}${tab(3)}parameters:${NEW_LINE}`.concat(
-                                vv.parameters.map(vvv => `${tab(3)}- parameterName: ${generateCliValue(vvv, 4)}${generatePropertyFlattenValue(vvv, 4)}${generatePropertyReadonlyValue(vvv, 4)}${generateDiscriminatorValueForParam(vvv, 4)}${NEW_LINE}` +
-                                    (isNullOrUndefined(NodeExtensionHelper.getPolyAsResourceBaseSchema(vvv)) ? '' : `${tab(4)}cli-poly-as-resource-base-schema: ${NodeCliHelper.getCliKey(NodeExtensionHelper.getPolyAsResourceBaseSchema(vvv), '<baseSchemaCliKeyMissing>')}${NEW_LINE}`) +
-                                    (isNullOrUndefined(NodeExtensionHelper.getPolyAsParamBaseSchema(vvv)) ? '' : `${tab(4)}cli-poly-as-param-base-schema: ${NodeCliHelper.getCliKey(NodeExtensionHelper.getPolyAsParamBaseSchema(vvv), '<baseSchemaCliKeyMissing>')}${NEW_LINE}`) +
-                                    (isNullOrUndefined(NodeExtensionHelper.getPolyAsParamOriginalParam(vvv)) ? '' : `${tab(4)}cli-poly-as-param-expanded: ${NodeCliHelper.getCliKey(NodeExtensionHelper.getPolyAsParamOriginalParam(vvv), '<oriParamCliKeyMissing>')}${NEW_LINE}`) +
-                                    (((!isNullOrUndefined(vvv.protocol?.http?.in)) && vvv.protocol.http.in === 'body')
-                                        ? `${tab(4)}bodySchema: ${vvv.schema.language.default.name}${NEW_LINE}` : '')).join('')) +
-                            vv.requests.map((req, index) =>
-                                isNullOrUndefined(req.parameters) ? '' :
-                                    req.parameters.map((vvv) => `${tab(3)}- parameterName[${index}]: ${generateCliValue(vvv, 4)}${generatePropertyFlattenValue(vvv, 4)}${generatePropertyReadonlyValue(vvv, 4)}${generateDiscriminatorValueForParam(vvv, 4)}${NEW_LINE}` +
-                                        (isNullOrUndefined(NodeExtensionHelper.getPolyAsResourceBaseSchema(vvv)) ? '' : `${tab(4)}cli-poly-as-resource-base-schema: ${NodeCliHelper.getCliKey(NodeExtensionHelper.getPolyAsResourceBaseSchema(vvv), '<baseSchemaCliKeyMissing>')}${NEW_LINE}`) +
-                                        (isNullOrUndefined(NodeExtensionHelper.getPolyAsParamBaseSchema(vvv)) ? '' : `${tab(4)}cli-poly-as-param-base-schema: ${NodeCliHelper.getCliKey(NodeExtensionHelper.getPolyAsParamBaseSchema(vvv), '<baseSchemaCliKeyMissing>')}${NEW_LINE}`) +
-                                        (isNullOrUndefined(NodeExtensionHelper.getPolyAsParamOriginalParam(vvv)) ? '' : `${tab(4)}cli-poly-as-param-expanded: ${NodeCliHelper.getCliKey(NodeExtensionHelper.getPolyAsParamOriginalParam(vvv), '<oriParamCliKeyMissing>')}${NEW_LINE}`) +
-                                        (!NodeExtensionHelper.isFlattened(vvv) ? '' : `${tab(4)}cli-flattened: true${NEW_LINE}`) +
-                                        (((!isNullOrUndefined(vvv.protocol?.http?.in)) && vvv.protocol.http.in === 'body')
-                                            ? `${tab(4)}bodySchema: ${vvv.schema.language.default.name}${NEW_LINE}` : '')).join(''))
-                        ).join(''))
-            ).join('')
-            );
-
-        s = s + `schemas:${NEW_LINE}` +
-            `${tab()}objects:${NEW_LINE}` +
-            `${tab(1)}all:${NEW_LINE}`.concat(codeModel.schemas.objects.map(
-                v => `${tab(2)}- schemaName: ${generateCliValue(v, 3)}` + generateDiscriminatorValueForSchema(v, 3) +
-                    `${NEW_LINE}${tab(3)}properties:${NEW_LINE}`.concat(
-                        isNullOrUndefined(v.properties) ? '' : v.properties.map(vv => `${tab(4)}- propertyName: ${generateCliValue(vv, 5)}${generatePropertyFlattenValue(vv, 5)}${generatePropertyReadonlyValue(vv, 5)} ${NEW_LINE}`)
-                            .join('')))
-                .join(''));
-        s = s + `${tab()}choices:${NEW_LINE}` +
-            `${tab(1)}all:${NEW_LINE}`.concat(
-                // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                [codeModel.schemas.choices ?? [], codeModel.schemas.sealedChoices ?? []].map((arr: any[]) => arr.map(
-                    v => `${tab(2)}- choiceName: ${generateCliValue(v, 3)}` +
-                        `${NEW_LINE}${tab(3)}choiceValues:${NEW_LINE}`.concat(
-                            isNullOrUndefined(v.choices) ? '' : v.choices.map(vv => `${tab(4)}- choiceValue: ${generateCliValue(vv, 5)}${NEW_LINE}`)
-                                .join(''))).join('')).join(''));
-        return s;
     }
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
