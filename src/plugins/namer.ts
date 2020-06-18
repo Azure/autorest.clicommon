@@ -25,7 +25,7 @@ export class CommonNamer {
         return this;
     }
 
-    public process(): void {
+    public process(): CodeModel {
         this.flag = new Set<Metadata>();
         this.applyNamingConvention(this.codeModel);
         this.processGlobalParam();
