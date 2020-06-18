@@ -8,7 +8,7 @@ import { Helper } from "../../helper";
 export class Modifier {
     private manager: CliDirectiveManager;
 
-    get codeModel() {
+    get codeModel(): CodeModel {
         return this.session.model;
     }
 
@@ -19,7 +19,7 @@ export class Modifier {
         if (isNullOrUndefined(directives))
             directives = [];
         if (!isNullOrUndefined(directives) && !Array.isArray(directives))
-            throw Error("directive is expected to be an array. Please check '-' is set property in yaml")
+            throw Error("directive is expected to be an array. Please check '-' is set property in yaml");
 
         this.manager = new CliDirectiveManager();
         await this.manager.LoadDirective(directives);
@@ -34,7 +34,7 @@ export class Modifier {
 
 }
 
-export async function processRequest(host: Host) {
+export async function processRequest(host: Host): Promise<void> {
     const session = await Helper.init(host);
 
     Helper.dumper.dumpCodeModel("modifier-pre");

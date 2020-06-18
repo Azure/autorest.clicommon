@@ -1,11 +1,11 @@
 import { getAllProperties, ImplementationLocation, ObjectSchema, Parameter, Property, Request, VirtualParameter } from "@azure-tools/codemodel";
 import { values } from "@azure-tools/linq";
 import { isNullOrUndefined } from "util";
-import { NodeHelper, NodeExtensionHelper, NodeCliHelper } from "./nodeHelper";
+import { NodeExtensionHelper, NodeCliHelper } from "./nodeHelper";
 
 export class FlattenHelper {
 
-    public static flattenParameter(req: Request, param: Parameter, path: Property[], prefix: string) {
+    public static flattenParameter(req: Request, param: Parameter, path: Property[], prefix: string): void {
         if (!(param.schema instanceof ObjectSchema))
             throw Error(`Try to flatten non-object schema: param = '${param.language.default.name}', schema= '${param.schema.language.default.name}'`);
 
@@ -33,9 +33,13 @@ export class FlattenHelper {
             targetProperty: property,
             pathToProperty: path
         });
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         delete (<any>vp).serializedName;
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         delete (<any>vp).readOnly;
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         delete (<any>vp).isDiscriminator;
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         delete (<any>vp).flattenedNames;
 
         vp.language = JSON.parse(JSON.stringify(vp.language));
@@ -53,7 +57,8 @@ export class FlattenHelper {
         NodeExtensionHelper.setCliFlattened(parameter, true);
 
         // we need this for the further flatten be recognized by python codegen
-        let protocal: any = {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const protocal: any = {
             http: {
                 in: 'body'
             },
@@ -61,7 +66,7 @@ export class FlattenHelper {
         };
         parameter.protocol = protocal;
 
-        let arr: Parameter[] = [];
+        const arr: Parameter[] = [];
         for (const property of values(getAllProperties(schema))) {
             if (property.readOnly) {
                 // skip read-only properties
@@ -76,11 +81,11 @@ export class FlattenHelper {
             }
         }
 
-        let arr2: Parameter[] = [];
-        let hash: Set<string> = new Set<string>();
+        const arr2: Parameter[] = [];
+        const hash: Set<string> = new Set<string>();
         // base class's property is before the subclass's
         for (let i = 0; i < arr.length; i++) {
-            let cur = arr[i];
+            const cur = arr[i];
             if (!hash.has(cur.language.default.name)) {
                 arr2.push(cur);
                 hash.add(cur.language.default.name);

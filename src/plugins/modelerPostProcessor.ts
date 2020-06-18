@@ -1,19 +1,15 @@
-import { Host, Session, startSession } from "@azure-tools/autorest-extension-base";
-import { serialize } from "@azure-tools/codegen";
-import { CodeModel, codeModelSchema, Metadata, ObjectSchema, isObjectSchema, Property, Extensions, Scheme } from "@azure-tools/codemodel";
-import { isNullOrUndefined, isArray } from "util";
+import { Host, Session } from "@azure-tools/autorest-extension-base";
+import { CodeModel } from "@azure-tools/codemodel";
+import { isNullOrUndefined } from "util";
 import { Helper } from "../helper";
 import { CopyHelper } from "../copyHelper";
-import { CliConst, M4Node } from "../schema";
-import { NodeHelper } from "../nodeHelper";
-import { normalize } from "path";
 
-export class ModelerPostProcessor{
+export class ModelerPostProcessor {
 
-    constructor(protected session: Session<CodeModel>){
+    constructor(protected session: Session<CodeModel>) {
     }
 
-    public process() {
+    public process(): void {
         Helper.enumerateCodeModel(this.session.model, (n) => {
 
             // In case cli is shared by multiple instances during modelerfour, do deep copy
@@ -24,12 +20,12 @@ export class ModelerPostProcessor{
     }
 }
 
-export async function processRequest(host: Host) {
+export async function processRequest(host: Host): Promise<void> {
 
     const session = await Helper.init(host);
     Helper.dumper.dumpCodeModel("modeler-post-processor-pre");
 
-    let pn = new ModelerPostProcessor(session);
+    const pn = new ModelerPostProcessor(session);
     pn.process();
 
     Helper.dumper.dumpCodeModel("modeler-post-processor-post");

@@ -6,30 +6,31 @@ export type M4NodeType = 'operationGroup' | 'operation' | 'parameter' | 'objectS
 export type LanguageType = 'cli' | 'default';
 export type M4Node = Metadata | ChoiceValue;
 
+// eslint-disable-next-line @typescript-eslint/no-namespace
 export namespace CliConst {
     // Todo: merge this into code model?
-    export const CLI_FORMATTABLE: string = "formatTable";
-    export const CLI_FORMATTABLE_PROPERTIES: string = "properties";
-    export const CLI_DIRECTIVE: string = "cli-directive";
-    export const CLI_DIRECTIVE_KEY: string = 'cli.cli-directive';
+    export const CLI_FORMATTABLE = "formatTable";
+    export const CLI_FORMATTABLE_PROPERTIES = "properties";
+    export const CLI_DIRECTIVE = "cli-directive";
+    export const CLI_DIRECTIVE_KEY = 'cli.cli-directive';
 
-    export const CLI_FLATTEN_DIRECTIVE_KEY: string = "cli.flatten.cli-flatten-directive";
-    export const CLI_FLATTEN_SET_ENABLED_KEY: string = 'cli.flatten.cli-flatten-set-enabled';
-    export const CLI_FLATTEN_SET_FLATTEN_ALL_KEY: string = 'cli.flatten.cli-flatten-all';
-    export const CLI_FLATTEN_SET_FLATTEN_SCHEMA_KEY: string = 'cli.flatten.cli-flatten-schema';
-    export const CLI_FLATTEN_SET_FLATTEN_PAYLOAD_KEY: string = 'cli.flatten.cli-flatten-payload';
-    export const CLI_FLATTEN_SET_FLATTEN_PAYLOAD_MAX_PROP_KEY: string = 'cli.flatten.cli-flatten-payload-max-prop';
-    export const CLI_FLATTEN_SET_FLATTEN_PAYLOAD_MAX_COMPLEXITY_KEY: string = 'cli.flatten.cli-flatten-payload-max-complexity';
-    export const CLI_FLATTEN_SET_FLATTEN_PAYLOAD_MAX_LEVEL_KEY: string = 'cli.flatten.cli-flatten-payload-max-level';
-    export const CLI_FLATTEN_SET_FLATTEN_PAYLOAD_MAX_ARRAY_OBJECT_PROP_KEY: string = 'cli.flatten.cli-flatten-payload-max-array-object-prop-count';
-    export const CLI_FLATTEN_SET_FLATTEN_PAYLOAD_MAX_POLY_AS_RESOURCE_PROP_KEY: string = 'cli.flatten.cli-flatten-payload-max-poly-as-resource-prop-count';
-    export const CLI_FLATTEN_SET_FLATTEN_PAYLOAD_MAX_POLY_AS_PARAM_PROP_KEY: string = 'cli.flatten.cli-flatten-payload-max-poly-as-param-prop-count';
-    export const CLI_FLATTEN_SET_FLATTEN_ALL_OVERWRITE_SWAGGER_KEY: string = 'cli.flatten.cli-flatten-all-overwrite-swagger';
+    export const CLI_FLATTEN_DIRECTIVE_KEY = "cli.flatten.cli-flatten-directive";
+    export const CLI_FLATTEN_SET_ENABLED_KEY = 'cli.flatten.cli-flatten-set-enabled';
+    export const CLI_FLATTEN_SET_FLATTEN_ALL_KEY = 'cli.flatten.cli-flatten-all';
+    export const CLI_FLATTEN_SET_FLATTEN_SCHEMA_KEY = 'cli.flatten.cli-flatten-schema';
+    export const CLI_FLATTEN_SET_FLATTEN_PAYLOAD_KEY = 'cli.flatten.cli-flatten-payload';
+    export const CLI_FLATTEN_SET_FLATTEN_PAYLOAD_MAX_PROP_KEY = 'cli.flatten.cli-flatten-payload-max-prop';
+    export const CLI_FLATTEN_SET_FLATTEN_PAYLOAD_MAX_COMPLEXITY_KEY = 'cli.flatten.cli-flatten-payload-max-complexity';
+    export const CLI_FLATTEN_SET_FLATTEN_PAYLOAD_MAX_LEVEL_KEY = 'cli.flatten.cli-flatten-payload-max-level';
+    export const CLI_FLATTEN_SET_FLATTEN_PAYLOAD_MAX_ARRAY_OBJECT_PROP_KEY = 'cli.flatten.cli-flatten-payload-max-array-object-prop-count';
+    export const CLI_FLATTEN_SET_FLATTEN_PAYLOAD_MAX_POLY_AS_RESOURCE_PROP_KEY = 'cli.flatten.cli-flatten-payload-max-poly-as-resource-prop-count';
+    export const CLI_FLATTEN_SET_FLATTEN_PAYLOAD_MAX_POLY_AS_PARAM_PROP_KEY = 'cli.flatten.cli-flatten-payload-max-poly-as-param-prop-count';
+    export const CLI_FLATTEN_SET_FLATTEN_ALL_OVERWRITE_SWAGGER_KEY = 'cli.flatten.cli-flatten-all-overwrite-swagger';
 
-    export const CLI_POLYMORPHISM_EXPAND_AS_RESOURCE_KEY: string = 'cli.polymorphism.expand-as-resource';
+    export const CLI_POLYMORPHISM_EXPAND_AS_RESOURCE_KEY = 'cli.polymorphism.expand-as-resource';
 
-    export const CLI_SPLIT_OPERATION_ENABLED_KEY: string = 'cli.split-operation.cli-split-operation-enabled';
-    export const CLI_SPLIT_OPERATION_EXTEND_POLY_RESOURCE_KEY: string = 'cli.split-operation.cli-split-operation-extend-poly-resource';
+    export const CLI_SPLIT_OPERATION_ENABLED_KEY = 'cli.split-operation.cli-split-operation-enabled';
+    export const CLI_SPLIT_OPERATION_EXTEND_POLY_RESOURCE_KEY = 'cli.split-operation.cli-split-operation-extend-poly-resource';
 
     export const DEFAULT_OPERATION_PARAMETER_INDEX = -1;
 
@@ -46,7 +47,7 @@ export namespace CliConst {
         static readonly space = "space";
         /** UPPER_CASE */
         static readonly upper = "upper";
-    };
+    }
 
     export class NamingType {
         static readonly parameter = 'parameter';
@@ -71,8 +72,10 @@ export namespace CliConst {
     }
 }
 
+// eslint-disable-next-line @typescript-eslint/no-namespace
 export namespace CliCommonSchema {
 
+    // eslint-disable-next-line @typescript-eslint/no-namespace
     export namespace CliDirective {
 
         export interface LogClause {
@@ -81,9 +84,11 @@ export namespace CliCommonSchema {
             logLevel?: string;
         }
 
+        // eslint-disable-next-line @typescript-eslint/no-empty-interface
         export interface SetClause {
         }
 
+        // eslint-disable-next-line @typescript-eslint/no-empty-interface
         export interface ValueClause {
         }
 
@@ -140,6 +145,7 @@ export namespace CliCommonSchema {
         appliedTo?: string[]
         singularize?: NamingType[]
         glossary?: string[]
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         override?: any
         parameter?: NamingStyle
         operation?: NamingStyle
@@ -150,6 +156,7 @@ export namespace CliCommonSchema {
         choiceValue?: NamingStyle
     }
 
+    // eslint-disable-next-line @typescript-eslint/no-namespace
     export namespace CodeModel {
         export enum NodeTypeFlag {
             operationGroup = 1,
@@ -201,6 +208,7 @@ export namespace CliCommonSchema {
             propertyCliKey?: string;
             choiceSchemaCliKey?: string;
             choiceValueCliKey?: string;
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             parent: any;
             target: M4Node;
             /** set to -1 if the parent is not an array */

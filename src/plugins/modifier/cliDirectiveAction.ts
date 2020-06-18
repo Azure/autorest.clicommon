@@ -1,21 +1,24 @@
-import { Session } from "@azure-tools/autorest-extension-base";
-import { CodeModel } from "@azure-tools/codemodel";
 import { isNullOrUndefined, isArray } from "util";
-import { Helper } from "../../helper";
-import { CliCommonSchema, CliConst, M4Node } from "../../schema";
+import { CliCommonSchema, CliConst } from "../../schema";
 import { NodeHelper, NodeCliHelper, NodeExtensionHelper } from "../../nodeHelper";
 
-export abstract class Action {
-    constructor() {
+
+function validateDirective(directive: CliCommonSchema.CliDirective.Directive | string, name: string): void {
+    if (isNullOrUndefined(directive)) {
+        throw Error(`Validation failed: '${name}' is null or undefined`);
     }
+}
+
+export abstract class Action {
+
     public abstract process(node: CliCommonSchema.CodeModel.NodeDescriptor): void;
 
     public static async buildActionList(directive: CliCommonSchema.CliDirective.Directive): Promise<Action[]> {
-        Helper.validateNullOrUndefined(directive, 'directive');
-        var arr: Action[] = [];
+        validateDirective(directive, 'directive');
+        const arr: Action[] = [];
 
-        for (var key in directive) {
-            var value = directive[key];
+        for (let key in directive) {
+            const value = directive[key];
             if (isNullOrUndefined(value))
                 continue;
 
@@ -45,7 +48,7 @@ export abstract class Action {
                 case 'alias':
                 case 'description':
                 case 'default-value':
-                    arr.push(new ActionSetProperty(value, key, () => { throw Error(`${key} missing in directive`) }))
+                    arr.push(new ActionSetProperty(value, key, () => { throw Error(`${key} missing in directive`); }));
                     break;
                 case 'replace':
                     arr.push(new ActionReplace(value));
@@ -79,6 +82,7 @@ export class ActionHitCount extends Action {
         super();
     }
 
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     public process(descriptor: CliCommonSchema.CodeModel.NodeDescriptor): void {
         ActionHitCount.hitCount++;
     }
@@ -91,8 +95,8 @@ export class ActionJson extends Action {
     }
 
     public process(descriptor: CliCommonSchema.CodeModel.NodeDescriptor): void {
-        let node = descriptor.target;
-        NodeHelper.setJson(node, this.directiveValue === true, true /*modify flatten*/)
+        const node = descriptor.target;
+        NodeHelper.setJson(node, this.directiveValue === true, true /*modify flatten*/);
     }
 }
 
@@ -103,19 +107,20 @@ export class ActionFlatten extends Action {
     }
 
     public process(descriptor: CliCommonSchema.CodeModel.NodeDescriptor): void {
-        let node = descriptor.target;
-        NodeExtensionHelper.setFlatten(node, this.directiveValue === true, true /*overwrite*/)
+        const node = descriptor.target;
+        NodeExtensionHelper.setFlatten(node, this.directiveValue === true, true /*overwrite*/);
     }
 }
 
 export class ActionSetProperty extends Action {
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     constructor(private directiveValue: CliCommonSchema.CliDirective.ValueClause, private propertyName: string, private getDefault: () => any) {
         super();
     }
 
     public process(descriptor: CliCommonSchema.CodeModel.NodeDescriptor): void {
-        let node = descriptor.target;
+        const node = descriptor.target;
         NodeCliHelper.setCliProperty(node, this.propertyName, this.directiveValue ?? this.getDefault());
     }
 }
@@ -143,9 +148,9 @@ export class ActionSet extends Action {
     }
 
     public process(descriptor: CliCommonSchema.CodeModel.NodeDescriptor): void {
-        let node = descriptor.target;
-        for (var key in this.directiveSet) {
-            let value = this.directiveSet[key];
+        const node = descriptor.target;
+        for (const key in this.directiveSet) {
+            const value = this.directiveSet[key];
             NodeCliHelper.setCliProperty(node, key, value);
         }
     }
@@ -158,7 +163,7 @@ export class ActionFormatTable extends Action {
     }
 
     public process(descriptor: CliCommonSchema.CodeModel.NodeDescriptor): void {
-        let node = descriptor.target;
+        const node = descriptor.target;
         if (!isNullOrUndefined(this.directiveFormatTable.properties)) {
             NodeCliHelper.setCliProperty(node, CliConst.CLI_FORMATTABLE, {
                 [CliConst.CLI_FORMATTABLE_PROPERTIES]: this.directiveFormatTable.properties
@@ -173,17 +178,17 @@ export class ActionReplace extends Action {
     }
 
     public process(descriptor: CliCommonSchema.CodeModel.NodeDescriptor): void {
-        let node = descriptor.target;
-        Helper.validateNullOrUndefined(this.actionReplace.field, 'field');
-        Helper.validateNullOrUndefined(this.actionReplace.old, 'old');
-        Helper.validateNullOrUndefined(this.actionReplace.new, 'new');
+        const node = descriptor.target;
+        validateDirective(this.actionReplace.field, 'field');
+        validateDirective(this.actionReplace.old, 'old');
+        validateDirective(this.actionReplace.new, 'new');
 
-        var original: string = node.language.default[this.actionReplace.field].toString();
+        const original: string = node.language.default[this.actionReplace.field].toString();
         if (isNullOrUndefined(this.actionReplace.isRegex) || this.actionReplace.isRegex == false) {
             NodeCliHelper.setCliProperty(node, this.actionReplace.field, original.replace(this.actionReplace.old, this.actionReplace.new));
         }
         else {
-            var regex = new RegExp(this.actionReplace.old);
+            const regex = new RegExp(this.actionReplace.old);
             NodeCliHelper.setCliProperty(node, this.actionReplace.field, original.replace(regex, this.actionReplace.new));
         }
     }

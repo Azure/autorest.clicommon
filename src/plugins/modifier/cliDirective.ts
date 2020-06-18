@@ -1,8 +1,6 @@
-import { NodeSelector } from "./cliDirectiveSelector"
-import { Action } from "./cliDirectiveAction"
-import { CliCommonSchema, CliConst } from "../../schema"
-import { CodeModel, } from "@azure-tools/codemodel";
-import { Session, } from "@azure-tools/autorest-extension-base";
+import { NodeSelector } from "./cliDirectiveSelector";
+import { Action } from "./cliDirectiveAction";
+import { CliCommonSchema } from "../../schema";
 import { isNullOrUndefined } from "util";
 
 class CliDirective {
@@ -21,7 +19,7 @@ class CliDirective {
 
     process(descriptor: CliCommonSchema.CodeModel.NodeDescriptor): void {
         if (this.selector.match(descriptor)) {
-            for (var action of this.actions) {
+            for (const action of this.actions) {
                 action.process(descriptor);
             }
         }
@@ -31,13 +29,13 @@ class CliDirective {
 export class CliDirectiveManager {
     private directives: CliDirective[] = [];
 
-    public async LoadDirective(directives: CliCommonSchema.CliDirective.Directive[]) {
+    public async LoadDirective(directives: CliCommonSchema.CliDirective.Directive[]): Promise<void> {
 
         this.directives = isNullOrUndefined(directives) ? [] : await Promise.all(directives.map(async v => new CliDirective(v).init()));
     }
 
-    public process(descripter: CliCommonSchema.CodeModel.NodeDescriptor) {
-        for (var d of this.directives)
+    public process(descripter: CliCommonSchema.CodeModel.NodeDescriptor): void {
+        for (const d of this.directives)
             d.process(descripter);
     }
 }
