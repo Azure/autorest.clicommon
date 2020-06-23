@@ -94,7 +94,7 @@ modelerfour:
     # group-parameters: true
     # flatten-models: true
     # flatten-payloads: true    
-    # lenient-model-deduplication: true
+    lenient-model-deduplication: true
 
     # standardize to snake in modelerfour for selecting and formatting in clicommon
     # further naming will be done in clicommon to corresonding convention

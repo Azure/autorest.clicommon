@@ -32,6 +32,7 @@
     "author": "Microsoft Corporation",
     "license": "MIT",
     "devDependencies": {
+        "autorest": "^3.0.6187",
         "@types/chai": "^4.2.10",
         "@types/js-yaml": "3.12.1",
         "@types/mocha": "^7.0.2",
@@ -60,6 +61,7 @@
         "@azure-tools/codegen": "^2.5.276",
         "@azure-tools/codemodel": "4.13.325",
         "@azure-tools/linq": "^3.1.232",
+        "@azure-tools/async-io": "^3.0.209",
         "node-yaml": "^4.0.1",
         "js-yaml": "^3.14.0"
     },

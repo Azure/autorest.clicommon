@@ -1,0 +1,93 @@
+FactoryListResponse<2>
+Resource<6>
+Factory<2>(identity:FactoryIdentity)[properties] -> FactoryProperties<6>(repoConfiguration*:FactoryRepoConfiguration, fakeIdentity:FakeFactoryIdentity)
+FactoryIdentity<3>
+FactoryRepoConfiguration<6>*
+FakeFactoryIdentity<2>
+CloudError<1>[error] -> CloudErrorBody<4>
+FactoryRepoUpdate<2>(repoConfiguration*:FactoryRepoConfiguration)
+FactoryUpdateParameters<2>(identity:FactoryIdentity)
+GitHubAccessTokenRequest<3>
+GitHubAccessTokenResponse<1>
+UserAccessPolicy<5>
+AccessPolicyResponse<3>(policy:UserAccessPolicy)
+TriggerListResponse<2>
+SubResource<4>
+TriggerResource<1>(properties*:Trigger)
+Trigger<4>*
+TriggerFilterParameters<2>
+TriggerQueryResponse<2>
+TriggerSubscriptionOperationStatus<2>
+IntegrationRuntimeListResponse<2>
+IntegrationRuntimeResource<1>(properties*:IntegrationRuntime)
+IntegrationRuntime<2>*
+UpdateIntegrationRuntimeRequest<2>
+IntegrationRuntimeStatusResponse<2>(properties*:IntegrationRuntimeStatus)
+IntegrationRuntimeStatus<3>*
+IntegrationRuntimeConnectionInfo<6>
+IntegrationRuntimeRegenerateKeyParameters<1>
+IntegrationRuntimeAuthKeys<2>
+IntegrationRuntimeMonitoringData<2>
+IntegrationRuntimeNodeMonitoringData<8>
+LinkedIntegrationRuntimeRequest<1>
+CreateLinkedIntegrationRuntimeRequest<4>
+FactoryVSTSConfiguration<2>
+FactoryGitHubConfiguration<1>
+MultiplePipelineTrigger<1>*
+TriggerPipelineReference<2>(pipelineReference:PipelineReference)
+PipelineReference<3>
+ScheduleTrigger<1>[typeProperties] -> ScheduleTrigger-typeProperties<1>(recurrence:ScheduleTriggerRecurrence)
+ScheduleTriggerRecurrence<6>(schedule:RecurrenceSchedule)
+RecurrenceSchedule<5>
+RecurrenceScheduleOccurrence<2>
+BlobTrigger<1>[typeProperties] -> BlobTrigger-typeProperties<3>(linkedService:LinkedServiceReference)
+LinkedServiceReference<3>
+BlobEventsTrigger<1>[typeProperties] -> BlobEventsTrigger-typeProperties<5>
+TumblingWindowTrigger<2>(pipeline:TriggerPipelineReference)[typeProperties] -> TumblingWindowTrigger-typeProperties<8>(retryPolicy:RetryPolicy)
+RetryPolicy<2>
+DependencyReference<1>*
+TriggerReference<2>
+TriggerDependencyReference<1>*(referenceTrigger:TriggerReference)
+TumblingWindowTriggerDependencyReference<2>
+SelfDependencyTumblingWindowTriggerReference<2>
+RerunTumblingWindowTrigger<1>[typeProperties] -> RerunTumblingWindowTrigger-typeProperties<4>
+ChainingTrigger<2>(pipeline:TriggerPipelineReference)[typeProperties] -> ChainingTrigger-typeProperties<2>
+IntegrationRuntimeReference<3>
+IntegrationRuntimeStatusListResponse<2>
+ManagedIntegrationRuntime<5>(repoConfiguration*:FactoryRepoConfiguration, fakeIdentity:FakeFactoryIdentity)[typeProperties] -> ManagedIntegrationRuntimeTypeProperties<2>(computeProperties:IntegrationRuntimeComputeProperties, ssisProperties:IntegrationRuntimeSsisProperties)
+IntegrationRuntimeComputeProperties<6>(dataFlowProperties:IntegrationRuntimeDataFlowProperties, vNetProperties:IntegrationRuntimeVNetProperties)
+IntegrationRuntimeDataFlowProperties<3>
+IntegrationRuntimeVNetProperties<3>
+IntegrationRuntimeSsisProperties<7>(catalogInfo:IntegrationRuntimeSsisCatalogInfo, customSetupScriptProperties:IntegrationRuntimeCustomSetupScriptProperties, dataProxyProperties:IntegrationRuntimeDataProxyProperties)
+IntegrationRuntimeSsisCatalogInfo<4>(catalogAdminPassword:SecureString)
+SecretBase<1>*
+SecureString<1>
+IntegrationRuntimeCustomSetupScriptProperties<2>(sasToken:SecureString)
+IntegrationRuntimeDataProxyProperties<3>(connectVia:EntityReference, stagingLinkedService:EntityReference)
+EntityReference<2>
+CustomSetupBase<1>*
+PackageStore<2>(packageStoreLinkedService:EntityReference)
+CmdkeySetup<1>[typeProperties] -> CmdkeySetupTypeProperties<3>(password*:SecretBase)
+EnvironmentVariableSetup<1>[typeProperties] -> EnvironmentVariableSetupTypeProperties<2>
+ComponentSetup<1>[typeProperties] -> LicensedComponentSetupTypeProperties<2>(licenseKey*:SecretBase)
+SelfHostedIntegrationRuntime<1>[typeProperties] -> SelfHostedIntegrationRuntimeTypeProperties<1>(linkedInfo*:LinkedIntegrationRuntimeType)
+LinkedIntegrationRuntimeType<1>*
+LinkedIntegrationRuntimeKeyAuthorization<1>(key:SecureString)
+LinkedIntegrationRuntimeRbacAuthorization<1>
+ManagedIntegrationRuntimeStatus<1>[typeProperties] -> ManagedIntegrationRuntimeStatusTypeProperties<4>(lastOperation:ManagedIntegrationRuntimeOperationResult)
+ManagedIntegrationRuntimeNode<3>
+ManagedIntegrationRuntimeError<4>
+ManagedIntegrationRuntimeOperationResult<6>
+SelfHostedIntegrationRuntimeStatus<1>[typeProperties] -> SelfHostedIntegrationRuntimeStatusTypeProperties<16>
+SelfHostedIntegrationRuntimeNode<18>
+LinkedIntegrationRuntime<5>
+IntegrationRuntimeNodeIpAddress<1>
+SsisObjectMetadataListResponse<2>
+SsisObjectMetadata<4>*
+SsisFolder<0>
+SsisProject<4>
+SsisEnvironmentReference<4>
+SsisParameter<12>
+SsisPackage<4>
+SsisEnvironment<2>
+SsisVariable<7>
