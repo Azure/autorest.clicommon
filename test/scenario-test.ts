@@ -52,7 +52,7 @@ describe("Scenario test", function () {
 });
 
 async function runCli(directory: string) {
-    let cmd = `${__dirname}/../node_modules/.bin/autorest --version=3.0.6271 --use=${__dirname}/../ ${directory}/configuration/readme.md --output-folder=${directory}/tmpoutput/ --debug`;
+    let cmd = `${__dirname}/../node_modules/.bin/autorest --version=3.0.6271 --use=${__dirname}/../ ${directory}/configuration/readme.md --output-folder=${directory}/tmpoutput/ --debug --cli`;
     console.log(cmd);
     return await new Promise<boolean>((resolve, reject) => {
         exec(cmd, function (error) {

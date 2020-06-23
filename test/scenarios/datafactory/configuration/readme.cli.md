@@ -5,6 +5,8 @@ These settings don't need to apply `--cli` on the command line.
 ``` yaml $(cli)
 cli:
   cli-name: datafactory
+  flatten:
+    cli-flatten-set-enabled: true
   test-scenario:
     - name: /Factories/put/Factories_CreateOrUpdate
     - name: /Factories/get/Factories_Get

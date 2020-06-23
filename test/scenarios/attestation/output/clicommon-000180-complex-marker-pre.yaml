@@ -2,13 +2,16 @@ info:
   description: Various APIs for managing resources in attestation service. This primarily encompasses per-tenant instance management.
   title: AttestationManagementClient
   extensions:
-    cli-dump-index: 80
+    cli-dump-index: 180
 schemas:
   strings:
     - &ref_0
       type: string
       language:
         default:
+          name: string
+          description: simple string
+        cli:
           name: string
           description: simple string
       protocol: {}
@@ -20,6 +23,9 @@ schemas:
         default:
           name: operations_definition_name
           description: Name of the operation.
+        cli:
+          name: operations_definition_name
+          description: Name of the operation.
       protocol: {}
     - &ref_3
       type: string
@@ -27,6 +33,9 @@ schemas:
         - version: 2018-09-01-preview
       language:
         default:
+          name: operations_display_definition_provider
+          description: Resource provider of the operation.
+        cli:
           name: operations_display_definition_provider
           description: Resource provider of the operation.
       protocol: {}
@@ -38,6 +47,9 @@ schemas:
         default:
           name: operations_display_definition_resource
           description: Resource for the operation.
+        cli:
+          name: operations_display_definition_resource
+          description: Resource for the operation.
       protocol: {}
     - &ref_5
       type: string
@@ -45,6 +57,9 @@ schemas:
         - version: 2018-09-01-preview
       language:
         default:
+          name: operations_display_definition_operation
+          description: Short description of the operation.
+        cli:
           name: operations_display_definition_operation
           description: Short description of the operation.
       protocol: {}
@@ -56,6 +71,9 @@ schemas:
         default:
           name: operations_display_definition_description
           description: Description of the operation.
+        cli:
+          name: operations_display_definition_description
+          description: Description of the operation.
       protocol: {}
     - &ref_9
       type: string
@@ -63,6 +81,9 @@ schemas:
         - version: 2018-09-01-preview
       language:
         default:
+          name: cloud_error_body_code
+          description: An identifier for the error. Codes are invariant and are intended to be consumed programmatically.
+        cli:
           name: cloud_error_body_code
           description: An identifier for the error. Codes are invariant and are intended to be consumed programmatically.
       protocol: {}
@@ -74,6 +95,9 @@ schemas:
         default:
           name: cloud_error_body_message
           description: 'A message describing the error, intended to be suitable for displaying in a user interface.'
+        cli:
+          name: cloud_error_body_message
+          description: 'A message describing the error, intended to be suitable for displaying in a user interface.'
       protocol: {}
     - &ref_52
       type: string
@@ -82,6 +106,9 @@ schemas:
       minLength: 1
       language:
         default:
+          name: string
+          description: ''
+        cli:
           name: string
           description: ''
       protocol: {}
@@ -96,6 +123,9 @@ schemas:
         default:
           name: string
           description: ''
+        cli:
+          name: string
+          description: ''
       protocol: {}
     - &ref_1
       type: string
@@ -103,6 +133,9 @@ schemas:
         - version: 2018-09-01-preview
       language:
         default:
+          name: string
+          description: ''
+        cli:
           name: string
           description: ''
       protocol: {}
@@ -114,6 +147,9 @@ schemas:
         default:
           name: resource_id
           description: 'Fully qualified resource Id for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}'
+        cli:
+          name: resource_id
+          description: 'Fully qualified resource Id for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}'
       protocol: {}
     - &ref_21
       type: string
@@ -123,6 +159,9 @@ schemas:
         default:
           name: resource_name
           description: The name of the resource
+        cli:
+          name: resource_name
+          description: The name of the resource
       protocol: {}
     - &ref_22
       type: string
@@ -130,6 +169,9 @@ schemas:
         - version: 2018-09-01-preview
       language:
         default:
+          name: resource_type
+          description: The type of the resource. Ex- Microsoft.Compute/virtualMachines or Microsoft.Storage/storageAccounts.
+        cli:
           name: resource_type
           description: The type of the resource. Ex- Microsoft.Compute/virtualMachines or Microsoft.Storage/storageAccounts.
       protocol: {}
@@ -145,6 +187,9 @@ schemas:
         default:
           name: tracked_resource_location
           description: The geo-location where the resource lives
+        cli:
+          name: tracked_resource_location
+          description: The geo-location where the resource lives
       protocol: {}
     - &ref_14
       type: string
@@ -152,6 +197,9 @@ schemas:
         - version: 2018-09-01-preview
       language:
         default:
+          name: status_result_trust_model
+          description: Trust model for the attestation service instance.
+        cli:
           name: status_result_trust_model
           description: Trust model for the attestation service instance.
       protocol: {}
@@ -163,6 +211,9 @@ schemas:
         default:
           name: status_result_attest_uri
           description: Gets the uri of attestation service
+        cli:
+          name: status_result_attest_uri
+          description: Gets the uri of attestation service
       protocol: {}
     - &ref_24
       type: string
@@ -172,6 +223,9 @@ schemas:
         default:
           name: attestation_service_creation_params_location
           description: The supported Azure location where the attestation service instance should be created.
+        cli:
+          name: attestation_service_creation_params_location
+          description: The supported Azure location where the attestation service instance should be created.
       protocol: {}
     - &ref_26
       type: string
@@ -179,6 +233,9 @@ schemas:
         - version: 2018-09-01-preview
       language:
         default:
+          name: attestation_service_creation_specific_params_attestation_policy
+          description: Name of attestation policy.
+        cli:
           name: attestation_service_creation_specific_params_attestation_policy
           description: Name of attestation policy.
       protocol: {}
@@ -195,6 +252,14 @@ schemas:
             IANA "JSON Web Signature and Encryption Algorithms" registry
             established by [JWA] or be a value that contains a Collision-
             Resistant Name.
+        cli:
+          name: json_web_key_alg
+          description: |-
+            The "alg" (algorithm) parameter identifies the algorithm intended for
+            use with the key.  The values used should either be registered in the
+            IANA "JSON Web Signature and Encryption Algorithms" registry
+            established by [JWA] or be a value that contains a Collision-
+            Resistant Name.
       protocol: {}
     - &ref_28
       type: string
@@ -202,6 +267,9 @@ schemas:
         - version: 2018-09-01-preview
       language:
         default:
+          name: json_web_key_crv
+          description: The "crv" (curve) parameter identifies the curve type
+        cli:
           name: json_web_key_crv
           description: The "crv" (curve) parameter identifies the curve type
       protocol: {}
@@ -213,6 +281,9 @@ schemas:
         default:
           name: json_web_key_d
           description: RSA private exponent or ECC private key
+        cli:
+          name: json_web_key_d
+          description: RSA private exponent or ECC private key
       protocol: {}
     - &ref_30
       type: string
@@ -220,6 +291,9 @@ schemas:
         - version: 2018-09-01-preview
       language:
         default:
+          name: json_web_key_dp
+          description: RSA Private Key Parameter
+        cli:
           name: json_web_key_dp
           description: RSA Private Key Parameter
       protocol: {}
@@ -231,6 +305,9 @@ schemas:
         default:
           name: json_web_key_dq
           description: RSA Private Key Parameter
+        cli:
+          name: json_web_key_dq
+          description: RSA Private Key Parameter
       protocol: {}
     - &ref_32
       type: string
@@ -238,6 +315,9 @@ schemas:
         - version: 2018-09-01-preview
       language:
         default:
+          name: json_web_key_e
+          description: 'RSA public exponent, in Base64'
+        cli:
           name: json_web_key_e
           description: 'RSA public exponent, in Base64'
       protocol: {}
@@ -249,6 +329,9 @@ schemas:
         default:
           name: json_web_key_k
           description: Symmetric key
+        cli:
+          name: json_web_key_k
+          description: Symmetric key
       protocol: {}
     - &ref_34
       type: string
@@ -256,6 +339,18 @@ schemas:
         - version: 2018-09-01-preview
       language:
         default:
+          name: json_web_key_kid
+          description: |-
+            The "kid" (key ID) parameter is used to match a specific key.  This
+            is used, for instance, to choose among a set of keys within a JWK Set
+            during key rollover.  The structure of the "kid" value is
+            unspecified.  When "kid" values are used within a JWK Set, different
+            keys within the JWK Set SHOULD use distinct "kid" values.  (One
+            example in which different keys might use the same "kid" value is if
+            they have different "kty" (key type) values but are considered to be
+            equivalent alternatives by the application using them.)  The "kid"
+            value is a case-sensitive string.
+        cli:
           name: json_web_key_kid
           description: |-
             The "kid" (key ID) parameter is used to match a specific key.  This
@@ -281,6 +376,14 @@ schemas:
             either be registered in the IANA "JSON Web Key Types" registry
             established by [JWA] or be a value that contains a Collision-
             Resistant Name.  The "kty" value is a case-sensitive string.
+        cli:
+          name: json_web_key_kty
+          description: |-
+            The "kty" (key type) parameter identifies the cryptographic algorithm
+            family used with the key, such as "RSA" or "EC". "kty" values should
+            either be registered in the IANA "JSON Web Key Types" registry
+            established by [JWA] or be a value that contains a Collision-
+            Resistant Name.  The "kty" value is a case-sensitive string.
       protocol: {}
     - &ref_36
       type: string
@@ -288,6 +391,9 @@ schemas:
         - version: 2018-09-01-preview
       language:
         default:
+          name: json_web_key_n
+          description: 'RSA modulus, in Base64'
+        cli:
           name: json_web_key_n
           description: 'RSA modulus, in Base64'
       protocol: {}
@@ -299,6 +405,9 @@ schemas:
         default:
           name: json_web_key_p
           description: RSA secret prime
+        cli:
+          name: json_web_key_p
+          description: RSA secret prime
       protocol: {}
     - &ref_38
       type: string
@@ -308,6 +417,9 @@ schemas:
         default:
           name: json_web_key_q
           description: 'RSA secret prime, with p < q'
+        cli:
+          name: json_web_key_q
+          description: 'RSA secret prime, with p < q'
       protocol: {}
     - &ref_39
       type: string
@@ -315,6 +427,9 @@ schemas:
         - version: 2018-09-01-preview
       language:
         default:
+          name: json_web_key_qi
+          description: RSA Private Key Parameter
+        cli:
           name: json_web_key_qi
           description: RSA Private Key Parameter
       protocol: {}
@@ -330,6 +445,13 @@ schemas:
             the public key. The "use" parameter is employed to indicate whether
             a public key is used for encrypting data or verifying the signature
             on data. Values are commonly "sig" (signature) or "enc" (encryption).
+        cli:
+          name: json_web_key_use
+          description: |-
+            Use ("public key use") identifies the intended use of
+            the public key. The "use" parameter is employed to indicate whether
+            a public key is used for encrypting data or verifying the signature
+            on data. Values are commonly "sig" (signature) or "enc" (encryption).
       protocol: {}
     - &ref_41
       type: string
@@ -337,6 +459,9 @@ schemas:
         - version: 2018-09-01-preview
       language:
         default:
+          name: json_web_key_x
+          description: X coordinate for the Elliptic Curve point
+        cli:
           name: json_web_key_x
           description: X coordinate for the Elliptic Curve point
       protocol: {}
@@ -348,6 +473,9 @@ schemas:
         default:
           name: json_web_key_x5_c_item
           description: ''
+        cli:
+          name: json_web_key_x5_c_item
+          description: ''
       protocol: {}
     - &ref_43
       type: string
@@ -355,6 +483,9 @@ schemas:
         - version: 2018-09-01-preview
       language:
         default:
+          name: json_web_key_y
+          description: Y coordinate for the Elliptic Curve point
+        cli:
           name: json_web_key_y
           description: Y coordinate for the Elliptic Curve point
       protocol: {}
@@ -367,6 +498,8 @@ schemas:
               name: ready
               description: ''
             cli:
+              name: ready
+              description: ''
               cliKey: Ready
         - value: NotReady
           language:
@@ -374,6 +507,8 @@ schemas:
               name: not_ready
               description: ''
             cli:
+              name: not_ready
+              description: ''
               cliKey: NotReady
         - value: Error
           language:
@@ -381,6 +516,8 @@ schemas:
               name: error
               description: ''
             cli:
+              name: error
+              description: ''
               cliKey: Error
       type: choice
       apiVersions:
@@ -391,6 +528,8 @@ schemas:
           name: attestation_service_status
           description: Status of attestation service.
         cli:
+          name: attestation_service_status
+          description: Status of attestation service.
           cliKey: AttestationServiceStatus
       protocol: {}
   constants:
@@ -403,6 +542,9 @@ schemas:
         default:
           name: api_version2018_09_01_preview
           description: Api Version (2018-09-01-preview)
+        cli:
+          name: api_version2018_09_01_preview
+          description: Api Version (2018-09-01-preview)
       protocol: {}
   dictionaries:
     - &ref_18
@@ -413,6 +555,8 @@ schemas:
           name: tracked_resource_tags
           description: Resource tags.
         cli:
+          name: tracked_resource_tags
+          description: Resource tags.
           cli-complexity: dictionary_simple
           cli-mark: checked
       protocol: {}
@@ -424,6 +568,8 @@ schemas:
           name: attestation_service_creation_params_tags
           description: The tags that will be assigned to the attestation service instance.
         cli:
+          name: attestation_service_creation_params_tags
+          description: The tags that will be assigned to the attestation service instance.
           cli-complexity: dictionary_simple
           cli-mark: checked
       protocol: {}
@@ -435,6 +581,8 @@ schemas:
           name: attestation_service_patch_params_tags
           description: The tags that will be assigned to the attestation service instance.
         cli:
+          name: attestation_service_patch_params_tags
+          description: The tags that will be assigned to the attestation service instance.
           cli-complexity: dictionary_simple
           cli-mark: checked
       protocol: {}
@@ -460,6 +608,8 @@ schemas:
                       name: name
                       description: Name of the operation.
                     cli:
+                      name: name
+                      description: Name of the operation.
                       cliKey: name
                   protocol: {}
                 - schema: &ref_8
@@ -474,6 +624,8 @@ schemas:
                             name: provider
                             description: Resource provider of the operation.
                           cli:
+                            name: provider
+                            description: Resource provider of the operation.
                             cliKey: provider
                         protocol: {}
                       - schema: *ref_4
@@ -483,6 +635,8 @@ schemas:
                             name: resource
                             description: Resource for the operation.
                           cli:
+                            name: resource
+                            description: Resource for the operation.
                             cliKey: resource
                         protocol: {}
                       - schema: *ref_5
@@ -492,6 +646,8 @@ schemas:
                             name: operation
                             description: Short description of the operation.
                           cli:
+                            name: operation
+                            description: Short description of the operation.
                             cliKey: operation
                         protocol: {}
                       - schema: *ref_6
@@ -501,6 +657,8 @@ schemas:
                             name: description
                             description: Description of the operation.
                           cli:
+                            name: description
+                            description: Description of the operation.
                             cliKey: description
                         protocol: {}
                     serializationFormats:
@@ -513,6 +671,8 @@ schemas:
                         description: Display object with properties of the operation.
                         namespace: ''
                       cli:
+                        name: operations_display_definition
+                        description: Display object with properties of the operation.
                         cli-complexity: object_simple
                         cli-mark: checked
                         cli-simplify-indicator:
@@ -527,6 +687,8 @@ schemas:
                       name: display
                       description: Display object with properties of the operation.
                     cli:
+                      name: display
+                      description: Display object with properties of the operation.
                       cliKey: display
                   protocol: {}
               serializationFormats:
@@ -539,6 +701,8 @@ schemas:
                   description: Definition object with the name and properties of an operation.
                   namespace: ''
                 cli:
+                  name: operations_definition
+                  description: Definition object with the name and properties of an operation.
                   cli-complexity: object_complex
                   cli-mark: checked
                   cli-simplify-indicator:
@@ -552,6 +716,8 @@ schemas:
                 name: operation_list_value
                 description: List of supported operations.
               cli:
+                name: operation_list_value
+                description: List of supported operations.
                 cli-complexity: array_simple
                 cli-mark: checked
             protocol: {}
@@ -561,6 +727,8 @@ schemas:
               name: value
               description: List of supported operations.
             cli:
+              name: value
+              description: List of supported operations.
               cliKey: value
           protocol: {}
       serializationFormats:
@@ -573,6 +741,8 @@ schemas:
           description: List of supported operations.
           namespace: ''
         cli:
+          name: operation_list
+          description: List of supported operations.
           cli-complexity: object_simple
           cli-mark: checked
           cli-simplify-indicator:
@@ -600,6 +770,8 @@ schemas:
                     name: code
                     description: An identifier for the error. Codes are invariant and are intended to be consumed programmatically.
                   cli:
+                    name: code
+                    description: An identifier for the error. Codes are invariant and are intended to be consumed programmatically.
                     cliKey: code
                 protocol: {}
               - schema: *ref_10
@@ -609,6 +781,8 @@ schemas:
                     name: message
                     description: 'A message describing the error, intended to be suitable for displaying in a user interface.'
                   cli:
+                    name: message
+                    description: 'A message describing the error, intended to be suitable for displaying in a user interface.'
                     cliKey: message
                 protocol: {}
             serializationFormats:
@@ -623,6 +797,8 @@ schemas:
                 description: An error response from Attestation.
                 namespace: ''
               cli:
+                name: cloud_error_body
+                description: An error response from Attestation.
                 cli-complexity: object_simple
                 cli-mark: checked
                 cli-simplify-indicator:
@@ -637,6 +813,8 @@ schemas:
               name: error
               description: An error response from Attestation.
             cli:
+              name: error
+              description: An error response from Attestation.
               cliKey: error
           protocol: {}
       serializationFormats:
@@ -651,6 +829,8 @@ schemas:
           description: An error response from Attestation.
           namespace: ''
         cli:
+          name: cloud_error
+          description: An error response from Attestation.
           cli-complexity: object_complex
           cli-mark: checked
           cli-simplify-indicator:
@@ -696,6 +876,8 @@ schemas:
                                 name: trust_model
                                 description: Trust model for the attestation service instance.
                               cli:
+                                name: trust_model
+                                description: Trust model for the attestation service instance.
                                 cliKey: trustModel
                             protocol: {}
                           - schema: *ref_15
@@ -706,6 +888,8 @@ schemas:
                                 name: status
                                 description: Status of attestation service.
                               cli:
+                                name: status
+                                description: Status of attestation service.
                                 cliKey: status
                             protocol: {}
                           - schema: *ref_16
@@ -716,6 +900,8 @@ schemas:
                                 name: attest_uri
                                 description: Gets the uri of attestation service
                               cli:
+                                name: attest_uri
+                                description: Gets the uri of attestation service
                                 cliKey: attestUri
                             protocol: {}
                         serializationFormats:
@@ -728,6 +914,8 @@ schemas:
                             description: Status of attestation service.
                             namespace: ''
                           cli:
+                            name: status_result
+                            description: Status of attestation service.
                             cli-complexity: object_simple
                             cli-mark: checked
                             cli-simplify-indicator:
@@ -745,6 +933,8 @@ schemas:
                           name: properties
                           description: Describes Attestation service status.
                         cli:
+                          name: properties
+                          description: Describes Attestation service status.
                           cliKey: properties
                       protocol: {}
                   serializationFormats:
@@ -757,6 +947,8 @@ schemas:
                       description: Attestation service response message.
                       namespace: ''
                     cli:
+                      name: attestation_provider
+                      description: Attestation service response message.
                       cli-complexity: object_complex
                       cli-mark: checked
                       cli-simplify-indicator:
@@ -781,6 +973,8 @@ schemas:
                     name: tags
                     description: Resource tags.
                   cli:
+                    name: tags
+                    description: Resource tags.
                     cliKey: tags
                 protocol: {}
               - schema: *ref_19
@@ -791,6 +985,8 @@ schemas:
                     name: location
                     description: The geo-location where the resource lives
                   cli:
+                    name: location
+                    description: The geo-location where the resource lives
                     cliKey: location
                 protocol: {}
             serializationFormats:
@@ -803,6 +999,8 @@ schemas:
                 description: The resource model definition for a ARM tracked top level resource
                 namespace: ''
               cli:
+                name: tracked_resource
+                description: The resource model definition for a ARM tracked top level resource
                 cli-complexity: object_simple
                 cli-mark: checked
                 cli-simplify-indicator:
@@ -823,6 +1021,8 @@ schemas:
               name: id
               description: 'Fully qualified resource Id for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}'
             cli:
+              name: id
+              description: 'Fully qualified resource Id for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}'
               cliKey: id
           protocol: {}
         - schema: *ref_21
@@ -833,6 +1033,8 @@ schemas:
               name: name
               description: The name of the resource
             cli:
+              name: name
+              description: The name of the resource
               cliKey: name
           protocol: {}
         - schema: *ref_22
@@ -843,6 +1045,8 @@ schemas:
               name: type
               description: The type of the resource. Ex- Microsoft.Compute/virtualMachines or Microsoft.Storage/storageAccounts.
             cli:
+              name: type
+              description: The type of the resource. Ex- Microsoft.Compute/virtualMachines or Microsoft.Storage/storageAccounts.
               cliKey: type
           protocol: {}
       serializationFormats:
@@ -857,6 +1061,8 @@ schemas:
           description: ''
           namespace: ''
         cli:
+          name: resource
+          description: ''
           cli-complexity: object_simple
           cli-mark: checked
           cli-simplify-indicator:
@@ -881,6 +1087,8 @@ schemas:
               name: location
               description: The supported Azure location where the attestation service instance should be created.
             cli:
+              name: location
+              description: The supported Azure location where the attestation service instance should be created.
               cliKey: location
           protocol: {}
         - schema: *ref_25
@@ -891,6 +1099,8 @@ schemas:
               name: tags
               description: The tags that will be assigned to the attestation service instance.
             cli:
+              name: tags
+              description: The tags that will be assigned to the attestation service instance.
               cliKey: tags
           protocol: {}
         - schema: &ref_44
@@ -905,6 +1115,8 @@ schemas:
                     name: attestation_policy
                     description: Name of attestation policy.
                   cli:
+                    name: attestation_policy
+                    description: Name of attestation policy.
                     cliKey: attestationPolicy
                 protocol: {}
               - schema: &ref_45
@@ -934,6 +1146,13 @@ schemas:
                                     established by [JWA] or be a value that contains a Collision-
                                     Resistant Name.
                                 cli:
+                                  name: alg
+                                  description: |-
+                                    The "alg" (algorithm) parameter identifies the algorithm intended for
+                                    use with the key.  The values used should either be registered in the
+                                    IANA "JSON Web Signature and Encryption Algorithms" registry
+                                    established by [JWA] or be a value that contains a Collision-
+                                    Resistant Name.
                                   cliKey: alg
                               protocol: {}
                             - schema: *ref_28
@@ -944,6 +1163,8 @@ schemas:
                                   name: crv
                                   description: The "crv" (curve) parameter identifies the curve type
                                 cli:
+                                  name: crv
+                                  description: The "crv" (curve) parameter identifies the curve type
                                   cliKey: crv
                               protocol: {}
                             - schema: *ref_29
@@ -954,6 +1175,8 @@ schemas:
                                   name: d
                                   description: RSA private exponent or ECC private key
                                 cli:
+                                  name: d
+                                  description: RSA private exponent or ECC private key
                                   cliKey: d
                               protocol: {}
                             - schema: *ref_30
@@ -964,6 +1187,8 @@ schemas:
                                   name: dp
                                   description: RSA Private Key Parameter
                                 cli:
+                                  name: dp
+                                  description: RSA Private Key Parameter
                                   cliKey: dp
                               protocol: {}
                             - schema: *ref_31
@@ -974,6 +1199,8 @@ schemas:
                                   name: dq
                                   description: RSA Private Key Parameter
                                 cli:
+                                  name: dq
+                                  description: RSA Private Key Parameter
                                   cliKey: dq
                               protocol: {}
                             - schema: *ref_32
@@ -984,6 +1211,8 @@ schemas:
                                   name: e
                                   description: 'RSA public exponent, in Base64'
                                 cli:
+                                  name: e
+                                  description: 'RSA public exponent, in Base64'
                                   cliKey: e
                               protocol: {}
                             - schema: *ref_33
@@ -994,6 +1223,8 @@ schemas:
                                   name: k
                                   description: Symmetric key
                                 cli:
+                                  name: k
+                                  description: Symmetric key
                                   cliKey: k
                               protocol: {}
                             - schema: *ref_34
@@ -1013,6 +1244,17 @@ schemas:
                                     equivalent alternatives by the application using them.)  The "kid"
                                     value is a case-sensitive string.
                                 cli:
+                                  name: kid
+                                  description: |-
+                                    The "kid" (key ID) parameter is used to match a specific key.  This
+                                    is used, for instance, to choose among a set of keys within a JWK Set
+                                    during key rollover.  The structure of the "kid" value is
+                                    unspecified.  When "kid" values are used within a JWK Set, different
+                                    keys within the JWK Set SHOULD use distinct "kid" values.  (One
+                                    example in which different keys might use the same "kid" value is if
+                                    they have different "kty" (key type) values but are considered to be
+                                    equivalent alternatives by the application using them.)  The "kid"
+                                    value is a case-sensitive string.
                                   cliKey: kid
                               protocol: {}
                             - schema: *ref_35
@@ -1028,6 +1270,13 @@ schemas:
                                     established by [JWA] or be a value that contains a Collision-
                                     Resistant Name.  The "kty" value is a case-sensitive string.
                                 cli:
+                                  name: kty
+                                  description: |-
+                                    The "kty" (key type) parameter identifies the cryptographic algorithm
+                                    family used with the key, such as "RSA" or "EC". "kty" values should
+                                    either be registered in the IANA "JSON Web Key Types" registry
+                                    established by [JWA] or be a value that contains a Collision-
+                                    Resistant Name.  The "kty" value is a case-sensitive string.
                                   cliKey: kty
                               protocol: {}
                             - schema: *ref_36
@@ -1038,6 +1287,8 @@ schemas:
                                   name: 'n'
                                   description: 'RSA modulus, in Base64'
                                 cli:
+                                  name: 'n'
+                                  description: 'RSA modulus, in Base64'
                                   cliKey: 'n'
                               protocol: {}
                             - schema: *ref_37
@@ -1048,6 +1299,8 @@ schemas:
                                   name: p
                                   description: RSA secret prime
                                 cli:
+                                  name: p
+                                  description: RSA secret prime
                                   cliKey: p
                               protocol: {}
                             - schema: *ref_38
@@ -1058,6 +1311,8 @@ schemas:
                                   name: q
                                   description: 'RSA secret prime, with p < q'
                                 cli:
+                                  name: q
+                                  description: 'RSA secret prime, with p < q'
                                   cliKey: q
                               protocol: {}
                             - schema: *ref_39
@@ -1068,6 +1323,8 @@ schemas:
                                   name: qi
                                   description: RSA Private Key Parameter
                                 cli:
+                                  name: qi
+                                  description: RSA Private Key Parameter
                                   cliKey: qi
                               protocol: {}
                             - schema: *ref_40
@@ -1082,6 +1339,12 @@ schemas:
                                     a public key is used for encrypting data or verifying the signature
                                     on data. Values are commonly "sig" (signature) or "enc" (encryption).
                                 cli:
+                                  name: use
+                                  description: |-
+                                    Use ("public key use") identifies the intended use of
+                                    the public key. The "use" parameter is employed to indicate whether
+                                    a public key is used for encrypting data or verifying the signature
+                                    on data. Values are commonly "sig" (signature) or "enc" (encryption).
                                   cliKey: use
                               protocol: {}
                             - schema: *ref_41
@@ -1092,6 +1355,8 @@ schemas:
                                   name: x
                                   description: X coordinate for the Elliptic Curve point
                                 cli:
+                                  name: x
+                                  description: X coordinate for the Elliptic Curve point
                                   cliKey: x
                               protocol: {}
                             - schema: &ref_49
@@ -1111,6 +1376,15 @@ schemas:
                                       The PKIX certificate containing the key value MUST be the first
                                       certificate.
                                   cli:
+                                    name: json_web_key_x5_c
+                                    description: |-
+                                      The "x5c" (X.509 certificate chain) parameter contains a chain of one
+                                      or more PKIX certificates [RFC5280].  The certificate chain is
+                                      represented as a JSON array of certificate value strings.  Each
+                                      string in the array is a base64-encoded (Section 4 of [RFC4648] --
+                                      not base64url-encoded) DER [ITU.X690.1994] PKIX certificate value.
+                                      The PKIX certificate containing the key value MUST be the first
+                                      certificate.
                                     cli-complexity: array_simple
                                     cli-mark: checked
                                 protocol: {}
@@ -1128,6 +1402,15 @@ schemas:
                                     The PKIX certificate containing the key value MUST be the first
                                     certificate.
                                 cli:
+                                  name: x5_c
+                                  description: |-
+                                    The "x5c" (X.509 certificate chain) parameter contains a chain of one
+                                    or more PKIX certificates [RFC5280].  The certificate chain is
+                                    represented as a JSON array of certificate value strings.  Each
+                                    string in the array is a base64-encoded (Section 4 of [RFC4648] --
+                                    not base64url-encoded) DER [ITU.X690.1994] PKIX certificate value.
+                                    The PKIX certificate containing the key value MUST be the first
+                                    certificate.
                                   cliKey: x5c
                               protocol: {}
                             - schema: *ref_43
@@ -1138,6 +1421,8 @@ schemas:
                                   name: 'y'
                                   description: Y coordinate for the Elliptic Curve point
                                 cli:
+                                  name: 'y'
+                                  description: Y coordinate for the Elliptic Curve point
                                   cliKey: 'y'
                               protocol: {}
                           serializationFormats:
@@ -1150,6 +1435,8 @@ schemas:
                               description: ''
                               namespace: ''
                             cli:
+                              name: json_web_key
+                              description: ''
                               cli-complexity: object_simple
                               cli-mark: checked
                               cli-simplify-indicator:
@@ -1168,6 +1455,13 @@ schemas:
                               can choose to assign a meaning to the order for their purposes, if
                               desired.
                           cli:
+                            name: json_web_key_set_keys
+                            description: |-
+                              The value of the "keys" parameter is an array of JWK values.  By
+                              default, the order of the JWK values within the array does not imply
+                              an order of preference among them, although applications of JWK Sets
+                              can choose to assign a meaning to the order for their purposes, if
+                              desired.
                             cli-complexity: array_simple
                             cli-mark: checked
                         protocol: {}
@@ -1182,6 +1476,13 @@ schemas:
                             can choose to assign a meaning to the order for their purposes, if
                             desired.
                         cli:
+                          name: keys
+                          description: |-
+                            The value of the "keys" parameter is an array of JWK values.  By
+                            default, the order of the JWK values within the array does not imply
+                            an order of preference among them, although applications of JWK Sets
+                            can choose to assign a meaning to the order for their purposes, if
+                            desired.
                           cliKey: keys
                       protocol: {}
                   serializationFormats:
@@ -1194,6 +1495,8 @@ schemas:
                       description: ''
                       namespace: ''
                     cli:
+                      name: json_web_key_set
+                      description: ''
                       cli-complexity: object_simple
                       cli-mark: checked
                       cli-simplify-indicator:
@@ -1208,6 +1511,8 @@ schemas:
                     name: policy_signing_certificates
                     description: JSON Web Key Set defining a set of X.509 Certificates that will represent the parent certificate for the signing certificate used for policy operations
                   cli:
+                    name: policy_signing_certificates
+                    description: JSON Web Key Set defining a set of X.509 Certificates that will represent the parent certificate for the signing certificate used for policy operations
                     cliKey: policySigningCertificates
                 protocol: {}
             serializationFormats:
@@ -1220,6 +1525,8 @@ schemas:
                 description: Client supplied parameters used to create a new attestation service instance.
                 namespace: ''
               cli:
+                name: attestation_service_creation_specific_params
+                description: Client supplied parameters used to create a new attestation service instance.
                 cli-complexity: object_complex
                 cli-mark: checked
                 cli-simplify-indicator:
@@ -1235,6 +1542,8 @@ schemas:
               name: properties
               description: Properties of the attestation service instance
             cli:
+              name: properties
+              description: Properties of the attestation service instance
               cliKey: properties
           protocol: {}
       serializationFormats:
@@ -1249,6 +1558,8 @@ schemas:
           description: Parameters for creating an attestation service instance
           namespace: ''
         cli:
+          name: attestation_service_creation_params
+          description: Parameters for creating an attestation service instance
           cli-complexity: object_complex
           cli-mark: checked
           cli-simplify-indicator:
@@ -1272,6 +1583,8 @@ schemas:
               name: tags
               description: The tags that will be assigned to the attestation service instance.
             cli:
+              name: tags
+              description: The tags that will be assigned to the attestation service instance.
               cliKey: tags
           protocol: {}
       serializationFormats:
@@ -1286,6 +1599,8 @@ schemas:
           description: Parameters for patching an attestation service instance
           namespace: ''
         cli:
+          name: attestation_service_patch_params
+          description: Parameters for patching an attestation service instance
           cli-complexity: object_simple
           cli-mark: checked
           cli-simplify-indicator:
@@ -1309,6 +1624,8 @@ schemas:
                 name: attestation_provider_list_result_value
                 description: Attestation Provider array.
               cli:
+                name: attestation_provider_list_result_value
+                description: Attestation Provider array.
                 cli-complexity: array_simple
                 cli-mark: checked
             protocol: {}
@@ -1318,6 +1635,8 @@ schemas:
               name: value
               description: Attestation Provider array.
             cli:
+              name: value
+              description: Attestation Provider array.
               cliKey: value
           protocol: {}
       serializationFormats:
@@ -1330,6 +1649,8 @@ schemas:
           description: Attestation Providers List.
           namespace: ''
         cli:
+          name: attestation_provider_list_result
+          description: Attestation Providers List.
           cli-complexity: object_simple
           cli-mark: checked
           cli-simplify-indicator:
@@ -1356,6 +1677,8 @@ globalParameters:
         description: The ID of the target subscription.
         serializedName: subscriptionId
       cli:
+        name: SubscriptionId
+        description: The ID of the target subscription.
         cliKey: subscriptionId
     protocol:
       http:
@@ -1374,6 +1697,8 @@ globalParameters:
         description: server parameter
         serializedName: $host
       cli:
+        name: $host
+        description: server parameter
         cliKey: $host
     protocol:
       http:
@@ -1389,6 +1714,8 @@ globalParameters:
         description: Api Version
         serializedName: api-version
       cli:
+        name: apiVersion
+        description: Api Version
         cliKey: ApiVersion
     protocol:
       http:
@@ -1469,6 +1796,8 @@ operationGroups:
             name: list
             description: Lists all of the available Azure attestation operations.
           cli:
+            name: list
+            description: Lists all of the available Azure attestation operations.
             cliKey: List
         protocol: {}
     language:
@@ -1476,6 +1805,8 @@ operationGroups:
         name: operation
         description: ''
       cli:
+        name: operation
+        description: ''
         cliKey: Operation
     protocol: {}
   - $key: AttestationProviders
@@ -1495,6 +1826,8 @@ operationGroups:
                 description: The name of the resource group. The name is case insensitive.
                 serializedName: resourceGroupName
               cli:
+                name: resource_group_name
+                description: The name of the resource group. The name is case insensitive.
                 cliKey: resourceGroupName
             protocol:
               http:
@@ -1509,6 +1842,8 @@ operationGroups:
                 description: Name of the attestation service instance
                 serializedName: providerName
               cli:
+                name: provider_name
+                description: Name of the attestation service instance
                 cliKey: providerName
             protocol:
               http:
@@ -1581,6 +1916,8 @@ operationGroups:
             name: get
             description: Get the status of Attestation Provider.
           cli:
+            name: get
+            description: Get the status of Attestation Provider.
             cliKey: Get
         protocol: {}
       - apiVersions:
@@ -1598,6 +1935,8 @@ operationGroups:
                 description: The name of the resource group. The name is case insensitive.
                 serializedName: resourceGroupName
               cli:
+                name: resource_group_name
+                description: The name of the resource group. The name is case insensitive.
                 cliKey: resourceGroupName
             protocol:
               http:
@@ -1612,6 +1951,8 @@ operationGroups:
                 description: Name of the attestation service
                 serializedName: providerName
               cli:
+                name: provider_name
+                description: Name of the attestation service
                 cliKey: providerName
             protocol:
               http:
@@ -1628,6 +1969,8 @@ operationGroups:
                     name: creation_params
                     description: Client supplied parameters.
                   cli:
+                    name: creation_params
+                    description: Client supplied parameters.
                     cliKey: creationParams
                 protocol:
                   http:
@@ -1731,6 +2074,8 @@ operationGroups:
             name: create
             description: Creates or updates the Attestation Provider.
           cli:
+            name: create
+            description: Creates or updates the Attestation Provider.
             cliKey: Create
         protocol: {}
       - apiVersions:
@@ -1748,6 +2093,8 @@ operationGroups:
                 description: The name of the resource group. The name is case insensitive.
                 serializedName: resourceGroupName
               cli:
+                name: resource_group_name
+                description: The name of the resource group. The name is case insensitive.
                 cliKey: resourceGroupName
             protocol:
               http:
@@ -1762,6 +2109,8 @@ operationGroups:
                 description: Name of the attestation service
                 serializedName: providerName
               cli:
+                name: provider_name
+                description: Name of the attestation service
                 cliKey: providerName
             protocol:
               http:
@@ -1778,6 +2127,8 @@ operationGroups:
                     name: update_params
                     description: Client supplied parameters.
                   cli:
+                    name: update_params
+                    description: Client supplied parameters.
                     cliKey: updateParams
                 protocol:
                   http:
@@ -1859,6 +2210,8 @@ operationGroups:
             name: update
             description: Updates the Attestation Provider.
           cli:
+            name: update
+            description: Updates the Attestation Provider.
             cliKey: Update
         protocol: {}
       - apiVersions:
@@ -1876,6 +2229,8 @@ operationGroups:
                 description: The name of the resource group. The name is case insensitive.
                 serializedName: resourceGroupName
               cli:
+                name: resource_group_name
+                description: The name of the resource group. The name is case insensitive.
                 cliKey: resourceGroupName
             protocol:
               http:
@@ -1890,6 +2245,8 @@ operationGroups:
                 description: Name of the attestation service
                 serializedName: providerName
               cli:
+                name: provider_name
+                description: Name of the attestation service
                 cliKey: providerName
             protocol:
               http:
@@ -1967,6 +2324,8 @@ operationGroups:
             name: delete
             description: Delete Attestation Service.
           cli:
+            name: delete
+            description: Delete Attestation Service.
             cliKey: Delete
         protocol: {}
       - apiVersions:
@@ -2039,6 +2398,8 @@ operationGroups:
             name: list
             description: Returns a list of attestation providers in a subscription.
           cli:
+            name: list
+            description: Returns a list of attestation providers in a subscription.
             cliKey: List
         protocol: {}
       - apiVersions:
@@ -2055,6 +2416,8 @@ operationGroups:
                 description: The name of the resource group. The name is case insensitive.
                 serializedName: resourceGroupName
               cli:
+                name: resource_group_name
+                description: The name of the resource group. The name is case insensitive.
                 cliKey: resourceGroupName
             protocol:
               http:
@@ -2127,6 +2490,8 @@ operationGroups:
             name: list_by_resource_group
             description: Returns attestation providers list in a resource group.
           cli:
+            name: list_by_resource_group
+            description: Returns attestation providers list in a resource group.
             cliKey: ListByResourceGroup
         protocol: {}
     language:
@@ -2134,12 +2499,25 @@ operationGroups:
         name: attestation_providers
         description: ''
       cli:
+        name: attestation_providers
+        description: ''
         cliKey: AttestationProviders
     protocol: {}
 security:
   authenticationRequired: false
+test-scenario:
+  - name: Operations_List
+  - name: AttestationProviders_Create
+  - name: AttestationProviders_Get
+  - function: mytest
+  - name: AttestationProviders_List
+  - name: AttestationProviders_ListByResourceGroup
+  - name: AttestationProviders_Delete
 language:
   default:
+    name: AttestationManagementClient
+    description: ''
+  cli:
     name: AttestationManagementClient
     description: ''
 protocol:

@@ -4,7 +4,7 @@ info:
     with ease.
   title: ManagedNetworkManagementClient
   extensions:
-    cli-dump-index: 70
+    cli-dump-index: 160
 schemas:
   numbers:
     - &ref_78
