@@ -1,0 +1,1088 @@
+operationGroups:
+  all:
+    - operationGroupName: Factories
+      operations:
+        - operationName: List
+          parameters:
+            - parameterName: $host(string^string)
+            - parameterName: subscriptionId(string^string)
+            - parameterName: ApiVersion(ApiVersion-2018-06-01^constant)
+        - operationName: ConfigureFactoryRepo
+          parameters:
+            - parameterName: $host(string^string)
+            - parameterName: subscriptionId(string^string)
+            - parameterName: locationId(string^string)
+            - parameterName: ApiVersion(ApiVersion-2018-06-01^constant)
+            - parameterName[0]: factoryRepoUpdate(FactoryRepoUpdate^object)
+              bodySchema: FactoryRepoUpdate
+        - operationName: ListByResourceGroup
+          parameters:
+            - parameterName: $host(string^string)
+            - parameterName: subscriptionId(string^string)
+            - parameterName: resourceGroupName(string^string)
+            - parameterName: ApiVersion(ApiVersion-2018-06-01^constant)
+        - operationName: CreateOrUpdate
+          parameters:
+            - parameterName: $host(string^string)
+            - parameterName: subscriptionId(string^string)
+            - parameterName: resourceGroupName(string^string)
+            - parameterName: factoryName(string^string)
+            - parameterName: ApiVersion(ApiVersion-2018-06-01^constant)
+            - parameterName: If-Match(string^string)
+            - parameterName[0]: factory(Factory^object)
+              bodySchema: Factory
+        - operationName: Update
+          parameters:
+            - parameterName: $host(string^string)
+            - parameterName: subscriptionId(string^string)
+            - parameterName: resourceGroupName(string^string)
+            - parameterName: factoryName(string^string)
+            - parameterName: ApiVersion(ApiVersion-2018-06-01^constant)
+            - parameterName[0]: factoryUpdateParameters(FactoryUpdateParameters^object)
+              bodySchema: FactoryUpdateParameters
+        - operationName: Get
+          parameters:
+            - parameterName: $host(string^string)
+            - parameterName: subscriptionId(string^string)
+            - parameterName: resourceGroupName(string^string)
+            - parameterName: factoryName(string^string)
+            - parameterName: ApiVersion(ApiVersion-2018-06-01^constant)
+            - parameterName: If-None-Match(string^string)
+        - operationName: Delete
+          parameters:
+            - parameterName: $host(string^string)
+            - parameterName: subscriptionId(string^string)
+            - parameterName: resourceGroupName(string^string)
+            - parameterName: factoryName(string^string)
+            - parameterName: ApiVersion(ApiVersion-2018-06-01^constant)
+        - operationName: GetGitHubAccessToken
+          parameters:
+            - parameterName: $host(string^string)
+            - parameterName: subscriptionId(string^string)
+            - parameterName: resourceGroupName(string^string)
+            - parameterName: factoryName(string^string)
+            - parameterName: ApiVersion(ApiVersion-2018-06-01^constant)
+            - parameterName[0]: gitHubAccessTokenRequest(GitHubAccessTokenRequest^object)
+              bodySchema: GitHubAccessTokenRequest
+        - operationName: GetDataPlaneAccess
+          parameters:
+            - parameterName: $host(string^string)
+            - parameterName: subscriptionId(string^string)
+            - parameterName: resourceGroupName(string^string)
+            - parameterName: factoryName(string^string)
+            - parameterName: ApiVersion(ApiVersion-2018-06-01^constant)
+            - parameterName[0]: policy(UserAccessPolicy^object)
+              bodySchema: UserAccessPolicy
+    - operationGroupName: Triggers
+      operations:
+        - operationName: ListByFactory
+          parameters:
+            - parameterName: $host(string^string)
+            - parameterName: subscriptionId(string^string)
+            - parameterName: resourceGroupName(string^string)
+            - parameterName: factoryName(string^string)
+            - parameterName: ApiVersion(ApiVersion-2018-06-01^constant)
+        - operationName: QueryByFactory
+          parameters:
+            - parameterName: $host(string^string)
+            - parameterName: subscriptionId(string^string)
+            - parameterName: resourceGroupName(string^string)
+            - parameterName: factoryName(string^string)
+            - parameterName: ApiVersion(ApiVersion-2018-06-01^constant)
+            - parameterName[0]: filterParameters(TriggerFilterParameters^object)
+              bodySchema: TriggerFilterParameters
+        - operationName: CreateOrUpdate
+          parameters:
+            - parameterName: $host(string^string)
+            - parameterName: subscriptionId(string^string)
+            - parameterName: resourceGroupName(string^string)
+            - parameterName: factoryName(string^string)
+            - parameterName: triggerName(string^string)
+            - parameterName: ApiVersion(ApiVersion-2018-06-01^constant)
+            - parameterName: If-Match(string^string)
+            - parameterName[0]: trigger(TriggerResource^object)
+              bodySchema: TriggerResource
+        - operationName: Get
+          parameters:
+            - parameterName: $host(string^string)
+            - parameterName: subscriptionId(string^string)
+            - parameterName: resourceGroupName(string^string)
+            - parameterName: factoryName(string^string)
+            - parameterName: triggerName(string^string)
+            - parameterName: ApiVersion(ApiVersion-2018-06-01^constant)
+            - parameterName: If-None-Match(string^string)
+        - operationName: Delete
+          parameters:
+            - parameterName: $host(string^string)
+            - parameterName: subscriptionId(string^string)
+            - parameterName: resourceGroupName(string^string)
+            - parameterName: factoryName(string^string)
+            - parameterName: triggerName(string^string)
+            - parameterName: ApiVersion(ApiVersion-2018-06-01^constant)
+        - operationName: SubscribeToEvents
+          parameters:
+            - parameterName: $host(string^string)
+            - parameterName: subscriptionId(string^string)
+            - parameterName: resourceGroupName(string^string)
+            - parameterName: factoryName(string^string)
+            - parameterName: triggerName(string^string)
+            - parameterName: ApiVersion(ApiVersion-2018-06-01^constant)
+        - operationName: GetEventSubscriptionStatus
+          parameters:
+            - parameterName: $host(string^string)
+            - parameterName: subscriptionId(string^string)
+            - parameterName: resourceGroupName(string^string)
+            - parameterName: factoryName(string^string)
+            - parameterName: triggerName(string^string)
+            - parameterName: ApiVersion(ApiVersion-2018-06-01^constant)
+        - operationName: UnsubscribeFromEvents
+          parameters:
+            - parameterName: $host(string^string)
+            - parameterName: subscriptionId(string^string)
+            - parameterName: resourceGroupName(string^string)
+            - parameterName: factoryName(string^string)
+            - parameterName: triggerName(string^string)
+            - parameterName: ApiVersion(ApiVersion-2018-06-01^constant)
+        - operationName: Start
+          parameters:
+            - parameterName: $host(string^string)
+            - parameterName: subscriptionId(string^string)
+            - parameterName: resourceGroupName(string^string)
+            - parameterName: factoryName(string^string)
+            - parameterName: triggerName(string^string)
+            - parameterName: ApiVersion(ApiVersion-2018-06-01^constant)
+        - operationName: Stop
+          parameters:
+            - parameterName: $host(string^string)
+            - parameterName: subscriptionId(string^string)
+            - parameterName: resourceGroupName(string^string)
+            - parameterName: factoryName(string^string)
+            - parameterName: triggerName(string^string)
+            - parameterName: ApiVersion(ApiVersion-2018-06-01^constant)
+    - operationGroupName: IntegrationRuntimes
+      operations:
+        - operationName: ListByFactory
+          parameters:
+            - parameterName: $host(string^string)
+            - parameterName: subscriptionId(string^string)
+            - parameterName: resourceGroupName(string^string)
+            - parameterName: factoryName(string^string)
+            - parameterName: ApiVersion(ApiVersion-2018-06-01^constant)
+        - operationName: CreateOrUpdate
+          parameters:
+            - parameterName: $host(string^string)
+            - parameterName: subscriptionId(string^string)
+            - parameterName: resourceGroupName(string^string)
+            - parameterName: factoryName(string^string)
+            - parameterName: integrationRuntimeName(string^string)
+            - parameterName: ApiVersion(ApiVersion-2018-06-01^constant)
+            - parameterName: If-Match(string^string)
+            - parameterName[0]: integrationRuntime(IntegrationRuntimeResource^object)
+              bodySchema: IntegrationRuntimeResource
+        - operationName: Get
+          parameters:
+            - parameterName: $host(string^string)
+            - parameterName: subscriptionId(string^string)
+            - parameterName: resourceGroupName(string^string)
+            - parameterName: factoryName(string^string)
+            - parameterName: integrationRuntimeName(string^string)
+            - parameterName: ApiVersion(ApiVersion-2018-06-01^constant)
+            - parameterName: If-None-Match(string^string)
+        - operationName: Update
+          parameters:
+            - parameterName: $host(string^string)
+            - parameterName: subscriptionId(string^string)
+            - parameterName: resourceGroupName(string^string)
+            - parameterName: factoryName(string^string)
+            - parameterName: integrationRuntimeName(string^string)
+            - parameterName: ApiVersion(ApiVersion-2018-06-01^constant)
+            - parameterName[0]: updateIntegrationRuntimeRequest(UpdateIntegrationRuntimeRequest^object)
+              bodySchema: UpdateIntegrationRuntimeRequest
+        - operationName: Delete
+          parameters:
+            - parameterName: $host(string^string)
+            - parameterName: subscriptionId(string^string)
+            - parameterName: resourceGroupName(string^string)
+            - parameterName: factoryName(string^string)
+            - parameterName: integrationRuntimeName(string^string)
+            - parameterName: ApiVersion(ApiVersion-2018-06-01^constant)
+        - operationName: GetStatus
+          parameters:
+            - parameterName: $host(string^string)
+            - parameterName: subscriptionId(string^string)
+            - parameterName: resourceGroupName(string^string)
+            - parameterName: factoryName(string^string)
+            - parameterName: integrationRuntimeName(string^string)
+            - parameterName: ApiVersion(ApiVersion-2018-06-01^constant)
+        - operationName: GetConnectionInfo
+          parameters:
+            - parameterName: $host(string^string)
+            - parameterName: subscriptionId(string^string)
+            - parameterName: resourceGroupName(string^string)
+            - parameterName: factoryName(string^string)
+            - parameterName: integrationRuntimeName(string^string)
+            - parameterName: ApiVersion(ApiVersion-2018-06-01^constant)
+        - operationName: RegenerateAuthKey
+          parameters:
+            - parameterName: $host(string^string)
+            - parameterName: subscriptionId(string^string)
+            - parameterName: resourceGroupName(string^string)
+            - parameterName: factoryName(string^string)
+            - parameterName: integrationRuntimeName(string^string)
+            - parameterName: ApiVersion(ApiVersion-2018-06-01^constant)
+            - parameterName[0]: regenerateKeyParameters(IntegrationRuntimeRegenerateKeyParameters^object)
+              bodySchema: IntegrationRuntimeRegenerateKeyParameters
+        - operationName: ListAuthKeys
+          parameters:
+            - parameterName: $host(string^string)
+            - parameterName: subscriptionId(string^string)
+            - parameterName: resourceGroupName(string^string)
+            - parameterName: factoryName(string^string)
+            - parameterName: integrationRuntimeName(string^string)
+            - parameterName: ApiVersion(ApiVersion-2018-06-01^constant)
+        - operationName: Start
+          parameters:
+            - parameterName: $host(string^string)
+            - parameterName: subscriptionId(string^string)
+            - parameterName: resourceGroupName(string^string)
+            - parameterName: factoryName(string^string)
+            - parameterName: integrationRuntimeName(string^string)
+            - parameterName: ApiVersion(ApiVersion-2018-06-01^constant)
+        - operationName: Stop
+          parameters:
+            - parameterName: $host(string^string)
+            - parameterName: subscriptionId(string^string)
+            - parameterName: resourceGroupName(string^string)
+            - parameterName: factoryName(string^string)
+            - parameterName: integrationRuntimeName(string^string)
+            - parameterName: ApiVersion(ApiVersion-2018-06-01^constant)
+        - operationName: SyncCredentials
+          parameters:
+            - parameterName: $host(string^string)
+            - parameterName: subscriptionId(string^string)
+            - parameterName: resourceGroupName(string^string)
+            - parameterName: factoryName(string^string)
+            - parameterName: integrationRuntimeName(string^string)
+            - parameterName: ApiVersion(ApiVersion-2018-06-01^constant)
+        - operationName: GetMonitoringData
+          parameters:
+            - parameterName: $host(string^string)
+            - parameterName: subscriptionId(string^string)
+            - parameterName: resourceGroupName(string^string)
+            - parameterName: factoryName(string^string)
+            - parameterName: integrationRuntimeName(string^string)
+            - parameterName: ApiVersion(ApiVersion-2018-06-01^constant)
+        - operationName: Upgrade
+          parameters:
+            - parameterName: $host(string^string)
+            - parameterName: subscriptionId(string^string)
+            - parameterName: resourceGroupName(string^string)
+            - parameterName: factoryName(string^string)
+            - parameterName: integrationRuntimeName(string^string)
+            - parameterName: ApiVersion(ApiVersion-2018-06-01^constant)
+        - operationName: RemoveLinks
+          parameters:
+            - parameterName: $host(string^string)
+            - parameterName: subscriptionId(string^string)
+            - parameterName: resourceGroupName(string^string)
+            - parameterName: factoryName(string^string)
+            - parameterName: integrationRuntimeName(string^string)
+            - parameterName: ApiVersion(ApiVersion-2018-06-01^constant)
+            - parameterName[0]: linkedIntegrationRuntimeRequest(LinkedIntegrationRuntimeRequest^object)
+              bodySchema: LinkedIntegrationRuntimeRequest
+        - operationName: CreateLinkedIntegrationRuntime
+          parameters:
+            - parameterName: $host(string^string)
+            - parameterName: subscriptionId(string^string)
+            - parameterName: resourceGroupName(string^string)
+            - parameterName: factoryName(string^string)
+            - parameterName: integrationRuntimeName(string^string)
+            - parameterName: ApiVersion(ApiVersion-2018-06-01^constant)
+            - parameterName[0]: createLinkedIntegrationRuntimeRequest(CreateLinkedIntegrationRuntimeRequest^object)
+              bodySchema: CreateLinkedIntegrationRuntimeRequest
+schemas:
+  objects:
+    all:
+      - schemaName: FactoryListResponse
+        properties:
+          - propertyName: value(FactoryListResponse-value^array)
+          - propertyName: nextLink(FactoryListResponse-nextLink^string)
+      - schemaName: Resource
+        properties:
+          - propertyName: id(Resource-id^string)
+            readOnly: true
+          - propertyName: name(Resource-name^string)
+            readOnly: true
+          - propertyName: type(Resource-type^string)
+            readOnly: true
+          - propertyName: location(Resource-location^string)
+          - propertyName: tags(Resource-tags^dictionary)
+          - propertyName: eTag(Resource-eTag^string)
+            readOnly: true
+      - schemaName: Factory
+        properties:
+          - propertyName: identity(FactoryIdentity^object)
+          - propertyName: properties(FactoryProperties^object)
+            x-ms-client-flatten: true
+      - schemaName: FactoryIdentity
+        properties:
+          - propertyName: type(FactoryIdentityType^constant)
+          - propertyName: principalId(FactoryIdentity-principalId^uuid)
+            readOnly: true
+          - propertyName: tenantId(FactoryIdentity-tenantId^uuid)
+            readOnly: true
+      - schemaName: FactoryProperties
+        properties:
+          - propertyName: provisioningState(FactoryProperties-provisioningState^string)
+            readOnly: true
+          - propertyName: createTime(FactoryProperties-createTime^date-time)
+            readOnly: true
+          - propertyName: version(FactoryProperties-version^string)
+            readOnly: true
+          - propertyName: repoConfiguration(FactoryRepoConfiguration^object)
+          - propertyName: fakeIdentity(FakeFactoryIdentity^object)
+          - propertyName: zones(Zone^array)
+      - schemaName: FactoryRepoConfiguration
+        discriminator: true
+        properties:
+          - propertyName: type(FactoryRepoConfiguration-type^string)
+          - propertyName: accountName(FactoryRepoConfiguration-accountName^string)
+          - propertyName: repositoryName(FactoryRepoConfiguration-repositoryName^string)
+          - propertyName: collaborationBranch(FactoryRepoConfiguration-collaborationBranch^string)
+          - propertyName: rootFolder(FactoryRepoConfiguration-rootFolder^string)
+          - propertyName: lastCommitId(FactoryRepoConfiguration-lastCommitId^string)
+      - schemaName: FakeFactoryIdentity
+        properties:
+          - propertyName: name(FakeFactoryIdentity-name^string)
+          - propertyName: zonesInside(FakeFactoryIdentity-zonesInside^array)
+      - schemaName: CloudError
+        properties:
+          - propertyName: error(CloudErrorBody^object)
+            x-ms-client-flatten: true
+      - schemaName: CloudErrorBody
+        properties:
+          - propertyName: code(CloudErrorBody-code^string)
+          - propertyName: message(CloudErrorBody-message^string)
+          - propertyName: target(CloudErrorBody-target^string)
+          - propertyName: details(CloudErrorBody-details^array)
+      - schemaName: FactoryRepoUpdate
+        properties:
+          - propertyName: factoryResourceId(FactoryRepoUpdate-factoryResourceId^string)
+          - propertyName: repoConfiguration(FactoryRepoConfiguration^object)
+      - schemaName: FactoryUpdateParameters
+        properties:
+          - propertyName: tags(FactoryUpdateParameters-tags^dictionary)
+          - propertyName: identity(FactoryIdentity^object)
+      - schemaName: GitHubAccessTokenRequest
+        properties:
+          - propertyName: gitHubAccessCode(GitHubAccessTokenRequest-gitHubAccessCode^string)
+          - propertyName: gitHubClientId(GitHubAccessTokenRequest-gitHubClientId^string)
+          - propertyName: gitHubAccessTokenBaseUrl(GitHubAccessTokenRequest-gitHubAccessTokenBaseUrl^string)
+      - schemaName: GitHubAccessTokenResponse
+        properties:
+          - propertyName: gitHubAccessToken(GitHubAccessTokenResponse-gitHubAccessToken^string)
+      - schemaName: UserAccessPolicy
+        properties:
+          - propertyName: permissions(UserAccessPolicy-permissions^string)
+          - propertyName: accessResourcePath(UserAccessPolicy-accessResourcePath^string)
+          - propertyName: profileName(UserAccessPolicy-profileName^string)
+          - propertyName: startTime(UserAccessPolicy-startTime^string)
+          - propertyName: expireTime(UserAccessPolicy-expireTime^string)
+      - schemaName: AccessPolicyResponse
+        properties:
+          - propertyName: policy(UserAccessPolicy^object)
+          - propertyName: accessToken(AccessPolicyResponse-accessToken^string)
+          - propertyName: dataPlaneUrl(AccessPolicyResponse-dataPlaneUrl^string)
+      - schemaName: TriggerListResponse
+        properties:
+          - propertyName: value(TriggerListResponse-value^array)
+          - propertyName: nextLink(TriggerListResponse-nextLink^string)
+      - schemaName: SubResource
+        properties:
+          - propertyName: id(SubResource-id^string)
+            readOnly: true
+          - propertyName: name(SubResource-name^string)
+            readOnly: true
+          - propertyName: type(SubResource-type^string)
+            readOnly: true
+          - propertyName: etag(SubResource-etag^string)
+            readOnly: true
+      - schemaName: TriggerResource
+        properties:
+          - propertyName: properties(Trigger^object)
+      - schemaName: Trigger
+        discriminator: true
+        properties:
+          - propertyName: type(Trigger-type^string)
+          - propertyName: description(Trigger-description^string)
+          - propertyName: runtimeState(TriggerRuntimeState^choice)
+            readOnly: true
+          - propertyName: annotations(Trigger-annotations^array)
+      - schemaName: TriggerFilterParameters
+        properties:
+          - propertyName: continuationToken(TriggerFilterParameters-continuationToken^string)
+          - propertyName: parentTriggerName(TriggerFilterParameters-parentTriggerName^string)
+      - schemaName: TriggerQueryResponse
+        properties:
+          - propertyName: value(TriggerQueryResponse-value^array)
+          - propertyName: continuationToken(TriggerQueryResponse-continuationToken^string)
+      - schemaName: TriggerSubscriptionOperationStatus
+        properties:
+          - propertyName: triggerName(TriggerSubscriptionOperationStatus-triggerName^string)
+            readOnly: true
+          - propertyName: status(EventSubscriptionStatus^choice)
+            readOnly: true
+      - schemaName: IntegrationRuntimeListResponse
+        properties:
+          - propertyName: value(IntegrationRuntimeListResponse-value^array)
+          - propertyName: nextLink(IntegrationRuntimeListResponse-nextLink^string)
+      - schemaName: IntegrationRuntimeResource
+        properties:
+          - propertyName: properties(IntegrationRuntime^object)
+      - schemaName: IntegrationRuntime
+        discriminator: true
+        properties:
+          - propertyName: type(IntegrationRuntimeType^choice)
+          - propertyName: description(IntegrationRuntime-description^string)
+      - schemaName: UpdateIntegrationRuntimeRequest
+        properties:
+          - propertyName: autoUpdate(IntegrationRuntimeAutoUpdate^choice)
+          - propertyName: updateDelayOffset(UpdateIntegrationRuntimeRequest-updateDelayOffset^string)
+      - schemaName: IntegrationRuntimeStatusResponse
+        properties:
+          - propertyName: name(IntegrationRuntimeStatusResponse-name^string)
+            readOnly: true
+          - propertyName: properties(IntegrationRuntimeStatus^object)
+      - schemaName: IntegrationRuntimeStatus
+        discriminator: true
+        properties:
+          - propertyName: type(IntegrationRuntimeType^choice)
+          - propertyName: dataFactoryName(IntegrationRuntimeStatus-dataFactoryName^string)
+            readOnly: true
+          - propertyName: state(IntegrationRuntimeState^choice)
+            readOnly: true
+      - schemaName: IntegrationRuntimeConnectionInfo
+        properties:
+          - propertyName: serviceToken(IntegrationRuntimeConnectionInfo-serviceToken^string)
+            readOnly: true
+          - propertyName: identityCertThumbprint(IntegrationRuntimeConnectionInfo-identityCertThumbprint^string)
+            readOnly: true
+          - propertyName: hostServiceUri(IntegrationRuntimeConnectionInfo-hostServiceUri^string)
+            readOnly: true
+          - propertyName: version(IntegrationRuntimeConnectionInfo-version^string)
+            readOnly: true
+          - propertyName: publicKey(IntegrationRuntimeConnectionInfo-publicKey^string)
+            readOnly: true
+          - propertyName: isIdentityCertExprired(boolean^boolean)
+            readOnly: true
+      - schemaName: IntegrationRuntimeRegenerateKeyParameters
+        properties:
+          - propertyName: keyName(IntegrationRuntimeAuthKeyName^choice)
+      - schemaName: IntegrationRuntimeAuthKeys
+        properties:
+          - propertyName: authKey1(IntegrationRuntimeAuthKeys-authKey1^string)
+          - propertyName: authKey2(IntegrationRuntimeAuthKeys-authKey2^string)
+      - schemaName: IntegrationRuntimeMonitoringData
+        properties:
+          - propertyName: name(IntegrationRuntimeMonitoringData-name^string)
+          - propertyName: nodes(IntegrationRuntimeMonitoringData-nodes^array)
+      - schemaName: IntegrationRuntimeNodeMonitoringData
+        properties:
+          - propertyName: nodeName(IntegrationRuntimeNodeMonitoringData-nodeName^string)
+            readOnly: true
+          - propertyName: availableMemoryInMB(integer^integer)
+            readOnly: true
+          - propertyName: cpuUtilization(integer^integer)
+            readOnly: true
+          - propertyName: concurrentJobsLimit(integer^integer)
+            readOnly: true
+          - propertyName: concurrentJobsRunning(integer^integer)
+            readOnly: true
+          - propertyName: maxConcurrentJobs(integer^integer)
+            readOnly: true
+          - propertyName: sentBytes(number^number)
+            readOnly: true
+          - propertyName: receivedBytes(number^number)
+            readOnly: true
+      - schemaName: LinkedIntegrationRuntimeRequest
+        properties:
+          - propertyName: linkedFactoryName(linkedFactoryName^string)
+      - schemaName: CreateLinkedIntegrationRuntimeRequest
+        properties:
+          - propertyName: name(CreateLinkedIntegrationRuntimeRequest-name^string)
+          - propertyName: subscriptionId(CreateLinkedIntegrationRuntimeRequest-subscriptionId^string)
+          - propertyName: dataFactoryName(CreateLinkedIntegrationRuntimeRequest-dataFactoryName^string)
+          - propertyName: dataFactoryLocation(CreateLinkedIntegrationRuntimeRequest-dataFactoryLocation^string)
+      - schemaName: FactoryVSTSConfiguration
+        properties:
+          - propertyName: projectName(FactoryVSTSConfiguration-projectName^string)
+          - propertyName: tenantId(FactoryVSTSConfiguration-tenantId^string)
+      - schemaName: FactoryGitHubConfiguration
+        properties:
+          - propertyName: hostName(FactoryGitHubConfiguration-hostName^string)
+      - schemaName: MultiplePipelineTrigger
+        discriminator: true
+        properties:
+          - propertyName: pipelines(MultiplePipelineTrigger-pipelines^array)
+      - schemaName: TriggerPipelineReference
+        properties:
+          - propertyName: pipelineReference(PipelineReference^object)
+          - propertyName: parameters(ParameterValueSpecification^dictionary)
+      - schemaName: PipelineReference
+        properties:
+          - propertyName: type(PipelineReference-type^constant)
+          - propertyName: referenceName(PipelineReference-referenceName^string)
+          - propertyName: name(PipelineReference-name^string)
+      - schemaName: ScheduleTrigger
+        properties:
+          - propertyName: typeProperties(ScheduleTrigger-typeProperties^object)
+            x-ms-client-flatten: true
+      - schemaName: ScheduleTrigger-typeProperties
+        properties:
+          - propertyName: recurrence(ScheduleTriggerRecurrence^object)
+      - schemaName: ScheduleTriggerRecurrence
+        properties:
+          - propertyName: frequency(RecurrenceFrequency^choice)
+          - propertyName: interval(integer^integer)
+          - propertyName: startTime(ScheduleTriggerRecurrence-startTime^date-time)
+          - propertyName: endTime(ScheduleTriggerRecurrence-endTime^date-time)
+          - propertyName: timeZone(ScheduleTriggerRecurrence-timeZone^string)
+          - propertyName: schedule(RecurrenceSchedule^object)
+      - schemaName: RecurrenceSchedule
+        properties:
+          - propertyName: minutes(type·for·minutes^array)
+          - propertyName: hours(type·for·hours^array)
+          - propertyName: weekDays(RecurrenceSchedule-weekDays^array)
+          - propertyName: monthDays(type·for·monthDays^array)
+          - propertyName: monthlyOccurrences(RecurrenceSchedule-monthlyOccurrences^array)
+      - schemaName: RecurrenceScheduleOccurrence
+        properties:
+          - propertyName: day(DayOfWeek^sealed-choice)
+          - propertyName: occurrence(integer^integer)
+      - schemaName: BlobTrigger
+        properties:
+          - propertyName: typeProperties(BlobTrigger-typeProperties^object)
+            x-ms-client-flatten: true
+      - schemaName: BlobTrigger-typeProperties
+        properties:
+          - propertyName: folderPath(BlobTrigger-typeProperties-folderPath^string)
+          - propertyName: maxConcurrency(integer^integer)
+          - propertyName: linkedService(LinkedServiceReference^object)
+      - schemaName: LinkedServiceReference
+        properties:
+          - propertyName: type(LinkedServiceReference-type^constant)
+          - propertyName: referenceName(LinkedServiceReference-referenceName^string)
+          - propertyName: parameters(ParameterValueSpecification^dictionary)
+      - schemaName: BlobEventsTrigger
+        properties:
+          - propertyName: typeProperties(BlobEventsTrigger-typeProperties^object)
+            x-ms-client-flatten: true
+      - schemaName: BlobEventsTrigger-typeProperties
+        properties:
+          - propertyName: blobPathBeginsWith(BlobEventsTrigger-typeProperties-blobPathBeginsWith^string)
+          - propertyName: blobPathEndsWith(BlobEventsTrigger-typeProperties-blobPathEndsWith^string)
+          - propertyName: ignoreEmptyBlobs(boolean^boolean)
+          - propertyName: events(BlobEventTypes^array)
+          - propertyName: scope(BlobEventsTrigger-typeProperties-scope^string)
+      - schemaName: TumblingWindowTrigger
+        properties:
+          - propertyName: pipeline(TriggerPipelineReference^object)
+          - propertyName: typeProperties(TumblingWindowTrigger-typeProperties^object)
+            x-ms-client-flatten: true
+      - schemaName: TumblingWindowTrigger-typeProperties
+        properties:
+          - propertyName: frequency(TumblingWindowFrequency^choice)
+          - propertyName: interval(integer^integer)
+          - propertyName: startTime(TumblingWindowTrigger-typeProperties-startTime^date-time)
+          - propertyName: endTime(TumblingWindowTrigger-typeProperties-endTime^date-time)
+          - propertyName: delay(any^any)
+          - propertyName: maxConcurrency(integer^integer)
+          - propertyName: retryPolicy(RetryPolicy^object)
+          - propertyName: dependsOn(TumblingWindowTrigger-typeProperties-dependsOn^array)
+      - schemaName: RetryPolicy
+        properties:
+          - propertyName: count(any^any)
+          - propertyName: intervalInSeconds(integer^integer)
+      - schemaName: DependencyReference
+        discriminator: true
+        properties:
+          - propertyName: type(DependencyReference-type^string)
+      - schemaName: TriggerReference
+        properties:
+          - propertyName: type(TriggerReference-type^constant)
+          - propertyName: referenceName(TriggerReference-referenceName^string)
+      - schemaName: TriggerDependencyReference
+        discriminator: true
+        properties:
+          - propertyName: referenceTrigger(TriggerReference^object)
+      - schemaName: TumblingWindowTriggerDependencyReference
+        properties:
+          - propertyName: offset(TumblingWindowTriggerDependencyReference-offset^string)
+          - propertyName: size(TumblingWindowTriggerDependencyReference-size^string)
+      - schemaName: SelfDependencyTumblingWindowTriggerReference
+        properties:
+          - propertyName: offset(SelfDependencyTumblingWindowTriggerReference-offset^string)
+          - propertyName: size(SelfDependencyTumblingWindowTriggerReference-size^string)
+      - schemaName: RerunTumblingWindowTrigger
+        properties:
+          - propertyName: typeProperties(RerunTumblingWindowTrigger-typeProperties^object)
+            x-ms-client-flatten: true
+      - schemaName: RerunTumblingWindowTrigger-typeProperties
+        properties:
+          - propertyName: parentTrigger(any^any)
+          - propertyName: requestedStartTime(RerunTumblingWindowTrigger-typeProperties-requestedStartTime^date-time)
+          - propertyName: requestedEndTime(RerunTumblingWindowTrigger-typeProperties-requestedEndTime^date-time)
+          - propertyName: rerunConcurrency(integer^integer)
+      - schemaName: ChainingTrigger
+        properties:
+          - propertyName: pipeline(TriggerPipelineReference^object)
+          - propertyName: typeProperties(ChainingTrigger-typeProperties^object)
+            x-ms-client-flatten: true
+      - schemaName: ChainingTrigger-typeProperties
+        properties:
+          - propertyName: dependsOn(ChainingTrigger-typeProperties-dependsOn^array)
+          - propertyName: runDimension(ChainingTrigger-typeProperties-runDimension^string)
+      - schemaName: IntegrationRuntimeReference
+        properties:
+          - propertyName: type(IntegrationRuntimeReference-type^constant)
+          - propertyName: referenceName(IntegrationRuntimeReference-referenceName^string)
+          - propertyName: parameters(ParameterValueSpecification^dictionary)
+      - schemaName: IntegrationRuntimeStatusListResponse
+        properties:
+          - propertyName: value(IntegrationRuntimeStatusListResponse-value^array)
+          - propertyName: nextLink(IntegrationRuntimeStatusListResponse-nextLink^string)
+      - schemaName: ManagedIntegrationRuntime
+        properties:
+          - propertyName: state(IntegrationRuntimeState^choice)
+            readOnly: true
+          - propertyName: typeProperties(ManagedIntegrationRuntimeTypeProperties^object)
+            x-ms-client-flatten: true
+          - propertyName: repoConfiguration(FactoryRepoConfiguration^object)
+          - propertyName: fakeIdentity(FakeFactoryIdentity^object)
+          - propertyName: zones(Zone^array)
+      - schemaName: ManagedIntegrationRuntimeTypeProperties
+        properties:
+          - propertyName: computeProperties(IntegrationRuntimeComputeProperties^object)
+          - propertyName: ssisProperties(IntegrationRuntimeSsisProperties^object)
+      - schemaName: IntegrationRuntimeComputeProperties
+        properties:
+          - propertyName: location(IntegrationRuntimeComputeProperties-location^string)
+          - propertyName: nodeSize(IntegrationRuntimeComputeProperties-nodeSize^string)
+          - propertyName: numberOfNodes(integer^integer)
+          - propertyName: maxParallelExecutionsPerNode(integer^integer)
+          - propertyName: dataFlowProperties(IntegrationRuntimeDataFlowProperties^object)
+          - propertyName: vNetProperties(IntegrationRuntimeVNetProperties^object)
+      - schemaName: IntegrationRuntimeDataFlowProperties
+        properties:
+          - propertyName: computeType(DataFlowComputeType^choice)
+          - propertyName: coreCount(integer^integer)
+          - propertyName: timeToLive(integer^integer)
+      - schemaName: IntegrationRuntimeVNetProperties
+        properties:
+          - propertyName: vNetId(IntegrationRuntimeVNetProperties-vNetId^string)
+          - propertyName: subnet(IntegrationRuntimeVNetProperties-subnet^string)
+          - propertyName: publicIPs(IntegrationRuntimeVNetProperties-publicIPs^array)
+      - schemaName: IntegrationRuntimeSsisProperties
+        properties:
+          - propertyName: catalogInfo(IntegrationRuntimeSsisCatalogInfo^object)
+          - propertyName: licenseType(IntegrationRuntimeLicenseType^choice)
+          - propertyName: customSetupScriptProperties(IntegrationRuntimeCustomSetupScriptProperties^object)
+          - propertyName: dataProxyProperties(IntegrationRuntimeDataProxyProperties^object)
+          - propertyName: edition(IntegrationRuntimeEdition^choice)
+          - propertyName: expressCustomSetupProperties(IntegrationRuntimeSsisProperties-expressCustomSetupProperties^array)
+          - propertyName: packageStores(IntegrationRuntimeSsisProperties-packageStores^array)
+      - schemaName: IntegrationRuntimeSsisCatalogInfo
+        properties:
+          - propertyName: catalogServerEndpoint(IntegrationRuntimeSsisCatalogInfo-catalogServerEndpoint^string)
+          - propertyName: catalogAdminUserName(IntegrationRuntimeSsisCatalogInfo-catalogAdminUserName^string)
+          - propertyName: catalogAdminPassword(SecureString^object)
+          - propertyName: catalogPricingTier(IntegrationRuntimeSsisCatalogPricingTier^choice)
+      - schemaName: SecretBase
+        discriminator: true
+        properties:
+          - propertyName: type(SecretBase-type^string)
+      - schemaName: SecureString
+        properties:
+          - propertyName: value(SecureString-value^string)
+      - schemaName: IntegrationRuntimeCustomSetupScriptProperties
+        properties:
+          - propertyName: blobContainerUri(IntegrationRuntimeCustomSetupScriptProperties-blobContainerUri^string)
+          - propertyName: sasToken(SecureString^object)
+      - schemaName: IntegrationRuntimeDataProxyProperties
+        properties:
+          - propertyName: connectVia(EntityReference^object)
+          - propertyName: stagingLinkedService(EntityReference^object)
+          - propertyName: path(IntegrationRuntimeDataProxyProperties-path^string)
+      - schemaName: EntityReference
+        properties:
+          - propertyName: type(IntegrationRuntimeEntityReferenceType^choice)
+          - propertyName: referenceName(EntityReference-referenceName^string)
+      - schemaName: CustomSetupBase
+        discriminator: true
+        properties:
+          - propertyName: type(CustomSetupBase-type^string)
+      - schemaName: PackageStore
+        properties:
+          - propertyName: name(PackageStore-name^string)
+          - propertyName: packageStoreLinkedService(EntityReference^object)
+      - schemaName: CmdkeySetup
+        properties:
+          - propertyName: typeProperties(CmdkeySetupTypeProperties^object)
+            x-ms-client-flatten: true
+      - schemaName: CmdkeySetupTypeProperties
+        properties:
+          - propertyName: targetName(any^any)
+          - propertyName: userName(any^any)
+          - propertyName: password(SecretBase^object)
+      - schemaName: EnvironmentVariableSetup
+        properties:
+          - propertyName: typeProperties(EnvironmentVariableSetupTypeProperties^object)
+            x-ms-client-flatten: true
+      - schemaName: EnvironmentVariableSetupTypeProperties
+        properties:
+          - propertyName: variableName(EnvironmentVariableSetupTypeProperties-variableName^string)
+          - propertyName: variableValue(EnvironmentVariableSetupTypeProperties-variableValue^string)
+      - schemaName: ComponentSetup
+        properties:
+          - propertyName: typeProperties(LicensedComponentSetupTypeProperties^object)
+            x-ms-client-flatten: true
+      - schemaName: LicensedComponentSetupTypeProperties
+        properties:
+          - propertyName: componentName(LicensedComponentSetupTypeProperties-componentName^string)
+          - propertyName: licenseKey(SecretBase^object)
+      - schemaName: SelfHostedIntegrationRuntime
+        properties:
+          - propertyName: typeProperties(SelfHostedIntegrationRuntimeTypeProperties^object)
+            x-ms-client-flatten: true
+      - schemaName: SelfHostedIntegrationRuntimeTypeProperties
+        properties:
+          - propertyName: linkedInfo(LinkedIntegrationRuntimeType^object)
+      - schemaName: LinkedIntegrationRuntimeType
+        discriminator: true
+        properties:
+          - propertyName: authorizationType(LinkedIntegrationRuntimeType-authorizationType^string)
+      - schemaName: LinkedIntegrationRuntimeKeyAuthorization
+        properties:
+          - propertyName: key(SecureString^object)
+      - schemaName: LinkedIntegrationRuntimeRbacAuthorization
+        properties:
+          - propertyName: resourceId(LinkedIntegrationRuntimeRbacAuthorization-resourceId^string)
+      - schemaName: ManagedIntegrationRuntimeStatus
+        properties:
+          - propertyName: typeProperties(ManagedIntegrationRuntimeStatusTypeProperties^object)
+            x-ms-client-flatten: true
+      - schemaName: ManagedIntegrationRuntimeStatusTypeProperties
+        properties:
+          - propertyName: createTime(ManagedIntegrationRuntimeStatusTypeProperties-createTime^date-time)
+            readOnly: true
+          - propertyName: nodes(ManagedIntegrationRuntimeStatusTypeProperties-nodes^array)
+            readOnly: true
+          - propertyName: otherErrors(ManagedIntegrationRuntimeStatusTypeProperties-otherErrors^array)
+            readOnly: true
+          - propertyName: lastOperation(ManagedIntegrationRuntimeOperationResult^object)
+            readOnly: true
+      - schemaName: ManagedIntegrationRuntimeNode
+        properties:
+          - propertyName: nodeId(ManagedIntegrationRuntimeNode-nodeId^string)
+            readOnly: true
+          - propertyName: status(ManagedIntegrationRuntimeNodeStatus^choice)
+            readOnly: true
+          - propertyName: errors(ManagedIntegrationRuntimeNode-errors^array)
+      - schemaName: ManagedIntegrationRuntimeError
+        properties:
+          - propertyName: time(ManagedIntegrationRuntimeError-time^date-time)
+            readOnly: true
+          - propertyName: code(ManagedIntegrationRuntimeError-code^string)
+            readOnly: true
+          - propertyName: parameters(ManagedIntegrationRuntimeError-parameters^array)
+            readOnly: true
+          - propertyName: message(ManagedIntegrationRuntimeError-message^string)
+            readOnly: true
+      - schemaName: ManagedIntegrationRuntimeOperationResult
+        properties:
+          - propertyName: type(ManagedIntegrationRuntimeOperationResult-type^string)
+            readOnly: true
+          - propertyName: startTime(ManagedIntegrationRuntimeOperationResult-startTime^date-time)
+            readOnly: true
+          - propertyName: result(ManagedIntegrationRuntimeOperationResult-result^string)
+            readOnly: true
+          - propertyName: errorCode(ManagedIntegrationRuntimeOperationResult-errorCode^string)
+            readOnly: true
+          - propertyName: parameters(ManagedIntegrationRuntimeOperationResult-parameters^array)
+            readOnly: true
+          - propertyName: activityId(ManagedIntegrationRuntimeOperationResult-activityId^string)
+            readOnly: true
+      - schemaName: SelfHostedIntegrationRuntimeStatus
+        properties:
+          - propertyName: typeProperties(SelfHostedIntegrationRuntimeStatusTypeProperties^object)
+            x-ms-client-flatten: true
+      - schemaName: SelfHostedIntegrationRuntimeStatusTypeProperties
+        properties:
+          - propertyName: createTime(SelfHostedIntegrationRuntimeStatusTypeProperties-createTime^date-time)
+            readOnly: true
+          - propertyName: taskQueueId(SelfHostedIntegrationRuntimeStatusTypeProperties-taskQueueId^string)
+            readOnly: true
+          - propertyName: internalChannelEncryption(IntegrationRuntimeInternalChannelEncryptionMode^choice)
+            readOnly: true
+          - propertyName: version(SelfHostedIntegrationRuntimeStatusTypeProperties-version^string)
+            readOnly: true
+          - propertyName: nodes(SelfHostedIntegrationRuntimeStatusTypeProperties-nodes^array)
+          - propertyName: scheduledUpdateDate(SelfHostedIntegrationRuntimeStatusTypeProperties-scheduledUpdateDate^date-time)
+            readOnly: true
+          - propertyName: updateDelayOffset(SelfHostedIntegrationRuntimeStatusTypeProperties-updateDelayOffset^string)
+            readOnly: true
+          - propertyName: localTimeZoneOffset(SelfHostedIntegrationRuntimeStatusTypeProperties-localTimeZoneOffset^string)
+            readOnly: true
+          - propertyName: capabilities(SelfHostedIntegrationRuntimeStatusTypeProperties-capabilities^dictionary)
+            readOnly: true
+          - propertyName: serviceUrls(SelfHostedIntegrationRuntimeStatusTypeProperties-serviceUrls^array)
+            readOnly: true
+          - propertyName: autoUpdate(IntegrationRuntimeAutoUpdate^choice)
+            readOnly: true
+          - propertyName: versionStatus(SelfHostedIntegrationRuntimeStatusTypeProperties-versionStatus^string)
+            readOnly: true
+          - propertyName: links(SelfHostedIntegrationRuntimeStatusTypeProperties-links^array)
+          - propertyName: pushedVersion(SelfHostedIntegrationRuntimeStatusTypeProperties-pushedVersion^string)
+            readOnly: true
+          - propertyName: latestVersion(SelfHostedIntegrationRuntimeStatusTypeProperties-latestVersion^string)
+            readOnly: true
+          - propertyName: autoUpdateETA(SelfHostedIntegrationRuntimeStatusTypeProperties-autoUpdateETA^date-time)
+            readOnly: true
+      - schemaName: SelfHostedIntegrationRuntimeNode
+        properties:
+          - propertyName: nodeName(SelfHostedIntegrationRuntimeNode-nodeName^string)
+            readOnly: true
+          - propertyName: machineName(SelfHostedIntegrationRuntimeNode-machineName^string)
+            readOnly: true
+          - propertyName: hostServiceUri(SelfHostedIntegrationRuntimeNode-hostServiceUri^string)
+            readOnly: true
+          - propertyName: status(SelfHostedIntegrationRuntimeNodeStatus^choice)
+            readOnly: true
+          - propertyName: capabilities(SelfHostedIntegrationRuntimeNode-capabilities^dictionary)
+            readOnly: true
+          - propertyName: versionStatus(SelfHostedIntegrationRuntimeNode-versionStatus^string)
+            readOnly: true
+          - propertyName: version(SelfHostedIntegrationRuntimeNode-version^string)
+            readOnly: true
+          - propertyName: registerTime(SelfHostedIntegrationRuntimeNode-registerTime^date-time)
+            readOnly: true
+          - propertyName: lastConnectTime(SelfHostedIntegrationRuntimeNode-lastConnectTime^date-time)
+            readOnly: true
+          - propertyName: expiryTime(SelfHostedIntegrationRuntimeNode-expiryTime^date-time)
+            readOnly: true
+          - propertyName: lastStartTime(SelfHostedIntegrationRuntimeNode-lastStartTime^date-time)
+            readOnly: true
+          - propertyName: lastStopTime(SelfHostedIntegrationRuntimeNode-lastStopTime^date-time)
+            readOnly: true
+          - propertyName: lastUpdateResult(IntegrationRuntimeUpdateResult^choice)
+            readOnly: true
+          - propertyName: lastStartUpdateTime(SelfHostedIntegrationRuntimeNode-lastStartUpdateTime^date-time)
+            readOnly: true
+          - propertyName: lastEndUpdateTime(SelfHostedIntegrationRuntimeNode-lastEndUpdateTime^date-time)
+            readOnly: true
+          - propertyName: isActiveDispatcher(boolean^boolean)
+            readOnly: true
+          - propertyName: concurrentJobsLimit(integer^integer)
+            readOnly: true
+          - propertyName: maxConcurrentJobs(integer^integer)
+            readOnly: true
+      - schemaName: LinkedIntegrationRuntime
+        properties:
+          - propertyName: name(LinkedIntegrationRuntime-name^string)
+            readOnly: true
+          - propertyName: subscriptionId(LinkedIntegrationRuntime-subscriptionId^string)
+            readOnly: true
+          - propertyName: dataFactoryName(LinkedIntegrationRuntime-dataFactoryName^string)
+            readOnly: true
+          - propertyName: dataFactoryLocation(LinkedIntegrationRuntime-dataFactoryLocation^string)
+            readOnly: true
+          - propertyName: createTime(LinkedIntegrationRuntime-createTime^date-time)
+            readOnly: true
+      - schemaName: IntegrationRuntimeNodeIpAddress
+        properties:
+          - propertyName: ipAddress(IntegrationRuntimeNodeIpAddress-ipAddress^string)
+            readOnly: true
+      - schemaName: SsisObjectMetadataListResponse
+        properties:
+          - propertyName: value(SsisObjectMetadataListResponse-value^array)
+          - propertyName: nextLink(SsisObjectMetadataListResponse-nextLink^string)
+      - schemaName: SsisObjectMetadata
+        discriminator: true
+        properties:
+          - propertyName: type(SsisObjectMetadataType^choice)
+          - propertyName: id(integer^integer)
+          - propertyName: name(SsisObjectMetadata-name^string)
+          - propertyName: description(SsisObjectMetadata-description^string)
+      - schemaName: SsisFolder
+      - schemaName: SsisProject
+        properties:
+          - propertyName: folderId(integer^integer)
+          - propertyName: version(integer^integer)
+          - propertyName: environmentRefs(SsisProject-environmentRefs^array)
+          - propertyName: parameters(SsisProject-parameters^array)
+      - schemaName: SsisEnvironmentReference
+        properties:
+          - propertyName: id(integer^integer)
+          - propertyName: environmentFolderName(SsisEnvironmentReference-environmentFolderName^string)
+          - propertyName: environmentName(SsisEnvironmentReference-environmentName^string)
+          - propertyName: referenceType(SsisEnvironmentReference-referenceType^string)
+      - schemaName: SsisParameter
+        properties:
+          - propertyName: id(integer^integer)
+          - propertyName: name(SsisParameter-name^string)
+          - propertyName: description(SsisParameter-description^string)
+          - propertyName: dataType(SsisParameter-dataType^string)
+          - propertyName: required(boolean^boolean)
+          - propertyName: sensitive(boolean^boolean)
+          - propertyName: designDefaultValue(SsisParameter-designDefaultValue^string)
+          - propertyName: defaultValue(SsisParameter-defaultValue^string)
+          - propertyName: sensitiveDefaultValue(SsisParameter-sensitiveDefaultValue^string)
+          - propertyName: valueType(SsisParameter-valueType^string)
+          - propertyName: valueSet(boolean^boolean)
+          - propertyName: variable(SsisParameter-variable^string)
+      - schemaName: SsisPackage
+        properties:
+          - propertyName: folderId(integer^integer)
+          - propertyName: projectVersion(integer^integer)
+          - propertyName: projectId(integer^integer)
+          - propertyName: parameters(SsisPackage-parameters^array)
+      - schemaName: SsisEnvironment
+        properties:
+          - propertyName: folderId(integer^integer)
+          - propertyName: variables(SsisEnvironment-variables^array)
+      - schemaName: SsisVariable
+        properties:
+          - propertyName: id(integer^integer)
+          - propertyName: name(SsisVariable-name^string)
+          - propertyName: description(SsisVariable-description^string)
+          - propertyName: dataType(SsisVariable-dataType^string)
+          - propertyName: sensitive(boolean^boolean)
+          - propertyName: value(SsisVariable-value^string)
+          - propertyName: sensitiveValue(SsisVariable-sensitiveValue^string)
+  choices:
+    all:
+      - choiceName: TriggerRuntimeState
+        choiceValues:
+          - choiceValue: Started
+          - choiceValue: Stopped
+          - choiceValue: Disabled
+      - choiceName: EventSubscriptionStatus
+        choiceValues:
+          - choiceValue: Enabled
+          - choiceValue: Provisioning
+          - choiceValue: Deprovisioning
+          - choiceValue: Disabled
+          - choiceValue: Unknown
+      - choiceName: IntegrationRuntimeType
+        choiceValues:
+          - choiceValue: Managed
+          - choiceValue: SelfHosted
+      - choiceName: IntegrationRuntimeAutoUpdate
+        choiceValues:
+          - choiceValue: On
+          - choiceValue: Off
+      - choiceName: IntegrationRuntimeState
+        choiceValues:
+          - choiceValue: Initial
+          - choiceValue: Stopped
+          - choiceValue: Started
+          - choiceValue: Starting
+          - choiceValue: Stopping
+          - choiceValue: NeedRegistration
+          - choiceValue: Online
+          - choiceValue: Limited
+          - choiceValue: Offline
+          - choiceValue: AccessDenied
+      - choiceName: IntegrationRuntimeAuthKeyName
+        choiceValues:
+          - choiceValue: authKey1
+          - choiceValue: authKey2
+      - choiceName: RecurrenceFrequency
+        choiceValues:
+          - choiceValue: NotSpecified
+          - choiceValue: Minute
+          - choiceValue: Hour
+          - choiceValue: Day
+          - choiceValue: Week
+          - choiceValue: Month
+          - choiceValue: Year
+      - choiceName: BlobEventTypes
+        choiceValues:
+          - choiceValue: Microsoft.Storage.BlobCreated
+          - choiceValue: Microsoft.Storage.BlobDeleted
+      - choiceName: TumblingWindowFrequency
+        choiceValues:
+          - choiceValue: Minute
+          - choiceValue: Hour
+      - choiceName: DataFlowComputeType
+        choiceValues:
+          - choiceValue: General
+          - choiceValue: MemoryOptimized
+          - choiceValue: ComputeOptimized
+      - choiceName: IntegrationRuntimeSsisCatalogPricingTier
+        choiceValues:
+          - choiceValue: Basic
+          - choiceValue: Standard
+          - choiceValue: Premium
+          - choiceValue: PremiumRS
+      - choiceName: IntegrationRuntimeLicenseType
+        choiceValues:
+          - choiceValue: BasePrice
+          - choiceValue: LicenseIncluded
+      - choiceName: IntegrationRuntimeEntityReferenceType
+        choiceValues:
+          - choiceValue: IntegrationRuntimeReference
+          - choiceValue: LinkedServiceReference
+      - choiceName: IntegrationRuntimeEdition
+        choiceValues:
+          - choiceValue: Standard
+          - choiceValue: Enterprise
+      - choiceName: ManagedIntegrationRuntimeNodeStatus
+        choiceValues:
+          - choiceValue: Starting
+          - choiceValue: Available
+          - choiceValue: Recycling
+          - choiceValue: Unavailable
+      - choiceName: IntegrationRuntimeInternalChannelEncryptionMode
+        choiceValues:
+          - choiceValue: NotSet
+          - choiceValue: SslEncrypted
+          - choiceValue: NotEncrypted
+      - choiceName: SelfHostedIntegrationRuntimeNodeStatus
+        choiceValues:
+          - choiceValue: NeedRegistration
+          - choiceValue: Online
+          - choiceValue: Limited
+          - choiceValue: Offline
+          - choiceValue: Upgrading
+          - choiceValue: Initializing
+          - choiceValue: InitializeFailed
+      - choiceName: IntegrationRuntimeUpdateResult
+        choiceValues:
+          - choiceValue: None
+          - choiceValue: Succeed
+          - choiceValue: Fail
+      - choiceName: SsisObjectMetadataType
+        choiceValues:
+          - choiceValue: Folder
+          - choiceValue: Project
+          - choiceValue: Package
+          - choiceValue: Environment
+      - choiceName: DaysOfWeek
+        choiceValues:
+          - choiceValue: Sunday
+          - choiceValue: Monday
+          - choiceValue: Tuesday
+          - choiceValue: Wednesday
+          - choiceValue: Thursday
+          - choiceValue: Friday
+          - choiceValue: Saturday
+      - choiceName: DayOfWeek
+        choiceValues:
+          - choiceValue: Sunday
+          - choiceValue: Monday
+          - choiceValue: Tuesday
+          - choiceValue: Wednesday
+          - choiceValue: Thursday
+          - choiceValue: Friday
+          - choiceValue: Saturday

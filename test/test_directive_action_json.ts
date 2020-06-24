@@ -1,9 +1,8 @@
 import { assert } from 'chai';
 import 'mocha';
-import { ActionSet, ActionFlatten } from '../src/plugins/modifier/cliDirectiveAction';
+import { ActionSet, ActionFlatten, ActionJson } from '../src/plugins/modifier/cliDirectiveAction';
 import { M4Node } from '../src/schema';
 import { Metadata } from "@azure-tools/codemodel";
-import { ActionJson } from '../dist/src/plugins/modifier/cliDirectiveAction';
 import { NodeHelper, NodeExtensionHelper } from '../src/nodeHelper';
 
 describe('Test Directive - Action - json', function () {

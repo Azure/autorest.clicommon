@@ -2,23 +2,23 @@ trigger:
 - master
 
 variables:
-  NodeVersion: '10.x'
+  NodeVersion: '12.x'
 
 jobs:
 
-  - job: Linter
-    pool:
-      vmImage: 'vs2017-win2016'
-    steps:
-      - task: TSLint@1
-        inputs:
-          RuleLibrary: 'tslint'
-          Ruleset: 'tsrecommended'
-          FileSelectionType: 'fileGlob'
-          Files: '**\*.ts'
-          OutputFormat: 'json'
-          ToolVersion: 'latest'
-          TypeScriptVersion: 'latest'
+  # - job: Linter
+  #   pool:
+  #     vmImage: 'vs2017-win2016'
+  #   steps:
+  #     - task: TSLint@1
+  #       inputs:
+  #         RuleLibrary: 'tslint'
+  #         Ruleset: 'tsrecommended'
+  #         FileSelectionType: 'fileGlob'
+  #         Files: '**\*.ts'
+  #         OutputFormat: 'json'
+  #         ToolVersion: 'latest'
+  #         TypeScriptVersion: 'latest'
 
   - job: 'Build'
 
@@ -34,16 +34,21 @@ jobs:
       - task: Npm@1
         displayName: 'npm install'
         inputs:
-          verbose: false
+          verbose: true
 
-      - script: 'npx @microsoft/rush sync-versions && npx @microsoft/rush update && npx @microsoft/rush rebuild'
+      - script: 'npm run eslint'
+        displayName: 'npm run eslint'
+
+      - script: 'npm run build'
         displayName: 'npm build'
 
       - script: 'npm test'
         displayName: 'npm test'
 
-      - script: 'npx @microsoft/rush publish --publish --pack --include-all --tag latest'
+      - script: 'npm pack'
         displayName: 'npm pack'
+
+
 
   - job: 'Analyze'
 
@@ -68,29 +73,29 @@ jobs:
           command: custom
           customCommand: 'audit'
 
-  - job: Windows
-    displayName: credentialScan
-    pool:
-      vmImage: "windows-2019"
+  # - job: Windows
+  #   displayName: credentialScan
+  #   pool:
+  #     vmImage: "windows-2019"
 
-    steps:
-      - task: CredScan@2
-        inputs:
-          toolMajorVersion: 'V2'
+  #   steps:
+  #     - task: CredScan@2
+  #       inputs:
+  #         toolMajorVersion: 'V2'
 
-      - task: PostAnalysis@1
-        inputs:
-          AllTools: false
-          APIScan: false
-          BinSkim: false
-          CodesignValidation: false
-          CredScan: true
-          FortifySCA: false
-          FxCop: false
-          ModernCop: false
-          PoliCheck: false
-          RoslynAnalyzers: false
-          SDLNativeRules: false
-          Semmle: false
-          TSLint: false
-          ToolLogsNotFoundAction: 'Standard'
+  #     - task: PostAnalysis@1
+  #       inputs:
+  #         AllTools: false
+  #         APIScan: false
+  #         BinSkim: false
+  #         CodesignValidation: false
+  #         CredScan: true
+  #         FortifySCA: false
+  #         FxCop: false
+  #         ModernCop: false
+  #         PoliCheck: false
+  #         RoslynAnalyzers: false
+  #         SDLNativeRules: false
+  #         Semmle: false
+  #         TSLint: false
+  #         ToolLogsNotFoundAction: 'Standard'

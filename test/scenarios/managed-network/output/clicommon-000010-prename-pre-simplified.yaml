@@ -1,0 +1,286 @@
+operationGroups:
+  all:
+    - operationGroupName: ManagedNetworks
+      operations:
+        - operationName: GetModify
+          parameters:
+            - parameterName: $host(string^string)
+            - parameterName: ApiVersion(ApiVersion-2019-06-01-preview^constant)
+            - parameterName: subscriptionId(string^string)
+            - parameterName: resourceGroupName(string^string)
+            - parameterName: managedNetworkName(string^string)
+        - operationName: CreateOrUpdate
+          parameters:
+            - parameterName: $host(string^string)
+            - parameterName: ApiVersion(ApiVersion-2019-06-01-preview^constant)
+            - parameterName: subscriptionId(string^string)
+            - parameterName: resourceGroupName(string^string)
+            - parameterName: managedNetworkName(string^string)
+            - parameterName[0]: managedNetwork(ManagedNetwork^object)
+              bodySchema: ManagedNetwork
+        - operationName: Delete
+          parameters:
+            - parameterName: $host(string^string)
+            - parameterName: ApiVersion(ApiVersion-2019-06-01-preview^constant)
+            - parameterName: subscriptionId(string^string)
+            - parameterName: resourceGroupName(string^string)
+            - parameterName: managedNetworkName(string^string)
+        - operationName: Update
+          parameters:
+            - parameterName: $host(string^string)
+            - parameterName: ApiVersion(ApiVersion-2019-06-01-preview^constant)
+            - parameterName: subscriptionId(string^string)
+            - parameterName: resourceGroupName(string^string)
+            - parameterName: managedNetworkName(string^string)
+            - parameterName[0]: parameters(ManagedNetworkUpdate^object)
+              bodySchema: ManagedNetworkUpdate
+        - operationName: ListByResourceGroup
+          parameters:
+            - parameterName: $host(string^string)
+            - parameterName: ApiVersion(ApiVersion-2019-06-01-preview^constant)
+            - parameterName: subscriptionId(string^string)
+            - parameterName: resourceGroupName(string^string)
+            - parameterName: $top(integer^integer)
+            - parameterName: $skiptoken(string^string)
+        - operationName: ListBySubscription
+          parameters:
+            - parameterName: $host(string^string)
+            - parameterName: ApiVersion(ApiVersion-2019-06-01-preview^constant)
+            - parameterName: subscriptionId(string^string)
+            - parameterName: $top(integer^integer)
+            - parameterName: $skiptoken(string^string)
+    - operationGroupName: ScopeAssignments
+      operations:
+        - operationName: Get
+          parameters:
+            - parameterName: $host(string^string)
+            - parameterName: scope(string^string)
+            - parameterName: scopeAssignmentName(string^string)
+            - parameterName: ApiVersion(ApiVersion-2019-06-01-preview^constant)
+        - operationName: CreateOrUpdate
+          parameters:
+            - parameterName: $host(string^string)
+            - parameterName: scope(string^string)
+            - parameterName: scopeAssignmentName(string^string)
+            - parameterName: ApiVersion(ApiVersion-2019-06-01-preview^constant)
+            - parameterName[0]: parameters(ScopeAssignment^object)
+              bodySchema: ScopeAssignment
+        - operationName: Delete
+          parameters:
+            - parameterName: $host(string^string)
+            - parameterName: scope(string^string)
+            - parameterName: scopeAssignmentName(string^string)
+            - parameterName: ApiVersion(ApiVersion-2019-06-01-preview^constant)
+        - operationName: List
+          parameters:
+            - parameterName: $host(string^string)
+            - parameterName: scope(string^string)
+            - parameterName: ApiVersion(ApiVersion-2019-06-01-preview^constant)
+    - operationGroupName: ManagedNetworkGroups
+      operations:
+        - operationName: Get
+          parameters:
+            - parameterName: $host(string^string)
+            - parameterName: ApiVersion(ApiVersion-2019-06-01-preview^constant)
+            - parameterName: subscriptionId(string^string)
+            - parameterName: resourceGroupName(string^string)
+            - parameterName: managedNetworkName(string^string)
+            - parameterName: managedNetworkGroupName(string^string)
+        - operationName: CreateOrUpdate
+          parameters:
+            - parameterName: $host(string^string)
+            - parameterName: ApiVersion(ApiVersion-2019-06-01-preview^constant)
+            - parameterName: subscriptionId(string^string)
+            - parameterName: resourceGroupName(string^string)
+            - parameterName: managedNetworkName(string^string)
+            - parameterName: managedNetworkGroupName(string^string)
+            - parameterName[0]: managedNetworkGroup(ManagedNetworkGroup^object)
+              bodySchema: ManagedNetworkGroup
+        - operationName: Delete
+          parameters:
+            - parameterName: $host(string^string)
+            - parameterName: ApiVersion(ApiVersion-2019-06-01-preview^constant)
+            - parameterName: subscriptionId(string^string)
+            - parameterName: resourceGroupName(string^string)
+            - parameterName: managedNetworkName(string^string)
+            - parameterName: managedNetworkGroupName(string^string)
+        - operationName: ListByManagedNetwork
+          parameters:
+            - parameterName: $host(string^string)
+            - parameterName: ApiVersion(ApiVersion-2019-06-01-preview^constant)
+            - parameterName: subscriptionId(string^string)
+            - parameterName: resourceGroupName(string^string)
+            - parameterName: managedNetworkName(string^string)
+            - parameterName: $top(integer^integer)
+            - parameterName: $skiptoken(string^string)
+    - operationGroupName: ManagedNetworkPeeringPolicies
+      operations:
+        - operationName: Get
+          parameters:
+            - parameterName: $host(string^string)
+            - parameterName: ApiVersion(ApiVersion-2019-06-01-preview^constant)
+            - parameterName: subscriptionId(string^string)
+            - parameterName: resourceGroupName(string^string)
+            - parameterName: managedNetworkName(string^string)
+            - parameterName: managedNetworkPeeringPolicyName(string^string)
+        - operationName: CreateOrUpdate
+          parameters:
+            - parameterName: $host(string^string)
+            - parameterName: ApiVersion(ApiVersion-2019-06-01-preview^constant)
+            - parameterName: subscriptionId(string^string)
+            - parameterName: resourceGroupName(string^string)
+            - parameterName: managedNetworkName(string^string)
+            - parameterName: managedNetworkPeeringPolicyName(string^string)
+            - parameterName[0]: managedNetworkPolicy(ManagedNetworkPeeringPolicy^object)
+              bodySchema: ManagedNetworkPeeringPolicy
+        - operationName: Delete
+          parameters:
+            - parameterName: $host(string^string)
+            - parameterName: ApiVersion(ApiVersion-2019-06-01-preview^constant)
+            - parameterName: subscriptionId(string^string)
+            - parameterName: resourceGroupName(string^string)
+            - parameterName: managedNetworkName(string^string)
+            - parameterName: managedNetworkPeeringPolicyName(string^string)
+        - operationName: ListByManagedNetwork
+          parameters:
+            - parameterName: $host(string^string)
+            - parameterName: ApiVersion(ApiVersion-2019-06-01-preview^constant)
+            - parameterName: subscriptionId(string^string)
+            - parameterName: resourceGroupName(string^string)
+            - parameterName: managedNetworkName(string^string)
+            - parameterName: $top(integer^integer)
+            - parameterName: $skiptoken(string^string)
+    - operationGroupName: Operations
+      operations:
+        - operationName: List
+          parameters:
+            - parameterName: $host(string^string)
+            - parameterName: ApiVersion(ApiVersion-2019-06-01-preview^constant)
+schemas:
+  objects:
+    all:
+      - schemaName: Resource
+        properties:
+          - propertyName: id(Resource-id^string)
+            readOnly: true
+          - propertyName: name(Resource-name^string)
+            readOnly: true
+          - propertyName: type(Resource-type^string)
+            readOnly: true
+          - propertyName: location(Resource-location^string)
+      - schemaName: TrackedResource
+        properties:
+          - propertyName: tags(TrackedResource-tags^dictionary)
+      - schemaName: ManagedNetwork
+        properties:
+          - propertyName: properties(ManagedNetworkProperties^object)
+            x-ms-client-flatten: true
+      - schemaName: ResourceProperties
+        properties:
+          - propertyName: provisioningState(ProvisioningState^choice)
+            readOnly: true
+          - propertyName: etag(ResourceProperties-etag^string)
+            readOnly: true
+      - schemaName: ManagedNetworkProperties
+        properties:
+          - propertyName: scope(Scope^object)
+            x-ms-client-flatten: true
+          - propertyName: connectivity(ConnectivityCollection^object)
+            x-ms-client-flatten: true
+            readOnly: true
+      - schemaName: Scope
+        properties:
+          - propertyName: managementGroups(Scope-managementGroups^array)
+          - propertyName: subscriptions(Scope-subscriptions^array)
+          - propertyName: virtualNetworks(Scope-virtualNetworks^array)
+          - propertyName: subnets(Scope-subnets^array)
+      - schemaName: ResourceId
+        properties:
+          - propertyName: id(ResourceId-id^string)
+      - schemaName: ConnectivityCollection
+        properties:
+          - propertyName: groups(ConnectivityCollection-groups^array)
+            readOnly: true
+          - propertyName: peerings(ConnectivityCollection-peerings^array)
+            readOnly: true
+      - schemaName: ManagedNetworkGroup
+        properties:
+          - propertyName: properties(ManagedNetworkGroupProperties^object)
+            x-ms-client-flatten: true
+          - propertyName: kind(Kind^constant)
+      - schemaName: ManagedNetworkGroupProperties
+        properties:
+          - propertyName: managementGroups(ManagedNetworkGroupProperties-managementGroups^array)
+          - propertyName: subscriptions(ManagedNetworkGroupProperties-subscriptions^array)
+          - propertyName: virtualNetworks(ManagedNetworkGroupProperties-virtualNetworks^array)
+          - propertyName: subnets(ManagedNetworkGroupProperties-subnets^array)
+      - schemaName: ManagedNetworkPeeringPolicy
+        properties:
+          - propertyName: properties(ManagedNetworkPeeringPolicyProperties^object)
+      - schemaName: ManagedNetworkPeeringPolicyProperties
+        discriminator: true
+        properties:
+          - propertyName: type(type^choice)
+          - propertyName: hub(ResourceId^object)
+          - propertyName: spokes(ManagedNetworkPeeringPolicyProperties-spokes^array)
+          - propertyName: mesh(ManagedNetworkPeeringPolicyProperties-mesh^array)
+      - schemaName: ErrorResponse
+        properties:
+          - propertyName: code(ErrorResponse-code^string)
+            readOnly: true
+          - propertyName: message(ErrorResponse-message^string)
+            readOnly: true
+      - schemaName: ManagedNetworkUpdate
+        properties:
+          - propertyName: tags(ManagedNetworkUpdate-tags^dictionary)
+      - schemaName: ManagedNetworkListResult
+        properties:
+          - propertyName: value(ManagedNetworkListResult-value^array)
+          - propertyName: nextLink(ManagedNetworkListResult-nextLink^string)
+      - schemaName: ScopeAssignment
+        properties:
+          - propertyName: properties(ScopeAssignmentProperties^object)
+            x-ms-client-flatten: true
+      - schemaName: ScopeAssignmentProperties
+        properties:
+          - propertyName: assignedManagedNetwork(ScopeAssignmentProperties-assignedManagedNetwork^string)
+      - schemaName: ScopeAssignmentListResult
+        properties:
+          - propertyName: value(ScopeAssignmentListResult-value^array)
+          - propertyName: nextLink(ScopeAssignmentListResult-nextLink^string)
+      - schemaName: ManagedNetworkGroupListResult
+        properties:
+          - propertyName: value(ManagedNetworkGroupListResult-value^array)
+          - propertyName: nextLink(ManagedNetworkGroupListResult-nextLink^string)
+      - schemaName: ManagedNetworkPeeringPolicyListResult
+        properties:
+          - propertyName: value(ManagedNetworkPeeringPolicyListResult-value^array)
+          - propertyName: nextLink(ManagedNetworkPeeringPolicyListResult-nextLink^string)
+      - schemaName: OperationListResult
+        properties:
+          - propertyName: value(OperationListResult-value^array)
+          - propertyName: nextLink(OperationListResult-nextLink^string)
+      - schemaName: Operation
+        properties:
+          - propertyName: name(Operation-name^string)
+          - propertyName: display(Operation-display^object)
+      - schemaName: Operation-display
+        properties:
+          - propertyName: provider(Operation-display-provider^string)
+          - propertyName: resource(Operation-display-resource^string)
+          - propertyName: operation(Operation-display-operation^string)
+      - schemaName: HubAndSpokePeeringPolicyProperties
+      - schemaName: MeshPeeringPolicyProperties
+      - schemaName: ProxyResource
+  choices:
+    all:
+      - choiceName: ProvisioningState
+        choiceValues:
+          - choiceValue: Updating
+          - choiceValue: Deleting
+          - choiceValue: Failed
+          - choiceValue: Succeeded
+      - choiceName: type
+        choiceValues:
+          - choiceValue: HubAndSpokeTopology
+          - choiceValue: MeshTopology
