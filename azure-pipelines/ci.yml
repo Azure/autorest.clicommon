@@ -42,8 +42,13 @@ jobs:
       - script: 'npm test'
         displayName: 'npm test'
 
+      - script: 'npm run eslint'
+        displayName: 'npm run eslint'
+
       - script: 'npx @microsoft/rush publish --publish --pack --include-all --tag latest'
         displayName: 'npm pack'
+
+
 
   - job: 'Analyze'
 
