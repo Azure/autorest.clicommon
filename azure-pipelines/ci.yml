@@ -34,18 +34,18 @@ jobs:
       - task: Npm@1
         displayName: 'npm install'
         inputs:
-          verbose: false
+          verbose: true
 
-      - script: 'npx @microsoft/rush sync-versions && npx @microsoft/rush update && npx @microsoft/rush rebuild'
+      - script: 'npm run eslint'
+        displayName: 'npm run eslint'
+
+      - script: 'npm run build'
         displayName: 'npm build'
 
       - script: 'npm test'
         displayName: 'npm test'
 
-      - script: 'npm run eslint'
-        displayName: 'npm run eslint'
-
-      - script: 'npx @microsoft/rush publish --publish --pack --include-all --tag latest'
+      - script: 'npm pack'
         displayName: 'npm pack'
 
 

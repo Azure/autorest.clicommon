@@ -14,7 +14,6 @@
         "start-testserver": "./node_modules/.bin/start-autorest-testserver",
         "stop-testserver": "./node_modules/.bin/stop-autorest-testserver",
         "watch": "tsc -p . --watch",
-        "prepare": "npm run build",
         "test": "npm run build && mocha",
         "clean": "ver > nul 2>&1 nul && npm run --silent clean-cmd || npm run --silent clean-bash",
         "clean-cmd": "if exist dist rmdir /s /q dist && exit 0 || exit 0 ",
