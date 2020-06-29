@@ -1,419 +1,424 @@
 operationGroups:
   all:
-    - operationGroupName: managed_networks
+    - operationGroupName: ManagedNetworks
       cli:
         cliKey: ManagedNetworks
+        name: ManagedNetwork
       operations:
-        - operationName: get_modify
+        - operationName: GetModify
           cli:
             cliKey: GetModify
           parameters:
-            - parameterName: $host(string^string)
+            - parameterName: $host(String^string)
               cli:
                 cliKey: $host
-            - parameterName: apiVersion(api_version2019_06_01_preview^constant)
+            - parameterName: Apiversion(ApiVersion20190601Preview^constant)
               cli:
                 cliKey: ApiVersion
-            - parameterName: SubscriptionId(string^string)
+            - parameterName: SubscriptionId(String^string)
               cli:
                 cliKey: subscriptionId
-            - parameterName: resource_group_name(string^string)
+            - parameterName: resourceGroupName(String^string)
               cli:
                 cliKey: resourceGroupName
-            - parameterName: managed_network_name(string^string)
+            - parameterName: managedNetworkName(String^string)
               cli:
                 cliKey: managedNetworkName
-        - operationName: create_or_update
+        - operationName: CreateOrUpdate
           cli:
             cliKey: CreateOrUpdate
           parameters:
-            - parameterName: $host(string^string)
+            - parameterName: $host(String^string)
               cli:
                 cliKey: $host
-            - parameterName: apiVersion(api_version2019_06_01_preview^constant)
+            - parameterName: Apiversion(ApiVersion20190601Preview^constant)
               cli:
                 cliKey: ApiVersion
-            - parameterName: SubscriptionId(string^string)
+            - parameterName: SubscriptionId(String^string)
               cli:
                 cliKey: subscriptionId
-            - parameterName: resource_group_name(string^string)
+            - parameterName: resourceGroupName(String^string)
               cli:
                 cliKey: resourceGroupName
-            - parameterName: managed_network_name(string^string)
+            - parameterName: managedNetworkName(String^string)
               cli:
                 cliKey: managedNetworkName
-            - parameterName[0]: managed_network(managed_network^object)
+            - parameterName[0]: managedNetwork(ManagedNetwork^object)
               cli:
                 cliKey: managedNetwork
-              bodySchema: managed_network
-        - operationName: delete
+              bodySchema: ManagedNetwork
+        - operationName: Delete
           cli:
             cliKey: Delete
           parameters:
-            - parameterName: $host(string^string)
+            - parameterName: $host(String^string)
               cli:
                 cliKey: $host
-            - parameterName: apiVersion(api_version2019_06_01_preview^constant)
+            - parameterName: Apiversion(ApiVersion20190601Preview^constant)
               cli:
                 cliKey: ApiVersion
-            - parameterName: SubscriptionId(string^string)
+            - parameterName: SubscriptionId(String^string)
               cli:
                 cliKey: subscriptionId
-            - parameterName: resource_group_name(string^string)
+            - parameterName: resourceGroupName(String^string)
               cli:
                 cliKey: resourceGroupName
-            - parameterName: managed_network_name(string^string)
+            - parameterName: managedNetworkName(String^string)
               cli:
                 cliKey: managedNetworkName
-        - operationName: update
+        - operationName: Update
           cli:
             cliKey: Update
           parameters:
-            - parameterName: $host(string^string)
+            - parameterName: $host(String^string)
               cli:
                 cliKey: $host
-            - parameterName: apiVersion(api_version2019_06_01_preview^constant)
+            - parameterName: Apiversion(ApiVersion20190601Preview^constant)
               cli:
                 cliKey: ApiVersion
-            - parameterName: SubscriptionId(string^string)
+            - parameterName: SubscriptionId(String^string)
               cli:
                 cliKey: subscriptionId
-            - parameterName: resource_group_name(string^string)
+            - parameterName: resourceGroupName(String^string)
               cli:
                 cliKey: resourceGroupName
-            - parameterName: managed_network_name(string^string)
+            - parameterName: managedNetworkName(String^string)
               cli:
                 cliKey: managedNetworkName
-            - parameterName[0]: parameters(managed_network_update^object)
+            - parameterName[0]: parameters(ManagedNetworkUpdate^object)
               cli:
                 cliKey: parameters
-              bodySchema: managed_network_update
-        - operationName: list_by_resource_group
+              bodySchema: ManagedNetworkUpdate
+        - operationName: ListByResourceGroup
           cli:
             cliKey: ListByResourceGroup
           parameters:
-            - parameterName: $host(string^string)
+            - parameterName: $host(String^string)
               cli:
                 cliKey: $host
-            - parameterName: apiVersion(api_version2019_06_01_preview^constant)
+            - parameterName: Apiversion(ApiVersion20190601Preview^constant)
               cli:
                 cliKey: ApiVersion
-            - parameterName: SubscriptionId(string^string)
+            - parameterName: SubscriptionId(String^string)
               cli:
                 cliKey: subscriptionId
-            - parameterName: resource_group_name(string^string)
+            - parameterName: resourceGroupName(String^string)
               cli:
                 cliKey: resourceGroupName
-            - parameterName: top(integer^integer)
+            - parameterName: top(Integer^integer)
               cli:
                 cliKey: $top
-            - parameterName: skiptoken(string^string)
+            - parameterName: skiptoken(String^string)
               cli:
                 cliKey: $skiptoken
-        - operationName: list_by_subscription
+        - operationName: ListBySubscription
           cli:
             cliKey: ListBySubscription
           parameters:
-            - parameterName: $host(string^string)
+            - parameterName: $host(String^string)
               cli:
                 cliKey: $host
-            - parameterName: apiVersion(api_version2019_06_01_preview^constant)
+            - parameterName: Apiversion(ApiVersion20190601Preview^constant)
               cli:
                 cliKey: ApiVersion
-            - parameterName: SubscriptionId(string^string)
+            - parameterName: SubscriptionId(String^string)
               cli:
                 cliKey: subscriptionId
-            - parameterName: top(integer^integer)
+            - parameterName: top(Integer^integer)
               cli:
                 cliKey: $top
-            - parameterName: skiptoken(string^string)
+            - parameterName: skiptoken(String^string)
               cli:
                 cliKey: $skiptoken
-    - operationGroupName: scope_assignments
+    - operationGroupName: ScopeAssignments
       cli:
         cliKey: ScopeAssignments
+        name: ScopeAssignment
       operations:
-        - operationName: get
+        - operationName: Get
           cli:
             cliKey: Get
           parameters:
-            - parameterName: $host(string^string)
+            - parameterName: $host(String^string)
               cli:
                 cliKey: $host
-            - parameterName: scope(string^string)
+            - parameterName: scope(String^string)
               cli:
                 cliKey: scope
-            - parameterName: scope_assignment_name(string^string)
+            - parameterName: scopeAssignmentName(String^string)
               cli:
                 cliKey: scopeAssignmentName
-            - parameterName: apiVersion(api_version2019_06_01_preview^constant)
+            - parameterName: Apiversion(ApiVersion20190601Preview^constant)
               cli:
                 cliKey: ApiVersion
-        - operationName: create_or_update
+        - operationName: CreateOrUpdate
           cli:
             cliKey: CreateOrUpdate
           parameters:
-            - parameterName: $host(string^string)
+            - parameterName: $host(String^string)
               cli:
                 cliKey: $host
-            - parameterName: scope(string^string)
+            - parameterName: scope(String^string)
               cli:
                 cliKey: scope
-            - parameterName: scope_assignment_name(string^string)
+            - parameterName: scopeAssignmentName(String^string)
               cli:
                 cliKey: scopeAssignmentName
-            - parameterName: apiVersion(api_version2019_06_01_preview^constant)
+            - parameterName: Apiversion(ApiVersion20190601Preview^constant)
               cli:
                 cliKey: ApiVersion
-            - parameterName[0]: parameters(scope_assignment^object)
+            - parameterName[0]: parameters(ScopeAssignment^object)
               cli:
                 cliKey: parameters
-              bodySchema: scope_assignment
-        - operationName: delete
+              bodySchema: ScopeAssignment
+        - operationName: Delete
           cli:
             cliKey: Delete
           parameters:
-            - parameterName: $host(string^string)
+            - parameterName: $host(String^string)
               cli:
                 cliKey: $host
-            - parameterName: scope(string^string)
+            - parameterName: scope(String^string)
               cli:
                 cliKey: scope
-            - parameterName: scope_assignment_name(string^string)
+            - parameterName: scopeAssignmentName(String^string)
               cli:
                 cliKey: scopeAssignmentName
-            - parameterName: apiVersion(api_version2019_06_01_preview^constant)
+            - parameterName: Apiversion(ApiVersion20190601Preview^constant)
               cli:
                 cliKey: ApiVersion
-        - operationName: list
+        - operationName: List
           cli:
             cliKey: List
           parameters:
-            - parameterName: $host(string^string)
+            - parameterName: $host(String^string)
               cli:
                 cliKey: $host
-            - parameterName: scope(string^string)
+            - parameterName: scope(String^string)
               cli:
                 cliKey: scope
-            - parameterName: apiVersion(api_version2019_06_01_preview^constant)
+            - parameterName: Apiversion(ApiVersion20190601Preview^constant)
               cli:
                 cliKey: ApiVersion
-    - operationGroupName: managed_network_groups
+    - operationGroupName: ManagedNetworkGroups
       cli:
         cliKey: ManagedNetworkGroups
+        name: ManagedNetworkGroup
       operations:
-        - operationName: get
+        - operationName: Get
           cli:
             cliKey: Get
           parameters:
-            - parameterName: $host(string^string)
+            - parameterName: $host(String^string)
               cli:
                 cliKey: $host
-            - parameterName: apiVersion(api_version2019_06_01_preview^constant)
+            - parameterName: Apiversion(ApiVersion20190601Preview^constant)
               cli:
                 cliKey: ApiVersion
-            - parameterName: SubscriptionId(string^string)
+            - parameterName: SubscriptionId(String^string)
               cli:
                 cliKey: subscriptionId
-            - parameterName: resource_group_name(string^string)
+            - parameterName: resourceGroupName(String^string)
               cli:
                 cliKey: resourceGroupName
-            - parameterName: managed_network_name(string^string)
+            - parameterName: managedNetworkName(String^string)
               cli:
                 cliKey: managedNetworkName
-            - parameterName: managed_network_group_name(string^string)
+            - parameterName: managedNetworkGroupName(String^string)
               cli:
                 cliKey: managedNetworkGroupName
-        - operationName: create_or_update
+        - operationName: CreateOrUpdate
           cli:
             cliKey: CreateOrUpdate
           parameters:
-            - parameterName: $host(string^string)
+            - parameterName: $host(String^string)
               cli:
                 cliKey: $host
-            - parameterName: apiVersion(api_version2019_06_01_preview^constant)
+            - parameterName: Apiversion(ApiVersion20190601Preview^constant)
               cli:
                 cliKey: ApiVersion
-            - parameterName: SubscriptionId(string^string)
+            - parameterName: SubscriptionId(String^string)
               cli:
                 cliKey: subscriptionId
-            - parameterName: resource_group_name(string^string)
+            - parameterName: resourceGroupName(String^string)
               cli:
                 cliKey: resourceGroupName
-            - parameterName: managed_network_name(string^string)
+            - parameterName: managedNetworkName(String^string)
               cli:
                 cliKey: managedNetworkName
-            - parameterName: managed_network_group_name(string^string)
+            - parameterName: managedNetworkGroupName(String^string)
               cli:
                 cliKey: managedNetworkGroupName
-            - parameterName[0]: managed_network_group(managed_network_group^object)
+            - parameterName[0]: managedNetworkGroup(ManagedNetworkGroup^object)
               cli:
                 cliKey: managedNetworkGroup
-              bodySchema: managed_network_group
-        - operationName: delete
+              bodySchema: ManagedNetworkGroup
+        - operationName: Delete
           cli:
             cliKey: Delete
           parameters:
-            - parameterName: $host(string^string)
+            - parameterName: $host(String^string)
               cli:
                 cliKey: $host
-            - parameterName: apiVersion(api_version2019_06_01_preview^constant)
+            - parameterName: Apiversion(ApiVersion20190601Preview^constant)
               cli:
                 cliKey: ApiVersion
-            - parameterName: SubscriptionId(string^string)
+            - parameterName: SubscriptionId(String^string)
               cli:
                 cliKey: subscriptionId
-            - parameterName: resource_group_name(string^string)
+            - parameterName: resourceGroupName(String^string)
               cli:
                 cliKey: resourceGroupName
-            - parameterName: managed_network_name(string^string)
+            - parameterName: managedNetworkName(String^string)
               cli:
                 cliKey: managedNetworkName
-            - parameterName: managed_network_group_name(string^string)
+            - parameterName: managedNetworkGroupName(String^string)
               cli:
                 cliKey: managedNetworkGroupName
-        - operationName: list_by_managed_network
+        - operationName: ListByManagedNetwork
           cli:
             cliKey: ListByManagedNetwork
           parameters:
-            - parameterName: $host(string^string)
+            - parameterName: $host(String^string)
               cli:
                 cliKey: $host
-            - parameterName: apiVersion(api_version2019_06_01_preview^constant)
+            - parameterName: Apiversion(ApiVersion20190601Preview^constant)
               cli:
                 cliKey: ApiVersion
-            - parameterName: SubscriptionId(string^string)
+            - parameterName: SubscriptionId(String^string)
               cli:
                 cliKey: subscriptionId
-            - parameterName: resource_group_name(string^string)
+            - parameterName: resourceGroupName(String^string)
               cli:
                 cliKey: resourceGroupName
-            - parameterName: managed_network_name(string^string)
+            - parameterName: managedNetworkName(String^string)
               cli:
                 cliKey: managedNetworkName
-            - parameterName: top(integer^integer)
+            - parameterName: top(Integer^integer)
               cli:
                 cliKey: $top
-            - parameterName: skiptoken(string^string)
+            - parameterName: skiptoken(String^string)
               cli:
                 cliKey: $skiptoken
-    - operationGroupName: managed_network_peering_policies
+    - operationGroupName: ManagedNetworkPeeringPolicies
       cli:
         cliKey: ManagedNetworkPeeringPolicies
+        name: ManagedNetworkPeeringPolicy
       operations:
-        - operationName: get
+        - operationName: Get
           cli:
             cliKey: Get
           parameters:
-            - parameterName: $host(string^string)
+            - parameterName: $host(String^string)
               cli:
                 cliKey: $host
-            - parameterName: apiVersion(api_version2019_06_01_preview^constant)
+            - parameterName: Apiversion(ApiVersion20190601Preview^constant)
               cli:
                 cliKey: ApiVersion
-            - parameterName: SubscriptionId(string^string)
+            - parameterName: SubscriptionId(String^string)
               cli:
                 cliKey: subscriptionId
-            - parameterName: resource_group_name(string^string)
+            - parameterName: resourceGroupName(String^string)
               cli:
                 cliKey: resourceGroupName
-            - parameterName: managed_network_name(string^string)
+            - parameterName: managedNetworkName(String^string)
               cli:
                 cliKey: managedNetworkName
-            - parameterName: managed_network_peering_policy_name(string^string)
+            - parameterName: managedNetworkPeeringPolicyName(String^string)
               cli:
                 cliKey: managedNetworkPeeringPolicyName
-        - operationName: create_or_update
+        - operationName: CreateOrUpdate
           cli:
             cliKey: CreateOrUpdate
           parameters:
-            - parameterName: $host(string^string)
+            - parameterName: $host(String^string)
               cli:
                 cliKey: $host
-            - parameterName: apiVersion(api_version2019_06_01_preview^constant)
+            - parameterName: Apiversion(ApiVersion20190601Preview^constant)
               cli:
                 cliKey: ApiVersion
-            - parameterName: SubscriptionId(string^string)
+            - parameterName: SubscriptionId(String^string)
               cli:
                 cliKey: subscriptionId
-            - parameterName: resource_group_name(string^string)
+            - parameterName: resourceGroupName(String^string)
               cli:
                 cliKey: resourceGroupName
-            - parameterName: managed_network_name(string^string)
+            - parameterName: managedNetworkName(String^string)
               cli:
                 cliKey: managedNetworkName
-            - parameterName: managed_network_peering_policy_name(string^string)
+            - parameterName: managedNetworkPeeringPolicyName(String^string)
               cli:
                 cliKey: managedNetworkPeeringPolicyName
-            - parameterName[0]: managed_network_policy(managed_network_peering_policy^object)
+            - parameterName[0]: managedNetworkPolicy(ManagedNetworkPeeringPolicy^object)
               cli:
                 cliKey: managedNetworkPolicy
-              bodySchema: managed_network_peering_policy
-        - operationName: delete
+              bodySchema: ManagedNetworkPeeringPolicy
+        - operationName: Delete
           cli:
             cliKey: Delete
           parameters:
-            - parameterName: $host(string^string)
+            - parameterName: $host(String^string)
               cli:
                 cliKey: $host
-            - parameterName: apiVersion(api_version2019_06_01_preview^constant)
+            - parameterName: Apiversion(ApiVersion20190601Preview^constant)
               cli:
                 cliKey: ApiVersion
-            - parameterName: SubscriptionId(string^string)
+            - parameterName: SubscriptionId(String^string)
               cli:
                 cliKey: subscriptionId
-            - parameterName: resource_group_name(string^string)
+            - parameterName: resourceGroupName(String^string)
               cli:
                 cliKey: resourceGroupName
-            - parameterName: managed_network_name(string^string)
+            - parameterName: managedNetworkName(String^string)
               cli:
                 cliKey: managedNetworkName
-            - parameterName: managed_network_peering_policy_name(string^string)
+            - parameterName: managedNetworkPeeringPolicyName(String^string)
               cli:
                 cliKey: managedNetworkPeeringPolicyName
-        - operationName: list_by_managed_network
+        - operationName: ListByManagedNetwork
           cli:
             cliKey: ListByManagedNetwork
           parameters:
-            - parameterName: $host(string^string)
+            - parameterName: $host(String^string)
               cli:
                 cliKey: $host
-            - parameterName: apiVersion(api_version2019_06_01_preview^constant)
+            - parameterName: Apiversion(ApiVersion20190601Preview^constant)
               cli:
                 cliKey: ApiVersion
-            - parameterName: SubscriptionId(string^string)
+            - parameterName: SubscriptionId(String^string)
               cli:
                 cliKey: subscriptionId
-            - parameterName: resource_group_name(string^string)
+            - parameterName: resourceGroupName(String^string)
               cli:
                 cliKey: resourceGroupName
-            - parameterName: managed_network_name(string^string)
+            - parameterName: managedNetworkName(String^string)
               cli:
                 cliKey: managedNetworkName
-            - parameterName: top(integer^integer)
+            - parameterName: top(Integer^integer)
               cli:
                 cliKey: $top
-            - parameterName: skiptoken(string^string)
+            - parameterName: skiptoken(String^string)
               cli:
                 cliKey: $skiptoken
-    - operationGroupName: operations
+    - operationGroupName: Operations
       cli:
         cliKey: Operations
+        name: Operation
       operations:
-        - operationName: list
+        - operationName: List
           cli:
             cliKey: List
           parameters:
-            - parameterName: $host(string^string)
+            - parameterName: $host(String^string)
               cli:
                 cliKey: $host
-            - parameterName: apiVersion(api_version2019_06_01_preview^constant)
+            - parameterName: Apiversion(ApiVersion20190601Preview^constant)
               cli:
                 cliKey: ApiVersion
 schemas:
   objects:
     all:
-      - schemaName: resource
+      - schemaName: Resource
         cli:
           cli-complexity: object_simple
           cli-mark: checked
@@ -423,49 +428,49 @@ schemas:
             simplifiable: true
           cliKey: Resource
         properties:
-          - propertyName: id(resource_id^string)
+          - propertyName: id(ResourceId^string)
             cli:
               cliKey: id
             readOnly: true
-          - propertyName: name(resource_name^string)
+          - propertyName: name(ResourceName^string)
             cli:
               cliKey: name
             readOnly: true
-          - propertyName: type(resource_type^string)
+          - propertyName: type(ResourceType^string)
             cli:
               cliKey: type
             readOnly: true
-          - propertyName: location(resource_location^string)
+          - propertyName: location(ResourceLocation^string)
             cli:
               cliKey: location
-      - schemaName: tracked_resource
-        cli:
-          cli-complexity: object_simple
-          cli-mark: checked
-          cli-simplify-indicator: 
-            propertyCountIfSimplify: 2
-            propertyCountIfSimplifyWithoutSimpleObject: 2
-            simplifiable: true
-          cliKey: TrackedResource
-        properties:
-          - propertyName: tags(tracked_resource_tags^dictionary)
-            cli:
-              cliKey: tags
-      - schemaName: managed_network
+      - schemaName: TrackedResource
         cli:
           cli-complexity: object_complex
           cli-mark: checked
           cli-simplify-indicator: 
-            propertyCountIfSimplify: 3
-            propertyCountIfSimplifyWithoutSimpleObject: 3
-            simplifiable: true
+            propertyCountIfSimplify: 10000
+            propertyCountIfSimplifyWithoutSimpleObject: 10000
+            simplifiable: false
+          cliKey: TrackedResource
+        properties:
+          - propertyName: tags(TrackedResourceTags^dictionary)
+            cli:
+              cliKey: tags
+      - schemaName: ManagedNetwork
+        cli:
+          cli-complexity: object_complex
+          cli-mark: checked
+          cli-simplify-indicator: 
+            propertyCountIfSimplify: 10000
+            propertyCountIfSimplifyWithoutSimpleObject: 10000
+            simplifiable: false
           cliKey: ManagedNetwork
         properties:
-          - propertyName: properties(managed_network_properties^object)
+          - propertyName: properties(ManagedNetworkProperties^object)
             cli:
               cliKey: properties
             x-ms-client-flatten: true
-      - schemaName: resource_properties
+      - schemaName: ResourceProperties
         cli:
           cli-complexity: object_simple
           cli-mark: checked
@@ -475,56 +480,56 @@ schemas:
             simplifiable: true
           cliKey: ResourceProperties
         properties:
-          - propertyName: provisioning_state(provisioning_state^choice)
+          - propertyName: provisioningState(ProvisioningState^choice)
             cli:
               cliKey: provisioningState
             readOnly: true
-          - propertyName: etag(resource_properties_etag^string)
+          - propertyName: etag(ResourcePropertiesEtag^string)
             cli:
               cliKey: etag
             readOnly: true
-      - schemaName: managed_network_properties
+      - schemaName: ManagedNetworkProperties
         cli:
           cli-complexity: object_complex
           cli-mark: checked
           cli-simplify-indicator: 
-            propertyCountIfSimplify: 1
-            propertyCountIfSimplifyWithoutSimpleObject: 1
-            simplifiable: true
+            propertyCountIfSimplify: 10000
+            propertyCountIfSimplifyWithoutSimpleObject: 10000
+            simplifiable: false
           cliKey: ManagedNetworkProperties
         properties:
-          - propertyName: scope(scope^object)
+          - propertyName: scope(Scope^object)
             cli:
               cliKey: scope
             x-ms-client-flatten: true
-          - propertyName: connectivity(connectivity_collection^object)
+          - propertyName: connectivity(ConnectivityCollection^object)
             cli:
               cliKey: connectivity
             x-ms-client-flatten: true
             readOnly: true
-      - schemaName: scope
+      - schemaName: Scope
         cli:
-          cli-complexity: object_simple
+          cli-complexity: object_complex
           cli-mark: checked
           cli-simplify-indicator: 
-            propertyCountIfSimplify: 4
-            propertyCountIfSimplifyWithoutSimpleObject: 4
-            simplifiable: true
+            propertyCountIfSimplify: 10000
+            propertyCountIfSimplifyWithoutSimpleObject: 10000
+            simplifiable: false
           cliKey: Scope
         properties:
-          - propertyName: management_groups(scope_management_groups^array)
+          - propertyName: managementGroups(ScopeManagementGroups^array)
             cli:
               cliKey: managementGroups
-          - propertyName: subscriptions(scope_subscriptions^array)
+          - propertyName: subscriptions(ScopeSubscriptions^array)
             cli:
               cliKey: subscriptions
-          - propertyName: virtual_networks(scope_virtual_networks^array)
+          - propertyName: virtualNetworks(ScopeVirtualNetworks^array)
             cli:
               cliKey: virtualNetworks
-          - propertyName: subnets(scope_subnets^array)
+          - propertyName: subnets(ScopeSubnets^array)
             cli:
               cliKey: subnets
-      - schemaName: resource_id
+      - schemaName: ResourceId
         cli:
           cli-complexity: object_simple
           cli-mark: checked
@@ -534,12 +539,12 @@ schemas:
             simplifiable: true
           cliKey: ResourceId
         properties:
-          - propertyName: id(resource_id^string)
+          - propertyName: id(ResourceId^string)
             cli:
               cliKey: id
-      - schemaName: connectivity_collection
+      - schemaName: ConnectivityCollection
         cli:
-          cli-complexity: object_simple
+          cli-complexity: object_complex
           cli-mark: checked
           cli-simplify-indicator: 
             propertyCountIfSimplify: 0
@@ -547,91 +552,91 @@ schemas:
             simplifiable: true
           cliKey: ConnectivityCollection
         properties:
-          - propertyName: groups(connectivity_collection_groups^array)
+          - propertyName: groups(ConnectivityCollectionGroups^array)
             cli:
               cliKey: groups
             readOnly: true
-          - propertyName: peerings(connectivity_collection_peerings^array)
+          - propertyName: peerings(ConnectivityCollectionPeerings^array)
             cli:
               cliKey: peerings
             readOnly: true
-      - schemaName: managed_network_group
+      - schemaName: ManagedNetworkGroup
         cli:
           cli-complexity: object_complex
           cli-mark: checked
           cli-simplify-indicator: 
-            propertyCountIfSimplify: 3
-            propertyCountIfSimplifyWithoutSimpleObject: 3
-            simplifiable: true
+            propertyCountIfSimplify: 10000
+            propertyCountIfSimplifyWithoutSimpleObject: 10000
+            simplifiable: false
           cliKey: ManagedNetworkGroup
         properties:
-          - propertyName: properties(managed_network_group_properties^object)
+          - propertyName: properties(ManagedNetworkGroupProperties^object)
             cli:
               cliKey: properties
             x-ms-client-flatten: true
-          - propertyName: kind(kind^constant)
+          - propertyName: kind(Kind^constant)
             cli:
               cliKey: kind
-      - schemaName: managed_network_group_properties
+      - schemaName: ManagedNetworkGroupProperties
         cli:
-          cli-complexity: object_simple
+          cli-complexity: object_complex
           cli-mark: checked
           cli-simplify-indicator: 
-            propertyCountIfSimplify: 4
-            propertyCountIfSimplifyWithoutSimpleObject: 4
-            simplifiable: true
+            propertyCountIfSimplify: 10000
+            propertyCountIfSimplifyWithoutSimpleObject: 10000
+            simplifiable: false
           cliKey: ManagedNetworkGroupProperties
         properties:
-          - propertyName: management_groups(managed_network_group_properties_management_groups^array)
+          - propertyName: managementGroups(ManagedNetworkGroupPropertiesManagementGroups^array)
             cli:
               cliKey: managementGroups
-          - propertyName: subscriptions(managed_network_group_properties_subscriptions^array)
+          - propertyName: subscriptions(ManagedNetworkGroupPropertiesSubscriptions^array)
             cli:
               cliKey: subscriptions
-          - propertyName: virtual_networks(managed_network_group_properties_virtual_networks^array)
+          - propertyName: virtualNetworks(ManagedNetworkGroupPropertiesVirtualNetworks^array)
             cli:
               cliKey: virtualNetworks
-          - propertyName: subnets(managed_network_group_properties_subnets^array)
+          - propertyName: subnets(ManagedNetworkGroupPropertiesSubnets^array)
             cli:
               cliKey: subnets
-      - schemaName: managed_network_peering_policy
+      - schemaName: ManagedNetworkPeeringPolicy
         cli:
           cli-complexity: object_complex
           cli-mark: checked
           cli-simplify-indicator: 
-            propertyCountIfSimplify: 2
-            propertyCountIfSimplifyWithoutSimpleObject: 2
-            simplifiable: true
+            propertyCountIfSimplify: 10000
+            propertyCountIfSimplifyWithoutSimpleObject: 10000
+            simplifiable: false
           cliKey: ManagedNetworkPeeringPolicy
         properties:
-          - propertyName: properties(managed_network_peering_policy_properties^object)
+          - propertyName: properties(ManagedNetworkPeeringPolicyProperties^object)
             cli:
               cliKey: properties
-      - schemaName: managed_network_peering_policy_properties
+      - schemaName: ManagedNetworkPeeringPolicyProperties
         cli:
           cli-complexity: object_complex
           cli-mark: checked
           cli-simplify-indicator: 
-            propertyCountIfSimplify: 4
-            propertyCountIfSimplifyWithoutSimpleObject: 4
-            simplifiable: true
+            propertyCountIfSimplify: 10000
+            propertyCountIfSimplifyWithoutSimpleObject: 10000
+            simplifiable: false
           cliKey: ManagedNetworkPeeringPolicyProperties
-          cli-discriminator-value: managed_network_peering_policy_properties
+          cli-discriminator-value: ManagedNetworkPeeringPolicyProperties
         discriminator: true
         properties:
-          - propertyName: type(type^choice)
+          - propertyName: type(Type^choice)
             cli:
               cliKey: type
-          - propertyName: hub(resource_id^object)
+          - propertyName: hub(ResourceId^object)
             cli:
               cliKey: hub
-          - propertyName: spokes(managed_network_peering_policy_properties_spokes^array)
+          - propertyName: spokes(ManagedNetworkPeeringPolicyPropertiesSpokes^array)
             cli:
               cliKey: spokes
-          - propertyName: mesh(managed_network_peering_policy_properties_mesh^array)
+          - propertyName: mesh(ManagedNetworkPeeringPolicyPropertiesMesh^array)
             cli:
               cliKey: mesh
-      - schemaName: error_response
+      - schemaName: ErrorResponse
         cli:
           cli-complexity: object_simple
           cli-mark: checked
@@ -641,44 +646,44 @@ schemas:
             simplifiable: true
           cliKey: ErrorResponse
         properties:
-          - propertyName: code(error_response_code^string)
+          - propertyName: code(ErrorResponseCode^string)
             cli:
               cliKey: code
             readOnly: true
-          - propertyName: message(error_response_message^string)
+          - propertyName: message(ErrorResponseMessage^string)
             cli:
               cliKey: message
             readOnly: true
-      - schemaName: managed_network_update
+      - schemaName: ManagedNetworkUpdate
         cli:
-          cli-complexity: object_simple
+          cli-complexity: object_complex
           cli-mark: checked
           cli-simplify-indicator: 
-            propertyCountIfSimplify: 1
-            propertyCountIfSimplifyWithoutSimpleObject: 1
-            simplifiable: true
+            propertyCountIfSimplify: 10000
+            propertyCountIfSimplifyWithoutSimpleObject: 10000
+            simplifiable: false
           cliKey: ManagedNetworkUpdate
         properties:
-          - propertyName: tags(managed_network_update_tags^dictionary)
+          - propertyName: tags(ManagedNetworkUpdateTags^dictionary)
             cli:
               cliKey: tags
-      - schemaName: managed_network_list_result
+      - schemaName: ManagedNetworkListResult
         cli:
-          cli-complexity: object_simple
+          cli-complexity: object_complex
           cli-mark: checked
           cli-simplify-indicator: 
-            propertyCountIfSimplify: 2
-            propertyCountIfSimplifyWithoutSimpleObject: 2
-            simplifiable: true
+            propertyCountIfSimplify: 10000
+            propertyCountIfSimplifyWithoutSimpleObject: 10000
+            simplifiable: false
           cliKey: ManagedNetworkListResult
         properties:
-          - propertyName: value(managed_network_list_result_value^array)
+          - propertyName: value(ManagedNetworkListResultValue^array)
             cli:
               cliKey: value
-          - propertyName: next_link(managed_network_list_result_next_link^string)
+          - propertyName: nextLink(ManagedNetworkListResultNextLink^string)
             cli:
               cliKey: nextLink
-      - schemaName: scope_assignment
+      - schemaName: ScopeAssignment
         cli:
           cli-complexity: object_complex
           cli-mark: checked
@@ -688,11 +693,11 @@ schemas:
             simplifiable: true
           cliKey: ScopeAssignment
         properties:
-          - propertyName: properties(scope_assignment_properties^object)
+          - propertyName: properties(ScopeAssignmentProperties^object)
             cli:
               cliKey: properties
             x-ms-client-flatten: true
-      - schemaName: scope_assignment_properties
+      - schemaName: ScopeAssignmentProperties
         cli:
           cli-complexity: object_simple
           cli-mark: checked
@@ -702,90 +707,90 @@ schemas:
             simplifiable: true
           cliKey: ScopeAssignmentProperties
         properties:
-          - propertyName: assigned_managed_network(scope_assignment_properties_assigned_managed_network^string)
+          - propertyName: assignedManagedNetwork(ScopeAssignmentPropertiesAssignedManagedNetwork^string)
             cli:
               cliKey: assignedManagedNetwork
-      - schemaName: scope_assignment_list_result
-        cli:
-          cli-complexity: object_simple
-          cli-mark: checked
-          cli-simplify-indicator: 
-            propertyCountIfSimplify: 2
-            propertyCountIfSimplifyWithoutSimpleObject: 2
-            simplifiable: true
-          cliKey: ScopeAssignmentListResult
-        properties:
-          - propertyName: value(scope_assignment_list_result_value^array)
-            cli:
-              cliKey: value
-          - propertyName: next_link(scope_assignment_list_result_next_link^string)
-            cli:
-              cliKey: nextLink
-      - schemaName: managed_network_group_list_result
-        cli:
-          cli-complexity: object_simple
-          cli-mark: checked
-          cli-simplify-indicator: 
-            propertyCountIfSimplify: 2
-            propertyCountIfSimplifyWithoutSimpleObject: 2
-            simplifiable: true
-          cliKey: ManagedNetworkGroupListResult
-        properties:
-          - propertyName: value(managed_network_group_list_result_value^array)
-            cli:
-              cliKey: value
-          - propertyName: next_link(managed_network_group_list_result_next_link^string)
-            cli:
-              cliKey: nextLink
-      - schemaName: managed_network_peering_policy_list_result
-        cli:
-          cli-complexity: object_simple
-          cli-mark: checked
-          cli-simplify-indicator: 
-            propertyCountIfSimplify: 2
-            propertyCountIfSimplifyWithoutSimpleObject: 2
-            simplifiable: true
-          cliKey: ManagedNetworkPeeringPolicyListResult
-        properties:
-          - propertyName: value(managed_network_peering_policy_list_result_value^array)
-            cli:
-              cliKey: value
-          - propertyName: next_link(managed_network_peering_policy_list_result_next_link^string)
-            cli:
-              cliKey: nextLink
-      - schemaName: operation_list_result
-        cli:
-          cli-complexity: object_simple
-          cli-mark: checked
-          cli-simplify-indicator: 
-            propertyCountIfSimplify: 2
-            propertyCountIfSimplifyWithoutSimpleObject: 2
-            simplifiable: true
-          cliKey: OperationListResult
-        properties:
-          - propertyName: value(operation_list_result_value^array)
-            cli:
-              cliKey: value
-          - propertyName: next_link(operation_list_result_next_link^string)
-            cli:
-              cliKey: nextLink
-      - schemaName: operation
+      - schemaName: ScopeAssignmentListResult
         cli:
           cli-complexity: object_complex
           cli-mark: checked
           cli-simplify-indicator: 
-            propertyCountIfSimplify: 2
+            propertyCountIfSimplify: 10000
+            propertyCountIfSimplifyWithoutSimpleObject: 10000
+            simplifiable: false
+          cliKey: ScopeAssignmentListResult
+        properties:
+          - propertyName: value(ScopeAssignmentListResultValue^array)
+            cli:
+              cliKey: value
+          - propertyName: nextLink(ScopeAssignmentListResultNextLink^string)
+            cli:
+              cliKey: nextLink
+      - schemaName: ManagedNetworkGroupListResult
+        cli:
+          cli-complexity: object_complex
+          cli-mark: checked
+          cli-simplify-indicator: 
+            propertyCountIfSimplify: 10000
+            propertyCountIfSimplifyWithoutSimpleObject: 10000
+            simplifiable: false
+          cliKey: ManagedNetworkGroupListResult
+        properties:
+          - propertyName: value(ManagedNetworkGroupListResultValue^array)
+            cli:
+              cliKey: value
+          - propertyName: nextLink(ManagedNetworkGroupListResultNextLink^string)
+            cli:
+              cliKey: nextLink
+      - schemaName: ManagedNetworkPeeringPolicyListResult
+        cli:
+          cli-complexity: object_complex
+          cli-mark: checked
+          cli-simplify-indicator: 
+            propertyCountIfSimplify: 10000
+            propertyCountIfSimplifyWithoutSimpleObject: 10000
+            simplifiable: false
+          cliKey: ManagedNetworkPeeringPolicyListResult
+        properties:
+          - propertyName: value(ManagedNetworkPeeringPolicyListResultValue^array)
+            cli:
+              cliKey: value
+          - propertyName: nextLink(ManagedNetworkPeeringPolicyListResultNextLink^string)
+            cli:
+              cliKey: nextLink
+      - schemaName: OperationListResult
+        cli:
+          cli-complexity: object_complex
+          cli-mark: checked
+          cli-simplify-indicator: 
+            propertyCountIfSimplify: 10000
+            propertyCountIfSimplifyWithoutSimpleObject: 10000
+            simplifiable: false
+          cliKey: OperationListResult
+        properties:
+          - propertyName: value(OperationListResultValue^array)
+            cli:
+              cliKey: value
+          - propertyName: nextLink(OperationListResultNextLink^string)
+            cli:
+              cliKey: nextLink
+      - schemaName: Operation
+        cli:
+          cli-complexity: object_complex
+          cli-mark: checked
+          cli-simplify-indicator: 
+            propertyCountIfSimplify: 4
             propertyCountIfSimplifyWithoutSimpleObject: 2
             simplifiable: true
           cliKey: Operation
         properties:
-          - propertyName: name(operation_name^string)
+          - propertyName: name(OperationName^string)
             cli:
               cliKey: name
-          - propertyName: display(operation_display^object)
+          - propertyName: display(OperationDisplay^object)
             cli:
               cliKey: display
-      - schemaName: operation_display
+      - schemaName: OperationDisplay
         cli:
           cli-complexity: object_simple
           cli-mark: checked
@@ -795,36 +800,36 @@ schemas:
             simplifiable: true
           cliKey: Operation-display
         properties:
-          - propertyName: provider(operation_display_provider^string)
+          - propertyName: provider(OperationDisplayProvider^string)
             cli:
               cliKey: provider
-          - propertyName: resource(operation_display_resource^string)
+          - propertyName: resource(OperationDisplayResource^string)
             cli:
               cliKey: resource
-          - propertyName: operation(operation_display_operation^string)
+          - propertyName: operation(OperationDisplayOperation^string)
             cli:
               cliKey: operation
-      - schemaName: hub_and_spoke_peering_policy_properties
+      - schemaName: HubAndSpokePeeringPolicyProperties
         cli:
           cli-complexity: object_simple
           cli-mark: checked
           cli-simplify-indicator: 
-            propertyCountIfSimplify: 4
-            propertyCountIfSimplifyWithoutSimpleObject: 4
-            simplifiable: true
+            propertyCountIfSimplify: 10000
+            propertyCountIfSimplifyWithoutSimpleObject: 10000
+            simplifiable: false
           cliKey: HubAndSpokePeeringPolicyProperties
-          cli-discriminator-value: hub_and_spoke_topology
-      - schemaName: mesh_peering_policy_properties
+          cli-discriminator-value: HubAndSpokeTopology
+      - schemaName: MeshPeeringPolicyProperties
         cli:
           cli-complexity: object_simple
           cli-mark: checked
           cli-simplify-indicator: 
-            propertyCountIfSimplify: 4
-            propertyCountIfSimplifyWithoutSimpleObject: 4
-            simplifiable: true
+            propertyCountIfSimplify: 10000
+            propertyCountIfSimplifyWithoutSimpleObject: 10000
+            simplifiable: false
           cliKey: MeshPeeringPolicyProperties
-          cli-discriminator-value: mesh_topology
-      - schemaName: proxy_resource
+          cli-discriminator-value: MeshTopology
+      - schemaName: ProxyResource
         cli:
           cli-complexity: object_simple
           cli-mark: checked
@@ -835,29 +840,29 @@ schemas:
           cliKey: ProxyResource
   choices:
     all:
-      - choiceName: provisioning_state
+      - choiceName: ProvisioningState
         cli:
           cliKey: ProvisioningState
         choiceValues:
-          - choiceValue: updating
+          - choiceValue: Updating
             cli:
               cliKey: Updating
-          - choiceValue: deleting
+          - choiceValue: Deleting
             cli:
               cliKey: Deleting
-          - choiceValue: failed
+          - choiceValue: Failed
             cli:
               cliKey: Failed
-          - choiceValue: succeeded
+          - choiceValue: Succeeded
             cli:
               cliKey: Succeeded
-      - choiceName: type
+      - choiceName: Type
         cli:
           cliKey: type
         choiceValues:
-          - choiceValue: hub_and_spoke_topology
+          - choiceValue: HubAndSpokeTopology
             cli:
               cliKey: HubAndSpokeTopology
-          - choiceValue: mesh_topology
+          - choiceValue: MeshTopology
             cli:
               cliKey: MeshTopology

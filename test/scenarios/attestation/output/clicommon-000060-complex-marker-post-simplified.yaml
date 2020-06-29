@@ -137,11 +137,11 @@ schemas:
       - schemaName: OperationList
         cli:
           cliKey: OperationList
-          cli-complexity: object_simple
+          cli-complexity: object_complex
           cli-simplify-indicator: 
-            simplifiable: true
-            propertyCountIfSimplify: 1
-            propertyCountIfSimplifyWithoutSimpleObject: 1
+            simplifiable: false
+            propertyCountIfSimplify: 10000
+            propertyCountIfSimplifyWithoutSimpleObject: 10000
           cli-mark: checked
         properties:
           - propertyName: value(OperationList-value^array)
@@ -153,7 +153,7 @@ schemas:
           cli-complexity: object_complex
           cli-simplify-indicator: 
             simplifiable: true
-            propertyCountIfSimplify: 2
+            propertyCountIfSimplify: 5
             propertyCountIfSimplifyWithoutSimpleObject: 2
           cli-mark: checked
         properties:
@@ -191,7 +191,7 @@ schemas:
           cli-complexity: object_complex
           cli-simplify-indicator: 
             simplifiable: true
-            propertyCountIfSimplify: 1
+            propertyCountIfSimplify: 2
             propertyCountIfSimplifyWithoutSimpleObject: 1
           cli-mark: checked
         properties:
@@ -239,11 +239,11 @@ schemas:
       - schemaName: TrackedResource
         cli:
           cliKey: TrackedResource
-          cli-complexity: object_simple
+          cli-complexity: object_complex
           cli-simplify-indicator: 
-            simplifiable: true
-            propertyCountIfSimplify: 2
-            propertyCountIfSimplifyWithoutSimpleObject: 2
+            simplifiable: false
+            propertyCountIfSimplify: 10000
+            propertyCountIfSimplifyWithoutSimpleObject: 10000
           cli-mark: checked
         properties:
           - propertyName: tags(TrackedResource-tags^dictionary)
@@ -257,9 +257,9 @@ schemas:
           cliKey: AttestationProvider
           cli-complexity: object_complex
           cli-simplify-indicator: 
-            simplifiable: true
-            propertyCountIfSimplify: 3
-            propertyCountIfSimplifyWithoutSimpleObject: 3
+            simplifiable: false
+            propertyCountIfSimplify: 10000
+            propertyCountIfSimplifyWithoutSimpleObject: 10000
           cli-mark: checked
         properties:
           - propertyName: properties(StatusResult^object)
@@ -290,9 +290,9 @@ schemas:
           cliKey: AttestationServiceCreationParams
           cli-complexity: object_complex
           cli-simplify-indicator: 
-            simplifiable: true
-            propertyCountIfSimplify: 3
-            propertyCountIfSimplifyWithoutSimpleObject: 3
+            simplifiable: false
+            propertyCountIfSimplify: 10000
+            propertyCountIfSimplifyWithoutSimpleObject: 10000
           cli-mark: checked
         properties:
           - propertyName: location(AttestationServiceCreationParams-location^string)
@@ -309,9 +309,9 @@ schemas:
           cliKey: AttestationServiceCreationSpecificParams
           cli-complexity: object_complex
           cli-simplify-indicator: 
-            simplifiable: true
-            propertyCountIfSimplify: 2
-            propertyCountIfSimplifyWithoutSimpleObject: 2
+            simplifiable: false
+            propertyCountIfSimplify: 10000
+            propertyCountIfSimplifyWithoutSimpleObject: 10000
           cli-mark: checked
         properties:
           - propertyName: attestationPolicy(AttestationServiceCreationSpecificParams-attestationPolicy^string)
@@ -323,11 +323,11 @@ schemas:
       - schemaName: JSONWebKeySet
         cli:
           cliKey: JSONWebKeySet
-          cli-complexity: object_simple
+          cli-complexity: object_complex
           cli-simplify-indicator: 
-            simplifiable: true
-            propertyCountIfSimplify: 1
-            propertyCountIfSimplifyWithoutSimpleObject: 1
+            simplifiable: false
+            propertyCountIfSimplify: 10000
+            propertyCountIfSimplifyWithoutSimpleObject: 10000
           cli-mark: checked
         properties:
           - propertyName: keys(JSONWebKeySet-keys^array)
@@ -338,9 +338,9 @@ schemas:
           cliKey: JSONWebKey
           cli-complexity: object_simple
           cli-simplify-indicator: 
-            simplifiable: true
-            propertyCountIfSimplify: 17
-            propertyCountIfSimplifyWithoutSimpleObject: 17
+            simplifiable: false
+            propertyCountIfSimplify: 10000
+            propertyCountIfSimplifyWithoutSimpleObject: 10000
           cli-mark: checked
         properties:
           - propertyName: alg(JSONWebKey-alg^string)
@@ -397,11 +397,11 @@ schemas:
       - schemaName: AttestationServicePatchParams
         cli:
           cliKey: AttestationServicePatchParams
-          cli-complexity: object_simple
+          cli-complexity: object_complex
           cli-simplify-indicator: 
-            simplifiable: true
-            propertyCountIfSimplify: 1
-            propertyCountIfSimplifyWithoutSimpleObject: 1
+            simplifiable: false
+            propertyCountIfSimplify: 10000
+            propertyCountIfSimplifyWithoutSimpleObject: 10000
           cli-mark: checked
         properties:
           - propertyName: tags(AttestationServicePatchParams-tags^dictionary)
@@ -410,11 +410,11 @@ schemas:
       - schemaName: AttestationProviderListResult
         cli:
           cliKey: AttestationProviderListResult
-          cli-complexity: object_simple
+          cli-complexity: object_complex
           cli-simplify-indicator: 
-            simplifiable: true
-            propertyCountIfSimplify: 1
-            propertyCountIfSimplifyWithoutSimpleObject: 1
+            simplifiable: false
+            propertyCountIfSimplify: 10000
+            propertyCountIfSimplifyWithoutSimpleObject: 10000
           cli-mark: checked
         properties:
           - propertyName: value(AttestationProviderListResult-value^array)

@@ -805,12 +805,12 @@ schemas:
     all:
       - schemaName: FactoryListResponse
         cli:
-          cli-complexity: object_simple
+          cli-complexity: object_complex
           cli-mark: checked
           cli-simplify-indicator: 
-            propertyCountIfSimplify: 2
-            propertyCountIfSimplifyWithoutSimpleObject: 2
-            simplifiable: true
+            propertyCountIfSimplify: 10000
+            propertyCountIfSimplifyWithoutSimpleObject: 10000
+            simplifiable: false
           cliKey: FactoryListResponse
         properties:
           - propertyName: value(FactoryListResponse-value^array)
@@ -821,12 +821,12 @@ schemas:
               cliKey: nextLink
       - schemaName: Resource
         cli:
-          cli-complexity: object_simple
+          cli-complexity: object_complex
           cli-mark: checked
           cli-simplify-indicator: 
-            propertyCountIfSimplify: 2
-            propertyCountIfSimplifyWithoutSimpleObject: 2
-            simplifiable: true
+            propertyCountIfSimplify: 10000
+            propertyCountIfSimplifyWithoutSimpleObject: 10000
+            simplifiable: false
           cliKey: Resource
         properties:
           - propertyName: id(Resource-id^string)
@@ -856,9 +856,9 @@ schemas:
           cli-complexity: object_complex
           cli-mark: checked
           cli-simplify-indicator: 
-            propertyCountIfSimplify: 4
-            propertyCountIfSimplifyWithoutSimpleObject: 4
-            simplifiable: true
+            propertyCountIfSimplify: 10000
+            propertyCountIfSimplifyWithoutSimpleObject: 10000
+            simplifiable: false
           cliKey: Factory
         properties:
           - propertyName: identity(FactoryIdentity^object)
@@ -873,8 +873,8 @@ schemas:
           cli-complexity: object_simple
           cli-mark: checked
           cli-simplify-indicator: 
-            propertyCountIfSimplify: 1
-            propertyCountIfSimplifyWithoutSimpleObject: 1
+            propertyCountIfSimplify: 0
+            propertyCountIfSimplifyWithoutSimpleObject: 0
             simplifiable: true
           cliKey: FactoryIdentity
         properties:
@@ -894,9 +894,9 @@ schemas:
           cli-complexity: object_complex
           cli-mark: checked
           cli-simplify-indicator: 
-            propertyCountIfSimplify: 3
-            propertyCountIfSimplifyWithoutSimpleObject: 3
-            simplifiable: true
+            propertyCountIfSimplify: 10000
+            propertyCountIfSimplifyWithoutSimpleObject: 10000
+            simplifiable: false
           cliKey: FactoryProperties
         properties:
           - propertyName: provisioningState(FactoryProperties-provisioningState^string)
@@ -954,9 +954,9 @@ schemas:
           cli-complexity: object_simple
           cli-mark: checked
           cli-simplify-indicator: 
-            propertyCountIfSimplify: 2
-            propertyCountIfSimplifyWithoutSimpleObject: 2
-            simplifiable: true
+            propertyCountIfSimplify: 10000
+            propertyCountIfSimplifyWithoutSimpleObject: 10000
+            simplifiable: false
           cliKey: FakeFactoryIdentity
         properties:
           - propertyName: name(FakeFactoryIdentity-name^string)
@@ -968,11 +968,12 @@ schemas:
       - schemaName: CloudError
         cli:
           cli-complexity: object_complex
+          cli-in-circle: true
           cli-mark: checked
           cli-simplify-indicator: 
-            propertyCountIfSimplify: 1
-            propertyCountIfSimplifyWithoutSimpleObject: 1
-            simplifiable: true
+            propertyCountIfSimplify: 10000
+            propertyCountIfSimplifyWithoutSimpleObject: 10000
+            simplifiable: false
           cliKey: CloudError
         properties:
           - propertyName: error(CloudErrorBody^object)
@@ -981,12 +982,13 @@ schemas:
             x-ms-client-flatten: true
       - schemaName: CloudErrorBody
         cli:
-          cli-complexity: object_simple
+          cli-complexity: object_complex
+          cli-in-circle: true
           cli-mark: checked
           cli-simplify-indicator: 
-            propertyCountIfSimplify: 4
-            propertyCountIfSimplifyWithoutSimpleObject: 4
-            simplifiable: true
+            propertyCountIfSimplify: 10000
+            propertyCountIfSimplifyWithoutSimpleObject: 10000
+            simplifiable: false
           cliKey: CloudErrorBody
         properties:
           - propertyName: code(CloudErrorBody-code^string)
@@ -1006,9 +1008,9 @@ schemas:
           cli-complexity: object_complex
           cli-mark: checked
           cli-simplify-indicator: 
-            propertyCountIfSimplify: 2
-            propertyCountIfSimplifyWithoutSimpleObject: 2
-            simplifiable: true
+            propertyCountIfSimplify: 10000
+            propertyCountIfSimplifyWithoutSimpleObject: 10000
+            simplifiable: false
           cliKey: FactoryRepoUpdate
         properties:
           - propertyName: factoryResourceId(FactoryRepoUpdate-factoryResourceId^string)
@@ -1022,9 +1024,9 @@ schemas:
           cli-complexity: object_complex
           cli-mark: checked
           cli-simplify-indicator: 
-            propertyCountIfSimplify: 2
-            propertyCountIfSimplifyWithoutSimpleObject: 2
-            simplifiable: true
+            propertyCountIfSimplify: 10000
+            propertyCountIfSimplifyWithoutSimpleObject: 10000
+            simplifiable: false
           cliKey: FactoryUpdateParameters
         properties:
           - propertyName: tags(FactoryUpdateParameters-tags^dictionary)
@@ -1095,7 +1097,7 @@ schemas:
           cli-complexity: object_complex
           cli-mark: checked
           cli-simplify-indicator: 
-            propertyCountIfSimplify: 3
+            propertyCountIfSimplify: 7
             propertyCountIfSimplifyWithoutSimpleObject: 3
             simplifiable: true
           cliKey: AccessPolicyResponse
@@ -1111,12 +1113,12 @@ schemas:
               cliKey: dataPlaneUrl
       - schemaName: TriggerListResponse
         cli:
-          cli-complexity: object_simple
+          cli-complexity: object_complex
           cli-mark: checked
           cli-simplify-indicator: 
-            propertyCountIfSimplify: 2
-            propertyCountIfSimplifyWithoutSimpleObject: 2
-            simplifiable: true
+            propertyCountIfSimplify: 10000
+            propertyCountIfSimplifyWithoutSimpleObject: 10000
+            simplifiable: false
           cliKey: TriggerListResponse
         properties:
           - propertyName: value(TriggerListResponse-value^array)
@@ -1156,9 +1158,9 @@ schemas:
           cli-complexity: object_complex
           cli-mark: checked
           cli-simplify-indicator: 
-            propertyCountIfSimplify: 1
-            propertyCountIfSimplifyWithoutSimpleObject: 1
-            simplifiable: true
+            propertyCountIfSimplify: 10000
+            propertyCountIfSimplifyWithoutSimpleObject: 10000
+            simplifiable: false
           cliKey: TriggerResource
         properties:
           - propertyName: properties(Trigger^object)
@@ -1169,9 +1171,9 @@ schemas:
           cli-complexity: object_complex
           cli-mark: checked
           cli-simplify-indicator: 
-            propertyCountIfSimplify: 3
-            propertyCountIfSimplifyWithoutSimpleObject: 3
-            simplifiable: true
+            propertyCountIfSimplify: 10000
+            propertyCountIfSimplifyWithoutSimpleObject: 10000
+            simplifiable: false
           cliKey: Trigger
         discriminator: true
         properties:
@@ -1206,12 +1208,12 @@ schemas:
               cliKey: parentTriggerName
       - schemaName: TriggerQueryResponse
         cli:
-          cli-complexity: object_simple
+          cli-complexity: object_complex
           cli-mark: checked
           cli-simplify-indicator: 
-            propertyCountIfSimplify: 2
-            propertyCountIfSimplifyWithoutSimpleObject: 2
-            simplifiable: true
+            propertyCountIfSimplify: 10000
+            propertyCountIfSimplifyWithoutSimpleObject: 10000
+            simplifiable: false
           cliKey: TriggerQueryResponse
         properties:
           - propertyName: value(TriggerQueryResponse-value^array)
@@ -1240,12 +1242,12 @@ schemas:
             readOnly: true
       - schemaName: IntegrationRuntimeListResponse
         cli:
-          cli-complexity: object_simple
+          cli-complexity: object_complex
           cli-mark: checked
           cli-simplify-indicator: 
-            propertyCountIfSimplify: 2
-            propertyCountIfSimplifyWithoutSimpleObject: 2
-            simplifiable: true
+            propertyCountIfSimplify: 10000
+            propertyCountIfSimplifyWithoutSimpleObject: 10000
+            simplifiable: false
           cliKey: IntegrationRuntimeListResponse
         properties:
           - propertyName: value(IntegrationRuntimeListResponse-value^array)
@@ -1259,9 +1261,9 @@ schemas:
           cli-complexity: object_complex
           cli-mark: checked
           cli-simplify-indicator: 
-            propertyCountIfSimplify: 1
-            propertyCountIfSimplifyWithoutSimpleObject: 1
-            simplifiable: true
+            propertyCountIfSimplify: 10000
+            propertyCountIfSimplifyWithoutSimpleObject: 10000
+            simplifiable: false
           cliKey: IntegrationRuntimeResource
         properties:
           - propertyName: properties(IntegrationRuntime^object)
@@ -1305,9 +1307,9 @@ schemas:
           cli-complexity: object_complex
           cli-mark: checked
           cli-simplify-indicator: 
-            propertyCountIfSimplify: 1
-            propertyCountIfSimplifyWithoutSimpleObject: 1
-            simplifiable: true
+            propertyCountIfSimplify: 10000
+            propertyCountIfSimplifyWithoutSimpleObject: 10000
+            simplifiable: false
           cliKey: IntegrationRuntimeStatusResponse
         properties:
           - propertyName: name(IntegrationRuntimeStatusResponse-name^string)
@@ -1404,12 +1406,12 @@ schemas:
               cliKey: authKey2
       - schemaName: IntegrationRuntimeMonitoringData
         cli:
-          cli-complexity: object_simple
+          cli-complexity: object_complex
           cli-mark: checked
           cli-simplify-indicator: 
-            propertyCountIfSimplify: 2
-            propertyCountIfSimplifyWithoutSimpleObject: 2
-            simplifiable: true
+            propertyCountIfSimplify: 10000
+            propertyCountIfSimplifyWithoutSimpleObject: 10000
+            simplifiable: false
           cliKey: IntegrationRuntimeMonitoringData
         properties:
           - propertyName: name(IntegrationRuntimeMonitoringData-name^string)
@@ -1529,9 +1531,9 @@ schemas:
           cli-complexity: object_complex
           cli-mark: checked
           cli-simplify-indicator: 
-            propertyCountIfSimplify: 4
-            propertyCountIfSimplifyWithoutSimpleObject: 4
-            simplifiable: true
+            propertyCountIfSimplify: 10000
+            propertyCountIfSimplifyWithoutSimpleObject: 10000
+            simplifiable: false
           cliKey: MultiplePipelineTrigger
         discriminator: true
         properties:
@@ -1543,9 +1545,9 @@ schemas:
           cli-complexity: object_complex
           cli-mark: checked
           cli-simplify-indicator: 
-            propertyCountIfSimplify: 2
-            propertyCountIfSimplifyWithoutSimpleObject: 2
-            simplifiable: true
+            propertyCountIfSimplify: 10000
+            propertyCountIfSimplifyWithoutSimpleObject: 10000
+            simplifiable: false
           cliKey: TriggerPipelineReference
         properties:
           - propertyName: pipelineReference(PipelineReference^object)
@@ -1559,8 +1561,8 @@ schemas:
           cli-complexity: object_simple
           cli-mark: checked
           cli-simplify-indicator: 
-            propertyCountIfSimplify: 3
-            propertyCountIfSimplifyWithoutSimpleObject: 3
+            propertyCountIfSimplify: 2
+            propertyCountIfSimplifyWithoutSimpleObject: 2
             simplifiable: true
           cliKey: PipelineReference
         properties:
@@ -1578,9 +1580,9 @@ schemas:
           cli-complexity: object_complex
           cli-mark: checked
           cli-simplify-indicator: 
-            propertyCountIfSimplify: 5
-            propertyCountIfSimplifyWithoutSimpleObject: 5
-            simplifiable: true
+            propertyCountIfSimplify: 10000
+            propertyCountIfSimplifyWithoutSimpleObject: 10000
+            simplifiable: false
           cliKey: ScheduleTrigger
         properties:
           - propertyName: typeProperties(ScheduleTrigger-typeProperties^object)
@@ -1592,9 +1594,9 @@ schemas:
           cli-complexity: object_complex
           cli-mark: checked
           cli-simplify-indicator: 
-            propertyCountIfSimplify: 1
-            propertyCountIfSimplifyWithoutSimpleObject: 1
-            simplifiable: true
+            propertyCountIfSimplify: 10000
+            propertyCountIfSimplifyWithoutSimpleObject: 10000
+            simplifiable: false
           cliKey: ScheduleTrigger-typeProperties
         properties:
           - propertyName: recurrence(ScheduleTriggerRecurrence^object)
@@ -1605,9 +1607,9 @@ schemas:
           cli-complexity: object_complex
           cli-mark: checked
           cli-simplify-indicator: 
-            propertyCountIfSimplify: 6
-            propertyCountIfSimplifyWithoutSimpleObject: 6
-            simplifiable: true
+            propertyCountIfSimplify: 10000
+            propertyCountIfSimplifyWithoutSimpleObject: 10000
+            simplifiable: false
           cliKey: ScheduleTriggerRecurrence
         properties:
           - propertyName: frequency(RecurrenceFrequency^choice)
@@ -1630,12 +1632,12 @@ schemas:
               cliKey: schedule
       - schemaName: RecurrenceSchedule
         cli:
-          cli-complexity: object_simple
+          cli-complexity: object_complex
           cli-mark: checked
           cli-simplify-indicator: 
-            propertyCountIfSimplify: 5
-            propertyCountIfSimplifyWithoutSimpleObject: 5
-            simplifiable: true
+            propertyCountIfSimplify: 10000
+            propertyCountIfSimplifyWithoutSimpleObject: 10000
+            simplifiable: false
           cliKey: RecurrenceSchedule
         properties:
           - propertyName: minutes(type·for·minutes^array)
@@ -1674,9 +1676,9 @@ schemas:
           cli-complexity: object_complex
           cli-mark: checked
           cli-simplify-indicator: 
-            propertyCountIfSimplify: 5
-            propertyCountIfSimplifyWithoutSimpleObject: 5
-            simplifiable: true
+            propertyCountIfSimplify: 10000
+            propertyCountIfSimplifyWithoutSimpleObject: 10000
+            simplifiable: false
           cliKey: BlobTrigger
         properties:
           - propertyName: typeProperties(BlobTrigger-typeProperties^object)
@@ -1688,9 +1690,9 @@ schemas:
           cli-complexity: object_complex
           cli-mark: checked
           cli-simplify-indicator: 
-            propertyCountIfSimplify: 3
-            propertyCountIfSimplifyWithoutSimpleObject: 3
-            simplifiable: true
+            propertyCountIfSimplify: 10000
+            propertyCountIfSimplifyWithoutSimpleObject: 10000
+            simplifiable: false
           cliKey: BlobTrigger-typeProperties
         properties:
           - propertyName: folderPath(BlobTrigger-typeProperties-folderPath^string)
@@ -1704,12 +1706,12 @@ schemas:
               cliKey: linkedService
       - schemaName: LinkedServiceReference
         cli:
-          cli-complexity: object_simple
+          cli-complexity: object_complex
           cli-mark: checked
           cli-simplify-indicator: 
-            propertyCountIfSimplify: 3
-            propertyCountIfSimplifyWithoutSimpleObject: 3
-            simplifiable: true
+            propertyCountIfSimplify: 10000
+            propertyCountIfSimplifyWithoutSimpleObject: 10000
+            simplifiable: false
           cliKey: LinkedServiceReference
         properties:
           - propertyName: type(LinkedServiceReference-type^constant)
@@ -1726,9 +1728,9 @@ schemas:
           cli-complexity: object_complex
           cli-mark: checked
           cli-simplify-indicator: 
-            propertyCountIfSimplify: 5
-            propertyCountIfSimplifyWithoutSimpleObject: 5
-            simplifiable: true
+            propertyCountIfSimplify: 10000
+            propertyCountIfSimplifyWithoutSimpleObject: 10000
+            simplifiable: false
           cliKey: BlobEventsTrigger
         properties:
           - propertyName: typeProperties(BlobEventsTrigger-typeProperties^object)
@@ -1740,9 +1742,9 @@ schemas:
           cli-complexity: object_simple
           cli-mark: checked
           cli-simplify-indicator: 
-            propertyCountIfSimplify: 5
-            propertyCountIfSimplifyWithoutSimpleObject: 5
-            simplifiable: true
+            propertyCountIfSimplify: 10000
+            propertyCountIfSimplifyWithoutSimpleObject: 10000
+            simplifiable: false
           cliKey: BlobEventsTrigger-typeProperties
         properties:
           - propertyName: blobPathBeginsWith(BlobEventsTrigger-typeProperties-blobPathBeginsWith^string)
@@ -1765,9 +1767,9 @@ schemas:
           cli-complexity: object_complex
           cli-mark: checked
           cli-simplify-indicator: 
-            propertyCountIfSimplify: 5
-            propertyCountIfSimplifyWithoutSimpleObject: 5
-            simplifiable: true
+            propertyCountIfSimplify: 10000
+            propertyCountIfSimplifyWithoutSimpleObject: 10000
+            simplifiable: false
           cliKey: TumblingWindowTrigger
         properties:
           - propertyName: pipeline(TriggerPipelineReference^object)
@@ -1782,9 +1784,9 @@ schemas:
           cli-complexity: object_complex
           cli-mark: checked
           cli-simplify-indicator: 
-            propertyCountIfSimplify: 8
-            propertyCountIfSimplifyWithoutSimpleObject: 8
-            simplifiable: true
+            propertyCountIfSimplify: 10000
+            propertyCountIfSimplifyWithoutSimpleObject: 10000
+            simplifiable: false
           cliKey: TumblingWindowTrigger-typeProperties
         properties:
           - propertyName: frequency(TumblingWindowFrequency^choice)
@@ -1813,12 +1815,12 @@ schemas:
               cliKey: dependsOn
       - schemaName: RetryPolicy
         cli:
-          cli-complexity: object_simple
+          cli-complexity: object_complex
           cli-mark: checked
           cli-simplify-indicator: 
-            propertyCountIfSimplify: 2
-            propertyCountIfSimplifyWithoutSimpleObject: 2
-            simplifiable: true
+            propertyCountIfSimplify: 10000
+            propertyCountIfSimplifyWithoutSimpleObject: 10000
+            simplifiable: false
           cliKey: RetryPolicy
         properties:
           - propertyName: count(any^any)
@@ -1846,8 +1848,8 @@ schemas:
           cli-complexity: object_simple
           cli-mark: checked
           cli-simplify-indicator: 
-            propertyCountIfSimplify: 2
-            propertyCountIfSimplifyWithoutSimpleObject: 2
+            propertyCountIfSimplify: 1
+            propertyCountIfSimplifyWithoutSimpleObject: 1
             simplifiable: true
           cliKey: TriggerReference
         properties:
@@ -1908,9 +1910,9 @@ schemas:
           cli-complexity: object_complex
           cli-mark: checked
           cli-simplify-indicator: 
-            propertyCountIfSimplify: 4
-            propertyCountIfSimplifyWithoutSimpleObject: 4
-            simplifiable: true
+            propertyCountIfSimplify: 10000
+            propertyCountIfSimplifyWithoutSimpleObject: 10000
+            simplifiable: false
           cliKey: RerunTumblingWindowTrigger
         properties:
           - propertyName: typeProperties(RerunTumblingWindowTrigger-typeProperties^object)
@@ -1919,12 +1921,12 @@ schemas:
             x-ms-client-flatten: true
       - schemaName: RerunTumblingWindowTrigger-typeProperties
         cli:
-          cli-complexity: object_simple
+          cli-complexity: object_complex
           cli-mark: checked
           cli-simplify-indicator: 
-            propertyCountIfSimplify: 4
-            propertyCountIfSimplifyWithoutSimpleObject: 4
-            simplifiable: true
+            propertyCountIfSimplify: 10000
+            propertyCountIfSimplifyWithoutSimpleObject: 10000
+            simplifiable: false
           cliKey: RerunTumblingWindowTrigger-typeProperties
         properties:
           - propertyName: parentTrigger(any^any)
@@ -1944,9 +1946,9 @@ schemas:
           cli-complexity: object_complex
           cli-mark: checked
           cli-simplify-indicator: 
-            propertyCountIfSimplify: 5
-            propertyCountIfSimplifyWithoutSimpleObject: 5
-            simplifiable: true
+            propertyCountIfSimplify: 10000
+            propertyCountIfSimplifyWithoutSimpleObject: 10000
+            simplifiable: false
           cliKey: ChainingTrigger
         properties:
           - propertyName: pipeline(TriggerPipelineReference^object)
@@ -1958,12 +1960,12 @@ schemas:
             x-ms-client-flatten: true
       - schemaName: ChainingTrigger-typeProperties
         cli:
-          cli-complexity: object_simple
+          cli-complexity: object_complex
           cli-mark: checked
           cli-simplify-indicator: 
-            propertyCountIfSimplify: 2
-            propertyCountIfSimplifyWithoutSimpleObject: 2
-            simplifiable: true
+            propertyCountIfSimplify: 10000
+            propertyCountIfSimplifyWithoutSimpleObject: 10000
+            simplifiable: false
           cliKey: ChainingTrigger-typeProperties
         properties:
           - propertyName: dependsOn(ChainingTrigger-typeProperties-dependsOn^array)
@@ -1974,12 +1976,12 @@ schemas:
               cliKey: runDimension
       - schemaName: IntegrationRuntimeReference
         cli:
-          cli-complexity: object_simple
+          cli-complexity: object_complex
           cli-mark: checked
           cli-simplify-indicator: 
-            propertyCountIfSimplify: 3
-            propertyCountIfSimplifyWithoutSimpleObject: 3
-            simplifiable: true
+            propertyCountIfSimplify: 10000
+            propertyCountIfSimplifyWithoutSimpleObject: 10000
+            simplifiable: false
           cliKey: IntegrationRuntimeReference
         properties:
           - propertyName: type(IntegrationRuntimeReference-type^constant)
@@ -1993,12 +1995,12 @@ schemas:
               cliKey: parameters
       - schemaName: IntegrationRuntimeStatusListResponse
         cli:
-          cli-complexity: object_simple
+          cli-complexity: object_complex
           cli-mark: checked
           cli-simplify-indicator: 
-            propertyCountIfSimplify: 2
-            propertyCountIfSimplifyWithoutSimpleObject: 2
-            simplifiable: true
+            propertyCountIfSimplify: 10000
+            propertyCountIfSimplifyWithoutSimpleObject: 10000
+            simplifiable: false
           cliKey: IntegrationRuntimeStatusListResponse
         properties:
           - propertyName: value(IntegrationRuntimeStatusListResponse-value^array)
@@ -2012,9 +2014,9 @@ schemas:
           cli-complexity: object_complex
           cli-mark: checked
           cli-simplify-indicator: 
-            propertyCountIfSimplify: 6
-            propertyCountIfSimplifyWithoutSimpleObject: 6
-            simplifiable: true
+            propertyCountIfSimplify: 10000
+            propertyCountIfSimplifyWithoutSimpleObject: 10000
+            simplifiable: false
           cliKey: ManagedIntegrationRuntime
         properties:
           - propertyName: state(IntegrationRuntimeState^choice)
@@ -2039,9 +2041,9 @@ schemas:
           cli-complexity: object_complex
           cli-mark: checked
           cli-simplify-indicator: 
-            propertyCountIfSimplify: 2
-            propertyCountIfSimplifyWithoutSimpleObject: 2
-            simplifiable: true
+            propertyCountIfSimplify: 10000
+            propertyCountIfSimplifyWithoutSimpleObject: 10000
+            simplifiable: false
           cliKey: ManagedIntegrationRuntimeTypeProperties
         properties:
           - propertyName: computeProperties(IntegrationRuntimeComputeProperties^object)
@@ -2055,9 +2057,9 @@ schemas:
           cli-complexity: object_complex
           cli-mark: checked
           cli-simplify-indicator: 
-            propertyCountIfSimplify: 6
-            propertyCountIfSimplifyWithoutSimpleObject: 6
-            simplifiable: true
+            propertyCountIfSimplify: 10000
+            propertyCountIfSimplifyWithoutSimpleObject: 10000
+            simplifiable: false
           cliKey: IntegrationRuntimeComputeProperties
         properties:
           - propertyName: location(IntegrationRuntimeComputeProperties-location^string)
@@ -2102,9 +2104,9 @@ schemas:
           cli-complexity: object_simple
           cli-mark: checked
           cli-simplify-indicator: 
-            propertyCountIfSimplify: 3
-            propertyCountIfSimplifyWithoutSimpleObject: 3
-            simplifiable: true
+            propertyCountIfSimplify: 10000
+            propertyCountIfSimplifyWithoutSimpleObject: 10000
+            simplifiable: false
           cliKey: IntegrationRuntimeVNetProperties
         properties:
           - propertyName: vNetId(IntegrationRuntimeVNetProperties-vNetId^string)
@@ -2121,9 +2123,9 @@ schemas:
           cli-complexity: object_complex
           cli-mark: checked
           cli-simplify-indicator: 
-            propertyCountIfSimplify: 7
-            propertyCountIfSimplifyWithoutSimpleObject: 7
-            simplifiable: true
+            propertyCountIfSimplify: 10000
+            propertyCountIfSimplifyWithoutSimpleObject: 10000
+            simplifiable: false
           cliKey: IntegrationRuntimeSsisProperties
         properties:
           - propertyName: catalogInfo(IntegrationRuntimeSsisCatalogInfo^object)
@@ -2152,7 +2154,7 @@ schemas:
           cli-complexity: object_complex
           cli-mark: checked
           cli-simplify-indicator: 
-            propertyCountIfSimplify: 4
+            propertyCountIfSimplify: 5
             propertyCountIfSimplifyWithoutSimpleObject: 4
             simplifiable: true
           cliKey: IntegrationRuntimeSsisCatalogInfo
@@ -2201,7 +2203,7 @@ schemas:
           cli-complexity: object_complex
           cli-mark: checked
           cli-simplify-indicator: 
-            propertyCountIfSimplify: 2
+            propertyCountIfSimplify: 3
             propertyCountIfSimplifyWithoutSimpleObject: 2
             simplifiable: true
           cliKey: IntegrationRuntimeCustomSetupScriptProperties
@@ -2217,7 +2219,7 @@ schemas:
           cli-complexity: object_complex
           cli-mark: checked
           cli-simplify-indicator: 
-            propertyCountIfSimplify: 3
+            propertyCountIfSimplify: 5
             propertyCountIfSimplifyWithoutSimpleObject: 3
             simplifiable: true
           cliKey: IntegrationRuntimeDataProxyProperties
@@ -2266,7 +2268,7 @@ schemas:
           cli-complexity: object_complex
           cli-mark: checked
           cli-simplify-indicator: 
-            propertyCountIfSimplify: 2
+            propertyCountIfSimplify: 3
             propertyCountIfSimplifyWithoutSimpleObject: 2
             simplifiable: true
           cliKey: PackageStore
@@ -2282,9 +2284,9 @@ schemas:
           cli-complexity: object_complex
           cli-mark: checked
           cli-simplify-indicator: 
-            propertyCountIfSimplify: 2
-            propertyCountIfSimplifyWithoutSimpleObject: 2
-            simplifiable: true
+            propertyCountIfSimplify: 10000
+            propertyCountIfSimplifyWithoutSimpleObject: 10000
+            simplifiable: false
           cliKey: CmdkeySetup
         properties:
           - propertyName: typeProperties(CmdkeySetupTypeProperties^object)
@@ -2296,9 +2298,9 @@ schemas:
           cli-complexity: object_complex
           cli-mark: checked
           cli-simplify-indicator: 
-            propertyCountIfSimplify: 3
-            propertyCountIfSimplifyWithoutSimpleObject: 3
-            simplifiable: true
+            propertyCountIfSimplify: 10000
+            propertyCountIfSimplifyWithoutSimpleObject: 10000
+            simplifiable: false
           cliKey: CmdkeySetupTypeProperties
         properties:
           - propertyName: targetName(any^any)
@@ -2315,7 +2317,7 @@ schemas:
           cli-complexity: object_complex
           cli-mark: checked
           cli-simplify-indicator: 
-            propertyCountIfSimplify: 2
+            propertyCountIfSimplify: 3
             propertyCountIfSimplifyWithoutSimpleObject: 2
             simplifiable: true
           cliKey: EnvironmentVariableSetup
@@ -2345,9 +2347,9 @@ schemas:
           cli-complexity: object_complex
           cli-mark: checked
           cli-simplify-indicator: 
-            propertyCountIfSimplify: 2
-            propertyCountIfSimplifyWithoutSimpleObject: 2
-            simplifiable: true
+            propertyCountIfSimplify: 10000
+            propertyCountIfSimplifyWithoutSimpleObject: 10000
+            simplifiable: false
           cliKey: ComponentSetup
         properties:
           - propertyName: typeProperties(LicensedComponentSetupTypeProperties^object)
@@ -2359,9 +2361,9 @@ schemas:
           cli-complexity: object_complex
           cli-mark: checked
           cli-simplify-indicator: 
-            propertyCountIfSimplify: 2
-            propertyCountIfSimplifyWithoutSimpleObject: 2
-            simplifiable: true
+            propertyCountIfSimplify: 10000
+            propertyCountIfSimplifyWithoutSimpleObject: 10000
+            simplifiable: false
           cliKey: LicensedComponentSetupTypeProperties
         properties:
           - propertyName: componentName(LicensedComponentSetupTypeProperties-componentName^string)
@@ -2375,9 +2377,9 @@ schemas:
           cli-complexity: object_complex
           cli-mark: checked
           cli-simplify-indicator: 
-            propertyCountIfSimplify: 3
-            propertyCountIfSimplifyWithoutSimpleObject: 3
-            simplifiable: true
+            propertyCountIfSimplify: 10000
+            propertyCountIfSimplifyWithoutSimpleObject: 10000
+            simplifiable: false
           cliKey: SelfHostedIntegrationRuntime
         properties:
           - propertyName: typeProperties(SelfHostedIntegrationRuntimeTypeProperties^object)
@@ -2389,9 +2391,9 @@ schemas:
           cli-complexity: object_complex
           cli-mark: checked
           cli-simplify-indicator: 
-            propertyCountIfSimplify: 1
-            propertyCountIfSimplifyWithoutSimpleObject: 1
-            simplifiable: true
+            propertyCountIfSimplify: 10000
+            propertyCountIfSimplifyWithoutSimpleObject: 10000
+            simplifiable: false
           cliKey: SelfHostedIntegrationRuntimeTypeProperties
         properties:
           - propertyName: linkedInfo(LinkedIntegrationRuntimeType^object)
@@ -2416,7 +2418,7 @@ schemas:
           cli-complexity: object_complex
           cli-mark: checked
           cli-simplify-indicator: 
-            propertyCountIfSimplify: 2
+            propertyCountIfSimplify: 3
             propertyCountIfSimplifyWithoutSimpleObject: 2
             simplifiable: true
           cliKey: LinkedIntegrationRuntimeKeyAuthorization
@@ -2442,8 +2444,8 @@ schemas:
           cli-complexity: object_complex
           cli-mark: checked
           cli-simplify-indicator: 
-            propertyCountIfSimplify: 2
-            propertyCountIfSimplifyWithoutSimpleObject: 2
+            propertyCountIfSimplify: 1
+            propertyCountIfSimplifyWithoutSimpleObject: 1
             simplifiable: true
           cliKey: ManagedIntegrationRuntimeStatus
         properties:
@@ -2479,12 +2481,12 @@ schemas:
             readOnly: true
       - schemaName: ManagedIntegrationRuntimeNode
         cli:
-          cli-complexity: object_simple
+          cli-complexity: object_complex
           cli-mark: checked
           cli-simplify-indicator: 
-            propertyCountIfSimplify: 1
-            propertyCountIfSimplifyWithoutSimpleObject: 1
-            simplifiable: true
+            propertyCountIfSimplify: 10000
+            propertyCountIfSimplifyWithoutSimpleObject: 10000
+            simplifiable: false
           cliKey: ManagedIntegrationRuntimeNode
         properties:
           - propertyName: nodeId(ManagedIntegrationRuntimeNode-nodeId^string)
@@ -2563,9 +2565,9 @@ schemas:
           cli-complexity: object_complex
           cli-mark: checked
           cli-simplify-indicator: 
-            propertyCountIfSimplify: 2
-            propertyCountIfSimplifyWithoutSimpleObject: 2
-            simplifiable: true
+            propertyCountIfSimplify: 10000
+            propertyCountIfSimplifyWithoutSimpleObject: 10000
+            simplifiable: false
           cliKey: SelfHostedIntegrationRuntimeStatus
         properties:
           - propertyName: typeProperties(SelfHostedIntegrationRuntimeStatusTypeProperties^object)
@@ -2574,12 +2576,12 @@ schemas:
             x-ms-client-flatten: true
       - schemaName: SelfHostedIntegrationRuntimeStatusTypeProperties
         cli:
-          cli-complexity: object_simple
+          cli-complexity: object_complex
           cli-mark: checked
           cli-simplify-indicator: 
-            propertyCountIfSimplify: 2
-            propertyCountIfSimplifyWithoutSimpleObject: 2
-            simplifiable: true
+            propertyCountIfSimplify: 10000
+            propertyCountIfSimplifyWithoutSimpleObject: 10000
+            simplifiable: false
           cliKey: SelfHostedIntegrationRuntimeStatusTypeProperties
         properties:
           - propertyName: createTime(SelfHostedIntegrationRuntimeStatusTypeProperties-createTime^date-time)
@@ -2646,7 +2648,7 @@ schemas:
             readOnly: true
       - schemaName: SelfHostedIntegrationRuntimeNode
         cli:
-          cli-complexity: object_simple
+          cli-complexity: object_complex
           cli-mark: checked
           cli-simplify-indicator: 
             propertyCountIfSimplify: 0
@@ -2772,12 +2774,12 @@ schemas:
             readOnly: true
       - schemaName: SsisObjectMetadataListResponse
         cli:
-          cli-complexity: object_simple
+          cli-complexity: object_complex
           cli-mark: checked
           cli-simplify-indicator: 
-            propertyCountIfSimplify: 2
-            propertyCountIfSimplifyWithoutSimpleObject: 2
-            simplifiable: true
+            propertyCountIfSimplify: 10000
+            propertyCountIfSimplifyWithoutSimpleObject: 10000
+            simplifiable: false
           cliKey: SsisObjectMetadataListResponse
         properties:
           - propertyName: value(SsisObjectMetadataListResponse-value^array)
@@ -2820,12 +2822,12 @@ schemas:
           cliKey: SsisFolder
       - schemaName: SsisProject
         cli:
-          cli-complexity: object_simple
+          cli-complexity: object_complex
           cli-mark: checked
           cli-simplify-indicator: 
-            propertyCountIfSimplify: 8
-            propertyCountIfSimplifyWithoutSimpleObject: 8
-            simplifiable: true
+            propertyCountIfSimplify: 10000
+            propertyCountIfSimplifyWithoutSimpleObject: 10000
+            simplifiable: false
           cliKey: SsisProject
         properties:
           - propertyName: folderId(integer^integer)
@@ -2910,12 +2912,12 @@ schemas:
               cliKey: variable
       - schemaName: SsisPackage
         cli:
-          cli-complexity: object_simple
+          cli-complexity: object_complex
           cli-mark: checked
           cli-simplify-indicator: 
-            propertyCountIfSimplify: 8
-            propertyCountIfSimplifyWithoutSimpleObject: 8
-            simplifiable: true
+            propertyCountIfSimplify: 10000
+            propertyCountIfSimplifyWithoutSimpleObject: 10000
+            simplifiable: false
           cliKey: SsisPackage
         properties:
           - propertyName: folderId(integer^integer)
@@ -2932,12 +2934,12 @@ schemas:
               cliKey: parameters
       - schemaName: SsisEnvironment
         cli:
-          cli-complexity: object_simple
+          cli-complexity: object_complex
           cli-mark: checked
           cli-simplify-indicator: 
-            propertyCountIfSimplify: 6
-            propertyCountIfSimplifyWithoutSimpleObject: 6
-            simplifiable: true
+            propertyCountIfSimplify: 10000
+            propertyCountIfSimplifyWithoutSimpleObject: 10000
+            simplifiable: false
           cliKey: SsisEnvironment
         properties:
           - propertyName: folderId(integer^integer)
