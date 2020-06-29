@@ -542,7 +542,7 @@ schemas:
                   cli-complexity: object_complex
                   cli-mark: checked
                   cli-simplify-indicator:
-                    propertyCountIfSimplify: 2
+                    propertyCountIfSimplify: 5
                     propertyCountIfSimplifyWithoutSimpleObject: 2
                     simplifiable: true
                   cliKey: OperationsDefinition
@@ -552,7 +552,7 @@ schemas:
                 name: operation_list_value
                 description: List of supported operations.
               cli:
-                cli-complexity: array_simple
+                cli-complexity: array_complex
                 cli-mark: checked
             protocol: {}
           serializedName: value
@@ -573,12 +573,12 @@ schemas:
           description: List of supported operations.
           namespace: ''
         cli:
-          cli-complexity: object_simple
+          cli-complexity: object_complex
           cli-mark: checked
           cli-simplify-indicator:
-            propertyCountIfSimplify: 1
-            propertyCountIfSimplifyWithoutSimpleObject: 1
-            simplifiable: true
+            propertyCountIfSimplify: 10000
+            propertyCountIfSimplifyWithoutSimpleObject: 10000
+            simplifiable: false
           cliKey: OperationList
       protocol: {}
     - *ref_7
@@ -654,7 +654,7 @@ schemas:
           cli-complexity: object_complex
           cli-mark: checked
           cli-simplify-indicator:
-            propertyCountIfSimplify: 1
+            propertyCountIfSimplify: 2
             propertyCountIfSimplifyWithoutSimpleObject: 1
             simplifiable: true
           cliKey: CloudError
@@ -760,9 +760,9 @@ schemas:
                       cli-complexity: object_complex
                       cli-mark: checked
                       cli-simplify-indicator:
-                        propertyCountIfSimplify: 3
-                        propertyCountIfSimplifyWithoutSimpleObject: 3
-                        simplifiable: true
+                        propertyCountIfSimplify: 10000
+                        propertyCountIfSimplifyWithoutSimpleObject: 10000
+                        simplifiable: false
                       cliKey: AttestationProvider
                   protocol: {}
               immediate:
@@ -803,12 +803,12 @@ schemas:
                 description: The resource model definition for a ARM tracked top level resource
                 namespace: ''
               cli:
-                cli-complexity: object_simple
+                cli-complexity: object_complex
                 cli-mark: checked
                 cli-simplify-indicator:
-                  propertyCountIfSimplify: 2
-                  propertyCountIfSimplifyWithoutSimpleObject: 2
-                  simplifiable: true
+                  propertyCountIfSimplify: 10000
+                  propertyCountIfSimplifyWithoutSimpleObject: 10000
+                  simplifiable: false
                 cliKey: TrackedResource
             protocol: {}
           - *ref_17
@@ -1153,9 +1153,9 @@ schemas:
                               cli-complexity: object_simple
                               cli-mark: checked
                               cli-simplify-indicator:
-                                propertyCountIfSimplify: 17
-                                propertyCountIfSimplifyWithoutSimpleObject: 17
-                                simplifiable: true
+                                propertyCountIfSimplify: 10000
+                                propertyCountIfSimplifyWithoutSimpleObject: 10000
+                                simplifiable: false
                               cliKey: JSONWebKey
                           protocol: {}
                         language:
@@ -1168,7 +1168,7 @@ schemas:
                               can choose to assign a meaning to the order for their purposes, if
                               desired.
                           cli:
-                            cli-complexity: array_simple
+                            cli-complexity: array_complex
                             cli-mark: checked
                         protocol: {}
                       serializedName: keys
@@ -1194,12 +1194,12 @@ schemas:
                       description: ''
                       namespace: ''
                     cli:
-                      cli-complexity: object_simple
+                      cli-complexity: object_complex
                       cli-mark: checked
                       cli-simplify-indicator:
-                        propertyCountIfSimplify: 1
-                        propertyCountIfSimplifyWithoutSimpleObject: 1
-                        simplifiable: true
+                        propertyCountIfSimplify: 10000
+                        propertyCountIfSimplifyWithoutSimpleObject: 10000
+                        simplifiable: false
                       cliKey: JSONWebKeySet
                   protocol: {}
                 serializedName: policySigningCertificates
@@ -1223,9 +1223,9 @@ schemas:
                 cli-complexity: object_complex
                 cli-mark: checked
                 cli-simplify-indicator:
-                  propertyCountIfSimplify: 2
-                  propertyCountIfSimplifyWithoutSimpleObject: 2
-                  simplifiable: true
+                  propertyCountIfSimplify: 10000
+                  propertyCountIfSimplifyWithoutSimpleObject: 10000
+                  simplifiable: false
                 cliKey: AttestationServiceCreationSpecificParams
             protocol: {}
           required: true
@@ -1252,9 +1252,9 @@ schemas:
           cli-complexity: object_complex
           cli-mark: checked
           cli-simplify-indicator:
-            propertyCountIfSimplify: 3
-            propertyCountIfSimplifyWithoutSimpleObject: 3
-            simplifiable: true
+            propertyCountIfSimplify: 10000
+            propertyCountIfSimplifyWithoutSimpleObject: 10000
+            simplifiable: false
           cliKey: AttestationServiceCreationParams
       protocol: {}
     - *ref_44
@@ -1286,12 +1286,12 @@ schemas:
           description: Parameters for patching an attestation service instance
           namespace: ''
         cli:
-          cli-complexity: object_simple
+          cli-complexity: object_complex
           cli-mark: checked
           cli-simplify-indicator:
-            propertyCountIfSimplify: 1
-            propertyCountIfSimplifyWithoutSimpleObject: 1
-            simplifiable: true
+            propertyCountIfSimplify: 10000
+            propertyCountIfSimplifyWithoutSimpleObject: 10000
+            simplifiable: false
           cliKey: AttestationServicePatchParams
       protocol: {}
     - &ref_72
@@ -1309,7 +1309,7 @@ schemas:
                 name: attestation_provider_list_result_value
                 description: Attestation Provider array.
               cli:
-                cli-complexity: array_simple
+                cli-complexity: array_complex
                 cli-mark: checked
             protocol: {}
           serializedName: value
@@ -1330,12 +1330,12 @@ schemas:
           description: Attestation Providers List.
           namespace: ''
         cli:
-          cli-complexity: object_simple
+          cli-complexity: object_complex
           cli-mark: checked
           cli-simplify-indicator:
-            propertyCountIfSimplify: 1
-            propertyCountIfSimplifyWithoutSimpleObject: 1
-            simplifiable: true
+            propertyCountIfSimplify: 10000
+            propertyCountIfSimplifyWithoutSimpleObject: 10000
+            simplifiable: false
           cliKey: AttestationProviderListResult
       protocol: {}
   arrays:

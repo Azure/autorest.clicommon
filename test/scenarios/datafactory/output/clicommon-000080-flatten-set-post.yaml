@@ -2646,7 +2646,7 @@ schemas:
           name: Factory
           description: Factory resource type.
         cli:
-          cli-complexity: dictionary_simple
+          cli-complexity: dictionary_complex
           cli-mark: checked
       protocol: {}
     - &ref_44
@@ -2668,7 +2668,7 @@ schemas:
           name: Trigger
           description: Azure data factory nested object which contains information about creating pipeline run
         cli:
-          cli-complexity: dictionary_simple
+          cli-complexity: dictionary_complex
           cli-mark: checked
       protocol: {}
     - &ref_60
@@ -2679,7 +2679,7 @@ schemas:
           name: IntegrationRuntime
           description: Azure Data Factory nested object which serves as a compute resource for activities.
         cli:
-          cli-complexity: dictionary_simple
+          cli-complexity: dictionary_complex
           cli-mark: checked
       protocol: {}
     - &ref_192
@@ -2690,7 +2690,7 @@ schemas:
           name: IntegrationRuntimeStatus
           description: Integration runtime status.
         cli:
-          cli-complexity: dictionary_simple
+          cli-complexity: dictionary_complex
           cli-mark: checked
       protocol: {}
     - &ref_251
@@ -2701,7 +2701,7 @@ schemas:
           name: IntegrationRuntimeConnectionInfo
           description: Connection information for encrypting the on-premises data source credentials.
         cli:
-          cli-complexity: dictionary_simple
+          cli-complexity: dictionary_complex
           cli-mark: checked
       protocol: {}
     - &ref_262
@@ -2712,7 +2712,7 @@ schemas:
           name: IntegrationRuntimeNodeMonitoringData
           description: Monitoring data for integration runtime node.
         cli:
-          cli-complexity: dictionary_simple
+          cli-complexity: dictionary_complex
           cli-mark: checked
       protocol: {}
     - &ref_138
@@ -2723,7 +2723,7 @@ schemas:
           name: ParameterValueSpecification
           description: An object mapping parameter names to argument values.
         cli:
-          cli-complexity: dictionary_simple
+          cli-complexity: dictionary_complex
           cli-mark: checked
       protocol: {}
     - &ref_122
@@ -2734,7 +2734,7 @@ schemas:
           name: ScheduleTriggerRecurrence
           description: The workflow trigger recurrence.
         cli:
-          cli-complexity: dictionary_simple
+          cli-complexity: dictionary_complex
           cli-mark: checked
       protocol: {}
     - &ref_128
@@ -2745,7 +2745,7 @@ schemas:
           name: RecurrenceSchedule
           description: The recurrence schedule.
         cli:
-          cli-complexity: dictionary_simple
+          cli-complexity: dictionary_complex
           cli-mark: checked
       protocol: {}
     - &ref_131
@@ -2756,7 +2756,7 @@ schemas:
           name: RecurrenceScheduleOccurrence
           description: The recurrence schedule occurrence.
         cli:
-          cli-complexity: dictionary_simple
+          cli-complexity: dictionary_complex
           cli-mark: checked
       protocol: {}
     - &ref_62
@@ -2767,7 +2767,7 @@ schemas:
           name: IntegrationRuntimeComputeProperties
           description: The compute resource properties for managed integration runtime.
         cli:
-          cli-complexity: dictionary_simple
+          cli-complexity: dictionary_complex
           cli-mark: checked
       protocol: {}
     - &ref_67
@@ -2778,7 +2778,7 @@ schemas:
           name: IntegrationRuntimeDataFlowProperties
           description: Data flow properties for managed integration runtime.
         cli:
-          cli-complexity: dictionary_simple
+          cli-complexity: dictionary_complex
           cli-mark: checked
       protocol: {}
     - &ref_71
@@ -2789,7 +2789,7 @@ schemas:
           name: IntegrationRuntimeVNetProperties
           description: VNet properties for managed integration runtime.
         cli:
-          cli-complexity: dictionary_simple
+          cli-complexity: dictionary_complex
           cli-mark: checked
       protocol: {}
     - &ref_75
@@ -2800,7 +2800,7 @@ schemas:
           name: IntegrationRuntimeSsisProperties
           description: SSIS properties for managed integration runtime.
         cli:
-          cli-complexity: dictionary_simple
+          cli-complexity: dictionary_complex
           cli-mark: checked
       protocol: {}
     - &ref_76
@@ -2811,7 +2811,7 @@ schemas:
           name: IntegrationRuntimeSsisCatalogInfo
           description: Catalog information for managed dedicated integration runtime.
         cli:
-          cli-complexity: dictionary_simple
+          cli-complexity: dictionary_complex
           cli-mark: checked
       protocol: {}
     - &ref_194
@@ -2822,7 +2822,7 @@ schemas:
           name: ManagedIntegrationRuntimeNode
           description: Properties of integration runtime node.
         cli:
-          cli-complexity: dictionary_simple
+          cli-complexity: dictionary_complex
           cli-mark: checked
       protocol: {}
     - &ref_197
@@ -2833,7 +2833,7 @@ schemas:
           name: ManagedIntegrationRuntimeError
           description: Error definition for managed integration runtime.
         cli:
-          cli-complexity: dictionary_simple
+          cli-complexity: dictionary_complex
           cli-mark: checked
       protocol: {}
     - &ref_203
@@ -2844,7 +2844,7 @@ schemas:
           name: ManagedIntegrationRuntimeOperationResult
           description: Properties of managed integration runtime operation result.
         cli:
-          cli-complexity: dictionary_simple
+          cli-complexity: dictionary_complex
           cli-mark: checked
       protocol: {}
     - &ref_214
@@ -2855,7 +2855,7 @@ schemas:
           name: SelfHostedIntegrationRuntimeNode
           description: Properties of Self-hosted integration runtime node.
         cli:
-          cli-complexity: dictionary_simple
+          cli-complexity: dictionary_complex
           cli-mark: checked
       protocol: {}
     - &ref_219
@@ -3209,12 +3209,12 @@ schemas:
                         description: Azure Data Factory top-level resource.
                         namespace: ''
                       cli:
-                        cli-complexity: object_simple
+                        cli-complexity: object_complex
                         cli-mark: checked
                         cli-simplify-indicator:
-                          propertyCountIfSimplify: 2
-                          propertyCountIfSimplifyWithoutSimpleObject: 2
-                          simplifiable: true
+                          propertyCountIfSimplify: 10000
+                          propertyCountIfSimplifyWithoutSimpleObject: 10000
+                          simplifiable: false
                         cliKey: Resource
                     protocol: {}
                   - *ref_10
@@ -3273,8 +3273,8 @@ schemas:
                         cli-complexity: object_simple
                         cli-mark: checked
                         cli-simplify-indicator:
-                          propertyCountIfSimplify: 1
-                          propertyCountIfSimplifyWithoutSimpleObject: 1
+                          propertyCountIfSimplify: 0
+                          propertyCountIfSimplifyWithoutSimpleObject: 0
                           simplifiable: true
                         cliKey: FactoryIdentity
                     protocol: {}
@@ -3572,9 +3572,9 @@ schemas:
                               cli-complexity: object_simple
                               cli-mark: checked
                               cli-simplify-indicator:
-                                propertyCountIfSimplify: 2
-                                propertyCountIfSimplifyWithoutSimpleObject: 2
-                                simplifiable: true
+                                propertyCountIfSimplify: 10000
+                                propertyCountIfSimplifyWithoutSimpleObject: 10000
+                                simplifiable: false
                               cliKey: FakeFactoryIdentity
                           protocol: {}
                         serializedName: fakeIdentity
@@ -3620,9 +3620,9 @@ schemas:
                         cli-complexity: object_complex
                         cli-mark: checked
                         cli-simplify-indicator:
-                          propertyCountIfSimplify: 3
-                          propertyCountIfSimplifyWithoutSimpleObject: 3
-                          simplifiable: true
+                          propertyCountIfSimplify: 10000
+                          propertyCountIfSimplifyWithoutSimpleObject: 10000
+                          simplifiable: false
                         cliKey: FactoryProperties
                     protocol: {}
                   serializedName: properties
@@ -3649,9 +3649,9 @@ schemas:
                   cli-complexity: object_complex
                   cli-mark: checked
                   cli-simplify-indicator:
-                    propertyCountIfSimplify: 4
-                    propertyCountIfSimplifyWithoutSimpleObject: 4
-                    simplifiable: true
+                    propertyCountIfSimplify: 10000
+                    propertyCountIfSimplifyWithoutSimpleObject: 10000
+                    simplifiable: false
                   cliKey: Factory
               protocol: {}
             language:
@@ -3659,7 +3659,7 @@ schemas:
                 name: FactoryListResponse-value
                 description: List of factories.
               cli:
-                cli-complexity: array_simple
+                cli-complexity: array_complex
                 cli-mark: checked
             protocol: {}
           required: true
@@ -3691,12 +3691,12 @@ schemas:
           description: A list of factory resources.
           namespace: ''
         cli:
-          cli-complexity: object_simple
+          cli-complexity: object_complex
           cli-mark: checked
           cli-simplify-indicator:
-            propertyCountIfSimplify: 2
-            propertyCountIfSimplifyWithoutSimpleObject: 2
-            simplifiable: true
+            propertyCountIfSimplify: 10000
+            propertyCountIfSimplifyWithoutSimpleObject: 10000
+            simplifiable: false
           cliKey: FactoryListResponse
       protocol: {}
     - *ref_11
@@ -3755,7 +3755,8 @@ schemas:
                       name: CloudErrorBody-details
                       description: Array with additional error details.
                     cli:
-                      cli-complexity: array_simple
+                      cli-complexity: array_complex
+                      cli-in-circle: true
                       cli-mark: checked
                   protocol: {}
                 required: false
@@ -3779,12 +3780,13 @@ schemas:
                 description: The object that defines the structure of an Azure Data Factory error.
                 namespace: ''
               cli:
-                cli-complexity: object_simple
+                cli-complexity: object_complex
+                cli-in-circle: true
                 cli-mark: checked
                 cli-simplify-indicator:
-                  propertyCountIfSimplify: 4
-                  propertyCountIfSimplifyWithoutSimpleObject: 4
-                  simplifiable: true
+                  propertyCountIfSimplify: 10000
+                  propertyCountIfSimplifyWithoutSimpleObject: 10000
+                  simplifiable: false
                 cliKey: CloudErrorBody
             protocol: {}
           required: true
@@ -3811,11 +3813,12 @@ schemas:
           namespace: ''
         cli:
           cli-complexity: object_complex
+          cli-in-circle: true
           cli-mark: checked
           cli-simplify-indicator:
-            propertyCountIfSimplify: 1
-            propertyCountIfSimplifyWithoutSimpleObject: 1
-            simplifiable: true
+            propertyCountIfSimplify: 10000
+            propertyCountIfSimplifyWithoutSimpleObject: 10000
+            simplifiable: false
           cliKey: CloudError
       protocol: {}
     - *ref_42
@@ -3855,9 +3858,9 @@ schemas:
           cli-complexity: object_complex
           cli-mark: checked
           cli-simplify-indicator:
-            propertyCountIfSimplify: 2
-            propertyCountIfSimplifyWithoutSimpleObject: 2
-            simplifiable: true
+            propertyCountIfSimplify: 10000
+            propertyCountIfSimplifyWithoutSimpleObject: 10000
+            simplifiable: false
           cliKey: FactoryRepoUpdate
       protocol: {}
     - &ref_403
@@ -3896,9 +3899,9 @@ schemas:
           cli-complexity: object_complex
           cli-mark: checked
           cli-simplify-indicator:
-            propertyCountIfSimplify: 2
-            propertyCountIfSimplifyWithoutSimpleObject: 2
-            simplifiable: true
+            propertyCountIfSimplify: 10000
+            propertyCountIfSimplifyWithoutSimpleObject: 10000
+            simplifiable: false
           cliKey: FactoryUpdateParameters
       protocol: {}
     - &ref_412
@@ -4100,7 +4103,7 @@ schemas:
           cli-complexity: object_complex
           cli-mark: checked
           cli-simplify-indicator:
-            propertyCountIfSimplify: 3
+            propertyCountIfSimplify: 7
             propertyCountIfSimplifyWithoutSimpleObject: 3
             simplifiable: true
           cliKey: AccessPolicyResponse
@@ -4344,9 +4347,9 @@ schemas:
                                                             cli-complexity: object_simple
                                                             cli-mark: checked
                                                             cli-simplify-indicator:
-                                                              propertyCountIfSimplify: 3
-                                                              propertyCountIfSimplifyWithoutSimpleObject: 3
-                                                              simplifiable: true
+                                                              propertyCountIfSimplify: 10000
+                                                              propertyCountIfSimplifyWithoutSimpleObject: 10000
+                                                              simplifiable: false
                                                             cliKey: IntegrationRuntimeVNetProperties
                                                         protocol: {}
                                                       serializedName: vNetProperties
@@ -4371,9 +4374,9 @@ schemas:
                                                       cli-complexity: object_complex
                                                       cli-mark: checked
                                                       cli-simplify-indicator:
-                                                        propertyCountIfSimplify: 6
-                                                        propertyCountIfSimplifyWithoutSimpleObject: 6
-                                                        simplifiable: true
+                                                        propertyCountIfSimplify: 10000
+                                                        propertyCountIfSimplifyWithoutSimpleObject: 10000
+                                                        simplifiable: false
                                                       cliKey: IntegrationRuntimeComputeProperties
                                                   protocol: {}
                                                 serializedName: computeProperties
@@ -4541,7 +4544,7 @@ schemas:
                                                             cli-complexity: object_complex
                                                             cli-mark: checked
                                                             cli-simplify-indicator:
-                                                              propertyCountIfSimplify: 4
+                                                              propertyCountIfSimplify: 5
                                                               propertyCountIfSimplifyWithoutSimpleObject: 4
                                                               simplifiable: true
                                                             cliKey: IntegrationRuntimeSsisCatalogInfo
@@ -4600,7 +4603,7 @@ schemas:
                                                             cli-complexity: object_complex
                                                             cli-mark: checked
                                                             cli-simplify-indicator:
-                                                              propertyCountIfSimplify: 2
+                                                              propertyCountIfSimplify: 3
                                                               propertyCountIfSimplifyWithoutSimpleObject: 2
                                                               simplifiable: true
                                                             cliKey: IntegrationRuntimeCustomSetupScriptProperties
@@ -4700,7 +4703,7 @@ schemas:
                                                             cli-complexity: object_complex
                                                             cli-mark: checked
                                                             cli-simplify-indicator:
-                                                              propertyCountIfSimplify: 3
+                                                              propertyCountIfSimplify: 5
                                                               propertyCountIfSimplifyWithoutSimpleObject: 3
                                                               simplifiable: true
                                                             cliKey: IntegrationRuntimeDataProxyProperties
@@ -4792,9 +4795,9 @@ schemas:
                                                                           cli-complexity: object_complex
                                                                           cli-mark: checked
                                                                           cli-simplify-indicator:
-                                                                            propertyCountIfSimplify: 3
-                                                                            propertyCountIfSimplifyWithoutSimpleObject: 3
-                                                                            simplifiable: true
+                                                                            propertyCountIfSimplify: 10000
+                                                                            propertyCountIfSimplifyWithoutSimpleObject: 10000
+                                                                            simplifiable: false
                                                                           cliKey: CmdkeySetupTypeProperties
                                                                       protocol: {}
                                                                     required: true
@@ -4822,9 +4825,9 @@ schemas:
                                                                     cli-complexity: object_complex
                                                                     cli-mark: checked
                                                                     cli-simplify-indicator:
-                                                                      propertyCountIfSimplify: 2
-                                                                      propertyCountIfSimplifyWithoutSimpleObject: 2
-                                                                      simplifiable: true
+                                                                      propertyCountIfSimplify: 10000
+                                                                      propertyCountIfSimplifyWithoutSimpleObject: 10000
+                                                                      simplifiable: false
                                                                     cliKey: CmdkeySetup
                                                                 protocol: {}
                                                               - &ref_97
@@ -4907,7 +4910,7 @@ schemas:
                                                                     cli-complexity: object_complex
                                                                     cli-mark: checked
                                                                     cli-simplify-indicator:
-                                                                      propertyCountIfSimplify: 2
+                                                                      propertyCountIfSimplify: 3
                                                                       propertyCountIfSimplifyWithoutSimpleObject: 2
                                                                       simplifiable: true
                                                                     cliKey: EnvironmentVariableSetup
@@ -4962,9 +4965,9 @@ schemas:
                                                                           cli-complexity: object_complex
                                                                           cli-mark: checked
                                                                           cli-simplify-indicator:
-                                                                            propertyCountIfSimplify: 2
-                                                                            propertyCountIfSimplifyWithoutSimpleObject: 2
-                                                                            simplifiable: true
+                                                                            propertyCountIfSimplify: 10000
+                                                                            propertyCountIfSimplifyWithoutSimpleObject: 10000
+                                                                            simplifiable: false
                                                                           cliKey: LicensedComponentSetupTypeProperties
                                                                       protocol: {}
                                                                     required: true
@@ -4992,9 +4995,9 @@ schemas:
                                                                     cli-complexity: object_complex
                                                                     cli-mark: checked
                                                                     cli-simplify-indicator:
-                                                                      propertyCountIfSimplify: 2
-                                                                      propertyCountIfSimplifyWithoutSimpleObject: 2
-                                                                      simplifiable: true
+                                                                      propertyCountIfSimplify: 10000
+                                                                      propertyCountIfSimplifyWithoutSimpleObject: 10000
+                                                                      simplifiable: false
                                                                     cliKey: ComponentSetup
                                                                 protocol: {}
                                                             immediate:
@@ -5048,7 +5051,7 @@ schemas:
                                                             name: IntegrationRuntimeSsisProperties-expressCustomSetupProperties
                                                             description: Custom setup without script properties for a SSIS integration runtime.
                                                           cli:
-                                                            cli-complexity: array_simple
+                                                            cli-complexity: array_complex
                                                             cli-mark: checked
                                                         protocol: {}
                                                       serializedName: expressCustomSetupProperties
@@ -5102,7 +5105,7 @@ schemas:
                                                               cli-complexity: object_complex
                                                               cli-mark: checked
                                                               cli-simplify-indicator:
-                                                                propertyCountIfSimplify: 2
+                                                                propertyCountIfSimplify: 3
                                                                 propertyCountIfSimplifyWithoutSimpleObject: 2
                                                                 simplifiable: true
                                                               cliKey: PackageStore
@@ -5112,7 +5115,7 @@ schemas:
                                                             name: IntegrationRuntimeSsisProperties-packageStores
                                                             description: Package stores for the SSIS Integration Runtime.
                                                           cli:
-                                                            cli-complexity: array_simple
+                                                            cli-complexity: array_complex
                                                             cli-mark: checked
                                                         protocol: {}
                                                       serializedName: packageStores
@@ -5137,9 +5140,9 @@ schemas:
                                                       cli-complexity: object_complex
                                                       cli-mark: checked
                                                       cli-simplify-indicator:
-                                                        propertyCountIfSimplify: 7
-                                                        propertyCountIfSimplifyWithoutSimpleObject: 7
-                                                        simplifiable: true
+                                                        propertyCountIfSimplify: 10000
+                                                        propertyCountIfSimplifyWithoutSimpleObject: 10000
+                                                        simplifiable: false
                                                       cliKey: IntegrationRuntimeSsisProperties
                                                   protocol: {}
                                                 serializedName: ssisProperties
@@ -5164,9 +5167,9 @@ schemas:
                                                 cli-complexity: object_complex
                                                 cli-mark: checked
                                                 cli-simplify-indicator:
-                                                  propertyCountIfSimplify: 2
-                                                  propertyCountIfSimplifyWithoutSimpleObject: 2
-                                                  simplifiable: true
+                                                  propertyCountIfSimplify: 10000
+                                                  propertyCountIfSimplifyWithoutSimpleObject: 10000
+                                                  simplifiable: false
                                                 cliKey: ManagedIntegrationRuntimeTypeProperties
                                             protocol: {}
                                           required: true
@@ -5226,9 +5229,9 @@ schemas:
                                           cli-complexity: object_complex
                                           cli-mark: checked
                                           cli-simplify-indicator:
-                                            propertyCountIfSimplify: 6
-                                            propertyCountIfSimplifyWithoutSimpleObject: 6
-                                            simplifiable: true
+                                            propertyCountIfSimplify: 10000
+                                            propertyCountIfSimplifyWithoutSimpleObject: 10000
+                                            simplifiable: false
                                           cliKey: ManagedIntegrationRuntime
                                       protocol: {}
                                     - &ref_110
@@ -5291,7 +5294,7 @@ schemas:
                                                             cli-complexity: object_complex
                                                             cli-mark: checked
                                                             cli-simplify-indicator:
-                                                              propertyCountIfSimplify: 2
+                                                              propertyCountIfSimplify: 3
                                                               propertyCountIfSimplifyWithoutSimpleObject: 2
                                                               simplifiable: true
                                                             cliKey: LinkedIntegrationRuntimeKeyAuthorization
@@ -5403,9 +5406,9 @@ schemas:
                                                 cli-complexity: object_complex
                                                 cli-mark: checked
                                                 cli-simplify-indicator:
-                                                  propertyCountIfSimplify: 1
-                                                  propertyCountIfSimplifyWithoutSimpleObject: 1
-                                                  simplifiable: true
+                                                  propertyCountIfSimplify: 10000
+                                                  propertyCountIfSimplifyWithoutSimpleObject: 10000
+                                                  simplifiable: false
                                                 cliKey: SelfHostedIntegrationRuntimeTypeProperties
                                             protocol: {}
                                           serializedName: typeProperties
@@ -5434,9 +5437,9 @@ schemas:
                                           cli-complexity: object_complex
                                           cli-mark: checked
                                           cli-simplify-indicator:
-                                            propertyCountIfSimplify: 3
-                                            propertyCountIfSimplifyWithoutSimpleObject: 3
-                                            simplifiable: true
+                                            propertyCountIfSimplify: 10000
+                                            propertyCountIfSimplifyWithoutSimpleObject: 10000
+                                            simplifiable: false
                                           cliKey: SelfHostedIntegrationRuntime
                                       protocol: {}
                                   immediate:
@@ -5521,9 +5524,9 @@ schemas:
                               cli-complexity: object_complex
                               cli-mark: checked
                               cli-simplify-indicator:
-                                propertyCountIfSimplify: 1
-                                propertyCountIfSimplifyWithoutSimpleObject: 1
-                                simplifiable: true
+                                propertyCountIfSimplify: 10000
+                                propertyCountIfSimplifyWithoutSimpleObject: 10000
+                                simplifiable: false
                               cliKey: IntegrationRuntimeResource
                           protocol: {}
                       immediate:
@@ -5823,7 +5826,7 @@ schemas:
                                                             name: RecurrenceSchedule-monthlyOccurrences
                                                             description: The monthly occurrences.
                                                           cli:
-                                                            cli-complexity: array_simple
+                                                            cli-complexity: array_complex
                                                             cli-mark: checked
                                                         protocol: {}
                                                       serializedName: monthlyOccurrences
@@ -5845,12 +5848,12 @@ schemas:
                                                       description: The recurrence schedule.
                                                       namespace: ''
                                                     cli:
-                                                      cli-complexity: object_simple
+                                                      cli-complexity: object_complex
                                                       cli-mark: checked
                                                       cli-simplify-indicator:
-                                                        propertyCountIfSimplify: 5
-                                                        propertyCountIfSimplifyWithoutSimpleObject: 5
-                                                        simplifiable: true
+                                                        propertyCountIfSimplify: 10000
+                                                        propertyCountIfSimplifyWithoutSimpleObject: 10000
+                                                        simplifiable: false
                                                       cliKey: RecurrenceSchedule
                                                   protocol: {}
                                                 serializedName: schedule
@@ -5875,9 +5878,9 @@ schemas:
                                                 cli-complexity: object_complex
                                                 cli-mark: checked
                                                 cli-simplify-indicator:
-                                                  propertyCountIfSimplify: 6
-                                                  propertyCountIfSimplifyWithoutSimpleObject: 6
-                                                  simplifiable: true
+                                                  propertyCountIfSimplify: 10000
+                                                  propertyCountIfSimplifyWithoutSimpleObject: 10000
+                                                  simplifiable: false
                                                 cliKey: ScheduleTriggerRecurrence
                                             protocol: {}
                                           required: true
@@ -5905,9 +5908,9 @@ schemas:
                                           cli-complexity: object_complex
                                           cli-mark: checked
                                           cli-simplify-indicator:
-                                            propertyCountIfSimplify: 1
-                                            propertyCountIfSimplifyWithoutSimpleObject: 1
-                                            simplifiable: true
+                                            propertyCountIfSimplify: 10000
+                                            propertyCountIfSimplifyWithoutSimpleObject: 10000
+                                            simplifiable: false
                                           cliKey: ScheduleTrigger-typeProperties
                                       protocol: {}
                                     required: true
@@ -5935,9 +5938,9 @@ schemas:
                                     cli-complexity: object_complex
                                     cli-mark: checked
                                     cli-simplify-indicator:
-                                      propertyCountIfSimplify: 5
-                                      propertyCountIfSimplifyWithoutSimpleObject: 5
-                                      simplifiable: true
+                                      propertyCountIfSimplify: 10000
+                                      propertyCountIfSimplifyWithoutSimpleObject: 10000
+                                      simplifiable: false
                                     cliKey: ScheduleTrigger
                                 protocol: {}
                               - &ref_145
@@ -6024,12 +6027,12 @@ schemas:
                                                 description: Linked service reference type.
                                                 namespace: ''
                                               cli:
-                                                cli-complexity: object_simple
+                                                cli-complexity: object_complex
                                                 cli-mark: checked
                                                 cli-simplify-indicator:
-                                                  propertyCountIfSimplify: 3
-                                                  propertyCountIfSimplifyWithoutSimpleObject: 3
-                                                  simplifiable: true
+                                                  propertyCountIfSimplify: 10000
+                                                  propertyCountIfSimplifyWithoutSimpleObject: 10000
+                                                  simplifiable: false
                                                 cliKey: LinkedServiceReference
                                             protocol: {}
                                           required: true
@@ -6057,9 +6060,9 @@ schemas:
                                           cli-complexity: object_complex
                                           cli-mark: checked
                                           cli-simplify-indicator:
-                                            propertyCountIfSimplify: 3
-                                            propertyCountIfSimplifyWithoutSimpleObject: 3
-                                            simplifiable: true
+                                            propertyCountIfSimplify: 10000
+                                            propertyCountIfSimplifyWithoutSimpleObject: 10000
+                                            simplifiable: false
                                           cliKey: BlobTrigger-typeProperties
                                       protocol: {}
                                     required: true
@@ -6087,9 +6090,9 @@ schemas:
                                     cli-complexity: object_complex
                                     cli-mark: checked
                                     cli-simplify-indicator:
-                                      propertyCountIfSimplify: 5
-                                      propertyCountIfSimplifyWithoutSimpleObject: 5
-                                      simplifiable: true
+                                      propertyCountIfSimplify: 10000
+                                      propertyCountIfSimplifyWithoutSimpleObject: 10000
+                                      simplifiable: false
                                     cliKey: BlobTrigger
                                 protocol: {}
                               - &ref_146
@@ -6192,9 +6195,9 @@ schemas:
                                           cli-complexity: object_simple
                                           cli-mark: checked
                                           cli-simplify-indicator:
-                                            propertyCountIfSimplify: 5
-                                            propertyCountIfSimplifyWithoutSimpleObject: 5
-                                            simplifiable: true
+                                            propertyCountIfSimplify: 10000
+                                            propertyCountIfSimplifyWithoutSimpleObject: 10000
+                                            simplifiable: false
                                           cliKey: BlobEventsTrigger-typeProperties
                                       protocol: {}
                                     required: true
@@ -6222,9 +6225,9 @@ schemas:
                                     cli-complexity: object_complex
                                     cli-mark: checked
                                     cli-simplify-indicator:
-                                      propertyCountIfSimplify: 5
-                                      propertyCountIfSimplifyWithoutSimpleObject: 5
-                                      simplifiable: true
+                                      propertyCountIfSimplify: 10000
+                                      propertyCountIfSimplifyWithoutSimpleObject: 10000
+                                      simplifiable: false
                                     cliKey: BlobEventsTrigger
                                 protocol: {}
                             immediate:
@@ -6318,8 +6321,8 @@ schemas:
                                             cli-complexity: object_simple
                                             cli-mark: checked
                                             cli-simplify-indicator:
-                                              propertyCountIfSimplify: 3
-                                              propertyCountIfSimplifyWithoutSimpleObject: 3
+                                              propertyCountIfSimplify: 2
+                                              propertyCountIfSimplifyWithoutSimpleObject: 2
                                               simplifiable: true
                                             cliKey: PipelineReference
                                         protocol: {}
@@ -6354,9 +6357,9 @@ schemas:
                                       cli-complexity: object_complex
                                       cli-mark: checked
                                       cli-simplify-indicator:
-                                        propertyCountIfSimplify: 2
-                                        propertyCountIfSimplifyWithoutSimpleObject: 2
-                                        simplifiable: true
+                                        propertyCountIfSimplify: 10000
+                                        propertyCountIfSimplifyWithoutSimpleObject: 10000
+                                        simplifiable: false
                                       cliKey: TriggerPipelineReference
                                   protocol: {}
                                 language:
@@ -6364,7 +6367,7 @@ schemas:
                                     name: MultiplePipelineTrigger-pipelines
                                     description: Pipelines that need to be started.
                                   cli:
-                                    cli-complexity: array_simple
+                                    cli-complexity: array_complex
                                     cli-mark: checked
                                 protocol: {}
                               serializedName: pipelines
@@ -6391,9 +6394,9 @@ schemas:
                               cli-complexity: object_complex
                               cli-mark: checked
                               cli-simplify-indicator:
-                                propertyCountIfSimplify: 4
-                                propertyCountIfSimplifyWithoutSimpleObject: 4
-                                simplifiable: true
+                                propertyCountIfSimplify: 10000
+                                propertyCountIfSimplifyWithoutSimpleObject: 10000
+                                simplifiable: false
                               cliKey: MultiplePipelineTrigger
                           protocol: {}
                         - *ref_144
@@ -6522,12 +6525,12 @@ schemas:
                                           description: Execution policy for an activity.
                                           namespace: ''
                                         cli:
-                                          cli-complexity: object_simple
+                                          cli-complexity: object_complex
                                           cli-mark: checked
                                           cli-simplify-indicator:
-                                            propertyCountIfSimplify: 2
-                                            propertyCountIfSimplifyWithoutSimpleObject: 2
-                                            simplifiable: true
+                                            propertyCountIfSimplify: 10000
+                                            propertyCountIfSimplifyWithoutSimpleObject: 10000
+                                            simplifiable: false
                                           cliKey: RetryPolicy
                                       protocol: {}
                                     required: false
@@ -6669,8 +6672,8 @@ schemas:
                                                         cli-complexity: object_simple
                                                         cli-mark: checked
                                                         cli-simplify-indicator:
-                                                          propertyCountIfSimplify: 2
-                                                          propertyCountIfSimplifyWithoutSimpleObject: 2
+                                                          propertyCountIfSimplify: 1
+                                                          propertyCountIfSimplifyWithoutSimpleObject: 1
                                                           simplifiable: true
                                                         cliKey: TriggerReference
                                                     protocol: {}
@@ -6791,7 +6794,7 @@ schemas:
                                           name: TumblingWindowTrigger-typeProperties-dependsOn
                                           description: Triggers that this trigger depends on. Only tumbling window triggers are supported.
                                         cli:
-                                          cli-complexity: array_simple
+                                          cli-complexity: array_complex
                                           cli-mark: checked
                                       protocol: {}
                                     required: false
@@ -6819,9 +6822,9 @@ schemas:
                                     cli-complexity: object_complex
                                     cli-mark: checked
                                     cli-simplify-indicator:
-                                      propertyCountIfSimplify: 8
-                                      propertyCountIfSimplifyWithoutSimpleObject: 8
-                                      simplifiable: true
+                                      propertyCountIfSimplify: 10000
+                                      propertyCountIfSimplifyWithoutSimpleObject: 10000
+                                      simplifiable: false
                                     cliKey: TumblingWindowTrigger-typeProperties
                                 protocol: {}
                               required: true
@@ -6849,9 +6852,9 @@ schemas:
                               cli-complexity: object_complex
                               cli-mark: checked
                               cli-simplify-indicator:
-                                propertyCountIfSimplify: 5
-                                propertyCountIfSimplifyWithoutSimpleObject: 5
-                                simplifiable: true
+                                propertyCountIfSimplify: 10000
+                                propertyCountIfSimplifyWithoutSimpleObject: 10000
+                                simplifiable: false
                               cliKey: TumblingWindowTrigger
                           protocol: {}
                         - &ref_176
@@ -6924,12 +6927,12 @@ schemas:
                                     description: Rerun Trigger properties.
                                     namespace: ''
                                   cli:
-                                    cli-complexity: object_simple
+                                    cli-complexity: object_complex
                                     cli-mark: checked
                                     cli-simplify-indicator:
-                                      propertyCountIfSimplify: 4
-                                      propertyCountIfSimplifyWithoutSimpleObject: 4
-                                      simplifiable: true
+                                      propertyCountIfSimplify: 10000
+                                      propertyCountIfSimplifyWithoutSimpleObject: 10000
+                                      simplifiable: false
                                     cliKey: RerunTumblingWindowTrigger-typeProperties
                                 protocol: {}
                               required: true
@@ -6957,9 +6960,9 @@ schemas:
                               cli-complexity: object_complex
                               cli-mark: checked
                               cli-simplify-indicator:
-                                propertyCountIfSimplify: 4
-                                propertyCountIfSimplifyWithoutSimpleObject: 4
-                                simplifiable: true
+                                propertyCountIfSimplify: 10000
+                                propertyCountIfSimplifyWithoutSimpleObject: 10000
+                                simplifiable: false
                               cliKey: RerunTumblingWindowTrigger
                           protocol: {}
                         - &ref_177
@@ -6999,7 +7002,7 @@ schemas:
                                           name: ChainingTrigger-typeProperties-dependsOn
                                           description: Upstream Pipelines.
                                         cli:
-                                          cli-complexity: array_simple
+                                          cli-complexity: array_complex
                                           cli-mark: checked
                                       protocol: {}
                                     required: true
@@ -7034,12 +7037,12 @@ schemas:
                                     description: Chaining Trigger properties.
                                     namespace: ''
                                   cli:
-                                    cli-complexity: object_simple
+                                    cli-complexity: object_complex
                                     cli-mark: checked
                                     cli-simplify-indicator:
-                                      propertyCountIfSimplify: 2
-                                      propertyCountIfSimplifyWithoutSimpleObject: 2
-                                      simplifiable: true
+                                      propertyCountIfSimplify: 10000
+                                      propertyCountIfSimplifyWithoutSimpleObject: 10000
+                                      simplifiable: false
                                     cliKey: ChainingTrigger-typeProperties
                                 protocol: {}
                               required: true
@@ -7069,9 +7072,9 @@ schemas:
                               cli-complexity: object_complex
                               cli-mark: checked
                               cli-simplify-indicator:
-                                propertyCountIfSimplify: 5
-                                propertyCountIfSimplifyWithoutSimpleObject: 5
-                                simplifiable: true
+                                propertyCountIfSimplify: 10000
+                                propertyCountIfSimplifyWithoutSimpleObject: 10000
+                                simplifiable: false
                               cliKey: ChainingTrigger
                           protocol: {}
                       immediate:
@@ -7133,7 +7136,7 @@ schemas:
                               name: Trigger-annotations
                               description: List of tags that can be used for describing the trigger.
                             cli:
-                              cli-complexity: array_simple
+                              cli-complexity: array_complex
                               cli-mark: checked
                           protocol: {}
                         required: false
@@ -7159,9 +7162,9 @@ schemas:
                         cli-complexity: object_complex
                         cli-mark: checked
                         cli-simplify-indicator:
-                          propertyCountIfSimplify: 3
-                          propertyCountIfSimplifyWithoutSimpleObject: 3
-                          simplifiable: true
+                          propertyCountIfSimplify: 10000
+                          propertyCountIfSimplifyWithoutSimpleObject: 10000
+                          simplifiable: false
                         cliKey: Trigger
                     protocol: {}
                   required: true
@@ -7187,9 +7190,9 @@ schemas:
                   cli-complexity: object_complex
                   cli-mark: checked
                   cli-simplify-indicator:
-                    propertyCountIfSimplify: 1
-                    propertyCountIfSimplifyWithoutSimpleObject: 1
-                    simplifiable: true
+                    propertyCountIfSimplify: 10000
+                    propertyCountIfSimplifyWithoutSimpleObject: 10000
+                    simplifiable: false
                   cliKey: TriggerResource
               protocol: {}
             language:
@@ -7197,7 +7200,7 @@ schemas:
                 name: TriggerListResponse-value
                 description: List of triggers.
               cli:
-                cli-complexity: array_simple
+                cli-complexity: array_complex
                 cli-mark: checked
             protocol: {}
           required: true
@@ -7229,12 +7232,12 @@ schemas:
           description: A list of trigger resources.
           namespace: ''
         cli:
-          cli-complexity: object_simple
+          cli-complexity: object_complex
           cli-mark: checked
           cli-simplify-indicator:
-            propertyCountIfSimplify: 2
-            propertyCountIfSimplifyWithoutSimpleObject: 2
-            simplifiable: true
+            propertyCountIfSimplify: 10000
+            propertyCountIfSimplifyWithoutSimpleObject: 10000
+            simplifiable: false
           cliKey: TriggerListResponse
       protocol: {}
     - *ref_58
@@ -7296,7 +7299,7 @@ schemas:
                 name: TriggerQueryResponse-value
                 description: List of triggers.
               cli:
-                cli-complexity: array_simple
+                cli-complexity: array_complex
                 cli-mark: checked
             protocol: {}
           required: true
@@ -7328,12 +7331,12 @@ schemas:
           description: A query of triggers.
           namespace: ''
         cli:
-          cli-complexity: object_simple
+          cli-complexity: object_complex
           cli-mark: checked
           cli-simplify-indicator:
-            propertyCountIfSimplify: 2
-            propertyCountIfSimplifyWithoutSimpleObject: 2
-            simplifiable: true
+            propertyCountIfSimplify: 10000
+            propertyCountIfSimplifyWithoutSimpleObject: 10000
+            simplifiable: false
           cliKey: TriggerQueryResponse
       protocol: {}
     - &ref_445
@@ -7394,7 +7397,7 @@ schemas:
                 name: IntegrationRuntimeListResponse-value
                 description: List of integration runtimes.
               cli:
-                cli-complexity: array_simple
+                cli-complexity: array_complex
                 cli-mark: checked
             protocol: {}
           required: true
@@ -7426,12 +7429,12 @@ schemas:
           description: A list of integration runtime resources.
           namespace: ''
         cli:
-          cli-complexity: object_simple
+          cli-complexity: object_complex
           cli-mark: checked
           cli-simplify-indicator:
-            propertyCountIfSimplify: 2
-            propertyCountIfSimplifyWithoutSimpleObject: 2
-            simplifiable: true
+            propertyCountIfSimplify: 10000
+            propertyCountIfSimplifyWithoutSimpleObject: 10000
+            simplifiable: false
           cliKey: IntegrationRuntimeListResponse
       protocol: {}
     - *ref_114
@@ -7649,7 +7652,7 @@ schemas:
                                           name: ManagedIntegrationRuntimeNode-errors
                                           description: The errors that occurred on this integration runtime node.
                                         cli:
-                                          cli-complexity: array_simple
+                                          cli-complexity: array_complex
                                           cli-mark: checked
                                       protocol: {}
                                     serializedName: errors
@@ -7670,12 +7673,12 @@ schemas:
                                     description: Properties of integration runtime node.
                                     namespace: ''
                                   cli:
-                                    cli-complexity: object_simple
+                                    cli-complexity: object_complex
                                     cli-mark: checked
                                     cli-simplify-indicator:
-                                      propertyCountIfSimplify: 1
-                                      propertyCountIfSimplifyWithoutSimpleObject: 1
-                                      simplifiable: true
+                                      propertyCountIfSimplify: 10000
+                                      propertyCountIfSimplifyWithoutSimpleObject: 10000
+                                      simplifiable: false
                                     cliKey: ManagedIntegrationRuntimeNode
                                 protocol: {}
                               language:
@@ -7683,7 +7686,7 @@ schemas:
                                   name: ManagedIntegrationRuntimeStatusTypeProperties-nodes
                                   description: The list of nodes for managed integration runtime.
                                 cli:
-                                  cli-complexity: array_simple
+                                  cli-complexity: array_complex
                                   cli-mark: checked
                               protocol: {}
                             readOnly: true
@@ -7705,7 +7708,7 @@ schemas:
                                   name: ManagedIntegrationRuntimeStatusTypeProperties-otherErrors
                                   description: The errors that occurred on this integration runtime.
                                 cli:
-                                  cli-complexity: array_simple
+                                  cli-complexity: array_complex
                                   cli-mark: checked
                               protocol: {}
                             readOnly: true
@@ -7870,8 +7873,8 @@ schemas:
                       cli-complexity: object_complex
                       cli-mark: checked
                       cli-simplify-indicator:
-                        propertyCountIfSimplify: 2
-                        propertyCountIfSimplifyWithoutSimpleObject: 2
+                        propertyCountIfSimplify: 1
+                        propertyCountIfSimplifyWithoutSimpleObject: 1
                         simplifiable: true
                       cliKey: ManagedIntegrationRuntimeStatus
                   protocol: {}
@@ -8136,7 +8139,7 @@ schemas:
                                     description: Properties of Self-hosted integration runtime node.
                                     namespace: ''
                                   cli:
-                                    cli-complexity: object_simple
+                                    cli-complexity: object_complex
                                     cli-mark: checked
                                     cli-simplify-indicator:
                                       propertyCountIfSimplify: 0
@@ -8149,7 +8152,7 @@ schemas:
                                   name: SelfHostedIntegrationRuntimeStatusTypeProperties-nodes
                                   description: The list of nodes for this integration runtime.
                                 cli:
-                                  cli-complexity: array_simple
+                                  cli-complexity: array_complex
                                   cli-mark: checked
                               protocol: {}
                             serializedName: nodes
@@ -8324,7 +8327,7 @@ schemas:
                                   name: SelfHostedIntegrationRuntimeStatusTypeProperties-links
                                   description: The list of linked integration runtimes that are created to share with this integration runtime.
                                 cli:
-                                  cli-complexity: array_simple
+                                  cli-complexity: array_complex
                                   cli-mark: checked
                               protocol: {}
                             serializedName: links
@@ -8375,12 +8378,12 @@ schemas:
                             description: Self-hosted integration runtime status type properties.
                             namespace: ''
                           cli:
-                            cli-complexity: object_simple
+                            cli-complexity: object_complex
                             cli-mark: checked
                             cli-simplify-indicator:
-                              propertyCountIfSimplify: 2
-                              propertyCountIfSimplifyWithoutSimpleObject: 2
-                              simplifiable: true
+                              propertyCountIfSimplify: 10000
+                              propertyCountIfSimplifyWithoutSimpleObject: 10000
+                              simplifiable: false
                             cliKey: SelfHostedIntegrationRuntimeStatusTypeProperties
                         protocol: {}
                       required: true
@@ -8409,9 +8412,9 @@ schemas:
                       cli-complexity: object_complex
                       cli-mark: checked
                       cli-simplify-indicator:
-                        propertyCountIfSimplify: 2
-                        propertyCountIfSimplifyWithoutSimpleObject: 2
-                        simplifiable: true
+                        propertyCountIfSimplify: 10000
+                        propertyCountIfSimplifyWithoutSimpleObject: 10000
+                        simplifiable: false
                       cliKey: SelfHostedIntegrationRuntimeStatus
                   protocol: {}
               immediate:
@@ -8506,9 +8509,9 @@ schemas:
           cli-complexity: object_complex
           cli-mark: checked
           cli-simplify-indicator:
-            propertyCountIfSimplify: 1
-            propertyCountIfSimplifyWithoutSimpleObject: 1
-            simplifiable: true
+            propertyCountIfSimplify: 10000
+            propertyCountIfSimplifyWithoutSimpleObject: 10000
+            simplifiable: false
           cliKey: IntegrationRuntimeStatusResponse
       protocol: {}
     - *ref_191
@@ -8804,7 +8807,7 @@ schemas:
                 name: IntegrationRuntimeMonitoringData-nodes
                 description: Integration runtime node monitoring data.
               cli:
-                cli-complexity: array_simple
+                cli-complexity: array_complex
                 cli-mark: checked
             protocol: {}
           serializedName: nodes
@@ -8825,12 +8828,12 @@ schemas:
           description: Get monitoring data response.
           namespace: ''
         cli:
-          cli-complexity: object_simple
+          cli-complexity: object_complex
           cli-mark: checked
           cli-simplify-indicator:
-            propertyCountIfSimplify: 2
-            propertyCountIfSimplifyWithoutSimpleObject: 2
-            simplifiable: true
+            propertyCountIfSimplify: 10000
+            propertyCountIfSimplifyWithoutSimpleObject: 10000
+            simplifiable: false
           cliKey: IntegrationRuntimeMonitoringData
       protocol: {}
     - *ref_269
@@ -8993,12 +8996,12 @@ schemas:
           description: Integration runtime reference type.
           namespace: ''
         cli:
-          cli-complexity: object_simple
+          cli-complexity: object_complex
           cli-mark: checked
           cli-simplify-indicator:
-            propertyCountIfSimplify: 3
-            propertyCountIfSimplifyWithoutSimpleObject: 3
-            simplifiable: true
+            propertyCountIfSimplify: 10000
+            propertyCountIfSimplifyWithoutSimpleObject: 10000
+            simplifiable: false
           cliKey: IntegrationRuntimeReference
       protocol: {}
     - type: object
@@ -9015,7 +9018,7 @@ schemas:
                 name: IntegrationRuntimeStatusListResponse-value
                 description: List of integration runtime status.
               cli:
-                cli-complexity: array_simple
+                cli-complexity: array_complex
                 cli-mark: checked
             protocol: {}
           required: true
@@ -9043,12 +9046,12 @@ schemas:
           description: A list of integration runtime status.
           namespace: ''
         cli:
-          cli-complexity: object_simple
+          cli-complexity: object_complex
           cli-mark: checked
           cli-simplify-indicator:
-            propertyCountIfSimplify: 2
-            propertyCountIfSimplifyWithoutSimpleObject: 2
-            simplifiable: true
+            propertyCountIfSimplify: 10000
+            propertyCountIfSimplifyWithoutSimpleObject: 10000
+            simplifiable: false
           cliKey: IntegrationRuntimeStatusListResponse
       protocol: {}
     - *ref_109
@@ -9246,7 +9249,7 @@ schemas:
                               name: SsisProject-environmentRefs
                               description: Environment reference in project
                             cli:
-                              cli-complexity: array_simple
+                              cli-complexity: array_complex
                               cli-mark: checked
                           protocol: {}
                         serializedName: environmentRefs
@@ -9393,7 +9396,7 @@ schemas:
                               name: SsisProject-parameters
                               description: Parameters in project
                             cli:
-                              cli-complexity: array_simple
+                              cli-complexity: array_complex
                               cli-mark: checked
                           protocol: {}
                         serializedName: parameters
@@ -9412,12 +9415,12 @@ schemas:
                         description: Ssis project.
                         namespace: ''
                       cli:
-                        cli-complexity: object_simple
+                        cli-complexity: object_complex
                         cli-mark: checked
                         cli-simplify-indicator:
-                          propertyCountIfSimplify: 8
-                          propertyCountIfSimplifyWithoutSimpleObject: 8
-                          simplifiable: true
+                          propertyCountIfSimplify: 10000
+                          propertyCountIfSimplifyWithoutSimpleObject: 10000
+                          simplifiable: false
                         cliKey: SsisProject
                     protocol: {}
                   - &ref_344
@@ -9468,7 +9471,7 @@ schemas:
                               name: SsisPackage-parameters
                               description: Parameters in package
                             cli:
-                              cli-complexity: array_simple
+                              cli-complexity: array_complex
                               cli-mark: checked
                           protocol: {}
                         serializedName: parameters
@@ -9487,12 +9490,12 @@ schemas:
                         description: Ssis Package.
                         namespace: ''
                       cli:
-                        cli-complexity: object_simple
+                        cli-complexity: object_complex
                         cli-mark: checked
                         cli-simplify-indicator:
-                          propertyCountIfSimplify: 8
-                          propertyCountIfSimplifyWithoutSimpleObject: 8
-                          simplifiable: true
+                          propertyCountIfSimplify: 10000
+                          propertyCountIfSimplifyWithoutSimpleObject: 10000
+                          simplifiable: false
                         cliKey: SsisPackage
                     protocol: {}
                   - &ref_345
@@ -9606,7 +9609,7 @@ schemas:
                               name: SsisEnvironment-variables
                               description: Variable in environment
                             cli:
-                              cli-complexity: array_simple
+                              cli-complexity: array_complex
                               cli-mark: checked
                           protocol: {}
                         serializedName: variables
@@ -9625,12 +9628,12 @@ schemas:
                         description: Ssis environment.
                         namespace: ''
                       cli:
-                        cli-complexity: object_simple
+                        cli-complexity: object_complex
                         cli-mark: checked
                         cli-simplify-indicator:
-                          propertyCountIfSimplify: 6
-                          propertyCountIfSimplifyWithoutSimpleObject: 6
-                          simplifiable: true
+                          propertyCountIfSimplify: 10000
+                          propertyCountIfSimplifyWithoutSimpleObject: 10000
+                          simplifiable: false
                         cliKey: SsisEnvironment
                     protocol: {}
                 immediate:
@@ -9712,7 +9715,7 @@ schemas:
                 name: SsisObjectMetadataListResponse-value
                 description: List of SSIS object metadata.
               cli:
-                cli-complexity: array_simple
+                cli-complexity: array_complex
                 cli-mark: checked
             protocol: {}
           serializedName: value
@@ -9738,12 +9741,12 @@ schemas:
           description: A list of SSIS object metadata.
           namespace: ''
         cli:
-          cli-complexity: object_simple
+          cli-complexity: object_complex
           cli-mark: checked
           cli-simplify-indicator:
-            propertyCountIfSimplify: 2
-            propertyCountIfSimplifyWithoutSimpleObject: 2
-            simplifiable: true
+            propertyCountIfSimplify: 10000
+            propertyCountIfSimplifyWithoutSimpleObject: 10000
+            simplifiable: false
           cliKey: SsisObjectMetadataListResponse
       protocol: {}
     - *ref_311

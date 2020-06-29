@@ -16,10 +16,10 @@ schemas:
       precision: 32
       language:
         default:
-          name: integer
+          name: Integer
           description: ''
         cli:
-          name: integer
+          name: Integer
           description: ''
       protocol: {}
   strings:
@@ -27,10 +27,10 @@ schemas:
       type: string
       language:
         default:
-          name: string
+          name: String
           description: simple string
         cli:
-          name: string
+          name: String
           description: simple string
       protocol: {}
     - &ref_1
@@ -39,10 +39,10 @@ schemas:
         - version: 2019-06-01-preview
       language:
         default:
-          name: string
+          name: String
           description: ''
         cli:
-          name: string
+          name: String
           description: ''
       protocol: {}
     - &ref_25
@@ -51,10 +51,10 @@ schemas:
         - version: 2019-06-01-preview
       language:
         default:
-          name: resource_id
+          name: ResourceId
           description: 'Fully qualified resource Id for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}'
         cli:
-          name: resource_id
+          name: ResourceId
           description: 'Fully qualified resource Id for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}'
       protocol: {}
     - &ref_26
@@ -63,10 +63,10 @@ schemas:
         - version: 2019-06-01-preview
       language:
         default:
-          name: resource_name
+          name: ResourceName
           description: The name of the resource
         cli:
-          name: resource_name
+          name: ResourceName
           description: The name of the resource
       protocol: {}
     - &ref_27
@@ -75,10 +75,10 @@ schemas:
         - version: 2019-06-01-preview
       language:
         default:
-          name: resource_type
+          name: ResourceType
           description: The type of the resource. Ex- Microsoft.Compute/virtualMachines or Microsoft.Storage/storageAccounts.
         cli:
-          name: resource_type
+          name: ResourceType
           description: The type of the resource. Ex- Microsoft.Compute/virtualMachines or Microsoft.Storage/storageAccounts.
       protocol: {}
     - &ref_28
@@ -91,10 +91,10 @@ schemas:
           - create
       language:
         default:
-          name: resource_location
+          name: ResourceLocation
           description: The geo-location where the resource lives
         cli:
-          name: resource_location
+          name: ResourceLocation
           description: The geo-location where the resource lives
       protocol: {}
     - &ref_17
@@ -103,10 +103,10 @@ schemas:
         - version: 2019-06-01-preview
       language:
         default:
-          name: resource_properties_etag
+          name: ResourcePropertiesEtag
           description: A unique read-only string that changes whenever the resource is updated.
         cli:
-          name: resource_properties_etag
+          name: ResourcePropertiesEtag
           description: A unique read-only string that changes whenever the resource is updated.
       protocol: {}
     - &ref_5
@@ -115,10 +115,10 @@ schemas:
         - version: 2019-06-01-preview
       language:
         default:
-          name: resource_id
+          name: ResourceId
           description: Resource Id
         cli:
-          name: resource_id
+          name: ResourceId
           description: Resource Id
       protocol: {}
     - &ref_31
@@ -127,10 +127,10 @@ schemas:
         - version: 2019-06-01-preview
       language:
         default:
-          name: error_response_code
+          name: ErrorResponseCode
           description: The error code.
         cli:
-          name: error_response_code
+          name: ErrorResponseCode
           description: The error code.
       protocol: {}
     - &ref_32
@@ -139,10 +139,10 @@ schemas:
         - version: 2019-06-01-preview
       language:
         default:
-          name: error_response_message
+          name: ErrorResponseMessage
           description: The error message.
         cli:
-          name: error_response_message
+          name: ErrorResponseMessage
           description: The error message.
       protocol: {}
     - &ref_34
@@ -151,10 +151,10 @@ schemas:
         - version: 2019-06-01-preview
       language:
         default:
-          name: managed_network_list_result_next_link
+          name: ManagedNetworkListResultNextLink
           description: Gets the URL to get the next page of results.
         cli:
-          name: managed_network_list_result_next_link
+          name: ManagedNetworkListResultNextLink
           description: Gets the URL to get the next page of results.
       protocol: {}
     - &ref_13
@@ -163,10 +163,10 @@ schemas:
         - version: 2019-06-01-preview
       language:
         default:
-          name: scope_assignment_properties_assigned_managed_network
+          name: ScopeAssignmentPropertiesAssignedManagedNetwork
           description: The managed network ID with scope will be assigned to.
         cli:
-          name: scope_assignment_properties_assigned_managed_network
+          name: ScopeAssignmentPropertiesAssignedManagedNetwork
           description: The managed network ID with scope will be assigned to.
       protocol: {}
     - &ref_35
@@ -175,10 +175,10 @@ schemas:
         - version: 2019-06-01-preview
       language:
         default:
-          name: scope_assignment_list_result_next_link
+          name: ScopeAssignmentListResultNextLink
           description: Gets the URL to get the next set of results.
         cli:
-          name: scope_assignment_list_result_next_link
+          name: ScopeAssignmentListResultNextLink
           description: Gets the URL to get the next set of results.
       protocol: {}
     - &ref_36
@@ -187,10 +187,10 @@ schemas:
         - version: 2019-06-01-preview
       language:
         default:
-          name: managed_network_group_list_result_next_link
+          name: ManagedNetworkGroupListResultNextLink
           description: Gets the URL to get the next set of results.
         cli:
-          name: managed_network_group_list_result_next_link
+          name: ManagedNetworkGroupListResultNextLink
           description: Gets the URL to get the next set of results.
       protocol: {}
     - &ref_37
@@ -199,10 +199,10 @@ schemas:
         - version: 2019-06-01-preview
       language:
         default:
-          name: managed_network_peering_policy_list_result_next_link
+          name: ManagedNetworkPeeringPolicyListResultNextLink
           description: Gets the URL to get the next page of results.
         cli:
-          name: managed_network_peering_policy_list_result_next_link
+          name: ManagedNetworkPeeringPolicyListResultNextLink
           description: Gets the URL to get the next page of results.
       protocol: {}
     - &ref_38
@@ -211,10 +211,10 @@ schemas:
         - version: 2019-06-01-preview
       language:
         default:
-          name: operation_name
+          name: OperationName
           description: 'Operation name: {provider}/{resource}/{operation}'
         cli:
-          name: operation_name
+          name: OperationName
           description: 'Operation name: {provider}/{resource}/{operation}'
       protocol: {}
     - &ref_39
@@ -223,10 +223,10 @@ schemas:
         - version: 2019-06-01-preview
       language:
         default:
-          name: operation_display_provider
+          name: OperationDisplayProvider
           description: 'Service provider: Microsoft.ManagedNetwork'
         cli:
-          name: operation_display_provider
+          name: OperationDisplayProvider
           description: 'Service provider: Microsoft.ManagedNetwork'
       protocol: {}
     - &ref_40
@@ -235,10 +235,10 @@ schemas:
         - version: 2019-06-01-preview
       language:
         default:
-          name: operation_display_resource
+          name: OperationDisplayResource
           description: 'Resource on which the operation is performed: Profile, endpoint, etc.'
         cli:
-          name: operation_display_resource
+          name: OperationDisplayResource
           description: 'Resource on which the operation is performed: Profile, endpoint, etc.'
       protocol: {}
     - &ref_41
@@ -247,10 +247,10 @@ schemas:
         - version: 2019-06-01-preview
       language:
         default:
-          name: operation_display_operation
+          name: OperationDisplayOperation
           description: 'Operation type: Read, write, delete, etc.'
         cli:
-          name: operation_display_operation
+          name: OperationDisplayOperation
           description: 'Operation type: Read, write, delete, etc.'
       protocol: {}
     - &ref_42
@@ -259,10 +259,10 @@ schemas:
         - version: 2019-06-01-preview
       language:
         default:
-          name: operation_list_result_next_link
+          name: OperationListResultNextLink
           description: URL to get the next set of operation list results if there are any.
         cli:
-          name: operation_list_result_next_link
+          name: OperationListResultNextLink
           description: URL to get the next set of operation list results if there are any.
       protocol: {}
   choices:
@@ -271,37 +271,37 @@ schemas:
         - value: Updating
           language:
             default:
-              name: updating
+              name: Updating
               description: ''
             cli:
-              name: updating
+              name: Updating
               description: ''
               cliKey: Updating
         - value: Deleting
           language:
             default:
-              name: deleting
+              name: Deleting
               description: ''
             cli:
-              name: deleting
+              name: Deleting
               description: ''
               cliKey: Deleting
         - value: Failed
           language:
             default:
-              name: failed
+              name: Failed
               description: ''
             cli:
-              name: failed
+              name: Failed
               description: ''
               cliKey: Failed
         - value: Succeeded
           language:
             default:
-              name: succeeded
+              name: Succeeded
               description: ''
             cli:
-              name: succeeded
+              name: Succeeded
               description: ''
               cliKey: Succeeded
       type: choice
@@ -310,10 +310,10 @@ schemas:
       choiceType: *ref_0
       language:
         default:
-          name: provisioning_state
+          name: ProvisioningState
           description: Provisioning state of the ManagedNetwork resource.
         cli:
-          name: provisioning_state
+          name: ProvisioningState
           description: Provisioning state of the ManagedNetwork resource.
           cliKey: ProvisioningState
       protocol: {}
@@ -322,19 +322,19 @@ schemas:
         - value: HubAndSpokeTopology
           language:
             default:
-              name: hub_and_spoke_topology
+              name: HubAndSpokeTopology
               description: ''
             cli:
-              name: hub_and_spoke_topology
+              name: HubAndSpokeTopology
               description: ''
               cliKey: HubAndSpokeTopology
         - value: MeshTopology
           language:
             default:
-              name: mesh_topology
+              name: MeshTopology
               description: ''
             cli:
-              name: mesh_topology
+              name: MeshTopology
               description: ''
               cliKey: MeshTopology
       type: choice
@@ -343,10 +343,10 @@ schemas:
       choiceType: *ref_0
       language:
         default:
-          name: type
+          name: Type
           description: Gets or sets the connectivity type of a network structure policy
         cli:
-          name: type
+          name: Type
           description: Gets or sets the connectivity type of a network structure policy
           cliKey: type
       protocol: {}
@@ -358,10 +358,10 @@ schemas:
       valueType: *ref_0
       language:
         default:
-          name: api_version2019_06_01_preview
+          name: ApiVersion20190601Preview
           description: Api Version (2019-06-01-preview)
         cli:
-          name: api_version2019_06_01_preview
+          name: ApiVersion20190601Preview
           description: Api Version (2019-06-01-preview)
       protocol: {}
     - &ref_18
@@ -373,10 +373,10 @@ schemas:
       valueType: *ref_0
       language:
         default:
-          name: kind
+          name: Kind
           description: Responsibility role under which this Managed Network Group will be created
         cli:
-          name: kind
+          name: Kind
           description: Responsibility role under which this Managed Network Group will be created
       protocol: {}
   dictionaries:
@@ -385,10 +385,10 @@ schemas:
       elementType: *ref_1
       language:
         default:
-          name: tracked_resource_tags
+          name: TrackedResourceTags
           description: Resource tags
         cli:
-          name: tracked_resource_tags
+          name: TrackedResourceTags
           description: Resource tags
           cli-complexity: dictionary_simple
           cli-mark: checked
@@ -398,10 +398,10 @@ schemas:
       elementType: *ref_1
       language:
         default:
-          name: managed_network_update_tags
+          name: ManagedNetworkUpdateTags
           description: Resource tags
         cli:
-          name: managed_network_update_tags
+          name: ManagedNetworkUpdateTags
           description: Resource tags
           cli-complexity: dictionary_simple
           cli-mark: checked
@@ -479,11 +479,11 @@ schemas:
                                               - input
                                             language:
                                               default:
-                                                name: resource_id
+                                                name: ResourceId
                                                 description: Generic pointer to a resource
                                                 namespace: ''
                                               cli:
-                                                name: resource_id
+                                                name: ResourceId
                                                 description: Generic pointer to a resource
                                                 cli-complexity: object_simple
                                                 cli-mark: checked
@@ -495,21 +495,21 @@ schemas:
                                             protocol: {}
                                           language:
                                             default:
-                                              name: managed_network_group_properties_management_groups
+                                              name: ManagedNetworkGroupPropertiesManagementGroups
                                               description: The collection of management groups covered by the Managed Network
                                             cli:
-                                              name: managed_network_group_properties_management_groups
+                                              name: ManagedNetworkGroupPropertiesManagementGroups
                                               description: The collection of management groups covered by the Managed Network
-                                              cli-complexity: array_simple
+                                              cli-complexity: array_complex
                                               cli-mark: checked
                                           protocol: {}
                                         serializedName: managementGroups
                                         language:
                                           default:
-                                            name: management_groups
+                                            name: managementGroups
                                             description: The collection of management groups covered by the Managed Network
                                           cli:
-                                            name: management_groups
+                                            name: managementGroups
                                             description: The collection of management groups covered by the Managed Network
                                             cliKey: managementGroups
                                         protocol: {}
@@ -520,12 +520,12 @@ schemas:
                                           elementType: *ref_6
                                           language:
                                             default:
-                                              name: managed_network_group_properties_subscriptions
+                                              name: ManagedNetworkGroupPropertiesSubscriptions
                                               description: The collection of subscriptions covered by the Managed Network
                                             cli:
-                                              name: managed_network_group_properties_subscriptions
+                                              name: ManagedNetworkGroupPropertiesSubscriptions
                                               description: The collection of subscriptions covered by the Managed Network
-                                              cli-complexity: array_simple
+                                              cli-complexity: array_complex
                                               cli-mark: checked
                                           protocol: {}
                                         serializedName: subscriptions
@@ -545,21 +545,21 @@ schemas:
                                           elementType: *ref_6
                                           language:
                                             default:
-                                              name: managed_network_group_properties_virtual_networks
+                                              name: ManagedNetworkGroupPropertiesVirtualNetworks
                                               description: The collection of virtual nets covered by the Managed Network
                                             cli:
-                                              name: managed_network_group_properties_virtual_networks
+                                              name: ManagedNetworkGroupPropertiesVirtualNetworks
                                               description: The collection of virtual nets covered by the Managed Network
-                                              cli-complexity: array_simple
+                                              cli-complexity: array_complex
                                               cli-mark: checked
                                           protocol: {}
                                         serializedName: virtualNetworks
                                         language:
                                           default:
-                                            name: virtual_networks
+                                            name: virtualNetworks
                                             description: The collection of virtual nets covered by the Managed Network
                                           cli:
-                                            name: virtual_networks
+                                            name: virtualNetworks
                                             description: The collection of virtual nets covered by the Managed Network
                                             cliKey: virtualNetworks
                                         protocol: {}
@@ -570,12 +570,12 @@ schemas:
                                           elementType: *ref_6
                                           language:
                                             default:
-                                              name: managed_network_group_properties_subnets
+                                              name: ManagedNetworkGroupPropertiesSubnets
                                               description: The collection of  subnets covered by the Managed Network
                                             cli:
-                                              name: managed_network_group_properties_subnets
+                                              name: ManagedNetworkGroupPropertiesSubnets
                                               description: The collection of  subnets covered by the Managed Network
-                                              cli-complexity: array_simple
+                                              cli-complexity: array_complex
                                               cli-mark: checked
                                           protocol: {}
                                         serializedName: subnets
@@ -595,18 +595,18 @@ schemas:
                                       - input
                                     language:
                                       default:
-                                        name: managed_network_group_properties
+                                        name: ManagedNetworkGroupProperties
                                         description: Properties of a Managed Network Group
                                         namespace: ''
                                       cli:
-                                        name: managed_network_group_properties
+                                        name: ManagedNetworkGroupProperties
                                         description: Properties of a Managed Network Group
-                                        cli-complexity: object_simple
+                                        cli-complexity: object_complex
                                         cli-mark: checked
                                         cli-simplify-indicator:
-                                          propertyCountIfSimplify: 4
-                                          propertyCountIfSimplifyWithoutSimpleObject: 4
-                                          simplifiable: true
+                                          propertyCountIfSimplify: 10000
+                                          propertyCountIfSimplifyWithoutSimpleObject: 10000
+                                          simplifiable: false
                                         cliKey: ManagedNetworkGroupProperties
                                     protocol: {}
                                   - &ref_7
@@ -635,19 +635,19 @@ schemas:
                                             x-ms-discriminator-value: HubAndSpokeTopology
                                           language:
                                             default:
-                                              name: hub_and_spoke_peering_policy_properties
+                                              name: HubAndSpokePeeringPolicyProperties
                                               description: Properties of a Hub and Spoke Peering Policy
                                               namespace: ''
                                             cli:
-                                              name: hub_and_spoke_peering_policy_properties
+                                              name: HubAndSpokePeeringPolicyProperties
                                               description: Properties of a Hub and Spoke Peering Policy
                                               cli-complexity: object_simple
-                                              cli-discriminator-value: hub_and_spoke_topology
+                                              cli-discriminator-value: HubAndSpokeTopology
                                               cli-mark: checked
                                               cli-simplify-indicator:
-                                                propertyCountIfSimplify: 4
-                                                propertyCountIfSimplifyWithoutSimpleObject: 4
-                                                simplifiable: true
+                                                propertyCountIfSimplify: 10000
+                                                propertyCountIfSimplifyWithoutSimpleObject: 10000
+                                                simplifiable: false
                                               cliKey: HubAndSpokePeeringPolicyProperties
                                           protocol: {}
                                         - &ref_9
@@ -670,19 +670,19 @@ schemas:
                                             x-ms-discriminator-value: MeshTopology
                                           language:
                                             default:
-                                              name: mesh_peering_policy_properties
+                                              name: MeshPeeringPolicyProperties
                                               description: Properties of a Mesh Peering Policy
                                               namespace: ''
                                             cli:
-                                              name: mesh_peering_policy_properties
+                                              name: MeshPeeringPolicyProperties
                                               description: Properties of a Mesh Peering Policy
                                               cli-complexity: object_simple
-                                              cli-discriminator-value: mesh_topology
+                                              cli-discriminator-value: MeshTopology
                                               cli-mark: checked
                                               cli-simplify-indicator:
-                                                propertyCountIfSimplify: 4
-                                                propertyCountIfSimplifyWithoutSimpleObject: 4
-                                                simplifiable: true
+                                                propertyCountIfSimplify: 10000
+                                                propertyCountIfSimplifyWithoutSimpleObject: 10000
+                                                simplifiable: false
                                               cliKey: MeshPeeringPolicyProperties
                                           protocol: {}
                                       immediate:
@@ -736,12 +736,12 @@ schemas:
                                           elementType: *ref_6
                                           language:
                                             default:
-                                              name: managed_network_peering_policy_properties_spokes
+                                              name: ManagedNetworkPeeringPolicyPropertiesSpokes
                                               description: Gets or sets the spokes group IDs
                                             cli:
-                                              name: managed_network_peering_policy_properties_spokes
+                                              name: ManagedNetworkPeeringPolicyPropertiesSpokes
                                               description: Gets or sets the spokes group IDs
-                                              cli-complexity: array_simple
+                                              cli-complexity: array_complex
                                               cli-mark: checked
                                           protocol: {}
                                         required: false
@@ -762,12 +762,12 @@ schemas:
                                           elementType: *ref_6
                                           language:
                                             default:
-                                              name: managed_network_peering_policy_properties_mesh
+                                              name: ManagedNetworkPeeringPolicyPropertiesMesh
                                               description: Gets or sets the mesh group IDs
                                             cli:
-                                              name: managed_network_peering_policy_properties_mesh
+                                              name: ManagedNetworkPeeringPolicyPropertiesMesh
                                               description: Gets or sets the mesh group IDs
-                                              cli-complexity: array_simple
+                                              cli-complexity: array_complex
                                               cli-mark: checked
                                           protocol: {}
                                         required: false
@@ -788,19 +788,19 @@ schemas:
                                       - input
                                     language:
                                       default:
-                                        name: managed_network_peering_policy_properties
+                                        name: ManagedNetworkPeeringPolicyProperties
                                         description: Properties of a Managed Network Peering Policy
                                         namespace: ''
                                       cli:
-                                        name: managed_network_peering_policy_properties
+                                        name: ManagedNetworkPeeringPolicyProperties
                                         description: Properties of a Managed Network Peering Policy
                                         cli-complexity: object_complex
-                                        cli-discriminator-value: managed_network_peering_policy_properties
+                                        cli-discriminator-value: ManagedNetworkPeeringPolicyProperties
                                         cli-mark: checked
                                         cli-simplify-indicator:
-                                          propertyCountIfSimplify: 4
-                                          propertyCountIfSimplifyWithoutSimpleObject: 4
-                                          simplifiable: true
+                                          propertyCountIfSimplify: 10000
+                                          propertyCountIfSimplifyWithoutSimpleObject: 10000
+                                          simplifiable: false
                                         cliKey: ManagedNetworkPeeringPolicyProperties
                                     protocol: {}
                                   - *ref_12
@@ -818,10 +818,10 @@ schemas:
                                         serializedName: assignedManagedNetwork
                                         language:
                                           default:
-                                            name: assigned_managed_network
+                                            name: assignedManagedNetwork
                                             description: The managed network ID with scope will be assigned to.
                                           cli:
-                                            name: assigned_managed_network
+                                            name: assignedManagedNetwork
                                             description: The managed network ID with scope will be assigned to.
                                             cliKey: assignedManagedNetwork
                                         protocol: {}
@@ -832,11 +832,11 @@ schemas:
                                       - input
                                     language:
                                       default:
-                                        name: scope_assignment_properties
+                                        name: ScopeAssignmentProperties
                                         description: Properties of Managed Network
                                         namespace: ''
                                       cli:
-                                        name: scope_assignment_properties
+                                        name: ScopeAssignmentProperties
                                         description: Properties of Managed Network
                                         cli-complexity: object_simple
                                         cli-mark: checked
@@ -859,10 +859,10 @@ schemas:
                                   serializedName: provisioningState
                                   language:
                                     default:
-                                      name: provisioning_state
+                                      name: provisioningState
                                       description: Provisioning state of the ManagedNetwork resource.
                                     cli:
-                                      name: provisioning_state
+                                      name: provisioningState
                                       description: Provisioning state of the ManagedNetwork resource.
                                       cliKey: provisioningState
                                   protocol: {}
@@ -885,11 +885,11 @@ schemas:
                                 - input
                               language:
                                 default:
-                                  name: resource_properties
+                                  name: ResourceProperties
                                   description: Base for resource properties.
                                   namespace: ''
                                 cli:
-                                  name: resource_properties
+                                  name: ResourceProperties
                                   description: Base for resource properties.
                                   cli-complexity: object_simple
                                   cli-mark: checked
@@ -914,21 +914,21 @@ schemas:
                                     elementType: *ref_6
                                     language:
                                       default:
-                                        name: scope_management_groups
+                                        name: ScopeManagementGroups
                                         description: The collection of management groups covered by the Managed Network
                                       cli:
-                                        name: scope_management_groups
+                                        name: ScopeManagementGroups
                                         description: The collection of management groups covered by the Managed Network
-                                        cli-complexity: array_simple
+                                        cli-complexity: array_complex
                                         cli-mark: checked
                                     protocol: {}
                                   serializedName: managementGroups
                                   language:
                                     default:
-                                      name: management_groups
+                                      name: managementGroups
                                       description: The collection of management groups covered by the Managed Network
                                     cli:
-                                      name: management_groups
+                                      name: managementGroups
                                       description: The collection of management groups covered by the Managed Network
                                       cliKey: managementGroups
                                   protocol: {}
@@ -939,12 +939,12 @@ schemas:
                                     elementType: *ref_6
                                     language:
                                       default:
-                                        name: scope_subscriptions
+                                        name: ScopeSubscriptions
                                         description: The collection of subscriptions covered by the Managed Network
                                       cli:
-                                        name: scope_subscriptions
+                                        name: ScopeSubscriptions
                                         description: The collection of subscriptions covered by the Managed Network
-                                        cli-complexity: array_simple
+                                        cli-complexity: array_complex
                                         cli-mark: checked
                                     protocol: {}
                                   serializedName: subscriptions
@@ -964,21 +964,21 @@ schemas:
                                     elementType: *ref_6
                                     language:
                                       default:
-                                        name: scope_virtual_networks
+                                        name: ScopeVirtualNetworks
                                         description: The collection of virtual nets covered by the Managed Network
                                       cli:
-                                        name: scope_virtual_networks
+                                        name: ScopeVirtualNetworks
                                         description: The collection of virtual nets covered by the Managed Network
-                                        cli-complexity: array_simple
+                                        cli-complexity: array_complex
                                         cli-mark: checked
                                     protocol: {}
                                   serializedName: virtualNetworks
                                   language:
                                     default:
-                                      name: virtual_networks
+                                      name: virtualNetworks
                                       description: The collection of virtual nets covered by the Managed Network
                                     cli:
-                                      name: virtual_networks
+                                      name: virtualNetworks
                                       description: The collection of virtual nets covered by the Managed Network
                                       cliKey: virtualNetworks
                                   protocol: {}
@@ -989,12 +989,12 @@ schemas:
                                     elementType: *ref_6
                                     language:
                                       default:
-                                        name: scope_subnets
+                                        name: ScopeSubnets
                                         description: The collection of  subnets covered by the Managed Network
                                       cli:
-                                        name: scope_subnets
+                                        name: ScopeSubnets
                                         description: The collection of  subnets covered by the Managed Network
-                                        cli-complexity: array_simple
+                                        cli-complexity: array_complex
                                         cli-mark: checked
                                     protocol: {}
                                   serializedName: subnets
@@ -1014,18 +1014,18 @@ schemas:
                                 - input
                               language:
                                 default:
-                                  name: scope
+                                  name: Scope
                                   description: Scope of a Managed Network
                                   namespace: ''
                                 cli:
-                                  name: scope
+                                  name: Scope
                                   description: Scope of a Managed Network
-                                  cli-complexity: object_simple
+                                  cli-complexity: object_complex
                                   cli-mark: checked
                                   cli-simplify-indicator:
-                                    propertyCountIfSimplify: 4
-                                    propertyCountIfSimplifyWithoutSimpleObject: 4
-                                    simplifiable: true
+                                    propertyCountIfSimplify: 10000
+                                    propertyCountIfSimplifyWithoutSimpleObject: 10000
+                                    simplifiable: false
                                   cliKey: Scope
                               protocol: {}
                             serializedName: scope
@@ -1090,28 +1090,28 @@ schemas:
                                         - input
                                       language:
                                         default:
-                                          name: managed_network_group
+                                          name: ManagedNetworkGroup
                                           description: The Managed Network Group resource
                                           namespace: ''
                                         cli:
-                                          name: managed_network_group
+                                          name: ManagedNetworkGroup
                                           description: The Managed Network Group resource
                                           cli-complexity: object_complex
                                           cli-mark: checked
                                           cli-simplify-indicator:
-                                            propertyCountIfSimplify: 3
-                                            propertyCountIfSimplifyWithoutSimpleObject: 3
-                                            simplifiable: true
+                                            propertyCountIfSimplify: 10000
+                                            propertyCountIfSimplifyWithoutSimpleObject: 10000
+                                            simplifiable: false
                                           cliKey: ManagedNetworkGroup
                                       protocol: {}
                                     language:
                                       default:
-                                        name: connectivity_collection_groups
+                                        name: ConnectivityCollectionGroups
                                         description: The collection of connectivity related Managed Network Groups within the Managed Network
                                       cli:
-                                        name: connectivity_collection_groups
+                                        name: ConnectivityCollectionGroups
                                         description: The collection of connectivity related Managed Network Groups within the Managed Network
-                                        cli-complexity: array_simple
+                                        cli-complexity: array_complex
                                         cli-mark: checked
                                     protocol: {}
                                   readOnly: true
@@ -1157,28 +1157,28 @@ schemas:
                                         - input
                                       language:
                                         default:
-                                          name: managed_network_peering_policy
+                                          name: ManagedNetworkPeeringPolicy
                                           description: The Managed Network Peering Policy resource
                                           namespace: ''
                                         cli:
-                                          name: managed_network_peering_policy
+                                          name: ManagedNetworkPeeringPolicy
                                           description: The Managed Network Peering Policy resource
                                           cli-complexity: object_complex
                                           cli-mark: checked
                                           cli-simplify-indicator:
-                                            propertyCountIfSimplify: 2
-                                            propertyCountIfSimplifyWithoutSimpleObject: 2
-                                            simplifiable: true
+                                            propertyCountIfSimplify: 10000
+                                            propertyCountIfSimplifyWithoutSimpleObject: 10000
+                                            simplifiable: false
                                           cliKey: ManagedNetworkPeeringPolicy
                                       protocol: {}
                                     language:
                                       default:
-                                        name: connectivity_collection_peerings
+                                        name: ConnectivityCollectionPeerings
                                         description: The collection of Managed Network Peering Policies within the Managed Network
                                       cli:
-                                        name: connectivity_collection_peerings
+                                        name: ConnectivityCollectionPeerings
                                         description: The collection of Managed Network Peering Policies within the Managed Network
-                                        cli-complexity: array_simple
+                                        cli-complexity: array_complex
                                         cli-mark: checked
                                     protocol: {}
                                   readOnly: true
@@ -1199,13 +1199,13 @@ schemas:
                                 - input
                               language:
                                 default:
-                                  name: connectivity_collection
+                                  name: ConnectivityCollection
                                   description: The collection of Connectivity related groups and policies within the Managed Network
                                   namespace: ''
                                 cli:
-                                  name: connectivity_collection
+                                  name: ConnectivityCollection
                                   description: The collection of Connectivity related groups and policies within the Managed Network
-                                  cli-complexity: object_simple
+                                  cli-complexity: object_complex
                                   cli-mark: checked
                                   cli-simplify-indicator:
                                     propertyCountIfSimplify: 0
@@ -1233,18 +1233,18 @@ schemas:
                           - input
                         language:
                           default:
-                            name: managed_network_properties
+                            name: ManagedNetworkProperties
                             description: Properties of Managed Network
                             namespace: ''
                           cli:
-                            name: managed_network_properties
+                            name: ManagedNetworkProperties
                             description: Properties of Managed Network
                             cli-complexity: object_complex
                             cli-mark: checked
                             cli-simplify-indicator:
-                              propertyCountIfSimplify: 1
-                              propertyCountIfSimplifyWithoutSimpleObject: 1
-                              simplifiable: true
+                              propertyCountIfSimplify: 10000
+                              propertyCountIfSimplifyWithoutSimpleObject: 10000
+                              simplifiable: false
                             cliKey: ManagedNetworkProperties
                         protocol: {}
                       serializedName: properties
@@ -1266,18 +1266,18 @@ schemas:
                     - input
                   language:
                     default:
-                      name: managed_network
+                      name: ManagedNetwork
                       description: The Managed Network resource
                       namespace: ''
                     cli:
-                      name: managed_network
+                      name: ManagedNetwork
                       description: The Managed Network resource
                       cli-complexity: object_complex
                       cli-mark: checked
                       cli-simplify-indicator:
-                        propertyCountIfSimplify: 3
-                        propertyCountIfSimplifyWithoutSimpleObject: 3
-                        simplifiable: true
+                        propertyCountIfSimplify: 10000
+                        propertyCountIfSimplifyWithoutSimpleObject: 10000
+                        simplifiable: false
                       cliKey: ManagedNetwork
                   protocol: {}
               immediate:
@@ -1307,18 +1307,18 @@ schemas:
               - input
             language:
               default:
-                name: tracked_resource
+                name: TrackedResource
                 description: The resource model definition for a ARM tracked top level resource
                 namespace: ''
               cli:
-                name: tracked_resource
+                name: TrackedResource
                 description: The resource model definition for a ARM tracked top level resource
-                cli-complexity: object_simple
+                cli-complexity: object_complex
                 cli-mark: checked
                 cli-simplify-indicator:
-                  propertyCountIfSimplify: 2
-                  propertyCountIfSimplifyWithoutSimpleObject: 2
-                  simplifiable: true
+                  propertyCountIfSimplify: 10000
+                  propertyCountIfSimplifyWithoutSimpleObject: 10000
+                  simplifiable: false
                 cliKey: TrackedResource
             protocol: {}
           - *ref_21
@@ -1354,11 +1354,11 @@ schemas:
               - input
             language:
               default:
-                name: scope_assignment
+                name: ScopeAssignment
                 description: The Managed Network resource
                 namespace: ''
               cli:
-                name: scope_assignment
+                name: ScopeAssignment
                 description: The Managed Network resource
                 cli-complexity: object_complex
                 cli-mark: checked
@@ -1384,11 +1384,11 @@ schemas:
               - input
             language:
               default:
-                name: proxy_resource
+                name: ProxyResource
                 description: The resource model definition for a ARM proxy resource. It will have everything other than required location and tags
                 namespace: ''
               cli:
-                name: proxy_resource
+                name: ProxyResource
                 description: The resource model definition for a ARM proxy resource. It will have everything other than required location and tags
                 cli-complexity: object_simple
                 cli-mark: checked
@@ -1461,11 +1461,11 @@ schemas:
         x-ms-azure-resource: true
       language:
         default:
-          name: resource
+          name: Resource
           description: The general resource model definition
           namespace: ''
         cli:
-          name: resource
+          name: Resource
           description: The general resource model definition
           cli-complexity: object_simple
           cli-mark: checked
@@ -1521,11 +1521,11 @@ schemas:
         - output
       language:
         default:
-          name: error_response
+          name: ErrorResponse
           description: The error response that indicates why an operation has failed.
           namespace: ''
         cli:
-          name: error_response
+          name: ErrorResponse
           description: The error response that indicates why an operation has failed.
           cli-complexity: object_simple
           cli-mark: checked
@@ -1557,18 +1557,18 @@ schemas:
         - input
       language:
         default:
-          name: managed_network_update
+          name: ManagedNetworkUpdate
           description: Update Tags of Managed Network
           namespace: ''
         cli:
-          name: managed_network_update
+          name: ManagedNetworkUpdate
           description: Update Tags of Managed Network
-          cli-complexity: object_simple
+          cli-complexity: object_complex
           cli-mark: checked
           cli-simplify-indicator:
-            propertyCountIfSimplify: 1
-            propertyCountIfSimplifyWithoutSimpleObject: 1
-            simplifiable: true
+            propertyCountIfSimplify: 10000
+            propertyCountIfSimplifyWithoutSimpleObject: 10000
+            simplifiable: false
           cliKey: ManagedNetworkUpdate
       protocol: {}
     - &ref_82
@@ -1583,12 +1583,12 @@ schemas:
             elementType: *ref_19
             language:
               default:
-                name: managed_network_list_result_value
+                name: ManagedNetworkListResultValue
                 description: Gets a page of ManagedNetworks
               cli:
-                name: managed_network_list_result_value
+                name: ManagedNetworkListResultValue
                 description: Gets a page of ManagedNetworks
-                cli-complexity: array_simple
+                cli-complexity: array_complex
                 cli-mark: checked
             protocol: {}
           serializedName: value
@@ -1605,10 +1605,10 @@ schemas:
           serializedName: nextLink
           language:
             default:
-              name: next_link
+              name: nextLink
               description: Gets the URL to get the next page of results.
             cli:
-              name: next_link
+              name: nextLink
               description: Gets the URL to get the next page of results.
               cliKey: nextLink
           protocol: {}
@@ -1618,18 +1618,18 @@ schemas:
         - output
       language:
         default:
-          name: managed_network_list_result
+          name: ManagedNetworkListResult
           description: Result of the request to list Managed Network. It contains a list of Managed Networks and a URL link to get the next set of results.
           namespace: ''
         cli:
-          name: managed_network_list_result
+          name: ManagedNetworkListResult
           description: Result of the request to list Managed Network. It contains a list of Managed Networks and a URL link to get the next set of results.
-          cli-complexity: object_simple
+          cli-complexity: object_complex
           cli-mark: checked
           cli-simplify-indicator:
-            propertyCountIfSimplify: 2
-            propertyCountIfSimplifyWithoutSimpleObject: 2
-            simplifiable: true
+            propertyCountIfSimplify: 10000
+            propertyCountIfSimplifyWithoutSimpleObject: 10000
+            simplifiable: false
           cliKey: ManagedNetworkListResult
       protocol: {}
     - *ref_23
@@ -1646,12 +1646,12 @@ schemas:
             elementType: *ref_23
             language:
               default:
-                name: scope_assignment_list_result_value
+                name: ScopeAssignmentListResultValue
                 description: Gets a page of ScopeAssignment
               cli:
-                name: scope_assignment_list_result_value
+                name: ScopeAssignmentListResultValue
                 description: Gets a page of ScopeAssignment
-                cli-complexity: array_simple
+                cli-complexity: array_complex
                 cli-mark: checked
             protocol: {}
           serializedName: value
@@ -1668,10 +1668,10 @@ schemas:
           serializedName: nextLink
           language:
             default:
-              name: next_link
+              name: nextLink
               description: Gets the URL to get the next set of results.
             cli:
-              name: next_link
+              name: nextLink
               description: Gets the URL to get the next set of results.
               cliKey: nextLink
           protocol: {}
@@ -1681,18 +1681,18 @@ schemas:
         - output
       language:
         default:
-          name: scope_assignment_list_result
+          name: ScopeAssignmentListResult
           description: Result of the request to list ScopeAssignment. It contains a list of groups and a URL link to get the next set of results.
           namespace: ''
         cli:
-          name: scope_assignment_list_result
+          name: ScopeAssignmentListResult
           description: Result of the request to list ScopeAssignment. It contains a list of groups and a URL link to get the next set of results.
-          cli-complexity: object_simple
+          cli-complexity: object_complex
           cli-mark: checked
           cli-simplify-indicator:
-            propertyCountIfSimplify: 2
-            propertyCountIfSimplifyWithoutSimpleObject: 2
-            simplifiable: true
+            propertyCountIfSimplify: 10000
+            propertyCountIfSimplifyWithoutSimpleObject: 10000
+            simplifiable: false
           cliKey: ScopeAssignmentListResult
       protocol: {}
     - &ref_108
@@ -1707,12 +1707,12 @@ schemas:
             elementType: *ref_21
             language:
               default:
-                name: managed_network_group_list_result_value
+                name: ManagedNetworkGroupListResultValue
                 description: Gets a page of ManagedNetworkGroup
               cli:
-                name: managed_network_group_list_result_value
+                name: ManagedNetworkGroupListResultValue
                 description: Gets a page of ManagedNetworkGroup
-                cli-complexity: array_simple
+                cli-complexity: array_complex
                 cli-mark: checked
             protocol: {}
           serializedName: value
@@ -1729,10 +1729,10 @@ schemas:
           serializedName: nextLink
           language:
             default:
-              name: next_link
+              name: nextLink
               description: Gets the URL to get the next set of results.
             cli:
-              name: next_link
+              name: nextLink
               description: Gets the URL to get the next set of results.
               cliKey: nextLink
           protocol: {}
@@ -1742,18 +1742,18 @@ schemas:
         - output
       language:
         default:
-          name: managed_network_group_list_result
+          name: ManagedNetworkGroupListResult
           description: Result of the request to list Managed Network Groups. It contains a list of groups and a URL link to get the next set of results.
           namespace: ''
         cli:
-          name: managed_network_group_list_result
+          name: ManagedNetworkGroupListResult
           description: Result of the request to list Managed Network Groups. It contains a list of groups and a URL link to get the next set of results.
-          cli-complexity: object_simple
+          cli-complexity: object_complex
           cli-mark: checked
           cli-simplify-indicator:
-            propertyCountIfSimplify: 2
-            propertyCountIfSimplifyWithoutSimpleObject: 2
-            simplifiable: true
+            propertyCountIfSimplify: 10000
+            propertyCountIfSimplifyWithoutSimpleObject: 10000
+            simplifiable: false
           cliKey: ManagedNetworkGroupListResult
       protocol: {}
     - &ref_123
@@ -1768,12 +1768,12 @@ schemas:
             elementType: *ref_22
             language:
               default:
-                name: managed_network_peering_policy_list_result_value
+                name: ManagedNetworkPeeringPolicyListResultValue
                 description: Gets a page of Peering Policies
               cli:
-                name: managed_network_peering_policy_list_result_value
+                name: ManagedNetworkPeeringPolicyListResultValue
                 description: Gets a page of Peering Policies
-                cli-complexity: array_simple
+                cli-complexity: array_complex
                 cli-mark: checked
             protocol: {}
           serializedName: value
@@ -1790,10 +1790,10 @@ schemas:
           serializedName: nextLink
           language:
             default:
-              name: next_link
+              name: nextLink
               description: Gets the URL to get the next page of results.
             cli:
-              name: next_link
+              name: nextLink
               description: Gets the URL to get the next page of results.
               cliKey: nextLink
           protocol: {}
@@ -1803,18 +1803,18 @@ schemas:
         - output
       language:
         default:
-          name: managed_network_peering_policy_list_result
+          name: ManagedNetworkPeeringPolicyListResult
           description: Result of the request to list Managed Network Peering Policies. It contains a list of policies and a URL link to get the next set of results.
           namespace: ''
         cli:
-          name: managed_network_peering_policy_list_result
+          name: ManagedNetworkPeeringPolicyListResult
           description: Result of the request to list Managed Network Peering Policies. It contains a list of policies and a URL link to get the next set of results.
-          cli-complexity: object_simple
+          cli-complexity: object_complex
           cli-mark: checked
           cli-simplify-indicator:
-            propertyCountIfSimplify: 2
-            propertyCountIfSimplifyWithoutSimpleObject: 2
-            simplifiable: true
+            propertyCountIfSimplify: 10000
+            propertyCountIfSimplifyWithoutSimpleObject: 10000
+            simplifiable: false
           cliKey: ManagedNetworkPeeringPolicyListResult
       protocol: {}
     - &ref_124
@@ -1886,11 +1886,11 @@ schemas:
                       - output
                     language:
                       default:
-                        name: operation_display
+                        name: OperationDisplay
                         description: The object that represents the operation.
                         namespace: ''
                       cli:
-                        name: operation_display
+                        name: OperationDisplay
                         description: The object that represents the operation.
                         cli-complexity: object_simple
                         cli-mark: checked
@@ -1916,28 +1916,28 @@ schemas:
                 - output
               language:
                 default:
-                  name: operation
+                  name: Operation
                   description: REST API operation
                   namespace: ''
                 cli:
-                  name: operation
+                  name: Operation
                   description: REST API operation
                   cli-complexity: object_complex
                   cli-mark: checked
                   cli-simplify-indicator:
-                    propertyCountIfSimplify: 2
+                    propertyCountIfSimplify: 4
                     propertyCountIfSimplifyWithoutSimpleObject: 2
                     simplifiable: true
                   cliKey: Operation
               protocol: {}
             language:
               default:
-                name: operation_list_result_value
+                name: OperationListResultValue
                 description: List of Resource Provider operations supported by the Managed Network resource provider.
               cli:
-                name: operation_list_result_value
+                name: OperationListResultValue
                 description: List of Resource Provider operations supported by the Managed Network resource provider.
-                cli-complexity: array_simple
+                cli-complexity: array_complex
                 cli-mark: checked
             protocol: {}
           serializedName: value
@@ -1954,10 +1954,10 @@ schemas:
           serializedName: nextLink
           language:
             default:
-              name: next_link
+              name: nextLink
               description: URL to get the next set of operation list results if there are any.
             cli:
-              name: next_link
+              name: nextLink
               description: URL to get the next set of operation list results if there are any.
               cliKey: nextLink
           protocol: {}
@@ -1967,18 +1967,18 @@ schemas:
         - output
       language:
         default:
-          name: operation_list_result
+          name: OperationListResult
           description: Result of the request to list Managed Network operations. It contains a list of operations and a URL link to get the next set of results.
           namespace: ''
         cli:
-          name: operation_list_result
+          name: OperationListResult
           description: Result of the request to list Managed Network operations. It contains a list of operations and a URL link to get the next set of results.
-          cli-complexity: object_simple
+          cli-complexity: object_complex
           cli-mark: checked
           cli-simplify-indicator:
-            propertyCountIfSimplify: 2
-            propertyCountIfSimplifyWithoutSimpleObject: 2
-            simplifiable: true
+            propertyCountIfSimplify: 10000
+            propertyCountIfSimplifyWithoutSimpleObject: 10000
+            simplifiable: false
           cliKey: OperationListResult
       protocol: {}
     - *ref_43
@@ -2010,12 +2010,12 @@ schemas:
       elementType: *ref_6
       language:
         default:
-          name: hub_and_spoke_peering_policy_properties_spokes
+          name: HubAndSpokePeeringPolicyPropertiesSpokes
           description: Gets or sets the spokes group IDs
         cli:
-          name: hub_and_spoke_peering_policy_properties_spokes
+          name: HubAndSpokePeeringPolicyPropertiesSpokes
           description: Gets or sets the spokes group IDs
-          cli-complexity: array_simple
+          cli-complexity: array_complex
           cli-mark: checked
       protocol: {}
     - type: array
@@ -2024,12 +2024,12 @@ schemas:
       elementType: *ref_6
       language:
         default:
-          name: mesh_peering_policy_properties_mesh
+          name: MeshPeeringPolicyPropertiesMesh
           description: Gets or sets the mesh group IDs
         cli:
-          name: mesh_peering_policy_properties_mesh
+          name: MeshPeeringPolicyPropertiesMesh
           description: Gets or sets the mesh group IDs
-          cli-complexity: array_simple
+          cli-complexity: array_complex
           cli-mark: checked
       protocol: {}
 globalParameters:
@@ -2078,11 +2078,11 @@ globalParameters:
     required: true
     language:
       default:
-        name: apiVersion
+        name: Apiversion
         description: Api Version
         serializedName: api-version
       cli:
-        name: apiVersion
+        name: Apiversion
         description: Api Version
         cliKey: ApiVersion
     protocol:
@@ -2103,11 +2103,11 @@ operationGroups:
             required: true
             language:
               default:
-                name: resource_group_name
+                name: resourceGroupName
                 description: The name of the resource group.
                 serializedName: resourceGroupName
               cli:
-                name: resource_group_name
+                name: resourceGroupName
                 description: The name of the resource group.
                 cliKey: resourceGroupName
             protocol:
@@ -2119,11 +2119,11 @@ operationGroups:
             required: true
             language:
               default:
-                name: managed_network_name
+                name: managedNetworkName
                 description: The name of the Managed Network.
                 serializedName: managedNetworkName
               cli:
-                name: managed_network_name
+                name: managedNetworkName
                 description: The name of the Managed Network.
                 cliKey: managedNetworkName
             protocol:
@@ -2206,10 +2206,10 @@ operationGroups:
                     tags: {}
         language:
           default:
-            name: get_modify
+            name: GetModify
             description: 'The Get ManagedNetworks operation gets a Managed Network Resource, specified by the resource group and Managed Network name'
           cli:
-            name: get_modify
+            name: GetModify
             description: 'The Get ManagedNetworks operation gets a Managed Network Resource, specified by the resource group and Managed Network name'
             cliKey: GetModify
         protocol: {}
@@ -2225,11 +2225,11 @@ operationGroups:
             required: true
             language:
               default:
-                name: resource_group_name
+                name: resourceGroupName
                 description: The name of the resource group.
                 serializedName: resourceGroupName
               cli:
-                name: resource_group_name
+                name: resourceGroupName
                 description: The name of the resource group.
                 cliKey: resourceGroupName
             protocol:
@@ -2241,11 +2241,11 @@ operationGroups:
             required: true
             language:
               default:
-                name: managed_network_name
+                name: managedNetworkName
                 description: The name of the Managed Network.
                 serializedName: managedNetworkName
               cli:
-                name: managed_network_name
+                name: managedNetworkName
                 description: The name of the Managed Network.
                 cliKey: managedNetworkName
             protocol:
@@ -2259,10 +2259,10 @@ operationGroups:
                 required: true
                 language:
                   default:
-                    name: managed_network
+                    name: managedNetwork
                     description: Parameters supplied to the create/update a Managed Network Resource
                   cli:
-                    name: managed_network
+                    name: managedNetwork
                     description: Parameters supplied to the create/update a Managed Network Resource
                     cliKey: managedNetwork
                 protocol:
@@ -2405,10 +2405,10 @@ operationGroups:
                     tags: {}
         language:
           default:
-            name: create_or_update
+            name: CreateOrUpdate
             description: 'The Put ManagedNetworks operation creates/updates a Managed Network Resource, specified by resource group and Managed Network name'
           cli:
-            name: create_or_update
+            name: CreateOrUpdate
             description: 'The Put ManagedNetworks operation creates/updates a Managed Network Resource, specified by resource group and Managed Network name'
             cliKey: CreateOrUpdate
         protocol: {}
@@ -2424,11 +2424,11 @@ operationGroups:
             required: true
             language:
               default:
-                name: resource_group_name
+                name: resourceGroupName
                 description: The name of the resource group.
                 serializedName: resourceGroupName
               cli:
-                name: resource_group_name
+                name: resourceGroupName
                 description: The name of the resource group.
                 cliKey: resourceGroupName
             protocol:
@@ -2440,11 +2440,11 @@ operationGroups:
             required: true
             language:
               default:
-                name: managed_network_name
+                name: managedNetworkName
                 description: The name of the Managed Network.
                 serializedName: managedNetworkName
               cli:
-                name: managed_network_name
+                name: managedNetworkName
                 description: The name of the Managed Network.
                 cliKey: managedNetworkName
             protocol:
@@ -2519,10 +2519,10 @@ operationGroups:
             final-state-via: azure-async-operation
         language:
           default:
-            name: delete
+            name: Delete
             description: 'The Delete ManagedNetworks operation deletes a Managed Network Resource, specified by the  resource group and Managed Network name'
           cli:
-            name: delete
+            name: Delete
             description: 'The Delete ManagedNetworks operation deletes a Managed Network Resource, specified by the  resource group and Managed Network name'
             cliKey: Delete
         protocol: {}
@@ -2538,11 +2538,11 @@ operationGroups:
             required: true
             language:
               default:
-                name: resource_group_name
+                name: resourceGroupName
                 description: The name of the resource group.
                 serializedName: resourceGroupName
               cli:
-                name: resource_group_name
+                name: resourceGroupName
                 description: The name of the resource group.
                 cliKey: resourceGroupName
             protocol:
@@ -2554,11 +2554,11 @@ operationGroups:
             required: true
             language:
               default:
-                name: managed_network_name
+                name: managedNetworkName
                 description: The name of the Managed Network.
                 serializedName: managedNetworkName
               cli:
-                name: managed_network_name
+                name: managedNetworkName
                 description: The name of the Managed Network.
                 cliKey: managedNetworkName
             protocol:
@@ -2706,10 +2706,10 @@ operationGroups:
             final-state-via: azure-async-operation
         language:
           default:
-            name: update
+            name: Update
             description: Updates the specified Managed Network resource tags.
           cli:
-            name: update
+            name: Update
             description: Updates the specified Managed Network resource tags.
             cliKey: Update
         protocol: {}
@@ -2725,11 +2725,11 @@ operationGroups:
             required: true
             language:
               default:
-                name: resource_group_name
+                name: resourceGroupName
                 description: The name of the resource group.
                 serializedName: resourceGroupName
               cli:
-                name: resource_group_name
+                name: resourceGroupName
                 description: The name of the resource group.
                 cliKey: resourceGroupName
             protocol:
@@ -2850,12 +2850,12 @@ operationGroups:
             nextLinkName: nextLink
         language:
           default:
-            name: list_by_resource_group
+            name: ListByResourceGroup
             description: The ListByResourceGroup ManagedNetwork operation retrieves all the Managed Network resources in a resource group in a paginated format.
             paging:
               nextLinkName: nextLink
           cli:
-            name: list_by_resource_group
+            name: ListByResourceGroup
             description: The ListByResourceGroup ManagedNetwork operation retrieves all the Managed Network resources in a resource group in a paginated format.
             cliKey: ListByResourceGroup
         protocol: {}
@@ -2978,21 +2978,21 @@ operationGroups:
             nextLinkName: nextLink
         language:
           default:
-            name: list_by_subscription
+            name: ListBySubscription
             description: The ListBySubscription  ManagedNetwork operation retrieves all the Managed Network Resources in the current subscription in a paginated format.
             paging:
               nextLinkName: nextLink
           cli:
-            name: list_by_subscription
+            name: ListBySubscription
             description: The ListBySubscription  ManagedNetwork operation retrieves all the Managed Network Resources in the current subscription in a paginated format.
             cliKey: ListBySubscription
         protocol: {}
     language:
       default:
-        name: managed_networks
+        name: ManagedNetworks
         description: ''
       cli:
-        name: managed_networks
+        name: ManagedNetwork
         description: ''
         cliKey: ManagedNetworks
     protocol: {}
@@ -3026,11 +3026,11 @@ operationGroups:
             required: true
             language:
               default:
-                name: scope_assignment_name
+                name: scopeAssignmentName
                 description: The name of the scope assignment to get.
                 serializedName: scopeAssignmentName
               cli:
-                name: scope_assignment_name
+                name: scopeAssignmentName
                 description: The name of the scope assignment to get.
                 cliKey: scopeAssignmentName
             protocol:
@@ -3094,10 +3094,10 @@ operationGroups:
                       assignedManagedNetwork: /subscriptions/subscriptionA/resourceGroups/myResourceGroup/providers/Microsoft.ManagedNetwork/managedNetworks/myManagedNetwork
         language:
           default:
-            name: get
+            name: Get
             description: Get the specified scope assignment.
           cli:
-            name: get
+            name: Get
             description: Get the specified scope assignment.
             cliKey: Get
         protocol: {}
@@ -3135,11 +3135,11 @@ operationGroups:
             required: true
             language:
               default:
-                name: scope_assignment_name
+                name: scopeAssignmentName
                 description: The name of the scope assignment to create.
                 serializedName: scopeAssignmentName
               cli:
-                name: scope_assignment_name
+                name: scopeAssignmentName
                 description: The name of the scope assignment to create.
                 cliKey: scopeAssignmentName
             protocol:
@@ -3251,10 +3251,10 @@ operationGroups:
                       provisioningState: Succeeded
         language:
           default:
-            name: create_or_update
+            name: CreateOrUpdate
             description: Creates a scope assignment.
           cli:
-            name: create_or_update
+            name: CreateOrUpdate
             description: Creates a scope assignment.
             cliKey: CreateOrUpdate
         protocol: {}
@@ -3286,11 +3286,11 @@ operationGroups:
             required: true
             language:
               default:
-                name: scope_assignment_name
+                name: scopeAssignmentName
                 description: The name of the scope assignment to delete.
                 serializedName: scopeAssignmentName
               cli:
-                name: scope_assignment_name
+                name: scopeAssignmentName
                 description: The name of the scope assignment to delete.
                 cliKey: scopeAssignmentName
             protocol:
@@ -3340,10 +3340,10 @@ operationGroups:
                 '200': {}
         language:
           default:
-            name: delete
+            name: Delete
             description: Deletes a scope assignment.
           cli:
-            name: delete
+            name: Delete
             description: Deletes a scope assignment.
             cliKey: Delete
         protocol: {}
@@ -3431,21 +3431,21 @@ operationGroups:
             nextLinkName: nextLink
         language:
           default:
-            name: list
+            name: List
             description: Get the specified scope assignment.
             paging:
               nextLinkName: nextLink
           cli:
-            name: list
+            name: List
             description: Get the specified scope assignment.
             cliKey: List
         protocol: {}
     language:
       default:
-        name: scope_assignments
+        name: ScopeAssignments
         description: ''
       cli:
-        name: scope_assignments
+        name: ScopeAssignment
         description: ''
         cliKey: ScopeAssignments
     protocol: {}
@@ -3463,11 +3463,11 @@ operationGroups:
             required: true
             language:
               default:
-                name: resource_group_name
+                name: resourceGroupName
                 description: The name of the resource group.
                 serializedName: resourceGroupName
               cli:
-                name: resource_group_name
+                name: resourceGroupName
                 description: The name of the resource group.
                 cliKey: resourceGroupName
             protocol:
@@ -3479,11 +3479,11 @@ operationGroups:
             required: true
             language:
               default:
-                name: managed_network_name
+                name: managedNetworkName
                 description: The name of the Managed Network.
                 serializedName: managedNetworkName
               cli:
-                name: managed_network_name
+                name: managedNetworkName
                 description: The name of the Managed Network.
                 cliKey: managedNetworkName
             protocol:
@@ -3495,11 +3495,11 @@ operationGroups:
             required: true
             language:
               default:
-                name: managed_network_group_name
+                name: managedNetworkGroupName
                 description: The name of the Managed Network Group.
                 serializedName: managedNetworkGroupName
               cli:
-                name: managed_network_group_name
+                name: managedNetworkGroupName
                 description: The name of the Managed Network Group.
                 cliKey: managedNetworkGroupName
             protocol:
@@ -3573,10 +3573,10 @@ operationGroups:
                         - id: /subscriptionB/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/VnetB
         language:
           default:
-            name: get
+            name: Get
             description: 'The Get ManagedNetworkGroups operation gets a Managed Network Group specified by the resource group, Managed Network name, and group name'
           cli:
-            name: get
+            name: Get
             description: 'The Get ManagedNetworkGroups operation gets a Managed Network Group specified by the resource group, Managed Network name, and group name'
             cliKey: Get
         protocol: {}
@@ -3592,11 +3592,11 @@ operationGroups:
             required: true
             language:
               default:
-                name: resource_group_name
+                name: resourceGroupName
                 description: The name of the resource group.
                 serializedName: resourceGroupName
               cli:
-                name: resource_group_name
+                name: resourceGroupName
                 description: The name of the resource group.
                 cliKey: resourceGroupName
             protocol:
@@ -3608,11 +3608,11 @@ operationGroups:
             required: true
             language:
               default:
-                name: managed_network_name
+                name: managedNetworkName
                 description: The name of the Managed Network.
                 serializedName: managedNetworkName
               cli:
-                name: managed_network_name
+                name: managedNetworkName
                 description: The name of the Managed Network.
                 cliKey: managedNetworkName
             protocol:
@@ -3624,11 +3624,11 @@ operationGroups:
             required: true
             language:
               default:
-                name: managed_network_group_name
+                name: managedNetworkGroupName
                 description: The name of the Managed Network Group.
                 serializedName: managedNetworkGroupName
               cli:
-                name: managed_network_group_name
+                name: managedNetworkGroupName
                 description: The name of the Managed Network Group.
                 cliKey: managedNetworkGroupName
             protocol:
@@ -3642,10 +3642,10 @@ operationGroups:
                 required: true
                 language:
                   default:
-                    name: managed_network_group
+                    name: managedNetworkGroup
                     description: Parameters supplied to the create/update a Managed Network Group resource
                   cli:
-                    name: managed_network_group
+                    name: managedNetworkGroup
                     description: Parameters supplied to the create/update a Managed Network Group resource
                     cliKey: managedNetworkGroup
                 protocol:
@@ -3763,10 +3763,10 @@ operationGroups:
             final-state-via: azure-async-operation
         language:
           default:
-            name: create_or_update
+            name: CreateOrUpdate
             description: The Put ManagedNetworkGroups operation creates or updates a Managed Network Group resource
           cli:
-            name: create_or_update
+            name: CreateOrUpdate
             description: The Put ManagedNetworkGroups operation creates or updates a Managed Network Group resource
             cliKey: CreateOrUpdate
         protocol: {}
@@ -3782,11 +3782,11 @@ operationGroups:
             required: true
             language:
               default:
-                name: resource_group_name
+                name: resourceGroupName
                 description: The name of the resource group.
                 serializedName: resourceGroupName
               cli:
-                name: resource_group_name
+                name: resourceGroupName
                 description: The name of the resource group.
                 cliKey: resourceGroupName
             protocol:
@@ -3798,11 +3798,11 @@ operationGroups:
             required: true
             language:
               default:
-                name: managed_network_name
+                name: managedNetworkName
                 description: The name of the Managed Network.
                 serializedName: managedNetworkName
               cli:
-                name: managed_network_name
+                name: managedNetworkName
                 description: The name of the Managed Network.
                 cliKey: managedNetworkName
             protocol:
@@ -3814,11 +3814,11 @@ operationGroups:
             required: true
             language:
               default:
-                name: managed_network_group_name
+                name: managedNetworkGroupName
                 description: The name of the Managed Network Group.
                 serializedName: managedNetworkGroupName
               cli:
-                name: managed_network_group_name
+                name: managedNetworkGroupName
                 description: The name of the Managed Network Group.
                 cliKey: managedNetworkGroupName
             protocol:
@@ -3895,10 +3895,10 @@ operationGroups:
             final-state-via: azure-async-operation
         language:
           default:
-            name: delete
+            name: Delete
             description: 'The Delete ManagedNetworkGroups operation deletes a Managed Network Group specified by the resource group, Managed Network name, and group name'
           cli:
-            name: delete
+            name: Delete
             description: 'The Delete ManagedNetworkGroups operation deletes a Managed Network Group specified by the resource group, Managed Network name, and group name'
             cliKey: Delete
         protocol: {}
@@ -3914,11 +3914,11 @@ operationGroups:
             required: true
             language:
               default:
-                name: resource_group_name
+                name: resourceGroupName
                 description: The name of the resource group.
                 serializedName: resourceGroupName
               cli:
-                name: resource_group_name
+                name: resourceGroupName
                 description: The name of the resource group.
                 cliKey: resourceGroupName
             protocol:
@@ -3930,11 +3930,11 @@ operationGroups:
             required: true
             language:
               default:
-                name: managed_network_name
+                name: managedNetworkName
                 description: The name of the Managed Network.
                 serializedName: managedNetworkName
               cli:
-                name: managed_network_name
+                name: managedNetworkName
                 description: The name of the Managed Network.
                 cliKey: managedNetworkName
             protocol:
@@ -4046,21 +4046,21 @@ operationGroups:
             nextLinkName: nextLink
         language:
           default:
-            name: list_by_managed_network
+            name: ListByManagedNetwork
             description: The ListByManagedNetwork ManagedNetworkGroup operation retrieves all the Managed Network Groups in a specified Managed Networks in a paginated format.
             paging:
               nextLinkName: nextLink
           cli:
-            name: list_by_managed_network
+            name: ListByManagedNetwork
             description: The ListByManagedNetwork ManagedNetworkGroup operation retrieves all the Managed Network Groups in a specified Managed Networks in a paginated format.
             cliKey: ListByManagedNetwork
         protocol: {}
     language:
       default:
-        name: managed_network_groups
+        name: ManagedNetworkGroups
         description: ''
       cli:
-        name: managed_network_groups
+        name: ManagedNetworkGroup
         description: ''
         cliKey: ManagedNetworkGroups
     protocol: {}
@@ -4078,11 +4078,11 @@ operationGroups:
             required: true
             language:
               default:
-                name: resource_group_name
+                name: resourceGroupName
                 description: The name of the resource group.
                 serializedName: resourceGroupName
               cli:
-                name: resource_group_name
+                name: resourceGroupName
                 description: The name of the resource group.
                 cliKey: resourceGroupName
             protocol:
@@ -4094,11 +4094,11 @@ operationGroups:
             required: true
             language:
               default:
-                name: managed_network_name
+                name: managedNetworkName
                 description: The name of the Managed Network.
                 serializedName: managedNetworkName
               cli:
-                name: managed_network_name
+                name: managedNetworkName
                 description: The name of the Managed Network.
                 cliKey: managedNetworkName
             protocol:
@@ -4110,11 +4110,11 @@ operationGroups:
             required: true
             language:
               default:
-                name: managed_network_peering_policy_name
+                name: managedNetworkPeeringPolicyName
                 description: The name of the Managed Network Peering Policy.
                 serializedName: managedNetworkPeeringPolicyName
               cli:
-                name: managed_network_peering_policy_name
+                name: managedNetworkPeeringPolicyName
                 description: The name of the Managed Network Peering Policy.
                 cliKey: managedNetworkPeeringPolicyName
             protocol:
@@ -4186,10 +4186,10 @@ operationGroups:
                         - id: /subscriptionB/resourceGroups/myResourceGroup/providers/Microsoft.ManagedNetwork/managedNetworks/myManagedNetwork/managedNetworkGroups/myManagedNetworkGroup1
         language:
           default:
-            name: get
+            name: Get
             description: 'The Get ManagedNetworkPeeringPolicies operation gets a Managed Network Peering Policy resource, specified by the  resource group, Managed Network name, and peering policy name'
           cli:
-            name: get
+            name: Get
             description: 'The Get ManagedNetworkPeeringPolicies operation gets a Managed Network Peering Policy resource, specified by the  resource group, Managed Network name, and peering policy name'
             cliKey: Get
         protocol: {}
@@ -4205,11 +4205,11 @@ operationGroups:
             required: true
             language:
               default:
-                name: resource_group_name
+                name: resourceGroupName
                 description: The name of the resource group.
                 serializedName: resourceGroupName
               cli:
-                name: resource_group_name
+                name: resourceGroupName
                 description: The name of the resource group.
                 cliKey: resourceGroupName
             protocol:
@@ -4221,11 +4221,11 @@ operationGroups:
             required: true
             language:
               default:
-                name: managed_network_name
+                name: managedNetworkName
                 description: The name of the Managed Network.
                 serializedName: managedNetworkName
               cli:
-                name: managed_network_name
+                name: managedNetworkName
                 description: The name of the Managed Network.
                 cliKey: managedNetworkName
             protocol:
@@ -4237,11 +4237,11 @@ operationGroups:
             required: true
             language:
               default:
-                name: managed_network_peering_policy_name
+                name: managedNetworkPeeringPolicyName
                 description: The name of the Managed Network Peering Policy.
                 serializedName: managedNetworkPeeringPolicyName
               cli:
-                name: managed_network_peering_policy_name
+                name: managedNetworkPeeringPolicyName
                 description: The name of the Managed Network Peering Policy.
                 cliKey: managedNetworkPeeringPolicyName
             protocol:
@@ -4255,10 +4255,10 @@ operationGroups:
                 required: true
                 language:
                   default:
-                    name: managed_network_policy
+                    name: managedNetworkPolicy
                     description: Parameters supplied to create/update a Managed Network Peering Policy
                   cli:
-                    name: managed_network_policy
+                    name: managedNetworkPolicy
                     description: Parameters supplied to create/update a Managed Network Peering Policy
                     cliKey: managedNetworkPolicy
                 protocol:
@@ -4370,10 +4370,10 @@ operationGroups:
             final-state-via: azure-async-operation
         language:
           default:
-            name: create_or_update
+            name: CreateOrUpdate
             description: The Put ManagedNetworkPeeringPolicies operation creates/updates a new Managed Network Peering Policy
           cli:
-            name: create_or_update
+            name: CreateOrUpdate
             description: The Put ManagedNetworkPeeringPolicies operation creates/updates a new Managed Network Peering Policy
             cliKey: CreateOrUpdate
         protocol: {}
@@ -4389,11 +4389,11 @@ operationGroups:
             required: true
             language:
               default:
-                name: resource_group_name
+                name: resourceGroupName
                 description: The name of the resource group.
                 serializedName: resourceGroupName
               cli:
-                name: resource_group_name
+                name: resourceGroupName
                 description: The name of the resource group.
                 cliKey: resourceGroupName
             protocol:
@@ -4405,11 +4405,11 @@ operationGroups:
             required: true
             language:
               default:
-                name: managed_network_name
+                name: managedNetworkName
                 description: The name of the Managed Network.
                 serializedName: managedNetworkName
               cli:
-                name: managed_network_name
+                name: managedNetworkName
                 description: The name of the Managed Network.
                 cliKey: managedNetworkName
             protocol:
@@ -4421,11 +4421,11 @@ operationGroups:
             required: true
             language:
               default:
-                name: managed_network_peering_policy_name
+                name: managedNetworkPeeringPolicyName
                 description: The name of the Managed Network Peering Policy.
                 serializedName: managedNetworkPeeringPolicyName
               cli:
-                name: managed_network_peering_policy_name
+                name: managedNetworkPeeringPolicyName
                 description: The name of the Managed Network Peering Policy.
                 cliKey: managedNetworkPeeringPolicyName
             protocol:
@@ -4502,10 +4502,10 @@ operationGroups:
             final-state-via: azure-async-operation
         language:
           default:
-            name: delete
+            name: Delete
             description: 'The Delete ManagedNetworkPeeringPolicies operation deletes a Managed Network Peering Policy, specified by the  resource group, Managed Network name, and peering policy name'
           cli:
-            name: delete
+            name: Delete
             description: 'The Delete ManagedNetworkPeeringPolicies operation deletes a Managed Network Peering Policy, specified by the  resource group, Managed Network name, and peering policy name'
             cliKey: Delete
         protocol: {}
@@ -4521,11 +4521,11 @@ operationGroups:
             required: true
             language:
               default:
-                name: resource_group_name
+                name: resourceGroupName
                 description: The name of the resource group.
                 serializedName: resourceGroupName
               cli:
-                name: resource_group_name
+                name: resourceGroupName
                 description: The name of the resource group.
                 cliKey: resourceGroupName
             protocol:
@@ -4537,11 +4537,11 @@ operationGroups:
             required: true
             language:
               default:
-                name: managed_network_name
+                name: managedNetworkName
                 description: The name of the Managed Network.
                 serializedName: managedNetworkName
               cli:
-                name: managed_network_name
+                name: managedNetworkName
                 description: The name of the Managed Network.
                 cliKey: managedNetworkName
             protocol:
@@ -4651,21 +4651,21 @@ operationGroups:
             nextLinkName: nextLink
         language:
           default:
-            name: list_by_managed_network
+            name: ListByManagedNetwork
             description: 'The ListByManagedNetwork PeeringPolicies operation retrieves all the Managed Network Peering Policies in a specified Managed Network, in a paginated format.'
             paging:
               nextLinkName: nextLink
           cli:
-            name: list_by_managed_network
+            name: ListByManagedNetwork
             description: 'The ListByManagedNetwork PeeringPolicies operation retrieves all the Managed Network Peering Policies in a specified Managed Network, in a paginated format.'
             cliKey: ListByManagedNetwork
         protocol: {}
     language:
       default:
-        name: managed_network_peering_policies
+        name: ManagedNetworkPeeringPolicies
         description: ''
       cli:
-        name: managed_network_peering_policies
+        name: ManagedNetworkPeeringPolicy
         description: ''
         cliKey: ManagedNetworkPeeringPolicies
     protocol: {}
@@ -4718,21 +4718,21 @@ operationGroups:
             nextLinkName: nextLink
         language:
           default:
-            name: list
+            name: List
             description: Lists all of the available MNC operations.
             paging:
               nextLinkName: nextLink
           cli:
-            name: list
+            name: List
             description: Lists all of the available MNC operations.
             cliKey: List
         protocol: {}
     language:
       default:
-        name: operations
+        name: Operations
         description: ''
       cli:
-        name: operations
+        name: Operation
         description: ''
         cliKey: Operations
     protocol: {}

@@ -440,12 +440,12 @@ schemas:
               cliKey: location
       - schemaName: TrackedResource
         cli:
-          cli-complexity: object_simple
+          cli-complexity: object_complex
           cli-mark: checked
           cli-simplify-indicator: 
-            propertyCountIfSimplify: 2
-            propertyCountIfSimplifyWithoutSimpleObject: 2
-            simplifiable: true
+            propertyCountIfSimplify: 10000
+            propertyCountIfSimplifyWithoutSimpleObject: 10000
+            simplifiable: false
           cliKey: TrackedResource
         properties:
           - propertyName: tags(TrackedResource-tags^dictionary)
@@ -456,9 +456,9 @@ schemas:
           cli-complexity: object_complex
           cli-mark: checked
           cli-simplify-indicator: 
-            propertyCountIfSimplify: 3
-            propertyCountIfSimplifyWithoutSimpleObject: 3
-            simplifiable: true
+            propertyCountIfSimplify: 10000
+            propertyCountIfSimplifyWithoutSimpleObject: 10000
+            simplifiable: false
           cliKey: ManagedNetwork
         properties:
           - propertyName: properties(ManagedNetworkProperties^object)
@@ -488,9 +488,9 @@ schemas:
           cli-complexity: object_complex
           cli-mark: checked
           cli-simplify-indicator: 
-            propertyCountIfSimplify: 1
-            propertyCountIfSimplifyWithoutSimpleObject: 1
-            simplifiable: true
+            propertyCountIfSimplify: 10000
+            propertyCountIfSimplifyWithoutSimpleObject: 10000
+            simplifiable: false
           cliKey: ManagedNetworkProperties
         properties:
           - propertyName: scope(Scope^object)
@@ -504,12 +504,12 @@ schemas:
             readOnly: true
       - schemaName: Scope
         cli:
-          cli-complexity: object_simple
+          cli-complexity: object_complex
           cli-mark: checked
           cli-simplify-indicator: 
-            propertyCountIfSimplify: 4
-            propertyCountIfSimplifyWithoutSimpleObject: 4
-            simplifiable: true
+            propertyCountIfSimplify: 10000
+            propertyCountIfSimplifyWithoutSimpleObject: 10000
+            simplifiable: false
           cliKey: Scope
         properties:
           - propertyName: managementGroups(Scope-managementGroups^array)
@@ -539,7 +539,7 @@ schemas:
               cliKey: id
       - schemaName: ConnectivityCollection
         cli:
-          cli-complexity: object_simple
+          cli-complexity: object_complex
           cli-mark: checked
           cli-simplify-indicator: 
             propertyCountIfSimplify: 0
@@ -560,9 +560,9 @@ schemas:
           cli-complexity: object_complex
           cli-mark: checked
           cli-simplify-indicator: 
-            propertyCountIfSimplify: 3
-            propertyCountIfSimplifyWithoutSimpleObject: 3
-            simplifiable: true
+            propertyCountIfSimplify: 10000
+            propertyCountIfSimplifyWithoutSimpleObject: 10000
+            simplifiable: false
           cliKey: ManagedNetworkGroup
         properties:
           - propertyName: properties(ManagedNetworkGroupProperties^object)
@@ -574,12 +574,12 @@ schemas:
               cliKey: kind
       - schemaName: ManagedNetworkGroupProperties
         cli:
-          cli-complexity: object_simple
+          cli-complexity: object_complex
           cli-mark: checked
           cli-simplify-indicator: 
-            propertyCountIfSimplify: 4
-            propertyCountIfSimplifyWithoutSimpleObject: 4
-            simplifiable: true
+            propertyCountIfSimplify: 10000
+            propertyCountIfSimplifyWithoutSimpleObject: 10000
+            simplifiable: false
           cliKey: ManagedNetworkGroupProperties
         properties:
           - propertyName: managementGroups(ManagedNetworkGroupProperties-managementGroups^array)
@@ -599,9 +599,9 @@ schemas:
           cli-complexity: object_complex
           cli-mark: checked
           cli-simplify-indicator: 
-            propertyCountIfSimplify: 2
-            propertyCountIfSimplifyWithoutSimpleObject: 2
-            simplifiable: true
+            propertyCountIfSimplify: 10000
+            propertyCountIfSimplifyWithoutSimpleObject: 10000
+            simplifiable: false
           cliKey: ManagedNetworkPeeringPolicy
         properties:
           - propertyName: properties(ManagedNetworkPeeringPolicyProperties^object)
@@ -612,9 +612,9 @@ schemas:
           cli-complexity: object_complex
           cli-mark: checked
           cli-simplify-indicator: 
-            propertyCountIfSimplify: 4
-            propertyCountIfSimplifyWithoutSimpleObject: 4
-            simplifiable: true
+            propertyCountIfSimplify: 10000
+            propertyCountIfSimplifyWithoutSimpleObject: 10000
+            simplifiable: false
           cliKey: ManagedNetworkPeeringPolicyProperties
         discriminator: true
         properties:
@@ -650,12 +650,12 @@ schemas:
             readOnly: true
       - schemaName: ManagedNetworkUpdate
         cli:
-          cli-complexity: object_simple
+          cli-complexity: object_complex
           cli-mark: checked
           cli-simplify-indicator: 
-            propertyCountIfSimplify: 1
-            propertyCountIfSimplifyWithoutSimpleObject: 1
-            simplifiable: true
+            propertyCountIfSimplify: 10000
+            propertyCountIfSimplifyWithoutSimpleObject: 10000
+            simplifiable: false
           cliKey: ManagedNetworkUpdate
         properties:
           - propertyName: tags(ManagedNetworkUpdate-tags^dictionary)
@@ -663,12 +663,12 @@ schemas:
               cliKey: tags
       - schemaName: ManagedNetworkListResult
         cli:
-          cli-complexity: object_simple
+          cli-complexity: object_complex
           cli-mark: checked
           cli-simplify-indicator: 
-            propertyCountIfSimplify: 2
-            propertyCountIfSimplifyWithoutSimpleObject: 2
-            simplifiable: true
+            propertyCountIfSimplify: 10000
+            propertyCountIfSimplifyWithoutSimpleObject: 10000
+            simplifiable: false
           cliKey: ManagedNetworkListResult
         properties:
           - propertyName: value(ManagedNetworkListResult-value^array)
@@ -706,12 +706,12 @@ schemas:
               cliKey: assignedManagedNetwork
       - schemaName: ScopeAssignmentListResult
         cli:
-          cli-complexity: object_simple
+          cli-complexity: object_complex
           cli-mark: checked
           cli-simplify-indicator: 
-            propertyCountIfSimplify: 2
-            propertyCountIfSimplifyWithoutSimpleObject: 2
-            simplifiable: true
+            propertyCountIfSimplify: 10000
+            propertyCountIfSimplifyWithoutSimpleObject: 10000
+            simplifiable: false
           cliKey: ScopeAssignmentListResult
         properties:
           - propertyName: value(ScopeAssignmentListResult-value^array)
@@ -722,12 +722,12 @@ schemas:
               cliKey: nextLink
       - schemaName: ManagedNetworkGroupListResult
         cli:
-          cli-complexity: object_simple
+          cli-complexity: object_complex
           cli-mark: checked
           cli-simplify-indicator: 
-            propertyCountIfSimplify: 2
-            propertyCountIfSimplifyWithoutSimpleObject: 2
-            simplifiable: true
+            propertyCountIfSimplify: 10000
+            propertyCountIfSimplifyWithoutSimpleObject: 10000
+            simplifiable: false
           cliKey: ManagedNetworkGroupListResult
         properties:
           - propertyName: value(ManagedNetworkGroupListResult-value^array)
@@ -738,12 +738,12 @@ schemas:
               cliKey: nextLink
       - schemaName: ManagedNetworkPeeringPolicyListResult
         cli:
-          cli-complexity: object_simple
+          cli-complexity: object_complex
           cli-mark: checked
           cli-simplify-indicator: 
-            propertyCountIfSimplify: 2
-            propertyCountIfSimplifyWithoutSimpleObject: 2
-            simplifiable: true
+            propertyCountIfSimplify: 10000
+            propertyCountIfSimplifyWithoutSimpleObject: 10000
+            simplifiable: false
           cliKey: ManagedNetworkPeeringPolicyListResult
         properties:
           - propertyName: value(ManagedNetworkPeeringPolicyListResult-value^array)
@@ -754,12 +754,12 @@ schemas:
               cliKey: nextLink
       - schemaName: OperationListResult
         cli:
-          cli-complexity: object_simple
+          cli-complexity: object_complex
           cli-mark: checked
           cli-simplify-indicator: 
-            propertyCountIfSimplify: 2
-            propertyCountIfSimplifyWithoutSimpleObject: 2
-            simplifiable: true
+            propertyCountIfSimplify: 10000
+            propertyCountIfSimplifyWithoutSimpleObject: 10000
+            simplifiable: false
           cliKey: OperationListResult
         properties:
           - propertyName: value(OperationListResult-value^array)
@@ -773,7 +773,7 @@ schemas:
           cli-complexity: object_complex
           cli-mark: checked
           cli-simplify-indicator: 
-            propertyCountIfSimplify: 2
+            propertyCountIfSimplify: 4
             propertyCountIfSimplifyWithoutSimpleObject: 2
             simplifiable: true
           cliKey: Operation
@@ -808,18 +808,18 @@ schemas:
           cli-complexity: object_simple
           cli-mark: checked
           cli-simplify-indicator: 
-            propertyCountIfSimplify: 4
-            propertyCountIfSimplifyWithoutSimpleObject: 4
-            simplifiable: true
+            propertyCountIfSimplify: 10000
+            propertyCountIfSimplifyWithoutSimpleObject: 10000
+            simplifiable: false
           cliKey: HubAndSpokePeeringPolicyProperties
       - schemaName: MeshPeeringPolicyProperties
         cli:
           cli-complexity: object_simple
           cli-mark: checked
           cli-simplify-indicator: 
-            propertyCountIfSimplify: 4
-            propertyCountIfSimplifyWithoutSimpleObject: 4
-            simplifiable: true
+            propertyCountIfSimplify: 10000
+            propertyCountIfSimplifyWithoutSimpleObject: 10000
+            simplifiable: false
           cliKey: MeshPeeringPolicyProperties
       - schemaName: ProxyResource
         cli:
