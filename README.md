@@ -189,6 +189,7 @@ cli:
                 MCAS: MCAS
                 UTC: UTC
                 SSL: SSL
+                Sql: SQL
                 # workaround for modelerfour issue
                 # https://github.com/Azure/autorest.modelerfour/issues/195
                 SubscriptionId: SubscriptionId
@@ -213,6 +214,7 @@ cli:
                 MCAS: MCAS
                 UTC: UTC
                 SSL: SSL
+                Sql: SQL
                 # workaround for modelerfour issue
                 SubscriptionId: SubscriptionId
             parameter: 'camel'
