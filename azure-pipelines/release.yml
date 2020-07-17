@@ -45,7 +45,7 @@ stages:
           displayName: 'npm pack'
 
         - script: 'cp autorest-clicommon-*.tgz $(VAR_BUILD_ARTIFACT_STAGING_DIRECTORY)'
-          displyName: 'copy to staging dir'
+          displayName: 'copy to staging dir'
 
         - task: PublishBuildArtifacts@1
           inputs:
