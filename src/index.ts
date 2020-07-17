@@ -1,6 +1,4 @@
-import { AutoRestExtension, startSession } from '@azure-tools/autorest-extension-base';
-import { serialize } from '@azure-tools/codegen';
-import { CodeModel, codeModelSchema, OperationGroup, Operation, Schema, ObjectSchema, Property } from '@azure-tools/codemodel';
+import { AutoRestExtension } from '@azure-tools/autorest-extension-base';
 import { Helper } from './helper';
 import { Modifier } from './plugins/modifier/modifier';
 import { CommonNamer } from './plugins/namer';
@@ -12,6 +10,8 @@ import { processRequest as polyAsResourceModifier } from './plugins/polyAsResour
 import { processRequest as polyAsParamModifier } from './plugins/polyAsParamModifier';
 import { processRequest as complexMarker } from './plugins/complexMarker';
 import { processRequest as visibilityCleaner } from './plugins/visibilityCleaner';
+import { processRequest as flattenModifier } from './plugins/flattenModifier';
+import { processRequest as modelerPostProcessor } from './plugins/modelerPostProcessor';
 
 const extension = new AutoRestExtension();
 
@@ -20,7 +20,7 @@ extension.Add("clicommon", async host => {
 
     Helper.dumper.dumpCodeModel("modifier-pre");
     
-    let arr = await session.getValue(CliConst.CLI_DIRECTIVE_KEY, null);
+    const arr = await session.getValue(CliConst.CLI_DIRECTIVE_KEY, null);
     const modifier = await new Modifier(session).init(arr);
     let result = modifier.process();
 
@@ -32,7 +32,7 @@ extension.Add("clicommon", async host => {
     Helper.dumper.dumpCodeModel("namer-post");
 
     // add test scenario from common settings
-    let cliCommonSettings = await host.GetValue("cli");
+    const cliCommonSettings = await host.GetValue("cli");
     if (cliCommonSettings) {
         result["test-scenario"] = cliCommonSettings['test-scenario'] || cliCommonSettings['test-setup'];
     }
@@ -44,8 +44,10 @@ extension.Add("clicommon", async host => {
 extension.Add("cli-flatten-setter", flattenSetter);
 extension.Add("cli-prenamer", preNamer);
 extension.Add("cli-split-operation", splitOperation);
+extension.Add("cli-modeler-post-processor", modelerPostProcessor);
 extension.Add("cli-poly-as-resource-modifier", polyAsResourceModifier);
+extension.Add("cli-flatten-modifier", flattenModifier);
 extension.Add("cli-poly-as-param-modifier", polyAsParamModifier);
 extension.Add("cli-complex-marker", complexMarker);
-extension.Add("cli-visibility-cleaner", visibilityCleaner)
+extension.Add("cli-visibility-cleaner", visibilityCleaner);
 extension.Run();

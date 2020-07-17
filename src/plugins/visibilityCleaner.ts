@@ -1,12 +1,8 @@
-import { Host, Session, startSession } from "@azure-tools/autorest-extension-base";
-import { CodeModel, Request, codeModelSchema, Metadata, ObjectSchema, isObjectSchema, Property, Extensions, Scheme, ComplexSchema, Operation, OperationGroup, Parameter, VirtualParameter, ImplementationLocation, ArraySchema, DictionarySchema, ConstantSchema, getAllProperties } from "@azure-tools/codemodel";
-import { isNullOrUndefined, isArray, isNull } from "util";
+import { Host, Session } from "@azure-tools/autorest-extension-base";
+import { CodeModel, ObjectSchema, isObjectSchema, Parameter, ArraySchema, DictionarySchema, ConstantSchema } from "@azure-tools/codemodel";
 import { Helper } from "../helper";
-import { CliConst, M4Node, CliCommonSchema } from "../schema";
-import { Dumper } from "../dumper";
-import { Dictionary, values } from '@azure-tools/linq';
-import { NodeHelper } from "../nodeHelper";
-import { FlattenHelper } from "../flattenHelper";
+import { CliCommonSchema } from "../schema";
+import { NodeHelper, NodeCliHelper } from "../nodeHelper";
 
 class VisibilityCleaner {
 
@@ -15,11 +11,11 @@ class VisibilityCleaner {
 
     private calcObject(schema: ObjectSchema): CliCommonSchema.CodeModel.Visibility {
 
-        let visibleProperty = NodeHelper.getIsVisibleFlag(schema);
+        const visibleProperty = NodeCliHelper.getIsVisibleFlag(schema);
         if (visibleProperty) {
             if (visibleProperty === CliCommonSchema.CodeModel.Visibility.unknown) {
                 // a circle found, lets go around it again to calculate the correct visibility
-                NodeHelper.setIsVisibleFlag(schema, CliCommonSchema.CodeModel.Visibility.unknownInCircle);
+                NodeCliHelper.setIsVisibleFlag(schema, CliCommonSchema.CodeModel.Visibility.unknownInCircle);
             }
             else if (visibleProperty === CliCommonSchema.CodeModel.Visibility.unknownInCircle) {
                 // it's the 3rd time we reach here, return isVisibility = false should be safe now
@@ -33,7 +29,7 @@ class VisibilityCleaner {
         let visible = CliCommonSchema.CodeModel.Visibility.false;
 
         if (schema.properties && schema.properties.length > 0) {
-            for (let prop of schema.properties) {
+            for (const prop of schema.properties) {
                 if (!NodeHelper.checkVisibility(prop))
                     continue;
                 if (isObjectSchema(prop.schema)) {
@@ -55,7 +51,7 @@ class VisibilityCleaner {
 
         if (visible === CliCommonSchema.CodeModel.Visibility.false) {
             if (NodeHelper.HasSubClass(schema)) {
-                for (let subClass of NodeHelper.getSubClasses(schema, true)) {
+                for (const subClass of NodeHelper.getSubClasses(schema, true)) {
                     if (this.calcObject(subClass) === CliCommonSchema.CodeModel.Visibility.true) {
                         visible = CliCommonSchema.CodeModel.Visibility.true;
                         break;
@@ -64,11 +60,11 @@ class VisibilityCleaner {
             }
         }
 
-        NodeHelper.setIsVisibleFlag(schema, visible);
+        NodeCliHelper.setIsVisibleFlag(schema, visible);
         return visible;
     }
 
-    public process() {
+    public process(): void {
 
         this.session.model.schemas.objects.forEach(obj => {
             this.calcObject(obj);
@@ -76,9 +72,9 @@ class VisibilityCleaner {
 
         Helper.enumerateCodeModel(this.session.model, (descriptor) => {
             if (descriptor.target instanceof Parameter) {
-                if (NodeHelper.getIsVisibleFlag(descriptor.target.schema) === CliCommonSchema.CodeModel.Visibility.false) {
-                    NodeHelper.setHidden(descriptor.target, true);
-                    NodeHelper.setIsVisibleFlag(descriptor.target, CliCommonSchema.CodeModel.Visibility.false);
+                if (NodeCliHelper.getIsVisibleFlag(descriptor.target.schema) === CliCommonSchema.CodeModel.Visibility.false) {
+                    NodeCliHelper.setHidden(descriptor.target, true);
+                    NodeCliHelper.setIsVisibleFlag(descriptor.target, CliCommonSchema.CodeModel.Visibility.false);
                 }
             }
         }, CliCommonSchema.CodeModel.NodeTypeFlag.parameter);
@@ -86,16 +82,16 @@ class VisibilityCleaner {
     }
 }
 
-export async function processRequest(host: Host) {
+export async function processRequest(host: Host): Promise<void> {
 
     const session = await Helper.init(host);
 
-    let flag = await session.getValue('cli.auto-parameter-hidden', false);
+    const flag = await session.getValue('cli.auto-parameter-hidden', false);
     if (flag === true) {
 
         Helper.dumper.dumpCodeModel('visibility-cleaner-pre');
 
-        let cm = new VisibilityCleaner(session);
+        const cm = new VisibilityCleaner(session);
         cm.process();
 
         Helper.dumper.dumpCodeModel('visibility-cleaner-post');

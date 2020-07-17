@@ -1,18 +1,17 @@
 import { Host, Session } from "@azure-tools/autorest-extension-base";
-import { CodeModel, Request, Operation, Parameter } from "@azure-tools/codemodel";
-import { isNullOrUndefined } from "util";
+import { CodeModel, Operation } from "@azure-tools/codemodel";
 import { Helper } from "../helper";
 import { CliConst, CliCommonSchema } from "../schema";
-import { NodeHelper } from "../nodeHelper";
+import { NodeCliHelper, NodeExtensionHelper } from "../nodeHelper";
 import { Modifier } from "./modifier/modifier";
 import { CopyHelper } from "../copyHelper";
 
 export class SplitOperation{
 
-    constructor(protected session: Session<CodeModel>){
+    constructor(protected session: Session<CodeModel>) {
     }
 
-    public async process() {
+    public async process(): Promise<void> {
 
         await this.modifier();
 
@@ -22,7 +21,7 @@ export class SplitOperation{
             const existedNames = new Set<string>(group.operations.map((op) => op.language.default.name.toUpperCase()));
             const splittedGroupOperations = [];
             for (const operation of group.operations) {
-                const splitNames = NodeHelper.getCliSplitOperationNames(operation);
+                const splitNames = NodeCliHelper.getCliSplitOperationNames(operation);
                 if (!splitNames || splitNames.length === 0) {
                     continue;
                 }
@@ -30,21 +29,24 @@ export class SplitOperation{
                 
                 splittedOperations.forEach((splittedOperation) => {
                     // Link splitted operation to src opreation
-                    NodeHelper.setSplitOperationOriginalOperation(splittedOperation, operation);
+                    NodeExtensionHelper.setSplitOperationOriginalOperation(splittedOperation, operation);
     
                     splittedGroupOperations.push(splittedOperation);
                 });
 
                 if (splittedOperations.length > 0) {
-                    NodeHelper.setCliOperationSplitted(operation, true);
+                    NodeCliHelper.setCliOperationSplitted(operation, true);
                 }
             }
             splittedGroupOperations.forEach((op) => group.addOperation(op));
         }
     }
 
-    private async modifier() {
-        const directives = (await this.session.getValue(CliConst.CLI_DIRECTIVE_KEY, [])).filter((dir) => dir[CliConst.CLI_SPLIT_OPERATION_NAMES_KEY]);
+    private async modifier(): Promise<void> {
+        const directives = (await this.session.getValue(CliConst.CLI_DIRECTIVE_KEY, []))
+            .filter((dir) => dir[NodeCliHelper.SPLIT_OPERATION_NAMES])
+            .map((dir) => this.copyDirective(dir,NodeCliHelper.SPLIT_OPERATION_NAMES));
+        
         if (directives && directives.length > 0) {
             Helper.dumper.dumpCodeModel('split-operation-modifier-pre');
             const modifier = await new Modifier(this.session).init(directives);
@@ -71,20 +73,28 @@ export class SplitOperation{
     private splitOperation(splitName: string, srcOperation: Operation): Operation {
         const operation = CopyHelper.copyOperation(srcOperation, this.session.model.globalParameters);
         operation.language.default.name = splitName;
-        // Splited operation's cli key in format: <SrcOperationKey>#<SplitName>
-        NodeHelper.setCliKey(operation, `${NodeHelper.getCliKey(srcOperation, srcOperation.language.default.name)}#${splitName}`);
-        NodeHelper.clearCliSplitOperationNames(operation);
+        NodeCliHelper.setCliKey(operation, Helper.createSplitOperationCliKey(srcOperation, splitName));
+        NodeCliHelper.clearCliSplitOperationNames(operation);
         return operation;
+    }
+
+    private copyDirective(src: CliCommonSchema.CliDirective.Directive, prop: string): CliCommonSchema.CliDirective.Directive {
+        const copy: CliCommonSchema.CliDirective.Directive = {
+            select: src.select,
+            where: CopyHelper.deepCopy(src.where),
+        };
+        copy[prop] = src[prop];
+        return copy;
     }
 }
 
-export async function processRequest(host: Host) {
+export async function processRequest(host: Host): Promise<void> {
 
     const session = await Helper.init(host);
     Helper.dumper.dumpCodeModel("split-operation-pre");
 
-    const expandEnabled = (await session.getValue(CliConst.CLI_SPLIT_OPERATION_ENABLED_KEY, false)) === true;
-    if (!expandEnabled) {
+    const splitEnabled = (await session.getValue(CliConst.CLI_SPLIT_OPERATION_ENABLED_KEY, false)) === true;
+    if (!splitEnabled) {
         Helper.logDebug(`cli-split-operation-enabled is not true. Skip split operation`);
     } else {
         const splitOperation = new SplitOperation(session);

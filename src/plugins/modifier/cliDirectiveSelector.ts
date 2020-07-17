@@ -11,7 +11,7 @@ export class NodeSelector {
         this.where = directive.where;
         this.selectType = directive.select;
 
-        let alias = {
+        const alias = {
             parameter: ['param'],
             requestIndex: ['request-index'],
             operation: ['op'],
@@ -22,9 +22,9 @@ export class NodeSelector {
             choiceValue: ['value', 'choice-value'],
         };
 
-        for (let key in alias) {
+        for (const key in alias) {
             alias[key].forEach(av => this.where[key] = this.where[key] ?? this.where[av]);
-        };
+        }
 
         // TODO: support alias for 'select'? let's support it when needed considering in most case people dont need to specify it...
 
@@ -51,11 +51,11 @@ export class NodeSelector {
     public match(descriptor: CliCommonSchema.CodeModel.NodeDescriptor): boolean {
 
         // TODO: seperate different node type to get better performance when needed
-        let match = (e, v) => isNullOrUndefined(e) || Helper.matchRegex(Helper.createRegex(e), v);
+        const match = (e, v) => isNullOrUndefined(e) || Helper.matchRegex(Helper.createRegex(e), v);
         if (Helper.ToM4NodeType(descriptor.target) !== this.selectType)
             return false;
 
-        let r: boolean = false;
+        let r = false;
         switch (this.selectType) {
             case CliConst.SelectType.operationGroup:
             case CliConst.SelectType.operation:
@@ -76,7 +76,7 @@ export class NodeSelector {
                     match(this.where.property, descriptor.propertyCliKey);
                 break;
             default:
-                throw Error(`Unknown select type: ${this.selectType}`)
+                throw Error(`Unknown select type: ${this.selectType}`);
         }
         return r;
     }

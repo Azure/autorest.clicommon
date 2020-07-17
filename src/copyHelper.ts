@@ -1,8 +1,7 @@
-import { Request, Parameter, Operation, Schema } from "@azure-tools/codemodel";
-import { isNullOrUndefined } from "util";
+import { Request, Parameter, Operation, Schema } from '@azure-tools/codemodel';
+import { isNullOrUndefined } from 'util';
 
 export class CopyHelper {
-
     public static copyOperation(source: Operation, globalParameters?: Parameter[], customizedReqCopy?: (req: Request) => Request, customizedParamCopy?: (srcParam: Parameter) => Parameter): Operation {
         const copy = new Operation(source.language.default.name, '', source);
         copy.language = CopyHelper.deepCopy(source.language);
@@ -13,7 +12,7 @@ export class CopyHelper {
             } else if (customizedParamCopy) {
                 return customizedParamCopy(op);
             } else {
-                return CopyHelper.copyParameter(op)
+                return CopyHelper.copyParameter(op);
             }
         });
         copy.requests = source.requests?.map((req) => customizedReqCopy == null ? CopyHelper.copyRequest(req) : customizedReqCopy(req));
@@ -25,7 +24,7 @@ export class CopyHelper {
         const copy = new Request(source);
         copy.extensions = CopyHelper.copy(source.extensions);
         copy.language = CopyHelper.deepCopy(source.language);
-        copy.parameters = copy.parameters?.map((p) => customizedParamCopy == null ? CopyHelper.copyParameter(p) : customizedParamCopy(p));
+        copy.parameters = source.parameters?.map((p) => customizedParamCopy == null ? CopyHelper.copyParameter(p) : customizedParamCopy(p));
         copy.updateSignatureParameters();
         return copy;
     }
@@ -35,7 +34,7 @@ export class CopyHelper {
             implementation: source.implementation,
             extensions: {},
             language: CopyHelper.deepCopy(source.language),
-            protocol: source.protocol,
+            protocol: source.protocol
         });
         for (const property in source) {
             if (isNullOrUndefined(copy[property])) {

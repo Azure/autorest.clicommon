@@ -10,3 +10,5 @@ generated
 *.user
 bin*/
 obj/Release*/
+
+tmpoutput

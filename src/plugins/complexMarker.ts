@@ -1,74 +1,70 @@
-import { Host, Session, startSession } from "@azure-tools/autorest-extension-base";
-import { CodeModel, Request, codeModelSchema, Metadata, ObjectSchema, isObjectSchema, Property, Extensions, Scheme, ComplexSchema, Operation, OperationGroup, Parameter, VirtualParameter, ImplementationLocation, ArraySchema, DictionarySchema, AnySchema, ConstantSchema, getAllProperties } from "@azure-tools/codemodel";
-import { isNullOrUndefined, isArray, isNull } from "util";
+import { Host, Session } from "@azure-tools/autorest-extension-base";
+import { CodeModel, isObjectSchema, ArraySchema, DictionarySchema, AnySchema, ConstantSchema, getAllProperties, ObjectSchema } from "@azure-tools/codemodel";
+import { isNullOrUndefined } from "util";
 import { Helper } from "../helper";
-import { CliConst, M4Node, CliCommonSchema } from "../schema";
-import { Dumper } from "../dumper";
-import { values } from '@azure-tools/linq';
-import { NodeHelper } from "../nodeHelper";
-import { FlattenHelper } from "../flattenHelper";
+import { CliCommonSchema } from "../schema";
+import { NodeHelper, NodeCliHelper } from "../nodeHelper";
 
 class ComplexMarker {
     constructor(private session: Session<CodeModel>) {
     }
 
     private calculateDict(dict: DictionarySchema) {
-        let complexity = NodeHelper.getComplexity(dict);
+        const complexity = NodeCliHelper.getComplexity(dict);
         if (!isNullOrUndefined(complexity)) {
             if (complexity === CliCommonSchema.CodeModel.Complexity.unknown) {
                 // we have been here before, a circle found
-                NodeHelper.setComplex(dict, CliCommonSchema.CodeModel.Complexity.dictionary_complex)
+                NodeCliHelper.setComplex(dict, CliCommonSchema.CodeModel.Complexity.dictionary_complex);
                 return CliCommonSchema.CodeModel.Complexity.dictionary_complex;
-            }
-            else {
+            } else {
                 return complexity;
             }
         }
-        NodeHelper.setComplex(dict, CliCommonSchema.CodeModel.Complexity.unknown);
+        NodeCliHelper.setComplex(dict, CliCommonSchema.CodeModel.Complexity.unknown);
 
         if (dict.elementType instanceof ObjectSchema ||
-            dict.elementType instanceof ArraySchema ||
-            dict.elementType instanceof DictionarySchema ||
-            dict.elementType instanceof AnySchema) {
-            NodeHelper.setComplex(dict, CliCommonSchema.CodeModel.Complexity.dictionary_complex);
+                dict.elementType instanceof ArraySchema ||
+                dict.elementType instanceof DictionarySchema ||
+                dict.elementType instanceof AnySchema) {
+            NodeCliHelper.setComplex(dict, CliCommonSchema.CodeModel.Complexity.dictionary_complex);
             return CliCommonSchema.CodeModel.Complexity.dictionary_complex;
         }
-        NodeHelper.setComplex(dict, CliCommonSchema.CodeModel.Complexity.dictionary_simple);
+        NodeCliHelper.setComplex(dict, CliCommonSchema.CodeModel.Complexity.dictionary_simple);
         return CliCommonSchema.CodeModel.Complexity.dictionary_simple;
     }
 
     private calculateArray(arr: ArraySchema) {
-        let complexity = NodeHelper.getComplexity(arr);
+        const complexity = NodeCliHelper.getComplexity(arr);
         if (!isNullOrUndefined(complexity)) {
             if (complexity === CliCommonSchema.CodeModel.Complexity.unknown) {
                 // we have been here before, a circle found
-                NodeHelper.setComplex(arr, CliCommonSchema.CodeModel.Complexity.array_complex)
+                NodeCliHelper.setComplex(arr, CliCommonSchema.CodeModel.Complexity.array_complex);
                 return CliCommonSchema.CodeModel.Complexity.array_complex;
             }
             else {
                 return complexity;
             }
         }
-        NodeHelper.setComplex(arr, CliCommonSchema.CodeModel.Complexity.unknown);
+        NodeCliHelper.setComplex(arr, CliCommonSchema.CodeModel.Complexity.unknown);
 
         if (arr.elementType instanceof ObjectSchema ||
-            arr.elementType instanceof ArraySchema ||
-            arr.elementType instanceof DictionarySchema ||
-            arr.elementType instanceof AnySchema) {
-            NodeHelper.setComplex(arr, CliCommonSchema.CodeModel.Complexity.array_complex);
+                arr.elementType instanceof ArraySchema ||
+                arr.elementType instanceof DictionarySchema ||
+                arr.elementType instanceof AnySchema) {
+            NodeCliHelper.setComplex(arr, CliCommonSchema.CodeModel.Complexity.array_complex);
             return CliCommonSchema.CodeModel.Complexity.array_complex;
         }
-        NodeHelper.setComplex(arr, CliCommonSchema.CodeModel.Complexity.array_simple);
+        NodeCliHelper.setComplex(arr, CliCommonSchema.CodeModel.Complexity.array_simple);
         return CliCommonSchema.CodeModel.Complexity.array_simple;
     }
 
     private calculateObject(obj: ObjectSchema) {
 
-        let complexity = NodeHelper.getComplexity(obj);
+        let complexity = NodeCliHelper.getComplexity(obj);
         if (!isNullOrUndefined(complexity)) {
             if (complexity === CliCommonSchema.CodeModel.Complexity.unknown) {
                 // we have been here before, a circle found
-                NodeHelper.setComplex(obj, CliCommonSchema.CodeModel.Complexity.object_complex)
+                NodeCliHelper.setComplex(obj, CliCommonSchema.CodeModel.Complexity.object_complex);
                 return CliCommonSchema.CodeModel.Complexity.object_complex;
             }
             else {
@@ -77,62 +73,62 @@ class ComplexMarker {
         }
 
         if (NodeHelper.HasSubClass(obj))
-            return NodeHelper.setComplex(obj, CliCommonSchema.CodeModel.Complexity.object_complex);
+            return NodeCliHelper.setComplex(obj, CliCommonSchema.CodeModel.Complexity.object_complex);
 
-        NodeHelper.setComplex(obj, CliCommonSchema.CodeModel.Complexity.unknown);
+        NodeCliHelper.setComplex(obj, CliCommonSchema.CodeModel.Complexity.unknown);
 
         complexity = CliCommonSchema.CodeModel.Complexity.object_simple;
         if (obj.properties && obj.properties.length > 0) {
-            for (let prop of obj.properties) {
+            for (const prop of obj.properties) {
                 if (isObjectSchema(prop.schema)) {
                     this.calculateObject(prop.schema);
-                    return NodeHelper.setComplex(obj, CliCommonSchema.CodeModel.Complexity.object_complex);
+                    return NodeCliHelper.setComplex(obj, CliCommonSchema.CodeModel.Complexity.object_complex);
                 }
                 else if (prop.schema instanceof ArraySchema) {
-                    let c = this.calculateArray(prop.schema);
-                    if (c == CliCommonSchema.CodeModel.Complexity.array_complex) {
-                        return NodeHelper.setComplex(obj, CliCommonSchema.CodeModel.Complexity.object_complex);
+                    const c = this.calculateArray(prop.schema);
+                    if (c === CliCommonSchema.CodeModel.Complexity.array_complex) {
+                        return NodeCliHelper.setComplex(obj, CliCommonSchema.CodeModel.Complexity.object_complex);
                     }
                 }
                 else if (prop.schema instanceof DictionarySchema) {
                     this.calculateDict(prop.schema);
-                    return NodeHelper.setComplex(obj, CliCommonSchema.CodeModel.Complexity.object_complex);
+                    return NodeCliHelper.setComplex(obj, CliCommonSchema.CodeModel.Complexity.object_complex);
                 }
                 else if (prop.schema instanceof AnySchema) {
-                    return NodeHelper.setComplex(obj, CliCommonSchema.CodeModel.Complexity.object_complex);
+                    return NodeCliHelper.setComplex(obj, CliCommonSchema.CodeModel.Complexity.object_complex);
                 }
             }
         }
-        return NodeHelper.setComplex(obj, CliCommonSchema.CodeModel.Complexity.object_simple);
+        return NodeCliHelper.setComplex(obj, CliCommonSchema.CodeModel.Complexity.object_simple);
     }
 
     private setSimplifyIndicator(schema: ObjectSchema) {
-        let indicator: CliCommonSchema.CodeModel.SimplifyIndicator = {
+        const indicator: CliCommonSchema.CodeModel.SimplifyIndicator = {
             simplifiable: true,
             propertyCountIfSimplify: 0,
             propertyCountIfSimplifyWithoutSimpleObject: 0,
         };
-        let impossible: CliCommonSchema.CodeModel.SimplifyIndicator = {
+        const impossible: CliCommonSchema.CodeModel.SimplifyIndicator = {
             simplifiable: false,
             propertyCountIfSimplify: 10000,
             propertyCountIfSimplifyWithoutSimpleObject: 10000,
         };
-        let flag: CliCommonSchema.CodeModel.SimplifyIndicator = {
+        const flag: CliCommonSchema.CodeModel.SimplifyIndicator = {
             simplifiable: false,
             propertyCountIfSimplify: -1,
             propertyCountIfSimplifyWithoutSimpleObject: -1,
             
         };
 
-        let pre = NodeHelper.getSimplifyIndicator(schema);
+        const pre = NodeCliHelper.getSimplifyIndicator(schema);
         if (!isNullOrUndefined(pre) && pre.propertyCountIfSimplify === -1) {
             // circle found
-            return NodeHelper.setSimplifyIndicator(schema, impossible);
+            return NodeCliHelper.setSimplifyIndicator(schema, impossible);
         }
 
-        NodeHelper.setSimplifyIndicator(schema, flag);
+        NodeCliHelper.setSimplifyIndicator(schema, flag);
 
-        for (let p of getAllProperties(schema)) {
+        for (const p of getAllProperties(schema)) {
             if (p.readOnly)
                 continue;
             if (p.schema instanceof ConstantSchema)
@@ -140,22 +136,22 @@ class ComplexMarker {
             if (p.schema instanceof AnySchema ||
                 p.schema instanceof ArraySchema ||
                 p.schema instanceof DictionarySchema) {
-                return NodeHelper.setSimplifyIndicator(schema, impossible);
+                return NodeCliHelper.setSimplifyIndicator(schema, impossible);
             }
             else if (p.schema instanceof ObjectSchema) {
                 if (NodeHelper.HasSubClass(p.schema)) {
-                    return NodeHelper.setSimplifyIndicator(schema, impossible);
+                    return NodeCliHelper.setSimplifyIndicator(schema, impossible);
                 }
-                let pi = this.setSimplifyIndicator(p.schema);
+                const pi = this.setSimplifyIndicator(p.schema);
                 if (pi.simplifiable === true) {
-                    if (NodeHelper.getComplexity(p.schema) === CliCommonSchema.CodeModel.Complexity.object_simple)
+                    if (NodeCliHelper.getComplexity(p.schema) === CliCommonSchema.CodeModel.Complexity.object_simple)
                         indicator.propertyCountIfSimplifyWithoutSimpleObject++;
                     else
-                        indicator.propertyCountIfSimplifyWithoutSimpleObject += (pi.propertyCountIfSimplifyWithoutSimpleObject)
+                        indicator.propertyCountIfSimplifyWithoutSimpleObject += (pi.propertyCountIfSimplifyWithoutSimpleObject);
                     indicator.propertyCountIfSimplify += (pi.propertyCountIfSimplify);
                 }
                 else {
-                    return NodeHelper.setSimplifyIndicator(schema, impossible);
+                    return NodeCliHelper.setSimplifyIndicator(schema, impossible);
                 }
             }
             else {
@@ -164,19 +160,19 @@ class ComplexMarker {
             }
         }
 
-        return NodeHelper.setSimplifyIndicator(schema, indicator);
+        return NodeCliHelper.setSimplifyIndicator(schema, indicator);
     }
 
-    public setInCircle(schema: ObjectSchema | DictionarySchema | ArraySchema, stack: (ObjectSchema | DictionarySchema | ArraySchema)[], tag: string) {
+    public setInCircle(schema: ObjectSchema | DictionarySchema | ArraySchema, stack: (ObjectSchema | DictionarySchema | ArraySchema)[], tag: string): void {
 
-        let flag = NodeHelper.getMark(schema);
+        const flag = NodeCliHelper.getMark(schema);
         if (!isNullOrUndefined(flag)) {
             if (flag === tag) {
                 // we find a circle
                 let msg = "Circle Found: " + NodeHelper.getDefaultNameWithType(schema);
                 for (let i = stack.length - 1; i >= 0; i--) {
                     msg += '->' + NodeHelper.getDefaultNameWithType(stack[i]);
-                    NodeHelper.setInCircle(stack[i], true);
+                    NodeCliHelper.setInCircle(stack[i], true);
                     if (stack[i] === schema)
                         break;
                 }
@@ -187,7 +183,7 @@ class ComplexMarker {
             }
         }
         else {
-            NodeHelper.setMark(schema, tag);
+            NodeCliHelper.setMark(schema, tag);
 
             if (schema instanceof ArraySchema || schema instanceof DictionarySchema) {
                 if (schema.elementType instanceof ObjectSchema ||
@@ -199,7 +195,7 @@ class ComplexMarker {
                 }
             }
             else if (schema instanceof ObjectSchema) {
-                for (let prop of getAllProperties(schema)) {
+                for (const prop of getAllProperties(schema)) {
                     if (prop.schema instanceof ObjectSchema ||
                         prop.schema instanceof DictionarySchema ||
                         prop.schema instanceof ArraySchema) {
@@ -210,26 +206,26 @@ class ComplexMarker {
                 }
             }
         }
-        NodeHelper.setMark(schema, "checked");
+        NodeCliHelper.setMark(schema, "checked");
     }
 
-    public process() {
+    public process(): void {
 
         this.session.model.schemas.objects.forEach(obj => {
-            NodeHelper.clearComplex(obj);
-            NodeHelper.clearSimplifyIndicator(obj);
-            NodeHelper.clearMark(obj);
+            NodeCliHelper.clearComplex(obj);
+            NodeCliHelper.clearSimplifyIndicator(obj);
+            NodeCliHelper.clearMark(obj);
         });
 
         this.session.model.schemas.dictionaries?.forEach(dict => {
-            NodeHelper.clearComplex(dict);
-            NodeHelper.clearMark(dict);
+            NodeCliHelper.clearComplex(dict);
+            NodeCliHelper.clearMark(dict);
         });
 
         this.session.model.schemas.arrays?.forEach(arr => {
-            NodeHelper.clearComplex(arr);
-            NodeHelper.clearMark(arr);
-        })
+            NodeCliHelper.clearComplex(arr);
+            NodeCliHelper.clearMark(arr);
+        });
 
         let tag = 1;
         this.session.model.schemas.objects.forEach(obj => {
@@ -243,7 +239,7 @@ class ComplexMarker {
         this.session.model.schemas.arrays?.forEach(arr => {
             this.calculateArray(arr);
             tag++;
-        })
+        });
 
         this.session.model.schemas.objects.forEach(obj => {
             this.setSimplifyIndicator(obj);
@@ -261,17 +257,17 @@ class ComplexMarker {
         this.session.model.schemas.arrays?.forEach(arr => {
             this.setInCircle(arr, [], tag.toString());
             tag++;
-        })
+        });
     }
 }
 
-export async function processRequest(host: Host) {
+export async function processRequest(host: Host): Promise<void> {
 
     const session = await Helper.init(host);
 
     Helper.dumper.dumpCodeModel('complex-marker-pre');
 
-    let cm = new ComplexMarker(session);
+    const cm = new ComplexMarker(session);
     cm.process();
 
     Helper.dumper.dumpCodeModel('complex-marker-post');

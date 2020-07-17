@@ -1,0 +1,22 @@
+ManagedNetwork<1>[properties] -> ManagedNetworkProperties<2>[scope] -> Scope<4>
+ManagedNetwork<1>[properties] -> ManagedNetworkProperties<2>[connectivity] -> ConnectivityCollection<2>
+ResourceId<1>
+ManagedNetworkGroup<2>[properties] -> ManagedNetworkGroupProperties<4>
+ResourceProperties<2>
+Resource<4>
+ManagedNetworkPeeringPolicy<1>(properties*:ManagedNetworkPeeringPolicyProperties)
+ManagedNetworkPeeringPolicyProperties<4>*(hub:ResourceId)
+TrackedResource<1>
+ErrorResponse<2>
+ManagedNetworkUpdate<1>
+ManagedNetworkListResult<2>
+ScopeAssignment<1>[properties] -> ScopeAssignmentProperties<1>
+ScopeAssignmentListResult<2>
+ManagedNetworkGroupListResult<2>
+ManagedNetworkPeeringPolicyListResult<2>
+OperationListResult<2>
+Operation<2>(display:Operation-display)
+Operation-display<3>
+HubAndSpokePeeringPolicyProperties<0>
+MeshPeeringPolicyProperties<0>
+ProxyResource<0>

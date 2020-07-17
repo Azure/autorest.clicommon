@@ -1,0 +1,3359 @@
+operationGroups:
+  all:
+    - operationGroupName: Factories
+      cli:
+        cliKey: Factories
+        name: Factory
+      operations:
+        - operationName: List
+          cli:
+            cliKey: List
+          parameters:
+            - parameterName: $host(String^string)
+              cli:
+                cliKey: $host
+            - parameterName: SubscriptionId(String^string)
+              cli:
+                cliKey: subscriptionId
+            - parameterName: Apiversion(ApiVersion20180601^constant)
+              cli:
+                cliKey: ApiVersion
+        - operationName: ConfigureFactoryRepo
+          cli:
+            cliKey: ConfigureFactoryRepo
+          parameters:
+            - parameterName: $host(String^string)
+              cli:
+                cliKey: $host
+            - parameterName: SubscriptionId(String^string)
+              cli:
+                cliKey: subscriptionId
+            - parameterName: locationId(String^string)
+              cli:
+                cliKey: locationId
+            - parameterName: Apiversion(ApiVersion20180601^constant)
+              cli:
+                cliKey: ApiVersion
+            - parameterName[0]: factoryRepoUpdate(FactoryRepoUpdate^object)
+              cli:
+                cliKey: factoryRepoUpdate
+              bodySchema: FactoryRepoUpdate
+        - operationName: ListByResourceGroup
+          cli:
+            cliKey: ListByResourceGroup
+          parameters:
+            - parameterName: $host(String^string)
+              cli:
+                cliKey: $host
+            - parameterName: SubscriptionId(String^string)
+              cli:
+                cliKey: subscriptionId
+            - parameterName: resourceGroupName(String^string)
+              cli:
+                cliKey: resourceGroupName
+            - parameterName: Apiversion(ApiVersion20180601^constant)
+              cli:
+                cliKey: ApiVersion
+        - operationName: CreateOrUpdate
+          cli:
+            cliKey: CreateOrUpdate
+          parameters:
+            - parameterName: $host(String^string)
+              cli:
+                cliKey: $host
+            - parameterName: SubscriptionId(String^string)
+              cli:
+                cliKey: subscriptionId
+            - parameterName: resourceGroupName(String^string)
+              cli:
+                cliKey: resourceGroupName
+            - parameterName: factoryName(String^string)
+              cli:
+                cliKey: factoryName
+            - parameterName: Apiversion(ApiVersion20180601^constant)
+              cli:
+                cliKey: ApiVersion
+            - parameterName: ifMatch(String^string)
+              cli:
+                cliKey: If-Match
+            - parameterName[0]: factory(Factory^object)
+              cli:
+                cliKey: factory
+              bodySchema: Factory
+        - operationName: Update
+          cli:
+            cliKey: Update
+          parameters:
+            - parameterName: $host(String^string)
+              cli:
+                cliKey: $host
+            - parameterName: SubscriptionId(String^string)
+              cli:
+                cliKey: subscriptionId
+            - parameterName: resourceGroupName(String^string)
+              cli:
+                cliKey: resourceGroupName
+            - parameterName: factoryName(String^string)
+              cli:
+                cliKey: factoryName
+            - parameterName: Apiversion(ApiVersion20180601^constant)
+              cli:
+                cliKey: ApiVersion
+            - parameterName[0]: factoryUpdateParameters(FactoryUpdateParameters^object)
+              cli:
+                cliKey: factoryUpdateParameters
+              bodySchema: FactoryUpdateParameters
+        - operationName: Get
+          cli:
+            cliKey: Get
+          parameters:
+            - parameterName: $host(String^string)
+              cli:
+                cliKey: $host
+            - parameterName: SubscriptionId(String^string)
+              cli:
+                cliKey: subscriptionId
+            - parameterName: resourceGroupName(String^string)
+              cli:
+                cliKey: resourceGroupName
+            - parameterName: factoryName(String^string)
+              cli:
+                cliKey: factoryName
+            - parameterName: Apiversion(ApiVersion20180601^constant)
+              cli:
+                cliKey: ApiVersion
+            - parameterName: ifNoneMatch(String^string)
+              cli:
+                cliKey: If-None-Match
+        - operationName: Delete
+          cli:
+            cliKey: Delete
+          parameters:
+            - parameterName: $host(String^string)
+              cli:
+                cliKey: $host
+            - parameterName: SubscriptionId(String^string)
+              cli:
+                cliKey: subscriptionId
+            - parameterName: resourceGroupName(String^string)
+              cli:
+                cliKey: resourceGroupName
+            - parameterName: factoryName(String^string)
+              cli:
+                cliKey: factoryName
+            - parameterName: Apiversion(ApiVersion20180601^constant)
+              cli:
+                cliKey: ApiVersion
+        - operationName: GetGitHubAccessToken
+          cli:
+            cliKey: GetGitHubAccessToken
+          parameters:
+            - parameterName: $host(String^string)
+              cli:
+                cliKey: $host
+            - parameterName: SubscriptionId(String^string)
+              cli:
+                cliKey: subscriptionId
+            - parameterName: resourceGroupName(String^string)
+              cli:
+                cliKey: resourceGroupName
+            - parameterName: factoryName(String^string)
+              cli:
+                cliKey: factoryName
+            - parameterName: Apiversion(ApiVersion20180601^constant)
+              cli:
+                cliKey: ApiVersion
+            - parameterName[0]: gitHubAccessTokenRequest(GitHubAccessTokenRequest^object)
+              cli:
+                cliKey: gitHubAccessTokenRequest
+              bodySchema: GitHubAccessTokenRequest
+        - operationName: GetDataPlaneAccess
+          cli:
+            cliKey: GetDataPlaneAccess
+          parameters:
+            - parameterName: $host(String^string)
+              cli:
+                cliKey: $host
+            - parameterName: SubscriptionId(String^string)
+              cli:
+                cliKey: subscriptionId
+            - parameterName: resourceGroupName(String^string)
+              cli:
+                cliKey: resourceGroupName
+            - parameterName: factoryName(String^string)
+              cli:
+                cliKey: factoryName
+            - parameterName: Apiversion(ApiVersion20180601^constant)
+              cli:
+                cliKey: ApiVersion
+            - parameterName[0]: policy(UserAccessPolicy^object)
+              cli:
+                cliKey: policy
+              bodySchema: UserAccessPolicy
+    - operationGroupName: Triggers
+      cli:
+        cliKey: Triggers
+        name: Trigger
+      operations:
+        - operationName: ListByFactory
+          cli:
+            cliKey: ListByFactory
+          parameters:
+            - parameterName: $host(String^string)
+              cli:
+                cliKey: $host
+            - parameterName: SubscriptionId(String^string)
+              cli:
+                cliKey: subscriptionId
+            - parameterName: resourceGroupName(String^string)
+              cli:
+                cliKey: resourceGroupName
+            - parameterName: factoryName(String^string)
+              cli:
+                cliKey: factoryName
+            - parameterName: Apiversion(ApiVersion20180601^constant)
+              cli:
+                cliKey: ApiVersion
+        - operationName: QueryByFactory
+          cli:
+            cliKey: QueryByFactory
+          parameters:
+            - parameterName: $host(String^string)
+              cli:
+                cliKey: $host
+            - parameterName: SubscriptionId(String^string)
+              cli:
+                cliKey: subscriptionId
+            - parameterName: resourceGroupName(String^string)
+              cli:
+                cliKey: resourceGroupName
+            - parameterName: factoryName(String^string)
+              cli:
+                cliKey: factoryName
+            - parameterName: Apiversion(ApiVersion20180601^constant)
+              cli:
+                cliKey: ApiVersion
+            - parameterName[0]: filterParameters(TriggerFilterParameters^object)
+              cli:
+                cliKey: filterParameters
+              bodySchema: TriggerFilterParameters
+        - operationName: CreateOrUpdate
+          cli:
+            cliKey: CreateOrUpdate
+          parameters:
+            - parameterName: $host(String^string)
+              cli:
+                cliKey: $host
+            - parameterName: SubscriptionId(String^string)
+              cli:
+                cliKey: subscriptionId
+            - parameterName: resourceGroupName(String^string)
+              cli:
+                cliKey: resourceGroupName
+            - parameterName: factoryName(String^string)
+              cli:
+                cliKey: factoryName
+            - parameterName: triggerName(String^string)
+              cli:
+                cliKey: triggerName
+            - parameterName: Apiversion(ApiVersion20180601^constant)
+              cli:
+                cliKey: ApiVersion
+            - parameterName: ifMatch(String^string)
+              cli:
+                cliKey: If-Match
+            - parameterName[0]: trigger(TriggerResource^object)
+              cli:
+                cliKey: trigger
+              bodySchema: TriggerResource
+        - operationName: Get
+          cli:
+            cliKey: Get
+          parameters:
+            - parameterName: $host(String^string)
+              cli:
+                cliKey: $host
+            - parameterName: SubscriptionId(String^string)
+              cli:
+                cliKey: subscriptionId
+            - parameterName: resourceGroupName(String^string)
+              cli:
+                cliKey: resourceGroupName
+            - parameterName: factoryName(String^string)
+              cli:
+                cliKey: factoryName
+            - parameterName: triggerName(String^string)
+              cli:
+                cliKey: triggerName
+            - parameterName: Apiversion(ApiVersion20180601^constant)
+              cli:
+                cliKey: ApiVersion
+            - parameterName: ifNoneMatch(String^string)
+              cli:
+                cliKey: If-None-Match
+        - operationName: Delete
+          cli:
+            cliKey: Delete
+          parameters:
+            - parameterName: $host(String^string)
+              cli:
+                cliKey: $host
+            - parameterName: SubscriptionId(String^string)
+              cli:
+                cliKey: subscriptionId
+            - parameterName: resourceGroupName(String^string)
+              cli:
+                cliKey: resourceGroupName
+            - parameterName: factoryName(String^string)
+              cli:
+                cliKey: factoryName
+            - parameterName: triggerName(String^string)
+              cli:
+                cliKey: triggerName
+            - parameterName: Apiversion(ApiVersion20180601^constant)
+              cli:
+                cliKey: ApiVersion
+        - operationName: SubscribeToEvents
+          cli:
+            cliKey: SubscribeToEvents
+            name: SubscribeToEvent
+          parameters:
+            - parameterName: $host(String^string)
+              cli:
+                cliKey: $host
+            - parameterName: SubscriptionId(String^string)
+              cli:
+                cliKey: subscriptionId
+            - parameterName: resourceGroupName(String^string)
+              cli:
+                cliKey: resourceGroupName
+            - parameterName: factoryName(String^string)
+              cli:
+                cliKey: factoryName
+            - parameterName: triggerName(String^string)
+              cli:
+                cliKey: triggerName
+            - parameterName: Apiversion(ApiVersion20180601^constant)
+              cli:
+                cliKey: ApiVersion
+        - operationName: GetEventSubscriptionStatus
+          cli:
+            cliKey: GetEventSubscriptionStatus
+          parameters:
+            - parameterName: $host(String^string)
+              cli:
+                cliKey: $host
+            - parameterName: SubscriptionId(String^string)
+              cli:
+                cliKey: subscriptionId
+            - parameterName: resourceGroupName(String^string)
+              cli:
+                cliKey: resourceGroupName
+            - parameterName: factoryName(String^string)
+              cli:
+                cliKey: factoryName
+            - parameterName: triggerName(String^string)
+              cli:
+                cliKey: triggerName
+            - parameterName: Apiversion(ApiVersion20180601^constant)
+              cli:
+                cliKey: ApiVersion
+        - operationName: UnsubscribeFromEvents
+          cli:
+            cliKey: UnsubscribeFromEvents
+            name: UnsubscribeFromEvent
+          parameters:
+            - parameterName: $host(String^string)
+              cli:
+                cliKey: $host
+            - parameterName: SubscriptionId(String^string)
+              cli:
+                cliKey: subscriptionId
+            - parameterName: resourceGroupName(String^string)
+              cli:
+                cliKey: resourceGroupName
+            - parameterName: factoryName(String^string)
+              cli:
+                cliKey: factoryName
+            - parameterName: triggerName(String^string)
+              cli:
+                cliKey: triggerName
+            - parameterName: Apiversion(ApiVersion20180601^constant)
+              cli:
+                cliKey: ApiVersion
+        - operationName: Start
+          cli:
+            cliKey: Start
+          parameters:
+            - parameterName: $host(String^string)
+              cli:
+                cliKey: $host
+            - parameterName: SubscriptionId(String^string)
+              cli:
+                cliKey: subscriptionId
+            - parameterName: resourceGroupName(String^string)
+              cli:
+                cliKey: resourceGroupName
+            - parameterName: factoryName(String^string)
+              cli:
+                cliKey: factoryName
+            - parameterName: triggerName(String^string)
+              cli:
+                cliKey: triggerName
+            - parameterName: Apiversion(ApiVersion20180601^constant)
+              cli:
+                cliKey: ApiVersion
+        - operationName: Stop
+          cli:
+            cliKey: Stop
+          parameters:
+            - parameterName: $host(String^string)
+              cli:
+                cliKey: $host
+            - parameterName: SubscriptionId(String^string)
+              cli:
+                cliKey: subscriptionId
+            - parameterName: resourceGroupName(String^string)
+              cli:
+                cliKey: resourceGroupName
+            - parameterName: factoryName(String^string)
+              cli:
+                cliKey: factoryName
+            - parameterName: triggerName(String^string)
+              cli:
+                cliKey: triggerName
+            - parameterName: Apiversion(ApiVersion20180601^constant)
+              cli:
+                cliKey: ApiVersion
+    - operationGroupName: IntegrationRuntimes
+      cli:
+        cliKey: IntegrationRuntimes
+        name: IntegrationRuntime
+      operations:
+        - operationName: ListByFactory
+          cli:
+            cliKey: ListByFactory
+          parameters:
+            - parameterName: $host(String^string)
+              cli:
+                cliKey: $host
+            - parameterName: SubscriptionId(String^string)
+              cli:
+                cliKey: subscriptionId
+            - parameterName: resourceGroupName(String^string)
+              cli:
+                cliKey: resourceGroupName
+            - parameterName: factoryName(String^string)
+              cli:
+                cliKey: factoryName
+            - parameterName: Apiversion(ApiVersion20180601^constant)
+              cli:
+                cliKey: ApiVersion
+        - operationName: CreateOrUpdate
+          cli:
+            cliKey: CreateOrUpdate
+          parameters:
+            - parameterName: $host(String^string)
+              cli:
+                cliKey: $host
+            - parameterName: SubscriptionId(String^string)
+              cli:
+                cliKey: subscriptionId
+            - parameterName: resourceGroupName(String^string)
+              cli:
+                cliKey: resourceGroupName
+            - parameterName: factoryName(String^string)
+              cli:
+                cliKey: factoryName
+            - parameterName: integrationRuntimeName(String^string)
+              cli:
+                cliKey: integrationRuntimeName
+            - parameterName: Apiversion(ApiVersion20180601^constant)
+              cli:
+                cliKey: ApiVersion
+            - parameterName: ifMatch(String^string)
+              cli:
+                cliKey: If-Match
+            - parameterName[0]: integrationRuntime(IntegrationRuntimeResource^object)
+              cli:
+                cliKey: integrationRuntime
+              bodySchema: IntegrationRuntimeResource
+        - operationName: Get
+          cli:
+            cliKey: Get
+          parameters:
+            - parameterName: $host(String^string)
+              cli:
+                cliKey: $host
+            - parameterName: SubscriptionId(String^string)
+              cli:
+                cliKey: subscriptionId
+            - parameterName: resourceGroupName(String^string)
+              cli:
+                cliKey: resourceGroupName
+            - parameterName: factoryName(String^string)
+              cli:
+                cliKey: factoryName
+            - parameterName: integrationRuntimeName(String^string)
+              cli:
+                cliKey: integrationRuntimeName
+            - parameterName: Apiversion(ApiVersion20180601^constant)
+              cli:
+                cliKey: ApiVersion
+            - parameterName: ifNoneMatch(String^string)
+              cli:
+                cliKey: If-None-Match
+        - operationName: Update
+          cli:
+            cliKey: Update
+          parameters:
+            - parameterName: $host(String^string)
+              cli:
+                cliKey: $host
+            - parameterName: SubscriptionId(String^string)
+              cli:
+                cliKey: subscriptionId
+            - parameterName: resourceGroupName(String^string)
+              cli:
+                cliKey: resourceGroupName
+            - parameterName: factoryName(String^string)
+              cli:
+                cliKey: factoryName
+            - parameterName: integrationRuntimeName(String^string)
+              cli:
+                cliKey: integrationRuntimeName
+            - parameterName: Apiversion(ApiVersion20180601^constant)
+              cli:
+                cliKey: ApiVersion
+            - parameterName[0]: updateIntegrationRuntimeRequest(UpdateIntegrationRuntimeRequest^object)
+              cli:
+                cliKey: updateIntegrationRuntimeRequest
+              bodySchema: UpdateIntegrationRuntimeRequest
+        - operationName: Delete
+          cli:
+            cliKey: Delete
+          parameters:
+            - parameterName: $host(String^string)
+              cli:
+                cliKey: $host
+            - parameterName: SubscriptionId(String^string)
+              cli:
+                cliKey: subscriptionId
+            - parameterName: resourceGroupName(String^string)
+              cli:
+                cliKey: resourceGroupName
+            - parameterName: factoryName(String^string)
+              cli:
+                cliKey: factoryName
+            - parameterName: integrationRuntimeName(String^string)
+              cli:
+                cliKey: integrationRuntimeName
+            - parameterName: Apiversion(ApiVersion20180601^constant)
+              cli:
+                cliKey: ApiVersion
+        - operationName: GetStatus
+          cli:
+            cliKey: GetStatus
+          parameters:
+            - parameterName: $host(String^string)
+              cli:
+                cliKey: $host
+            - parameterName: SubscriptionId(String^string)
+              cli:
+                cliKey: subscriptionId
+            - parameterName: resourceGroupName(String^string)
+              cli:
+                cliKey: resourceGroupName
+            - parameterName: factoryName(String^string)
+              cli:
+                cliKey: factoryName
+            - parameterName: integrationRuntimeName(String^string)
+              cli:
+                cliKey: integrationRuntimeName
+            - parameterName: Apiversion(ApiVersion20180601^constant)
+              cli:
+                cliKey: ApiVersion
+        - operationName: GetConnectionInfo
+          cli:
+            cliKey: GetConnectionInfo
+          parameters:
+            - parameterName: $host(String^string)
+              cli:
+                cliKey: $host
+            - parameterName: SubscriptionId(String^string)
+              cli:
+                cliKey: subscriptionId
+            - parameterName: resourceGroupName(String^string)
+              cli:
+                cliKey: resourceGroupName
+            - parameterName: factoryName(String^string)
+              cli:
+                cliKey: factoryName
+            - parameterName: integrationRuntimeName(String^string)
+              cli:
+                cliKey: integrationRuntimeName
+            - parameterName: Apiversion(ApiVersion20180601^constant)
+              cli:
+                cliKey: ApiVersion
+        - operationName: RegenerateAuthKey
+          cli:
+            cliKey: RegenerateAuthKey
+          parameters:
+            - parameterName: $host(String^string)
+              cli:
+                cliKey: $host
+            - parameterName: SubscriptionId(String^string)
+              cli:
+                cliKey: subscriptionId
+            - parameterName: resourceGroupName(String^string)
+              cli:
+                cliKey: resourceGroupName
+            - parameterName: factoryName(String^string)
+              cli:
+                cliKey: factoryName
+            - parameterName: integrationRuntimeName(String^string)
+              cli:
+                cliKey: integrationRuntimeName
+            - parameterName: Apiversion(ApiVersion20180601^constant)
+              cli:
+                cliKey: ApiVersion
+            - parameterName[0]: regenerateKeyParameters(IntegrationRuntimeRegenerateKeyParameters^object)
+              cli:
+                cliKey: regenerateKeyParameters
+              bodySchema: IntegrationRuntimeRegenerateKeyParameters
+        - operationName: ListAuthKeys
+          cli:
+            cliKey: ListAuthKeys
+            name: ListAuthKey
+          parameters:
+            - parameterName: $host(String^string)
+              cli:
+                cliKey: $host
+            - parameterName: SubscriptionId(String^string)
+              cli:
+                cliKey: subscriptionId
+            - parameterName: resourceGroupName(String^string)
+              cli:
+                cliKey: resourceGroupName
+            - parameterName: factoryName(String^string)
+              cli:
+                cliKey: factoryName
+            - parameterName: integrationRuntimeName(String^string)
+              cli:
+                cliKey: integrationRuntimeName
+            - parameterName: Apiversion(ApiVersion20180601^constant)
+              cli:
+                cliKey: ApiVersion
+        - operationName: Start
+          cli:
+            cliKey: Start
+          parameters:
+            - parameterName: $host(String^string)
+              cli:
+                cliKey: $host
+            - parameterName: SubscriptionId(String^string)
+              cli:
+                cliKey: subscriptionId
+            - parameterName: resourceGroupName(String^string)
+              cli:
+                cliKey: resourceGroupName
+            - parameterName: factoryName(String^string)
+              cli:
+                cliKey: factoryName
+            - parameterName: integrationRuntimeName(String^string)
+              cli:
+                cliKey: integrationRuntimeName
+            - parameterName: Apiversion(ApiVersion20180601^constant)
+              cli:
+                cliKey: ApiVersion
+        - operationName: Stop
+          cli:
+            cliKey: Stop
+          parameters:
+            - parameterName: $host(String^string)
+              cli:
+                cliKey: $host
+            - parameterName: SubscriptionId(String^string)
+              cli:
+                cliKey: subscriptionId
+            - parameterName: resourceGroupName(String^string)
+              cli:
+                cliKey: resourceGroupName
+            - parameterName: factoryName(String^string)
+              cli:
+                cliKey: factoryName
+            - parameterName: integrationRuntimeName(String^string)
+              cli:
+                cliKey: integrationRuntimeName
+            - parameterName: Apiversion(ApiVersion20180601^constant)
+              cli:
+                cliKey: ApiVersion
+        - operationName: SyncCredentials
+          cli:
+            cliKey: SyncCredentials
+          parameters:
+            - parameterName: $host(String^string)
+              cli:
+                cliKey: $host
+            - parameterName: SubscriptionId(String^string)
+              cli:
+                cliKey: subscriptionId
+            - parameterName: resourceGroupName(String^string)
+              cli:
+                cliKey: resourceGroupName
+            - parameterName: factoryName(String^string)
+              cli:
+                cliKey: factoryName
+            - parameterName: integrationRuntimeName(String^string)
+              cli:
+                cliKey: integrationRuntimeName
+            - parameterName: Apiversion(ApiVersion20180601^constant)
+              cli:
+                cliKey: ApiVersion
+        - operationName: GetMonitoringData
+          cli:
+            cliKey: GetMonitoringData
+          parameters:
+            - parameterName: $host(String^string)
+              cli:
+                cliKey: $host
+            - parameterName: SubscriptionId(String^string)
+              cli:
+                cliKey: subscriptionId
+            - parameterName: resourceGroupName(String^string)
+              cli:
+                cliKey: resourceGroupName
+            - parameterName: factoryName(String^string)
+              cli:
+                cliKey: factoryName
+            - parameterName: integrationRuntimeName(String^string)
+              cli:
+                cliKey: integrationRuntimeName
+            - parameterName: Apiversion(ApiVersion20180601^constant)
+              cli:
+                cliKey: ApiVersion
+        - operationName: Upgrade
+          cli:
+            cliKey: Upgrade
+          parameters:
+            - parameterName: $host(String^string)
+              cli:
+                cliKey: $host
+            - parameterName: SubscriptionId(String^string)
+              cli:
+                cliKey: subscriptionId
+            - parameterName: resourceGroupName(String^string)
+              cli:
+                cliKey: resourceGroupName
+            - parameterName: factoryName(String^string)
+              cli:
+                cliKey: factoryName
+            - parameterName: integrationRuntimeName(String^string)
+              cli:
+                cliKey: integrationRuntimeName
+            - parameterName: Apiversion(ApiVersion20180601^constant)
+              cli:
+                cliKey: ApiVersion
+        - operationName: RemoveLinks
+          cli:
+            cliKey: RemoveLinks
+            name: RemoveLink
+          parameters:
+            - parameterName: $host(String^string)
+              cli:
+                cliKey: $host
+            - parameterName: SubscriptionId(String^string)
+              cli:
+                cliKey: subscriptionId
+            - parameterName: resourceGroupName(String^string)
+              cli:
+                cliKey: resourceGroupName
+            - parameterName: factoryName(String^string)
+              cli:
+                cliKey: factoryName
+            - parameterName: integrationRuntimeName(String^string)
+              cli:
+                cliKey: integrationRuntimeName
+            - parameterName: Apiversion(ApiVersion20180601^constant)
+              cli:
+                cliKey: ApiVersion
+            - parameterName[0]: linkedIntegrationRuntimeRequest(LinkedIntegrationRuntimeRequest^object)
+              cli:
+                cliKey: linkedIntegrationRuntimeRequest
+              bodySchema: LinkedIntegrationRuntimeRequest
+        - operationName: CreateLinkedIntegrationRuntime
+          cli:
+            cliKey: CreateLinkedIntegrationRuntime
+          parameters:
+            - parameterName: $host(String^string)
+              cli:
+                cliKey: $host
+            - parameterName: SubscriptionId(String^string)
+              cli:
+                cliKey: subscriptionId
+            - parameterName: resourceGroupName(String^string)
+              cli:
+                cliKey: resourceGroupName
+            - parameterName: factoryName(String^string)
+              cli:
+                cliKey: factoryName
+            - parameterName: integrationRuntimeName(String^string)
+              cli:
+                cliKey: integrationRuntimeName
+            - parameterName: Apiversion(ApiVersion20180601^constant)
+              cli:
+                cliKey: ApiVersion
+            - parameterName[0]: createLinkedIntegrationRuntimeRequest(CreateLinkedIntegrationRuntimeRequest^object)
+              cli:
+                cliKey: createLinkedIntegrationRuntimeRequest
+              bodySchema: CreateLinkedIntegrationRuntimeRequest
+schemas:
+  objects:
+    all:
+      - schemaName: FactoryListResponse
+        cli:
+          cli-complexity: object_complex
+          cli-mark: checked
+          cli-simplify-indicator: 
+            propertyCountIfSimplify: 10000
+            propertyCountIfSimplifyWithoutSimpleObject: 10000
+            simplifiable: false
+          cliKey: FactoryListResponse
+        properties:
+          - propertyName: value(FactoryListResponseValue^array)
+            cli:
+              cliKey: value
+          - propertyName: nextLink(FactoryListResponseNextLink^string)
+            cli:
+              cliKey: nextLink
+      - schemaName: Factory
+        cli:
+          cli-complexity: object_complex
+          cli-mark: checked
+          cli-simplify-indicator: 
+            propertyCountIfSimplify: 10000
+            propertyCountIfSimplifyWithoutSimpleObject: 10000
+            simplifiable: false
+          cliKey: Factory
+        properties:
+          - propertyName: identity(FactoryIdentity^object)
+            cli:
+              cliKey: identity
+          - propertyName: properties(FactoryProperties^object)
+            cli:
+              cliKey: properties
+            x-ms-client-flatten: true
+      - schemaName: FactoryIdentity
+        cli:
+          cli-complexity: object_simple
+          cli-mark: checked
+          cli-simplify-indicator: 
+            propertyCountIfSimplify: 1
+            propertyCountIfSimplifyWithoutSimpleObject: 1
+            simplifiable: true
+          cliKey: FactoryIdentity
+        properties:
+          - propertyName: type(FactoryIdentityType^choice)
+            cli:
+              cliKey: type
+          - propertyName: principalId(factory_identity_principal_id^uuid)
+            cli:
+              cliKey: principalId
+            readOnly: true
+          - propertyName: tenantId(factory_identity_tenant_id^uuid)
+            cli:
+              cliKey: tenantId
+            readOnly: true
+      - schemaName: FactoryProperties
+        cli:
+          cli-complexity: object_complex
+          cli-mark: checked
+          cli-simplify-indicator: 
+            propertyCountIfSimplify: 10000
+            propertyCountIfSimplifyWithoutSimpleObject: 10000
+            simplifiable: false
+          cliKey: FactoryProperties
+        properties:
+          - propertyName: provisioningState(FactoryPropertiesProvisioningState^string)
+            cli:
+              cliKey: provisioningState
+            readOnly: true
+          - propertyName: createTime(factory_properties_create_time^date-time)
+            cli:
+              cliKey: createTime
+            readOnly: true
+          - propertyName: version(FactoryPropertiesVersion^string)
+            cli:
+              cliKey: version
+            readOnly: true
+          - propertyName: repoConfiguration(FactoryRepoConfiguration^object)
+            cli:
+              cliKey: repoConfiguration
+          - propertyName: fakeIdentity(FakeFactoryIdentity^object)
+            cli:
+              cliKey: fakeIdentity
+          - propertyName: zones(Zone^array)
+            cli:
+              cliKey: zones
+      - schemaName: FactoryRepoConfiguration
+        cli:
+          cli-complexity: object_complex
+          cli-mark: checked
+          cli-simplify-indicator: 
+            propertyCountIfSimplify: 6
+            propertyCountIfSimplifyWithoutSimpleObject: 6
+            simplifiable: true
+          cliKey: FactoryRepoConfiguration
+        discriminator: true
+        properties:
+          - propertyName: type(FactoryRepoConfigurationType^string)
+            cli:
+              cliKey: type
+          - propertyName: accountName(FactoryRepoConfigurationAccountName^string)
+            cli:
+              cliKey: accountName
+          - propertyName: repositoryName(FactoryRepoConfigurationRepositoryName^string)
+            cli:
+              cliKey: repositoryName
+          - propertyName: collaborationBranch(FactoryRepoConfigurationCollaborationBranch^string)
+            cli:
+              cliKey: collaborationBranch
+          - propertyName: rootFolder(FactoryRepoConfigurationRootFolder^string)
+            cli:
+              cliKey: rootFolder
+          - propertyName: lastCommitId(FactoryRepoConfigurationLastCommitId^string)
+            cli:
+              cliKey: lastCommitId
+      - schemaName: FakeFactoryIdentity
+        cli:
+          cli-complexity: object_simple
+          cli-mark: checked
+          cli-simplify-indicator: 
+            propertyCountIfSimplify: 10000
+            propertyCountIfSimplifyWithoutSimpleObject: 10000
+            simplifiable: false
+          cliKey: FakeFactoryIdentity
+        properties:
+          - propertyName: name(FakeFactoryIdentityName^string)
+            cli:
+              cliKey: name
+          - propertyName: zonesInside(FakeFactoryIdentityZonesInside^array)
+            cli:
+              cliKey: zonesInside
+      - schemaName: Resource
+        cli:
+          cli-complexity: object_complex
+          cli-mark: checked
+          cli-simplify-indicator: 
+            propertyCountIfSimplify: 10000
+            propertyCountIfSimplifyWithoutSimpleObject: 10000
+            simplifiable: false
+          cliKey: Resource
+        properties:
+          - propertyName: id(ResourceId^string)
+            cli:
+              cliKey: id
+            readOnly: true
+          - propertyName: name(ResourceName^string)
+            cli:
+              cliKey: name
+            readOnly: true
+          - propertyName: type(ResourceType^string)
+            cli:
+              cliKey: type
+            readOnly: true
+          - propertyName: location(ResourceLocation^string)
+            cli:
+              cliKey: location
+          - propertyName: tags(ResourceTags^dictionary)
+            cli:
+              cliKey: tags
+          - propertyName: eTag(ResourceETag^string)
+            cli:
+              cliKey: eTag
+            readOnly: true
+      - schemaName: CloudError
+        cli:
+          cli-complexity: object_complex
+          cli-in-circle: true
+          cli-mark: checked
+          cli-simplify-indicator: 
+            propertyCountIfSimplify: 10000
+            propertyCountIfSimplifyWithoutSimpleObject: 10000
+            simplifiable: false
+          cliKey: CloudError
+        properties:
+          - propertyName: error(CloudErrorBody^object)
+            cli:
+              cliKey: error
+            x-ms-client-flatten: true
+      - schemaName: CloudErrorBody
+        cli:
+          cli-complexity: object_complex
+          cli-in-circle: true
+          cli-mark: checked
+          cli-simplify-indicator: 
+            propertyCountIfSimplify: 10000
+            propertyCountIfSimplifyWithoutSimpleObject: 10000
+            simplifiable: false
+          cliKey: CloudErrorBody
+        properties:
+          - propertyName: code(CloudErrorBodyCode^string)
+            cli:
+              cliKey: code
+          - propertyName: message(CloudErrorBodyMessage^string)
+            cli:
+              cliKey: message
+          - propertyName: target(CloudErrorBodyTarget^string)
+            cli:
+              cliKey: target
+          - propertyName: details(CloudErrorBodyDetails^array)
+            cli:
+              cliKey: details
+      - schemaName: FactoryRepoUpdate
+        cli:
+          cli-complexity: object_complex
+          cli-mark: checked
+          cli-simplify-indicator: 
+            propertyCountIfSimplify: 10000
+            propertyCountIfSimplifyWithoutSimpleObject: 10000
+            simplifiable: false
+          cliKey: FactoryRepoUpdate
+        properties:
+          - propertyName: factoryResourceId(FactoryRepoUpdateFactoryResourceId^string)
+            cli:
+              cliKey: factoryResourceId
+          - propertyName: repoConfiguration(FactoryRepoConfiguration^object)
+            cli:
+              cliKey: repoConfiguration
+      - schemaName: FactoryUpdateParameters
+        cli:
+          cli-complexity: object_complex
+          cli-mark: checked
+          cli-simplify-indicator: 
+            propertyCountIfSimplify: 10000
+            propertyCountIfSimplifyWithoutSimpleObject: 10000
+            simplifiable: false
+          cliKey: FactoryUpdateParameters
+        properties:
+          - propertyName: tags(FactoryUpdateParametersTags^dictionary)
+            cli:
+              cliKey: tags
+          - propertyName: identity(FactoryIdentity^object)
+            cli:
+              cliKey: identity
+      - schemaName: GitHubAccessTokenRequest
+        cli:
+          cli-complexity: object_simple
+          cli-mark: checked
+          cli-simplify-indicator: 
+            propertyCountIfSimplify: 3
+            propertyCountIfSimplifyWithoutSimpleObject: 3
+            simplifiable: true
+          cliKey: GitHubAccessTokenRequest
+        properties:
+          - propertyName: gitHubAccessCode(GitHubAccessTokenRequestGitHubAccessCode^string)
+            cli:
+              cliKey: gitHubAccessCode
+          - propertyName: gitHubClientId(GitHubAccessTokenRequestGitHubClientId^string)
+            cli:
+              cliKey: gitHubClientId
+          - propertyName: gitHubAccessTokenBaseUrl(GitHubAccessTokenRequestGitHubAccessTokenBaseUrl^string)
+            cli:
+              cliKey: gitHubAccessTokenBaseUrl
+      - schemaName: GitHubAccessTokenResponse
+        cli:
+          cli-complexity: object_simple
+          cli-mark: checked
+          cli-simplify-indicator: 
+            propertyCountIfSimplify: 1
+            propertyCountIfSimplifyWithoutSimpleObject: 1
+            simplifiable: true
+          cliKey: GitHubAccessTokenResponse
+        properties:
+          - propertyName: gitHubAccessToken(GitHubAccessTokenResponseGitHubAccessToken^string)
+            cli:
+              cliKey: gitHubAccessToken
+      - schemaName: UserAccessPolicy
+        cli:
+          cli-complexity: object_simple
+          cli-mark: checked
+          cli-simplify-indicator: 
+            propertyCountIfSimplify: 5
+            propertyCountIfSimplifyWithoutSimpleObject: 5
+            simplifiable: true
+          cliKey: UserAccessPolicy
+        properties:
+          - propertyName: permissions(UserAccessPolicyPermissions^string)
+            cli:
+              cliKey: permissions
+          - propertyName: accessResourcePath(UserAccessPolicyAccessResourcePath^string)
+            cli:
+              cliKey: accessResourcePath
+          - propertyName: profileName(UserAccessPolicyProfileName^string)
+            cli:
+              cliKey: profileName
+          - propertyName: startTime(UserAccessPolicyStartTime^string)
+            cli:
+              cliKey: startTime
+          - propertyName: expireTime(UserAccessPolicyExpireTime^string)
+            cli:
+              cliKey: expireTime
+      - schemaName: AccessPolicyResponse
+        cli:
+          cli-complexity: object_complex
+          cli-mark: checked
+          cli-simplify-indicator: 
+            propertyCountIfSimplify: 7
+            propertyCountIfSimplifyWithoutSimpleObject: 3
+            simplifiable: true
+          cliKey: AccessPolicyResponse
+        properties:
+          - propertyName: policy(UserAccessPolicy^object)
+            cli:
+              cliKey: policy
+          - propertyName: accessToken(AccessPolicyResponseAccessToken^string)
+            cli:
+              cliKey: accessToken
+          - propertyName: dataPlaneUrl(AccessPolicyResponseDataPlaneUrl^string)
+            cli:
+              cliKey: dataPlaneUrl
+      - schemaName: TriggerListResponse
+        cli:
+          cli-complexity: object_complex
+          cli-mark: checked
+          cli-simplify-indicator: 
+            propertyCountIfSimplify: 10000
+            propertyCountIfSimplifyWithoutSimpleObject: 10000
+            simplifiable: false
+          cliKey: TriggerListResponse
+        properties:
+          - propertyName: value(TriggerListResponseValue^array)
+            cli:
+              cliKey: value
+          - propertyName: nextLink(TriggerListResponseNextLink^string)
+            cli:
+              cliKey: nextLink
+      - schemaName: TriggerResource
+        cli:
+          cli-complexity: object_complex
+          cli-mark: checked
+          cli-simplify-indicator: 
+            propertyCountIfSimplify: 10000
+            propertyCountIfSimplifyWithoutSimpleObject: 10000
+            simplifiable: false
+          cliKey: TriggerResource
+        properties:
+          - propertyName: properties(Trigger^object)
+            cli:
+              cliKey: properties
+      - schemaName: Trigger
+        cli:
+          cli-complexity: object_complex
+          cli-mark: checked
+          cli-simplify-indicator: 
+            propertyCountIfSimplify: 10000
+            propertyCountIfSimplifyWithoutSimpleObject: 10000
+            simplifiable: false
+          cliKey: Trigger
+          cli-discriminator-value: Trigger
+        discriminator: true
+        properties:
+          - propertyName: type(TriggerType^string)
+            cli:
+              cliKey: type
+          - propertyName: description(TriggerDescription^string)
+            cli:
+              cliKey: description
+          - propertyName: runtimeState(TriggerRuntimeState^choice)
+            cli:
+              cliKey: runtimeState
+            readOnly: true
+          - propertyName: annotations(TriggerAnnotations^array)
+            cli:
+              cliKey: annotations
+      - schemaName: SubResource
+        cli:
+          cli-complexity: object_simple
+          cli-mark: checked
+          cli-simplify-indicator: 
+            propertyCountIfSimplify: 0
+            propertyCountIfSimplifyWithoutSimpleObject: 0
+            simplifiable: true
+          cliKey: SubResource
+        properties:
+          - propertyName: id(SubResourceId^string)
+            cli:
+              cliKey: id
+            readOnly: true
+          - propertyName: name(SubResourceName^string)
+            cli:
+              cliKey: name
+            readOnly: true
+          - propertyName: type(SubResourceType^string)
+            cli:
+              cliKey: type
+            readOnly: true
+          - propertyName: etag(SubResourceEtag^string)
+            cli:
+              cliKey: etag
+            readOnly: true
+      - schemaName: TriggerFilterParameters
+        cli:
+          cli-complexity: object_simple
+          cli-mark: checked
+          cli-simplify-indicator: 
+            propertyCountIfSimplify: 2
+            propertyCountIfSimplifyWithoutSimpleObject: 2
+            simplifiable: true
+          cliKey: TriggerFilterParameters
+        properties:
+          - propertyName: continuationToken(TriggerFilterParametersContinuationToken^string)
+            cli:
+              cliKey: continuationToken
+          - propertyName: parentTriggerName(TriggerFilterParametersParentTriggerName^string)
+            cli:
+              cliKey: parentTriggerName
+      - schemaName: TriggerQueryResponse
+        cli:
+          cli-complexity: object_complex
+          cli-mark: checked
+          cli-simplify-indicator: 
+            propertyCountIfSimplify: 10000
+            propertyCountIfSimplifyWithoutSimpleObject: 10000
+            simplifiable: false
+          cliKey: TriggerQueryResponse
+        properties:
+          - propertyName: value(TriggerQueryResponseValue^array)
+            cli:
+              cliKey: value
+          - propertyName: continuationToken(TriggerQueryResponseContinuationToken^string)
+            cli:
+              cliKey: continuationToken
+      - schemaName: TriggerSubscriptionOperationStatus
+        cli:
+          cli-complexity: object_simple
+          cli-mark: checked
+          cli-simplify-indicator: 
+            propertyCountIfSimplify: 0
+            propertyCountIfSimplifyWithoutSimpleObject: 0
+            simplifiable: true
+          cliKey: TriggerSubscriptionOperationStatus
+        properties:
+          - propertyName: triggerName(TriggerSubscriptionOperationStatusTriggerName^string)
+            cli:
+              cliKey: triggerName
+            readOnly: true
+          - propertyName: status(EventSubscriptionStatus^choice)
+            cli:
+              cliKey: status
+            readOnly: true
+      - schemaName: IntegrationRuntimeListResponse
+        cli:
+          cli-complexity: object_complex
+          cli-mark: checked
+          cli-simplify-indicator: 
+            propertyCountIfSimplify: 10000
+            propertyCountIfSimplifyWithoutSimpleObject: 10000
+            simplifiable: false
+          cliKey: IntegrationRuntimeListResponse
+        properties:
+          - propertyName: value(IntegrationRuntimeListResponseValue^array)
+            cli:
+              cliKey: value
+          - propertyName: nextLink(IntegrationRuntimeListResponseNextLink^string)
+            cli:
+              cliKey: nextLink
+      - schemaName: IntegrationRuntimeResource
+        cli:
+          cli-complexity: object_complex
+          cli-mark: checked
+          cli-simplify-indicator: 
+            propertyCountIfSimplify: 10000
+            propertyCountIfSimplifyWithoutSimpleObject: 10000
+            simplifiable: false
+          cliKey: IntegrationRuntimeResource
+        properties:
+          - propertyName: properties(IntegrationRuntime^object)
+            cli:
+              cliKey: properties
+      - schemaName: IntegrationRuntime
+        cli:
+          cli-complexity: object_complex
+          cli-mark: checked
+          cli-simplify-indicator: 
+            propertyCountIfSimplify: 2
+            propertyCountIfSimplifyWithoutSimpleObject: 2
+            simplifiable: true
+          cliKey: IntegrationRuntime
+          cli-discriminator-value: IntegrationRuntime
+        discriminator: true
+        properties:
+          - propertyName: type(IntegrationRuntimeType^choice)
+            cli:
+              cliKey: type
+          - propertyName: description(IntegrationRuntimeDescription^string)
+            cli:
+              cliKey: description
+      - schemaName: UpdateIntegrationRuntimeRequest
+        cli:
+          cli-complexity: object_simple
+          cli-mark: checked
+          cli-simplify-indicator: 
+            propertyCountIfSimplify: 2
+            propertyCountIfSimplifyWithoutSimpleObject: 2
+            simplifiable: true
+          cliKey: UpdateIntegrationRuntimeRequest
+        properties:
+          - propertyName: autoUpdate(IntegrationRuntimeAutoUpdate^choice)
+            cli:
+              cliKey: autoUpdate
+          - propertyName: updateDelayOffset(UpdateIntegrationRuntimeRequestUpdateDelayOffset^string)
+            cli:
+              cliKey: updateDelayOffset
+      - schemaName: IntegrationRuntimeStatusResponse
+        cli:
+          cli-complexity: object_complex
+          cli-mark: checked
+          cli-simplify-indicator: 
+            propertyCountIfSimplify: 10000
+            propertyCountIfSimplifyWithoutSimpleObject: 10000
+            simplifiable: false
+          cliKey: IntegrationRuntimeStatusResponse
+        properties:
+          - propertyName: name(IntegrationRuntimeStatusResponseName^string)
+            cli:
+              cliKey: name
+            readOnly: true
+          - propertyName: properties(IntegrationRuntimeStatus^object)
+            cli:
+              cliKey: properties
+      - schemaName: IntegrationRuntimeStatus
+        cli:
+          cli-complexity: object_complex
+          cli-mark: checked
+          cli-simplify-indicator: 
+            propertyCountIfSimplify: 1
+            propertyCountIfSimplifyWithoutSimpleObject: 1
+            simplifiable: true
+          cliKey: IntegrationRuntimeStatus
+          cli-discriminator-value: IntegrationRuntimeStatus
+        discriminator: true
+        properties:
+          - propertyName: type(IntegrationRuntimeType^choice)
+            cli:
+              cliKey: type
+          - propertyName: dataFactoryName(IntegrationRuntimeStatusDataFactoryName^string)
+            cli:
+              cliKey: dataFactoryName
+            readOnly: true
+          - propertyName: state(IntegrationRuntimeState^choice)
+            cli:
+              cliKey: state
+            readOnly: true
+      - schemaName: IntegrationRuntimeConnectionInfo
+        cli:
+          cli-complexity: object_simple
+          cli-mark: checked
+          cli-simplify-indicator: 
+            propertyCountIfSimplify: 0
+            propertyCountIfSimplifyWithoutSimpleObject: 0
+            simplifiable: true
+          cliKey: IntegrationRuntimeConnectionInfo
+        properties:
+          - propertyName: serviceToken(IntegrationRuntimeConnectionInfoServiceToken^string)
+            cli:
+              cliKey: serviceToken
+            readOnly: true
+          - propertyName: identityCertThumbprint(IntegrationRuntimeConnectionInfoIdentityCertThumbprint^string)
+            cli:
+              cliKey: identityCertThumbprint
+            readOnly: true
+          - propertyName: hostServiceUri(IntegrationRuntimeConnectionInfoHostServiceUri^string)
+            cli:
+              cliKey: hostServiceUri
+            readOnly: true
+          - propertyName: version(IntegrationRuntimeConnectionInfoVersion^string)
+            cli:
+              cliKey: version
+            readOnly: true
+          - propertyName: publicKey(IntegrationRuntimeConnectionInfoPublicKey^string)
+            cli:
+              cliKey: publicKey
+            readOnly: true
+          - propertyName: isIdentityCertExprired(boolean^boolean)
+            cli:
+              cliKey: isIdentityCertExprired
+            readOnly: true
+      - schemaName: IntegrationRuntimeRegenerateKeyParameters
+        cli:
+          cli-complexity: object_simple
+          cli-mark: checked
+          cli-simplify-indicator: 
+            propertyCountIfSimplify: 1
+            propertyCountIfSimplifyWithoutSimpleObject: 1
+            simplifiable: true
+          cliKey: IntegrationRuntimeRegenerateKeyParameters
+        properties:
+          - propertyName: keyName(IntegrationRuntimeAuthKeyName^choice)
+            cli:
+              cliKey: keyName
+      - schemaName: IntegrationRuntimeAuthKeys
+        cli:
+          cli-complexity: object_simple
+          cli-mark: checked
+          cli-simplify-indicator: 
+            propertyCountIfSimplify: 2
+            propertyCountIfSimplifyWithoutSimpleObject: 2
+            simplifiable: true
+          cliKey: IntegrationRuntimeAuthKeys
+        properties:
+          - propertyName: authKey1(IntegrationRuntimeAuthKeysAuthKey1^string)
+            cli:
+              cliKey: authKey1
+          - propertyName: authKey2(IntegrationRuntimeAuthKeysAuthKey2^string)
+            cli:
+              cliKey: authKey2
+      - schemaName: IntegrationRuntimeMonitoringData
+        cli:
+          cli-complexity: object_complex
+          cli-mark: checked
+          cli-simplify-indicator: 
+            propertyCountIfSimplify: 10000
+            propertyCountIfSimplifyWithoutSimpleObject: 10000
+            simplifiable: false
+          cliKey: IntegrationRuntimeMonitoringData
+        properties:
+          - propertyName: name(IntegrationRuntimeMonitoringDataName^string)
+            cli:
+              cliKey: name
+          - propertyName: nodes(IntegrationRuntimeMonitoringDataNodes^array)
+            cli:
+              cliKey: nodes
+      - schemaName: IntegrationRuntimeNodeMonitoringData
+        cli:
+          cli-complexity: object_simple
+          cli-mark: checked
+          cli-simplify-indicator: 
+            propertyCountIfSimplify: 0
+            propertyCountIfSimplifyWithoutSimpleObject: 0
+            simplifiable: true
+          cliKey: IntegrationRuntimeNodeMonitoringData
+        properties:
+          - propertyName: nodeName(IntegrationRuntimeNodeMonitoringDataNodeName^string)
+            cli:
+              cliKey: nodeName
+            readOnly: true
+          - propertyName: availableMemoryInMb(Integer^integer)
+            cli:
+              cliKey: availableMemoryInMB
+            readOnly: true
+          - propertyName: cpuUtilization(Integer^integer)
+            cli:
+              cliKey: cpuUtilization
+            readOnly: true
+          - propertyName: concurrentJobsLimit(Integer^integer)
+            cli:
+              cliKey: concurrentJobsLimit
+            readOnly: true
+          - propertyName: concurrentJobsRunning(Integer^integer)
+            cli:
+              cliKey: concurrentJobsRunning
+            readOnly: true
+          - propertyName: maxConcurrentJobs(Integer^integer)
+            cli:
+              cliKey: maxConcurrentJobs
+            readOnly: true
+          - propertyName: sentBytes(Number^number)
+            cli:
+              cliKey: sentBytes
+            readOnly: true
+          - propertyName: receivedBytes(Number^number)
+            cli:
+              cliKey: receivedBytes
+            readOnly: true
+      - schemaName: LinkedIntegrationRuntimeRequest
+        cli:
+          cli-complexity: object_simple
+          cli-mark: checked
+          cli-simplify-indicator: 
+            propertyCountIfSimplify: 1
+            propertyCountIfSimplifyWithoutSimpleObject: 1
+            simplifiable: true
+          cliKey: LinkedIntegrationRuntimeRequest
+        properties:
+          - propertyName: linkedFactoryName(LinkedFactoryName^string)
+            cli:
+              cliKey: linkedFactoryName
+      - schemaName: CreateLinkedIntegrationRuntimeRequest
+        cli:
+          cli-complexity: object_simple
+          cli-mark: checked
+          cli-simplify-indicator: 
+            propertyCountIfSimplify: 4
+            propertyCountIfSimplifyWithoutSimpleObject: 4
+            simplifiable: true
+          cliKey: CreateLinkedIntegrationRuntimeRequest
+        properties:
+          - propertyName: name(CreateLinkedIntegrationRuntimeRequestName^string)
+            cli:
+              cliKey: name
+          - propertyName: subscriptionId(CreateLinkedIntegrationRuntimeRequestSubscriptionId^string)
+            cli:
+              cliKey: subscriptionId
+          - propertyName: dataFactoryName(CreateLinkedIntegrationRuntimeRequestDataFactoryName^string)
+            cli:
+              cliKey: dataFactoryName
+          - propertyName: dataFactoryLocation(CreateLinkedIntegrationRuntimeRequestDataFactoryLocation^string)
+            cli:
+              cliKey: dataFactoryLocation
+      - schemaName: FactoryVstsConfiguration
+        cli:
+          cli-complexity: object_simple
+          cli-mark: checked
+          cli-simplify-indicator: 
+            propertyCountIfSimplify: 8
+            propertyCountIfSimplifyWithoutSimpleObject: 8
+            simplifiable: true
+          cliKey: FactoryVSTSConfiguration
+          cli-discriminator-value: FactoryVstsConfiguration
+        properties:
+          - propertyName: projectName(FactoryVstsConfigurationProjectName^string)
+            cli:
+              cliKey: projectName
+          - propertyName: tenantId(FactoryVstsConfigurationTenantId^string)
+            cli:
+              cliKey: tenantId
+      - schemaName: FactoryGitHubConfiguration
+        cli:
+          cli-complexity: object_simple
+          cli-mark: checked
+          cli-simplify-indicator: 
+            propertyCountIfSimplify: 7
+            propertyCountIfSimplifyWithoutSimpleObject: 7
+            simplifiable: true
+          cliKey: FactoryGitHubConfiguration
+          cli-discriminator-value: FactoryGitHubConfiguration
+        properties:
+          - propertyName: hostName(FactoryGitHubConfigurationHostName^string)
+            cli:
+              cliKey: hostName
+      - schemaName: MultiplePipelineTrigger
+        cli:
+          cli-complexity: object_complex
+          cli-mark: checked
+          cli-simplify-indicator: 
+            propertyCountIfSimplify: 10000
+            propertyCountIfSimplifyWithoutSimpleObject: 10000
+            simplifiable: false
+          cliKey: MultiplePipelineTrigger
+          cli-discriminator-value: MultiplePipelineTrigger
+        discriminator: true
+        properties:
+          - propertyName: pipelines(MultiplePipelineTriggerPipelines^array)
+            cli:
+              cliKey: pipelines
+      - schemaName: TriggerPipelineReference
+        cli:
+          cli-complexity: object_complex
+          cli-mark: checked
+          cli-simplify-indicator: 
+            propertyCountIfSimplify: 10000
+            propertyCountIfSimplifyWithoutSimpleObject: 10000
+            simplifiable: false
+          cliKey: TriggerPipelineReference
+        properties:
+          - propertyName: pipelineReference(PipelineReference^object)
+            cli:
+              cliKey: pipelineReference
+          - propertyName: parameters(ParameterValueSpecification^dictionary)
+            cli:
+              cliKey: parameters
+      - schemaName: PipelineReference
+        cli:
+          cli-complexity: object_simple
+          cli-mark: checked
+          cli-simplify-indicator: 
+            propertyCountIfSimplify: 2
+            propertyCountIfSimplifyWithoutSimpleObject: 2
+            simplifiable: true
+          cliKey: PipelineReference
+        properties:
+          - propertyName: type(PipelineReferenceType^constant)
+            cli:
+              cliKey: type
+          - propertyName: referenceName(PipelineReferenceName^string)
+            cli:
+              cliKey: referenceName
+          - propertyName: name(PipelineReferenceName^string)
+            cli:
+              cliKey: name
+      - schemaName: ScheduleTrigger
+        cli:
+          cli-complexity: object_complex
+          cli-mark: checked
+          cli-simplify-indicator: 
+            propertyCountIfSimplify: 10000
+            propertyCountIfSimplifyWithoutSimpleObject: 10000
+            simplifiable: false
+          cliKey: ScheduleTrigger
+          cli-discriminator-value: ScheduleTrigger
+        properties:
+          - propertyName: typeProperties(ScheduleTriggerTypeProperties^object)
+            cli:
+              cliKey: typeProperties
+            x-ms-client-flatten: true
+      - schemaName: ScheduleTriggerTypeProperties
+        cli:
+          cli-complexity: object_complex
+          cli-mark: checked
+          cli-simplify-indicator: 
+            propertyCountIfSimplify: 10000
+            propertyCountIfSimplifyWithoutSimpleObject: 10000
+            simplifiable: false
+          cliKey: ScheduleTrigger-typeProperties
+        properties:
+          - propertyName: recurrence(ScheduleTriggerRecurrence^object)
+            cli:
+              cliKey: recurrence
+      - schemaName: ScheduleTriggerRecurrence
+        cli:
+          cli-complexity: object_complex
+          cli-mark: checked
+          cli-simplify-indicator: 
+            propertyCountIfSimplify: 10000
+            propertyCountIfSimplifyWithoutSimpleObject: 10000
+            simplifiable: false
+          cliKey: ScheduleTriggerRecurrence
+        properties:
+          - propertyName: frequency(RecurrenceFrequency^choice)
+            cli:
+              cliKey: frequency
+          - propertyName: interval(Integer^integer)
+            cli:
+              cliKey: interval
+          - propertyName: startTime(schedule_trigger_recurrence_start_time^date-time)
+            cli:
+              cliKey: startTime
+          - propertyName: endTime(schedule_trigger_recurrence_end_time^date-time)
+            cli:
+              cliKey: endTime
+          - propertyName: timeZone(ScheduleTriggerRecurrenceTimeZone^string)
+            cli:
+              cliKey: timeZone
+          - propertyName: schedule(RecurrenceSchedule^object)
+            cli:
+              cliKey: schedule
+      - schemaName: RecurrenceSchedule
+        cli:
+          cli-complexity: object_complex
+          cli-mark: checked
+          cli-simplify-indicator: 
+            propertyCountIfSimplify: 10000
+            propertyCountIfSimplifyWithoutSimpleObject: 10000
+            simplifiable: false
+          cliKey: RecurrenceSchedule
+        properties:
+          - propertyName: minutes(ArrayOfarrayItemschema^array)
+            cli:
+              cliKey: minutes
+          - propertyName: hours(ArrayOfarrayItemschema^array)
+            cli:
+              cliKey: hours
+          - propertyName: weekDays(RecurrenceScheduleWeekDays^array)
+            cli:
+              cliKey: weekDays
+          - propertyName: monthDays(ArrayOfarrayItemschema^array)
+            cli:
+              cliKey: monthDays
+          - propertyName: monthlyOccurrences(RecurrenceScheduleMonthlyOccurrences^array)
+            cli:
+              cliKey: monthlyOccurrences
+      - schemaName: RecurrenceScheduleOccurrence
+        cli:
+          cli-complexity: object_simple
+          cli-mark: checked
+          cli-simplify-indicator: 
+            propertyCountIfSimplify: 2
+            propertyCountIfSimplifyWithoutSimpleObject: 2
+            simplifiable: true
+          cliKey: RecurrenceScheduleOccurrence
+        properties:
+          - propertyName: day(DayOfWeek^sealed-choice)
+            cli:
+              cliKey: day
+          - propertyName: occurrence(Integer^integer)
+            cli:
+              cliKey: occurrence
+      - schemaName: BlobTrigger
+        cli:
+          cli-complexity: object_complex
+          cli-mark: checked
+          cli-simplify-indicator: 
+            propertyCountIfSimplify: 10000
+            propertyCountIfSimplifyWithoutSimpleObject: 10000
+            simplifiable: false
+          cliKey: BlobTrigger
+          cli-discriminator-value: BlobTrigger
+        properties:
+          - propertyName: typeProperties(BlobTriggerTypeProperties^object)
+            cli:
+              cliKey: typeProperties
+            x-ms-client-flatten: true
+      - schemaName: BlobTriggerTypeProperties
+        cli:
+          cli-complexity: object_complex
+          cli-mark: checked
+          cli-simplify-indicator: 
+            propertyCountIfSimplify: 10000
+            propertyCountIfSimplifyWithoutSimpleObject: 10000
+            simplifiable: false
+          cliKey: BlobTrigger-typeProperties
+        properties:
+          - propertyName: folderPath(BlobTriggerTypePropertiesFolderPath^string)
+            cli:
+              cliKey: folderPath
+          - propertyName: maxConcurrency(Integer^integer)
+            cli:
+              cliKey: maxConcurrency
+          - propertyName: linkedService(LinkedServiceReference^object)
+            cli:
+              cliKey: linkedService
+      - schemaName: LinkedServiceReference
+        cli:
+          cli-complexity: object_complex
+          cli-mark: checked
+          cli-simplify-indicator: 
+            propertyCountIfSimplify: 10000
+            propertyCountIfSimplifyWithoutSimpleObject: 10000
+            simplifiable: false
+          cliKey: LinkedServiceReference
+        properties:
+          - propertyName: type(LinkedServiceReferenceType^constant)
+            cli:
+              cliKey: type
+          - propertyName: referenceName(LinkedServiceReferenceName^string)
+            cli:
+              cliKey: referenceName
+          - propertyName: parameters(ParameterValueSpecification^dictionary)
+            cli:
+              cliKey: parameters
+      - schemaName: BlobEventsTrigger
+        cli:
+          cli-complexity: object_complex
+          cli-mark: checked
+          cli-simplify-indicator: 
+            propertyCountIfSimplify: 10000
+            propertyCountIfSimplifyWithoutSimpleObject: 10000
+            simplifiable: false
+          cliKey: BlobEventsTrigger
+          cli-discriminator-value: BlobEventsTrigger
+        properties:
+          - propertyName: typeProperties(BlobEventsTriggerTypeProperties^object)
+            cli:
+              cliKey: typeProperties
+            x-ms-client-flatten: true
+      - schemaName: BlobEventsTriggerTypeProperties
+        cli:
+          cli-complexity: object_simple
+          cli-mark: checked
+          cli-simplify-indicator: 
+            propertyCountIfSimplify: 10000
+            propertyCountIfSimplifyWithoutSimpleObject: 10000
+            simplifiable: false
+          cliKey: BlobEventsTrigger-typeProperties
+        properties:
+          - propertyName: blobPathBeginsWith(BlobEventsTriggerTypePropertiesBlobPathBeginsWith^string)
+            cli:
+              cliKey: blobPathBeginsWith
+          - propertyName: blobPathEndsWith(BlobEventsTriggerTypePropertiesBlobPathEndsWith^string)
+            cli:
+              cliKey: blobPathEndsWith
+          - propertyName: ignoreEmptyBlobs(boolean^boolean)
+            cli:
+              cliKey: ignoreEmptyBlobs
+          - propertyName: events(BlobEventTypes^array)
+            cli:
+              cliKey: events
+          - propertyName: scope(BlobEventsTriggerTypePropertiesScope^string)
+            cli:
+              cliKey: scope
+      - schemaName: TumblingWindowTrigger
+        cli:
+          cli-complexity: object_complex
+          cli-mark: checked
+          cli-simplify-indicator: 
+            propertyCountIfSimplify: 10000
+            propertyCountIfSimplifyWithoutSimpleObject: 10000
+            simplifiable: false
+          cliKey: TumblingWindowTrigger
+          cli-discriminator-value: TumblingWindowTrigger
+        properties:
+          - propertyName: pipeline(TriggerPipelineReference^object)
+            cli:
+              cliKey: pipeline
+          - propertyName: typeProperties(TumblingWindowTriggerTypeProperties^object)
+            cli:
+              cliKey: typeProperties
+            x-ms-client-flatten: true
+      - schemaName: TumblingWindowTriggerTypeProperties
+        cli:
+          cli-complexity: object_complex
+          cli-mark: checked
+          cli-simplify-indicator: 
+            propertyCountIfSimplify: 10000
+            propertyCountIfSimplifyWithoutSimpleObject: 10000
+            simplifiable: false
+          cliKey: TumblingWindowTrigger-typeProperties
+        properties:
+          - propertyName: frequency(TumblingWindowFrequency^choice)
+            cli:
+              cliKey: frequency
+          - propertyName: interval(Integer^integer)
+            cli:
+              cliKey: interval
+          - propertyName: startTime(tumbling_window_trigger_type_properties_start_time^date-time)
+            cli:
+              cliKey: startTime
+          - propertyName: endTime(tumbling_window_trigger_type_properties_end_time^date-time)
+            cli:
+              cliKey: endTime
+          - propertyName: delay(Any^any)
+            cli:
+              cliKey: delay
+          - propertyName: maxConcurrency(Integer^integer)
+            cli:
+              cliKey: maxConcurrency
+          - propertyName: retryPolicy(RetryPolicy^object)
+            cli:
+              cliKey: retryPolicy
+          - propertyName: dependsOn(TumblingWindowTriggerTypePropertiesDependsOn^array)
+            cli:
+              cliKey: dependsOn
+      - schemaName: RetryPolicy
+        cli:
+          cli-complexity: object_complex
+          cli-mark: checked
+          cli-simplify-indicator: 
+            propertyCountIfSimplify: 10000
+            propertyCountIfSimplifyWithoutSimpleObject: 10000
+            simplifiable: false
+          cliKey: RetryPolicy
+        properties:
+          - propertyName: count(Any^any)
+            cli:
+              cliKey: count
+          - propertyName: intervalInSeconds(Integer^integer)
+            cli:
+              cliKey: intervalInSeconds
+      - schemaName: DependencyReference
+        cli:
+          cli-complexity: object_complex
+          cli-mark: checked
+          cli-simplify-indicator: 
+            propertyCountIfSimplify: 1
+            propertyCountIfSimplifyWithoutSimpleObject: 1
+            simplifiable: true
+          cliKey: DependencyReference
+        discriminator: true
+        properties:
+          - propertyName: type(DependencyReferenceType^string)
+            cli:
+              cliKey: type
+      - schemaName: TriggerReference
+        cli:
+          cli-complexity: object_simple
+          cli-mark: checked
+          cli-simplify-indicator: 
+            propertyCountIfSimplify: 1
+            propertyCountIfSimplifyWithoutSimpleObject: 1
+            simplifiable: true
+          cliKey: TriggerReference
+        properties:
+          - propertyName: type(TriggerReferenceType^constant)
+            cli:
+              cliKey: type
+          - propertyName: referenceName(TriggerReferenceName^string)
+            cli:
+              cliKey: referenceName
+      - schemaName: TriggerDependencyReference
+        cli:
+          cli-complexity: object_complex
+          cli-mark: checked
+          cli-simplify-indicator: 
+            propertyCountIfSimplify: 2
+            propertyCountIfSimplifyWithoutSimpleObject: 2
+            simplifiable: true
+          cliKey: TriggerDependencyReference
+          cli-discriminator-value: TriggerDependencyReference
+        discriminator: true
+        properties:
+          - propertyName: referenceTrigger(TriggerReference^object)
+            cli:
+              cliKey: referenceTrigger
+      - schemaName: TumblingWindowTriggerDependencyReference
+        cli:
+          cli-complexity: object_simple
+          cli-mark: checked
+          cli-simplify-indicator: 
+            propertyCountIfSimplify: 4
+            propertyCountIfSimplifyWithoutSimpleObject: 4
+            simplifiable: true
+          cliKey: TumblingWindowTriggerDependencyReference
+          cli-discriminator-value: TumblingWindowTriggerDependencyReference
+        properties:
+          - propertyName: offset(TumblingWindowTriggerDependencyReferenceOffset^string)
+            cli:
+              cliKey: offset
+          - propertyName: size(TumblingWindowTriggerDependencyReferenceSize^string)
+            cli:
+              cliKey: size
+      - schemaName: SelfDependencyTumblingWindowTriggerReference
+        cli:
+          cli-complexity: object_simple
+          cli-mark: checked
+          cli-simplify-indicator: 
+            propertyCountIfSimplify: 3
+            propertyCountIfSimplifyWithoutSimpleObject: 3
+            simplifiable: true
+          cliKey: SelfDependencyTumblingWindowTriggerReference
+          cli-discriminator-value: SelfDependencyTumblingWindowTriggerReference
+        properties:
+          - propertyName: offset(SelfDependencyTumblingWindowTriggerReferenceOffset^string)
+            cli:
+              cliKey: offset
+          - propertyName: size(SelfDependencyTumblingWindowTriggerReferenceSize^string)
+            cli:
+              cliKey: size
+      - schemaName: RerunTumblingWindowTrigger
+        cli:
+          cli-complexity: object_complex
+          cli-mark: checked
+          cli-simplify-indicator: 
+            propertyCountIfSimplify: 10000
+            propertyCountIfSimplifyWithoutSimpleObject: 10000
+            simplifiable: false
+          cliKey: RerunTumblingWindowTrigger
+          cli-discriminator-value: RerunTumblingWindowTrigger
+        properties:
+          - propertyName: typeProperties(RerunTumblingWindowTriggerTypeProperties^object)
+            cli:
+              cliKey: typeProperties
+            x-ms-client-flatten: true
+      - schemaName: RerunTumblingWindowTriggerTypeProperties
+        cli:
+          cli-complexity: object_complex
+          cli-mark: checked
+          cli-simplify-indicator: 
+            propertyCountIfSimplify: 10000
+            propertyCountIfSimplifyWithoutSimpleObject: 10000
+            simplifiable: false
+          cliKey: RerunTumblingWindowTrigger-typeProperties
+        properties:
+          - propertyName: parentTrigger(Any^any)
+            cli:
+              cliKey: parentTrigger
+          - propertyName: requestedStartTime(rerun_tumbling_window_trigger_type_properties_requested_start_time^date-time)
+            cli:
+              cliKey: requestedStartTime
+          - propertyName: requestedEndTime(rerun_tumbling_window_trigger_type_properties_requested_end_time^date-time)
+            cli:
+              cliKey: requestedEndTime
+          - propertyName: rerunConcurrency(Integer^integer)
+            cli:
+              cliKey: rerunConcurrency
+      - schemaName: ChainingTrigger
+        cli:
+          cli-complexity: object_complex
+          cli-mark: checked
+          cli-simplify-indicator: 
+            propertyCountIfSimplify: 10000
+            propertyCountIfSimplifyWithoutSimpleObject: 10000
+            simplifiable: false
+          cliKey: ChainingTrigger
+          cli-discriminator-value: ChainingTrigger
+        properties:
+          - propertyName: pipeline(TriggerPipelineReference^object)
+            cli:
+              cliKey: pipeline
+          - propertyName: typeProperties(ChainingTriggerTypeProperties^object)
+            cli:
+              cliKey: typeProperties
+            x-ms-client-flatten: true
+      - schemaName: ChainingTriggerTypeProperties
+        cli:
+          cli-complexity: object_complex
+          cli-mark: checked
+          cli-simplify-indicator: 
+            propertyCountIfSimplify: 10000
+            propertyCountIfSimplifyWithoutSimpleObject: 10000
+            simplifiable: false
+          cliKey: ChainingTrigger-typeProperties
+        properties:
+          - propertyName: dependsOn(ChainingTriggerTypePropertiesDependsOn^array)
+            cli:
+              cliKey: dependsOn
+          - propertyName: runDimension(ChainingTriggerTypePropertiesRunDimension^string)
+            cli:
+              cliKey: runDimension
+      - schemaName: IntegrationRuntimeReference
+        cli:
+          cli-complexity: object_complex
+          cli-mark: checked
+          cli-simplify-indicator: 
+            propertyCountIfSimplify: 10000
+            propertyCountIfSimplifyWithoutSimpleObject: 10000
+            simplifiable: false
+          cliKey: IntegrationRuntimeReference
+        properties:
+          - propertyName: type(IntegrationRuntimeReferenceType^constant)
+            cli:
+              cliKey: type
+          - propertyName: referenceName(IntegrationRuntimeReferenceName^string)
+            cli:
+              cliKey: referenceName
+          - propertyName: parameters(ParameterValueSpecification^dictionary)
+            cli:
+              cliKey: parameters
+      - schemaName: IntegrationRuntimeStatusListResponse
+        cli:
+          cli-complexity: object_complex
+          cli-mark: checked
+          cli-simplify-indicator: 
+            propertyCountIfSimplify: 10000
+            propertyCountIfSimplifyWithoutSimpleObject: 10000
+            simplifiable: false
+          cliKey: IntegrationRuntimeStatusListResponse
+        properties:
+          - propertyName: value(IntegrationRuntimeStatusListResponseValue^array)
+            cli:
+              cliKey: value
+          - propertyName: nextLink(IntegrationRuntimeStatusListResponseNextLink^string)
+            cli:
+              cliKey: nextLink
+      - schemaName: ManagedIntegrationRuntime
+        cli:
+          cli-complexity: object_complex
+          cli-mark: checked
+          cli-simplify-indicator: 
+            propertyCountIfSimplify: 10000
+            propertyCountIfSimplifyWithoutSimpleObject: 10000
+            simplifiable: false
+          cliKey: ManagedIntegrationRuntime
+          cli-discriminator-value: Managed
+        properties:
+          - propertyName: state(IntegrationRuntimeState^choice)
+            cli:
+              cliKey: state
+            readOnly: true
+          - propertyName: typeProperties(ManagedIntegrationRuntimeTypeProperties^object)
+            cli:
+              cliKey: typeProperties
+            x-ms-client-flatten: true
+          - propertyName: repoConfiguration(FactoryRepoConfiguration^object)
+            cli:
+              cliKey: repoConfiguration
+          - propertyName: fakeIdentity(FakeFactoryIdentity^object)
+            cli:
+              cliKey: fakeIdentity
+          - propertyName: zones(Zone^array)
+            cli:
+              cliKey: zones
+      - schemaName: ManagedIntegrationRuntimeTypeProperties
+        cli:
+          cli-complexity: object_complex
+          cli-mark: checked
+          cli-simplify-indicator: 
+            propertyCountIfSimplify: 10000
+            propertyCountIfSimplifyWithoutSimpleObject: 10000
+            simplifiable: false
+          cliKey: ManagedIntegrationRuntimeTypeProperties
+        properties:
+          - propertyName: computeProperties(IntegrationRuntimeComputeProperties^object)
+            cli:
+              cliKey: computeProperties
+          - propertyName: ssisProperties(IntegrationRuntimeSsisProperties^object)
+            cli:
+              cliKey: ssisProperties
+      - schemaName: IntegrationRuntimeComputeProperties
+        cli:
+          cli-complexity: object_complex
+          cli-mark: checked
+          cli-simplify-indicator: 
+            propertyCountIfSimplify: 10000
+            propertyCountIfSimplifyWithoutSimpleObject: 10000
+            simplifiable: false
+          cliKey: IntegrationRuntimeComputeProperties
+        properties:
+          - propertyName: location(IntegrationRuntimeComputePropertiesLocation^string)
+            cli:
+              cliKey: location
+          - propertyName: nodeSize(IntegrationRuntimeComputePropertiesNodeSize^string)
+            cli:
+              cliKey: nodeSize
+          - propertyName: numberOfNodes(Integer^integer)
+            cli:
+              cliKey: numberOfNodes
+          - propertyName: maxParallelExecutionsPerNode(Integer^integer)
+            cli:
+              cliKey: maxParallelExecutionsPerNode
+          - propertyName: dataFlowProperties(IntegrationRuntimeDataFlowProperties^object)
+            cli:
+              cliKey: dataFlowProperties
+          - propertyName: vNetProperties(IntegrationRuntimeVNetProperties^object)
+            cli:
+              cliKey: vNetProperties
+      - schemaName: IntegrationRuntimeDataFlowProperties
+        cli:
+          cli-complexity: object_simple
+          cli-mark: checked
+          cli-simplify-indicator: 
+            propertyCountIfSimplify: 3
+            propertyCountIfSimplifyWithoutSimpleObject: 3
+            simplifiable: true
+          cliKey: IntegrationRuntimeDataFlowProperties
+        properties:
+          - propertyName: computeType(DataFlowComputeType^choice)
+            cli:
+              cliKey: computeType
+          - propertyName: coreCount(Integer^integer)
+            cli:
+              cliKey: coreCount
+          - propertyName: timeToLive(Integer^integer)
+            cli:
+              cliKey: timeToLive
+      - schemaName: IntegrationRuntimeVNetProperties
+        cli:
+          cli-complexity: object_simple
+          cli-mark: checked
+          cli-simplify-indicator: 
+            propertyCountIfSimplify: 10000
+            propertyCountIfSimplifyWithoutSimpleObject: 10000
+            simplifiable: false
+          cliKey: IntegrationRuntimeVNetProperties
+        properties:
+          - propertyName: vNetId(IntegrationRuntimeVNetPropertiesVNetId^string)
+            cli:
+              cliKey: vNetId
+          - propertyName: subnet(IntegrationRuntimeVNetPropertiesSubnet^string)
+            cli:
+              cliKey: subnet
+          - propertyName: publicIPs(IntegrationRuntimeVNetPropertiesPublicIPs^array)
+            cli:
+              cliKey: publicIPs
+      - schemaName: IntegrationRuntimeSsisProperties
+        cli:
+          cli-complexity: object_complex
+          cli-mark: checked
+          cli-simplify-indicator: 
+            propertyCountIfSimplify: 10000
+            propertyCountIfSimplifyWithoutSimpleObject: 10000
+            simplifiable: false
+          cliKey: IntegrationRuntimeSsisProperties
+        properties:
+          - propertyName: catalogInfo(IntegrationRuntimeSsisCatalogInfo^object)
+            cli:
+              cliKey: catalogInfo
+          - propertyName: licenseType(IntegrationRuntimeLicenseType^choice)
+            cli:
+              cliKey: licenseType
+          - propertyName: customSetupScriptProperties(IntegrationRuntimeCustomSetupScriptProperties^object)
+            cli:
+              cliKey: customSetupScriptProperties
+          - propertyName: dataProxyProperties(IntegrationRuntimeDataProxyProperties^object)
+            cli:
+              cliKey: dataProxyProperties
+          - propertyName: edition(IntegrationRuntimeEdition^choice)
+            cli:
+              cliKey: edition
+          - propertyName: expressCustomSetupProperties(IntegrationRuntimeSsisPropertiesExpressCustomSetupProperties^array)
+            cli:
+              cliKey: expressCustomSetupProperties
+          - propertyName: packageStores(IntegrationRuntimeSsisPropertiesPackageStores^array)
+            cli:
+              cliKey: packageStores
+      - schemaName: IntegrationRuntimeSsisCatalogInfo
+        cli:
+          cli-complexity: object_complex
+          cli-mark: checked
+          cli-simplify-indicator: 
+            propertyCountIfSimplify: 5
+            propertyCountIfSimplifyWithoutSimpleObject: 4
+            simplifiable: true
+          cliKey: IntegrationRuntimeSsisCatalogInfo
+        properties:
+          - propertyName: catalogServerEndpoint(IntegrationRuntimeSsisCatalogInfoCatalogServerEndpoint^string)
+            cli:
+              cliKey: catalogServerEndpoint
+          - propertyName: catalogAdminUserName(IntegrationRuntimeSsisCatalogInfoCatalogAdminUserName^string)
+            cli:
+              cliKey: catalogAdminUserName
+          - propertyName: catalogAdminPassword(SecureString^object)
+            cli:
+              cliKey: catalogAdminPassword
+          - propertyName: catalogPricingTier(IntegrationRuntimeSsisCatalogPricingTier^choice)
+            cli:
+              cliKey: catalogPricingTier
+      - schemaName: SecureString
+        cli:
+          cli-complexity: object_simple
+          cli-mark: checked
+          cli-simplify-indicator: 
+            propertyCountIfSimplify: 2
+            propertyCountIfSimplifyWithoutSimpleObject: 2
+            simplifiable: true
+          cliKey: SecureString
+          cli-discriminator-value: SecureString
+        properties:
+          - propertyName: value(SecureStringValue^string)
+            cli:
+              cliKey: value
+      - schemaName: SecretBase
+        cli:
+          cli-complexity: object_complex
+          cli-mark: checked
+          cli-simplify-indicator: 
+            propertyCountIfSimplify: 1
+            propertyCountIfSimplifyWithoutSimpleObject: 1
+            simplifiable: true
+          cliKey: SecretBase
+        discriminator: true
+        properties:
+          - propertyName: type(SecretBaseType^string)
+            cli:
+              cliKey: type
+      - schemaName: IntegrationRuntimeCustomSetupScriptProperties
+        cli:
+          cli-complexity: object_complex
+          cli-mark: checked
+          cli-simplify-indicator: 
+            propertyCountIfSimplify: 3
+            propertyCountIfSimplifyWithoutSimpleObject: 2
+            simplifiable: true
+          cliKey: IntegrationRuntimeCustomSetupScriptProperties
+        properties:
+          - propertyName: blobContainerUri(IntegrationRuntimeCustomSetupScriptPropertiesBlobContainerUri^string)
+            cli:
+              cliKey: blobContainerUri
+          - propertyName: sasToken(SecureString^object)
+            cli:
+              cliKey: sasToken
+      - schemaName: IntegrationRuntimeDataProxyProperties
+        cli:
+          cli-complexity: object_complex
+          cli-mark: checked
+          cli-simplify-indicator: 
+            propertyCountIfSimplify: 5
+            propertyCountIfSimplifyWithoutSimpleObject: 3
+            simplifiable: true
+          cliKey: IntegrationRuntimeDataProxyProperties
+        properties:
+          - propertyName: connectVia(EntityReference^object)
+            cli:
+              cliKey: connectVia
+          - propertyName: stagingLinkedService(EntityReference^object)
+            cli:
+              cliKey: stagingLinkedService
+          - propertyName: path(IntegrationRuntimeDataProxyPropertiesPath^string)
+            cli:
+              cliKey: path
+      - schemaName: EntityReference
+        cli:
+          cli-complexity: object_simple
+          cli-mark: checked
+          cli-simplify-indicator: 
+            propertyCountIfSimplify: 2
+            propertyCountIfSimplifyWithoutSimpleObject: 2
+            simplifiable: true
+          cliKey: EntityReference
+        properties:
+          - propertyName: type(IntegrationRuntimeEntityReferenceType^choice)
+            cli:
+              cliKey: type
+          - propertyName: referenceName(EntityReferenceName^string)
+            cli:
+              cliKey: referenceName
+      - schemaName: CustomSetupBase
+        cli:
+          cli-complexity: object_complex
+          cli-mark: checked
+          cli-simplify-indicator: 
+            propertyCountIfSimplify: 1
+            propertyCountIfSimplifyWithoutSimpleObject: 1
+            simplifiable: true
+          cliKey: CustomSetupBase
+        discriminator: true
+        properties:
+          - propertyName: type(CustomSetupBaseType^string)
+            cli:
+              cliKey: type
+      - schemaName: PackageStore
+        cli:
+          cli-complexity: object_complex
+          cli-mark: checked
+          cli-simplify-indicator: 
+            propertyCountIfSimplify: 3
+            propertyCountIfSimplifyWithoutSimpleObject: 2
+            simplifiable: true
+          cliKey: PackageStore
+        properties:
+          - propertyName: name(PackageStoreName^string)
+            cli:
+              cliKey: name
+          - propertyName: packageStoreLinkedService(EntityReference^object)
+            cli:
+              cliKey: packageStoreLinkedService
+      - schemaName: CmdkeySetup
+        cli:
+          cli-complexity: object_complex
+          cli-mark: checked
+          cli-simplify-indicator: 
+            propertyCountIfSimplify: 10000
+            propertyCountIfSimplifyWithoutSimpleObject: 10000
+            simplifiable: false
+          cliKey: CmdkeySetup
+          cli-discriminator-value: CmdkeySetup
+        properties:
+          - propertyName: typeProperties(CmdkeySetupTypeProperties^object)
+            cli:
+              cliKey: typeProperties
+            x-ms-client-flatten: true
+      - schemaName: CmdkeySetupTypeProperties
+        cli:
+          cli-complexity: object_complex
+          cli-mark: checked
+          cli-simplify-indicator: 
+            propertyCountIfSimplify: 10000
+            propertyCountIfSimplifyWithoutSimpleObject: 10000
+            simplifiable: false
+          cliKey: CmdkeySetupTypeProperties
+        properties:
+          - propertyName: targetName(Any^any)
+            cli:
+              cliKey: targetName
+          - propertyName: userName(Any^any)
+            cli:
+              cliKey: userName
+          - propertyName: password(SecretBase^object)
+            cli:
+              cliKey: password
+      - schemaName: EnvironmentVariableSetup
+        cli:
+          cli-complexity: object_complex
+          cli-mark: checked
+          cli-simplify-indicator: 
+            propertyCountIfSimplify: 3
+            propertyCountIfSimplifyWithoutSimpleObject: 2
+            simplifiable: true
+          cliKey: EnvironmentVariableSetup
+          cli-discriminator-value: EnvironmentVariableSetup
+        properties:
+          - propertyName: typeProperties(EnvironmentVariableSetupTypeProperties^object)
+            cli:
+              cliKey: typeProperties
+            x-ms-client-flatten: true
+      - schemaName: EnvironmentVariableSetupTypeProperties
+        cli:
+          cli-complexity: object_simple
+          cli-mark: checked
+          cli-simplify-indicator: 
+            propertyCountIfSimplify: 2
+            propertyCountIfSimplifyWithoutSimpleObject: 2
+            simplifiable: true
+          cliKey: EnvironmentVariableSetupTypeProperties
+        properties:
+          - propertyName: variableName(EnvironmentVariableSetupTypePropertiesVariableName^string)
+            cli:
+              cliKey: variableName
+          - propertyName: variableValue(EnvironmentVariableSetupTypePropertiesVariableValue^string)
+            cli:
+              cliKey: variableValue
+      - schemaName: ComponentSetup
+        cli:
+          cli-complexity: object_complex
+          cli-mark: checked
+          cli-simplify-indicator: 
+            propertyCountIfSimplify: 10000
+            propertyCountIfSimplifyWithoutSimpleObject: 10000
+            simplifiable: false
+          cliKey: ComponentSetup
+          cli-discriminator-value: ComponentSetup
+        properties:
+          - propertyName: typeProperties(LicensedComponentSetupTypeProperties^object)
+            cli:
+              cliKey: typeProperties
+            x-ms-client-flatten: true
+      - schemaName: LicensedComponentSetupTypeProperties
+        cli:
+          cli-complexity: object_complex
+          cli-mark: checked
+          cli-simplify-indicator: 
+            propertyCountIfSimplify: 10000
+            propertyCountIfSimplifyWithoutSimpleObject: 10000
+            simplifiable: false
+          cliKey: LicensedComponentSetupTypeProperties
+        properties:
+          - propertyName: componentName(LicensedComponentSetupTypePropertiesComponentName^string)
+            cli:
+              cliKey: componentName
+          - propertyName: licenseKey(SecretBase^object)
+            cli:
+              cliKey: licenseKey
+      - schemaName: SelfHostedIntegrationRuntime
+        cli:
+          cli-complexity: object_complex
+          cli-mark: checked
+          cli-simplify-indicator: 
+            propertyCountIfSimplify: 10000
+            propertyCountIfSimplifyWithoutSimpleObject: 10000
+            simplifiable: false
+          cliKey: SelfHostedIntegrationRuntime
+          cli-discriminator-value: SelfHosted
+        properties:
+          - propertyName: typeProperties(SelfHostedIntegrationRuntimeTypeProperties^object)
+            cli:
+              cliKey: typeProperties
+            x-ms-client-flatten: true
+      - schemaName: SelfHostedIntegrationRuntimeTypeProperties
+        cli:
+          cli-complexity: object_complex
+          cli-mark: checked
+          cli-simplify-indicator: 
+            propertyCountIfSimplify: 10000
+            propertyCountIfSimplifyWithoutSimpleObject: 10000
+            simplifiable: false
+          cliKey: SelfHostedIntegrationRuntimeTypeProperties
+        properties:
+          - propertyName: linkedInfo(LinkedIntegrationRuntimeType^object)
+            cli:
+              cliKey: linkedInfo
+      - schemaName: LinkedIntegrationRuntimeType
+        cli:
+          cli-complexity: object_complex
+          cli-mark: checked
+          cli-simplify-indicator: 
+            propertyCountIfSimplify: 1
+            propertyCountIfSimplifyWithoutSimpleObject: 1
+            simplifiable: true
+          cliKey: LinkedIntegrationRuntimeType
+        discriminator: true
+        properties:
+          - propertyName: authorizationType(LinkedIntegrationRuntimeTypeAuthorizationType^string)
+            cli:
+              cliKey: authorizationType
+      - schemaName: LinkedIntegrationRuntimeKeyAuthorization
+        cli:
+          cli-complexity: object_complex
+          cli-mark: checked
+          cli-simplify-indicator: 
+            propertyCountIfSimplify: 3
+            propertyCountIfSimplifyWithoutSimpleObject: 2
+            simplifiable: true
+          cliKey: LinkedIntegrationRuntimeKeyAuthorization
+          cli-discriminator-value: Key
+        properties:
+          - propertyName: key(SecureString^object)
+            cli:
+              cliKey: key
+      - schemaName: LinkedIntegrationRuntimeRbacAuthorization
+        cli:
+          cli-complexity: object_simple
+          cli-mark: checked
+          cli-simplify-indicator: 
+            propertyCountIfSimplify: 2
+            propertyCountIfSimplifyWithoutSimpleObject: 2
+            simplifiable: true
+          cliKey: LinkedIntegrationRuntimeRbacAuthorization
+          cli-discriminator-value: Rbac
+        properties:
+          - propertyName: resourceId(LinkedIntegrationRuntimeRbacAuthorizationResourceId^string)
+            cli:
+              cliKey: resourceId
+      - schemaName: ManagedIntegrationRuntimeStatus
+        cli:
+          cli-complexity: object_complex
+          cli-mark: checked
+          cli-simplify-indicator: 
+            propertyCountIfSimplify: 1
+            propertyCountIfSimplifyWithoutSimpleObject: 1
+            simplifiable: true
+          cliKey: ManagedIntegrationRuntimeStatus
+          cli-discriminator-value: Managed
+        properties:
+          - propertyName: typeProperties(ManagedIntegrationRuntimeStatusTypeProperties^object)
+            cli:
+              cliKey: typeProperties
+            x-ms-client-flatten: true
+      - schemaName: ManagedIntegrationRuntimeStatusTypeProperties
+        cli:
+          cli-complexity: object_complex
+          cli-mark: checked
+          cli-simplify-indicator: 
+            propertyCountIfSimplify: 0
+            propertyCountIfSimplifyWithoutSimpleObject: 0
+            simplifiable: true
+          cliKey: ManagedIntegrationRuntimeStatusTypeProperties
+        properties:
+          - propertyName: createTime(managed_integration_runtime_status_type_properties_create_time^date-time)
+            cli:
+              cliKey: createTime
+            readOnly: true
+          - propertyName: nodes(ManagedIntegrationRuntimeStatusTypePropertiesNodes^array)
+            cli:
+              cliKey: nodes
+            readOnly: true
+          - propertyName: otherErrors(ManagedIntegrationRuntimeStatusTypePropertiesOtherErrors^array)
+            cli:
+              cliKey: otherErrors
+            readOnly: true
+          - propertyName: lastOperation(ManagedIntegrationRuntimeOperationResult^object)
+            cli:
+              cliKey: lastOperation
+            readOnly: true
+      - schemaName: ManagedIntegrationRuntimeNode
+        cli:
+          cli-complexity: object_complex
+          cli-mark: checked
+          cli-simplify-indicator: 
+            propertyCountIfSimplify: 10000
+            propertyCountIfSimplifyWithoutSimpleObject: 10000
+            simplifiable: false
+          cliKey: ManagedIntegrationRuntimeNode
+        properties:
+          - propertyName: nodeId(ManagedIntegrationRuntimeNodeId^string)
+            cli:
+              cliKey: nodeId
+            readOnly: true
+          - propertyName: status(ManagedIntegrationRuntimeNodeStatus^choice)
+            cli:
+              cliKey: status
+            readOnly: true
+          - propertyName: errors(ManagedIntegrationRuntimeNodeErrors^array)
+            cli:
+              cliKey: errors
+      - schemaName: ManagedIntegrationRuntimeError
+        cli:
+          cli-complexity: object_simple
+          cli-mark: checked
+          cli-simplify-indicator: 
+            propertyCountIfSimplify: 0
+            propertyCountIfSimplifyWithoutSimpleObject: 0
+            simplifiable: true
+          cliKey: ManagedIntegrationRuntimeError
+        properties:
+          - propertyName: time(managed_integration_runtime_error_time^date-time)
+            cli:
+              cliKey: time
+            readOnly: true
+          - propertyName: code(ManagedIntegrationRuntimeErrorCode^string)
+            cli:
+              cliKey: code
+            readOnly: true
+          - propertyName: parameters(ManagedIntegrationRuntimeErrorParameters^array)
+            cli:
+              cliKey: parameters
+            readOnly: true
+          - propertyName: message(ManagedIntegrationRuntimeErrorMessage^string)
+            cli:
+              cliKey: message
+            readOnly: true
+      - schemaName: ManagedIntegrationRuntimeOperationResult
+        cli:
+          cli-complexity: object_simple
+          cli-mark: checked
+          cli-simplify-indicator: 
+            propertyCountIfSimplify: 0
+            propertyCountIfSimplifyWithoutSimpleObject: 0
+            simplifiable: true
+          cliKey: ManagedIntegrationRuntimeOperationResult
+        properties:
+          - propertyName: type(ManagedIntegrationRuntimeOperationResultType^string)
+            cli:
+              cliKey: type
+            readOnly: true
+          - propertyName: startTime(managed_integration_runtime_operation_result_start_time^date-time)
+            cli:
+              cliKey: startTime
+            readOnly: true
+          - propertyName: result(ManagedIntegrationRuntimeOperationResult^string)
+            cli:
+              cliKey: result
+            readOnly: true
+          - propertyName: errorCode(ManagedIntegrationRuntimeOperationResultErrorCode^string)
+            cli:
+              cliKey: errorCode
+            readOnly: true
+          - propertyName: parameters(ManagedIntegrationRuntimeOperationResultParameters^array)
+            cli:
+              cliKey: parameters
+            readOnly: true
+          - propertyName: activityId(ManagedIntegrationRuntimeOperationResultActivityId^string)
+            cli:
+              cliKey: activityId
+            readOnly: true
+      - schemaName: SelfHostedIntegrationRuntimeStatus
+        cli:
+          cli-complexity: object_complex
+          cli-mark: checked
+          cli-simplify-indicator: 
+            propertyCountIfSimplify: 10000
+            propertyCountIfSimplifyWithoutSimpleObject: 10000
+            simplifiable: false
+          cliKey: SelfHostedIntegrationRuntimeStatus
+          cli-discriminator-value: SelfHosted
+        properties:
+          - propertyName: typeProperties(SelfHostedIntegrationRuntimeStatusTypeProperties^object)
+            cli:
+              cliKey: typeProperties
+            x-ms-client-flatten: true
+      - schemaName: SelfHostedIntegrationRuntimeStatusTypeProperties
+        cli:
+          cli-complexity: object_complex
+          cli-mark: checked
+          cli-simplify-indicator: 
+            propertyCountIfSimplify: 10000
+            propertyCountIfSimplifyWithoutSimpleObject: 10000
+            simplifiable: false
+          cliKey: SelfHostedIntegrationRuntimeStatusTypeProperties
+        properties:
+          - propertyName: createTime(self_hosted_integration_runtime_status_type_properties_create_time^date-time)
+            cli:
+              cliKey: createTime
+            readOnly: true
+          - propertyName: taskQueueId(SelfHostedIntegrationRuntimeStatusTypePropertiesTaskQueueId^string)
+            cli:
+              cliKey: taskQueueId
+            readOnly: true
+          - propertyName: internalChannelEncryption(IntegrationRuntimeInternalChannelEncryptionMode^choice)
+            cli:
+              cliKey: internalChannelEncryption
+            readOnly: true
+          - propertyName: version(SelfHostedIntegrationRuntimeStatusTypePropertiesVersion^string)
+            cli:
+              cliKey: version
+            readOnly: true
+          - propertyName: nodes(SelfHostedIntegrationRuntimeStatusTypePropertiesNodes^array)
+            cli:
+              cliKey: nodes
+          - propertyName: scheduledUpdateDate(self_hosted_integration_runtime_status_type_properties_scheduled_update_date^date-time)
+            cli:
+              cliKey: scheduledUpdateDate
+            readOnly: true
+          - propertyName: updateDelayOffset(SelfHostedIntegrationRuntimeStatusTypePropertiesUpdateDelayOffset^string)
+            cli:
+              cliKey: updateDelayOffset
+            readOnly: true
+          - propertyName: localTimeZoneOffset(SelfHostedIntegrationRuntimeStatusTypePropertiesLocalTimeZoneOffset^string)
+            cli:
+              cliKey: localTimeZoneOffset
+            readOnly: true
+          - propertyName: capabilities(SelfHostedIntegrationRuntimeStatusTypePropertiesCapabilities^dictionary)
+            cli:
+              cliKey: capabilities
+            readOnly: true
+          - propertyName: serviceUrls(SelfHostedIntegrationRuntimeStatusTypePropertiesServiceUrls^array)
+            cli:
+              cliKey: serviceUrls
+            readOnly: true
+          - propertyName: autoUpdate(IntegrationRuntimeAutoUpdate^choice)
+            cli:
+              cliKey: autoUpdate
+            readOnly: true
+          - propertyName: versionStatus(SelfHostedIntegrationRuntimeStatusTypePropertiesVersionStatus^string)
+            cli:
+              cliKey: versionStatus
+            readOnly: true
+          - propertyName: links(SelfHostedIntegrationRuntimeStatusTypePropertiesLinks^array)
+            cli:
+              cliKey: links
+          - propertyName: pushedVersion(SelfHostedIntegrationRuntimeStatusTypePropertiesPushedVersion^string)
+            cli:
+              cliKey: pushedVersion
+            readOnly: true
+          - propertyName: latestVersion(SelfHostedIntegrationRuntimeStatusTypePropertiesLatestVersion^string)
+            cli:
+              cliKey: latestVersion
+            readOnly: true
+          - propertyName: autoUpdateEta(self_hosted_integration_runtime_status_type_properties_auto_update_ETA^date-time)
+            cli:
+              cliKey: autoUpdateETA
+            readOnly: true
+      - schemaName: SelfHostedIntegrationRuntimeNode
+        cli:
+          cli-complexity: object_complex
+          cli-mark: checked
+          cli-simplify-indicator: 
+            propertyCountIfSimplify: 0
+            propertyCountIfSimplifyWithoutSimpleObject: 0
+            simplifiable: true
+          cliKey: SelfHostedIntegrationRuntimeNode
+        properties:
+          - propertyName: nodeName(SelfHostedIntegrationRuntimeNodeName^string)
+            cli:
+              cliKey: nodeName
+            readOnly: true
+          - propertyName: machineName(SelfHostedIntegrationRuntimeNodeMachineName^string)
+            cli:
+              cliKey: machineName
+            readOnly: true
+          - propertyName: hostServiceUri(SelfHostedIntegrationRuntimeNodeHostServiceUri^string)
+            cli:
+              cliKey: hostServiceUri
+            readOnly: true
+          - propertyName: status(SelfHostedIntegrationRuntimeNodeStatus^choice)
+            cli:
+              cliKey: status
+            readOnly: true
+          - propertyName: capabilities(SelfHostedIntegrationRuntimeNodeCapabilities^dictionary)
+            cli:
+              cliKey: capabilities
+            readOnly: true
+          - propertyName: versionStatus(SelfHostedIntegrationRuntimeNodeVersionStatus^string)
+            cli:
+              cliKey: versionStatus
+            readOnly: true
+          - propertyName: version(SelfHostedIntegrationRuntimeNodeVersion^string)
+            cli:
+              cliKey: version
+            readOnly: true
+          - propertyName: registerTime(self_hosted_integration_runtime_node_register_time^date-time)
+            cli:
+              cliKey: registerTime
+            readOnly: true
+          - propertyName: lastConnectTime(self_hosted_integration_runtime_node_last_connect_time^date-time)
+            cli:
+              cliKey: lastConnectTime
+            readOnly: true
+          - propertyName: expiryTime(self_hosted_integration_runtime_node_expiry_time^date-time)
+            cli:
+              cliKey: expiryTime
+            readOnly: true
+          - propertyName: lastStartTime(self_hosted_integration_runtime_node_last_start_time^date-time)
+            cli:
+              cliKey: lastStartTime
+            readOnly: true
+          - propertyName: lastStopTime(self_hosted_integration_runtime_node_last_stop_time^date-time)
+            cli:
+              cliKey: lastStopTime
+            readOnly: true
+          - propertyName: lastUpdateResult(IntegrationRuntimeUpdateResult^choice)
+            cli:
+              cliKey: lastUpdateResult
+            readOnly: true
+          - propertyName: lastStartUpdateTime(self_hosted_integration_runtime_node_last_start_update_time^date-time)
+            cli:
+              cliKey: lastStartUpdateTime
+            readOnly: true
+          - propertyName: lastEndUpdateTime(self_hosted_integration_runtime_node_last_end_update_time^date-time)
+            cli:
+              cliKey: lastEndUpdateTime
+            readOnly: true
+          - propertyName: isActiveDispatcher(boolean^boolean)
+            cli:
+              cliKey: isActiveDispatcher
+            readOnly: true
+          - propertyName: concurrentJobsLimit(Integer^integer)
+            cli:
+              cliKey: concurrentJobsLimit
+            readOnly: true
+          - propertyName: maxConcurrentJobs(Integer^integer)
+            cli:
+              cliKey: maxConcurrentJobs
+            readOnly: true
+      - schemaName: LinkedIntegrationRuntime
+        cli:
+          cli-complexity: object_simple
+          cli-mark: checked
+          cli-simplify-indicator: 
+            propertyCountIfSimplify: 0
+            propertyCountIfSimplifyWithoutSimpleObject: 0
+            simplifiable: true
+          cliKey: LinkedIntegrationRuntime
+        properties:
+          - propertyName: name(LinkedIntegrationRuntimeName^string)
+            cli:
+              cliKey: name
+            readOnly: true
+          - propertyName: subscriptionId(LinkedIntegrationRuntimeSubscriptionId^string)
+            cli:
+              cliKey: subscriptionId
+            readOnly: true
+          - propertyName: dataFactoryName(LinkedIntegrationRuntimeDataFactoryName^string)
+            cli:
+              cliKey: dataFactoryName
+            readOnly: true
+          - propertyName: dataFactoryLocation(LinkedIntegrationRuntimeDataFactoryLocation^string)
+            cli:
+              cliKey: dataFactoryLocation
+            readOnly: true
+          - propertyName: createTime(linked_integration_runtime_create_time^date-time)
+            cli:
+              cliKey: createTime
+            readOnly: true
+      - schemaName: IntegrationRuntimeNodeIpAddress
+        cli:
+          cli-complexity: object_simple
+          cli-mark: checked
+          cli-simplify-indicator: 
+            propertyCountIfSimplify: 0
+            propertyCountIfSimplifyWithoutSimpleObject: 0
+            simplifiable: true
+          cliKey: IntegrationRuntimeNodeIpAddress
+        properties:
+          - propertyName: ipAddress(IntegrationRuntimeNodeIpAddress^string)
+            cli:
+              cliKey: ipAddress
+            readOnly: true
+      - schemaName: SsisObjectMetadataListResponse
+        cli:
+          cli-complexity: object_complex
+          cli-mark: checked
+          cli-simplify-indicator: 
+            propertyCountIfSimplify: 10000
+            propertyCountIfSimplifyWithoutSimpleObject: 10000
+            simplifiable: false
+          cliKey: SsisObjectMetadataListResponse
+        properties:
+          - propertyName: value(SsisObjectMetadataListResponseValue^array)
+            cli:
+              cliKey: value
+          - propertyName: nextLink(SsisObjectMetadataListResponseNextLink^string)
+            cli:
+              cliKey: nextLink
+      - schemaName: SsisObjectMetadata
+        cli:
+          cli-complexity: object_complex
+          cli-mark: checked
+          cli-simplify-indicator: 
+            propertyCountIfSimplify: 4
+            propertyCountIfSimplifyWithoutSimpleObject: 4
+            simplifiable: true
+          cliKey: SsisObjectMetadata
+        discriminator: true
+        properties:
+          - propertyName: type(SsisObjectMetadataType^choice)
+            cli:
+              cliKey: type
+          - propertyName: id(Integer^integer)
+            cli:
+              cliKey: id
+          - propertyName: name(SsisObjectMetadataName^string)
+            cli:
+              cliKey: name
+          - propertyName: description(SsisObjectMetadataDescription^string)
+            cli:
+              cliKey: description
+      - schemaName: SsisFolder
+        cli:
+          cli-complexity: object_simple
+          cli-mark: checked
+          cli-simplify-indicator: 
+            propertyCountIfSimplify: 4
+            propertyCountIfSimplifyWithoutSimpleObject: 4
+            simplifiable: true
+          cliKey: SsisFolder
+          cli-discriminator-value: Folder
+      - schemaName: SsisProject
+        cli:
+          cli-complexity: object_complex
+          cli-mark: checked
+          cli-simplify-indicator: 
+            propertyCountIfSimplify: 10000
+            propertyCountIfSimplifyWithoutSimpleObject: 10000
+            simplifiable: false
+          cliKey: SsisProject
+          cli-discriminator-value: Project
+        properties:
+          - propertyName: folderId(Integer^integer)
+            cli:
+              cliKey: folderId
+          - propertyName: version(Integer^integer)
+            cli:
+              cliKey: version
+          - propertyName: environmentRefs(SsisProjectEnvironmentRefs^array)
+            cli:
+              cliKey: environmentRefs
+          - propertyName: parameters(SsisProjectParameters^array)
+            cli:
+              cliKey: parameters
+      - schemaName: SsisEnvironmentReference
+        cli:
+          cli-complexity: object_simple
+          cli-mark: checked
+          cli-simplify-indicator: 
+            propertyCountIfSimplify: 4
+            propertyCountIfSimplifyWithoutSimpleObject: 4
+            simplifiable: true
+          cliKey: SsisEnvironmentReference
+        properties:
+          - propertyName: id(Integer^integer)
+            cli:
+              cliKey: id
+          - propertyName: environmentFolderName(SsisEnvironmentReferenceEnvironmentFolderName^string)
+            cli:
+              cliKey: environmentFolderName
+          - propertyName: environmentName(SsisEnvironmentReferenceEnvironmentName^string)
+            cli:
+              cliKey: environmentName
+          - propertyName: referenceType(SsisEnvironmentReferenceType^string)
+            cli:
+              cliKey: referenceType
+      - schemaName: SsisParameter
+        cli:
+          cli-complexity: object_simple
+          cli-mark: checked
+          cli-simplify-indicator: 
+            propertyCountIfSimplify: 12
+            propertyCountIfSimplifyWithoutSimpleObject: 12
+            simplifiable: true
+          cliKey: SsisParameter
+        properties:
+          - propertyName: id(Integer^integer)
+            cli:
+              cliKey: id
+          - propertyName: name(SsisParameterName^string)
+            cli:
+              cliKey: name
+          - propertyName: description(SsisParameterDescription^string)
+            cli:
+              cliKey: description
+          - propertyName: dataType(SsisParameterDataType^string)
+            cli:
+              cliKey: dataType
+          - propertyName: required(boolean^boolean)
+            cli:
+              cliKey: required
+          - propertyName: sensitive(boolean^boolean)
+            cli:
+              cliKey: sensitive
+          - propertyName: designDefaultValue(SsisParameterDesignDefaultValue^string)
+            cli:
+              cliKey: designDefaultValue
+          - propertyName: defaultValue(SsisParameterDefaultValue^string)
+            cli:
+              cliKey: defaultValue
+          - propertyName: sensitiveDefaultValue(SsisParameterSensitiveDefaultValue^string)
+            cli:
+              cliKey: sensitiveDefaultValue
+          - propertyName: valueType(SsisParameterValueType^string)
+            cli:
+              cliKey: valueType
+          - propertyName: valueSet(boolean^boolean)
+            cli:
+              cliKey: valueSet
+          - propertyName: variable(SsisParameterVariable^string)
+            cli:
+              cliKey: variable
+      - schemaName: SsisPackage
+        cli:
+          cli-complexity: object_complex
+          cli-mark: checked
+          cli-simplify-indicator: 
+            propertyCountIfSimplify: 10000
+            propertyCountIfSimplifyWithoutSimpleObject: 10000
+            simplifiable: false
+          cliKey: SsisPackage
+          cli-discriminator-value: Package
+        properties:
+          - propertyName: folderId(Integer^integer)
+            cli:
+              cliKey: folderId
+          - propertyName: projectVersion(Integer^integer)
+            cli:
+              cliKey: projectVersion
+          - propertyName: projectId(Integer^integer)
+            cli:
+              cliKey: projectId
+          - propertyName: parameters(SsisPackageParameters^array)
+            cli:
+              cliKey: parameters
+      - schemaName: SsisEnvironment
+        cli:
+          cli-complexity: object_complex
+          cli-mark: checked
+          cli-simplify-indicator: 
+            propertyCountIfSimplify: 10000
+            propertyCountIfSimplifyWithoutSimpleObject: 10000
+            simplifiable: false
+          cliKey: SsisEnvironment
+          cli-discriminator-value: Environment
+        properties:
+          - propertyName: folderId(Integer^integer)
+            cli:
+              cliKey: folderId
+          - propertyName: variables(SsisEnvironmentVariables^array)
+            cli:
+              cliKey: variables
+      - schemaName: SsisVariable
+        cli:
+          cli-complexity: object_simple
+          cli-mark: checked
+          cli-simplify-indicator: 
+            propertyCountIfSimplify: 7
+            propertyCountIfSimplifyWithoutSimpleObject: 7
+            simplifiable: true
+          cliKey: SsisVariable
+        properties:
+          - propertyName: id(Integer^integer)
+            cli:
+              cliKey: id
+          - propertyName: name(SsisVariableName^string)
+            cli:
+              cliKey: name
+          - propertyName: description(SsisVariableDescription^string)
+            cli:
+              cliKey: description
+          - propertyName: dataType(SsisVariableDataType^string)
+            cli:
+              cliKey: dataType
+          - propertyName: sensitive(boolean^boolean)
+            cli:
+              cliKey: sensitive
+          - propertyName: value(SsisVariableValue^string)
+            cli:
+              cliKey: value
+          - propertyName: sensitiveValue(SsisVariableSensitiveValue^string)
+            cli:
+              cliKey: sensitiveValue
+  choices:
+    all:
+      - choiceName: FactoryIdentityType
+        cli:
+          cliKey: FactoryIdentityType
+        choiceValues:
+          - choiceValue: SystemAssigned
+            cli:
+              cliKey: SystemAssigned
+      - choiceName: TriggerRuntimeState
+        cli:
+          cliKey: TriggerRuntimeState
+        choiceValues:
+          - choiceValue: Started
+            cli:
+              cliKey: Started
+          - choiceValue: Stopped
+            cli:
+              cliKey: Stopped
+          - choiceValue: Disabled
+            cli:
+              cliKey: Disabled
+      - choiceName: EventSubscriptionStatus
+        cli:
+          cliKey: EventSubscriptionStatus
+        choiceValues:
+          - choiceValue: Enabled
+            cli:
+              cliKey: Enabled
+          - choiceValue: Provisioning
+            cli:
+              cliKey: Provisioning
+          - choiceValue: Deprovisioning
+            cli:
+              cliKey: Deprovisioning
+          - choiceValue: Disabled
+            cli:
+              cliKey: Disabled
+          - choiceValue: Unknown
+            cli:
+              cliKey: Unknown
+      - choiceName: IntegrationRuntimeType
+        cli:
+          cliKey: IntegrationRuntimeType
+        choiceValues:
+          - choiceValue: Managed
+            cli:
+              cliKey: Managed
+          - choiceValue: SelfHosted
+            cli:
+              cliKey: SelfHosted
+      - choiceName: IntegrationRuntimeAutoUpdate
+        cli:
+          cliKey: IntegrationRuntimeAutoUpdate
+        choiceValues:
+          - choiceValue: On
+            cli:
+              cliKey: On
+          - choiceValue: Off
+            cli:
+              cliKey: Off
+      - choiceName: IntegrationRuntimeState
+        cli:
+          cliKey: IntegrationRuntimeState
+        choiceValues:
+          - choiceValue: Initial
+            cli:
+              cliKey: Initial
+          - choiceValue: Stopped
+            cli:
+              cliKey: Stopped
+          - choiceValue: Started
+            cli:
+              cliKey: Started
+          - choiceValue: Starting
+            cli:
+              cliKey: Starting
+          - choiceValue: Stopping
+            cli:
+              cliKey: Stopping
+          - choiceValue: NeedRegistration
+            cli:
+              cliKey: NeedRegistration
+          - choiceValue: Online
+            cli:
+              cliKey: Online
+          - choiceValue: Limited
+            cli:
+              cliKey: Limited
+          - choiceValue: Offline
+            cli:
+              cliKey: Offline
+          - choiceValue: AccessDenied
+            cli:
+              cliKey: AccessDenied
+      - choiceName: IntegrationRuntimeAuthKeyName
+        cli:
+          cliKey: IntegrationRuntimeAuthKeyName
+        choiceValues:
+          - choiceValue: AuthKey1
+            cli:
+              cliKey: authKey1
+          - choiceValue: AuthKey2
+            cli:
+              cliKey: authKey2
+      - choiceName: RecurrenceFrequency
+        cli:
+          cliKey: RecurrenceFrequency
+        choiceValues:
+          - choiceValue: NotSpecified
+            cli:
+              cliKey: NotSpecified
+          - choiceValue: Minute
+            cli:
+              cliKey: Minute
+          - choiceValue: Hour
+            cli:
+              cliKey: Hour
+          - choiceValue: Day
+            cli:
+              cliKey: Day
+          - choiceValue: Week
+            cli:
+              cliKey: Week
+          - choiceValue: Month
+            cli:
+              cliKey: Month
+          - choiceValue: Year
+            cli:
+              cliKey: Year
+      - choiceName: BlobEventTypes
+        cli:
+          cliKey: BlobEventTypes
+        choiceValues:
+          - choiceValue: MicrosoftStorageBlobCreated
+            cli:
+              cliKey: Microsoft.Storage.BlobCreated
+          - choiceValue: MicrosoftStorageBlobDeleted
+            cli:
+              cliKey: Microsoft.Storage.BlobDeleted
+      - choiceName: TumblingWindowFrequency
+        cli:
+          cliKey: TumblingWindowFrequency
+        choiceValues:
+          - choiceValue: Minute
+            cli:
+              cliKey: Minute
+          - choiceValue: Hour
+            cli:
+              cliKey: Hour
+      - choiceName: DataFlowComputeType
+        cli:
+          cliKey: DataFlowComputeType
+        choiceValues:
+          - choiceValue: General
+            cli:
+              cliKey: General
+          - choiceValue: MemoryOptimized
+            cli:
+              cliKey: MemoryOptimized
+          - choiceValue: ComputeOptimized
+            cli:
+              cliKey: ComputeOptimized
+      - choiceName: IntegrationRuntimeSsisCatalogPricingTier
+        cli:
+          cliKey: IntegrationRuntimeSsisCatalogPricingTier
+        choiceValues:
+          - choiceValue: Basic
+            cli:
+              cliKey: Basic
+          - choiceValue: Standard
+            cli:
+              cliKey: Standard
+          - choiceValue: Premium
+            cli:
+              cliKey: Premium
+          - choiceValue: PremiumRs
+            cli:
+              cliKey: PremiumRS
+      - choiceName: IntegrationRuntimeLicenseType
+        cli:
+          cliKey: IntegrationRuntimeLicenseType
+        choiceValues:
+          - choiceValue: BasePrice
+            cli:
+              cliKey: BasePrice
+          - choiceValue: LicenseIncluded
+            cli:
+              cliKey: LicenseIncluded
+      - choiceName: IntegrationRuntimeEntityReferenceType
+        cli:
+          cliKey: IntegrationRuntimeEntityReferenceType
+        choiceValues:
+          - choiceValue: IntegrationRuntimeReference
+            cli:
+              cliKey: IntegrationRuntimeReference
+          - choiceValue: LinkedServiceReference
+            cli:
+              cliKey: LinkedServiceReference
+      - choiceName: IntegrationRuntimeEdition
+        cli:
+          cliKey: IntegrationRuntimeEdition
+        choiceValues:
+          - choiceValue: Standard
+            cli:
+              cliKey: Standard
+          - choiceValue: Enterprise
+            cli:
+              cliKey: Enterprise
+      - choiceName: ManagedIntegrationRuntimeNodeStatus
+        cli:
+          cliKey: ManagedIntegrationRuntimeNodeStatus
+        choiceValues:
+          - choiceValue: Starting
+            cli:
+              cliKey: Starting
+          - choiceValue: Available
+            cli:
+              cliKey: Available
+          - choiceValue: Recycling
+            cli:
+              cliKey: Recycling
+          - choiceValue: Unavailable
+            cli:
+              cliKey: Unavailable
+      - choiceName: IntegrationRuntimeInternalChannelEncryptionMode
+        cli:
+          cliKey: IntegrationRuntimeInternalChannelEncryptionMode
+        choiceValues:
+          - choiceValue: NotSet
+            cli:
+              cliKey: NotSet
+          - choiceValue: SSLEncrypted
+            cli:
+              cliKey: SslEncrypted
+          - choiceValue: NotEncrypted
+            cli:
+              cliKey: NotEncrypted
+      - choiceName: SelfHostedIntegrationRuntimeNodeStatus
+        cli:
+          cliKey: SelfHostedIntegrationRuntimeNodeStatus
+        choiceValues:
+          - choiceValue: NeedRegistration
+            cli:
+              cliKey: NeedRegistration
+          - choiceValue: Online
+            cli:
+              cliKey: Online
+          - choiceValue: Limited
+            cli:
+              cliKey: Limited
+          - choiceValue: Offline
+            cli:
+              cliKey: Offline
+          - choiceValue: Upgrading
+            cli:
+              cliKey: Upgrading
+          - choiceValue: Initializing
+            cli:
+              cliKey: Initializing
+          - choiceValue: InitializeFailed
+            cli:
+              cliKey: InitializeFailed
+      - choiceName: IntegrationRuntimeUpdateResult
+        cli:
+          cliKey: IntegrationRuntimeUpdateResult
+        choiceValues:
+          - choiceValue: None
+            cli:
+              cliKey: None
+          - choiceValue: Succeed
+            cli:
+              cliKey: Succeed
+          - choiceValue: Fail
+            cli:
+              cliKey: Fail
+      - choiceName: SsisObjectMetadataType
+        cli:
+          cliKey: SsisObjectMetadataType
+        choiceValues:
+          - choiceValue: Folder
+            cli:
+              cliKey: Folder
+          - choiceValue: Project
+            cli:
+              cliKey: Project
+          - choiceValue: Package
+            cli:
+              cliKey: Package
+          - choiceValue: Environment
+            cli:
+              cliKey: Environment
+      - choiceName: DaysOfWeek
+        cli:
+          cliKey: DaysOfWeek
+        choiceValues:
+          - choiceValue: Sunday
+            cli:
+              cliKey: Sunday
+          - choiceValue: Monday
+            cli:
+              cliKey: Monday
+          - choiceValue: Tuesday
+            cli:
+              cliKey: Tuesday
+          - choiceValue: Wednesday
+            cli:
+              cliKey: Wednesday
+          - choiceValue: Thursday
+            cli:
+              cliKey: Thursday
+          - choiceValue: Friday
+            cli:
+              cliKey: Friday
+          - choiceValue: Saturday
+            cli:
+              cliKey: Saturday
+      - choiceName: DayOfWeek
+        cli:
+          cliKey: DayOfWeek
+        choiceValues:
+          - choiceValue: Sunday
+            cli:
+              cliKey: Sunday
+          - choiceValue: Monday
+            cli:
+              cliKey: Monday
+          - choiceValue: Tuesday
+            cli:
+              cliKey: Tuesday
+          - choiceValue: Wednesday
+            cli:
+              cliKey: Wednesday
+          - choiceValue: Thursday
+            cli:
+              cliKey: Thursday
+          - choiceValue: Friday
+            cli:
+              cliKey: Friday
+          - choiceValue: Saturday
+            cli:
+              cliKey: Saturday
