@@ -28,30 +28,30 @@ stages:
       pool:
         vmImage: 'ubuntu-latest'
       steps:
-      - task: NodeTool@0
-        inputs:
-          versionSpec: '10.17.0'
-        displayName: 'Install Node.js'
-      - script: |
-          echo "[$(date -u)] LOG: ENSURE LATEST NPM IS INSTALLED"
-          npm install -g npm
-          npm install js-yaml@3.14.0
+        - task: NodeTool@0
+          inputs:
+            versionSpec: '$(NodeVersion)'
+          displayName: 'Install Node.js $(NodeVersion)'
 
-          echo "[$(date -u)] LOG: MAKE SURE THE VERSIONS ARE ALL SYNCHRONIZED AND PULL IN DEPENDENCIES"
-          npx @microsoft/rush sync-versions
-          npx @microsoft/rush update 
+        - task: Npm@1
+          displayName: 'npm install'
+          inputs:
+            verbose: true
 
-          echo "[$(date -u)] LOG: COMPILE THE CODE"
-          npx @microsoft/rush rebuild 
+        - script: 'npm run build'
+          displayName: 'npm build'
 
-          echo "[$(date -u)] LOG: BUILD PACKAGE"
-          npx @microsoft/rush publish --publish --pack --release-folder $(VAR_BUILD_ARTIFACT_STAGING_DIRECTORY) --include-all --tag latest
-        displayName: 'Build and Pack'
-      - task: PublishBuildArtifacts@1
-        inputs:
-          PathtoPublish: '$(VAR_BUILD_ARTIFACT_STAGING_DIRECTORY)'
-          ArtifactName: '$(VAR_ARIFACT_NAME)'
-          publishLocation: 'Container'
+        - script: 'npm pack'
+          displayName: 'npm pack'
+
+        - script: 'cp autorest-clicommon-*.tgz $(VAR_BUILD_ARTIFACT_STAGING_DIRECTORY)'
+          displyName: 'copy to staging dir'
+
+        - task: PublishBuildArtifacts@1
+          inputs:
+            PathtoPublish: '$(VAR_BUILD_ARTIFACT_STAGING_DIRECTORY)'
+            ArtifactName: '$(VAR_ARIFACT_NAME)'
+            publishLocation: 'Container'
 
 - stage: Test
   dependsOn: Build
