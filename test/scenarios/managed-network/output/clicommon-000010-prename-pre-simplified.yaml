@@ -159,28 +159,10 @@ operationGroups:
 schemas:
   objects:
     all:
-      - schemaName: Resource
-        properties:
-          - propertyName: id(Resource-id^string)
-            readOnly: true
-          - propertyName: name(Resource-name^string)
-            readOnly: true
-          - propertyName: type(Resource-type^string)
-            readOnly: true
-          - propertyName: location(Resource-location^string)
-      - schemaName: TrackedResource
-        properties:
-          - propertyName: tags(TrackedResource-tags^dictionary)
       - schemaName: ManagedNetwork
         properties:
           - propertyName: properties(ManagedNetworkProperties^object)
             x-ms-client-flatten: true
-      - schemaName: ResourceProperties
-        properties:
-          - propertyName: provisioningState(ProvisioningState^choice)
-            readOnly: true
-          - propertyName: etag(ResourceProperties-etag^string)
-            readOnly: true
       - schemaName: ManagedNetworkProperties
         properties:
           - propertyName: scope(Scope^object)
@@ -207,13 +189,28 @@ schemas:
         properties:
           - propertyName: properties(ManagedNetworkGroupProperties^object)
             x-ms-client-flatten: true
-          - propertyName: kind(Kind^constant)
+          - propertyName: kind(Kind^choice)
       - schemaName: ManagedNetworkGroupProperties
         properties:
           - propertyName: managementGroups(ManagedNetworkGroupProperties-managementGroups^array)
           - propertyName: subscriptions(ManagedNetworkGroupProperties-subscriptions^array)
           - propertyName: virtualNetworks(ManagedNetworkGroupProperties-virtualNetworks^array)
           - propertyName: subnets(ManagedNetworkGroupProperties-subnets^array)
+      - schemaName: ResourceProperties
+        properties:
+          - propertyName: provisioningState(ProvisioningState^choice)
+            readOnly: true
+          - propertyName: etag(ResourceProperties-etag^string)
+            readOnly: true
+      - schemaName: Resource
+        properties:
+          - propertyName: id(Resource-id^string)
+            readOnly: true
+          - propertyName: name(Resource-name^string)
+            readOnly: true
+          - propertyName: type(Resource-type^string)
+            readOnly: true
+          - propertyName: location(Resource-location^string)
       - schemaName: ManagedNetworkPeeringPolicy
         properties:
           - propertyName: properties(ManagedNetworkPeeringPolicyProperties^object)
@@ -224,6 +221,9 @@ schemas:
           - propertyName: hub(ResourceId^object)
           - propertyName: spokes(ManagedNetworkPeeringPolicyProperties-spokes^array)
           - propertyName: mesh(ManagedNetworkPeeringPolicyProperties-mesh^array)
+      - schemaName: TrackedResource
+        properties:
+          - propertyName: tags(TrackedResource-tags^dictionary)
       - schemaName: ErrorResponse
         properties:
           - propertyName: code(ErrorResponse-code^string)
@@ -280,6 +280,9 @@ schemas:
           - choiceValue: Deleting
           - choiceValue: Failed
           - choiceValue: Succeeded
+      - choiceName: Kind
+        choiceValues:
+          - choiceValue: Connectivity
       - choiceName: type
         choiceValues:
           - choiceValue: HubAndSpokeTopology

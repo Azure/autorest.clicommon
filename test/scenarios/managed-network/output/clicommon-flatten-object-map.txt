@@ -1,12 +1,12 @@
-Resource<4>
-TrackedResource<1>
 ManagedNetwork<1>[properties] -> ManagedNetworkProperties<2>[scope] -> Scope<4>
 ManagedNetwork<1>[properties] -> ManagedNetworkProperties<2>[connectivity] -> ConnectivityCollection<2>
-ResourceProperties<2>
 ResourceId<1>
 ManagedNetworkGroup<2>[properties] -> ManagedNetworkGroupProperties<4>
+ResourceProperties<2>
+Resource<4>
 ManagedNetworkPeeringPolicy<1>(properties*:ManagedNetworkPeeringPolicyProperties)
 ManagedNetworkPeeringPolicyProperties<4>*(hub:ResourceId)
+TrackedResource<1>
 ErrorResponse<2>
 ManagedNetworkUpdate<1>
 ManagedNetworkListResult<2>

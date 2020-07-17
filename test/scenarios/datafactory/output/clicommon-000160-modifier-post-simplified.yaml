@@ -819,38 +819,6 @@ schemas:
           - propertyName: next_link(factory_list_response_next_link^string)
             cli:
               cliKey: nextLink
-      - schemaName: resource
-        cli:
-          cli-complexity: object_complex
-          cli-mark: checked
-          cli-simplify-indicator: 
-            propertyCountIfSimplify: 10000
-            propertyCountIfSimplifyWithoutSimpleObject: 10000
-            simplifiable: false
-          cliKey: Resource
-        properties:
-          - propertyName: id(resource_id^string)
-            cli:
-              cliKey: id
-            readOnly: true
-          - propertyName: name(resource_name^string)
-            cli:
-              cliKey: name
-            readOnly: true
-          - propertyName: type(resource_type^string)
-            cli:
-              cliKey: type
-            readOnly: true
-          - propertyName: location(resource_location^string)
-            cli:
-              cliKey: location
-          - propertyName: tags(resource_tags^dictionary)
-            cli:
-              cliKey: tags
-          - propertyName: e_tag(resource_e_tag^string)
-            cli:
-              cliKey: eTag
-            readOnly: true
       - schemaName: factory
         cli:
           cli-complexity: object_complex
@@ -873,12 +841,12 @@ schemas:
           cli-complexity: object_simple
           cli-mark: checked
           cli-simplify-indicator: 
-            propertyCountIfSimplify: 0
-            propertyCountIfSimplifyWithoutSimpleObject: 0
+            propertyCountIfSimplify: 1
+            propertyCountIfSimplifyWithoutSimpleObject: 1
             simplifiable: true
           cliKey: FactoryIdentity
         properties:
-          - propertyName: type(factory_identity_type^constant)
+          - propertyName: type(factory_identity_type^choice)
             cli:
               cliKey: type
           - propertyName: principal_id(factory_identity_principal_id^uuid)
@@ -965,6 +933,38 @@ schemas:
           - propertyName: zones_inside(fake_factory_identity_zones_inside^array)
             cli:
               cliKey: zonesInside
+      - schemaName: resource
+        cli:
+          cli-complexity: object_complex
+          cli-mark: checked
+          cli-simplify-indicator: 
+            propertyCountIfSimplify: 10000
+            propertyCountIfSimplifyWithoutSimpleObject: 10000
+            simplifiable: false
+          cliKey: Resource
+        properties:
+          - propertyName: id(resource_id^string)
+            cli:
+              cliKey: id
+            readOnly: true
+          - propertyName: name(resource_name^string)
+            cli:
+              cliKey: name
+            readOnly: true
+          - propertyName: type(resource_type^string)
+            cli:
+              cliKey: type
+            readOnly: true
+          - propertyName: location(resource_location^string)
+            cli:
+              cliKey: location
+          - propertyName: tags(resource_tags^dictionary)
+            cli:
+              cliKey: tags
+          - propertyName: e_tag(resource_e_tag^string)
+            cli:
+              cliKey: eTag
+            readOnly: true
       - schemaName: cloud_error
         cli:
           cli-complexity: object_complex
@@ -1127,32 +1127,6 @@ schemas:
           - propertyName: next_link(trigger_list_response_next_link^string)
             cli:
               cliKey: nextLink
-      - schemaName: sub_resource
-        cli:
-          cli-complexity: object_simple
-          cli-mark: checked
-          cli-simplify-indicator: 
-            propertyCountIfSimplify: 0
-            propertyCountIfSimplifyWithoutSimpleObject: 0
-            simplifiable: true
-          cliKey: SubResource
-        properties:
-          - propertyName: id(sub_resource_id^string)
-            cli:
-              cliKey: id
-            readOnly: true
-          - propertyName: name(sub_resource_name^string)
-            cli:
-              cliKey: name
-            readOnly: true
-          - propertyName: type(sub_resource_type^string)
-            cli:
-              cliKey: type
-            readOnly: true
-          - propertyName: etag(sub_resource_etag^string)
-            cli:
-              cliKey: etag
-            readOnly: true
       - schemaName: trigger_resource
         cli:
           cli-complexity: object_complex
@@ -1190,6 +1164,32 @@ schemas:
           - propertyName: annotations(trigger_annotations^array)
             cli:
               cliKey: annotations
+      - schemaName: sub_resource
+        cli:
+          cli-complexity: object_simple
+          cli-mark: checked
+          cli-simplify-indicator: 
+            propertyCountIfSimplify: 0
+            propertyCountIfSimplifyWithoutSimpleObject: 0
+            simplifiable: true
+          cliKey: SubResource
+        properties:
+          - propertyName: id(sub_resource_id^string)
+            cli:
+              cliKey: id
+            readOnly: true
+          - propertyName: name(sub_resource_name^string)
+            cli:
+              cliKey: name
+            readOnly: true
+          - propertyName: type(sub_resource_type^string)
+            cli:
+              cliKey: type
+            readOnly: true
+          - propertyName: etag(sub_resource_etag^string)
+            cli:
+              cliKey: etag
+            readOnly: true
       - schemaName: trigger_filter_parameters
         cli:
           cli-complexity: object_simple
@@ -2171,6 +2171,19 @@ schemas:
           - propertyName: catalog_pricing_tier(integration_runtime_ssis_catalog_pricing_tier^choice)
             cli:
               cliKey: catalogPricingTier
+      - schemaName: secure_string
+        cli:
+          cli-complexity: object_simple
+          cli-mark: checked
+          cli-simplify-indicator: 
+            propertyCountIfSimplify: 2
+            propertyCountIfSimplifyWithoutSimpleObject: 2
+            simplifiable: true
+          cliKey: SecureString
+        properties:
+          - propertyName: value(secure_string_value^string)
+            cli:
+              cliKey: value
       - schemaName: secret_base
         cli:
           cli-complexity: object_complex
@@ -2185,19 +2198,6 @@ schemas:
           - propertyName: type(secret_base_type^string)
             cli:
               cliKey: type
-      - schemaName: secure_string
-        cli:
-          cli-complexity: object_simple
-          cli-mark: checked
-          cli-simplify-indicator: 
-            propertyCountIfSimplify: 2
-            propertyCountIfSimplifyWithoutSimpleObject: 2
-            simplifiable: true
-          cliKey: SecureString
-        properties:
-          - propertyName: value(secure_string_value^string)
-            cli:
-              cliKey: value
       - schemaName: integration_runtime_custom_setup_script_properties
         cli:
           cli-complexity: object_complex
@@ -2981,6 +2981,13 @@ schemas:
               cliKey: sensitiveValue
   choices:
     all:
+      - choiceName: factory_identity_type
+        cli:
+          cliKey: FactoryIdentityType
+        choiceValues:
+          - choiceValue: system_assigned
+            cli:
+              cliKey: SystemAssigned
       - choiceName: trigger_runtime_state
         cli:
           cliKey: TriggerRuntimeState

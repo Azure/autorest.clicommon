@@ -1,9 +1,9 @@
 FactoryListResponse<2>
-Resource<6>
 Factory<2>(identity:FactoryIdentity)[properties] -> FactoryProperties<6>(repoConfiguration*:FactoryRepoConfiguration, fakeIdentity:FakeFactoryIdentity)
 FactoryIdentity<3>
 FactoryRepoConfiguration<6>*
 FakeFactoryIdentity<2>
+Resource<6>
 CloudError<1>[error] -> CloudErrorBody<4>
 FactoryRepoUpdate<2>(repoConfiguration*:FactoryRepoConfiguration)
 FactoryUpdateParameters<2>(identity:FactoryIdentity)
@@ -12,9 +12,9 @@ GitHubAccessTokenResponse<1>
 UserAccessPolicy<5>
 AccessPolicyResponse<3>(policy:UserAccessPolicy)
 TriggerListResponse<2>
-SubResource<4>
 TriggerResource<1>(properties*:Trigger)
 Trigger<4>*
+SubResource<4>
 TriggerFilterParameters<2>
 TriggerQueryResponse<2>
 TriggerSubscriptionOperationStatus<2>
@@ -60,8 +60,8 @@ IntegrationRuntimeDataFlowProperties<3>
 IntegrationRuntimeVNetProperties<3>
 IntegrationRuntimeSsisProperties<7>(catalogInfo:IntegrationRuntimeSsisCatalogInfo, customSetupScriptProperties:IntegrationRuntimeCustomSetupScriptProperties, dataProxyProperties:IntegrationRuntimeDataProxyProperties)
 IntegrationRuntimeSsisCatalogInfo<4>(catalogAdminPassword:SecureString)
-SecretBase<1>*
 SecureString<1>
+SecretBase<1>*
 IntegrationRuntimeCustomSetupScriptProperties<2>(sasToken:SecureString)
 IntegrationRuntimeDataProxyProperties<3>(connectVia:EntityReference, stagingLinkedService:EntityReference)
 EntityReference<2>

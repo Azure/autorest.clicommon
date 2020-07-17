@@ -307,18 +307,6 @@ schemas:
         properties:
           - propertyName: value(FactoryListResponse-value^array)
           - propertyName: nextLink(FactoryListResponse-nextLink^string)
-      - schemaName: Resource
-        properties:
-          - propertyName: id(Resource-id^string)
-            readOnly: true
-          - propertyName: name(Resource-name^string)
-            readOnly: true
-          - propertyName: type(Resource-type^string)
-            readOnly: true
-          - propertyName: location(Resource-location^string)
-          - propertyName: tags(Resource-tags^dictionary)
-          - propertyName: eTag(Resource-eTag^string)
-            readOnly: true
       - schemaName: Factory
         properties:
           - propertyName: identity(FactoryIdentity^object)
@@ -326,7 +314,7 @@ schemas:
             x-ms-client-flatten: true
       - schemaName: FactoryIdentity
         properties:
-          - propertyName: type(FactoryIdentityType^constant)
+          - propertyName: type(FactoryIdentityType^choice)
           - propertyName: principalId(FactoryIdentity-principalId^uuid)
             readOnly: true
           - propertyName: tenantId(FactoryIdentity-tenantId^uuid)
@@ -355,6 +343,18 @@ schemas:
         properties:
           - propertyName: name(FakeFactoryIdentity-name^string)
           - propertyName: zonesInside(FakeFactoryIdentity-zonesInside^array)
+      - schemaName: Resource
+        properties:
+          - propertyName: id(Resource-id^string)
+            readOnly: true
+          - propertyName: name(Resource-name^string)
+            readOnly: true
+          - propertyName: type(Resource-type^string)
+            readOnly: true
+          - propertyName: location(Resource-location^string)
+          - propertyName: tags(Resource-tags^dictionary)
+          - propertyName: eTag(Resource-eTag^string)
+            readOnly: true
       - schemaName: CloudError
         properties:
           - propertyName: error(CloudErrorBody^object)
@@ -397,16 +397,6 @@ schemas:
         properties:
           - propertyName: value(TriggerListResponse-value^array)
           - propertyName: nextLink(TriggerListResponse-nextLink^string)
-      - schemaName: SubResource
-        properties:
-          - propertyName: id(SubResource-id^string)
-            readOnly: true
-          - propertyName: name(SubResource-name^string)
-            readOnly: true
-          - propertyName: type(SubResource-type^string)
-            readOnly: true
-          - propertyName: etag(SubResource-etag^string)
-            readOnly: true
       - schemaName: TriggerResource
         properties:
           - propertyName: properties(Trigger^object)
@@ -418,6 +408,16 @@ schemas:
           - propertyName: runtimeState(TriggerRuntimeState^choice)
             readOnly: true
           - propertyName: annotations(Trigger-annotations^array)
+      - schemaName: SubResource
+        properties:
+          - propertyName: id(SubResource-id^string)
+            readOnly: true
+          - propertyName: name(SubResource-name^string)
+            readOnly: true
+          - propertyName: type(SubResource-type^string)
+            readOnly: true
+          - propertyName: etag(SubResource-etag^string)
+            readOnly: true
       - schemaName: TriggerFilterParameters
         properties:
           - propertyName: continuationToken(TriggerFilterParameters-continuationToken^string)
@@ -697,13 +697,13 @@ schemas:
           - propertyName: catalogAdminUserName(IntegrationRuntimeSsisCatalogInfo-catalogAdminUserName^string)
           - propertyName: catalogAdminPassword(SecureString^object)
           - propertyName: catalogPricingTier(IntegrationRuntimeSsisCatalogPricingTier^choice)
+      - schemaName: SecureString
+        properties:
+          - propertyName: value(SecureString-value^string)
       - schemaName: SecretBase
         discriminator: true
         properties:
           - propertyName: type(SecretBase-type^string)
-      - schemaName: SecureString
-        properties:
-          - propertyName: value(SecureString-value^string)
       - schemaName: IntegrationRuntimeCustomSetupScriptProperties
         properties:
           - propertyName: blobContainerUri(IntegrationRuntimeCustomSetupScriptProperties-blobContainerUri^string)
@@ -961,6 +961,9 @@ schemas:
           - propertyName: sensitiveValue(SsisVariable-sensitiveValue^string)
   choices:
     all:
+      - choiceName: FactoryIdentityType
+        choiceValues:
+          - choiceValue: SystemAssigned
       - choiceName: TriggerRuntimeState
         choiceValues:
           - choiceValue: Started
