@@ -112,17 +112,8 @@ schemas:
         - version: 2018-09-01-preview
       language:
         default:
-          name: Resource-id
-          description: 'Fully qualified resource Id for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}'
-      protocol: {}
-    - &ref_21
-      type: string
-      apiVersions:
-        - version: 2018-09-01-preview
-      language:
-        default:
-          name: Resource-name
-          description: The name of the resource
+          name: StatusResult-trustModel
+          description: Trust model for the attestation service instance.
       protocol: {}
     - &ref_22
       type: string
@@ -130,8 +121,8 @@ schemas:
         - version: 2018-09-01-preview
       language:
         default:
-          name: Resource-type
-          description: The type of the resource. Ex- Microsoft.Compute/virtualMachines or Microsoft.Storage/storageAccounts.
+          name: StatusResult-attestUri
+          description: Gets the uri of attestation service
       protocol: {}
     - &ref_19
       type: string
@@ -152,8 +143,17 @@ schemas:
         - version: 2018-09-01-preview
       language:
         default:
-          name: StatusResult-trustModel
-          description: Trust model for the attestation service instance.
+          name: Resource-id
+          description: 'Fully qualified resource Id for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}'
+      protocol: {}
+    - &ref_15
+      type: string
+      apiVersions:
+        - version: 2018-09-01-preview
+      language:
+        default:
+          name: Resource-name
+          description: The name of the resource
       protocol: {}
     - &ref_16
       type: string
@@ -161,8 +161,8 @@ schemas:
         - version: 2018-09-01-preview
       language:
         default:
-          name: StatusResult-attestUri
-          description: Gets the uri of attestation service
+          name: Resource-type
+          description: The type of the resource. Ex- Microsoft.Compute/virtualMachines or Microsoft.Storage/storageAccounts.
       protocol: {}
     - &ref_24
       type: string
@@ -359,7 +359,7 @@ schemas:
           description: Y coordinate for the Elliptic Curve point
       protocol: {}
   choices:
-    - &ref_15
+    - &ref_21
       choices:
         - value: Ready
           language:
@@ -400,6 +400,7 @@ schemas:
     - &ref_18
       type: dictionary
       elementType: *ref_1
+      nullableItems: false
       language:
         default:
           name: TrackedResource-tags
@@ -408,6 +409,7 @@ schemas:
     - &ref_25
       type: dictionary
       elementType: *ref_1
+      nullableItems: false
       language:
         default:
           name: AttestationServiceCreationParams-tags
@@ -416,6 +418,7 @@ schemas:
     - &ref_47
       type: dictionary
       elementType: *ref_1
+      nullableItems: false
       language:
         default:
           name: AttestationServicePatchParams-tags
@@ -552,7 +555,7 @@ schemas:
             serializationFormats:
               - json
             usage:
-              - output
+              - exception
             extensions:
               x-ms-external: true
             language:
@@ -570,7 +573,7 @@ schemas:
       serializationFormats:
         - json
       usage:
-        - output
+        - exception
       extensions:
         x-ms-external: true
       language:
@@ -580,94 +583,72 @@ schemas:
           namespace: ''
       protocol: {}
     - *ref_11
-    - &ref_13
+    - &ref_12
       type: object
       apiVersions:
         - version: 2018-09-01-preview
-      children:
+      parents:
         all:
-          - &ref_12
+          - &ref_13
             type: object
             apiVersions:
               - version: 2018-09-01-preview
             children:
               all:
+                - *ref_12
+              immediate:
+                - *ref_12
+            parents:
+              all:
                 - &ref_17
                   type: object
                   apiVersions:
                     - version: 2018-09-01-preview
-                  parents:
+                  children:
                     all:
-                      - *ref_12
                       - *ref_13
-                    immediate:
                       - *ref_12
+                    immediate:
+                      - *ref_13
                   properties:
-                    - schema: &ref_23
-                        type: object
-                        apiVersions:
-                          - version: 2018-09-01-preview
-                        properties:
-                          - schema: *ref_14
-                            required: false
-                            serializedName: trustModel
-                            language:
-                              default:
-                                name: trustModel
-                                description: Trust model for the attestation service instance.
-                            protocol: {}
-                          - schema: *ref_15
-                            required: true
-                            serializedName: status
-                            language:
-                              default:
-                                name: status
-                                description: Status of attestation service.
-                            protocol: {}
-                          - schema: *ref_16
-                            required: false
-                            serializedName: attestUri
-                            language:
-                              default:
-                                name: attestUri
-                                description: Gets the uri of attestation service
-                            protocol: {}
-                        serializationFormats:
-                          - json
-                        usage:
-                          - output
-                        language:
-                          default:
-                            name: StatusResult
-                            description: Status of attestation service.
-                            namespace: ''
-                        protocol: {}
-                      required: true
-                      serializedName: properties
-                      extensions:
-                        x-ms-client-flatten: true
+                    - schema: *ref_14
+                      readOnly: true
+                      serializedName: id
                       language:
                         default:
-                          name: properties
-                          description: Describes Attestation service status.
+                          name: id
+                          description: 'Fully qualified resource Id for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}'
+                      protocol: {}
+                    - schema: *ref_15
+                      readOnly: true
+                      serializedName: name
+                      language:
+                        default:
+                          name: name
+                          description: The name of the resource
+                      protocol: {}
+                    - schema: *ref_16
+                      readOnly: true
+                      serializedName: type
+                      language:
+                        default:
+                          name: type
+                          description: The type of the resource. Ex- Microsoft.Compute/virtualMachines or Microsoft.Storage/storageAccounts.
                       protocol: {}
                   serializationFormats:
                     - json
                   usage:
                     - output
+                  extensions:
+                    x-ms-azure-resource: true
                   language:
                     default:
-                      name: AttestationProvider
-                      description: Attestation service response message.
+                      name: Resource
+                      description: ''
                       namespace: ''
                   protocol: {}
               immediate:
                 - *ref_17
-            parents:
-              all:
-                - *ref_13
-              immediate:
-                - *ref_13
             properties:
               - schema: *ref_18
                 required: false
@@ -697,47 +678,69 @@ schemas:
             protocol: {}
           - *ref_17
         immediate:
-          - *ref_12
+          - *ref_13
       properties:
-        - schema: *ref_20
-          readOnly: true
-          serializedName: id
+        - schema: &ref_23
+            type: object
+            apiVersions:
+              - version: 2018-09-01-preview
+            properties:
+              - schema: *ref_20
+                required: false
+                serializedName: trustModel
+                language:
+                  default:
+                    name: trustModel
+                    description: Trust model for the attestation service instance.
+                protocol: {}
+              - schema: *ref_21
+                required: true
+                serializedName: status
+                language:
+                  default:
+                    name: status
+                    description: Status of attestation service.
+                protocol: {}
+              - schema: *ref_22
+                required: false
+                serializedName: attestUri
+                language:
+                  default:
+                    name: attestUri
+                    description: Gets the uri of attestation service
+                protocol: {}
+            serializationFormats:
+              - json
+            usage:
+              - output
+            language:
+              default:
+                name: StatusResult
+                description: Status of attestation service.
+                namespace: ''
+            protocol: {}
+          required: true
+          serializedName: properties
+          extensions:
+            x-ms-client-flatten: true
           language:
             default:
-              name: id
-              description: 'Fully qualified resource Id for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}'
-          protocol: {}
-        - schema: *ref_21
-          readOnly: true
-          serializedName: name
-          language:
-            default:
-              name: name
-              description: The name of the resource
-          protocol: {}
-        - schema: *ref_22
-          readOnly: true
-          serializedName: type
-          language:
-            default:
-              name: type
-              description: The type of the resource. Ex- Microsoft.Compute/virtualMachines or Microsoft.Storage/storageAccounts.
+              name: properties
+              description: Describes Attestation service status.
           protocol: {}
       serializationFormats:
         - json
       usage:
         - output
-      extensions:
-        x-ms-azure-resource: true
       language:
         default:
-          name: Resource
-          description: ''
+          name: AttestationProvider
+          description: Attestation service response message.
           namespace: ''
       protocol: {}
-    - *ref_12
-    - *ref_17
     - *ref_23
+    - *ref_13
+    - *ref_17
     - &ref_62
       type: object
       apiVersions:
@@ -1079,7 +1082,7 @@ schemas:
             type: array
             apiVersions:
               - version: 2018-09-01-preview
-            elementType: *ref_17
+            elementType: *ref_12
             language:
               default:
                 name: AttestationProviderListResult-value
@@ -1277,7 +1280,7 @@ operationGroups:
           - *ref_60
           - *ref_61
         responses:
-          - schema: *ref_17
+          - schema: *ref_12
             language:
               default:
                 name: ''
@@ -1392,7 +1395,7 @@ operationGroups:
           - *ref_64
           - *ref_65
         responses:
-          - schema: *ref_17
+          - schema: *ref_12
             language:
               default:
                 name: ''
@@ -1404,7 +1407,7 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - '200'
-          - schema: *ref_17
+          - schema: *ref_12
             language:
               default:
                 name: ''
@@ -1534,7 +1537,7 @@ operationGroups:
           - *ref_68
           - *ref_69
         responses:
-          - schema: *ref_17
+          - schema: *ref_12
             language:
               default:
                 name: ''

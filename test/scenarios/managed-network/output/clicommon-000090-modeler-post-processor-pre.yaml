@@ -36,7 +36,25 @@ schemas:
           name: string
           description: ''
       protocol: {}
-    - &ref_25
+    - &ref_11
+      type: string
+      apiVersions:
+        - version: 2019-06-01-preview
+      language:
+        default:
+          name: resource_id
+          description: Resource Id
+      protocol: {}
+    - &ref_18
+      type: string
+      apiVersions:
+        - version: 2019-06-01-preview
+      language:
+        default:
+          name: resource_properties_etag
+          description: A unique read-only string that changes whenever the resource is updated.
+      protocol: {}
+    - &ref_24
       type: string
       apiVersions:
         - version: 2019-06-01-preview
@@ -45,7 +63,7 @@ schemas:
           name: resource_id
           description: 'Fully qualified resource Id for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}'
       protocol: {}
-    - &ref_26
+    - &ref_25
       type: string
       apiVersions:
         - version: 2019-06-01-preview
@@ -54,7 +72,7 @@ schemas:
           name: resource_name
           description: The name of the resource
       protocol: {}
-    - &ref_27
+    - &ref_26
       type: string
       apiVersions:
         - version: 2019-06-01-preview
@@ -63,7 +81,7 @@ schemas:
           name: resource_type
           description: The type of the resource. Ex- Microsoft.Compute/virtualMachines or Microsoft.Storage/storageAccounts.
       protocol: {}
-    - &ref_28
+    - &ref_27
       type: string
       apiVersions:
         - version: 2019-06-01-preview
@@ -75,24 +93,6 @@ schemas:
         default:
           name: resource_location
           description: The geo-location where the resource lives
-      protocol: {}
-    - &ref_17
-      type: string
-      apiVersions:
-        - version: 2019-06-01-preview
-      language:
-        default:
-          name: resource_properties_etag
-          description: A unique read-only string that changes whenever the resource is updated.
-      protocol: {}
-    - &ref_5
-      type: string
-      apiVersions:
-        - version: 2019-06-01-preview
-      language:
-        default:
-          name: resource_id
-          description: Resource Id
       protocol: {}
     - &ref_31
       type: string
@@ -121,7 +121,7 @@ schemas:
           name: managed_network_list_result_next_link
           description: Gets the URL to get the next page of results.
       protocol: {}
-    - &ref_13
+    - &ref_14
       type: string
       apiVersions:
         - version: 2019-06-01-preview
@@ -203,7 +203,7 @@ schemas:
           description: URL to get the next set of operation list results if there are any.
       protocol: {}
   choices:
-    - &ref_16
+    - &ref_17
       choices:
         - value: Updating
           language:
@@ -244,7 +244,27 @@ schemas:
         cli:
           cliKey: ProvisioningState
       protocol: {}
-    - &ref_10
+    - &ref_19
+      choices:
+        - value: Connectivity
+          language:
+            default:
+              name: connectivity
+              description: ''
+            cli:
+              cliKey: Connectivity
+      type: choice
+      apiVersions:
+        - version: 2019-06-01-preview
+      choiceType: *ref_0
+      language:
+        default:
+          name: kind
+          description: Responsibility role under which this Managed Network Group will be created
+        cli:
+          cliKey: Kind
+      protocol: {}
+    - &ref_9
       choices:
         - value: HubAndSpokeTopology
           language:
@@ -282,22 +302,11 @@ schemas:
           name: api_version2019_06_01_preview
           description: Api Version (2019-06-01-preview)
       protocol: {}
-    - &ref_18
-      type: constant
-      apiVersions:
-        - version: 2019-06-01-preview
-      value:
-        value: Connectivity
-      valueType: *ref_0
-      language:
-        default:
-          name: kind
-          description: Responsibility role under which this Managed Network Group will be created
-      protocol: {}
   dictionaries:
-    - &ref_20
+    - &ref_28
       type: dictionary
       elementType: *ref_1
+      nullableItems: false
       language:
         default:
           name: tracked_resource_tags
@@ -309,6 +318,7 @@ schemas:
     - &ref_33
       type: dictionary
       elementType: *ref_1
+      nullableItems: false
       language:
         default:
           name: managed_network_update_tags
@@ -318,339 +328,587 @@ schemas:
           cli-mark: checked
       protocol: {}
   objects:
-    - &ref_3
+    - &ref_2
       type: object
       apiVersions:
         - version: 2019-06-01-preview
-      children:
+      parents:
         all:
-          - &ref_2
+          - &ref_21
             type: object
             apiVersions:
               - version: 2019-06-01-preview
             children:
               all:
-                - &ref_19
+                - *ref_2
+              immediate:
+                - *ref_2
+            parents:
+              all:
+                - &ref_3
                   type: object
                   apiVersions:
                     - version: 2019-06-01-preview
-                  parents:
+                  children:
                     all:
-                      - *ref_2
-                      - *ref_3
-                    immediate:
-                      - *ref_2
-                  properties:
-                    - schema: &ref_12
+                      - &ref_13
                         type: object
                         apiVersions:
                           - version: 2019-06-01-preview
                         parents:
                           all:
-                            - &ref_4
+                            - *ref_3
+                          immediate:
+                            - *ref_3
+                        properties:
+                          - schema: &ref_4
                               type: object
                               apiVersions:
                                 - version: 2019-06-01-preview
-                              children:
+                              parents:
                                 all:
-                                  - &ref_14
-                                    type: object
-                                    apiVersions:
-                                      - version: 2019-06-01-preview
-                                    parents:
-                                      all:
-                                        - *ref_4
-                                      immediate:
-                                        - *ref_4
-                                    properties:
-                                      - schema: &ref_49
-                                          type: array
-                                          apiVersions:
-                                            - version: 2019-06-01-preview
-                                          elementType: &ref_6
-                                            type: object
-                                            apiVersions:
-                                              - version: 2019-06-01-preview
-                                            properties:
-                                              - schema: *ref_5
-                                                serializedName: id
-                                                language:
-                                                  default:
-                                                    name: id
-                                                    description: Resource Id
-                                                  cli:
-                                                    cliKey: id
-                                                protocol: {}
-                                            serializationFormats:
-                                              - json
-                                            usage:
-                                              - output
-                                              - input
-                                            language:
-                                              default:
-                                                name: resource_id
-                                                description: Generic pointer to a resource
-                                                namespace: ''
-                                              cli:
-                                                cli-complexity: object_simple
-                                                cli-mark: checked
-                                                cli-simplify-indicator:
-                                                  propertyCountIfSimplify: 1
-                                                  propertyCountIfSimplifyWithoutSimpleObject: 1
-                                                  simplifiable: true
-                                                cliKey: ResourceId
-                                            protocol: {}
-                                          language:
-                                            default:
-                                              name: managed_network_group_properties_management_groups
-                                              description: The collection of management groups covered by the Managed Network
-                                            cli:
-                                              cli-complexity: array_complex
-                                              cli-mark: checked
-                                          protocol: {}
-                                        serializedName: managementGroups
-                                        language:
-                                          default:
-                                            name: management_groups
-                                            description: The collection of management groups covered by the Managed Network
-                                          cli:
-                                            cliKey: managementGroups
-                                        protocol: {}
-                                      - schema: &ref_50
-                                          type: array
-                                          apiVersions:
-                                            - version: 2019-06-01-preview
-                                          elementType: *ref_6
-                                          language:
-                                            default:
-                                              name: managed_network_group_properties_subscriptions
-                                              description: The collection of subscriptions covered by the Managed Network
-                                            cli:
-                                              cli-complexity: array_complex
-                                              cli-mark: checked
-                                          protocol: {}
-                                        serializedName: subscriptions
-                                        language:
-                                          default:
-                                            name: subscriptions
-                                            description: The collection of subscriptions covered by the Managed Network
-                                          cli:
-                                            cliKey: subscriptions
-                                        protocol: {}
-                                      - schema: &ref_51
-                                          type: array
-                                          apiVersions:
-                                            - version: 2019-06-01-preview
-                                          elementType: *ref_6
-                                          language:
-                                            default:
-                                              name: managed_network_group_properties_virtual_networks
-                                              description: The collection of virtual nets covered by the Managed Network
-                                            cli:
-                                              cli-complexity: array_complex
-                                              cli-mark: checked
-                                          protocol: {}
-                                        serializedName: virtualNetworks
-                                        language:
-                                          default:
-                                            name: virtual_networks
-                                            description: The collection of virtual nets covered by the Managed Network
-                                          cli:
-                                            cliKey: virtualNetworks
-                                        protocol: {}
-                                      - schema: &ref_52
-                                          type: array
-                                          apiVersions:
-                                            - version: 2019-06-01-preview
-                                          elementType: *ref_6
-                                          language:
-                                            default:
-                                              name: managed_network_group_properties_subnets
-                                              description: The collection of  subnets covered by the Managed Network
-                                            cli:
-                                              cli-complexity: array_complex
-                                              cli-mark: checked
-                                          protocol: {}
-                                        serializedName: subnets
-                                        language:
-                                          default:
-                                            name: subnets
-                                            description: The collection of  subnets covered by the Managed Network
-                                          cli:
-                                            cliKey: subnets
-                                        protocol: {}
-                                    serializationFormats:
-                                      - json
-                                    usage:
-                                      - output
-                                      - input
-                                    language:
-                                      default:
-                                        name: managed_network_group_properties
-                                        description: Properties of a Managed Network Group
-                                        namespace: ''
-                                      cli:
-                                        cli-complexity: object_complex
-                                        cli-mark: checked
-                                        cli-simplify-indicator:
-                                          propertyCountIfSimplify: 10000
-                                          propertyCountIfSimplifyWithoutSimpleObject: 10000
-                                          simplifiable: false
-                                        cliKey: ManagedNetworkGroupProperties
-                                    protocol: {}
-                                  - &ref_7
+                                  - &ref_6
                                     type: object
                                     apiVersions:
                                       - version: 2019-06-01-preview
                                     children:
                                       all:
-                                        - &ref_8
+                                        - *ref_4
+                                        - &ref_5
                                           type: object
                                           apiVersions:
                                             - version: 2019-06-01-preview
-                                          discriminatorValue: HubAndSpokeTopology
-                                          parents:
+                                          children:
                                             all:
-                                              - *ref_7
-                                              - *ref_4
+                                              - &ref_7
+                                                type: object
+                                                apiVersions:
+                                                  - version: 2019-06-01-preview
+                                                discriminatorValue: HubAndSpokeTopology
+                                                parents:
+                                                  all:
+                                                    - *ref_5
+                                                    - *ref_6
+                                                  immediate:
+                                                    - *ref_5
+                                                serializationFormats:
+                                                  - json
+                                                usage:
+                                                  - output
+                                                  - input
+                                                extensions:
+                                                  x-ms-discriminator-value: HubAndSpokeTopology
+                                                language:
+                                                  default:
+                                                    name: hub_and_spoke_peering_policy_properties
+                                                    description: Properties of a Hub and Spoke Peering Policy
+                                                    namespace: ''
+                                                  cli:
+                                                    cli-complexity: object_simple
+                                                    cli-mark: checked
+                                                    cli-simplify-indicator:
+                                                      propertyCountIfSimplify: 10000
+                                                      propertyCountIfSimplifyWithoutSimpleObject: 10000
+                                                      simplifiable: false
+                                                    cliKey: HubAndSpokePeeringPolicyProperties
+                                                protocol: {}
+                                              - &ref_8
+                                                type: object
+                                                apiVersions:
+                                                  - version: 2019-06-01-preview
+                                                discriminatorValue: MeshTopology
+                                                parents:
+                                                  all:
+                                                    - *ref_5
+                                                    - *ref_6
+                                                  immediate:
+                                                    - *ref_5
+                                                serializationFormats:
+                                                  - json
+                                                usage:
+                                                  - output
+                                                  - input
+                                                extensions:
+                                                  x-ms-discriminator-value: MeshTopology
+                                                language:
+                                                  default:
+                                                    name: mesh_peering_policy_properties
+                                                    description: Properties of a Mesh Peering Policy
+                                                    namespace: ''
+                                                  cli:
+                                                    cli-complexity: object_simple
+                                                    cli-mark: checked
+                                                    cli-simplify-indicator:
+                                                      propertyCountIfSimplify: 10000
+                                                      propertyCountIfSimplifyWithoutSimpleObject: 10000
+                                                      simplifiable: false
+                                                    cliKey: MeshPeeringPolicyProperties
+                                                protocol: {}
                                             immediate:
                                               - *ref_7
+                                              - *ref_8
+                                          discriminator:
+                                            all:
+                                              HubAndSpokeTopology: *ref_7
+                                              MeshTopology: *ref_8
+                                            immediate:
+                                              HubAndSpokeTopology: *ref_7
+                                              MeshTopology: *ref_8
+                                            property: &ref_10
+                                              schema: *ref_9
+                                              isDiscriminator: true
+                                              required: true
+                                              serializedName: type
+                                              language:
+                                                default:
+                                                  name: type
+                                                  description: Gets or sets the connectivity type of a network structure policy
+                                                cli:
+                                                  cliKey: type
+                                              protocol: {}
+                                          discriminatorValue: ManagedNetworkPeeringPolicyProperties
+                                          parents:
+                                            all:
+                                              - *ref_6
+                                            immediate:
+                                              - *ref_6
+                                          properties:
+                                            - *ref_10
+                                            - schema: &ref_12
+                                                type: object
+                                                apiVersions:
+                                                  - version: 2019-06-01-preview
+                                                properties:
+                                                  - schema: *ref_11
+                                                    serializedName: id
+                                                    language:
+                                                      default:
+                                                        name: id
+                                                        description: Resource Id
+                                                      cli:
+                                                        cliKey: id
+                                                    protocol: {}
+                                                serializationFormats:
+                                                  - json
+                                                usage:
+                                                  - output
+                                                  - input
+                                                language:
+                                                  default:
+                                                    name: resource_id
+                                                    description: Generic pointer to a resource
+                                                    namespace: ''
+                                                  cli:
+                                                    cli-complexity: object_simple
+                                                    cli-mark: checked
+                                                    cli-simplify-indicator:
+                                                      propertyCountIfSimplify: 1
+                                                      propertyCountIfSimplifyWithoutSimpleObject: 1
+                                                      simplifiable: true
+                                                    cliKey: ResourceId
+                                                protocol: {}
+                                              required: false
+                                              serializedName: hub
+                                              language:
+                                                default:
+                                                  name: hub
+                                                  description: Gets or sets the hub virtual network ID
+                                                cli:
+                                                  cliKey: hub
+                                              protocol: {}
+                                            - schema: &ref_54
+                                                type: array
+                                                apiVersions:
+                                                  - version: 2019-06-01-preview
+                                                elementType: *ref_12
+                                                language:
+                                                  default:
+                                                    name: managed_network_peering_policy_properties_spokes
+                                                    description: Gets or sets the spokes group IDs
+                                                  cli:
+                                                    cli-complexity: array_complex
+                                                    cli-mark: checked
+                                                protocol: {}
+                                              required: false
+                                              serializedName: spokes
+                                              language:
+                                                default:
+                                                  name: spokes
+                                                  description: Gets or sets the spokes group IDs
+                                                cli:
+                                                  cliKey: spokes
+                                              protocol: {}
+                                            - schema: &ref_55
+                                                type: array
+                                                apiVersions:
+                                                  - version: 2019-06-01-preview
+                                                elementType: *ref_12
+                                                language:
+                                                  default:
+                                                    name: managed_network_peering_policy_properties_mesh
+                                                    description: Gets or sets the mesh group IDs
+                                                  cli:
+                                                    cli-complexity: array_complex
+                                                    cli-mark: checked
+                                                protocol: {}
+                                              required: false
+                                              serializedName: mesh
+                                              language:
+                                                default:
+                                                  name: mesh
+                                                  description: Gets or sets the mesh group IDs
+                                                cli:
+                                                  cliKey: mesh
+                                              protocol: {}
                                           serializationFormats:
                                             - json
                                           usage:
                                             - output
                                             - input
-                                          extensions:
-                                            x-ms-discriminator-value: HubAndSpokeTopology
                                           language:
                                             default:
-                                              name: hub_and_spoke_peering_policy_properties
-                                              description: Properties of a Hub and Spoke Peering Policy
+                                              name: managed_network_peering_policy_properties
+                                              description: Properties of a Managed Network Peering Policy
                                               namespace: ''
                                             cli:
-                                              cli-complexity: object_simple
+                                              cli-complexity: object_complex
                                               cli-mark: checked
                                               cli-simplify-indicator:
                                                 propertyCountIfSimplify: 10000
                                                 propertyCountIfSimplifyWithoutSimpleObject: 10000
                                                 simplifiable: false
-                                              cliKey: HubAndSpokePeeringPolicyProperties
+                                              cliKey: ManagedNetworkPeeringPolicyProperties
                                           protocol: {}
-                                        - &ref_9
+                                        - &ref_15
                                           type: object
                                           apiVersions:
                                             - version: 2019-06-01-preview
-                                          discriminatorValue: MeshTopology
                                           parents:
                                             all:
-                                              - *ref_7
-                                              - *ref_4
+                                              - *ref_6
                                             immediate:
-                                              - *ref_7
+                                              - *ref_6
+                                          properties:
+                                            - schema: &ref_29
+                                                type: object
+                                                apiVersions:
+                                                  - version: 2019-06-01-preview
+                                                properties:
+                                                  - schema: &ref_45
+                                                      type: array
+                                                      apiVersions:
+                                                        - version: 2019-06-01-preview
+                                                      elementType: *ref_12
+                                                      language:
+                                                        default:
+                                                          name: scope_management_groups
+                                                          description: The collection of management groups covered by the Managed Network
+                                                        cli:
+                                                          cli-complexity: array_complex
+                                                          cli-mark: checked
+                                                      protocol: {}
+                                                    serializedName: managementGroups
+                                                    language:
+                                                      default:
+                                                        name: management_groups
+                                                        description: The collection of management groups covered by the Managed Network
+                                                      cli:
+                                                        cliKey: managementGroups
+                                                    protocol: {}
+                                                  - schema: &ref_46
+                                                      type: array
+                                                      apiVersions:
+                                                        - version: 2019-06-01-preview
+                                                      elementType: *ref_12
+                                                      language:
+                                                        default:
+                                                          name: scope_subscriptions
+                                                          description: The collection of subscriptions covered by the Managed Network
+                                                        cli:
+                                                          cli-complexity: array_complex
+                                                          cli-mark: checked
+                                                      protocol: {}
+                                                    serializedName: subscriptions
+                                                    language:
+                                                      default:
+                                                        name: subscriptions
+                                                        description: The collection of subscriptions covered by the Managed Network
+                                                      cli:
+                                                        cliKey: subscriptions
+                                                    protocol: {}
+                                                  - schema: &ref_47
+                                                      type: array
+                                                      apiVersions:
+                                                        - version: 2019-06-01-preview
+                                                      elementType: *ref_12
+                                                      language:
+                                                        default:
+                                                          name: scope_virtual_networks
+                                                          description: The collection of virtual nets covered by the Managed Network
+                                                        cli:
+                                                          cli-complexity: array_complex
+                                                          cli-mark: checked
+                                                      protocol: {}
+                                                    serializedName: virtualNetworks
+                                                    language:
+                                                      default:
+                                                        name: virtual_networks
+                                                        description: The collection of virtual nets covered by the Managed Network
+                                                      cli:
+                                                        cliKey: virtualNetworks
+                                                    protocol: {}
+                                                  - schema: &ref_48
+                                                      type: array
+                                                      apiVersions:
+                                                        - version: 2019-06-01-preview
+                                                      elementType: *ref_12
+                                                      language:
+                                                        default:
+                                                          name: scope_subnets
+                                                          description: The collection of  subnets covered by the Managed Network
+                                                        cli:
+                                                          cli-complexity: array_complex
+                                                          cli-mark: checked
+                                                      protocol: {}
+                                                    serializedName: subnets
+                                                    language:
+                                                      default:
+                                                        name: subnets
+                                                        description: The collection of  subnets covered by the Managed Network
+                                                      cli:
+                                                        cliKey: subnets
+                                                    protocol: {}
+                                                serializationFormats:
+                                                  - json
+                                                usage:
+                                                  - output
+                                                  - input
+                                                language:
+                                                  default:
+                                                    name: scope
+                                                    description: Scope of a Managed Network
+                                                    namespace: ''
+                                                  cli:
+                                                    cli-complexity: object_complex
+                                                    cli-mark: checked
+                                                    cli-simplify-indicator:
+                                                      propertyCountIfSimplify: 10000
+                                                      propertyCountIfSimplifyWithoutSimpleObject: 10000
+                                                      simplifiable: false
+                                                    cliKey: Scope
+                                                protocol: {}
+                                              serializedName: scope
+                                              extensions:
+                                                x-ms-client-flatten: true
+                                              language:
+                                                default:
+                                                  name: scope
+                                                  description: >-
+                                                    The collection of management groups, subscriptions, virtual networks, and subnets by the Managed Network. This is a read-only property that is reflective of all ScopeAssignments for this
+                                                    Managed Network
+                                                cli:
+                                                  cliKey: scope
+                                              protocol: {}
+                                            - schema: &ref_30
+                                                type: object
+                                                apiVersions:
+                                                  - version: 2019-06-01-preview
+                                                properties:
+                                                  - schema: &ref_53
+                                                      type: array
+                                                      apiVersions:
+                                                        - version: 2019-06-01-preview
+                                                      elementType: *ref_13
+                                                      language:
+                                                        default:
+                                                          name: connectivity_collection_groups
+                                                          description: The collection of connectivity related Managed Network Groups within the Managed Network
+                                                        cli:
+                                                          cli-complexity: array_complex
+                                                          cli-mark: checked
+                                                      protocol: {}
+                                                    readOnly: true
+                                                    serializedName: groups
+                                                    language:
+                                                      default:
+                                                        name: groups
+                                                        description: The collection of connectivity related Managed Network Groups within the Managed Network
+                                                      cli:
+                                                        cliKey: groups
+                                                    protocol: {}
+                                                  - schema: &ref_56
+                                                      type: array
+                                                      apiVersions:
+                                                        - version: 2019-06-01-preview
+                                                      elementType: &ref_20
+                                                        type: object
+                                                        apiVersions:
+                                                          - version: 2019-06-01-preview
+                                                        parents:
+                                                          all:
+                                                            - *ref_3
+                                                          immediate:
+                                                            - *ref_3
+                                                        properties:
+                                                          - schema: *ref_5
+                                                            serializedName: properties
+                                                            language:
+                                                              default:
+                                                                name: properties
+                                                                description: Gets or sets the properties of a Managed Network Policy
+                                                              cli:
+                                                                cliKey: properties
+                                                            protocol: {}
+                                                        serializationFormats:
+                                                          - json
+                                                        usage:
+                                                          - output
+                                                          - input
+                                                        language:
+                                                          default:
+                                                            name: managed_network_peering_policy
+                                                            description: The Managed Network Peering Policy resource
+                                                            namespace: ''
+                                                          cli:
+                                                            cli-complexity: object_complex
+                                                            cli-mark: checked
+                                                            cli-simplify-indicator:
+                                                              propertyCountIfSimplify: 10000
+                                                              propertyCountIfSimplifyWithoutSimpleObject: 10000
+                                                              simplifiable: false
+                                                            cliKey: ManagedNetworkPeeringPolicy
+                                                        protocol: {}
+                                                      language:
+                                                        default:
+                                                          name: connectivity_collection_peerings
+                                                          description: The collection of Managed Network Peering Policies within the Managed Network
+                                                        cli:
+                                                          cli-complexity: array_complex
+                                                          cli-mark: checked
+                                                      protocol: {}
+                                                    readOnly: true
+                                                    serializedName: peerings
+                                                    language:
+                                                      default:
+                                                        name: peerings
+                                                        description: The collection of Managed Network Peering Policies within the Managed Network
+                                                      cli:
+                                                        cliKey: peerings
+                                                    protocol: {}
+                                                serializationFormats:
+                                                  - json
+                                                usage:
+                                                  - output
+                                                  - input
+                                                language:
+                                                  default:
+                                                    name: connectivity_collection
+                                                    description: The collection of Connectivity related groups and policies within the Managed Network
+                                                    namespace: ''
+                                                  cli:
+                                                    cli-complexity: object_complex
+                                                    cli-mark: checked
+                                                    cli-simplify-indicator:
+                                                      propertyCountIfSimplify: 0
+                                                      propertyCountIfSimplifyWithoutSimpleObject: 0
+                                                      simplifiable: true
+                                                    cliKey: ConnectivityCollection
+                                                protocol: {}
+                                              readOnly: true
+                                              serializedName: connectivity
+                                              extensions:
+                                                x-ms-client-flatten: true
+                                              language:
+                                                default:
+                                                  name: connectivity
+                                                  description: The collection of groups and policies concerned with connectivity
+                                                cli:
+                                                  cliKey: connectivity
+                                              protocol: {}
                                           serializationFormats:
                                             - json
                                           usage:
                                             - output
                                             - input
-                                          extensions:
-                                            x-ms-discriminator-value: MeshTopology
                                           language:
                                             default:
-                                              name: mesh_peering_policy_properties
-                                              description: Properties of a Mesh Peering Policy
+                                              name: managed_network_properties
+                                              description: Properties of Managed Network
                                               namespace: ''
                                             cli:
-                                              cli-complexity: object_simple
+                                              cli-complexity: object_complex
                                               cli-mark: checked
                                               cli-simplify-indicator:
                                                 propertyCountIfSimplify: 10000
                                                 propertyCountIfSimplifyWithoutSimpleObject: 10000
                                                 simplifiable: false
-                                              cliKey: MeshPeeringPolicyProperties
+                                              cliKey: ManagedNetworkProperties
                                           protocol: {}
-                                      immediate:
+                                        - &ref_16
+                                          type: object
+                                          apiVersions:
+                                            - version: 2019-06-01-preview
+                                          parents:
+                                            all:
+                                              - *ref_6
+                                            immediate:
+                                              - *ref_6
+                                          properties:
+                                            - schema: *ref_14
+                                              serializedName: assignedManagedNetwork
+                                              language:
+                                                default:
+                                                  name: assigned_managed_network
+                                                  description: The managed network ID with scope will be assigned to.
+                                                cli:
+                                                  cliKey: assignedManagedNetwork
+                                              protocol: {}
+                                          serializationFormats:
+                                            - json
+                                          usage:
+                                            - output
+                                            - input
+                                          language:
+                                            default:
+                                              name: scope_assignment_properties
+                                              description: Properties of Managed Network
+                                              namespace: ''
+                                            cli:
+                                              cli-complexity: object_simple
+                                              cli-mark: checked
+                                              cli-simplify-indicator:
+                                                propertyCountIfSimplify: 1
+                                                propertyCountIfSimplifyWithoutSimpleObject: 1
+                                                simplifiable: true
+                                              cliKey: ScopeAssignmentProperties
+                                          protocol: {}
+                                        - *ref_7
                                         - *ref_8
-                                        - *ref_9
-                                    discriminator:
-                                      all:
-                                        HubAndSpokeTopology: *ref_8
-                                        MeshTopology: *ref_9
-                                      immediate:
-                                        HubAndSpokeTopology: *ref_8
-                                        MeshTopology: *ref_9
-                                      property: &ref_11
-                                        schema: *ref_10
-                                        isDiscriminator: true
-                                        required: true
-                                        serializedName: type
-                                        language:
-                                          default:
-                                            name: type
-                                            description: Gets or sets the connectivity type of a network structure policy
-                                          cli:
-                                            cliKey: type
-                                        protocol: {}
-                                    discriminatorValue: ManagedNetworkPeeringPolicyProperties
-                                    parents:
-                                      all:
-                                        - *ref_4
                                       immediate:
                                         - *ref_4
+                                        - *ref_5
+                                        - *ref_15
+                                        - *ref_16
                                     properties:
-                                      - *ref_11
-                                      - schema: *ref_6
-                                        required: false
-                                        serializedName: hub
+                                      - schema: *ref_17
+                                        readOnly: true
+                                        serializedName: provisioningState
                                         language:
                                           default:
-                                            name: hub
-                                            description: Gets or sets the hub virtual network ID
+                                            name: provisioning_state
+                                            description: Provisioning state of the ManagedNetwork resource.
                                           cli:
-                                            cliKey: hub
+                                            cliKey: provisioningState
                                         protocol: {}
-                                      - schema: &ref_54
-                                          type: array
-                                          apiVersions:
-                                            - version: 2019-06-01-preview
-                                          elementType: *ref_6
-                                          language:
-                                            default:
-                                              name: managed_network_peering_policy_properties_spokes
-                                              description: Gets or sets the spokes group IDs
-                                            cli:
-                                              cli-complexity: array_complex
-                                              cli-mark: checked
-                                          protocol: {}
-                                        required: false
-                                        serializedName: spokes
+                                      - schema: *ref_18
+                                        readOnly: true
+                                        serializedName: etag
                                         language:
                                           default:
-                                            name: spokes
-                                            description: Gets or sets the spokes group IDs
+                                            name: etag
+                                            description: A unique read-only string that changes whenever the resource is updated.
                                           cli:
-                                            cliKey: spokes
-                                        protocol: {}
-                                      - schema: &ref_55
-                                          type: array
-                                          apiVersions:
-                                            - version: 2019-06-01-preview
-                                          elementType: *ref_6
-                                          language:
-                                            default:
-                                              name: managed_network_peering_policy_properties_mesh
-                                              description: Gets or sets the mesh group IDs
-                                            cli:
-                                              cli-complexity: array_complex
-                                              cli-mark: checked
-                                          protocol: {}
-                                        required: false
-                                        serializedName: mesh
-                                        language:
-                                          default:
-                                            name: mesh
-                                            description: Gets or sets the mesh group IDs
-                                          cli:
-                                            cliKey: mesh
+                                            cliKey: etag
                                         protocol: {}
                                     serializationFormats:
                                       - json
@@ -659,120 +917,29 @@ schemas:
                                       - input
                                     language:
                                       default:
-                                        name: managed_network_peering_policy_properties
-                                        description: Properties of a Managed Network Peering Policy
-                                        namespace: ''
-                                      cli:
-                                        cli-complexity: object_complex
-                                        cli-mark: checked
-                                        cli-simplify-indicator:
-                                          propertyCountIfSimplify: 10000
-                                          propertyCountIfSimplifyWithoutSimpleObject: 10000
-                                          simplifiable: false
-                                        cliKey: ManagedNetworkPeeringPolicyProperties
-                                    protocol: {}
-                                  - *ref_12
-                                  - &ref_15
-                                    type: object
-                                    apiVersions:
-                                      - version: 2019-06-01-preview
-                                    parents:
-                                      all:
-                                        - *ref_4
-                                      immediate:
-                                        - *ref_4
-                                    properties:
-                                      - schema: *ref_13
-                                        serializedName: assignedManagedNetwork
-                                        language:
-                                          default:
-                                            name: assigned_managed_network
-                                            description: The managed network ID with scope will be assigned to.
-                                          cli:
-                                            cliKey: assignedManagedNetwork
-                                        protocol: {}
-                                    serializationFormats:
-                                      - json
-                                    usage:
-                                      - output
-                                      - input
-                                    language:
-                                      default:
-                                        name: scope_assignment_properties
-                                        description: Properties of Managed Network
+                                        name: resource_properties
+                                        description: Base for resource properties.
                                         namespace: ''
                                       cli:
                                         cli-complexity: object_simple
                                         cli-mark: checked
                                         cli-simplify-indicator:
-                                          propertyCountIfSimplify: 1
-                                          propertyCountIfSimplifyWithoutSimpleObject: 1
+                                          propertyCountIfSimplify: 0
+                                          propertyCountIfSimplifyWithoutSimpleObject: 0
                                           simplifiable: true
-                                        cliKey: ScopeAssignmentProperties
+                                        cliKey: ResourceProperties
                                     protocol: {}
-                                  - *ref_8
-                                  - *ref_9
                                 immediate:
-                                  - *ref_14
-                                  - *ref_7
-                                  - *ref_12
-                                  - *ref_15
+                                  - *ref_6
                               properties:
-                                - schema: *ref_16
-                                  readOnly: true
-                                  serializedName: provisioningState
-                                  language:
-                                    default:
-                                      name: provisioning_state
-                                      description: Provisioning state of the ManagedNetwork resource.
-                                    cli:
-                                      cliKey: provisioningState
-                                  protocol: {}
-                                - schema: *ref_17
-                                  readOnly: true
-                                  serializedName: etag
-                                  language:
-                                    default:
-                                      name: etag
-                                      description: A unique read-only string that changes whenever the resource is updated.
-                                    cli:
-                                      cliKey: etag
-                                  protocol: {}
-                              serializationFormats:
-                                - json
-                              usage:
-                                - output
-                                - input
-                              language:
-                                default:
-                                  name: resource_properties
-                                  description: Base for resource properties.
-                                  namespace: ''
-                                cli:
-                                  cli-complexity: object_simple
-                                  cli-mark: checked
-                                  cli-simplify-indicator:
-                                    propertyCountIfSimplify: 0
-                                    propertyCountIfSimplifyWithoutSimpleObject: 0
-                                    simplifiable: true
-                                  cliKey: ResourceProperties
-                              protocol: {}
-                          immediate:
-                            - *ref_4
-                        properties:
-                          - schema: &ref_29
-                              type: object
-                              apiVersions:
-                                - version: 2019-06-01-preview
-                              properties:
-                                - schema: &ref_45
+                                - schema: &ref_49
                                     type: array
                                     apiVersions:
                                       - version: 2019-06-01-preview
-                                    elementType: *ref_6
+                                    elementType: *ref_12
                                     language:
                                       default:
-                                        name: scope_management_groups
+                                        name: managed_network_group_properties_management_groups
                                         description: The collection of management groups covered by the Managed Network
                                       cli:
                                         cli-complexity: array_complex
@@ -786,14 +953,14 @@ schemas:
                                     cli:
                                       cliKey: managementGroups
                                   protocol: {}
-                                - schema: &ref_46
+                                - schema: &ref_50
                                     type: array
                                     apiVersions:
                                       - version: 2019-06-01-preview
-                                    elementType: *ref_6
+                                    elementType: *ref_12
                                     language:
                                       default:
-                                        name: scope_subscriptions
+                                        name: managed_network_group_properties_subscriptions
                                         description: The collection of subscriptions covered by the Managed Network
                                       cli:
                                         cli-complexity: array_complex
@@ -807,14 +974,14 @@ schemas:
                                     cli:
                                       cliKey: subscriptions
                                   protocol: {}
-                                - schema: &ref_47
+                                - schema: &ref_51
                                     type: array
                                     apiVersions:
                                       - version: 2019-06-01-preview
-                                    elementType: *ref_6
+                                    elementType: *ref_12
                                     language:
                                       default:
-                                        name: scope_virtual_networks
+                                        name: managed_network_group_properties_virtual_networks
                                         description: The collection of virtual nets covered by the Managed Network
                                       cli:
                                         cli-complexity: array_complex
@@ -828,14 +995,14 @@ schemas:
                                     cli:
                                       cliKey: virtualNetworks
                                   protocol: {}
-                                - schema: &ref_48
+                                - schema: &ref_52
                                     type: array
                                     apiVersions:
                                       - version: 2019-06-01-preview
-                                    elementType: *ref_6
+                                    elementType: *ref_12
                                     language:
                                       default:
-                                        name: scope_subnets
+                                        name: managed_network_group_properties_subnets
                                         description: The collection of  subnets covered by the Managed Network
                                       cli:
                                         cli-complexity: array_complex
@@ -856,8 +1023,8 @@ schemas:
                                 - input
                               language:
                                 default:
-                                  name: scope
-                                  description: Scope of a Managed Network
+                                  name: managed_network_group_properties
+                                  description: Properties of a Managed Network Group
                                   namespace: ''
                                 cli:
                                   cli-complexity: object_complex
@@ -866,181 +1033,26 @@ schemas:
                                     propertyCountIfSimplify: 10000
                                     propertyCountIfSimplifyWithoutSimpleObject: 10000
                                     simplifiable: false
-                                  cliKey: Scope
+                                  cliKey: ManagedNetworkGroupProperties
                               protocol: {}
-                            serializedName: scope
+                            serializedName: properties
                             extensions:
                               x-ms-client-flatten: true
                             language:
                               default:
-                                name: scope
-                                description: 'The collection of management groups, subscriptions, virtual networks, and subnets by the Managed Network. This is a read-only property that is reflective of all ScopeAssignments for this Managed Network'
+                                name: properties
+                                description: Gets or sets the properties of a network group
                               cli:
-                                cliKey: scope
+                                cliKey: properties
                             protocol: {}
-                          - schema: &ref_30
-                              type: object
-                              apiVersions:
-                                - version: 2019-06-01-preview
-                              properties:
-                                - schema: &ref_53
-                                    type: array
-                                    apiVersions:
-                                      - version: 2019-06-01-preview
-                                    elementType: &ref_21
-                                      type: object
-                                      apiVersions:
-                                        - version: 2019-06-01-preview
-                                      parents:
-                                        all:
-                                          - *ref_3
-                                        immediate:
-                                          - *ref_3
-                                      properties:
-                                        - schema: *ref_14
-                                          serializedName: properties
-                                          extensions:
-                                            x-ms-client-flatten: true
-                                          language:
-                                            default:
-                                              name: properties
-                                              description: Gets or sets the properties of a network group
-                                            cli:
-                                              cliKey: properties
-                                          protocol: {}
-                                        - schema: *ref_18
-                                          serializedName: kind
-                                          language:
-                                            default:
-                                              name: kind
-                                              description: Responsibility role under which this Managed Network Group will be created
-                                            cli:
-                                              cliKey: kind
-                                          protocol: {}
-                                      serializationFormats:
-                                        - json
-                                      usage:
-                                        - output
-                                        - input
-                                      language:
-                                        default:
-                                          name: managed_network_group
-                                          description: The Managed Network Group resource
-                                          namespace: ''
-                                        cli:
-                                          cli-complexity: object_complex
-                                          cli-mark: checked
-                                          cli-simplify-indicator:
-                                            propertyCountIfSimplify: 10000
-                                            propertyCountIfSimplifyWithoutSimpleObject: 10000
-                                            simplifiable: false
-                                          cliKey: ManagedNetworkGroup
-                                      protocol: {}
-                                    language:
-                                      default:
-                                        name: connectivity_collection_groups
-                                        description: The collection of connectivity related Managed Network Groups within the Managed Network
-                                      cli:
-                                        cli-complexity: array_complex
-                                        cli-mark: checked
-                                    protocol: {}
-                                  readOnly: true
-                                  serializedName: groups
-                                  language:
-                                    default:
-                                      name: groups
-                                      description: The collection of connectivity related Managed Network Groups within the Managed Network
-                                    cli:
-                                      cliKey: groups
-                                  protocol: {}
-                                - schema: &ref_56
-                                    type: array
-                                    apiVersions:
-                                      - version: 2019-06-01-preview
-                                    elementType: &ref_22
-                                      type: object
-                                      apiVersions:
-                                        - version: 2019-06-01-preview
-                                      parents:
-                                        all:
-                                          - *ref_3
-                                        immediate:
-                                          - *ref_3
-                                      properties:
-                                        - schema: *ref_7
-                                          serializedName: properties
-                                          language:
-                                            default:
-                                              name: properties
-                                              description: Gets or sets the properties of a Managed Network Policy
-                                            cli:
-                                              cliKey: properties
-                                          protocol: {}
-                                      serializationFormats:
-                                        - json
-                                      usage:
-                                        - output
-                                        - input
-                                      language:
-                                        default:
-                                          name: managed_network_peering_policy
-                                          description: The Managed Network Peering Policy resource
-                                          namespace: ''
-                                        cli:
-                                          cli-complexity: object_complex
-                                          cli-mark: checked
-                                          cli-simplify-indicator:
-                                            propertyCountIfSimplify: 10000
-                                            propertyCountIfSimplifyWithoutSimpleObject: 10000
-                                            simplifiable: false
-                                          cliKey: ManagedNetworkPeeringPolicy
-                                      protocol: {}
-                                    language:
-                                      default:
-                                        name: connectivity_collection_peerings
-                                        description: The collection of Managed Network Peering Policies within the Managed Network
-                                      cli:
-                                        cli-complexity: array_complex
-                                        cli-mark: checked
-                                    protocol: {}
-                                  readOnly: true
-                                  serializedName: peerings
-                                  language:
-                                    default:
-                                      name: peerings
-                                      description: The collection of Managed Network Peering Policies within the Managed Network
-                                    cli:
-                                      cliKey: peerings
-                                  protocol: {}
-                              serializationFormats:
-                                - json
-                              usage:
-                                - output
-                                - input
-                              language:
-                                default:
-                                  name: connectivity_collection
-                                  description: The collection of Connectivity related groups and policies within the Managed Network
-                                  namespace: ''
-                                cli:
-                                  cli-complexity: object_complex
-                                  cli-mark: checked
-                                  cli-simplify-indicator:
-                                    propertyCountIfSimplify: 0
-                                    propertyCountIfSimplifyWithoutSimpleObject: 0
-                                    simplifiable: true
-                                  cliKey: ConnectivityCollection
-                              protocol: {}
-                            readOnly: true
-                            serializedName: connectivity
-                            extensions:
-                              x-ms-client-flatten: true
+                          - schema: *ref_19
+                            serializedName: kind
                             language:
                               default:
-                                name: connectivity
-                                description: The collection of groups and policies concerned with connectivity
+                                name: kind
+                                description: Responsibility role under which this Managed Network Group will be created
                               cli:
-                                cliKey: connectivity
+                                cliKey: kind
                             protocol: {}
                         serializationFormats:
                           - json
@@ -1049,8 +1061,8 @@ schemas:
                           - input
                         language:
                           default:
-                            name: managed_network_properties
-                            description: Properties of Managed Network
+                            name: managed_network_group
+                            description: The Managed Network Group resource
                             namespace: ''
                           cli:
                             cli-complexity: object_complex
@@ -1059,46 +1071,150 @@ schemas:
                               propertyCountIfSimplify: 10000
                               propertyCountIfSimplifyWithoutSimpleObject: 10000
                               simplifiable: false
-                            cliKey: ManagedNetworkProperties
+                            cliKey: ManagedNetworkGroup
                         protocol: {}
-                      serializedName: properties
-                      extensions:
-                        x-ms-client-flatten: true
+                      - *ref_20
+                      - *ref_21
+                      - *ref_2
+                      - &ref_22
+                        type: object
+                        apiVersions:
+                          - version: 2019-06-01-preview
+                        parents:
+                          all:
+                            - *ref_3
+                          immediate:
+                            - *ref_3
+                        properties:
+                          - schema: *ref_16
+                            serializedName: properties
+                            extensions:
+                              x-ms-client-flatten: true
+                            language:
+                              default:
+                                name: properties
+                                description: The Scope Assignment properties
+                              cli:
+                                cliKey: properties
+                            protocol: {}
+                        serializationFormats:
+                          - json
+                        usage:
+                          - output
+                          - input
+                        language:
+                          default:
+                            name: scope_assignment
+                            description: The Managed Network resource
+                            namespace: ''
+                          cli:
+                            cli-complexity: object_complex
+                            cli-mark: checked
+                            cli-simplify-indicator:
+                              propertyCountIfSimplify: 2
+                              propertyCountIfSimplifyWithoutSimpleObject: 2
+                              simplifiable: true
+                            cliKey: ScopeAssignment
+                        protocol: {}
+                      - &ref_23
+                        type: object
+                        apiVersions:
+                          - version: 2019-06-01-preview
+                        parents:
+                          all:
+                            - *ref_3
+                          immediate:
+                            - *ref_3
+                        serializationFormats:
+                          - json
+                        usage:
+                          - output
+                          - input
+                        language:
+                          default:
+                            name: proxy_resource
+                            description: The resource model definition for a ARM proxy resource. It will have everything other than required location and tags
+                            namespace: ''
+                          cli:
+                            cli-complexity: object_simple
+                            cli-mark: checked
+                            cli-simplify-indicator:
+                              propertyCountIfSimplify: 1
+                              propertyCountIfSimplifyWithoutSimpleObject: 1
+                              simplifiable: true
+                            cliKey: ProxyResource
+                        protocol: {}
+                    immediate:
+                      - *ref_13
+                      - *ref_20
+                      - *ref_21
+                      - *ref_22
+                      - *ref_23
+                  properties:
+                    - schema: *ref_24
+                      readOnly: true
+                      serializedName: id
                       language:
                         default:
-                          name: properties
-                          description: The MNC properties
+                          name: id
+                          description: 'Fully qualified resource Id for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}'
                         cli:
-                          cliKey: properties
+                          cliKey: id
+                      protocol: {}
+                    - schema: *ref_25
+                      readOnly: true
+                      serializedName: name
+                      language:
+                        default:
+                          name: name
+                          description: The name of the resource
+                        cli:
+                          cliKey: name
+                      protocol: {}
+                    - schema: *ref_26
+                      readOnly: true
+                      serializedName: type
+                      language:
+                        default:
+                          name: type
+                          description: The type of the resource. Ex- Microsoft.Compute/virtualMachines or Microsoft.Storage/storageAccounts.
+                        cli:
+                          cliKey: type
+                      protocol: {}
+                    - schema: *ref_27
+                      serializedName: location
+                      language:
+                        default:
+                          name: location
+                          description: The geo-location where the resource lives
+                        cli:
+                          cliKey: location
                       protocol: {}
                   serializationFormats:
                     - json
                   usage:
                     - output
                     - input
+                  extensions:
+                    x-ms-azure-resource: true
                   language:
                     default:
-                      name: managed_network
-                      description: The Managed Network resource
+                      name: resource
+                      description: The general resource model definition
                       namespace: ''
                     cli:
-                      cli-complexity: object_complex
+                      cli-complexity: object_simple
                       cli-mark: checked
                       cli-simplify-indicator:
-                        propertyCountIfSimplify: 10000
-                        propertyCountIfSimplifyWithoutSimpleObject: 10000
-                        simplifiable: false
-                      cliKey: ManagedNetwork
+                        propertyCountIfSimplify: 1
+                        propertyCountIfSimplifyWithoutSimpleObject: 1
+                        simplifiable: true
+                      cliKey: Resource
                   protocol: {}
-              immediate:
-                - *ref_19
-            parents:
-              all:
-                - *ref_3
               immediate:
                 - *ref_3
             properties:
-              - schema: *ref_20
+              - schema: *ref_28
                 required: false
                 serializedName: tags
                 language:
@@ -1127,155 +1243,51 @@ schemas:
                   simplifiable: false
                 cliKey: TrackedResource
             protocol: {}
-          - *ref_21
-          - *ref_22
-          - *ref_19
-          - &ref_23
-            type: object
-            apiVersions:
-              - version: 2019-06-01-preview
-            parents:
-              all:
-                - *ref_3
-              immediate:
-                - *ref_3
-            properties:
-              - schema: *ref_15
-                serializedName: properties
-                extensions:
-                  x-ms-client-flatten: true
-                language:
-                  default:
-                    name: properties
-                    description: The Scope Assignment properties
-                  cli:
-                    cliKey: properties
-                protocol: {}
-            serializationFormats:
-              - json
-            usage:
-              - output
-              - input
-            language:
-              default:
-                name: scope_assignment
-                description: The Managed Network resource
-                namespace: ''
-              cli:
-                cli-complexity: object_complex
-                cli-mark: checked
-                cli-simplify-indicator:
-                  propertyCountIfSimplify: 2
-                  propertyCountIfSimplifyWithoutSimpleObject: 2
-                  simplifiable: true
-                cliKey: ScopeAssignment
-            protocol: {}
-          - &ref_24
-            type: object
-            apiVersions:
-              - version: 2019-06-01-preview
-            parents:
-              all:
-                - *ref_3
-              immediate:
-                - *ref_3
-            serializationFormats:
-              - json
-            usage:
-              - output
-              - input
-            language:
-              default:
-                name: proxy_resource
-                description: The resource model definition for a ARM proxy resource. It will have everything other than required location and tags
-                namespace: ''
-              cli:
-                cli-complexity: object_simple
-                cli-mark: checked
-                cli-simplify-indicator:
-                  propertyCountIfSimplify: 1
-                  propertyCountIfSimplifyWithoutSimpleObject: 1
-                  simplifiable: true
-                cliKey: ProxyResource
-            protocol: {}
+          - *ref_3
         immediate:
-          - *ref_2
           - *ref_21
-          - *ref_22
-          - *ref_23
-          - *ref_24
       properties:
-        - schema: *ref_25
-          readOnly: true
-          serializedName: id
+        - schema: *ref_15
+          serializedName: properties
+          extensions:
+            x-ms-client-flatten: true
           language:
             default:
-              name: id
-              description: 'Fully qualified resource Id for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}'
+              name: properties
+              description: The MNC properties
             cli:
-              cliKey: id
-          protocol: {}
-        - schema: *ref_26
-          readOnly: true
-          serializedName: name
-          language:
-            default:
-              name: name
-              description: The name of the resource
-            cli:
-              cliKey: name
-          protocol: {}
-        - schema: *ref_27
-          readOnly: true
-          serializedName: type
-          language:
-            default:
-              name: type
-              description: The type of the resource. Ex- Microsoft.Compute/virtualMachines or Microsoft.Storage/storageAccounts.
-            cli:
-              cliKey: type
-          protocol: {}
-        - schema: *ref_28
-          serializedName: location
-          language:
-            default:
-              name: location
-              description: The geo-location where the resource lives
-            cli:
-              cliKey: location
+              cliKey: properties
           protocol: {}
       serializationFormats:
         - json
       usage:
         - output
         - input
-      extensions:
-        x-ms-azure-resource: true
       language:
         default:
-          name: resource
-          description: The general resource model definition
+          name: managed_network
+          description: The Managed Network resource
           namespace: ''
         cli:
-          cli-complexity: object_simple
+          cli-complexity: object_complex
           cli-mark: checked
           cli-simplify-indicator:
-            propertyCountIfSimplify: 1
-            propertyCountIfSimplifyWithoutSimpleObject: 1
-            simplifiable: true
-          cliKey: Resource
+            propertyCountIfSimplify: 10000
+            propertyCountIfSimplifyWithoutSimpleObject: 10000
+            simplifiable: false
+          cliKey: ManagedNetwork
       protocol: {}
-    - *ref_2
-    - *ref_19
-    - *ref_4
-    - *ref_12
+    - *ref_15
     - *ref_29
-    - *ref_6
+    - *ref_12
     - *ref_30
+    - *ref_13
+    - *ref_4
+    - *ref_6
+    - *ref_3
+    - *ref_20
+    - *ref_5
     - *ref_21
-    - *ref_14
-    - *ref_22
-    - *ref_7
     - &ref_68
       type: object
       apiVersions:
@@ -1304,7 +1316,7 @@ schemas:
       serializationFormats:
         - json
       usage:
-        - output
+        - exception
       language:
         default:
           name: error_response
@@ -1360,7 +1372,7 @@ schemas:
             type: array
             apiVersions:
               - version: 2019-06-01-preview
-            elementType: *ref_19
+            elementType: *ref_2
             language:
               default:
                 name: managed_network_list_result_value
@@ -1404,8 +1416,8 @@ schemas:
             simplifiable: false
           cliKey: ManagedNetworkListResult
       protocol: {}
-    - *ref_23
-    - *ref_15
+    - *ref_22
+    - *ref_16
     - &ref_93
       type: object
       apiVersions:
@@ -1415,7 +1427,7 @@ schemas:
             type: array
             apiVersions:
               - version: 2019-06-01-preview
-            elementType: *ref_23
+            elementType: *ref_22
             language:
               default:
                 name: scope_assignment_list_result_value
@@ -1468,7 +1480,7 @@ schemas:
             type: array
             apiVersions:
               - version: 2019-06-01-preview
-            elementType: *ref_21
+            elementType: *ref_13
             language:
               default:
                 name: managed_network_group_list_result_value
@@ -1521,7 +1533,7 @@ schemas:
             type: array
             apiVersions:
               - version: 2019-06-01-preview
-            elementType: *ref_22
+            elementType: *ref_20
             language:
               default:
                 name: managed_network_peering_policy_list_result_value
@@ -1709,9 +1721,9 @@ schemas:
       protocol: {}
     - *ref_43
     - *ref_44
+    - *ref_7
     - *ref_8
-    - *ref_9
-    - *ref_24
+    - *ref_23
   arrays:
     - *ref_45
     - *ref_46
@@ -1733,7 +1745,7 @@ schemas:
     - type: array
       apiVersions:
         - version: 2019-06-01-preview
-      elementType: *ref_6
+      elementType: *ref_12
       language:
         default:
           name: hub_and_spoke_peering_policy_properties_spokes
@@ -1745,7 +1757,7 @@ schemas:
     - type: array
       apiVersions:
         - version: 2019-06-01-preview
-      elementType: *ref_6
+      elementType: *ref_12
       language:
         default:
           name: mesh_peering_policy_properties_mesh
@@ -1855,7 +1867,7 @@ operationGroups:
           - *ref_66
           - *ref_67
         responses:
-          - schema: *ref_19
+          - schema: *ref_2
             language:
               default:
                 name: ''
@@ -1960,7 +1972,7 @@ operationGroups:
         requests:
           - parameters:
               - &ref_69
-                schema: *ref_19
+                schema: *ref_2
                 implementation: Method
                 required: true
                 language:
@@ -1991,7 +2003,7 @@ operationGroups:
           - *ref_70
           - *ref_71
         responses:
-          - schema: *ref_19
+          - schema: *ref_2
             language:
               default:
                 name: ''
@@ -2003,7 +2015,7 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - '200'
-          - schema: *ref_19
+          - schema: *ref_2
             language:
               default:
                 name: ''
@@ -2290,7 +2302,7 @@ operationGroups:
           - *ref_76
           - *ref_77
         responses:
-          - schema: *ref_19
+          - schema: *ref_2
             language:
               default:
                 name: ''
@@ -2302,7 +2314,7 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - '200'
-          - schema: *ref_19
+          - schema: *ref_2
             language:
               default:
                 name: ''
@@ -2715,7 +2727,7 @@ operationGroups:
           - *ref_85
           - *ref_86
         responses:
-          - schema: *ref_23
+          - schema: *ref_22
             language:
               default:
                 name: ''
@@ -2804,7 +2816,7 @@ operationGroups:
         requests:
           - parameters:
               - &ref_87
-                schema: *ref_23
+                schema: *ref_22
                 implementation: Method
                 required: true
                 language:
@@ -2835,7 +2847,7 @@ operationGroups:
           - *ref_88
           - *ref_89
         responses:
-          - schema: *ref_23
+          - schema: *ref_22
             language:
               default:
                 name: ''
@@ -2847,7 +2859,7 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - '200'
-          - schema: *ref_23
+          - schema: *ref_22
             language:
               default:
                 name: ''
@@ -3153,7 +3165,7 @@ operationGroups:
           - *ref_95
           - *ref_96
         responses:
-          - schema: *ref_21
+          - schema: *ref_13
             language:
               default:
                 name: ''
@@ -3262,7 +3274,7 @@ operationGroups:
         requests:
           - parameters:
               - &ref_97
-                schema: *ref_21
+                schema: *ref_13
                 implementation: Method
                 required: true
                 language:
@@ -3294,7 +3306,7 @@ operationGroups:
           - *ref_99
           - *ref_100
         responses:
-          - schema: *ref_21
+          - schema: *ref_13
             language:
               default:
                 name: ''
@@ -3306,7 +3318,7 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - '200'
-          - schema: *ref_21
+          - schema: *ref_13
             language:
               default:
                 name: ''
@@ -3728,7 +3740,7 @@ operationGroups:
           - *ref_110
           - *ref_111
         responses:
-          - schema: *ref_22
+          - schema: *ref_20
             language:
               default:
                 name: ''
@@ -3835,7 +3847,7 @@ operationGroups:
         requests:
           - parameters:
               - &ref_112
-                schema: *ref_22
+                schema: *ref_20
                 implementation: Method
                 required: true
                 language:
@@ -3867,7 +3879,7 @@ operationGroups:
           - *ref_114
           - *ref_115
         responses:
-          - schema: *ref_22
+          - schema: *ref_20
             language:
               default:
                 name: ''
@@ -3879,7 +3891,7 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - '200'
-          - schema: *ref_22
+          - schema: *ref_20
             language:
               default:
                 name: ''

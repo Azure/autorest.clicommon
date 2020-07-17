@@ -312,55 +312,6 @@ schemas:
           name: string
           description: ''
       protocol: {}
-    - &ref_4
-      type: string
-      apiVersions:
-        - version: '2018-06-01'
-      language:
-        default:
-          name: Resource-id
-          description: The resource identifier.
-      protocol: {}
-    - &ref_5
-      type: string
-      apiVersions:
-        - version: '2018-06-01'
-      language:
-        default:
-          name: Resource-name
-          description: The resource name.
-      protocol: {}
-    - &ref_6
-      type: string
-      apiVersions:
-        - version: '2018-06-01'
-      language:
-        default:
-          name: Resource-type
-          description: The resource type.
-      protocol: {}
-    - &ref_7
-      type: string
-      apiVersions:
-        - version: '2018-06-01'
-      extensions:
-        x-ms-mutability:
-          - create
-          - read
-      language:
-        default:
-          name: Resource-location
-          description: The resource location.
-      protocol: {}
-    - &ref_9
-      type: string
-      apiVersions:
-        - version: '2018-06-01'
-      language:
-        default:
-          name: Resource-eTag
-          description: Etag identifies change in the resource.
-      protocol: {}
     - &ref_15
       type: string
       apiVersions:
@@ -459,6 +410,55 @@ schemas:
         default:
           name: ZoneItem
           description: ''
+      protocol: {}
+    - &ref_4
+      type: string
+      apiVersions:
+        - version: '2018-06-01'
+      language:
+        default:
+          name: Resource-id
+          description: The resource identifier.
+      protocol: {}
+    - &ref_5
+      type: string
+      apiVersions:
+        - version: '2018-06-01'
+      language:
+        default:
+          name: Resource-name
+          description: The resource name.
+      protocol: {}
+    - &ref_6
+      type: string
+      apiVersions:
+        - version: '2018-06-01'
+      language:
+        default:
+          name: Resource-type
+          description: The resource type.
+      protocol: {}
+    - &ref_7
+      type: string
+      apiVersions:
+        - version: '2018-06-01'
+      extensions:
+        x-ms-mutability:
+          - create
+          - read
+      language:
+        default:
+          name: Resource-location
+          description: The resource location.
+      protocol: {}
+    - &ref_9
+      type: string
+      apiVersions:
+        - version: '2018-06-01'
+      language:
+        default:
+          name: Resource-eTag
+          description: Etag identifies change in the resource.
       protocol: {}
     - &ref_34
       type: string
@@ -628,6 +628,24 @@ schemas:
           name: AccessPolicyResponse-dataPlaneUrl
           description: Data Plane service base URL.
       protocol: {}
+    - &ref_147
+      type: string
+      apiVersions:
+        - version: '2018-06-01'
+      language:
+        default:
+          name: Trigger-type
+          description: Trigger type.
+      protocol: {}
+    - &ref_179
+      type: string
+      apiVersions:
+        - version: '2018-06-01'
+      language:
+        default:
+          name: Trigger-description
+          description: Trigger description.
+      protocol: {}
     - &ref_115
       type: string
       apiVersions:
@@ -663,24 +681,6 @@ schemas:
         default:
           name: SubResource-etag
           description: Etag identifies change in the resource.
-      protocol: {}
-    - &ref_147
-      type: string
-      apiVersions:
-        - version: '2018-06-01'
-      language:
-        default:
-          name: Trigger-type
-          description: Trigger type.
-      protocol: {}
-    - &ref_179
-      type: string
-      apiVersions:
-        - version: '2018-06-01'
-      language:
-        default:
-          name: Trigger-description
-          description: Trigger description.
       protocol: {}
     - &ref_181
       type: string
@@ -1171,15 +1171,6 @@ schemas:
           name: IntegrationRuntimeSsisCatalogInfo-catalogAdminUserName
           description: The administrator user name of catalog database.
       protocol: {}
-    - &ref_80
-      type: string
-      apiVersions:
-        - version: '2018-06-01'
-      language:
-        default:
-          name: SecretBase-type
-          description: Type of the secret.
-      protocol: {}
     - &ref_83
       type: string
       apiVersions:
@@ -1188,6 +1179,15 @@ schemas:
         default:
           name: SecureString-value
           description: Value of secure string.
+      protocol: {}
+    - &ref_80
+      type: string
+      apiVersions:
+        - version: '2018-06-01'
+      language:
+        default:
+          name: SecretBase-type
+          description: Type of the secret.
       protocol: {}
     - &ref_86
       type: string
@@ -1694,6 +1694,22 @@ schemas:
           description: Variable sensitive value.
       protocol: {}
   choices:
+    - &ref_12
+      choices:
+        - value: SystemAssigned
+          language:
+            default:
+              name: SystemAssigned
+              description: ''
+      type: choice
+      apiVersions:
+        - version: '2018-06-01'
+      choiceType: *ref_0
+      language:
+        default:
+          name: FactoryIdentityType
+          description: The identity type. Currently the only supported type is 'SystemAssigned'.
+      protocol: {}
     - &ref_180
       choices:
         - value: Started
@@ -2352,18 +2368,6 @@ schemas:
           name: ApiVersion-2018-06-01
           description: Api Version (2018-06-01)
       protocol: {}
-    - &ref_12
-      type: constant
-      apiVersions:
-        - version: '2018-06-01'
-      value:
-        value: SystemAssigned
-      valueType: *ref_0
-      language:
-        default:
-          name: FactoryIdentityType
-          description: The identity type. Currently the only supported type is 'SystemAssigned'.
-      protocol: {}
     - &ref_148
       type: constant
       apiVersions:
@@ -2413,14 +2417,6 @@ schemas:
           description: Type of integration runtime.
       protocol: {}
   dictionaries:
-    - &ref_8
-      type: dictionary
-      elementType: *ref_1
-      language:
-        default:
-          name: Resource-tags
-          description: The resource tags.
-      protocol: {}
     - &ref_10
       type: dictionary
       elementType: &ref_2
@@ -2435,9 +2431,19 @@ schemas:
           name: Factory
           description: Factory resource type.
       protocol: {}
+    - &ref_8
+      type: dictionary
+      elementType: *ref_1
+      nullableItems: false
+      language:
+        default:
+          name: Resource-tags
+          description: The resource tags.
+      protocol: {}
     - &ref_44
       type: dictionary
       elementType: *ref_1
+      nullableItems: false
       language:
         default:
           name: FactoryUpdateParameters-tags
@@ -2590,6 +2596,7 @@ schemas:
     - &ref_219
       type: dictionary
       elementType: *ref_1
+      nullableItems: false
       language:
         default:
           name: SelfHostedIntegrationRuntimeNode-capabilities
@@ -2598,6 +2605,7 @@ schemas:
     - &ref_236
       type: dictionary
       elementType: *ref_1
+      nullableItems: false
       language:
         default:
           name: SelfHostedIntegrationRuntimeStatusTypeProperties-capabilities
@@ -3281,12 +3289,12 @@ schemas:
           description: A list of factory resources.
           namespace: ''
       protocol: {}
-    - *ref_11
     - *ref_3
     - *ref_35
     - *ref_36
     - *ref_18
     - *ref_37
+    - *ref_11
     - &ref_41
       type: object
       apiVersions:
@@ -3341,7 +3349,7 @@ schemas:
             serializationFormats:
               - json
             usage:
-              - output
+              - exception
             extensions:
               x-ms-external: true
             language:
@@ -3362,7 +3370,7 @@ schemas:
       serializationFormats:
         - json
       usage:
-        - output
+        - exception
       extensions:
         x-ms-external: true
       language:
@@ -5952,9 +5960,9 @@ schemas:
           description: A list of trigger resources.
           namespace: ''
       protocol: {}
-    - *ref_58
     - *ref_57
     - *ref_120
+    - *ref_58
     - &ref_424
       type: object
       apiVersions:
@@ -7333,8 +7341,8 @@ schemas:
     - *ref_294
     - *ref_295
     - *ref_296
-    - *ref_82
     - *ref_79
+    - *ref_82
     - *ref_297
     - *ref_298
     - *ref_89

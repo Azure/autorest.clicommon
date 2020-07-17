@@ -74,18 +74,6 @@ schemas:
         properties:
           - propertyName: code(CloudErrorBody-code^string)
           - propertyName: message(CloudErrorBody-message^string)
-      - schemaName: Resource
-        properties:
-          - propertyName: id(Resource-id^string)
-            readOnly: true
-          - propertyName: name(Resource-name^string)
-            readOnly: true
-          - propertyName: type(Resource-type^string)
-            readOnly: true
-      - schemaName: TrackedResource
-        properties:
-          - propertyName: tags(TrackedResource-tags^dictionary)
-          - propertyName: location(TrackedResource-location^string)
       - schemaName: AttestationProvider
         properties:
           - propertyName: properties(StatusResult^object)
@@ -95,6 +83,18 @@ schemas:
           - propertyName: trustModel(StatusResult-trustModel^string)
           - propertyName: status(AttestationServiceStatus^choice)
           - propertyName: attestUri(StatusResult-attestUri^string)
+      - schemaName: TrackedResource
+        properties:
+          - propertyName: tags(TrackedResource-tags^dictionary)
+          - propertyName: location(TrackedResource-location^string)
+      - schemaName: Resource
+        properties:
+          - propertyName: id(Resource-id^string)
+            readOnly: true
+          - propertyName: name(Resource-name^string)
+            readOnly: true
+          - propertyName: type(Resource-type^string)
+            readOnly: true
       - schemaName: AttestationServiceCreationParams
         properties:
           - propertyName: location(AttestationServiceCreationParams-location^string)
