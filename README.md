@@ -187,6 +187,11 @@ cli:
                 dw: DW
                 ti: TI
                 MCAS: MCAS
+                mdatp: MDATP
+                aad: AAD
+                aat: AAT
+                asc: ASC
+                aatp: AATP
                 UTC: UTC
                 SSL: SSL
                 Sql: SQL
@@ -214,6 +219,11 @@ cli:
                 dw: DW
                 ti: TI
                 MCAS: MCAS
+                mdatp: MDATP
+                aad: AAD
+                aat: AAT
+                asc: ASC
+                aatp: AATP
                 UTC: UTC
                 SSL: SSL
                 Sql: SQL
