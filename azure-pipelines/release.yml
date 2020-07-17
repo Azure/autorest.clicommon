@@ -35,6 +35,7 @@ stages:
       - script: |
           echo "[$(date -u)] LOG: ENSURE LATEST NPM IS INSTALLED"
           npm install -g npm
+          npm install js-yaml@3.14.0
 
           echo "[$(date -u)] LOG: MAKE SURE THE VERSIONS ARE ALL SYNCHRONIZED AND PULL IN DEPENDENCIES"
           npx @microsoft/rush sync-versions
