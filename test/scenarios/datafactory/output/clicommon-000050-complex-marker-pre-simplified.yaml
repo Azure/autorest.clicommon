@@ -813,32 +813,6 @@ schemas:
           - propertyName: nextLink(FactoryListResponse-nextLink^string)
             cli:
               cliKey: nextLink
-      - schemaName: Resource
-        cli:
-          cliKey: Resource
-        properties:
-          - propertyName: id(Resource-id^string)
-            cli:
-              cliKey: id
-            readOnly: true
-          - propertyName: name(Resource-name^string)
-            cli:
-              cliKey: name
-            readOnly: true
-          - propertyName: type(Resource-type^string)
-            cli:
-              cliKey: type
-            readOnly: true
-          - propertyName: location(Resource-location^string)
-            cli:
-              cliKey: location
-          - propertyName: tags(Resource-tags^dictionary)
-            cli:
-              cliKey: tags
-          - propertyName: eTag(Resource-eTag^string)
-            cli:
-              cliKey: eTag
-            readOnly: true
       - schemaName: Factory
         cli:
           cliKey: Factory
@@ -854,7 +828,7 @@ schemas:
         cli:
           cliKey: FactoryIdentity
         properties:
-          - propertyName: type(FactoryIdentityType^constant)
+          - propertyName: type(FactoryIdentityType^choice)
             cli:
               cliKey: type
           - propertyName: principalId(FactoryIdentity-principalId^uuid)
@@ -923,6 +897,32 @@ schemas:
           - propertyName: zonesInside(FakeFactoryIdentity-zonesInside^array)
             cli:
               cliKey: zonesInside
+      - schemaName: Resource
+        cli:
+          cliKey: Resource
+        properties:
+          - propertyName: id(Resource-id^string)
+            cli:
+              cliKey: id
+            readOnly: true
+          - propertyName: name(Resource-name^string)
+            cli:
+              cliKey: name
+            readOnly: true
+          - propertyName: type(Resource-type^string)
+            cli:
+              cliKey: type
+            readOnly: true
+          - propertyName: location(Resource-location^string)
+            cli:
+              cliKey: location
+          - propertyName: tags(Resource-tags^dictionary)
+            cli:
+              cliKey: tags
+          - propertyName: eTag(Resource-eTag^string)
+            cli:
+              cliKey: eTag
+            readOnly: true
       - schemaName: CloudError
         cli:
           cliKey: CloudError
@@ -1029,26 +1029,6 @@ schemas:
           - propertyName: nextLink(TriggerListResponse-nextLink^string)
             cli:
               cliKey: nextLink
-      - schemaName: SubResource
-        cli:
-          cliKey: SubResource
-        properties:
-          - propertyName: id(SubResource-id^string)
-            cli:
-              cliKey: id
-            readOnly: true
-          - propertyName: name(SubResource-name^string)
-            cli:
-              cliKey: name
-            readOnly: true
-          - propertyName: type(SubResource-type^string)
-            cli:
-              cliKey: type
-            readOnly: true
-          - propertyName: etag(SubResource-etag^string)
-            cli:
-              cliKey: etag
-            readOnly: true
       - schemaName: TriggerResource
         cli:
           cliKey: TriggerResource
@@ -1074,6 +1054,26 @@ schemas:
           - propertyName: annotations(Trigger-annotations^array)
             cli:
               cliKey: annotations
+      - schemaName: SubResource
+        cli:
+          cliKey: SubResource
+        properties:
+          - propertyName: id(SubResource-id^string)
+            cli:
+              cliKey: id
+            readOnly: true
+          - propertyName: name(SubResource-name^string)
+            cli:
+              cliKey: name
+            readOnly: true
+          - propertyName: type(SubResource-type^string)
+            cli:
+              cliKey: type
+            readOnly: true
+          - propertyName: etag(SubResource-etag^string)
+            cli:
+              cliKey: etag
+            readOnly: true
       - schemaName: TriggerFilterParameters
         cli:
           cliKey: TriggerFilterParameters
@@ -1743,6 +1743,13 @@ schemas:
           - propertyName: catalogPricingTier(IntegrationRuntimeSsisCatalogPricingTier^choice)
             cli:
               cliKey: catalogPricingTier
+      - schemaName: SecureString
+        cli:
+          cliKey: SecureString
+        properties:
+          - propertyName: value(SecureString-value^string)
+            cli:
+              cliKey: value
       - schemaName: SecretBase
         cli:
           cliKey: SecretBase
@@ -1751,13 +1758,6 @@ schemas:
           - propertyName: type(SecretBase-type^string)
             cli:
               cliKey: type
-      - schemaName: SecureString
-        cli:
-          cliKey: SecureString
-        properties:
-          - propertyName: value(SecureString-value^string)
-            cli:
-              cliKey: value
       - schemaName: IntegrationRuntimeCustomSetupScriptProperties
         cli:
           cliKey: IntegrationRuntimeCustomSetupScriptProperties
@@ -2331,6 +2331,13 @@ schemas:
               cliKey: sensitiveValue
   choices:
     all:
+      - choiceName: FactoryIdentityType
+        cli:
+          cliKey: FactoryIdentityType
+        choiceValues:
+          - choiceValue: SystemAssigned
+            cli:
+              cliKey: SystemAssigned
       - choiceName: TriggerRuntimeState
         cli:
           cliKey: TriggerRuntimeState

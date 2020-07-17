@@ -36,7 +36,25 @@ schemas:
           name: string
           description: ''
       protocol: {}
-    - &ref_25
+    - &ref_11
+      type: string
+      apiVersions:
+        - version: 2019-06-01-preview
+      language:
+        default:
+          name: ResourceId-id
+          description: Resource Id
+      protocol: {}
+    - &ref_18
+      type: string
+      apiVersions:
+        - version: 2019-06-01-preview
+      language:
+        default:
+          name: ResourceProperties-etag
+          description: A unique read-only string that changes whenever the resource is updated.
+      protocol: {}
+    - &ref_24
       type: string
       apiVersions:
         - version: 2019-06-01-preview
@@ -45,7 +63,7 @@ schemas:
           name: Resource-id
           description: 'Fully qualified resource Id for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}'
       protocol: {}
-    - &ref_26
+    - &ref_25
       type: string
       apiVersions:
         - version: 2019-06-01-preview
@@ -54,7 +72,7 @@ schemas:
           name: Resource-name
           description: The name of the resource
       protocol: {}
-    - &ref_27
+    - &ref_26
       type: string
       apiVersions:
         - version: 2019-06-01-preview
@@ -63,7 +81,7 @@ schemas:
           name: Resource-type
           description: The type of the resource. Ex- Microsoft.Compute/virtualMachines or Microsoft.Storage/storageAccounts.
       protocol: {}
-    - &ref_28
+    - &ref_27
       type: string
       apiVersions:
         - version: 2019-06-01-preview
@@ -75,24 +93,6 @@ schemas:
         default:
           name: Resource-location
           description: The geo-location where the resource lives
-      protocol: {}
-    - &ref_17
-      type: string
-      apiVersions:
-        - version: 2019-06-01-preview
-      language:
-        default:
-          name: ResourceProperties-etag
-          description: A unique read-only string that changes whenever the resource is updated.
-      protocol: {}
-    - &ref_5
-      type: string
-      apiVersions:
-        - version: 2019-06-01-preview
-      language:
-        default:
-          name: ResourceId-id
-          description: Resource Id
       protocol: {}
     - &ref_31
       type: string
@@ -121,7 +121,7 @@ schemas:
           name: ManagedNetworkListResult-nextLink
           description: Gets the URL to get the next page of results.
       protocol: {}
-    - &ref_13
+    - &ref_14
       type: string
       apiVersions:
         - version: 2019-06-01-preview
@@ -203,7 +203,7 @@ schemas:
           description: URL to get the next set of operation list results if there are any.
       protocol: {}
   choices:
-    - &ref_16
+    - &ref_17
       choices:
         - value: Updating
           language:
@@ -234,7 +234,23 @@ schemas:
           name: ProvisioningState
           description: Provisioning state of the ManagedNetwork resource.
       protocol: {}
-    - &ref_10
+    - &ref_19
+      choices:
+        - value: Connectivity
+          language:
+            default:
+              name: Connectivity
+              description: ''
+      type: choice
+      apiVersions:
+        - version: 2019-06-01-preview
+      choiceType: *ref_0
+      language:
+        default:
+          name: Kind
+          description: Responsibility role under which this Managed Network Group will be created
+      protocol: {}
+    - &ref_9
       choices:
         - value: HubAndSpokeTopology
           language:
@@ -266,22 +282,11 @@ schemas:
           name: ApiVersion-2019-06-01-preview
           description: Api Version (2019-06-01-preview)
       protocol: {}
-    - &ref_18
-      type: constant
-      apiVersions:
-        - version: 2019-06-01-preview
-      value:
-        value: Connectivity
-      valueType: *ref_0
-      language:
-        default:
-          name: Kind
-          description: Responsibility role under which this Managed Network Group will be created
-      protocol: {}
   dictionaries:
-    - &ref_20
+    - &ref_28
       type: dictionary
       elementType: *ref_1
+      nullableItems: false
       language:
         default:
           name: TrackedResource-tags
@@ -290,277 +295,464 @@ schemas:
     - &ref_33
       type: dictionary
       elementType: *ref_1
+      nullableItems: false
       language:
         default:
           name: ManagedNetworkUpdate-tags
           description: Resource tags
       protocol: {}
   objects:
-    - &ref_3
+    - &ref_2
       type: object
       apiVersions:
         - version: 2019-06-01-preview
-      children:
+      parents:
         all:
-          - &ref_2
+          - &ref_21
             type: object
             apiVersions:
               - version: 2019-06-01-preview
             children:
               all:
-                - &ref_19
+                - *ref_2
+              immediate:
+                - *ref_2
+            parents:
+              all:
+                - &ref_3
                   type: object
                   apiVersions:
                     - version: 2019-06-01-preview
-                  parents:
+                  children:
                     all:
-                      - *ref_2
-                      - *ref_3
-                    immediate:
-                      - *ref_2
-                  properties:
-                    - schema: &ref_12
+                      - &ref_13
                         type: object
                         apiVersions:
                           - version: 2019-06-01-preview
                         parents:
                           all:
-                            - &ref_4
+                            - *ref_3
+                          immediate:
+                            - *ref_3
+                        properties:
+                          - schema: &ref_4
                               type: object
                               apiVersions:
                                 - version: 2019-06-01-preview
-                              children:
+                              parents:
                                 all:
-                                  - &ref_14
-                                    type: object
-                                    apiVersions:
-                                      - version: 2019-06-01-preview
-                                    parents:
-                                      all:
-                                        - *ref_4
-                                      immediate:
-                                        - *ref_4
-                                    properties:
-                                      - schema: &ref_49
-                                          type: array
-                                          apiVersions:
-                                            - version: 2019-06-01-preview
-                                          elementType: &ref_6
-                                            type: object
-                                            apiVersions:
-                                              - version: 2019-06-01-preview
-                                            properties:
-                                              - schema: *ref_5
-                                                serializedName: id
-                                                language:
-                                                  default:
-                                                    name: id
-                                                    description: Resource Id
-                                                protocol: {}
-                                            serializationFormats:
-                                              - json
-                                            usage:
-                                              - output
-                                              - input
-                                            language:
-                                              default:
-                                                name: ResourceId
-                                                description: Generic pointer to a resource
-                                                namespace: ''
-                                            protocol: {}
-                                          language:
-                                            default:
-                                              name: ManagedNetworkGroupProperties-managementGroups
-                                              description: The collection of management groups covered by the Managed Network
-                                          protocol: {}
-                                        serializedName: managementGroups
-                                        language:
-                                          default:
-                                            name: managementGroups
-                                            description: The collection of management groups covered by the Managed Network
-                                        protocol: {}
-                                      - schema: &ref_50
-                                          type: array
-                                          apiVersions:
-                                            - version: 2019-06-01-preview
-                                          elementType: *ref_6
-                                          language:
-                                            default:
-                                              name: ManagedNetworkGroupProperties-subscriptions
-                                              description: The collection of subscriptions covered by the Managed Network
-                                          protocol: {}
-                                        serializedName: subscriptions
-                                        language:
-                                          default:
-                                            name: subscriptions
-                                            description: The collection of subscriptions covered by the Managed Network
-                                        protocol: {}
-                                      - schema: &ref_51
-                                          type: array
-                                          apiVersions:
-                                            - version: 2019-06-01-preview
-                                          elementType: *ref_6
-                                          language:
-                                            default:
-                                              name: ManagedNetworkGroupProperties-virtualNetworks
-                                              description: The collection of virtual nets covered by the Managed Network
-                                          protocol: {}
-                                        serializedName: virtualNetworks
-                                        language:
-                                          default:
-                                            name: virtualNetworks
-                                            description: The collection of virtual nets covered by the Managed Network
-                                        protocol: {}
-                                      - schema: &ref_52
-                                          type: array
-                                          apiVersions:
-                                            - version: 2019-06-01-preview
-                                          elementType: *ref_6
-                                          language:
-                                            default:
-                                              name: ManagedNetworkGroupProperties-subnets
-                                              description: The collection of  subnets covered by the Managed Network
-                                          protocol: {}
-                                        serializedName: subnets
-                                        language:
-                                          default:
-                                            name: subnets
-                                            description: The collection of  subnets covered by the Managed Network
-                                        protocol: {}
-                                    serializationFormats:
-                                      - json
-                                    usage:
-                                      - output
-                                      - input
-                                    language:
-                                      default:
-                                        name: ManagedNetworkGroupProperties
-                                        description: Properties of a Managed Network Group
-                                        namespace: ''
-                                    protocol: {}
-                                  - &ref_7
+                                  - &ref_6
                                     type: object
                                     apiVersions:
                                       - version: 2019-06-01-preview
                                     children:
                                       all:
-                                        - &ref_8
+                                        - *ref_4
+                                        - &ref_5
                                           type: object
                                           apiVersions:
                                             - version: 2019-06-01-preview
-                                          discriminatorValue: HubAndSpokeTopology
-                                          parents:
+                                          children:
                                             all:
-                                              - *ref_7
-                                              - *ref_4
+                                              - &ref_7
+                                                type: object
+                                                apiVersions:
+                                                  - version: 2019-06-01-preview
+                                                discriminatorValue: HubAndSpokeTopology
+                                                parents:
+                                                  all:
+                                                    - *ref_5
+                                                    - *ref_6
+                                                  immediate:
+                                                    - *ref_5
+                                                serializationFormats:
+                                                  - json
+                                                usage:
+                                                  - output
+                                                  - input
+                                                extensions:
+                                                  x-ms-discriminator-value: HubAndSpokeTopology
+                                                language:
+                                                  default:
+                                                    name: HubAndSpokePeeringPolicyProperties
+                                                    description: Properties of a Hub and Spoke Peering Policy
+                                                    namespace: ''
+                                                protocol: {}
+                                              - &ref_8
+                                                type: object
+                                                apiVersions:
+                                                  - version: 2019-06-01-preview
+                                                discriminatorValue: MeshTopology
+                                                parents:
+                                                  all:
+                                                    - *ref_5
+                                                    - *ref_6
+                                                  immediate:
+                                                    - *ref_5
+                                                serializationFormats:
+                                                  - json
+                                                usage:
+                                                  - output
+                                                  - input
+                                                extensions:
+                                                  x-ms-discriminator-value: MeshTopology
+                                                language:
+                                                  default:
+                                                    name: MeshPeeringPolicyProperties
+                                                    description: Properties of a Mesh Peering Policy
+                                                    namespace: ''
+                                                protocol: {}
                                             immediate:
                                               - *ref_7
+                                              - *ref_8
+                                          discriminator:
+                                            all:
+                                              HubAndSpokeTopology: *ref_7
+                                              MeshTopology: *ref_8
+                                            immediate:
+                                              HubAndSpokeTopology: *ref_7
+                                              MeshTopology: *ref_8
+                                            property: &ref_10
+                                              schema: *ref_9
+                                              isDiscriminator: true
+                                              required: true
+                                              serializedName: type
+                                              language:
+                                                default:
+                                                  name: type
+                                                  description: Gets or sets the connectivity type of a network structure policy
+                                              protocol: {}
+                                          discriminatorValue: ManagedNetworkPeeringPolicyProperties
+                                          parents:
+                                            all:
+                                              - *ref_6
+                                            immediate:
+                                              - *ref_6
+                                          properties:
+                                            - *ref_10
+                                            - schema: &ref_12
+                                                type: object
+                                                apiVersions:
+                                                  - version: 2019-06-01-preview
+                                                properties:
+                                                  - schema: *ref_11
+                                                    serializedName: id
+                                                    language:
+                                                      default:
+                                                        name: id
+                                                        description: Resource Id
+                                                    protocol: {}
+                                                serializationFormats:
+                                                  - json
+                                                usage:
+                                                  - output
+                                                  - input
+                                                language:
+                                                  default:
+                                                    name: ResourceId
+                                                    description: Generic pointer to a resource
+                                                    namespace: ''
+                                                protocol: {}
+                                              required: false
+                                              serializedName: hub
+                                              language:
+                                                default:
+                                                  name: hub
+                                                  description: Gets or sets the hub virtual network ID
+                                              protocol: {}
+                                            - schema: &ref_54
+                                                type: array
+                                                apiVersions:
+                                                  - version: 2019-06-01-preview
+                                                elementType: *ref_12
+                                                language:
+                                                  default:
+                                                    name: ManagedNetworkPeeringPolicyProperties-spokes
+                                                    description: Gets or sets the spokes group IDs
+                                                protocol: {}
+                                              required: false
+                                              serializedName: spokes
+                                              language:
+                                                default:
+                                                  name: spokes
+                                                  description: Gets or sets the spokes group IDs
+                                              protocol: {}
+                                            - schema: &ref_55
+                                                type: array
+                                                apiVersions:
+                                                  - version: 2019-06-01-preview
+                                                elementType: *ref_12
+                                                language:
+                                                  default:
+                                                    name: ManagedNetworkPeeringPolicyProperties-mesh
+                                                    description: Gets or sets the mesh group IDs
+                                                protocol: {}
+                                              required: false
+                                              serializedName: mesh
+                                              language:
+                                                default:
+                                                  name: mesh
+                                                  description: Gets or sets the mesh group IDs
+                                              protocol: {}
                                           serializationFormats:
                                             - json
                                           usage:
                                             - output
                                             - input
-                                          extensions:
-                                            x-ms-discriminator-value: HubAndSpokeTopology
                                           language:
                                             default:
-                                              name: HubAndSpokePeeringPolicyProperties
-                                              description: Properties of a Hub and Spoke Peering Policy
+                                              name: ManagedNetworkPeeringPolicyProperties
+                                              description: Properties of a Managed Network Peering Policy
                                               namespace: ''
                                           protocol: {}
-                                        - &ref_9
+                                        - &ref_15
                                           type: object
                                           apiVersions:
                                             - version: 2019-06-01-preview
-                                          discriminatorValue: MeshTopology
                                           parents:
                                             all:
-                                              - *ref_7
-                                              - *ref_4
+                                              - *ref_6
                                             immediate:
-                                              - *ref_7
+                                              - *ref_6
+                                          properties:
+                                            - schema: &ref_29
+                                                type: object
+                                                apiVersions:
+                                                  - version: 2019-06-01-preview
+                                                properties:
+                                                  - schema: &ref_45
+                                                      type: array
+                                                      apiVersions:
+                                                        - version: 2019-06-01-preview
+                                                      elementType: *ref_12
+                                                      language:
+                                                        default:
+                                                          name: Scope-managementGroups
+                                                          description: The collection of management groups covered by the Managed Network
+                                                      protocol: {}
+                                                    serializedName: managementGroups
+                                                    language:
+                                                      default:
+                                                        name: managementGroups
+                                                        description: The collection of management groups covered by the Managed Network
+                                                    protocol: {}
+                                                  - schema: &ref_46
+                                                      type: array
+                                                      apiVersions:
+                                                        - version: 2019-06-01-preview
+                                                      elementType: *ref_12
+                                                      language:
+                                                        default:
+                                                          name: Scope-subscriptions
+                                                          description: The collection of subscriptions covered by the Managed Network
+                                                      protocol: {}
+                                                    serializedName: subscriptions
+                                                    language:
+                                                      default:
+                                                        name: subscriptions
+                                                        description: The collection of subscriptions covered by the Managed Network
+                                                    protocol: {}
+                                                  - schema: &ref_47
+                                                      type: array
+                                                      apiVersions:
+                                                        - version: 2019-06-01-preview
+                                                      elementType: *ref_12
+                                                      language:
+                                                        default:
+                                                          name: Scope-virtualNetworks
+                                                          description: The collection of virtual nets covered by the Managed Network
+                                                      protocol: {}
+                                                    serializedName: virtualNetworks
+                                                    language:
+                                                      default:
+                                                        name: virtualNetworks
+                                                        description: The collection of virtual nets covered by the Managed Network
+                                                    protocol: {}
+                                                  - schema: &ref_48
+                                                      type: array
+                                                      apiVersions:
+                                                        - version: 2019-06-01-preview
+                                                      elementType: *ref_12
+                                                      language:
+                                                        default:
+                                                          name: Scope-subnets
+                                                          description: The collection of  subnets covered by the Managed Network
+                                                      protocol: {}
+                                                    serializedName: subnets
+                                                    language:
+                                                      default:
+                                                        name: subnets
+                                                        description: The collection of  subnets covered by the Managed Network
+                                                    protocol: {}
+                                                serializationFormats:
+                                                  - json
+                                                usage:
+                                                  - output
+                                                  - input
+                                                language:
+                                                  default:
+                                                    name: Scope
+                                                    description: Scope of a Managed Network
+                                                    namespace: ''
+                                                protocol: {}
+                                              serializedName: scope
+                                              extensions:
+                                                x-ms-client-flatten: true
+                                              language:
+                                                default:
+                                                  name: scope
+                                                  description: >-
+                                                    The collection of management groups, subscriptions, virtual networks, and subnets by the Managed Network. This is a read-only property that is reflective of all ScopeAssignments for this
+                                                    Managed Network
+                                              protocol: {}
+                                            - schema: &ref_30
+                                                type: object
+                                                apiVersions:
+                                                  - version: 2019-06-01-preview
+                                                properties:
+                                                  - schema: &ref_53
+                                                      type: array
+                                                      apiVersions:
+                                                        - version: 2019-06-01-preview
+                                                      elementType: *ref_13
+                                                      language:
+                                                        default:
+                                                          name: ConnectivityCollection-groups
+                                                          description: The collection of connectivity related Managed Network Groups within the Managed Network
+                                                      protocol: {}
+                                                    readOnly: true
+                                                    serializedName: groups
+                                                    language:
+                                                      default:
+                                                        name: groups
+                                                        description: The collection of connectivity related Managed Network Groups within the Managed Network
+                                                    protocol: {}
+                                                  - schema: &ref_56
+                                                      type: array
+                                                      apiVersions:
+                                                        - version: 2019-06-01-preview
+                                                      elementType: &ref_20
+                                                        type: object
+                                                        apiVersions:
+                                                          - version: 2019-06-01-preview
+                                                        parents:
+                                                          all:
+                                                            - *ref_3
+                                                          immediate:
+                                                            - *ref_3
+                                                        properties:
+                                                          - schema: *ref_5
+                                                            serializedName: properties
+                                                            language:
+                                                              default:
+                                                                name: properties
+                                                                description: Gets or sets the properties of a Managed Network Policy
+                                                            protocol: {}
+                                                        serializationFormats:
+                                                          - json
+                                                        usage:
+                                                          - output
+                                                          - input
+                                                        language:
+                                                          default:
+                                                            name: ManagedNetworkPeeringPolicy
+                                                            description: The Managed Network Peering Policy resource
+                                                            namespace: ''
+                                                        protocol: {}
+                                                      language:
+                                                        default:
+                                                          name: ConnectivityCollection-peerings
+                                                          description: The collection of Managed Network Peering Policies within the Managed Network
+                                                      protocol: {}
+                                                    readOnly: true
+                                                    serializedName: peerings
+                                                    language:
+                                                      default:
+                                                        name: peerings
+                                                        description: The collection of Managed Network Peering Policies within the Managed Network
+                                                    protocol: {}
+                                                serializationFormats:
+                                                  - json
+                                                usage:
+                                                  - output
+                                                  - input
+                                                language:
+                                                  default:
+                                                    name: ConnectivityCollection
+                                                    description: The collection of Connectivity related groups and policies within the Managed Network
+                                                    namespace: ''
+                                                protocol: {}
+                                              readOnly: true
+                                              serializedName: connectivity
+                                              extensions:
+                                                x-ms-client-flatten: true
+                                              language:
+                                                default:
+                                                  name: connectivity
+                                                  description: The collection of groups and policies concerned with connectivity
+                                              protocol: {}
                                           serializationFormats:
                                             - json
                                           usage:
                                             - output
                                             - input
-                                          extensions:
-                                            x-ms-discriminator-value: MeshTopology
                                           language:
                                             default:
-                                              name: MeshPeeringPolicyProperties
-                                              description: Properties of a Mesh Peering Policy
+                                              name: ManagedNetworkProperties
+                                              description: Properties of Managed Network
                                               namespace: ''
                                           protocol: {}
-                                      immediate:
+                                        - &ref_16
+                                          type: object
+                                          apiVersions:
+                                            - version: 2019-06-01-preview
+                                          parents:
+                                            all:
+                                              - *ref_6
+                                            immediate:
+                                              - *ref_6
+                                          properties:
+                                            - schema: *ref_14
+                                              serializedName: assignedManagedNetwork
+                                              language:
+                                                default:
+                                                  name: assignedManagedNetwork
+                                                  description: The managed network ID with scope will be assigned to.
+                                              protocol: {}
+                                          serializationFormats:
+                                            - json
+                                          usage:
+                                            - output
+                                            - input
+                                          language:
+                                            default:
+                                              name: ScopeAssignmentProperties
+                                              description: Properties of Managed Network
+                                              namespace: ''
+                                          protocol: {}
+                                        - *ref_7
                                         - *ref_8
-                                        - *ref_9
-                                    discriminator:
-                                      all:
-                                        HubAndSpokeTopology: *ref_8
-                                        MeshTopology: *ref_9
-                                      immediate:
-                                        HubAndSpokeTopology: *ref_8
-                                        MeshTopology: *ref_9
-                                      property: &ref_11
-                                        schema: *ref_10
-                                        isDiscriminator: true
-                                        required: true
-                                        serializedName: type
-                                        language:
-                                          default:
-                                            name: type
-                                            description: Gets or sets the connectivity type of a network structure policy
-                                        protocol: {}
-                                    discriminatorValue: ManagedNetworkPeeringPolicyProperties
-                                    parents:
-                                      all:
-                                        - *ref_4
                                       immediate:
                                         - *ref_4
+                                        - *ref_5
+                                        - *ref_15
+                                        - *ref_16
                                     properties:
-                                      - *ref_11
-                                      - schema: *ref_6
-                                        required: false
-                                        serializedName: hub
+                                      - schema: *ref_17
+                                        readOnly: true
+                                        serializedName: provisioningState
                                         language:
                                           default:
-                                            name: hub
-                                            description: Gets or sets the hub virtual network ID
+                                            name: provisioningState
+                                            description: Provisioning state of the ManagedNetwork resource.
                                         protocol: {}
-                                      - schema: &ref_54
-                                          type: array
-                                          apiVersions:
-                                            - version: 2019-06-01-preview
-                                          elementType: *ref_6
-                                          language:
-                                            default:
-                                              name: ManagedNetworkPeeringPolicyProperties-spokes
-                                              description: Gets or sets the spokes group IDs
-                                          protocol: {}
-                                        required: false
-                                        serializedName: spokes
+                                      - schema: *ref_18
+                                        readOnly: true
+                                        serializedName: etag
                                         language:
                                           default:
-                                            name: spokes
-                                            description: Gets or sets the spokes group IDs
-                                        protocol: {}
-                                      - schema: &ref_55
-                                          type: array
-                                          apiVersions:
-                                            - version: 2019-06-01-preview
-                                          elementType: *ref_6
-                                          language:
-                                            default:
-                                              name: ManagedNetworkPeeringPolicyProperties-mesh
-                                              description: Gets or sets the mesh group IDs
-                                          protocol: {}
-                                        required: false
-                                        serializedName: mesh
-                                        language:
-                                          default:
-                                            name: mesh
-                                            description: Gets or sets the mesh group IDs
+                                            name: etag
+                                            description: A unique read-only string that changes whenever the resource is updated.
                                         protocol: {}
                                     serializationFormats:
                                       - json
@@ -569,90 +761,21 @@ schemas:
                                       - input
                                     language:
                                       default:
-                                        name: ManagedNetworkPeeringPolicyProperties
-                                        description: Properties of a Managed Network Peering Policy
+                                        name: ResourceProperties
+                                        description: Base for resource properties.
                                         namespace: ''
                                     protocol: {}
-                                  - *ref_12
-                                  - &ref_15
-                                    type: object
-                                    apiVersions:
-                                      - version: 2019-06-01-preview
-                                    parents:
-                                      all:
-                                        - *ref_4
-                                      immediate:
-                                        - *ref_4
-                                    properties:
-                                      - schema: *ref_13
-                                        serializedName: assignedManagedNetwork
-                                        language:
-                                          default:
-                                            name: assignedManagedNetwork
-                                            description: The managed network ID with scope will be assigned to.
-                                        protocol: {}
-                                    serializationFormats:
-                                      - json
-                                    usage:
-                                      - output
-                                      - input
-                                    language:
-                                      default:
-                                        name: ScopeAssignmentProperties
-                                        description: Properties of Managed Network
-                                        namespace: ''
-                                    protocol: {}
-                                  - *ref_8
-                                  - *ref_9
                                 immediate:
-                                  - *ref_14
-                                  - *ref_7
-                                  - *ref_12
-                                  - *ref_15
+                                  - *ref_6
                               properties:
-                                - schema: *ref_16
-                                  readOnly: true
-                                  serializedName: provisioningState
-                                  language:
-                                    default:
-                                      name: provisioningState
-                                      description: Provisioning state of the ManagedNetwork resource.
-                                  protocol: {}
-                                - schema: *ref_17
-                                  readOnly: true
-                                  serializedName: etag
-                                  language:
-                                    default:
-                                      name: etag
-                                      description: A unique read-only string that changes whenever the resource is updated.
-                                  protocol: {}
-                              serializationFormats:
-                                - json
-                              usage:
-                                - output
-                                - input
-                              language:
-                                default:
-                                  name: ResourceProperties
-                                  description: Base for resource properties.
-                                  namespace: ''
-                              protocol: {}
-                          immediate:
-                            - *ref_4
-                        properties:
-                          - schema: &ref_29
-                              type: object
-                              apiVersions:
-                                - version: 2019-06-01-preview
-                              properties:
-                                - schema: &ref_45
+                                - schema: &ref_49
                                     type: array
                                     apiVersions:
                                       - version: 2019-06-01-preview
-                                    elementType: *ref_6
+                                    elementType: *ref_12
                                     language:
                                       default:
-                                        name: Scope-managementGroups
+                                        name: ManagedNetworkGroupProperties-managementGroups
                                         description: The collection of management groups covered by the Managed Network
                                     protocol: {}
                                   serializedName: managementGroups
@@ -661,14 +784,14 @@ schemas:
                                       name: managementGroups
                                       description: The collection of management groups covered by the Managed Network
                                   protocol: {}
-                                - schema: &ref_46
+                                - schema: &ref_50
                                     type: array
                                     apiVersions:
                                       - version: 2019-06-01-preview
-                                    elementType: *ref_6
+                                    elementType: *ref_12
                                     language:
                                       default:
-                                        name: Scope-subscriptions
+                                        name: ManagedNetworkGroupProperties-subscriptions
                                         description: The collection of subscriptions covered by the Managed Network
                                     protocol: {}
                                   serializedName: subscriptions
@@ -677,14 +800,14 @@ schemas:
                                       name: subscriptions
                                       description: The collection of subscriptions covered by the Managed Network
                                   protocol: {}
-                                - schema: &ref_47
+                                - schema: &ref_51
                                     type: array
                                     apiVersions:
                                       - version: 2019-06-01-preview
-                                    elementType: *ref_6
+                                    elementType: *ref_12
                                     language:
                                       default:
-                                        name: Scope-virtualNetworks
+                                        name: ManagedNetworkGroupProperties-virtualNetworks
                                         description: The collection of virtual nets covered by the Managed Network
                                     protocol: {}
                                   serializedName: virtualNetworks
@@ -693,14 +816,14 @@ schemas:
                                       name: virtualNetworks
                                       description: The collection of virtual nets covered by the Managed Network
                                   protocol: {}
-                                - schema: &ref_48
+                                - schema: &ref_52
                                     type: array
                                     apiVersions:
                                       - version: 2019-06-01-preview
-                                    elementType: *ref_6
+                                    elementType: *ref_12
                                     language:
                                       default:
-                                        name: Scope-subnets
+                                        name: ManagedNetworkGroupProperties-subnets
                                         description: The collection of  subnets covered by the Managed Network
                                     protocol: {}
                                   serializedName: subnets
@@ -716,139 +839,24 @@ schemas:
                                 - input
                               language:
                                 default:
-                                  name: Scope
-                                  description: Scope of a Managed Network
+                                  name: ManagedNetworkGroupProperties
+                                  description: Properties of a Managed Network Group
                                   namespace: ''
                               protocol: {}
-                            serializedName: scope
+                            serializedName: properties
                             extensions:
                               x-ms-client-flatten: true
                             language:
                               default:
-                                name: scope
-                                description: 'The collection of management groups, subscriptions, virtual networks, and subnets by the Managed Network. This is a read-only property that is reflective of all ScopeAssignments for this Managed Network'
+                                name: properties
+                                description: Gets or sets the properties of a network group
                             protocol: {}
-                          - schema: &ref_30
-                              type: object
-                              apiVersions:
-                                - version: 2019-06-01-preview
-                              properties:
-                                - schema: &ref_53
-                                    type: array
-                                    apiVersions:
-                                      - version: 2019-06-01-preview
-                                    elementType: &ref_21
-                                      type: object
-                                      apiVersions:
-                                        - version: 2019-06-01-preview
-                                      parents:
-                                        all:
-                                          - *ref_3
-                                        immediate:
-                                          - *ref_3
-                                      properties:
-                                        - schema: *ref_14
-                                          serializedName: properties
-                                          extensions:
-                                            x-ms-client-flatten: true
-                                          language:
-                                            default:
-                                              name: properties
-                                              description: Gets or sets the properties of a network group
-                                          protocol: {}
-                                        - schema: *ref_18
-                                          serializedName: kind
-                                          language:
-                                            default:
-                                              name: kind
-                                              description: Responsibility role under which this Managed Network Group will be created
-                                          protocol: {}
-                                      serializationFormats:
-                                        - json
-                                      usage:
-                                        - output
-                                        - input
-                                      language:
-                                        default:
-                                          name: ManagedNetworkGroup
-                                          description: The Managed Network Group resource
-                                          namespace: ''
-                                      protocol: {}
-                                    language:
-                                      default:
-                                        name: ConnectivityCollection-groups
-                                        description: The collection of connectivity related Managed Network Groups within the Managed Network
-                                    protocol: {}
-                                  readOnly: true
-                                  serializedName: groups
-                                  language:
-                                    default:
-                                      name: groups
-                                      description: The collection of connectivity related Managed Network Groups within the Managed Network
-                                  protocol: {}
-                                - schema: &ref_56
-                                    type: array
-                                    apiVersions:
-                                      - version: 2019-06-01-preview
-                                    elementType: &ref_22
-                                      type: object
-                                      apiVersions:
-                                        - version: 2019-06-01-preview
-                                      parents:
-                                        all:
-                                          - *ref_3
-                                        immediate:
-                                          - *ref_3
-                                      properties:
-                                        - schema: *ref_7
-                                          serializedName: properties
-                                          language:
-                                            default:
-                                              name: properties
-                                              description: Gets or sets the properties of a Managed Network Policy
-                                          protocol: {}
-                                      serializationFormats:
-                                        - json
-                                      usage:
-                                        - output
-                                        - input
-                                      language:
-                                        default:
-                                          name: ManagedNetworkPeeringPolicy
-                                          description: The Managed Network Peering Policy resource
-                                          namespace: ''
-                                      protocol: {}
-                                    language:
-                                      default:
-                                        name: ConnectivityCollection-peerings
-                                        description: The collection of Managed Network Peering Policies within the Managed Network
-                                    protocol: {}
-                                  readOnly: true
-                                  serializedName: peerings
-                                  language:
-                                    default:
-                                      name: peerings
-                                      description: The collection of Managed Network Peering Policies within the Managed Network
-                                  protocol: {}
-                              serializationFormats:
-                                - json
-                              usage:
-                                - output
-                                - input
-                              language:
-                                default:
-                                  name: ConnectivityCollection
-                                  description: The collection of Connectivity related groups and policies within the Managed Network
-                                  namespace: ''
-                              protocol: {}
-                            readOnly: true
-                            serializedName: connectivity
-                            extensions:
-                              x-ms-client-flatten: true
+                          - schema: *ref_19
+                            serializedName: kind
                             language:
                               default:
-                                name: connectivity
-                                description: The collection of groups and policies concerned with connectivity
+                                name: kind
+                                description: Responsibility role under which this Managed Network Group will be created
                             protocol: {}
                         serializationFormats:
                           - json
@@ -857,38 +865,118 @@ schemas:
                           - input
                         language:
                           default:
-                            name: ManagedNetworkProperties
-                            description: Properties of Managed Network
+                            name: ManagedNetworkGroup
+                            description: The Managed Network Group resource
                             namespace: ''
                         protocol: {}
-                      serializedName: properties
-                      extensions:
-                        x-ms-client-flatten: true
+                      - *ref_20
+                      - *ref_21
+                      - *ref_2
+                      - &ref_22
+                        type: object
+                        apiVersions:
+                          - version: 2019-06-01-preview
+                        parents:
+                          all:
+                            - *ref_3
+                          immediate:
+                            - *ref_3
+                        properties:
+                          - schema: *ref_16
+                            serializedName: properties
+                            extensions:
+                              x-ms-client-flatten: true
+                            language:
+                              default:
+                                name: properties
+                                description: The Scope Assignment properties
+                            protocol: {}
+                        serializationFormats:
+                          - json
+                        usage:
+                          - output
+                          - input
+                        language:
+                          default:
+                            name: ScopeAssignment
+                            description: The Managed Network resource
+                            namespace: ''
+                        protocol: {}
+                      - &ref_23
+                        type: object
+                        apiVersions:
+                          - version: 2019-06-01-preview
+                        parents:
+                          all:
+                            - *ref_3
+                          immediate:
+                            - *ref_3
+                        serializationFormats:
+                          - json
+                        usage:
+                          - output
+                          - input
+                        language:
+                          default:
+                            name: ProxyResource
+                            description: The resource model definition for a ARM proxy resource. It will have everything other than required location and tags
+                            namespace: ''
+                        protocol: {}
+                    immediate:
+                      - *ref_13
+                      - *ref_20
+                      - *ref_21
+                      - *ref_22
+                      - *ref_23
+                  properties:
+                    - schema: *ref_24
+                      readOnly: true
+                      serializedName: id
                       language:
                         default:
-                          name: properties
-                          description: The MNC properties
+                          name: id
+                          description: 'Fully qualified resource Id for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}'
+                      protocol: {}
+                    - schema: *ref_25
+                      readOnly: true
+                      serializedName: name
+                      language:
+                        default:
+                          name: name
+                          description: The name of the resource
+                      protocol: {}
+                    - schema: *ref_26
+                      readOnly: true
+                      serializedName: type
+                      language:
+                        default:
+                          name: type
+                          description: The type of the resource. Ex- Microsoft.Compute/virtualMachines or Microsoft.Storage/storageAccounts.
+                      protocol: {}
+                    - schema: *ref_27
+                      serializedName: location
+                      language:
+                        default:
+                          name: location
+                          description: The geo-location where the resource lives
                       protocol: {}
                   serializationFormats:
                     - json
                   usage:
                     - output
                     - input
+                  extensions:
+                    x-ms-azure-resource: true
                   language:
                     default:
-                      name: ManagedNetwork
-                      description: The Managed Network resource
+                      name: Resource
+                      description: The general resource model definition
                       namespace: ''
                   protocol: {}
               immediate:
-                - *ref_19
-            parents:
-              all:
-                - *ref_3
-              immediate:
                 - *ref_3
             properties:
-              - schema: *ref_20
+              - schema: *ref_28
                 required: false
                 serializedName: tags
                 language:
@@ -907,121 +995,41 @@ schemas:
                 description: The resource model definition for a ARM tracked top level resource
                 namespace: ''
             protocol: {}
-          - *ref_21
-          - *ref_22
-          - *ref_19
-          - &ref_23
-            type: object
-            apiVersions:
-              - version: 2019-06-01-preview
-            parents:
-              all:
-                - *ref_3
-              immediate:
-                - *ref_3
-            properties:
-              - schema: *ref_15
-                serializedName: properties
-                extensions:
-                  x-ms-client-flatten: true
-                language:
-                  default:
-                    name: properties
-                    description: The Scope Assignment properties
-                protocol: {}
-            serializationFormats:
-              - json
-            usage:
-              - output
-              - input
-            language:
-              default:
-                name: ScopeAssignment
-                description: The Managed Network resource
-                namespace: ''
-            protocol: {}
-          - &ref_24
-            type: object
-            apiVersions:
-              - version: 2019-06-01-preview
-            parents:
-              all:
-                - *ref_3
-              immediate:
-                - *ref_3
-            serializationFormats:
-              - json
-            usage:
-              - output
-              - input
-            language:
-              default:
-                name: ProxyResource
-                description: The resource model definition for a ARM proxy resource. It will have everything other than required location and tags
-                namespace: ''
-            protocol: {}
+          - *ref_3
         immediate:
-          - *ref_2
           - *ref_21
-          - *ref_22
-          - *ref_23
-          - *ref_24
       properties:
-        - schema: *ref_25
-          readOnly: true
-          serializedName: id
+        - schema: *ref_15
+          serializedName: properties
+          extensions:
+            x-ms-client-flatten: true
           language:
             default:
-              name: id
-              description: 'Fully qualified resource Id for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}'
-          protocol: {}
-        - schema: *ref_26
-          readOnly: true
-          serializedName: name
-          language:
-            default:
-              name: name
-              description: The name of the resource
-          protocol: {}
-        - schema: *ref_27
-          readOnly: true
-          serializedName: type
-          language:
-            default:
-              name: type
-              description: The type of the resource. Ex- Microsoft.Compute/virtualMachines or Microsoft.Storage/storageAccounts.
-          protocol: {}
-        - schema: *ref_28
-          serializedName: location
-          language:
-            default:
-              name: location
-              description: The geo-location where the resource lives
+              name: properties
+              description: The MNC properties
           protocol: {}
       serializationFormats:
         - json
       usage:
         - output
         - input
-      extensions:
-        x-ms-azure-resource: true
       language:
         default:
-          name: Resource
-          description: The general resource model definition
+          name: ManagedNetwork
+          description: The Managed Network resource
           namespace: ''
       protocol: {}
-    - *ref_2
-    - *ref_19
-    - *ref_4
-    - *ref_12
+    - *ref_15
     - *ref_29
-    - *ref_6
+    - *ref_12
     - *ref_30
+    - *ref_13
+    - *ref_4
+    - *ref_6
+    - *ref_3
+    - *ref_20
+    - *ref_5
     - *ref_21
-    - *ref_14
-    - *ref_22
-    - *ref_7
     - &ref_68
       type: object
       apiVersions:
@@ -1046,7 +1054,7 @@ schemas:
       serializationFormats:
         - json
       usage:
-        - output
+        - exception
       language:
         default:
           name: ErrorResponse
@@ -1084,7 +1092,7 @@ schemas:
             type: array
             apiVersions:
               - version: 2019-06-01-preview
-            elementType: *ref_19
+            elementType: *ref_2
             language:
               default:
                 name: ManagedNetworkListResult-value
@@ -1113,8 +1121,8 @@ schemas:
           description: Result of the request to list Managed Network. It contains a list of Managed Networks and a URL link to get the next set of results.
           namespace: ''
       protocol: {}
-    - *ref_23
-    - *ref_15
+    - *ref_22
+    - *ref_16
     - &ref_93
       type: object
       apiVersions:
@@ -1124,7 +1132,7 @@ schemas:
             type: array
             apiVersions:
               - version: 2019-06-01-preview
-            elementType: *ref_23
+            elementType: *ref_22
             language:
               default:
                 name: ScopeAssignmentListResult-value
@@ -1162,7 +1170,7 @@ schemas:
             type: array
             apiVersions:
               - version: 2019-06-01-preview
-            elementType: *ref_21
+            elementType: *ref_13
             language:
               default:
                 name: ManagedNetworkGroupListResult-value
@@ -1200,7 +1208,7 @@ schemas:
             type: array
             apiVersions:
               - version: 2019-06-01-preview
-            elementType: *ref_22
+            elementType: *ref_20
             language:
               default:
                 name: ManagedNetworkPeeringPolicyListResult-value
@@ -1332,9 +1340,9 @@ schemas:
       protocol: {}
     - *ref_43
     - *ref_44
+    - *ref_7
     - *ref_8
-    - *ref_9
-    - *ref_24
+    - *ref_23
   arrays:
     - *ref_45
     - *ref_46
@@ -1356,7 +1364,7 @@ schemas:
     - type: array
       apiVersions:
         - version: 2019-06-01-preview
-      elementType: *ref_6
+      elementType: *ref_12
       language:
         default:
           name: HubAndSpokePeeringPolicyProperties-spokes
@@ -1365,7 +1373,7 @@ schemas:
     - type: array
       apiVersions:
         - version: 2019-06-01-preview
-      elementType: *ref_6
+      elementType: *ref_12
       language:
         default:
           name: MeshPeeringPolicyProperties-mesh
@@ -1462,7 +1470,7 @@ operationGroups:
           - *ref_66
           - *ref_67
         responses:
-          - schema: *ref_19
+          - schema: *ref_2
             language:
               default:
                 name: ''
@@ -1561,7 +1569,7 @@ operationGroups:
         requests:
           - parameters:
               - &ref_69
-                schema: *ref_19
+                schema: *ref_2
                 implementation: Method
                 required: true
                 language:
@@ -1590,7 +1598,7 @@ operationGroups:
           - *ref_70
           - *ref_71
         responses:
-          - schema: *ref_19
+          - schema: *ref_2
             language:
               default:
                 name: ''
@@ -1602,7 +1610,7 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - '200'
-          - schema: *ref_19
+          - schema: *ref_2
             language:
               default:
                 name: ''
@@ -1875,7 +1883,7 @@ operationGroups:
           - *ref_76
           - *ref_77
         responses:
-          - schema: *ref_19
+          - schema: *ref_2
             language:
               default:
                 name: ''
@@ -1887,7 +1895,7 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - '200'
-          - schema: *ref_19
+          - schema: *ref_2
             language:
               default:
                 name: ''
@@ -2278,7 +2286,7 @@ operationGroups:
           - *ref_85
           - *ref_86
         responses:
-          - schema: *ref_23
+          - schema: *ref_22
             language:
               default:
                 name: ''
@@ -2361,7 +2369,7 @@ operationGroups:
         requests:
           - parameters:
               - &ref_87
-                schema: *ref_23
+                schema: *ref_22
                 implementation: Method
                 required: true
                 language:
@@ -2390,7 +2398,7 @@ operationGroups:
           - *ref_88
           - *ref_89
         responses:
-          - schema: *ref_23
+          - schema: *ref_22
             language:
               default:
                 name: ''
@@ -2402,7 +2410,7 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - '200'
-          - schema: *ref_23
+          - schema: *ref_22
             language:
               default:
                 name: ''
@@ -2688,7 +2696,7 @@ operationGroups:
           - *ref_95
           - *ref_96
         responses:
-          - schema: *ref_21
+          - schema: *ref_13
             language:
               default:
                 name: ''
@@ -2789,7 +2797,7 @@ operationGroups:
         requests:
           - parameters:
               - &ref_97
-                schema: *ref_21
+                schema: *ref_13
                 implementation: Method
                 required: true
                 language:
@@ -2819,7 +2827,7 @@ operationGroups:
           - *ref_99
           - *ref_100
         responses:
-          - schema: *ref_21
+          - schema: *ref_13
             language:
               default:
                 name: ''
@@ -2831,7 +2839,7 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - '200'
-          - schema: *ref_21
+          - schema: *ref_13
             language:
               default:
                 name: ''
@@ -3225,7 +3233,7 @@ operationGroups:
           - *ref_110
           - *ref_111
         responses:
-          - schema: *ref_22
+          - schema: *ref_20
             language:
               default:
                 name: ''
@@ -3324,7 +3332,7 @@ operationGroups:
         requests:
           - parameters:
               - &ref_112
-                schema: *ref_22
+                schema: *ref_20
                 implementation: Method
                 required: true
                 language:
@@ -3354,7 +3362,7 @@ operationGroups:
           - *ref_114
           - *ref_115
         responses:
-          - schema: *ref_22
+          - schema: *ref_20
             language:
               default:
                 name: ''
@@ -3366,7 +3374,7 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - '200'
-          - schema: *ref_22
+          - schema: *ref_20
             language:
               default:
                 name: ''

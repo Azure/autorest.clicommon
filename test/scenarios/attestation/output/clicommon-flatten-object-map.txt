@@ -3,9 +3,9 @@ OperationsDefinition<2>(display:OperationsDisplayDefinition)
 OperationsDisplayDefinition<4>
 CloudError<1>(error:CloudErrorBody)
 CloudErrorBody<2>
-Resource<3>
-TrackedResource<2>
 AttestationProvider<1>[properties] -> StatusResult<3>
+TrackedResource<2>
+Resource<3>
 AttestationServiceCreationParams<3>(properties:AttestationServiceCreationSpecificParams)
 AttestationServiceCreationSpecificParams<2>(policySigningCertificates:JSONWebKeySet)
 JSONWebKeySet<1>

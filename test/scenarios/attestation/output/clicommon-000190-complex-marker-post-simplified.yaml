@@ -215,44 +215,6 @@ schemas:
           - propertyName: message(CloudErrorBodyMessage^string)
             cli:
               cliKey: message
-      - schemaName: Resource
-        cli:
-          cliKey: Resource
-          cli-complexity: object_simple
-          cli-simplify-indicator: 
-            simplifiable: true
-            propertyCountIfSimplify: 0
-            propertyCountIfSimplifyWithoutSimpleObject: 0
-          cli-mark: checked
-        properties:
-          - propertyName: id(ResourceId^string)
-            cli:
-              cliKey: id
-            readOnly: true
-          - propertyName: name(ResourceName^string)
-            cli:
-              cliKey: name
-            readOnly: true
-          - propertyName: type(ResourceType^string)
-            cli:
-              cliKey: type
-            readOnly: true
-      - schemaName: TrackedResource
-        cli:
-          cliKey: TrackedResource
-          cli-complexity: object_complex
-          cli-simplify-indicator: 
-            simplifiable: false
-            propertyCountIfSimplify: 10000
-            propertyCountIfSimplifyWithoutSimpleObject: 10000
-          cli-mark: checked
-        properties:
-          - propertyName: tags(TrackedResourceTags^dictionary)
-            cli:
-              cliKey: tags
-          - propertyName: location(TrackedResourceLocation^string)
-            cli:
-              cliKey: location
       - schemaName: AttestationProvider
         cli:
           cliKey: AttestationProvider
@@ -286,6 +248,44 @@ schemas:
           - propertyName: attestUri(StatusResultAttestUri^string)
             cli:
               cliKey: attestUri
+      - schemaName: TrackedResource
+        cli:
+          cliKey: TrackedResource
+          cli-complexity: object_complex
+          cli-simplify-indicator: 
+            simplifiable: false
+            propertyCountIfSimplify: 10000
+            propertyCountIfSimplifyWithoutSimpleObject: 10000
+          cli-mark: checked
+        properties:
+          - propertyName: tags(TrackedResourceTags^dictionary)
+            cli:
+              cliKey: tags
+          - propertyName: location(TrackedResourceLocation^string)
+            cli:
+              cliKey: location
+      - schemaName: Resource
+        cli:
+          cliKey: Resource
+          cli-complexity: object_simple
+          cli-simplify-indicator: 
+            simplifiable: true
+            propertyCountIfSimplify: 0
+            propertyCountIfSimplifyWithoutSimpleObject: 0
+          cli-mark: checked
+        properties:
+          - propertyName: id(ResourceId^string)
+            cli:
+              cliKey: id
+            readOnly: true
+          - propertyName: name(ResourceName^string)
+            cli:
+              cliKey: name
+            readOnly: true
+          - propertyName: type(ResourceType^string)
+            cli:
+              cliKey: type
+            readOnly: true
       - schemaName: AttestationServiceCreationParams
         cli:
           cliKey: AttestationServiceCreationParams

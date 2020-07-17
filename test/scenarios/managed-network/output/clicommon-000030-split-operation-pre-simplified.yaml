@@ -413,32 +413,6 @@ operationGroups:
 schemas:
   objects:
     all:
-      - schemaName: Resource
-        cli:
-          cliKey: Resource
-        properties:
-          - propertyName: id(Resource-id^string)
-            cli:
-              cliKey: id
-            readOnly: true
-          - propertyName: name(Resource-name^string)
-            cli:
-              cliKey: name
-            readOnly: true
-          - propertyName: type(Resource-type^string)
-            cli:
-              cliKey: type
-            readOnly: true
-          - propertyName: location(Resource-location^string)
-            cli:
-              cliKey: location
-      - schemaName: TrackedResource
-        cli:
-          cliKey: TrackedResource
-        properties:
-          - propertyName: tags(TrackedResource-tags^dictionary)
-            cli:
-              cliKey: tags
       - schemaName: ManagedNetwork
         cli:
           cliKey: ManagedNetwork
@@ -447,18 +421,6 @@ schemas:
             cli:
               cliKey: properties
             x-ms-client-flatten: true
-      - schemaName: ResourceProperties
-        cli:
-          cliKey: ResourceProperties
-        properties:
-          - propertyName: provisioningState(ProvisioningState^choice)
-            cli:
-              cliKey: provisioningState
-            readOnly: true
-          - propertyName: etag(ResourceProperties-etag^string)
-            cli:
-              cliKey: etag
-            readOnly: true
       - schemaName: ManagedNetworkProperties
         cli:
           cliKey: ManagedNetworkProperties
@@ -515,7 +477,7 @@ schemas:
             cli:
               cliKey: properties
             x-ms-client-flatten: true
-          - propertyName: kind(Kind^constant)
+          - propertyName: kind(Kind^choice)
             cli:
               cliKey: kind
       - schemaName: ManagedNetworkGroupProperties
@@ -534,6 +496,37 @@ schemas:
           - propertyName: subnets(ManagedNetworkGroupProperties-subnets^array)
             cli:
               cliKey: subnets
+      - schemaName: ResourceProperties
+        cli:
+          cliKey: ResourceProperties
+        properties:
+          - propertyName: provisioningState(ProvisioningState^choice)
+            cli:
+              cliKey: provisioningState
+            readOnly: true
+          - propertyName: etag(ResourceProperties-etag^string)
+            cli:
+              cliKey: etag
+            readOnly: true
+      - schemaName: Resource
+        cli:
+          cliKey: Resource
+        properties:
+          - propertyName: id(Resource-id^string)
+            cli:
+              cliKey: id
+            readOnly: true
+          - propertyName: name(Resource-name^string)
+            cli:
+              cliKey: name
+            readOnly: true
+          - propertyName: type(Resource-type^string)
+            cli:
+              cliKey: type
+            readOnly: true
+          - propertyName: location(Resource-location^string)
+            cli:
+              cliKey: location
       - schemaName: ManagedNetworkPeeringPolicy
         cli:
           cliKey: ManagedNetworkPeeringPolicy
@@ -558,6 +551,13 @@ schemas:
           - propertyName: mesh(ManagedNetworkPeeringPolicyProperties-mesh^array)
             cli:
               cliKey: mesh
+      - schemaName: TrackedResource
+        cli:
+          cliKey: TrackedResource
+        properties:
+          - propertyName: tags(TrackedResource-tags^dictionary)
+            cli:
+              cliKey: tags
       - schemaName: ErrorResponse
         cli:
           cliKey: ErrorResponse
@@ -692,6 +692,13 @@ schemas:
           - choiceValue: Succeeded
             cli:
               cliKey: Succeeded
+      - choiceName: Kind
+        cli:
+          cliKey: Kind
+        choiceValues:
+          - choiceValue: Connectivity
+            cli:
+              cliKey: Connectivity
       - choiceName: type
         cli:
           cliKey: type

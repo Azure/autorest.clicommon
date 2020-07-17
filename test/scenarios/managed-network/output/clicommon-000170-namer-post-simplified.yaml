@@ -418,44 +418,6 @@ operationGroups:
 schemas:
   objects:
     all:
-      - schemaName: Resource
-        cli:
-          cli-complexity: object_simple
-          cli-mark: checked
-          cli-simplify-indicator: 
-            propertyCountIfSimplify: 1
-            propertyCountIfSimplifyWithoutSimpleObject: 1
-            simplifiable: true
-          cliKey: Resource
-        properties:
-          - propertyName: id(ResourceId^string)
-            cli:
-              cliKey: id
-            readOnly: true
-          - propertyName: name(ResourceName^string)
-            cli:
-              cliKey: name
-            readOnly: true
-          - propertyName: type(ResourceType^string)
-            cli:
-              cliKey: type
-            readOnly: true
-          - propertyName: location(ResourceLocation^string)
-            cli:
-              cliKey: location
-      - schemaName: TrackedResource
-        cli:
-          cli-complexity: object_complex
-          cli-mark: checked
-          cli-simplify-indicator: 
-            propertyCountIfSimplify: 10000
-            propertyCountIfSimplifyWithoutSimpleObject: 10000
-            simplifiable: false
-          cliKey: TrackedResource
-        properties:
-          - propertyName: tags(TrackedResourceTags^dictionary)
-            cli:
-              cliKey: tags
       - schemaName: ManagedNetwork
         cli:
           cli-complexity: object_complex
@@ -470,24 +432,6 @@ schemas:
             cli:
               cliKey: properties
             x-ms-client-flatten: true
-      - schemaName: ResourceProperties
-        cli:
-          cli-complexity: object_simple
-          cli-mark: checked
-          cli-simplify-indicator: 
-            propertyCountIfSimplify: 0
-            propertyCountIfSimplifyWithoutSimpleObject: 0
-            simplifiable: true
-          cliKey: ResourceProperties
-        properties:
-          - propertyName: provisioningState(ProvisioningState^choice)
-            cli:
-              cliKey: provisioningState
-            readOnly: true
-          - propertyName: etag(ResourcePropertiesEtag^string)
-            cli:
-              cliKey: etag
-            readOnly: true
       - schemaName: ManagedNetworkProperties
         cli:
           cli-complexity: object_complex
@@ -574,7 +518,7 @@ schemas:
             cli:
               cliKey: properties
             x-ms-client-flatten: true
-          - propertyName: kind(Kind^constant)
+          - propertyName: kind(Kind^choice)
             cli:
               cliKey: kind
       - schemaName: ManagedNetworkGroupProperties
@@ -599,6 +543,49 @@ schemas:
           - propertyName: subnets(ManagedNetworkGroupPropertiesSubnets^array)
             cli:
               cliKey: subnets
+      - schemaName: ResourceProperties
+        cli:
+          cli-complexity: object_simple
+          cli-mark: checked
+          cli-simplify-indicator: 
+            propertyCountIfSimplify: 0
+            propertyCountIfSimplifyWithoutSimpleObject: 0
+            simplifiable: true
+          cliKey: ResourceProperties
+        properties:
+          - propertyName: provisioningState(ProvisioningState^choice)
+            cli:
+              cliKey: provisioningState
+            readOnly: true
+          - propertyName: etag(ResourcePropertiesEtag^string)
+            cli:
+              cliKey: etag
+            readOnly: true
+      - schemaName: Resource
+        cli:
+          cli-complexity: object_simple
+          cli-mark: checked
+          cli-simplify-indicator: 
+            propertyCountIfSimplify: 1
+            propertyCountIfSimplifyWithoutSimpleObject: 1
+            simplifiable: true
+          cliKey: Resource
+        properties:
+          - propertyName: id(ResourceId^string)
+            cli:
+              cliKey: id
+            readOnly: true
+          - propertyName: name(ResourceName^string)
+            cli:
+              cliKey: name
+            readOnly: true
+          - propertyName: type(ResourceType^string)
+            cli:
+              cliKey: type
+            readOnly: true
+          - propertyName: location(ResourceLocation^string)
+            cli:
+              cliKey: location
       - schemaName: ManagedNetworkPeeringPolicy
         cli:
           cli-complexity: object_complex
@@ -636,6 +623,19 @@ schemas:
           - propertyName: mesh(ManagedNetworkPeeringPolicyPropertiesMesh^array)
             cli:
               cliKey: mesh
+      - schemaName: TrackedResource
+        cli:
+          cli-complexity: object_complex
+          cli-mark: checked
+          cli-simplify-indicator: 
+            propertyCountIfSimplify: 10000
+            propertyCountIfSimplifyWithoutSimpleObject: 10000
+            simplifiable: false
+          cliKey: TrackedResource
+        properties:
+          - propertyName: tags(TrackedResourceTags^dictionary)
+            cli:
+              cliKey: tags
       - schemaName: ErrorResponse
         cli:
           cli-complexity: object_simple
@@ -856,6 +856,13 @@ schemas:
           - choiceValue: Succeeded
             cli:
               cliKey: Succeeded
+      - choiceName: Kind
+        cli:
+          cliKey: Kind
+        choiceValues:
+          - choiceValue: Connectivity
+            cli:
+              cliKey: Connectivity
       - choiceName: Type
         cli:
           cliKey: type
