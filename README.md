@@ -190,6 +190,8 @@ cli:
                 UTC: UTC
                 SSL: SSL
                 Sql: SQL
+                Rc: RC
+                Gb: GB
                 # workaround for modelerfour issue
                 # https://github.com/Azure/autorest.modelerfour/issues/195
                 SubscriptionId: SubscriptionId
@@ -215,6 +217,8 @@ cli:
                 UTC: UTC
                 SSL: SSL
                 Sql: SQL
+                Rc: RC
+                Gb: GB
                 # workaround for modelerfour issue
                 SubscriptionId: SubscriptionId
             parameter: 'camel'
