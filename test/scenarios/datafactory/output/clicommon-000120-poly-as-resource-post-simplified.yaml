@@ -2984,6 +2984,7 @@ schemas:
       - choiceName: factory_identity_type
         cli:
           cliKey: FactoryIdentityType
+          default-value: SystemAssigned
           hidden: true
         choiceValues:
           - choiceValue: system_assigned

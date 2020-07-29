@@ -257,13 +257,13 @@ schemas:
       apiVersions:
         - version: 2019-06-01-preview
       choiceType: *ref_0
-      defaultValue: Connectivity
       language:
         default:
           name: kind
           description: Responsibility role under which this Managed Network Group will be created
         cli:
           cliKey: Kind
+          default-value: Connectivity
           hidden: true
       protocol: {}
     - &ref_9

@@ -2256,7 +2256,6 @@ schemas:
       apiVersions:
         - version: '2018-06-01'
       choiceType: *ref_0
-      defaultValue: SystemAssigned
       language:
         default:
           name: FactoryIdentityType
@@ -2265,6 +2264,7 @@ schemas:
           name: FactoryIdentityType
           description: The identity type. Currently the only supported type is 'SystemAssigned'.
           cliKey: FactoryIdentityType
+          default-value: SystemAssigned
           hidden: true
       protocol: {}
     - &ref_180

@@ -3020,6 +3020,7 @@ schemas:
       - choiceName: FactoryIdentityType
         cli:
           cliKey: FactoryIdentityType
+          default-value: SystemAssigned
           hidden: true
         choiceValues:
           - choiceValue: SystemAssigned
