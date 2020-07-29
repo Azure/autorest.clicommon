@@ -49,6 +49,8 @@ export class FlattenHelper {
             (vp.extensions = vp.extensions || {})['x-ms-parameter-grouping'] = parameter.extensions?.['x-ms-parameter-grouping'];
         }
 
+        vp.required = parameter.required && property.required;
+
         yield vp;
     }
 
