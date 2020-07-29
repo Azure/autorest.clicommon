@@ -851,6 +851,7 @@ schemas:
       - choiceName: kind
         cli:
           cliKey: Kind
+          hidden: true
         choiceValues:
           - choiceValue: connectivity
             cli:

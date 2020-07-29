@@ -332,6 +332,7 @@ schemas:
       apiVersions:
         - version: 2019-06-01-preview
       choiceType: *ref_0
+      defaultValue: Connectivity
       language:
         default:
           name: Kind
@@ -340,6 +341,7 @@ schemas:
           name: Kind
           description: Responsibility role under which this Managed Network Group will be created
           cliKey: Kind
+          hidden: true
       protocol: {}
     - &ref_9
       choices:
