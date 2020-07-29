@@ -439,6 +439,9 @@ export class Helper {
     public static enumrateSchemas(schemas: ObjectSchema[], action: (nodeDescriptor: CliCommonSchema.CodeModel.NodeDescriptor) => void, flag: CliCommonSchema.CodeModel.NodeTypeFlag): void {
         const enumObjectSchema = isNullOrUndefined(flag) || ((flag & CliCommonSchema.CodeModel.NodeTypeFlag.objectSchema) > 0);
         const cliKeyMissing = '<clikey-missing>';
+        if (isNullOrUndefined(schemas)) {
+            return;
+        }
 
         for (let i = schemas.length - 1; i >= 0; i--) {
             const schema = schemas[i];
@@ -477,6 +480,9 @@ export class Helper {
     public static enumrateOperationGroups(groups: OperationGroup[], action: (nodeDescriptor: CliCommonSchema.CodeModel.NodeDescriptor) => void, flag: CliCommonSchema.CodeModel.NodeTypeFlag): void {
         const enumGroup = isNullOrUndefined(flag) || ((flag & CliCommonSchema.CodeModel.NodeTypeFlag.operationGroup) > 0);
         const cliKeyMissing = '<clikey-missing>';
+        if (isNullOrUndefined(groups)) {
+            return;
+        }
 
         for (let i = groups.length - 1; i >= 0; i--) {
             const group = groups[i];
