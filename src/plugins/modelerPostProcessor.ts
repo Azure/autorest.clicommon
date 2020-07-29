@@ -37,7 +37,7 @@ export class ModelerPostProcessor {
         Helper.enumerateCodeModel(model, (n) => {
             const schema = <ChoiceSchema<StringSchema> | SealedChoiceSchema<StringSchema>>n.target;
             if (!isNullOrUndefined(schema.choices) && schema.choices.length === 1) {
-                schema.defaultValue = schema.choices[0].value;
+                NodeCliHelper.setCliProperty(schema, 'default-value', schema.choices[0].value);
                 NodeCliHelper.setHidden(schema, true);
             }
         }, CliCommonSchema.CodeModel.NodeTypeFlag.choiceSchema);
