@@ -211,7 +211,7 @@ class ComplexMarker {
 
     public process(): void {
 
-        this.session.model.schemas.objects.forEach(obj => {
+        this.session.model.schemas.objects?.forEach(obj => {
             NodeCliHelper.clearComplex(obj);
             NodeCliHelper.clearSimplifyIndicator(obj);
             NodeCliHelper.clearMark(obj);
@@ -228,7 +228,7 @@ class ComplexMarker {
         });
 
         let tag = 1;
-        this.session.model.schemas.objects.forEach(obj => {
+        this.session.model.schemas.objects?.forEach(obj => {
             this.calculateObject(obj);
             tag++;
         });
@@ -241,12 +241,12 @@ class ComplexMarker {
             tag++;
         });
 
-        this.session.model.schemas.objects.forEach(obj => {
+        this.session.model.schemas.objects?.forEach(obj => {
             this.setSimplifyIndicator(obj);
             tag++;
         });
 
-        this.session.model.schemas.objects.forEach(obj => {
+        this.session.model.schemas.objects?.forEach(obj => {
             this.setInCircle(obj, [], tag.toString());
             tag++;
         });

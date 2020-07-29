@@ -125,7 +125,7 @@ export class FlattenValidator {
 
         const result: NodePath[] = [];
         const visited = new Set<string>();
-        objects.forEach(o => {
+        objects?.forEach(o => {
             const ni = new NodeInfo(o);
             if (!visited.has(ni.key))
                 this.visitNode(ni, [], result, visited);

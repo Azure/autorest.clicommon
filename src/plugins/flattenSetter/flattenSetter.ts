@@ -256,7 +256,7 @@ export class FlattenSetter {
 
         // by default on when the flatten_all flag is one
         if (flattenSchema === true || flattenAll === true) {
-            this.codeModel.schemas.objects.forEach(o => {
+            this.codeModel.schemas.objects?.forEach(o => {
                 if (!NodeHelper.HasSubClass(o)) {
                     for (const p of getAllProperties(o)) {
                         if (isObjectSchema(p.schema)) {
@@ -301,7 +301,7 @@ export class FlattenSetter {
         };
 
         if (flattenPayload === true || flattenAll === true) {
-            this.codeModel.operationGroups.forEach(group => {
+            this.codeModel.operationGroups?.forEach(group => {
                 group.operations.forEach(operation => {
                     values(operation.parameters)
                         .where(p => p.protocol.http?.in === 'body' && p.implementation === 'Method')
