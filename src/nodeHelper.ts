@@ -410,15 +410,15 @@ export class NodeHelper {
 
         for (const key in allSubs) {
             const subClass = allSubs[key];
-            if (!(subClass instanceof ObjectSchema)) {
+            if (!Helper.isObjectSchema(subClass)) {
                 Helper.logWarning("subclass is not ObjectSchema: " + subClass.language.default.name);
                 continue;
             }
-            if (NodeHelper.HasSubClass(subClass) && leafOnly) {
+            if (NodeHelper.HasSubClass(subClass as ObjectSchema) && leafOnly) {
                 Helper.logWarning("skip subclass which also has subclass: " + subClass.language.default.name);
                 continue;
             }
-            yield subClass;
+            yield subClass as ObjectSchema;
         }
     }
 
@@ -435,7 +435,9 @@ export class NodeHelper {
     }
 
     public static getDefaultNameWithType(node: ObjectSchema | DictionarySchema | ArraySchema): string {
-        return `${node.language.default.name}(${node instanceof ObjectSchema ? node.type : node instanceof DictionarySchema ? (node.elementType.language.default.name + '^dictionary') : (node.elementType.language.default.name + '^array')})`;
+        return `${node.language.default.name}(${Helper.isObjectSchema(node) ? node.type : 
+            Helper.isDictionarySchema(node) ? ((<DictionarySchema>node).elementType.language.default.name + '^dictionary') : 
+            ((<ArraySchema>node).elementType.language.default.name + '^array')})`;
     }
 
     public static checkVisibility(prop: Property): boolean {

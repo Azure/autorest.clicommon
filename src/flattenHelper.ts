@@ -1,12 +1,13 @@
 import { getAllProperties, ImplementationLocation, ObjectSchema, Parameter, Property, Request, VirtualParameter } from "@azure-tools/codemodel";
 import { values } from "@azure-tools/linq";
 import { isNullOrUndefined } from "util";
+import { Helper } from "./helper";
 import { NodeExtensionHelper, NodeCliHelper } from "./nodeHelper";
 
 export class FlattenHelper {
 
     public static flattenParameter(req: Request, param: Parameter, path: Property[], prefix: string): void {
-        if (!(param.schema instanceof ObjectSchema))
+        if (!Helper.isObjectSchema(param.schema))
             throw Error(`Try to flatten non-object schema: param = '${param.language.default.name}', schema= '${param.schema.language.default.name}'`);
 
         FlattenHelper.flattenPorperties(req, param, param.schema as ObjectSchema, path, prefix);

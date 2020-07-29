@@ -109,7 +109,7 @@ export class FlattenModifier {
     private flattenNormalOperationParam(request: Request, index: number): boolean {
         const parameter = request.parameters[index];
         const paramSchema = parameter.schema;
-        if (!(paramSchema instanceof ObjectSchema)) {
+        if (!Helper.isObjectSchema(paramSchema)) {
             Helper.logWarning(`flatten param ${NodeCliHelper.getCliKey(parameter, null)} is not object! Skip flatten`);
             return false;
         }

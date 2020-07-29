@@ -1,5 +1,5 @@
 import { Host, Session } from "@azure-tools/autorest-extension-base";
-import { CodeModel, isObjectSchema, ArraySchema, DictionarySchema, AnySchema, ConstantSchema, getAllProperties, ObjectSchema } from "@azure-tools/codemodel";
+import { CodeModel, ArraySchema, DictionarySchema, getAllProperties, ObjectSchema } from "@azure-tools/codemodel";
 import { isNullOrUndefined } from "util";
 import { Helper } from "../helper";
 import { CliCommonSchema } from "../schema";
@@ -22,10 +22,10 @@ class ComplexMarker {
         }
         NodeCliHelper.setComplex(dict, CliCommonSchema.CodeModel.Complexity.unknown);
 
-        if (dict.elementType instanceof ObjectSchema ||
-                dict.elementType instanceof ArraySchema ||
-                dict.elementType instanceof DictionarySchema ||
-                dict.elementType instanceof AnySchema) {
+        if (Helper.isObjectSchema(dict.elementType) ||
+                Helper.isArraySchema(dict) ||
+                Helper.isDictionarySchema(dict.elementType) ||
+                Helper.isAnySchema(dict.elementType)) {
             NodeCliHelper.setComplex(dict, CliCommonSchema.CodeModel.Complexity.dictionary_complex);
             return CliCommonSchema.CodeModel.Complexity.dictionary_complex;
         }
@@ -47,10 +47,10 @@ class ComplexMarker {
         }
         NodeCliHelper.setComplex(arr, CliCommonSchema.CodeModel.Complexity.unknown);
 
-        if (arr.elementType instanceof ObjectSchema ||
-                arr.elementType instanceof ArraySchema ||
-                arr.elementType instanceof DictionarySchema ||
-                arr.elementType instanceof AnySchema) {
+        if (Helper.isObjectSchema(arr.elementType) ||
+                Helper.isArraySchema(arr.elementType) ||
+                Helper.isDictionarySchema(arr.elementType) ||
+                Helper.isAnySchema(arr.elementType)) {
             NodeCliHelper.setComplex(arr, CliCommonSchema.CodeModel.Complexity.array_complex);
             return CliCommonSchema.CodeModel.Complexity.array_complex;
         }
@@ -80,21 +80,21 @@ class ComplexMarker {
         complexity = CliCommonSchema.CodeModel.Complexity.object_simple;
         if (obj.properties && obj.properties.length > 0) {
             for (const prop of obj.properties) {
-                if (isObjectSchema(prop.schema)) {
-                    this.calculateObject(prop.schema);
+                if (Helper.isObjectSchema(prop.schema)) {
+                    this.calculateObject(prop.schema as ObjectSchema);
                     return NodeCliHelper.setComplex(obj, CliCommonSchema.CodeModel.Complexity.object_complex);
                 }
-                else if (prop.schema instanceof ArraySchema) {
-                    const c = this.calculateArray(prop.schema);
+                else if (Helper.isArraySchema(prop.schema)) {
+                    const c = this.calculateArray(prop.schema as ArraySchema);
                     if (c === CliCommonSchema.CodeModel.Complexity.array_complex) {
                         return NodeCliHelper.setComplex(obj, CliCommonSchema.CodeModel.Complexity.object_complex);
                     }
                 }
-                else if (prop.schema instanceof DictionarySchema) {
-                    this.calculateDict(prop.schema);
+                else if (Helper.isDictionarySchema(prop.schema)) {
+                    this.calculateDict(prop.schema as DictionarySchema);
                     return NodeCliHelper.setComplex(obj, CliCommonSchema.CodeModel.Complexity.object_complex);
                 }
-                else if (prop.schema instanceof AnySchema) {
+                else if (Helper.isAnySchema(prop.schema)) {
                     return NodeCliHelper.setComplex(obj, CliCommonSchema.CodeModel.Complexity.object_complex);
                 }
             }
@@ -131,18 +131,18 @@ class ComplexMarker {
         for (const p of getAllProperties(schema)) {
             if (p.readOnly)
                 continue;
-            if (p.schema instanceof ConstantSchema)
+            if (Helper.isConstantSchema(p.schema))
                 continue;
-            if (p.schema instanceof AnySchema ||
-                p.schema instanceof ArraySchema ||
-                p.schema instanceof DictionarySchema) {
+            if (Helper.isAnySchema(p.schema) ||
+                Helper.isArraySchema(p.schema) ||
+                Helper.isDictionarySchema(p.schema)) {
                 return NodeCliHelper.setSimplifyIndicator(schema, impossible);
             }
-            else if (p.schema instanceof ObjectSchema) {
-                if (NodeHelper.HasSubClass(p.schema)) {
+            else if (Helper.isObjectSchema(p.schema)) {
+                if (NodeHelper.HasSubClass(p.schema as ObjectSchema)) {
                     return NodeCliHelper.setSimplifyIndicator(schema, impossible);
                 }
-                const pi = this.setSimplifyIndicator(p.schema);
+                const pi = this.setSimplifyIndicator(p.schema as ObjectSchema);
                 if (pi.simplifiable === true) {
                     if (NodeCliHelper.getComplexity(p.schema) === CliCommonSchema.CodeModel.Complexity.object_simple)
                         indicator.propertyCountIfSimplifyWithoutSimpleObject++;
@@ -185,22 +185,23 @@ class ComplexMarker {
         else {
             NodeCliHelper.setMark(schema, tag);
 
-            if (schema instanceof ArraySchema || schema instanceof DictionarySchema) {
-                if (schema.elementType instanceof ObjectSchema ||
-                    schema.elementType instanceof DictionarySchema ||
-                    schema.elementType instanceof ArraySchema) {
+            if (Helper.isArraySchema(schema) || Helper.isDictionarySchema(schema)) {
+                if (Helper.isObjectSchema((<ArraySchema | DictionarySchema>schema).elementType) ||
+                    Helper.isDictionarySchema((<ArraySchema | DictionarySchema>schema).elementType) ||
+                    Helper.isArraySchema((<ArraySchema | DictionarySchema>schema).elementType)) {
                     stack.push(schema);
-                    this.setInCircle(schema.elementType, stack, tag);
+                    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                    this.setInCircle((<ArraySchema<any> | DictionarySchema<any>>schema).elementType, stack, tag);
                     stack.splice(stack.length - 1, 1);
                 }
             }
-            else if (schema instanceof ObjectSchema) {
-                for (const prop of getAllProperties(schema)) {
-                    if (prop.schema instanceof ObjectSchema ||
-                        prop.schema instanceof DictionarySchema ||
-                        prop.schema instanceof ArraySchema) {
+            else if (Helper.isObjectSchema(schema)) {
+                for (const prop of getAllProperties(schema as ObjectSchema)) {
+                    if (Helper.isObjectSchema(prop.schema) ||
+                        Helper.isDictionarySchema(prop.schema) ||
+                        Helper.isArraySchema(prop.schema)) {
                         stack.push(schema);
-                        this.setInCircle(prop.schema, stack, tag);
+                        this.setInCircle(prop.schema as ObjectSchema, stack, tag);
                         stack.splice(stack.length - 1, 1);
                     }
                 }

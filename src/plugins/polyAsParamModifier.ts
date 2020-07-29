@@ -62,7 +62,7 @@ export class PolyAsParamModifier {
                 if (isNullOrUndefined(request.parameters))
                     return;
                 const allPolyParam: Parameter[] = request.parameters.filter(p =>
-                    p.schema instanceof ObjectSchema &&
+                    Helper.isObjectSchema(p.schema) &&
                     (p.schema as ObjectSchema).discriminator);
                 if (allPolyParam.length == 0)
                     return;
@@ -83,16 +83,16 @@ export class PolyAsParamModifier {
 
                     for (const key in allSubClass) {
                         const subClass = allSubClass[key];
-                        if (!(subClass instanceof ObjectSchema)) {
+                        if (!Helper.isObjectSchema(subClass)) {
                             Helper.logWarning("subclass is not ObjectSchema: " + subClass.language.default.name);
                             continue;
                         }
-                        if (NodeHelper.HasSubClass(subClass)) {
+                        if (NodeHelper.HasSubClass(subClass as ObjectSchema)) {
                             Helper.logWarning("skip subclass which also has subclass: " + subClass.language.default.name);
                             continue;
                         }
 
-                        const param2: Parameter = this.cloneParamForSubclass(polyParam, this.buildSubclassParamName(polyParam, key), subClass);
+                        const param2: Parameter = this.cloneParamForSubclass(polyParam, this.buildSubclassParamName(polyParam, key), subClass as ObjectSchema);
                         NodeExtensionHelper.setPolyAsParamOriginalParam(param2, polyParam);
                         request.addParameter(param2);
                     }

@@ -1,5 +1,5 @@
 import { Host, Session } from "@azure-tools/autorest-extension-base";
-import { CodeModel, ObjectSchema, isObjectSchema, Parameter, ArraySchema, DictionarySchema, ConstantSchema } from "@azure-tools/codemodel";
+import { CodeModel, ObjectSchema, Parameter } from "@azure-tools/codemodel";
 import { Helper } from "../helper";
 import { CliCommonSchema } from "../schema";
 import { NodeHelper, NodeCliHelper } from "../nodeHelper";
@@ -32,14 +32,14 @@ class VisibilityCleaner {
             for (const prop of schema.properties) {
                 if (!NodeHelper.checkVisibility(prop))
                     continue;
-                if (isObjectSchema(prop.schema)) {
-                    if (this.calcObject(prop.schema) === CliCommonSchema.CodeModel.Visibility.true)
+                if (Helper.isObjectSchema(prop.schema)) {
+                    if (this.calcObject(prop.schema as ObjectSchema) === CliCommonSchema.CodeModel.Visibility.true)
                         visible = CliCommonSchema.CodeModel.Visibility.true;
                 }
-                else if ((prop.schema instanceof ArraySchema || prop.schema instanceof DictionarySchema)) {
+                else if (Helper.isArraySchema(prop.schema) || Helper.isDictionarySchema(prop.schema)) {
                     visible = CliCommonSchema.CodeModel.Visibility.true;
                 }
-                else if (prop.schema instanceof ConstantSchema) {
+                else if (Helper.isConstantSchema(prop.schema)) {
                     // do nothing here
                 }
                 else {
@@ -71,8 +71,8 @@ class VisibilityCleaner {
         });
 
         Helper.enumerateCodeModel(this.session.model, (descriptor) => {
-            if (descriptor.target instanceof Parameter) {
-                if (NodeCliHelper.getIsVisibleFlag(descriptor.target.schema) === CliCommonSchema.CodeModel.Visibility.false) {
+            if (Helper.isParameter(descriptor.target)) {
+                if (NodeCliHelper.getIsVisibleFlag((<Parameter>descriptor.target).schema) === CliCommonSchema.CodeModel.Visibility.false) {
                     NodeCliHelper.setHidden(descriptor.target, true);
                     NodeCliHelper.setIsVisibleFlag(descriptor.target, CliCommonSchema.CodeModel.Visibility.false);
                 }

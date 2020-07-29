@@ -129,7 +129,7 @@ export class PolyAsResourceModifier {
             return [];
         }
         return request.parameters?.filter(p =>
-            p.schema instanceof ObjectSchema && (p.schema as ObjectSchema).discriminator && NodeCliHelper.isPolyAsResource(p));
+            Helper.isObjectSchema(p.schema) && (p.schema as ObjectSchema).discriminator && NodeCliHelper.isPolyAsResource(p));
     }
 
     private getDefaultRequest(operation: Operation): Request {

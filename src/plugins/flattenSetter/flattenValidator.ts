@@ -1,5 +1,5 @@
 import { Session } from "@azure-tools/autorest-extension-base";
-import { CodeModel, isObjectSchema, ObjectSchema, Property } from "@azure-tools/codemodel";
+import { CodeModel, ObjectSchema, Property } from "@azure-tools/codemodel";
 import { isNullOrUndefined } from "util";
 import { Helper } from "../../helper";
 import { NodeHelper, NodeExtensionHelper } from "../../nodeHelper";
@@ -51,7 +51,7 @@ class NodeInfo {
         if (!isNullOrUndefined(this.node.properties) && this.node.properties.length > 0) {
             for (let i = 0; i < this.node.properties.length; i++) {
                 const p = this.node.properties[i];
-                if (isObjectSchema(p.schema)) {
+                if (Helper.isObjectSchema(p.schema)) {
                     NodeExtensionHelper.isFlattened(p) ? this.flattenProperty.push(new PropertyInfo(p)) : this.unflattenProperty.push(new PropertyInfo(p));
                 }
             }

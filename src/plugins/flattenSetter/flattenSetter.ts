@@ -1,5 +1,5 @@
 import { Host, Session } from "@azure-tools/autorest-extension-base";
-import { CodeModel, ObjectSchema, isObjectSchema, getAllProperties, Parameter, DictionarySchema, Schema, ArraySchema, ConstantSchema, AnySchema } from "@azure-tools/codemodel";
+import { CodeModel, ObjectSchema, getAllProperties, Parameter, Schema, ArraySchema } from "@azure-tools/codemodel";
 import { isNullOrUndefined, isArray } from "util";
 import { Helper } from "../../helper";
 import { NodeHelper, NodeCliHelper, NodeExtensionHelper } from "../../nodeHelper";
@@ -50,16 +50,16 @@ export class FlattenSetter {
     }
 
     private canArrayObjectSimplified(schema: Schema, maxArrayObjProp: number) {
-        if (schema instanceof ObjectSchema && !NodeHelper.HasSubClass(schema)) {
-            const sim = NodeCliHelper.getSimplifyIndicator(schema);
+        if (Helper.isObjectSchema(schema) && !NodeHelper.HasSubClass(schema as ObjectSchema)) {
+            const sim = NodeCliHelper.getSimplifyIndicator(schema as ObjectSchema);
             return ((!isNullOrUndefined(sim)) && sim.simplifiable === true && sim.propertyCountIfSimplify <= maxArrayObjProp);
         }
         return false;
     }
 
     private canSubclassSimplified(schema: Schema, flattenConfig: FlattenConfig, isPolyAsResource: boolean) {
-        if (schema instanceof ObjectSchema && !isNullOrUndefined(schema.discriminatorValue) && !NodeHelper.HasSubClass(schema)) {
-            const sim = NodeCliHelper.getSimplifyIndicator(schema);
+        if (Helper.isObjectSchema(schema) && !isNullOrUndefined((<ObjectSchema>schema).discriminatorValue) && !NodeHelper.HasSubClass(schema as ObjectSchema)) {
+            const sim = NodeCliHelper.getSimplifyIndicator(schema as ObjectSchema);
             if (isPolyAsResource)
                 return ((!isNullOrUndefined(sim)) && sim.simplifiable === true && sim.propertyCountIfSimplifyWithoutSimpleObject <= flattenConfig.maxPolyAsResourcePropCount);
             else
@@ -90,27 +90,27 @@ export class FlattenSetter {
 
         let r = level;
 
-        if (schema instanceof ArraySchema) {
+        if (Helper.isArraySchema(schema)) {
             increasePropCount();
             if (NodeCliHelper.getComplexity(schema) === CliCommonSchema.CodeModel.Complexity.array_complex) {
                 if (!this.canArrayObjectSimplified(schema, flattenConfig.maxArrayPropCount))
                     increaseComplexity();
             }
         }
-        else if (schema instanceof DictionarySchema) {
+        else if (Helper.isDictionarySchema(schema)) {
             increasePropCount();
             if (NodeCliHelper.getComplexity(schema) === CliCommonSchema.CodeModel.Complexity.dictionary_complex)
                 increaseComplexity();
         }
-        else if (schema instanceof AnySchema) {
+        else if (Helper.isAnySchema(schema)) {
             increasePropCount();
             increaseComplexity();
         }
         // eslint-disable-next-line no-empty
-        else if (schema instanceof ConstantSchema) {
+        else if (Helper.isConstantSchema(schema)) {
         }
-        else if (schema instanceof ObjectSchema) {
-            if (NodeHelper.HasSubClass(schema)) {
+        else if (Helper.isObjectSchema(schema)) {
+            if (NodeHelper.HasSubClass(schema as ObjectSchema)) {
                 increasePropCount();
                 increaseComplexity();
             }
@@ -120,7 +120,7 @@ export class FlattenSetter {
             else {
                 info[level].propCount++;
                 info[level].complexity += weight;
-                for (const prop of getAllProperties(schema)) {
+                for (const prop of getAllProperties(schema as ObjectSchema)) {
                     if (prop.readOnly)
                         continue;
                     if (level + 1 < info.length) {
@@ -191,39 +191,39 @@ export class FlattenSetter {
 
     private flattenSchemaFromPayload(schema: Schema, curLevel: number, flattenSimpleObject: boolean, flattenConfig: FlattenConfig) {
 
-        if (!(schema instanceof ObjectSchema))
+        if (!Helper.isObjectSchema(schema))
             return;
         if (curLevel >= flattenConfig.maxLevel) {
-            const indicator = NodeCliHelper.getSimplifyIndicator(schema);
+            const indicator = NodeCliHelper.getSimplifyIndicator(schema as ObjectSchema);
             // Continue flatten if there is only one property even when we hit the max level
             if (indicator.simplifiable !== true || indicator.propertyCountIfSimplify !== 1)
                 return;
             Helper.logDebug(`continue flatten ${schema.language.default.name} when maxLevel is met because it's simplifiyIndicator.propertyCountIfSimplify is ${indicator.propertyCountIfSimplify}`);
         }
 
-        for (const prop of getAllProperties(schema)) {
+        for (const prop of getAllProperties(schema as ObjectSchema)) {
             if (prop.readOnly)
                 continue;
-            if (prop.schema instanceof ObjectSchema) {
-                if (NodeHelper.HasSubClass(prop.schema)) {
-                    this.flattenPolySchema(prop.schema, NodeCliHelper.getCliKey(prop, "noParamCliKey"), curLevel, flattenSimpleObject, flattenConfig);
+            if (Helper.isObjectSchema(prop.schema)) {
+                if (NodeHelper.HasSubClass(prop.schema as ObjectSchema)) {
+                    this.flattenPolySchema(prop.schema as ObjectSchema, NodeCliHelper.getCliKey(prop, "noParamCliKey"), curLevel, flattenSimpleObject, flattenConfig);
                 }
-                else if (NodeCliHelper.getInCircle(prop.schema) !== true) {
+                else if (NodeCliHelper.getInCircle(prop.schema as ObjectSchema) !== true) {
                     if (flattenSimpleObject ||
                         NodeCliHelper.getComplexity(prop.schema) !== CliCommonSchema.CodeModel.Complexity.object_simple ||
-                        NodeCliHelper.getSimplifyIndicator(prop.schema).propertyCountIfSimplify == 1) {
+                        NodeCliHelper.getSimplifyIndicator(prop.schema as ObjectSchema).propertyCountIfSimplify == 1) {
                         NodeExtensionHelper.setFlatten(prop, true, flattenConfig.overwriteSwagger);
                     }
                 }
             }
-            else if (prop.schema instanceof ArraySchema) {
-                if (this.canArrayObjectSimplified(prop.schema.elementType, flattenConfig.maxArrayPropCount)) {
+            else if (Helper.isArraySchema(prop.schema)) {
+                if (this.canArrayObjectSimplified((<ArraySchema>prop.schema).elementType, flattenConfig.maxArrayPropCount)) {
                     // put 32 as max flatten level for array object flatten here just in case, 
                     // it should be big enough value for array object flattening, but handle unexpected circle
                     // situation though it's not expected
                     const config = cloneFlattenConfig(flattenConfig);
                     config.maxLevel = Math.max(32, config.maxLevel);
-                    this.flattenSchemaFromPayload(prop.schema.elementType, curLevel, true, config);
+                    this.flattenSchemaFromPayload((<ArraySchema>prop.schema).elementType, curLevel, true, config);
                 }
             }
             this.flattenSchemaFromPayload(prop.schema, curLevel + 1, flattenSimpleObject, flattenConfig);
@@ -231,10 +231,10 @@ export class FlattenSetter {
     }
 
     private flattenPayload(param: Parameter, flattenConfig: FlattenConfig): void {
-        if (!(param.schema instanceof ObjectSchema))
+        if (!Helper.isObjectSchema(param.schema))
             return;
-        if (NodeHelper.HasSubClass(param.schema)) {
-            this.flattenPolySchema(param.schema, NodeCliHelper.getCliKey(param, "noParamCliKey"), 0, true, flattenConfig);
+        if (NodeHelper.HasSubClass(param.schema as ObjectSchema)) {
+            this.flattenPolySchema(param.schema as ObjectSchema, NodeCliHelper.getCliKey(param, "noParamCliKey"), 0, true, flattenConfig);
         }
         else {
             const r = this.calcPayloadFlatten(param.schema, flattenConfig);
@@ -259,7 +259,7 @@ export class FlattenSetter {
             this.codeModel.schemas.objects?.forEach(o => {
                 if (!NodeHelper.HasSubClass(o)) {
                     for (const p of getAllProperties(o)) {
-                        if (isObjectSchema(p.schema)) {
+                        if (Helper.isObjectSchema(p.schema)) {
                             NodeExtensionHelper.setFlatten(p, !NodeHelper.HasSubClass(p.schema as ObjectSchema), overwriteSwagger);
                         }
                     }
@@ -306,7 +306,7 @@ export class FlattenSetter {
                     values(operation.parameters)
                         .where(p => p.protocol.http?.in === 'body' && p.implementation === 'Method')
                         .forEach((p) => {
-                            if (p.schema instanceof ObjectSchema) {
+                            if (Helper.isObjectSchema(p.schema)) {
                                 Helper.logDebug(`Try to set flatten for ${group.language.default.name}/${operation.language.default.name}/${p.language.default.name}`);
 
                                 flattenConfig.nodeDescripter = {
@@ -326,7 +326,7 @@ export class FlattenSetter {
                             values(request.parameters)
                                 .where(p => p.protocol.http?.in === 'body' && p.implementation === 'Method')
                                 .forEach(p => {
-                                    if (p.schema instanceof ObjectSchema) {
+                                    if (Helper.isObjectSchema(p.schema)) {
                                         Helper.logDebug(`Try to set flatten for ${group.language.default.name}/${operation.language.default.name}/${p.language.default.name}`);
 
                                         flattenConfig.nodeDescripter = {
