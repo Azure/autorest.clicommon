@@ -50,6 +50,13 @@ export class FlattenHelper {
         }
 
         vp.required = parameter.required && property.required;
+        if (NodeCliHelper.getHidden(property.schema, false)) {
+            NodeCliHelper.setHidden(vp, true);
+        }
+        const cliDefaultValue = NodeCliHelper.getCliDefaultValue(property.schema);
+        if (cliDefaultValue !== undefined) {
+            NodeCliHelper.setCliDefaultValue(vp, cliDefaultValue);
+        }
 
         yield vp;
     }

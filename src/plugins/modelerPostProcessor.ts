@@ -1,5 +1,5 @@
 import { Host, Session } from "@azure-tools/autorest-extension-base";
-import { ChoiceSchema, CodeModel, SealedChoiceSchema, StringSchema } from "@azure-tools/codemodel";
+import { ChoiceSchema, CodeModel, Parameter, SealedChoiceSchema, StringSchema } from "@azure-tools/codemodel";
 import { isNullOrUndefined } from "util";
 import { Helper } from "../helper";
 import { CopyHelper } from "../copyHelper";
@@ -34,13 +34,29 @@ export class ModelerPostProcessor {
         // To make it backward compatiable, for those choices which are constant before(choice.length === 1),
         // we give it a default value and set hidden as true.
         // The following codegen should handle this case.
+
+        // Set schema
         Helper.enumerateCodeModel(model, (n) => {
             const schema = <ChoiceSchema<StringSchema> | SealedChoiceSchema<StringSchema>>n.target;
             if (!isNullOrUndefined(schema.choices) && schema.choices.length === 1) {
-                NodeCliHelper.setCliProperty(schema, 'default-value', schema.choices[0].value);
+                NodeCliHelper.setCliDefaultValue(schema, schema.choices[0].value);
                 NodeCliHelper.setHidden(schema, true);
             }
         }, CliCommonSchema.CodeModel.NodeTypeFlag.choiceSchema);
+
+        // Set parameter according to schema 
+        Helper.enumerateCodeModel(model, (n) => {
+            const parameter = <Parameter>n.target;
+            if (!isNullOrUndefined(parameter) && (Helper.isChoiceSchema(parameter.schema) || Helper.isChoiceSchema(parameter.schema))) {
+                if (NodeCliHelper.getHidden(parameter.schema, false)) {
+                    NodeCliHelper.setHidden(parameter, true);
+                }
+                const cliDefaultValue = NodeCliHelper.getCliDefaultValue(parameter.schema);
+                if (cliDefaultValue !== undefined) {
+                    NodeCliHelper.setCliDefaultValue(parameter, cliDefaultValue);
+                }
+            }
+        }, CliCommonSchema.CodeModel.NodeTypeFlag.parameter);
     }
 }
 
