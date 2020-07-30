@@ -10,7 +10,7 @@ export class NodeCliHelper {
     public static readonly POLY_RESOURCE: string = 'poly-resource';
     public static readonly CLI_FLATTEN: string = 'cli-flatten';
     public static readonly SPLIT_OPERATION_NAMES = 'split-operation-names';
-
+    
     private static readonly CLI: string = "cli";
     private static readonly NAME: string = "name";
     private static readonly DESCRIPTION: string = "description";
@@ -23,7 +23,8 @@ export class NodeCliHelper {
     private static readonly CLI_MARK: string = "cli-mark";
     private static readonly CLI_IS_VISIBLE: string = "cli-is-visible";
     private static readonly CLI_OPERATION_SPLITTED = 'cli-operation-splitted';
-    private static readonly JSON: string = "json";
+    private static readonly CLI_DEFAULT_VALUE: string = "default-value";
+
 
     private static readonly POLY_AS_PARAM_EXPANDED = 'cli-poly-as-param-expanded';
 
@@ -145,6 +146,15 @@ export class NodeCliHelper {
 
     public static getIsVisibleFlag(node: M4Node): CliCommonSchema.CodeModel.Visibility {
         return NodeCliHelper.getCliProperty(node, NodeCliHelper.CLI_IS_VISIBLE, () => undefined);
+    }
+
+    // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types, @typescript-eslint/no-explicit-any
+    public static setCliDefaultValue(node: M4Node, value: any): void {
+        NodeCliHelper.setCliProperty(node, NodeCliHelper.CLI_DEFAULT_VALUE, value);
+    }
+
+    public static getCliDefaultValue(node: M4Node): any {
+        return NodeCliHelper.getCliProperty(node, NodeCliHelper.CLI_DEFAULT_VALUE, () => undefined);
     }
 
     /**
@@ -410,15 +420,15 @@ export class NodeHelper {
 
         for (const key in allSubs) {
             const subClass = allSubs[key];
-            if (!(subClass instanceof ObjectSchema)) {
+            if (!Helper.isObjectSchema(subClass)) {
                 Helper.logWarning("subclass is not ObjectSchema: " + subClass.language.default.name);
                 continue;
             }
-            if (NodeHelper.HasSubClass(subClass) && leafOnly) {
+            if (NodeHelper.HasSubClass(subClass as ObjectSchema) && leafOnly) {
                 Helper.logWarning("skip subclass which also has subclass: " + subClass.language.default.name);
                 continue;
             }
-            yield subClass;
+            yield subClass as ObjectSchema;
         }
     }
 
@@ -435,7 +445,9 @@ export class NodeHelper {
     }
 
     public static getDefaultNameWithType(node: ObjectSchema | DictionarySchema | ArraySchema): string {
-        return `${node.language.default.name}(${node instanceof ObjectSchema ? node.type : node instanceof DictionarySchema ? (node.elementType.language.default.name + '^dictionary') : (node.elementType.language.default.name + '^array')})`;
+        return `${node.language.default.name}(${Helper.isObjectSchema(node) ? node.type : 
+            Helper.isDictionarySchema(node) ? ((<DictionarySchema>node).elementType.language.default.name + '^dictionary') : 
+            ((<ArraySchema>node).elementType.language.default.name + '^array')})`;
     }
 
     public static checkVisibility(prop: Property): boolean {

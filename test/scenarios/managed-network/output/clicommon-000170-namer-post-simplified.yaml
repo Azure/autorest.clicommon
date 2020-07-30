@@ -859,6 +859,8 @@ schemas:
       - choiceName: Kind
         cli:
           cliKey: Kind
+          default-value: Connectivity
+          hidden: true
         choiceValues:
           - choiceValue: Connectivity
             cli:

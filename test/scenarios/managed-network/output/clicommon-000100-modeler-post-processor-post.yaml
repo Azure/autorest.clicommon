@@ -263,6 +263,8 @@ schemas:
           description: Responsibility role under which this Managed Network Group will be created
         cli:
           cliKey: Kind
+          default-value: Connectivity
+          hidden: true
       protocol: {}
     - &ref_9
       choices:

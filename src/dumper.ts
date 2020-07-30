@@ -4,6 +4,7 @@ import { CodeModel, Info, ObjectSchema, Operation, Parameter, OperationGroup, Pr
 import { isNullOrUndefined, isString, isArray, isObject, isUndefined, isNull } from 'util';
 import { keys } from '@azure-tools/linq';
 import { NodeExtensionHelper, NodeHelper, NodeCliHelper } from './nodeHelper';
+import { Helper } from './helper';
 
 export class Dumper {
     private debugEnabled = false;
@@ -163,7 +164,7 @@ export class Dumper {
             output.push(Dumper.tab(indent + 1) + 'readOnly: true');
         }
 
-        if (parameter.schema instanceof ObjectSchema && NodeHelper.HasSubClass(parameter.schema)) {
+        if (Helper.isObjectSchema(parameter.schema) && NodeHelper.HasSubClass(parameter.schema as ObjectSchema)) {
             output.push(Dumper.tab(indent + 1) + NodeHelper.DISCRIMINATOR_FLAG + ': true');
         }
 
@@ -203,7 +204,7 @@ export class Dumper {
             output.push(Dumper.tab(indent + 1) + 'readOnly: true');
         }
 
-        if (parameter.schema instanceof ObjectSchema && NodeHelper.HasSubClass(parameter.schema)) {
+        if (Helper.isObjectSchema(parameter.schema) && NodeHelper.HasSubClass(parameter.schema as ObjectSchema)) {
             output.push(Dumper.tab(indent + 1) + NodeHelper.DISCRIMINATOR_FLAG + ': true');
         }
 
@@ -313,9 +314,9 @@ export class Dumper {
             return o;
         else if (isArray(o))
             return o.map(v => Dumper.NEW_LINE + Dumper.tab(indent) + "- " + Dumper.formatValue(v, indent + 2/* one more indent for array*/)).join('');
-        else if (o instanceof ObjectSchema)
+        else if (Helper.isObjectSchema(o))
             return `<${(o as ObjectSchema).language.default.name}>`;
-        else if (o instanceof Operation)
+        else if (Helper.isOperation(o))
             return `<${(o as Operation).language.default.name}>`;
         else if (isObject(o))
             return keys(o).select(k => Dumper.NEW_LINE + Dumper.tab(indent) + `${k}: ${Dumper.formatValue(o[k], indent + 1)}`).join('');

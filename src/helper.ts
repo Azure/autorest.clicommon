@@ -1,4 +1,4 @@
-import { codeModelSchema, ChoiceSchema, ChoiceValue, CodeModel, ObjectSchema, Operation, OperationGroup, Parameter, Property, SealedChoiceSchema, Schema, ConstantSchema, SchemaType, StringSchema } from "@azure-tools/codemodel";
+import { codeModelSchema, ChoiceSchema, ChoiceValue, CodeModel, ObjectSchema, Operation, OperationGroup, Parameter, Property, SealedChoiceSchema, Schema, ConstantSchema, SchemaType, StringSchema, DictionarySchema, ArraySchema, AnySchema } from "@azure-tools/codemodel";
 import { isArray, isNullOrUndefined, isString } from "util";
 import { CliConst, M4Node, M4NodeType, NamingType, CliCommonSchema } from "./schema";
 import { EnglishPluralizationService, guid } from '@azure-tools/codegen';
@@ -118,49 +118,49 @@ export class Helper {
 
     public static ToNamingType(node: M4Node): NamingType | null {
 
-        if (node instanceof OperationGroup)
+        if (Helper.isOperationGroup(node))
             return CliConst.NamingType.operationGroup;
-        else if (node instanceof Operation)
+        else if (Helper.isOperation(node))
             return CliConst.NamingType.operation;
-        else if (node instanceof Parameter) {
+        else if (Helper.isParameter(node)) {
             // workaround for modelerfour's bug, the naming convention is not applied to flattened parameter
             // https://github.com/Azure/autorest.modelerfour/issues/195
             if (node['flattened'] === true)
                 return null;
-            return node.schema?.type === SchemaType.Constant ? CliConst.NamingType.constant : CliConst.NamingType.parameter;
+            return (<Parameter>node).schema?.type === SchemaType.Constant ? CliConst.NamingType.constant : CliConst.NamingType.parameter;
         }
-        else if (node instanceof ChoiceSchema)
+        else if (Helper.isChoiceSchema(node))
             return CliConst.NamingType.choice;
-        else if (node instanceof SealedChoiceSchema)
+        else if (Helper.isSealedChoiceSchema(node))
             return CliConst.NamingType.choice;
-        else if (node instanceof ConstantSchema)
+        else if (Helper.isConstantSchema(node))
             return CliConst.NamingType.constant;
-        else if (node instanceof ChoiceValue)
+        else if (Helper.isChoiceValue(node))
             return CliConst.NamingType.choiceValue;
         // Treat other schema type as 'type' like 'string, 'number', 'array', 'dictionary', 'object'...
-        else if (node instanceof Schema)
+        else if (Helper.isSchema(node))
             return CliConst.NamingType.type;
-        else if (node instanceof Property)
+        else if (Helper.isProperty(node))
             return CliConst.NamingType.property;
         return null;
     }
 
     public static ToM4NodeType(node: M4Node): M4NodeType {
-        if (node instanceof OperationGroup)
+        if (Helper.isOperationGroup(node))
             return CliConst.SelectType.operationGroup;
-        else if (node instanceof Operation)
+        else if (Helper.isOperation(node))
             return CliConst.SelectType.operation;
-        else if (node instanceof Parameter)
+        else if (Helper.isParameter(node))
             return CliConst.SelectType.parameter;
-        else if (node instanceof ObjectSchema)
+        else if (Helper.isObjectSchema(node))
             return CliConst.SelectType.objectSchema;
-        else if (node instanceof Property)
+        else if (Helper.isProperty(node))
             return CliConst.SelectType.property;
-        else if (node instanceof ChoiceSchema)
+        else if (Helper.isChoiceSchema(node))
             return CliConst.SelectType.choiceSchema;
-        else if (node instanceof SealedChoiceSchema)
+        else if (Helper.isSealedChoiceSchema(node))
             return CliConst.SelectType.choiceSchema;
-        else if (node instanceof ChoiceValue)
+        else if (Helper.isChoiceValue(node))
             return CliConst.SelectType.choiceValue;
         throw Error(`Unsupported node type: ${typeof (node)}`);
     }
@@ -566,6 +566,233 @@ export class Helper {
                 }
             }
         }
+    }
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/explicit-module-boundary-types
+    public static isOperationGroup(o: any): boolean {
+        if (isNullOrUndefined(o)) {
+            return false;
+        }
+        if (o instanceof OperationGroup) {
+            return true;
+        }
+        if (o.prototype !== Object.prototype) {
+            return false;
+        }
+        const props = Object.getOwnPropertyNames(o);
+        if (props.find((prop) => prop === '$key') && props.find((prop) => prop === 'operations')) {
+            return true;
+        }
+        return false;
+    }
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/explicit-module-boundary-types
+    public static isOperation(o: any): boolean {
+        if (isNullOrUndefined(o)) {
+            return false;
+        }
+        if (o instanceof Operation) {
+            return true;
+        }
+        if (o.prototype !== Object.prototype) {
+            return false;
+        }
+        const props = Object.getOwnPropertyNames(o);
+        if (props.find((prop) => prop === 'responses') || props.find((prop) => prop === 'parameters')) {
+            return true;
+        }
+        return false;
+    }
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/explicit-module-boundary-types
+    public static isParameter(o: any): boolean {
+        if (isNullOrUndefined(o)) {
+            return false;
+        }
+        if (o instanceof Parameter) {
+            return true;
+        }
+        if (o.prototype !== Object.prototype) {
+            return false;
+        }
+        const props = Object.getOwnPropertyNames(o);
+        if (props.find((prop) => prop === 'implementation') || props.find((prop) => prop === 'flattened') || props.find((prop) => prop === 'groupedBy')) {
+            return true;
+        }
+        return false;
+    }
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/explicit-module-boundary-types
+    public static isObjectSchema(o: any): boolean {
+        if (isNullOrUndefined(o)) {
+            return false;
+        }
+        if (o instanceof ObjectSchema) {
+            return true;
+        }
+        if (o.prototype !== Object.prototype) {
+            return false;
+        }
+        if (o.type === SchemaType.Object) {
+            return true;
+        }
+        return false;
+    }
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/explicit-module-boundary-types
+    public static isDictionarySchema(o: any): boolean {
+        if (isNullOrUndefined(o)) {
+            return false;
+        }
+        if (o instanceof DictionarySchema) {
+            return true;
+        }
+        if (o.prototype !== Object.prototype) {
+            return false;
+        }
+        if (o.type === SchemaType.Dictionary) {
+            return true;
+        }
+        return false;
+    }
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/explicit-module-boundary-types
+    public static isArraySchema(o: any): boolean {
+        if (isNullOrUndefined(o)) {
+            return false;
+        }
+        if (o instanceof ArraySchema) {
+            return true;
+        }
+        if (o.prototype !== Object.prototype) {
+            return false;
+        }
+        if (o.type === SchemaType.Array) {
+            return true;
+        }
+        return false;
+    }
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/explicit-module-boundary-types
+    public static isAnySchema(o: any): boolean {
+        if (isNullOrUndefined(o)) {
+            return false;
+        }
+        if (o instanceof AnySchema) {
+            return true;
+        }
+        if (o.prototype !== Object.prototype) {
+            return false;
+        }
+        if (o.type === SchemaType.Any) {
+            return true;
+        }
+        return false;
+    }
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/explicit-module-boundary-types
+    public static isChoiceSchema(o: any): boolean {
+        if (isNullOrUndefined(o)) {
+            return false;
+        }
+        if (o instanceof ChoiceSchema) {
+            return true;
+        }
+        if (o.prototype !== Object.prototype) {
+            return false;
+        }
+        if (o.type === SchemaType.Choice) {
+            return true;
+        }
+        return false;
+    }
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/explicit-module-boundary-types
+    public static isSealedChoiceSchema(o: any): boolean {
+        if (isNullOrUndefined(o)) {
+            return false;
+        }
+        if (o instanceof SealedChoiceSchema) {
+            return true;
+        }
+        if (o.prototype !== Object.prototype) {
+            return false;
+        }
+        if (o.type === SchemaType.SealedChoice) {
+            return true;
+        }
+        return false;
+    }
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/explicit-module-boundary-types
+    public static isConstantSchema(o: any): boolean {
+        if (isNullOrUndefined(o)) {
+            return false;
+        }
+        if (o instanceof ConstantSchema) {
+            return true;
+        }
+        if (o.prototype !== Object.prototype) {
+            return false;
+        }
+        if (o.type === SchemaType.Constant) {
+            return true;
+        }
+        return false;
+    }
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/explicit-module-boundary-types
+    public static isChoiceValue(o: any): boolean {
+        if (isNullOrUndefined(o)) {
+            return false;
+        }
+        if (o instanceof ChoiceValue) {
+            return true;
+        }
+        if (o.prototype !== Object.prototype) {
+            return false;
+        }
+        const props = Object.getOwnPropertyNames(o);
+        if (props.find((prop) => prop === 'language') && props.find((prop) => prop === 'value')) {
+            return true;
+        }
+        return false;
+    }
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/explicit-module-boundary-types
+    public static isSchema(o: any): boolean {
+        if (isNullOrUndefined(o)) {
+            return false;
+        }
+        if (o instanceof Schema) {
+            return true;
+        }
+        if (o.prototype !== Object.prototype) {
+            return false;
+        }
+        const props = Object.getOwnPropertyNames(o);
+        if (props.find((prop) => prop === 'type')) {
+            return true;
+        }
+        return false;
+    }
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/explicit-module-boundary-types
+    public static isProperty(o: any): boolean {
+        if (isNullOrUndefined(o)) {
+            return false;
+        }
+        if (o instanceof Property) {
+            return true;
+        }
+        if (o.prototype !== Object.prototype) {
+            return false;
+        }
+        const props = Object.getOwnPropertyNames(o);
+        if (props.find((prop) => prop === 'serializedName')) {
+            return true;
+        }
+        return false;
     }
 
 }

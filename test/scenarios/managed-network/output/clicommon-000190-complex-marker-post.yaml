@@ -340,6 +340,8 @@ schemas:
           name: Kind
           description: Responsibility role under which this Managed Network Group will be created
           cliKey: Kind
+          default-value: Connectivity
+          hidden: true
       protocol: {}
     - &ref_9
       choices:
