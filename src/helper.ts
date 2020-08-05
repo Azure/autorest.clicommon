@@ -576,7 +576,7 @@ export class Helper {
         if (o instanceof OperationGroup) {
             return true;
         }
-        if (o.prototype !== Object.prototype) {
+        if (o.__proto__ !== Object.prototype) {
             return false;
         }
         const props = Object.getOwnPropertyNames(o);
@@ -594,7 +594,7 @@ export class Helper {
         if (o instanceof Operation) {
             return true;
         }
-        if (o.prototype !== Object.prototype) {
+        if (o.__proto__ !== Object.prototype) {
             return false;
         }
         const props = Object.getOwnPropertyNames(o);
@@ -612,7 +612,7 @@ export class Helper {
         if (o instanceof Parameter) {
             return true;
         }
-        if (o.prototype !== Object.prototype) {
+        if (o.__proto__ !== Object.prototype) {
             return false;
         }
         const props = Object.getOwnPropertyNames(o);
@@ -630,7 +630,7 @@ export class Helper {
         if (o instanceof ObjectSchema) {
             return true;
         }
-        if (o.prototype !== Object.prototype) {
+        if (o.__proto__ !== Object.prototype) {
             return false;
         }
         if (o.type === SchemaType.Object) {
@@ -647,7 +647,7 @@ export class Helper {
         if (o instanceof DictionarySchema) {
             return true;
         }
-        if (o.prototype !== Object.prototype) {
+        if (o.__proto__ !== Object.prototype) {
             return false;
         }
         if (o.type === SchemaType.Dictionary) {
@@ -664,7 +664,7 @@ export class Helper {
         if (o instanceof ArraySchema) {
             return true;
         }
-        if (o.prototype !== Object.prototype) {
+        if (o.__proto__ !== Object.prototype) {
             return false;
         }
         if (o.type === SchemaType.Array) {
@@ -681,7 +681,7 @@ export class Helper {
         if (o instanceof AnySchema) {
             return true;
         }
-        if (o.prototype !== Object.prototype) {
+        if (o.__proto__ !== Object.prototype) {
             return false;
         }
         if (o.type === SchemaType.Any) {
@@ -698,7 +698,7 @@ export class Helper {
         if (o instanceof ChoiceSchema) {
             return true;
         }
-        if (o.prototype !== Object.prototype) {
+        if (o.__proto__ !== Object.prototype) {
             return false;
         }
         if (o.type === SchemaType.Choice) {
@@ -715,7 +715,7 @@ export class Helper {
         if (o instanceof SealedChoiceSchema) {
             return true;
         }
-        if (o.prototype !== Object.prototype) {
+        if (o.__proto__ !== Object.prototype) {
             return false;
         }
         if (o.type === SchemaType.SealedChoice) {
@@ -732,7 +732,7 @@ export class Helper {
         if (o instanceof ConstantSchema) {
             return true;
         }
-        if (o.prototype !== Object.prototype) {
+        if (o.__proto__ !== Object.prototype) {
             return false;
         }
         if (o.type === SchemaType.Constant) {
@@ -749,7 +749,7 @@ export class Helper {
         if (o instanceof ChoiceValue) {
             return true;
         }
-        if (o.prototype !== Object.prototype) {
+        if (o.__proto__ !== Object.prototype) {
             return false;
         }
         const props = Object.getOwnPropertyNames(o);
@@ -767,7 +767,7 @@ export class Helper {
         if (o instanceof Schema) {
             return true;
         }
-        if (o.prototype !== Object.prototype) {
+        if (o.__proto__ !== Object.prototype) {
             return false;
         }
         const props = Object.getOwnPropertyNames(o);
@@ -785,7 +785,7 @@ export class Helper {
         if (o instanceof Property) {
             return true;
         }
-        if (o.prototype !== Object.prototype) {
+        if (o.__proto__ !== Object.prototype) {
             return false;
         }
         const props = Object.getOwnPropertyNames(o);
