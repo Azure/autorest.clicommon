@@ -1,10 +1,10 @@
-import { Host, Session } from "@azure-tools/autorest-extension-base";
-import { ChoiceSchema, CodeModel, Parameter, SealedChoiceSchema, StringSchema } from "@azure-tools/codemodel";
+import { Host, Session, startSession } from "@azure-tools/autorest-extension-base";
+import { ChoiceSchema, CodeModel, codeModelSchema, Parameter, SealedChoiceSchema, StringSchema } from "@azure-tools/codemodel";
 import { isNullOrUndefined } from "util";
 import { Helper } from "../helper";
 import { CopyHelper } from "../copyHelper";
-import { CliCommonSchema } from "../schema";
 import { NodeCliHelper } from "../nodeHelper";
+import { CliCommonSchema } from "../schema";
 
 export class ModelerPostProcessor {
 
@@ -14,16 +14,31 @@ export class ModelerPostProcessor {
     public process(): void {
         const model = this.session.model;
 
-        this.removeCliShare(model);
+        this.retrieveCodeModel(model);
 
         this.adjustChoiceschema(model);
     }
 
-    private removeCliShare(model: CodeModel): void {
-        // In case cli is shared by multiple instances during modelerfour, do deep copy
+    private retrieveCodeModel(model: CodeModel): void {
         Helper.enumerateCodeModel(model, (n) => {
             if (!isNullOrUndefined(n.target.language['cli'])) {
+                // In case cli is shared by multiple instances during modelerfour, do deep copy
                 n.target.language['cli'] = CopyHelper.deepCopy(n.target.language['cli']);
+
+                // log path for code model
+                NodeCliHelper.setCliM4Path(n.target, n.nodePath);
+            }
+        });
+
+        // We expect global parameter's cliM4Path to be like globalParameters$$['cliKey']
+        // So enumerate again to override
+        const paths = ['globalParameters'];
+        this.session.model.globalParameters?.forEach((param) => {
+            const cliKey = NodeCliHelper.getCliKey(param, null);
+            if (!isNullOrUndefined(cliKey)) {
+                paths.push(`['${cliKey}']`);
+                NodeCliHelper.setCliM4Path(param, Helper.joinNodePath(paths));
+                paths.pop();
             }
         });
     }
@@ -61,15 +76,15 @@ export class ModelerPostProcessor {
 }
 
 export async function processRequest(host: Host): Promise<void> {
-
-    const session = await Helper.init(host);
-    Helper.dumper.dumpCodeModel("modeler-post-processor-pre");
+    const session = await startSession<CodeModel>(host, {}, codeModelSchema);
+    const dumper = await Helper.getDumper(session);
+    dumper.dumpCodeModel("modeler-post-processor-pre", session.model);
 
     const pn = new ModelerPostProcessor(session);
     pn.process();
 
-    Helper.dumper.dumpCodeModel("modeler-post-processor-post");
+    dumper.dumpCodeModel("modeler-post-processor-post", session.model);
 
-    Helper.outputToModelerfour();
-    await Helper.dumper.persistAsync();
+    await Helper.outputToModelerfour(host, session);
+    await dumper.persistAsync(host);
 }

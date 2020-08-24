@@ -20,12 +20,16 @@ export namespace CliConst {
     export const CLI_FLATTEN_SET_FLATTEN_SCHEMA_KEY = 'cli.flatten.cli-flatten-schema';
     export const CLI_FLATTEN_SET_FLATTEN_PAYLOAD_KEY = 'cli.flatten.cli-flatten-payload';
     export const CLI_FLATTEN_SET_FLATTEN_PAYLOAD_MAX_PROP_KEY = 'cli.flatten.cli-flatten-payload-max-prop';
+    export const CLI_FLATTEN_SET_M4FLATTEN_PAYLOAD_MAX_PROP_KEY = 'cli.flatten.cli-m4flatten-payload-max-prop';
+    export const CLI_FLATTEN_SET_M4FLATTEN_PAYLOAD_TRACK1_ENABLED_KEY = 'cli.flatten.cli-m4flatten-payload-track1-enabled';
     export const CLI_FLATTEN_SET_FLATTEN_PAYLOAD_MAX_COMPLEXITY_KEY = 'cli.flatten.cli-flatten-payload-max-complexity';
     export const CLI_FLATTEN_SET_FLATTEN_PAYLOAD_MAX_LEVEL_KEY = 'cli.flatten.cli-flatten-payload-max-level';
     export const CLI_FLATTEN_SET_FLATTEN_PAYLOAD_MAX_ARRAY_OBJECT_PROP_KEY = 'cli.flatten.cli-flatten-payload-max-array-object-prop-count';
     export const CLI_FLATTEN_SET_FLATTEN_PAYLOAD_MAX_POLY_AS_RESOURCE_PROP_KEY = 'cli.flatten.cli-flatten-payload-max-poly-as-resource-prop-count';
     export const CLI_FLATTEN_SET_FLATTEN_PAYLOAD_MAX_POLY_AS_PARAM_PROP_KEY = 'cli.flatten.cli-flatten-payload-max-poly-as-param-prop-count';
     export const CLI_FLATTEN_SET_FLATTEN_ALL_OVERWRITE_SWAGGER_KEY = 'cli.flatten.cli-flatten-all-overwrite-swagger';
+    export const CLI_FLATTEN_SET_FLATTEN_KEEP_UNUSED_FLATTENED_MODELS_KEY = 'cli.flatten.cli-flatten-keep-unused-flattened-models';
+    export const CLI_FLATTEN_SET_FLATTEN_MULTIPLE_REQUEST_PARAMETER_FLATTENING_KEY = 'cli.flatten.cli-flatten-multiple-request-parameter-flattening';
 
     export const CLI_POLYMORPHISM_EXPAND_AS_RESOURCE_KEY = 'cli.polymorphism.expand-as-resource';
 
@@ -138,6 +142,7 @@ export namespace CliCommonSchema {
             replace?: ReplaceClause;
             formatTable?: FormatTableClause;
             "split-operation-names"?: ValueClause;
+            "pre-json"?: ValueClause;
         }
     }
 
@@ -213,6 +218,21 @@ export namespace CliCommonSchema {
             target: M4Node;
             /** set to -1 if the parent is not an array */
             targetIndex: number;
+            /** Node path after the code model emit from modeler four
+             *  The path is like json path. But in selector case, we use cliKey
+             * 
+             *  For example: schemas$$objects['OperationsList']$$properties['nextLink']
+             * 
+             *  It refer's to the element in code model
+             *  schemas:
+             *    objects:
+             *      - &ref_xx: 
+             *        cliKey: OperationsList
+             *        properties:
+             *          - &ref_xxx:
+             *            cliKey: nextLink
+             **/
+            nodePath?: string;
         }
     }
 }

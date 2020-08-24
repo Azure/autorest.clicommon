@@ -22,7 +22,7 @@ export class Dumper {
     private static readonly INITIAL_INDENT = 1;
     private static readonly MISSING_CLI_KEY = '<missing-clikey>';
     
-    constructor(private host: Host, private session: Session<CodeModel>) {
+    constructor(private session: Session<CodeModel>) {
     }
 
     public async init(): Promise<Dumper> {
@@ -45,10 +45,10 @@ export class Dumper {
         this.info.extensions[this.INDEX_KEY] += 10;
     }
 
-    public dumpCodeModel(name: string): void {
+    public dumpCodeModel(name: string, model: CodeModel): void {
         if (this.debugEnabled) {
-            this.dumpDebug[`clicommon-${this.dumpIndex.toString().padStart(6, '0')}-${name}.yaml`] = serialize(this.session.model);
-            this.dumpDebug[`clicommon-${this.dumpIndex.toString().padStart(6, '0')}-${name}-simplified.yaml`] = Dumper.toYamlSimplified(this.session.model);
+            this.dumpDebug[`clicommon-${this.dumpIndex.toString().padStart(6, '0')}-${name}.yaml`] = serialize(model);
+            this.dumpDebug[`clicommon-${this.dumpIndex.toString().padStart(6, '0')}-${name}-simplified.yaml`] = Dumper.toYamlSimplified(model);
             this.increaseDumpIndex();
         }
     }
@@ -62,14 +62,14 @@ export class Dumper {
         }
     }
 
-    public async persistAsync(): Promise<void> {
+    public async persistAsync(host: Host): Promise<void> {
         if (this.debugEnabled) {
             for (const key in this.dumpDebug) {
-                this.host.WriteFile(key, this.dumpDebug[key], null);
+                host.WriteFile(key, this.dumpDebug[key], null);
             }
         }
         for (const key in this.dumpOther) {
-            this.host.WriteFile(key, this.dumpOther[key], null);
+            host.WriteFile(key, this.dumpOther[key], null);
         }
     }
 
@@ -221,10 +221,6 @@ export class Dumper {
         const polyParamOriParam = NodeExtensionHelper.getPolyAsParamOriginalParam(parameter);
         if (!isNullOrUndefined(polyBaseSchema)) {
             output.push(Dumper.tab(indent + 1) + 'cli-poly-as-param-expanded: ' + NodeCliHelper.getCliKey(polyParamOriParam, Dumper.MISSING_CLI_KEY));
-        }
-
-        if (NodeExtensionHelper.isFlattened(parameter)) {
-            output.push(Dumper.tab(index + 1) + 'cli-flattened: true');
         }
 
         if (!isNullOrUndefined(parameter.protocol?.http?.in) && parameter.protocol.http.in === 'body') {

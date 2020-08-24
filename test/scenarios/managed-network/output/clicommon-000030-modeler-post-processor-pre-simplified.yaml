@@ -1,0 +1,711 @@
+operationGroups:
+  all:
+    - operationGroupName: managed_networks
+      cli:
+        cliKey: ManagedNetworks
+      operations:
+        - operationName: get_modify
+          cli:
+            cliKey: GetModify
+          parameters:
+            - parameterName: $host(string^string)
+              cli:
+                cliKey: $host
+            - parameterName: apiVersion(api_version2019_06_01_preview^constant)
+              cli:
+                cliKey: ApiVersion
+            - parameterName: SubscriptionId(string^string)
+              cli:
+                cliKey: subscriptionId
+            - parameterName: resource_group_name(string^string)
+              cli:
+                cliKey: resourceGroupName
+            - parameterName: managed_network_name(string^string)
+              cli:
+                cliKey: managedNetworkName
+        - operationName: create_or_update
+          cli:
+            cliKey: CreateOrUpdate
+          parameters:
+            - parameterName: $host(string^string)
+              cli:
+                cliKey: $host
+            - parameterName: apiVersion(api_version2019_06_01_preview^constant)
+              cli:
+                cliKey: ApiVersion
+            - parameterName: SubscriptionId(string^string)
+              cli:
+                cliKey: subscriptionId
+            - parameterName: resource_group_name(string^string)
+              cli:
+                cliKey: resourceGroupName
+            - parameterName: managed_network_name(string^string)
+              cli:
+                cliKey: managedNetworkName
+            - parameterName[0]: managed_network(managed_network^object)
+              cli:
+                cliKey: managedNetwork
+              bodySchema: managed_network
+        - operationName: delete
+          cli:
+            cliKey: Delete
+          parameters:
+            - parameterName: $host(string^string)
+              cli:
+                cliKey: $host
+            - parameterName: apiVersion(api_version2019_06_01_preview^constant)
+              cli:
+                cliKey: ApiVersion
+            - parameterName: SubscriptionId(string^string)
+              cli:
+                cliKey: subscriptionId
+            - parameterName: resource_group_name(string^string)
+              cli:
+                cliKey: resourceGroupName
+            - parameterName: managed_network_name(string^string)
+              cli:
+                cliKey: managedNetworkName
+        - operationName: update
+          cli:
+            cliKey: Update
+          parameters:
+            - parameterName: $host(string^string)
+              cli:
+                cliKey: $host
+            - parameterName: apiVersion(api_version2019_06_01_preview^constant)
+              cli:
+                cliKey: ApiVersion
+            - parameterName: SubscriptionId(string^string)
+              cli:
+                cliKey: subscriptionId
+            - parameterName: resource_group_name(string^string)
+              cli:
+                cliKey: resourceGroupName
+            - parameterName: managed_network_name(string^string)
+              cli:
+                cliKey: managedNetworkName
+            - parameterName[0]: parameters(managed_network_update^object)
+              cli:
+                cliKey: parameters
+              bodySchema: managed_network_update
+        - operationName: list_by_resource_group
+          cli:
+            cliKey: ListByResourceGroup
+          parameters:
+            - parameterName: $host(string^string)
+              cli:
+                cliKey: $host
+            - parameterName: apiVersion(api_version2019_06_01_preview^constant)
+              cli:
+                cliKey: ApiVersion
+            - parameterName: SubscriptionId(string^string)
+              cli:
+                cliKey: subscriptionId
+            - parameterName: resource_group_name(string^string)
+              cli:
+                cliKey: resourceGroupName
+            - parameterName: top(integer^integer)
+              cli:
+                cliKey: $top
+            - parameterName: skiptoken(string^string)
+              cli:
+                cliKey: $skiptoken
+        - operationName: list_by_subscription
+          cli:
+            cliKey: ListBySubscription
+          parameters:
+            - parameterName: $host(string^string)
+              cli:
+                cliKey: $host
+            - parameterName: apiVersion(api_version2019_06_01_preview^constant)
+              cli:
+                cliKey: ApiVersion
+            - parameterName: SubscriptionId(string^string)
+              cli:
+                cliKey: subscriptionId
+            - parameterName: top(integer^integer)
+              cli:
+                cliKey: $top
+            - parameterName: skiptoken(string^string)
+              cli:
+                cliKey: $skiptoken
+    - operationGroupName: scope_assignments
+      cli:
+        cliKey: ScopeAssignments
+      operations:
+        - operationName: get
+          cli:
+            cliKey: Get
+          parameters:
+            - parameterName: $host(string^string)
+              cli:
+                cliKey: $host
+            - parameterName: scope(string^string)
+              cli:
+                cliKey: scope
+            - parameterName: scope_assignment_name(string^string)
+              cli:
+                cliKey: scopeAssignmentName
+            - parameterName: apiVersion(api_version2019_06_01_preview^constant)
+              cli:
+                cliKey: ApiVersion
+        - operationName: create_or_update
+          cli:
+            cliKey: CreateOrUpdate
+          parameters:
+            - parameterName: $host(string^string)
+              cli:
+                cliKey: $host
+            - parameterName: scope(string^string)
+              cli:
+                cliKey: scope
+            - parameterName: scope_assignment_name(string^string)
+              cli:
+                cliKey: scopeAssignmentName
+            - parameterName: apiVersion(api_version2019_06_01_preview^constant)
+              cli:
+                cliKey: ApiVersion
+            - parameterName[0]: parameters(scope_assignment^object)
+              cli:
+                cliKey: parameters
+              bodySchema: scope_assignment
+        - operationName: delete
+          cli:
+            cliKey: Delete
+          parameters:
+            - parameterName: $host(string^string)
+              cli:
+                cliKey: $host
+            - parameterName: scope(string^string)
+              cli:
+                cliKey: scope
+            - parameterName: scope_assignment_name(string^string)
+              cli:
+                cliKey: scopeAssignmentName
+            - parameterName: apiVersion(api_version2019_06_01_preview^constant)
+              cli:
+                cliKey: ApiVersion
+        - operationName: list
+          cli:
+            cliKey: List
+          parameters:
+            - parameterName: $host(string^string)
+              cli:
+                cliKey: $host
+            - parameterName: scope(string^string)
+              cli:
+                cliKey: scope
+            - parameterName: apiVersion(api_version2019_06_01_preview^constant)
+              cli:
+                cliKey: ApiVersion
+    - operationGroupName: managed_network_groups
+      cli:
+        cliKey: ManagedNetworkGroups
+      operations:
+        - operationName: get
+          cli:
+            cliKey: Get
+          parameters:
+            - parameterName: $host(string^string)
+              cli:
+                cliKey: $host
+            - parameterName: apiVersion(api_version2019_06_01_preview^constant)
+              cli:
+                cliKey: ApiVersion
+            - parameterName: SubscriptionId(string^string)
+              cli:
+                cliKey: subscriptionId
+            - parameterName: resource_group_name(string^string)
+              cli:
+                cliKey: resourceGroupName
+            - parameterName: managed_network_name(string^string)
+              cli:
+                cliKey: managedNetworkName
+            - parameterName: managed_network_group_name(string^string)
+              cli:
+                cliKey: managedNetworkGroupName
+        - operationName: create_or_update
+          cli:
+            cliKey: CreateOrUpdate
+          parameters:
+            - parameterName: $host(string^string)
+              cli:
+                cliKey: $host
+            - parameterName: apiVersion(api_version2019_06_01_preview^constant)
+              cli:
+                cliKey: ApiVersion
+            - parameterName: SubscriptionId(string^string)
+              cli:
+                cliKey: subscriptionId
+            - parameterName: resource_group_name(string^string)
+              cli:
+                cliKey: resourceGroupName
+            - parameterName: managed_network_name(string^string)
+              cli:
+                cliKey: managedNetworkName
+            - parameterName: managed_network_group_name(string^string)
+              cli:
+                cliKey: managedNetworkGroupName
+            - parameterName[0]: managed_network_group(managed_network_group^object)
+              cli:
+                cliKey: managedNetworkGroup
+              bodySchema: managed_network_group
+        - operationName: delete
+          cli:
+            cliKey: Delete
+          parameters:
+            - parameterName: $host(string^string)
+              cli:
+                cliKey: $host
+            - parameterName: apiVersion(api_version2019_06_01_preview^constant)
+              cli:
+                cliKey: ApiVersion
+            - parameterName: SubscriptionId(string^string)
+              cli:
+                cliKey: subscriptionId
+            - parameterName: resource_group_name(string^string)
+              cli:
+                cliKey: resourceGroupName
+            - parameterName: managed_network_name(string^string)
+              cli:
+                cliKey: managedNetworkName
+            - parameterName: managed_network_group_name(string^string)
+              cli:
+                cliKey: managedNetworkGroupName
+        - operationName: list_by_managed_network
+          cli:
+            cliKey: ListByManagedNetwork
+          parameters:
+            - parameterName: $host(string^string)
+              cli:
+                cliKey: $host
+            - parameterName: apiVersion(api_version2019_06_01_preview^constant)
+              cli:
+                cliKey: ApiVersion
+            - parameterName: SubscriptionId(string^string)
+              cli:
+                cliKey: subscriptionId
+            - parameterName: resource_group_name(string^string)
+              cli:
+                cliKey: resourceGroupName
+            - parameterName: managed_network_name(string^string)
+              cli:
+                cliKey: managedNetworkName
+            - parameterName: top(integer^integer)
+              cli:
+                cliKey: $top
+            - parameterName: skiptoken(string^string)
+              cli:
+                cliKey: $skiptoken
+    - operationGroupName: managed_network_peering_policies
+      cli:
+        cliKey: ManagedNetworkPeeringPolicies
+      operations:
+        - operationName: get
+          cli:
+            cliKey: Get
+          parameters:
+            - parameterName: $host(string^string)
+              cli:
+                cliKey: $host
+            - parameterName: apiVersion(api_version2019_06_01_preview^constant)
+              cli:
+                cliKey: ApiVersion
+            - parameterName: SubscriptionId(string^string)
+              cli:
+                cliKey: subscriptionId
+            - parameterName: resource_group_name(string^string)
+              cli:
+                cliKey: resourceGroupName
+            - parameterName: managed_network_name(string^string)
+              cli:
+                cliKey: managedNetworkName
+            - parameterName: managed_network_peering_policy_name(string^string)
+              cli:
+                cliKey: managedNetworkPeeringPolicyName
+        - operationName: create_or_update
+          cli:
+            cliKey: CreateOrUpdate
+          parameters:
+            - parameterName: $host(string^string)
+              cli:
+                cliKey: $host
+            - parameterName: apiVersion(api_version2019_06_01_preview^constant)
+              cli:
+                cliKey: ApiVersion
+            - parameterName: SubscriptionId(string^string)
+              cli:
+                cliKey: subscriptionId
+            - parameterName: resource_group_name(string^string)
+              cli:
+                cliKey: resourceGroupName
+            - parameterName: managed_network_name(string^string)
+              cli:
+                cliKey: managedNetworkName
+            - parameterName: managed_network_peering_policy_name(string^string)
+              cli:
+                cliKey: managedNetworkPeeringPolicyName
+            - parameterName[0]: managed_network_policy(managed_network_peering_policy^object)
+              cli:
+                cliKey: managedNetworkPolicy
+              bodySchema: managed_network_peering_policy
+        - operationName: delete
+          cli:
+            cliKey: Delete
+          parameters:
+            - parameterName: $host(string^string)
+              cli:
+                cliKey: $host
+            - parameterName: apiVersion(api_version2019_06_01_preview^constant)
+              cli:
+                cliKey: ApiVersion
+            - parameterName: SubscriptionId(string^string)
+              cli:
+                cliKey: subscriptionId
+            - parameterName: resource_group_name(string^string)
+              cli:
+                cliKey: resourceGroupName
+            - parameterName: managed_network_name(string^string)
+              cli:
+                cliKey: managedNetworkName
+            - parameterName: managed_network_peering_policy_name(string^string)
+              cli:
+                cliKey: managedNetworkPeeringPolicyName
+        - operationName: list_by_managed_network
+          cli:
+            cliKey: ListByManagedNetwork
+          parameters:
+            - parameterName: $host(string^string)
+              cli:
+                cliKey: $host
+            - parameterName: apiVersion(api_version2019_06_01_preview^constant)
+              cli:
+                cliKey: ApiVersion
+            - parameterName: SubscriptionId(string^string)
+              cli:
+                cliKey: subscriptionId
+            - parameterName: resource_group_name(string^string)
+              cli:
+                cliKey: resourceGroupName
+            - parameterName: managed_network_name(string^string)
+              cli:
+                cliKey: managedNetworkName
+            - parameterName: top(integer^integer)
+              cli:
+                cliKey: $top
+            - parameterName: skiptoken(string^string)
+              cli:
+                cliKey: $skiptoken
+    - operationGroupName: operations
+      cli:
+        cliKey: Operations
+      operations:
+        - operationName: list
+          cli:
+            cliKey: List
+          parameters:
+            - parameterName: $host(string^string)
+              cli:
+                cliKey: $host
+            - parameterName: apiVersion(api_version2019_06_01_preview^constant)
+              cli:
+                cliKey: ApiVersion
+schemas:
+  objects:
+    all:
+      - schemaName: managed_network
+        cli:
+          cliKey: ManagedNetwork
+        properties:
+          - propertyName: properties(managed_network_properties^object)
+            cli:
+              cliKey: properties
+            x-ms-client-flatten: true
+      - schemaName: managed_network_properties
+        cli:
+          cliKey: ManagedNetworkProperties
+        properties:
+          - propertyName: scope(scope^object)
+            cli:
+              cliKey: scope
+            x-ms-client-flatten: true
+          - propertyName: connectivity(connectivity_collection^object)
+            cli:
+              cliKey: connectivity
+            x-ms-client-flatten: true
+            readOnly: true
+      - schemaName: scope
+        cli:
+          cliKey: Scope
+        properties:
+          - propertyName: management_groups(scope_management_groups^array)
+            cli:
+              cliKey: managementGroups
+          - propertyName: subscriptions(scope_subscriptions^array)
+            cli:
+              cliKey: subscriptions
+          - propertyName: virtual_networks(scope_virtual_networks^array)
+            cli:
+              cliKey: virtualNetworks
+          - propertyName: subnets(scope_subnets^array)
+            cli:
+              cliKey: subnets
+      - schemaName: resource_id
+        cli:
+          cliKey: ResourceId
+        properties:
+          - propertyName: id(resource_id^string)
+            cli:
+              cliKey: id
+      - schemaName: connectivity_collection
+        cli:
+          cliKey: ConnectivityCollection
+        properties:
+          - propertyName: groups(connectivity_collection_groups^array)
+            cli:
+              cliKey: groups
+            readOnly: true
+          - propertyName: peerings(connectivity_collection_peerings^array)
+            cli:
+              cliKey: peerings
+            readOnly: true
+      - schemaName: managed_network_group
+        cli:
+          cliKey: ManagedNetworkGroup
+        properties:
+          - propertyName: properties(managed_network_group_properties^object)
+            cli:
+              cliKey: properties
+            x-ms-client-flatten: true
+          - propertyName: kind(kind^choice)
+            cli:
+              cliKey: kind
+      - schemaName: managed_network_group_properties
+        cli:
+          cliKey: ManagedNetworkGroupProperties
+        properties:
+          - propertyName: management_groups(managed_network_group_properties_management_groups^array)
+            cli:
+              cliKey: managementGroups
+          - propertyName: subscriptions(managed_network_group_properties_subscriptions^array)
+            cli:
+              cliKey: subscriptions
+          - propertyName: virtual_networks(managed_network_group_properties_virtual_networks^array)
+            cli:
+              cliKey: virtualNetworks
+          - propertyName: subnets(managed_network_group_properties_subnets^array)
+            cli:
+              cliKey: subnets
+      - schemaName: resource_properties
+        cli:
+          cliKey: ResourceProperties
+        properties:
+          - propertyName: provisioning_state(provisioning_state^choice)
+            cli:
+              cliKey: provisioningState
+            readOnly: true
+          - propertyName: etag(resource_properties_etag^string)
+            cli:
+              cliKey: etag
+            readOnly: true
+      - schemaName: resource
+        cli:
+          cliKey: Resource
+        properties:
+          - propertyName: id(resource_id^string)
+            cli:
+              cliKey: id
+            readOnly: true
+          - propertyName: name(resource_name^string)
+            cli:
+              cliKey: name
+            readOnly: true
+          - propertyName: type(resource_type^string)
+            cli:
+              cliKey: type
+            readOnly: true
+          - propertyName: location(resource_location^string)
+            cli:
+              cliKey: location
+      - schemaName: managed_network_peering_policy
+        cli:
+          cliKey: ManagedNetworkPeeringPolicy
+        properties:
+          - propertyName: properties(managed_network_peering_policy_properties^object)
+            cli:
+              cliKey: properties
+      - schemaName: managed_network_peering_policy_properties
+        cli:
+          cliKey: ManagedNetworkPeeringPolicyProperties
+        discriminator: true
+        properties:
+          - propertyName: type(type^choice)
+            cli:
+              cliKey: type
+          - propertyName: hub(resource_id^object)
+            cli:
+              cliKey: hub
+          - propertyName: spokes(managed_network_peering_policy_properties_spokes^array)
+            cli:
+              cliKey: spokes
+          - propertyName: mesh(managed_network_peering_policy_properties_mesh^array)
+            cli:
+              cliKey: mesh
+      - schemaName: tracked_resource
+        cli:
+          cliKey: TrackedResource
+        properties:
+          - propertyName: tags(tracked_resource_tags^dictionary)
+            cli:
+              cliKey: tags
+      - schemaName: error_response
+        cli:
+          cliKey: ErrorResponse
+        properties:
+          - propertyName: code(error_response_code^string)
+            cli:
+              cliKey: code
+            readOnly: true
+          - propertyName: message(error_response_message^string)
+            cli:
+              cliKey: message
+            readOnly: true
+      - schemaName: managed_network_update
+        cli:
+          cliKey: ManagedNetworkUpdate
+        properties:
+          - propertyName: tags(managed_network_update_tags^dictionary)
+            cli:
+              cliKey: tags
+      - schemaName: managed_network_list_result
+        cli:
+          cliKey: ManagedNetworkListResult
+        properties:
+          - propertyName: value(managed_network_list_result_value^array)
+            cli:
+              cliKey: value
+          - propertyName: next_link(managed_network_list_result_next_link^string)
+            cli:
+              cliKey: nextLink
+      - schemaName: scope_assignment
+        cli:
+          cliKey: ScopeAssignment
+        properties:
+          - propertyName: properties(scope_assignment_properties^object)
+            cli:
+              cliKey: properties
+            x-ms-client-flatten: true
+      - schemaName: scope_assignment_properties
+        cli:
+          cliKey: ScopeAssignmentProperties
+        properties:
+          - propertyName: assigned_managed_network(scope_assignment_properties_assigned_managed_network^string)
+            cli:
+              cliKey: assignedManagedNetwork
+      - schemaName: scope_assignment_list_result
+        cli:
+          cliKey: ScopeAssignmentListResult
+        properties:
+          - propertyName: value(scope_assignment_list_result_value^array)
+            cli:
+              cliKey: value
+          - propertyName: next_link(scope_assignment_list_result_next_link^string)
+            cli:
+              cliKey: nextLink
+      - schemaName: managed_network_group_list_result
+        cli:
+          cliKey: ManagedNetworkGroupListResult
+        properties:
+          - propertyName: value(managed_network_group_list_result_value^array)
+            cli:
+              cliKey: value
+          - propertyName: next_link(managed_network_group_list_result_next_link^string)
+            cli:
+              cliKey: nextLink
+      - schemaName: managed_network_peering_policy_list_result
+        cli:
+          cliKey: ManagedNetworkPeeringPolicyListResult
+        properties:
+          - propertyName: value(managed_network_peering_policy_list_result_value^array)
+            cli:
+              cliKey: value
+          - propertyName: next_link(managed_network_peering_policy_list_result_next_link^string)
+            cli:
+              cliKey: nextLink
+      - schemaName: operation_list_result
+        cli:
+          cliKey: OperationListResult
+        properties:
+          - propertyName: value(operation_list_result_value^array)
+            cli:
+              cliKey: value
+          - propertyName: next_link(operation_list_result_next_link^string)
+            cli:
+              cliKey: nextLink
+      - schemaName: operation
+        cli:
+          cliKey: Operation
+        properties:
+          - propertyName: name(operation_name^string)
+            cli:
+              cliKey: name
+          - propertyName: display(operation_display^object)
+            cli:
+              cliKey: display
+      - schemaName: operation_display
+        cli:
+          cliKey: Operation-display
+        properties:
+          - propertyName: provider(operation_display_provider^string)
+            cli:
+              cliKey: provider
+          - propertyName: resource(operation_display_resource^string)
+            cli:
+              cliKey: resource
+          - propertyName: operation(operation_display_operation^string)
+            cli:
+              cliKey: operation
+      - schemaName: hub_and_spoke_peering_policy_properties
+        cli:
+          cliKey: HubAndSpokePeeringPolicyProperties
+      - schemaName: mesh_peering_policy_properties
+        cli:
+          cliKey: MeshPeeringPolicyProperties
+      - schemaName: proxy_resource
+        cli:
+          cliKey: ProxyResource
+  choices:
+    all:
+      - choiceName: provisioning_state
+        cli:
+          cliKey: ProvisioningState
+        choiceValues:
+          - choiceValue: updating
+            cli:
+              cliKey: Updating
+          - choiceValue: deleting
+            cli:
+              cliKey: Deleting
+          - choiceValue: failed
+            cli:
+              cliKey: Failed
+          - choiceValue: succeeded
+            cli:
+              cliKey: Succeeded
+      - choiceName: kind
+        cli:
+          cliKey: Kind
+        choiceValues:
+          - choiceValue: connectivity
+            cli:
+              cliKey: Connectivity
+      - choiceName: type
+        cli:
+          cliKey: type
+        choiceValues:
+          - choiceValue: hub_and_spoke_topology
+            cli:
+              cliKey: HubAndSpokeTopology
+          - choiceValue: mesh_topology
+            cli:
+              cliKey: MeshTopology

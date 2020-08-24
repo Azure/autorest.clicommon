@@ -2,7 +2,7 @@ import { Session } from "@azure-tools/autorest-extension-base";
 import { CodeModel, ObjectSchema, Property } from "@azure-tools/codemodel";
 import { isNullOrUndefined } from "util";
 import { Helper } from "../../helper";
-import { NodeHelper, NodeExtensionHelper } from "../../nodeHelper";
+import { NodeHelper, NodeCliHelper } from "../../nodeHelper";
 
 const BASECLASS_INDICATOR = '*';
 const CIRCLE_VICIM_INDICATOR = '#';
@@ -17,7 +17,7 @@ class PropertyInfo {
     }
 
     constructor(public property: Property) {
-        this.isFlatten = NodeExtensionHelper.isFlattened(property);
+        this.isFlatten = NodeCliHelper.isCliFlattened(property);
         this.isPointToBaseClass = NodeHelper.HasSubClass(property.schema as ObjectSchema);
     }
 
@@ -26,7 +26,7 @@ class PropertyInfo {
     }
 
     public unflattenAsCirculeVictim(): void {
-        NodeExtensionHelper.setFlatten(this.property, false, true);
+        NodeCliHelper.setCliFlatten(this.property, false);
         this.isCirculeVictim = true;
     }
 }
@@ -52,7 +52,7 @@ class NodeInfo {
             for (let i = 0; i < this.node.properties.length; i++) {
                 const p = this.node.properties[i];
                 if (Helper.isObjectSchema(p.schema)) {
-                    NodeExtensionHelper.isFlattened(p) ? this.flattenProperty.push(new PropertyInfo(p)) : this.unflattenProperty.push(new PropertyInfo(p));
+                    NodeCliHelper.isCliFlattened(p) ? this.flattenProperty.push(new PropertyInfo(p)) : this.unflattenProperty.push(new PropertyInfo(p));
                 }
             }
         }
@@ -104,8 +104,8 @@ export class FlattenValidator {
             const index = ppre.findIndex((v) => v.preNode.key === pi.nodeKey);
 
             if (index >= 0) {
-                Helper.logWarning('Circle found in flatten: ' + new NodePath(ppre).toOutputString() + ' ==> ' + pi.toOutputString(true));
-                Helper.logWarning('disable flatten on: ' + pi.toOutputString(true));
+                Helper.logWarning(this.session, 'Circle found in flatten: ' + new NodePath(ppre).toOutputString() + ' ==> ' + pi.toOutputString(true));
+                Helper.logWarning(this.session, 'disable flatten on: ' + pi.toOutputString(true));
                 pi.unflattenAsCirculeVictim();
 
                 ni.unflattenProperty.push(ni.flattenProperty.splice(i, 1)[0]);

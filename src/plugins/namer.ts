@@ -1,5 +1,5 @@
-import { CodeModel, Language, Metadata, Operation, Parameter } from '@azure-tools/codemodel';
-import { Session, Host, Channel } from '@azure-tools/autorest-extension-base';
+import { CodeModel, Language, Metadata, Operation, Parameter, codeModelSchema } from '@azure-tools/codemodel';
+import { Session, Host, Channel, startSession } from '@azure-tools/autorest-extension-base';
 import { values } from '@azure-tools/linq';
 import { isNullOrUndefined } from 'util';
 import { CliCommonSchema } from '../schema';
@@ -21,7 +21,6 @@ export class CommonNamer {
         // any configuration if necessary
         this.cliNamingSettings = Helper.normalizeNamingSettings(await this.session.getValue("cli.naming.cli", {}));
         this.defaultNamingSettings = Helper.normalizeNamingSettings(await this.session.getValue("cli.naming.default", {}));
-
         return this;
     }
 
@@ -33,6 +32,9 @@ export class CommonNamer {
         this.processOperationGroups();
         this.processCliOperation();
         this.flag = null;
+
+        this.retrieveCodeModel(this.codeModel);
+
         return this.codeModel;
     }
 
@@ -81,6 +83,27 @@ export class CommonNamer {
         for (const str of values(schemas.strings)) {
             this.applyNamingConvention(str);
         }
+    }
+
+    private retrieveCodeModel(model: CodeModel): void {
+        Helper.enumerateCodeModel(model, (n) => {
+            if (!isNullOrUndefined(n.target.language['cli'])) {
+                // log path for code model
+                NodeCliHelper.setCliPath(n.target, n.nodePath);
+            }
+        });
+
+        // We expect global parameter's cliPath to be like globalParameters$$['cliKey']
+        // So enumerate again to override
+        const paths = ['globalParameters'];
+        this.session.model.globalParameters?.forEach((param) => {
+            const cliKey = NodeCliHelper.getCliKey(param, null);
+            if (!isNullOrUndefined(cliKey)) {
+                paths.push(`['${cliKey}']`);
+                NodeCliHelper.setCliPath(param, Helper.joinNodePath(paths));
+                paths.pop();
+            }
+        });
     }
 
     private processOperationGroups(): void {
@@ -211,8 +234,9 @@ export class CommonNamer {
 }
 
 export async function processRequest(host: Host): Promise<void> {
-    const session = await Helper.init(host);
-    Helper.dumper.dumpCodeModel("namer-pre");
+    const session = await startSession<CodeModel>(host, {}, codeModelSchema);
+    const dumper = await Helper.getDumper(session);
+    dumper.dumpCodeModel("namer-pre", session.model);
 
     const debug = await host.GetValue('debug') || false;
     try {
@@ -224,9 +248,9 @@ export async function processRequest(host: Host): Promise<void> {
         }
         throw E;
     }
-    Helper.dumper.dumpCodeModel("namer-post");
+    dumper.dumpCodeModel("namer-post", session.model);
 
-    Helper.outputToModelerfour();
-    await Helper.dumper.persistAsync();
+    await Helper.outputToModelerfour(host, session);
+    await dumper.persistAsync(host);
 
 }

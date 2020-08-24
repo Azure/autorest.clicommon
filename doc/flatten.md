@@ -34,5 +34,11 @@ cli:
        cli-flatten-payload-max-poly-as-resource-prop-count: 8
        # max properties allowed from flatten of sub-class as param
        cli-flatten-payload-max-poly-as-param-prop-count: 8
+       # if you want to keep the flattened models even if they are not used
+       # default: false
+       cli-flatten-keep-unused-flattened-models: false
+       # setting this to false will skip parameter flattening for operations that have multiple requests (ie, JSON and BINARY)
+       # default: true
+       cli-flatten-multiple-request-parameter-flattening: true
 
 ```

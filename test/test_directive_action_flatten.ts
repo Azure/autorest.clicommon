@@ -18,7 +18,7 @@ describe('Test Directive - Action - flatten', function () {
         descriptor.target = new Metadata();
         let o = descriptor.target;
         action.process(descriptor);
-        assert.equal(NodeExtensionHelper.getFlattenedValue(o), false);
+        assert.equal(NodeCliHelper.isCliFlatten(o), false);
 
 
         action = new ActionFlatten(true);
@@ -26,6 +26,6 @@ describe('Test Directive - Action - flatten', function () {
         descriptor.target = new Metadata();
         o = descriptor.target;
         action.process(descriptor);
-        assert.equal(NodeExtensionHelper.getFlattenedValue(o), true);
+        assert.equal(NodeCliHelper.isCliFlatten(o), true);
     });
 });

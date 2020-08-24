@@ -1,5 +1,5 @@
-import { Host, Session } from "@azure-tools/autorest-extension-base";
-import { CodeModel, Request, ObjectSchema, Operation, OperationGroup, Parameter } from "@azure-tools/codemodel";
+import { Host, Session, startSession } from "@azure-tools/autorest-extension-base";
+import { CodeModel, Request, ObjectSchema, Operation, OperationGroup, Parameter, codeModelSchema } from "@azure-tools/codemodel";
 import { isNullOrUndefined } from "util";
 import { Helper } from "../helper";
 import { NodeHelper, NodeCliHelper, NodeExtensionHelper } from "../nodeHelper";
@@ -24,7 +24,6 @@ export class PolyAsResourceModifier {
             .filter((dir) => dir[NodeCliHelper.POLY_RESOURCE])
             .map((dir) => this.copyDirectiveOnlyForPolyResource(dir));
         if (directives && directives.length > 0) {
-            Helper.dumper.dumpCodeModel('poly-as-resource-modifier-pre');
             const modifier = await new Modifier(this.session).init(directives);
             modifier.process();
 
@@ -32,10 +31,8 @@ export class PolyAsResourceModifier {
             if (splitOpExtendPoly) {
                 this.modifierForExtendPolyResource();
             }
-
-            Helper.dumper.dumpCodeModel('poly-as-resource-modifier-post');
         } else {
-            Helper.logDebug('No poly resource directive is found!');
+            Helper.logDebug(this.session, 'No poly resource directive is found!');
         }
     }
 
@@ -108,7 +105,7 @@ export class PolyAsResourceModifier {
 
                     const op2: Operation = this.cloneOperationForSubclass(op, baseSchema, subClass);
                     
-                    Helper.logDebug(`${g.language.default.name}/${op.language.default.name} cloned for subclass ${discriminatorValue}`);
+                    Helper.logDebug(this.session, `${g.language.default.name}/${op.language.default.name} cloned for subclass ${discriminatorValue}`);
                     NodeExtensionHelper.addCliOperation(op, op2);
                 }
 
@@ -169,21 +166,21 @@ export class PolyAsResourceModifier {
 }
 
 export async function processRequest(host: Host): Promise<void> {
+    const session = await startSession<CodeModel>(host, {}, codeModelSchema);
+    const dumper = await Helper.getDumper(session);
 
-    const session = await Helper.init(host);
-
-    Helper.dumper.dumpCodeModel('poly-as-resource-pre');
+    dumper.dumpCodeModel('poly-as-resource-pre', session.model);
 
     if ((await session.getValue('cli.polymorphism.expand-as-resource', false)) === true) {
         const rd = new PolyAsResourceModifier(session);
         await rd.process();
     }
     else {
-        Helper.logWarning("cli.polymorphism.expand-as-resource is not true, poly-resource will be ignored");
+        Helper.logWarning(session, "cli.polymorphism.expand-as-resource is not true, poly-resource will be ignored");
     }
 
-    Helper.dumper.dumpCodeModel('poly-as-resource-post');
+    dumper.dumpCodeModel('poly-as-resource-post', session.model);
 
-    Helper.outputToModelerfour();
-    await Helper.dumper.persistAsync();
+    await Helper.outputToModelerfour(host, session);
+    await dumper.persistAsync(host);
 }
