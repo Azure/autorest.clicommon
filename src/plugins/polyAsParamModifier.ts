@@ -1,5 +1,5 @@
-import { Host, Session } from "@azure-tools/autorest-extension-base";
-import { CodeModel, ObjectSchema, Operation, Parameter } from "@azure-tools/codemodel";
+import { Host, Session, startSession } from "@azure-tools/autorest-extension-base";
+import { CodeModel, ObjectSchema, Operation, Parameter, codeModelSchema } from "@azure-tools/codemodel";
 import { isNullOrUndefined } from "util";
 import { Helper } from "../helper";
 import { CliCommonSchema } from "../schema";
@@ -69,12 +69,12 @@ export class PolyAsParamModifier {
 
                 for (const polyParam of allPolyParam) {
                     if (NodeCliHelper.getComplexity(polyParam.schema) !== CliCommonSchema.CodeModel.Complexity.object_simple) {
-                        Helper.logWarning(`Skip on complex poly param: ${NodeCliHelper.getCliKey(polyParam, '<clikey-missing>')}(${NodeCliHelper.getCliKey(polyParam, '<clikey-missing>')})`);
+                        Helper.logWarning(this.session, `Skip on complex poly param: ${NodeCliHelper.getCliKey(polyParam, '<clikey-missing>')}(${NodeCliHelper.getCliKey(polyParam, '<clikey-missing>')})`);
                         continue;
                     }
 
                     if (NodeHelper.getJson(polyParam)) {
-                        Helper.logWarning(`Skip poly object with json flag: ${NodeCliHelper.getCliKey(polyParam, '<clikey-missing>')}(${NodeCliHelper.getCliKey(polyParam, '<clikey-missing>')})`);
+                        Helper.logWarning(this.session, `Skip poly object with json flag: ${NodeCliHelper.getCliKey(polyParam, '<clikey-missing>')}(${NodeCliHelper.getCliKey(polyParam, '<clikey-missing>')})`);
                         continue;
                     }
 
@@ -84,11 +84,11 @@ export class PolyAsParamModifier {
                     for (const key in allSubClass) {
                         const subClass = allSubClass[key];
                         if (!Helper.isObjectSchema(subClass)) {
-                            Helper.logWarning("subclass is not ObjectSchema: " + subClass.language.default.name);
+                            Helper.logWarning(this.session, "subclass is not ObjectSchema: " + subClass.language.default.name);
                             continue;
                         }
                         if (NodeHelper.HasSubClass(subClass as ObjectSchema)) {
-                            Helper.logWarning("skip subclass which also has subclass: " + subClass.language.default.name);
+                            Helper.logWarning(this.session, "skip subclass which also has subclass: " + subClass.language.default.name);
                             continue;
                         }
 
@@ -105,18 +105,18 @@ export class PolyAsParamModifier {
 }
 
 export async function processRequest(host: Host): Promise<void> {
+    const session = await startSession<CodeModel>(host, {}, codeModelSchema);
+    const dumper = await Helper.getDumper(session);
 
-    const session = await Helper.init(host);
-
-    Helper.dumper.dumpCodeModel('poly-as-param-pre');
+    dumper.dumpCodeModel('poly-as-param-pre', session.model);
 
     if ((await session.getValue('cli.polymorphism.expand-as-param', false)) === true) {
         const rd = new PolyAsParamModifier(session);
         rd.process();
     }
 
-    Helper.dumper.dumpCodeModel('poly-as-param-post');
+    dumper.dumpCodeModel('poly-as-param-post', session.model);
 
-    Helper.outputToModelerfour();
-    await Helper.dumper.persistAsync();
+    await Helper.outputToModelerfour(host, session);
+    await dumper.persistAsync(host);
 }

@@ -1,5 +1,5 @@
-import { Host, Session } from "@azure-tools/autorest-extension-base";
-import { CodeModel, ArraySchema, DictionarySchema, getAllProperties, ObjectSchema } from "@azure-tools/codemodel";
+import { Host, Session, startSession } from "@azure-tools/autorest-extension-base";
+import { CodeModel, ArraySchema, DictionarySchema, getAllProperties, ObjectSchema, codeModelSchema } from "@azure-tools/codemodel";
 import { isNullOrUndefined } from "util";
 import { Helper } from "../helper";
 import { CliCommonSchema } from "../schema";
@@ -176,7 +176,7 @@ class ComplexMarker {
                     if (stack[i] === schema)
                         break;
                 }
-                Helper.logDebug(msg);
+                Helper.logDebug(this.session, msg);
             }
             else {
                 // we have been here before when iterating other schema
@@ -263,16 +263,16 @@ class ComplexMarker {
 }
 
 export async function processRequest(host: Host): Promise<void> {
+    const session = await startSession<CodeModel>(host, {}, codeModelSchema);
+    const dumper = await Helper.getDumper(session);
 
-    const session = await Helper.init(host);
-
-    Helper.dumper.dumpCodeModel('complex-marker-pre');
+    dumper.dumpCodeModel('complex-marker-pre', session.model);
 
     const cm = new ComplexMarker(session);
     cm.process();
 
-    Helper.dumper.dumpCodeModel('complex-marker-post');
+    dumper.dumpCodeModel('complex-marker-post', session.model);
 
-    Helper.outputToModelerfour();
-    await Helper.dumper.persistAsync();
+    await Helper.outputToModelerfour(host, session);
+    await dumper.persistAsync(host);
 }

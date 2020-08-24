@@ -1,4 +1,4 @@
-import { ArraySchema, DictionarySchema, Extensions, ObjectSchema, Operation, Parameter, Property, Schema } from "@azure-tools/codemodel";
+import { ArraySchema, DictionarySchema, Extensions, ObjectSchema, Operation, Parameter, Property, Schema, Request } from "@azure-tools/codemodel";
 import { isNullOrUndefined, isUndefined } from "util";
 import { CliCommonSchema, M4Node } from "./schema";
 import { Helper } from "./helper";
@@ -9,8 +9,15 @@ export class NodeCliHelper {
     // TODO: Consider add specific class for directive keys
     public static readonly POLY_RESOURCE: string = 'poly-resource';
     public static readonly CLI_FLATTEN: string = 'cli-flatten';
+    public static readonly CLI_FLATTENED: string = 'cli-flattened';
+    public static readonly CLI_M4_FLATTEN: string = 'cli-m4-flatten';
+    public static readonly CLI_M4_FLATTENED: string = 'cli-m4-flattened';
+    public static readonly CLI_PAYLOAD_FLATTENED: string = 'cli-payload-flattened';
     public static readonly SPLIT_OPERATION_NAMES = 'split-operation-names';
-    
+    public static readonly CLI_M4_PATH: string = 'cliM4Path';
+    public static readonly CLI_PATH: string = 'cliPath';
+    public static readonly CLI_FLATTEN_TRACE: string = 'cliFlattenTrace';
+
     private static readonly CLI: string = "cli";
     private static readonly NAME: string = "name";
     private static readonly DESCRIPTION: string = "description";
@@ -27,8 +34,6 @@ export class NodeCliHelper {
 
 
     private static readonly POLY_AS_PARAM_EXPANDED = 'cli-poly-as-param-expanded';
-
-    private static readonly FLATTENED_NAMES = 'flattenedNames';
 
     public static setCliDiscriminatorValue(node: ObjectSchema, value: string): void {
         NodeCliHelper.setCliProperty(node, this.CLI_DISCRIMINATOR_VALUE, value);
@@ -53,6 +58,30 @@ export class NodeCliHelper {
      */
     public static getCliKey(node: M4Node, defaultValue: string): string {
         return isNullOrUndefined(node?.language[NodeCliHelper.CLI]) ? defaultValue : node.language[NodeCliHelper.CLI][NodeCliHelper.CLI_KEY];
+    }
+
+    public static getCliFlattenTrace(node: M4Node): string[] {
+        return NodeCliHelper.getCliProperty(node, NodeCliHelper.CLI_FLATTEN_TRACE, () => undefined);
+    }
+
+    public static setCliFlattenTrace(node: M4Node, value: string[]): void {
+        NodeCliHelper.setCliProperty(node, NodeCliHelper.CLI_FLATTEN_TRACE, value);
+    }
+
+    public static setCliM4Path(node: M4Node, path: string): void {
+        NodeCliHelper.setCliProperty(node, NodeCliHelper.CLI_M4_PATH, path);
+    }
+
+    public static getCliM4Path(node: M4Node): string {
+        return NodeCliHelper.getCliProperty(node, NodeCliHelper.CLI_M4_PATH, () => undefined);
+    }
+
+    public static setCliPath(node: M4Node, path: string): void {
+        NodeCliHelper.setCliProperty(node, NodeCliHelper.CLI_PATH, path);
+    }
+
+    public static getCliPath(node: M4Node): string {
+        return NodeCliHelper.getCliProperty(node, NodeCliHelper.CLI_PATH, () => undefined);
     }
 
     public static setCliName(node: M4Node, value: string): void {
@@ -99,16 +128,44 @@ export class NodeCliHelper {
         NodeCliHelper.clearCliProperty(node, NodeCliHelper.SPLIT_OPERATION_NAMES);
     }
 
+    public static setCliFlatten(node: M4Node, value: boolean): void {
+        NodeCliHelper.setCliProperty(node, NodeCliHelper.CLI_FLATTEN, value);
+    }
+
     public static isCliFlatten(node: M4Node): boolean {
         return NodeCliHelper.getCliProperty(node, NodeCliHelper.CLI_FLATTEN, () => false);
     }
 
-    public static getCliFlattenedNames(param: Parameter): string[] {
-        return NodeCliHelper.getCliProperty(param, NodeCliHelper.FLATTENED_NAMES, () => []);
+    public static setCliFlattened(node: M4Node, value: boolean): void {
+        NodeCliHelper.setCliProperty(node, NodeCliHelper.CLI_FLATTENED, value);
     }
 
-    public static setCliFlattenedNames(param: Parameter, flattenedNames: string[]): void {
-        NodeCliHelper.setCliProperty(param, NodeCliHelper.FLATTENED_NAMES, flattenedNames);
+    public static isCliFlattened(node: M4Node): boolean {
+        return NodeCliHelper.getCliProperty(node, NodeCliHelper.CLI_FLATTENED, () => false);
+    }
+
+    public static setCliM4Flatten(node: M4Node, value: boolean): void {
+        NodeCliHelper.setCliProperty(node, NodeCliHelper.CLI_M4_FLATTEN, value);
+    }
+
+    public static isCliM4Flatten(node: M4Node): boolean {
+        return NodeCliHelper.getCliProperty(node, NodeCliHelper.CLI_M4_FLATTEN, () => false);
+    }
+
+    public static setCliM4Flattened(node: M4Node, value: boolean): void {
+        NodeCliHelper.setCliProperty(node, NodeCliHelper.CLI_M4_FLATTENED, value);
+    }
+
+    public static isCliM4Flattened(node: M4Node): boolean {
+        return NodeCliHelper.getCliProperty(node, NodeCliHelper.CLI_M4_FLATTENED, () => false);
+    }
+
+    public static setCliPayloadFlattened(request: Request, value: boolean): void {
+        NodeCliHelper.setCliProperty(request, NodeCliHelper.CLI_PAYLOAD_FLATTENED, value);
+    }
+
+    public static isCliPayloadFlattened(request: Request): boolean {
+        return NodeCliHelper.getCliProperty(request, NodeCliHelper.CLI_PAYLOAD_FLATTENED, () => false);
     }
 
     public static setPolyAsResource(node: Parameter, value: boolean): void {
@@ -153,6 +210,7 @@ export class NodeCliHelper {
         NodeCliHelper.setCliProperty(node, NodeCliHelper.CLI_DEFAULT_VALUE, value);
     }
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     public static getCliDefaultValue(node: M4Node): any {
         return NodeCliHelper.getCliProperty(node, NodeCliHelper.CLI_DEFAULT_VALUE, () => undefined);
     }
@@ -247,31 +305,8 @@ export class NodeExtensionHelper {
 
     private static readonly SPLIT_OPERATION_ORIGINAL_OPERATION = 'cli-split-operation-original-operation';
 
-    private static readonly CLI_FLATTENED = 'cli-flattened';
     private static readonly CLI_FLATTEN_ORIGIN = 'cli-flatten-origin';
     private static readonly CLI_FLATTEN_PREFIX = 'cli-flatten-prefix';
-
-    /**
-     * set node.extensions['x-ms-client-flatten']
-     * @param p
-     * @param isFlatten
-     * @param overwrite
-     */
-    public static setFlatten(node: Extensions, isFlatten: boolean, overwrite: boolean): void {
-        if (isNullOrUndefined(node.extensions))
-            node.extensions = {};
-        if (isNullOrUndefined(node.extensions[NodeExtensionHelper.FLATTEN_FLAG]) || overwrite) {
-            node.extensions[NodeExtensionHelper.FLATTEN_FLAG] = isFlatten;
-        }
-    }
-
-    /**
-     *  check node.extensions['x-ms-client-flatten']
-     * @param p
-     */
-    public static isFlattened(p: Extensions): boolean {
-        return !isNullOrUndefined(p.extensions) && p.extensions[NodeExtensionHelper.FLATTEN_FLAG] === true;
-    }
 
     /**
      * return the value of node.extensions['x-ms-client-flatten']
@@ -356,14 +391,6 @@ export class NodeExtensionHelper {
         return NodeExtensionHelper.getExtensionsProperty(param, NodeExtensionHelper.POLY_AS_PARAM_ORIGINIAL_PARAMETER, null);
     }
 
-    public static setCliFlattened(node: M4Node, value: boolean): void {
-        NodeExtensionHelper.setExtensionsProperty(node, NodeExtensionHelper.CLI_FLATTENED, value);
-    }
-
-    public static isCliFlattened(node: M4Node): boolean {
-        return NodeExtensionHelper.getExtensionsProperty(node, NodeExtensionHelper.CLI_FLATTENED, () => false);
-    }
-
     public static addCliOperation(originalOperation: Operation, cliOperation: Operation): void {
         const v: Operation[] = NodeExtensionHelper.getExtensionsProperty(originalOperation, NodeExtensionHelper.CLI_OPERATIONS, () => []);
         v.push(cliOperation);
@@ -397,6 +424,15 @@ export class NodeExtensionHelper {
         }
         return node.extensions[propertyName];
     }
+
+    public static setFlatten(node: Extensions, isFlatten: boolean, overwrite: boolean): void {
+        if (isNullOrUndefined(node.extensions)) {
+            node.extensions = {};
+        }
+        if (isNullOrUndefined(node.extensions[NodeExtensionHelper.FLATTEN_FLAG]) || overwrite) {
+            node.extensions[NodeExtensionHelper.FLATTEN_FLAG] = isFlatten;
+        }
+    }
 }
 
 export class NodeHelper {
@@ -421,11 +457,9 @@ export class NodeHelper {
         for (const key in allSubs) {
             const subClass = allSubs[key];
             if (!Helper.isObjectSchema(subClass)) {
-                Helper.logWarning("subclass is not ObjectSchema: " + subClass.language.default.name);
                 continue;
             }
             if (NodeHelper.HasSubClass(subClass as ObjectSchema) && leafOnly) {
-                Helper.logWarning("skip subclass which also has subclass: " + subClass.language.default.name);
                 continue;
             }
             yield subClass as ObjectSchema;
@@ -435,6 +469,7 @@ export class NodeHelper {
     public static setJson(node: M4Node, isJson: boolean, modifyFlatten: boolean): void {
 
         if (modifyFlatten && isJson) {
+            NodeCliHelper.setCliFlatten(node, false);
             NodeExtensionHelper.setFlatten(node, false /*flatten*/, true /*overwrite flag*/);
         }
         NodeCliHelper.setCliProperty(node, NodeHelper.JSON, isJson);

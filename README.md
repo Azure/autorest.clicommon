@@ -14,8 +14,23 @@ pipeline:
         input: modelerfour
         output-artifact: clicommon-prenamer
 
-    clicommon/cli-split-operation:
+    modelerfour/new-transform:
         input: clicommon/cli-prenamer
+
+    clicommon/cli-modeler-post-processor:
+        input: modelerfour/identity
+        output-artifact: clicommon-modeler-post-processor
+
+    clicommon/cli-m4flatten-modifier:
+        input: clicommon/cli-modeler-post-processor
+        output-artifact: clicommon-m4flatten-modifier-output
+
+    clicommon/cli-m4namer:
+        input: clicommon/cli-m4flatten-modifier
+        output-artifact: clicommon-m4namer-output
+
+    clicommon/cli-split-operation:
+        input: clicommon/cli-modeler-post-processor
         output-artifact: clicommon-split-operation
 
     clicommon/pre/cli-complex-marker:
@@ -25,28 +40,33 @@ pipeline:
     clicommon/cli-flatten-setter:
         input: clicommon/pre/cli-complex-marker
         output-artifact: clicommon-flatten-setter
-        
-    modelerfour/new-transform:
-        input: clicommon/cli-flatten-setter
 
-    clicommon/cli-modeler-post-processor:
-        input: modelerfour/identity
-        output-artifact: clicommon-modeler-post-processor
+    clicommon/pre/cli-flatten-modifier:
+        input: clicommon/cli-flatten-setter
+        output-artifact: clicommon-flatten-modifier-pre
 
     clicommon/cli-poly-as-resource-modifier:
-        input: clicommon/cli-modeler-post-processor
+        input: clicommon/pre/cli-flatten-modifier
         output-artifact: clicommon-poly-as-resource-modifier
 
     clicommon/cli-flatten-modifier:
         input: clicommon/cli-poly-as-resource-modifier
         output-artifact: clicommon-flatten-modifier
 
-    clicommon:
+    clicommon/cli-modifier:
         input: clicommon/cli-flatten-modifier
-        output-artifact: clicommon-output
+        output-artifact: clicommon-modifier-output
+
+    clicommon/cli-namer:
+        input: clicommon/cli-modifier
+        output-artifact: clicommon-namer-output
+
+    clicommon/cli-test:
+        input: clicommon/cli-namer
+        output-artifact: clicommon-test-output
 
     clicommon/cli-complex-marker:
-        input: clicommon
+        input: clicommon/cli-test
         output-artifact: clicommon-complex-marker
     
     #clicommon/cli-poly-as-param-modifier:
@@ -61,34 +81,28 @@ pipeline:
         input: clicommon/cli-visibility-cleaner
 
     clicommon/emitter:
-        input: 
-          - clicommon
-          - clicommon/cli-prenamer
-          - clicommon/cli-split-operation
-          - clicommon/cli-flatten-setter
-          - clicommon/cli-modeler-post-processor
-          #- clicommon/cli-poly-as-param-modifier
-          - clicommon/cli-poly-as-resource-modifier
-          - clicommon/cli-flatten-modifier
-          - clicommon/cli-complex-marker
-          - clicommon/pre/cli-complex-marker
-          - clicommon/cli-visibility-cleaner
+        input: clicommon/identity
         scope: scope-clicommon
 
 scope-clicommon:
     is-object: false
     output-artifact:
-        - clicommon-output
+        - clicommon-m4namer-output
+        - clicommon-modifier-output
+        - clicommon-namer-output
+        - clicommon-test-output
         - clicommon-prenamer
         - clicommon-split-operation
         - clicommon-flatten-setter
         - clicommon-modeler-post-processor
         - clicommon-poly-as-resource-modifier
         - clicommon-flatten-modifier
+        - clicommon-flatten-modifier-pre
         #- clicommon-poly-as-param-modifier
         - clicommon-complex-marker
         - clicommon-complex-marker-pre
         - clicommon-visibility-cleaner
+        - clicommon-m4flatten-modifier-output
 
 modelerfour:
     # group-parameters: true
@@ -125,8 +139,14 @@ cli:
     #            type: SchemaType
     #            prop: propertyName
     #          flatten: true
-    #    # max properties allowed from flatten
+    #    # max properties allowed from flatten. Default is 32
     #    cli-flatten-payload-max-prop: 32
+    #    # max properties allowed from flatten on m4 path. Default is 0 - unlimited
+    #    cli-m4flatten-payload-max-prop: 0
+    #    # For autorest python, payload flatten is removed from track2. This flag can help do payload flatten in track2 or above.
+    #    # If this flag is true, we will ignore 'cli-m4-flatten' flag, do the flatten.
+    #    # Default is false
+    #    cli-m4flatten-payload-track1-enabled: true
     #    # max complexity allowed from flatten
     #    #   a required json argument counted as 1
     #    #   an optional json argument counted as 0.5
@@ -139,6 +159,12 @@ cli:
     #    cli-flatten-payload-max-poly-as-resource-prop-count: 8
     #    # max properties allowed from flatten of sub-class as param
     #    cli-flatten-payload-max-poly-as-param-prop-count: 8
+    #    # if you want to keep the flattened models even if they are not used
+    #    # default: false
+    #    cli-flatten-keep-unused-flattened-models: false
+    #    # setting this to false will skip parameter flattening for operations that have multiple requests (ie, JSON and BINARY)
+    #    # default: true
+    #    cli-flatten-multiple-request-parameter-flattening: true
 
     # example for split-operation
     # cli-directive:

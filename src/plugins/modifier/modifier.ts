@@ -1,5 +1,5 @@
-import { Session, Host } from "@azure-tools/autorest-extension-base";
-import { CodeModel } from "@azure-tools/codemodel";
+import { Session, Host, startSession } from "@azure-tools/autorest-extension-base";
+import { CodeModel, codeModelSchema } from "@azure-tools/codemodel";
 import { CliDirectiveManager } from "./cliDirective";
 import { isNullOrUndefined } from "util";
 import { CliConst, CliCommonSchema } from "../../schema";
@@ -35,16 +35,17 @@ export class Modifier {
 }
 
 export async function processRequest(host: Host): Promise<void> {
-    const session = await Helper.init(host);
+    const session = await startSession<CodeModel>(host, {}, codeModelSchema);
+    const dumper = await Helper.getDumper(session);
 
-    Helper.dumper.dumpCodeModel("modifier-pre");
-    
+    dumper.dumpCodeModel("modifier-pre", session.model);
+
     const arr = await session.getValue(CliConst.CLI_DIRECTIVE_KEY, null);
     const modifier = await new Modifier(session).init(arr);
     modifier.process();
 
-    Helper.dumper.dumpCodeModel("modifier-post");
+    dumper.dumpCodeModel("modifier-post", session.model);
 
-    Helper.outputToModelerfour();
-    await Helper.dumper.persistAsync();
+    await Helper.outputToModelerfour(host, session);
+    await dumper.persistAsync(host);
 }

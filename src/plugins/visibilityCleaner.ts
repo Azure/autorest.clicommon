@@ -1,5 +1,5 @@
-import { Host, Session } from "@azure-tools/autorest-extension-base";
-import { CodeModel, ObjectSchema, Parameter } from "@azure-tools/codemodel";
+import { Host, Session, startSession } from "@azure-tools/autorest-extension-base";
+import { CodeModel, codeModelSchema, ObjectSchema, Parameter } from "@azure-tools/codemodel";
 import { Helper } from "../helper";
 import { CliCommonSchema } from "../schema";
 import { NodeHelper, NodeCliHelper } from "../nodeHelper";
@@ -83,23 +83,23 @@ class VisibilityCleaner {
 }
 
 export async function processRequest(host: Host): Promise<void> {
-
-    const session = await Helper.init(host);
+    const session = await startSession<CodeModel>(host, {}, codeModelSchema);
+    const dumper = await Helper.getDumper(session);
 
     const flag = await session.getValue('cli.auto-parameter-hidden', false);
     if (flag === true) {
 
-        Helper.dumper.dumpCodeModel('visibility-cleaner-pre');
+        dumper.dumpCodeModel('visibility-cleaner-pre', session.model);
 
         const cm = new VisibilityCleaner(session);
         cm.process();
 
-        Helper.dumper.dumpCodeModel('visibility-cleaner-post');
+        dumper.dumpCodeModel('visibility-cleaner-post', session.model);
     }
     else {
-        Helper.logWarning('cli.auto-parameter-hidden is not true, skip visibility cleaner');
+        Helper.logWarning(session, 'cli.auto-parameter-hidden is not true, skip visibility cleaner');
     }
 
-    Helper.outputToModelerfour();
-    await Helper.dumper.persistAsync();
+    await Helper.outputToModelerfour(host, session);
+    await dumper.persistAsync(host);
 }

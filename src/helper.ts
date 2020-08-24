@@ -2,65 +2,49 @@ import { codeModelSchema, ChoiceSchema, ChoiceValue, CodeModel, ObjectSchema, Op
 import { isArray, isNullOrUndefined, isString } from "util";
 import { CliConst, M4Node, M4NodeType, NamingType, CliCommonSchema } from "./schema";
 import { EnglishPluralizationService, guid } from '@azure-tools/codegen';
-import { Session, Host, startSession } from "@azure-tools/autorest-extension-base";
+import { Session, Host } from "@azure-tools/autorest-extension-base";
 import { serialize } from "@azure-tools/codegen";
 import { NodeCliHelper, NodeExtensionHelper } from "./nodeHelper";
 import { Dumper } from "./dumper";
 
 export class Helper {
 
-    private static session: Session<CodeModel>;
-    private static host: Host;
-    private static _dumper: Dumper;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    private static modelerfourOptions: any;
+    public static readonly M4_PATH_SEPARATOR = '$$';
 
-    public static async init(host: Host): Promise<Session<CodeModel>> {
-        Helper.session = await startSession<CodeModel>(host, {}, codeModelSchema);
-        Helper.host = host;
-        Helper._dumper = await (new Dumper(host, Helper.session)).init();
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        Helper.modelerfourOptions = <any>await Helper.session.getValue('modelerfour', {});
-        return Helper.session;
+    private static _dumper: Dumper;
+
+    public static logDebug(session: Session<CodeModel>, msg: string): void {
+        session.debug(msg, []);
     }
 
-    public static get dumper(): Dumper {
-        if (isNullOrUndefined(Helper._dumper))
-            throw Error("Helper not init yet, please call Helper.init() to init the Helper");
+    public static logWarning(session: Session<CodeModel>, msg: string): void {
+        session.warning(msg, []);
+    }
+
+    public static logError(session: Session<CodeModel>, msg: string): void {
+        session.error(msg, []);
+    }
+
+    public static async getDumper(session: Session<CodeModel> = null): Promise<Dumper> {
+        if (isNullOrUndefined(Helper._dumper) && session == null) {
+            throw Error("Dumper is not initialized. Please give session!");
+        }
+        if (isNullOrUndefined(Helper._dumper)) {
+            this._dumper = await new Dumper(session).init();
+        }
         return Helper._dumper;
     }
 
-    public static logDebug(msg: string): void {
-        if (isNullOrUndefined(Helper.session))
-            throw Error("Helper not init yet, please call Helper.init() to init the Helper");
-        Helper.session.debug(msg, []);
-    }
-
-    public static logWarning(msg: string): void {
-        if (isNullOrUndefined(Helper.session))
-            throw Error("Helper not init yet, please call Helper.init() to init the Helper");
-        Helper.session.warning(msg, []);
-    }
-
-    public static logError(msg: string): void {
-        if (isNullOrUndefined(Helper.session))
-            throw Error("Helper not init yet, please call Helper.init() to init the Helper");
-        Helper.session.error(msg, []);
-    }
-
-    public static outputToModelerfour(): void {
-        if (isNullOrUndefined(Helper.session))
-            throw Error("Helper not init yet, please call Helper.init() to init the Helper");
-        if (isNullOrUndefined(Helper.host))
-            throw Error("Helper not init yet, please call Helper.init() to init the Helper");
-
+    public static async outputToModelerfour(host: Host, session: Session<CodeModel>): Promise<void> {
         // write the final result first which is hardcoded in the Session class to use to build the model..
         // overwrite the modelerfour which should be fine considering our change is backward compatible
-        if (Helper.modelerfourOptions['emit-yaml-tags'] !== false) {
-            Helper.host.WriteFile('code-model-v4.yaml', serialize(Helper.session.model, codeModelSchema), undefined, 'code-model-v4');
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const modelerfourOptions = <any>await session.getValue('modelerfour', {});
+        if (modelerfourOptions['emit-yaml-tags'] !== false) {
+            host.WriteFile('code-model-v4.yaml', serialize(session.model, codeModelSchema), undefined, 'code-model-v4');
         }
-        if (Helper.modelerfourOptions['emit-yaml-tags'] !== true) {
-            Helper.host.WriteFile('code-model-v4-no-tags.yaml', serialize(Helper.session.model), undefined, 'code-model-v4-no-tags');
+        if (modelerfourOptions['emit-yaml-tags'] !== true) {
+            host.WriteFile('code-model-v4-no-tags.yaml', serialize(session.model), undefined, 'code-model-v4-no-tags');
         }
     }
 
@@ -381,62 +365,90 @@ export class Helper {
         if (isNullOrUndefined(action)) {
             throw Error("empty action for going through code model");
         }
+
+        const paths = [];
+
+        // schema
+        paths.push('schemas');
             
-        // choice/sealedChoice/choiceValue
+        // schema - choice/sealedChoice/choiceValue
         if (isNullOrUndefined(flag) || (flag & CliCommonSchema.CodeModel.NodeTypeFlag.choiceSchema) || (flag & CliCommonSchema.CodeModel.NodeTypeFlag.choiceValue)) {
-            Helper.enumerateChoices(codeModel.schemas.choices ?? [], action, flag);
-            Helper.enumerateChoices(codeModel.schemas.sealedChoices ?? [], action, flag);
+            paths.push('choices');
+            Helper.enumerateChoices(codeModel.schemas.choices ?? [], paths, action, flag);
+            paths.pop();
+
+            paths.push('sealedChoices');
+            Helper.enumerateChoices(codeModel.schemas.sealedChoices ?? [], paths, action, flag);
+            paths.pop();
         }
 
-        // schemaObject/property
+        // schema - object/property
         if (isNullOrUndefined(flag) || (flag & CliCommonSchema.CodeModel.NodeTypeFlag.objectSchema) || (flag & CliCommonSchema.CodeModel.NodeTypeFlag.property)) {
-            Helper.enumrateSchemas(codeModel.schemas.objects, action, flag);
+            paths.push('objects');
+            Helper.enumrateSchemas(codeModel.schemas.objects, paths, action, flag);
+            paths.pop();
         }
 
-        // operationGroup/operation/parameter
+        paths.pop();
+
+        // operation group
         if (isNullOrUndefined(flag) || (flag & CliCommonSchema.CodeModel.NodeTypeFlag.operationGroup) || (flag & CliCommonSchema.CodeModel.NodeTypeFlag.operation) || (flag & CliCommonSchema.CodeModel.NodeTypeFlag.parameter)) {
-            Helper.enumrateOperationGroups(codeModel.operationGroups, action, flag);
+            paths.push('operationGroups');
+            Helper.enumrateOperationGroups(codeModel.operationGroups, paths, action, flag);
+            paths.pop();
         }
+
     }
 
-    public static enumerateChoices(choices: ChoiceSchema<StringSchema>[] | SealedChoiceSchema<StringSchema>[], action: (nodeDescriptor: CliCommonSchema.CodeModel.NodeDescriptor) => void, flag: CliCommonSchema.CodeModel.NodeTypeFlag): void {
+    public static enumerateChoices(choices: ChoiceSchema<StringSchema>[] | SealedChoiceSchema<StringSchema>[], paths: string[], action: (nodeDescriptor: CliCommonSchema.CodeModel.NodeDescriptor) => void, flag: CliCommonSchema.CodeModel.NodeTypeFlag): void {
         const enumSchema = isNullOrUndefined(flag) || ((flag & CliCommonSchema.CodeModel.NodeTypeFlag.choiceSchema) > 0);
         const cliKeyMissing = '<clikey-missing>';
 
         for (let i = choices.length - 1; i >= 0; i--) {
             const choice = choices[i];
+            const cliKey = NodeCliHelper.getCliKey(choice, cliKeyMissing);
+            paths.push(`['${cliKey}']`);
             if (enumSchema) {
                 action({
-                    choiceSchemaCliKey: NodeCliHelper.getCliKey(choice, cliKeyMissing),
+                    choiceSchemaCliKey: cliKey,
                     parent: choices,
                     target: choice,
-                    targetIndex: i
+                    targetIndex: i,
+                    nodePath: Helper.joinNodePath(paths)
                 });
             }
+            
+            paths.push('choices');
+            Helper.enumerateChoiceValues(choice, paths, action, flag);
+            paths.pop();
 
-            Helper.enumerateChoiceValues(choice, action, flag);
+            paths.pop();
         }
     }
 
-    public static enumerateChoiceValues(choice: ChoiceSchema<StringSchema> | SealedChoiceSchema<StringSchema>, action: (nodeDescriptor: CliCommonSchema.CodeModel.NodeDescriptor) => void, flag: CliCommonSchema.CodeModel.NodeTypeFlag): void {
+    public static enumerateChoiceValues(choice: ChoiceSchema<StringSchema> | SealedChoiceSchema<StringSchema>, paths: string[], action: (nodeDescriptor: CliCommonSchema.CodeModel.NodeDescriptor) => void, flag: CliCommonSchema.CodeModel.NodeTypeFlag): void {
         const enumValue = isNullOrUndefined(flag) || ((flag & CliCommonSchema.CodeModel.NodeTypeFlag.choiceValue) > 0);
         const cliKeyMissing = '<clikey-missing>';
 
         for (let j = choice.choices.length - 1; j >= 0; j--) {
             const choiceValue = choice.choices[j];
+            const cliKey = NodeCliHelper.getCliKey(choiceValue, cliKeyMissing);
+            paths.push(`['${cliKey}]'`);
             if (enumValue) {
                 action({
                     choiceSchemaCliKey: NodeCliHelper.getCliKey(choice, cliKeyMissing),
-                    choiceValueCliKey: NodeCliHelper.getCliKey(choiceValue, cliKeyMissing),
+                    choiceValueCliKey: cliKey,
                     parent: choice.choices,
                     target: choiceValue,
-                    targetIndex: j
+                    targetIndex: j,
+                    nodePath: Helper.joinNodePath(paths)
                 });
             }
+            paths.pop();
         }
     }
 
-    public static enumrateSchemas(schemas: ObjectSchema[], action: (nodeDescriptor: CliCommonSchema.CodeModel.NodeDescriptor) => void, flag: CliCommonSchema.CodeModel.NodeTypeFlag): void {
+    public static enumrateSchemas(schemas: ObjectSchema[], paths: string[], action: (nodeDescriptor: CliCommonSchema.CodeModel.NodeDescriptor) => void, flag: CliCommonSchema.CodeModel.NodeTypeFlag): void {
         const enumObjectSchema = isNullOrUndefined(flag) || ((flag & CliCommonSchema.CodeModel.NodeTypeFlag.objectSchema) > 0);
         const cliKeyMissing = '<clikey-missing>';
         if (isNullOrUndefined(schemas)) {
@@ -445,19 +457,27 @@ export class Helper {
 
         for (let i = schemas.length - 1; i >= 0; i--) {
             const schema = schemas[i];
+            const cliKey = NodeCliHelper.getCliKey(schema, cliKeyMissing);
+            paths.push(`['${cliKey}']`);
             if (enumObjectSchema) {
                 action({
-                    objectSchemaCliKey: NodeCliHelper.getCliKey(schema, cliKeyMissing),
+                    objectSchemaCliKey: cliKey,
                     parent: schemas,
                     target: schema,
-                    targetIndex: i
+                    targetIndex: i,
+                    nodePath: Helper.joinNodePath(paths)
                 });
             }
-            Helper.enumrateSchemaProperties(schema, action, flag);
+            
+            paths.push('properties');
+            Helper.enumrateSchemaProperties(schema, paths, action, flag);
+            paths.pop();
+
+            paths.pop();
         }
     }
 
-    public static enumrateSchemaProperties(schema: ObjectSchema, action: (nodeDescriptor: CliCommonSchema.CodeModel.NodeDescriptor) => void, flag: CliCommonSchema.CodeModel.NodeTypeFlag): void {
+    public static enumrateSchemaProperties(schema: ObjectSchema, paths: string[], action: (nodeDescriptor: CliCommonSchema.CodeModel.NodeDescriptor) => void, flag: CliCommonSchema.CodeModel.NodeTypeFlag): void {
         const enumProperty = isNullOrUndefined(flag) || ((flag & CliCommonSchema.CodeModel.NodeTypeFlag.property) > 0);
         if (isNullOrUndefined(schema.properties)) {
             return;
@@ -465,19 +485,23 @@ export class Helper {
         const cliKeyMissing = '<clikey-missing>';
         for (let j = schema.properties.length - 1; j >= 0; j--) {
             const prop = schema.properties[j];
+            const cliKey = NodeCliHelper.getCliKey(prop, cliKeyMissing);
+            paths.push(`['${cliKey}']`);
             if (enumProperty) {
                 action({
                     objectSchemaCliKey: NodeCliHelper.getCliKey(schema, cliKeyMissing),
-                    propertyCliKey: NodeCliHelper.getCliKey(prop, cliKeyMissing),
+                    propertyCliKey: cliKey,
                     parent: schema.properties,
                     target: prop,
-                    targetIndex: j
+                    targetIndex: j,
+                    nodePath: Helper.joinNodePath(paths)
                 });
             }
+            paths.pop();
         }
     }
 
-    public static enumrateOperationGroups(groups: OperationGroup[], action: (nodeDescriptor: CliCommonSchema.CodeModel.NodeDescriptor) => void, flag: CliCommonSchema.CodeModel.NodeTypeFlag): void {
+    public static enumrateOperationGroups(groups: OperationGroup[], paths: string[], action: (nodeDescriptor: CliCommonSchema.CodeModel.NodeDescriptor) => void, flag: CliCommonSchema.CodeModel.NodeTypeFlag): void {
         const enumGroup = isNullOrUndefined(flag) || ((flag & CliCommonSchema.CodeModel.NodeTypeFlag.operationGroup) > 0);
         const cliKeyMissing = '<clikey-missing>';
         if (isNullOrUndefined(groups)) {
@@ -486,19 +510,27 @@ export class Helper {
 
         for (let i = groups.length - 1; i >= 0; i--) {
             const group = groups[i];
+            const cliKey = NodeCliHelper.getCliKey(group, cliKeyMissing);
+            paths.push(`['${cliKey}']`);
             if (enumGroup) {
                 action({
-                    operationGroupCliKey: NodeCliHelper.getCliKey(group, cliKeyMissing),
+                    operationGroupCliKey: cliKey,
                     parent: groups,
                     target: group,
                     targetIndex: i,
+                    nodePath: Helper.joinNodePath(paths)
                 });
             }
-            Helper.enumrateOperations(group, action, flag);
+            
+            paths.push('operations');
+            Helper.enumrateOperations(group, paths, action, flag);
+            paths.pop();
+
+            paths.pop();
         }
     }
 
-    public static enumrateOperations(group: OperationGroup, action: (nodeDescriptor: CliCommonSchema.CodeModel.NodeDescriptor) => void, flag: CliCommonSchema.CodeModel.NodeTypeFlag): void {
+    public static enumrateOperations(group: OperationGroup, paths: string[], action: (nodeDescriptor: CliCommonSchema.CodeModel.NodeDescriptor) => void, flag: CliCommonSchema.CodeModel.NodeTypeFlag): void {
         const enumOperation = isNullOrUndefined(flag) || ((flag & CliCommonSchema.CodeModel.NodeTypeFlag.operation) > 0);
         const cliKeyMissing = '<clikey-missing>';
 
@@ -515,56 +547,87 @@ export class Helper {
 
         for (let j = operations.length - 1; j >= 0; j--) {
             const op = operations[j];
+            const cliKey = NodeCliHelper.getCliKey(op, cliKeyMissing);
+            paths.push(`['${cliKey}']`);
             if (enumOperation) {
                 action({
                     operationGroupCliKey: NodeCliHelper.getCliKey(group, cliKeyMissing),
-                    operationCliKey: NodeCliHelper.getCliKey(op, cliKeyMissing),
+                    operationCliKey: cliKey,
                     parent: group.operations,
                     target: op,
                     targetIndex: j,
+                    nodePath: Helper.joinNodePath(paths)
                 });
             }
-            Helper.enumrateParameters(group, op, action, flag);
+
+            paths.push('parameters');
+            Helper.enumrateParameters(group, op, paths, action, flag);
+            paths.pop();
+
+            paths.push('requests');
+            Helper.enumerateRequestParameters(group, op, paths, action, flag);
+            paths.pop();
+
+            paths.pop();
         }
     }
 
-    public static enumrateParameters(group: OperationGroup, op: Operation, action: (nodeDescriptor: CliCommonSchema.CodeModel.NodeDescriptor) => void, flag: CliCommonSchema.CodeModel.NodeTypeFlag): void {
+    public static enumrateParameters(group: OperationGroup, op: Operation, paths: string[], action: (nodeDescriptor: CliCommonSchema.CodeModel.NodeDescriptor) => void, flag: CliCommonSchema.CodeModel.NodeTypeFlag): void {
         const enumParam = isNullOrUndefined(flag) || ((flag & CliCommonSchema.CodeModel.NodeTypeFlag.parameter) > 0);
         const cliKeyMissing = '<clikey-missing>';
        
         for (let k = op.parameters.length - 1; k >= 0; k--) {
             const param = op.parameters[k];
+            const cliKey = NodeCliHelper.getCliKey(param, cliKeyMissing);
+            paths.push(`['${cliKey}']`);
             if (enumParam) {
                 action({
                     operationGroupCliKey: NodeCliHelper.getCliKey(group, cliKeyMissing),
                     operationCliKey: NodeCliHelper.getCliKey(op, cliKeyMissing),
                     requestIndex: CliConst.DEFAULT_OPERATION_PARAMETER_INDEX,
-                    parameterCliKey: NodeCliHelper.getCliKey(param, cliKeyMissing),
+                    parameterCliKey: cliKey,
                     parent: op.parameters,
                     target: param,
                     targetIndex: k,
+                    nodePath: Helper.joinNodePath(paths)
                 });
             }
+            paths.pop();
         }
-        
+    }
+
+    public static enumerateRequestParameters(group: OperationGroup, op: Operation, paths: string[], action: (nodeDescriptor: CliCommonSchema.CodeModel.NodeDescriptor) => void, flag: CliCommonSchema.CodeModel.NodeTypeFlag): void {
+        const enumParam = isNullOrUndefined(flag) || ((flag & CliCommonSchema.CodeModel.NodeTypeFlag.parameter) > 0);
+        const cliKeyMissing = '<clikey-missing>';
+
         for (let m = op.requests.length - 1; m >= 0; m--) {
             if (isNullOrUndefined(op.requests[m].parameters)) {
                 continue;
             }
+
+            // request has no clikey, use index instead
+            paths.push(`[${m}]`);
+            paths.push('parameters');
             for (let k = op.requests[m].parameters.length - 1; k >= 0; k--) {
                 const param = op.requests[m].parameters[k];
+                const cliKey = NodeCliHelper.getCliKey(param, cliKeyMissing);
+                paths.push(`['${cliKey}']`);
                 if (enumParam) {
                     action({
                         operationGroupCliKey: NodeCliHelper.getCliKey(group, cliKeyMissing),
                         operationCliKey: NodeCliHelper.getCliKey(op, cliKeyMissing),
                         requestIndex: m,
-                        parameterCliKey: NodeCliHelper.getCliKey(param, cliKeyMissing),
+                        parameterCliKey: cliKey,
                         parent: op.requests[m].parameters,
                         target: param,
                         targetIndex: k,
+                        nodePath: Helper.joinNodePath(paths)
                     });
                 }
+                paths.pop();
             }
+            paths.pop();
+            paths.pop();
         }
     }
 
@@ -793,6 +856,21 @@ export class Helper {
             return true;
         }
         return false;
+    }
+    
+    public static joinNodePath(paths: string[]): string {
+        let m4Path = '';
+        paths.forEach((path, index) => {
+            if (isNullOrUndefined(path)) {
+                return;
+            }
+            if (index > 0 && !path.startsWith('[')) {
+                // current path is not array, we need separator
+                m4Path += Helper.M4_PATH_SEPARATOR;
+            }
+            m4Path += path;
+        });
+        return m4Path;
     }
 
 }

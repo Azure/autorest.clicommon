@@ -1,5 +1,5 @@
-import { Host, Session } from "@azure-tools/autorest-extension-base";
-import { CodeModel, Operation } from "@azure-tools/codemodel";
+import { Host, Session, startSession } from "@azure-tools/autorest-extension-base";
+import { CodeModel, Operation, codeModelSchema } from "@azure-tools/codemodel";
 import { Helper } from "../helper";
 import { CliConst, CliCommonSchema } from "../schema";
 import { NodeCliHelper, NodeExtensionHelper } from "../nodeHelper";
@@ -48,12 +48,10 @@ export class SplitOperation{
             .map((dir) => this.copyDirective(dir,NodeCliHelper.SPLIT_OPERATION_NAMES));
         
         if (directives && directives.length > 0) {
-            Helper.dumper.dumpCodeModel('split-operation-modifier-pre');
             const modifier = await new Modifier(this.session).init(directives);
             modifier.process();
-            Helper.dumper.dumpCodeModel('split-operation-modifier-post');
         } else {
-            Helper.logDebug('No split operation directive is found!');
+            Helper.logDebug(this.session, 'No split operation directive is found!');
         }
     }
 
@@ -61,7 +59,7 @@ export class SplitOperation{
         const splittedOperations = [];
         for (const splitName of splitNames) {
             if (existedNames.has(splitName.toUpperCase())) {
-                Helper.logWarning(`Operation ${splitName} has already existed in group! Skip split!`);
+                Helper.logWarning(this.session, `Operation ${splitName} has already existed in group! Skip split!`);
                 continue;
             }
             const splittedOperation = this.splitOperation(splitName, srcOperation);
@@ -89,20 +87,21 @@ export class SplitOperation{
 }
 
 export async function processRequest(host: Host): Promise<void> {
-
-    const session = await Helper.init(host);
-    Helper.dumper.dumpCodeModel("split-operation-pre");
+    const session = await startSession<CodeModel>(host, {}, codeModelSchema);
+    const dumper = await Helper.getDumper(session);
+    dumper.dumpCodeModel("split-operation-pre", session.model);
 
     const splitEnabled = (await session.getValue(CliConst.CLI_SPLIT_OPERATION_ENABLED_KEY, false)) === true;
     if (!splitEnabled) {
-        Helper.logDebug(`cli-split-operation-enabled is not true. Skip split operation`);
+        Helper.logDebug(session, `cli-split-operation-enabled is not true. Skip split operation`);
     } else {
         const splitOperation = new SplitOperation(session);
         await splitOperation.process();
     }
     
-    Helper.dumper.dumpCodeModel("split-operation-post");
+    dumper.dumpCodeModel("split-operation-post", session.model);
 
-    Helper.outputToModelerfour();
-    await Helper.dumper.persistAsync();
+    await Helper.outputToModelerfour(host, session);
+
+    await dumper.persistAsync(host);
 }

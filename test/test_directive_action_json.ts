@@ -3,7 +3,7 @@ import 'mocha';
 import { ActionSet, ActionFlatten, ActionJson } from '../src/plugins/modifier/cliDirectiveAction';
 import { M4Node } from '../src/schema';
 import { Metadata } from "@azure-tools/codemodel";
-import { NodeHelper, NodeExtensionHelper } from '../src/nodeHelper';
+import { NodeHelper, NodeExtensionHelper, NodeCliHelper } from '../src/nodeHelper';
 
 describe('Test Directive - Action - json', function () {
     var descriptor = {
@@ -26,7 +26,7 @@ describe('Test Directive - Action - json', function () {
         descriptor.target = new Metadata();
         o = descriptor.target;
         action.process(descriptor);
-        assert.equal(NodeExtensionHelper.getFlattenedValue(o), false);
+        assert.equal(NodeCliHelper.isCliFlatten(o), false);
         assert.equal(o.language.cli.json, true)
 
     });

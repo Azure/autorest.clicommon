@@ -60,7 +60,7 @@ For groupName, operationName, parameterName, typeName, propertyName, usually you
   - optional
 - json:
   - add 'json: ...' under 'language->cli'.
-  - add 'x-ms-client-flatten: false' under 'extensions' if 'json: true'
+  - add 'x-ms-client-flatten: false' under 'extensions' and 'cli-flatten: false' under 'language->cli' if 'json: true'. Note: if command includes argument'--target-mode=core' or '--sdk-no-flatter', 'x-ms-client-flatten' won't be changed.
 - flatten:
   - add 'x-ms-client-flatten: ..." under 'extensions'
 - formatTable:

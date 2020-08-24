@@ -1,8 +1,8 @@
-import { Host, Session } from "@azure-tools/autorest-extension-base";
-import { CodeModel, ObjectSchema, getAllProperties, Parameter, Schema, ArraySchema } from "@azure-tools/codemodel";
+import { Host, Session, startSession } from "@azure-tools/autorest-extension-base";
+import { CodeModel, ObjectSchema, isObjectSchema, getAllProperties, Parameter, Schema, ArraySchema, codeModelSchema } from "@azure-tools/codemodel";
 import { isNullOrUndefined, isArray } from "util";
 import { Helper } from "../../helper";
-import { NodeHelper, NodeCliHelper, NodeExtensionHelper } from "../../nodeHelper";
+import { NodeHelper, NodeCliHelper } from "../../nodeHelper";
 import { CliConst, CliCommonSchema } from "../../schema";
 import { CliDirectiveManager } from "../modifier/cliDirective";
 import { Modifier } from "../modifier/modifier";
@@ -147,17 +147,17 @@ export class FlattenSetter {
         const r = this.calcSchemaForPayloadFlatten(paramSchema, info, 0, true, flattenConfig);
 
         for (let i = 0; i <= r; i++) {
-            Helper.logDebug(`Level-${i}: propCount=${info[i].propCount}, complexity=${info[i].complexity}`);
+            Helper.logDebug(this.session, `Level-${i}: propCount=${info[i].propCount}, complexity=${info[i].complexity}`);
         }
 
         for (let i = r; i >= 0; i--) {
             if (info[i].propCount <= maxPropCount && info[i].complexity <= maxComplexity) {
                 if (i == 0 && NodeCliHelper.getComplexity(paramSchema) === CliCommonSchema.CodeModel.Complexity.object_simple) {
-                    Helper.logDebug(`flatten to level ${i} and adjusted to 1 for top level simple object with maxLevel=${maxLevel}, maxPropCount=${maxPropCount}, maxComplexity=${maxComplexity}`);
+                    Helper.logDebug(this.session, `flatten to level ${i} and adjusted to 1 for top level simple object with maxLevel=${maxLevel}, maxPropCount=${maxPropCount}, maxComplexity=${maxComplexity}`);
                     return 1;
                 }
                 else {
-                    Helper.logDebug(`flatten to level ${i} with maxLevel=${maxLevel}, maxPropCount=${maxPropCount}, maxComplexity=${maxComplexity}`);
+                    Helper.logDebug(this.session, `flatten to level ${i} with maxLevel=${maxLevel}, maxPropCount=${maxPropCount}, maxComplexity=${maxComplexity}`);
                     return i;
                 }
             }
@@ -182,7 +182,7 @@ export class FlattenSetter {
                 if (this.canSubclassSimplified(subClass, flattenConfig, isPolyAsResource)) {
                     const config = cloneFlattenConfig(flattenConfig);
                     config.maxLevel = Math.max(32, config.maxLevel);
-                    Helper.logDebug(`Try to flatten poly schema ${subClass.language.default.name} from ${baseSchema.language.default.name} with paramName ${paramName}, polyAsResource=${isPolyAsResource}`);
+                    Helper.logDebug(this.session, `Try to flatten poly schema ${subClass.language.default.name} from ${baseSchema.language.default.name} with paramName ${paramName}, polyAsResource=${isPolyAsResource}`);
                     this.flattenSchemaFromPayload(subClass, curLevel, flattenSimpleObject || (!isPolyAsResource), config);
                 }
             }
@@ -198,7 +198,7 @@ export class FlattenSetter {
             // Continue flatten if there is only one property even when we hit the max level
             if (indicator.simplifiable !== true || indicator.propertyCountIfSimplify !== 1)
                 return;
-            Helper.logDebug(`continue flatten ${schema.language.default.name} when maxLevel is met because it's simplifiyIndicator.propertyCountIfSimplify is ${indicator.propertyCountIfSimplify}`);
+            Helper.logDebug(this.session, `continue flatten ${schema.language.default.name} when maxLevel is met because it's simplifiyIndicator.propertyCountIfSimplify is ${indicator.propertyCountIfSimplify}`);
         }
 
         for (const prop of getAllProperties(schema as ObjectSchema)) {
@@ -212,7 +212,7 @@ export class FlattenSetter {
                     if (flattenSimpleObject ||
                         NodeCliHelper.getComplexity(prop.schema) !== CliCommonSchema.CodeModel.Complexity.object_simple ||
                         NodeCliHelper.getSimplifyIndicator(prop.schema as ObjectSchema).propertyCountIfSimplify == 1) {
-                        NodeExtensionHelper.setFlatten(prop, true, flattenConfig.overwriteSwagger);
+                        NodeCliHelper.setCliFlatten(prop, true);
                     }
                 }
             }
@@ -239,7 +239,7 @@ export class FlattenSetter {
         else {
             const r = this.calcPayloadFlatten(param.schema, flattenConfig);
             if (r > 0) {
-                NodeExtensionHelper.setFlatten(param, true, flattenConfig.overwriteSwagger);
+                NodeCliHelper.setCliFlatten(param, true);
                 const config = cloneFlattenConfig(flattenConfig);
                 config.maxLevel = r;
                 this.flattenSchemaFromPayload(param.schema, 0, false, config);
@@ -259,8 +259,8 @@ export class FlattenSetter {
             this.codeModel.schemas.objects?.forEach(o => {
                 if (!NodeHelper.HasSubClass(o)) {
                     for (const p of getAllProperties(o)) {
-                        if (Helper.isObjectSchema(p.schema)) {
-                            NodeExtensionHelper.setFlatten(p, !NodeHelper.HasSubClass(p.schema as ObjectSchema), overwriteSwagger);
+                        if (isObjectSchema(p.schema)) {
+                            NodeCliHelper.setCliFlatten(p, !NodeHelper.HasSubClass(p.schema as ObjectSchema));
                         }
                     }
                 }
@@ -307,7 +307,7 @@ export class FlattenSetter {
                         .where(p => p.protocol.http?.in === 'body' && p.implementation === 'Method')
                         .forEach((p) => {
                             if (Helper.isObjectSchema(p.schema)) {
-                                Helper.logDebug(`Try to set flatten for ${group.language.default.name}/${operation.language.default.name}/${p.language.default.name}`);
+                                Helper.logDebug(this.session, `Try to set flatten for ${group.language.default.name}/${operation.language.default.name}/${p.language.default.name}`);
 
                                 flattenConfig.nodeDescripter = {
                                     operationGroupCliKey: NodeCliHelper.getCliKey(group, "<noGroupCliKey>"),
@@ -327,7 +327,7 @@ export class FlattenSetter {
                                 .where(p => p.protocol.http?.in === 'body' && p.implementation === 'Method')
                                 .forEach(p => {
                                     if (Helper.isObjectSchema(p.schema)) {
-                                        Helper.logDebug(`Try to set flatten for ${group.language.default.name}/${operation.language.default.name}/${p.language.default.name}`);
+                                        Helper.logDebug(this.session, `Try to set flatten for ${group.language.default.name}/${operation.language.default.name}/${p.language.default.name}`);
 
                                         flattenConfig.nodeDescripter = {
                                             operationGroupCliKey: NodeCliHelper.getCliKey(group, "<noGroupCliKey>"),
@@ -353,26 +353,20 @@ export class FlattenSetter {
 }
 
 export async function processRequest(host: Host): Promise<void> {
-    const session = await Helper.init(host);
+    const session = await startSession<CodeModel>(host, {}, codeModelSchema);
+    const dumper = await Helper.getDumper(session);
 
     const flag = await session.getValue(CliConst.CLI_FLATTEN_SET_ENABLED_KEY, false);
     if (flag !== true) {
-        Helper.logWarning(`'${CliConst.CLI_FLATTEN_SET_ENABLED_KEY}' is not set to true, skip flattenSetter`);
+        Helper.logWarning(session, `'${CliConst.CLI_FLATTEN_SET_ENABLED_KEY}' is not set to true, skip flattenSetter`);
     }
     else {
-        Helper.dumper.dumpCodeModel("flatten-set-pre");
+        dumper.dumpCodeModel("flatten-set-pre", session.model);
 
-        const m4FlattenModels = await session.getValue('modelerfour.flatten-models', false);
-        if (m4FlattenModels !== true)
-            Helper.logWarning('modelerfour.flatten-models is not turned on');
-        const m4FlattenPayloads = await session.getValue('modelerfour.flatten-payloads', false);
-        if (m4FlattenPayloads !== true)
-            Helper.logWarning('modelerfour.flatten-payloads is not turned on');
-
-        const plugin = await new FlattenSetter(session);
+        const plugin = new FlattenSetter(session);
         await plugin.process();
 
-        Helper.dumper.dumpCodeModel("flatten-set-post");
+        dumper.dumpCodeModel("flatten-set-post", session.model);
 
         let directives = await session.getValue(CliConst.CLI_FLATTEN_DIRECTIVE_KEY, []);
         const cliDirectives = await session.getValue(CliConst.CLI_DIRECTIVE_KEY, []);
@@ -392,13 +386,13 @@ export async function processRequest(host: Host): Promise<void> {
         if (!isNullOrUndefined(directives) && isArray(directives) && directives.length > 0) {
             const modifier = await new Modifier(session).init(directives);
             modifier.process();
-            Helper.dumper.dumpCodeModel("flatten-modifier-post");
+            dumper.dumpCodeModel("flatten-modifier-post", session.model);
         }
 
     }
     const finalMapping = new FlattenValidator(session).validate(session.model.schemas.objects);
-    Helper.dumper.dump('clicommon-flatten-object-map.txt', finalMapping, true /*debug only*/);
+    dumper.dump('clicommon-flatten-object-map.txt', finalMapping, true /*debug only*/);
 
-    Helper.outputToModelerfour();
-    await Helper.dumper.persistAsync();
+    await Helper.outputToModelerfour(host, session);
+    await dumper.persistAsync(host);
 }

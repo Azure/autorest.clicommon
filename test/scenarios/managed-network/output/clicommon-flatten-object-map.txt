@@ -1,22 +1,26 @@
-ManagedNetwork<1>[properties] -> ManagedNetworkProperties<2>[scope] -> Scope<4>
-ManagedNetwork<1>[properties] -> ManagedNetworkProperties<2>[connectivity] -> ConnectivityCollection<2>
-ResourceId<1>
-ManagedNetworkGroup<2>[properties] -> ManagedNetworkGroupProperties<4>
-ResourceProperties<2>
-Resource<4>
-ManagedNetworkPeeringPolicy<1>(properties*:ManagedNetworkPeeringPolicyProperties)
-ManagedNetworkPeeringPolicyProperties<4>*(hub:ResourceId)
-TrackedResource<1>
-ErrorResponse<2>
-ManagedNetworkUpdate<1>
-ManagedNetworkListResult<2>
-ScopeAssignment<1>[properties] -> ScopeAssignmentProperties<1>
-ScopeAssignmentListResult<2>
-ManagedNetworkGroupListResult<2>
-ManagedNetworkPeeringPolicyListResult<2>
-OperationListResult<2>
-Operation<2>(display:Operation-display)
-Operation-display<3>
-HubAndSpokePeeringPolicyProperties<0>
-MeshPeeringPolicyProperties<0>
-ProxyResource<0>
+managed_network<1>(properties:managed_network_properties)
+managed_network_properties<2>(scope:scope, connectivity:connectivity_collection)
+scope<4>
+resource_id<1>
+connectivity_collection<2>
+managed_network_group<2>(properties:managed_network_group_properties)
+managed_network_group_properties<4>
+resource_properties<2>
+resource<4>
+managed_network_peering_policy<1>(properties*:managed_network_peering_policy_properties)
+managed_network_peering_policy_properties<4>*(hub:resource_id)
+tracked_resource<1>
+error_response<2>
+managed_network_update<1>
+managed_network_list_result<2>
+scope_assignment<1>(properties:scope_assignment_properties)
+scope_assignment_properties<1>
+scope_assignment_list_result<2>
+managed_network_group_list_result<2>
+managed_network_peering_policy_list_result<2>
+operation_list_result<2>
+operation<2>(display:operation_display)
+operation_display<3>
+hub_and_spoke_peering_policy_properties<0>
+mesh_peering_policy_properties<0>
+proxy_resource<0>

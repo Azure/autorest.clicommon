@@ -62,6 +62,9 @@ export abstract class Action {
                 case 'json':
                     arr.push(new ActionJson(value));
                     break;
+                case 'pre-json':
+                    arr.push(new ActionPreJson(value));
+                    break;
                 case 'hitcount':
                     arr.push(new ActionHitCount(value));
                     break;
@@ -100,6 +103,22 @@ export class ActionJson extends Action {
     }
 }
 
+export class ActionPreJson extends Action {
+
+    constructor(private directiveValue: CliCommonSchema.CliDirective.ValueClause) {
+        super();
+    }
+
+    public process(descriptor: CliCommonSchema.CodeModel.NodeDescriptor): void {
+        const node = descriptor.target;
+        if (this.directiveValue === true && NodeExtensionHelper.getFlattenedValue(node)) {
+            // Instead of flatten node in m4, we will do it by ourselves later.
+            NodeCliHelper.setCliM4Flatten(node, true);
+        }
+        NodeHelper.setJson(node, this.directiveValue === true, true /*modify flatten*/);
+    }
+}
+
 export class ActionFlatten extends Action {
 
     constructor(private directiveValue: CliCommonSchema.CliDirective.ValueClause) {
@@ -108,7 +127,7 @@ export class ActionFlatten extends Action {
 
     public process(descriptor: CliCommonSchema.CodeModel.NodeDescriptor): void {
         const node = descriptor.target;
-        NodeExtensionHelper.setFlatten(node, this.directiveValue === true, true /*overwrite*/);
+        NodeCliHelper.setCliFlatten(node, this.directiveValue === true);
     }
 }
 
