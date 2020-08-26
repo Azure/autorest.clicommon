@@ -265,4 +265,35 @@ cli:
             choice: 'pascal'
             choiceValue: 'pascal'
             constant: 'pascal'
+        m4:
+            override:
+                cmyk : CMYK
+                $host: $host
+                LRO: LRO
+                rp: RP
+                db: DB
+                adls: ADLS
+                dw: DW
+                ti: TI
+                MCAS: MCAS
+                mdatp: MDATP
+                aad: AAD
+                aat: AAT
+                asc: ASC
+                aatp: AATP
+                UTC: UTC
+                SSL: SSL
+                Sql: SQL
+                Rc: RC
+                Gb: GB
+                # workaround for modelerfour issue
+                SubscriptionId: SubscriptionId
+            parameter: 'snake'
+            operation: 'snake'
+            operationGroup:  'pascal'
+            property: 'snake'
+            type:  'pascal'
+            choice: 'pascal'
+            choiceValue: 'upper'
+            constant: 'snake'
 ```
