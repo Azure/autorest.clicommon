@@ -9,7 +9,7 @@ schemas:
       type: string
       language:
         default:
-          name: string
+          name: String
           description: simple string
       protocol: {}
     - &ref_2
@@ -18,7 +18,7 @@ schemas:
         - version: 2018-09-01-preview
       language:
         default:
-          name: operations_definition_name
+          name: OperationsDefinitionName
           description: Name of the operation.
       protocol: {}
     - &ref_3
@@ -27,7 +27,7 @@ schemas:
         - version: 2018-09-01-preview
       language:
         default:
-          name: operations_display_definition_provider
+          name: OperationsDisplayDefinitionProvider
           description: Resource provider of the operation.
       protocol: {}
     - &ref_4
@@ -36,7 +36,7 @@ schemas:
         - version: 2018-09-01-preview
       language:
         default:
-          name: operations_display_definition_resource
+          name: OperationsDisplayDefinitionResource
           description: Resource for the operation.
       protocol: {}
     - &ref_5
@@ -45,7 +45,7 @@ schemas:
         - version: 2018-09-01-preview
       language:
         default:
-          name: operations_display_definition_operation
+          name: OperationsDisplayDefinitionOperation
           description: Short description of the operation.
       protocol: {}
     - &ref_6
@@ -54,7 +54,7 @@ schemas:
         - version: 2018-09-01-preview
       language:
         default:
-          name: operations_display_definition_description
+          name: OperationsDisplayDefinitionDescription
           description: Description of the operation.
       protocol: {}
     - &ref_9
@@ -63,7 +63,7 @@ schemas:
         - version: 2018-09-01-preview
       language:
         default:
-          name: cloud_error_body_code
+          name: CloudErrorBodyCode
           description: An identifier for the error. Codes are invariant and are intended to be consumed programmatically.
       protocol: {}
     - &ref_10
@@ -72,7 +72,7 @@ schemas:
         - version: 2018-09-01-preview
       language:
         default:
-          name: cloud_error_body_message
+          name: CloudErrorBodyMessage
           description: 'A message describing the error, intended to be suitable for displaying in a user interface.'
       protocol: {}
     - &ref_52
@@ -82,7 +82,7 @@ schemas:
       minLength: 1
       language:
         default:
-          name: string
+          name: String
           description: ''
       protocol: {}
     - &ref_59
@@ -94,7 +94,7 @@ schemas:
       pattern: '^[-\w\._\(\)]+$'
       language:
         default:
-          name: string
+          name: String
           description: ''
       protocol: {}
     - &ref_1
@@ -103,7 +103,7 @@ schemas:
         - version: 2018-09-01-preview
       language:
         default:
-          name: string
+          name: String
           description: ''
       protocol: {}
     - &ref_20
@@ -112,7 +112,7 @@ schemas:
         - version: 2018-09-01-preview
       language:
         default:
-          name: status_result_trust_model
+          name: StatusResultTrustModel
           description: Trust model for the attestation service instance.
       protocol: {}
     - &ref_22
@@ -121,7 +121,7 @@ schemas:
         - version: 2018-09-01-preview
       language:
         default:
-          name: status_result_attest_uri
+          name: StatusResultAttestUri
           description: Gets the uri of attestation service
       protocol: {}
     - &ref_19
@@ -134,7 +134,7 @@ schemas:
           - create
       language:
         default:
-          name: tracked_resource_location
+          name: TrackedResourceLocation
           description: The geo-location where the resource lives
       protocol: {}
     - &ref_14
@@ -143,7 +143,7 @@ schemas:
         - version: 2018-09-01-preview
       language:
         default:
-          name: resource_id
+          name: ResourceId
           description: 'Fully qualified resource Id for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}'
       protocol: {}
     - &ref_15
@@ -152,7 +152,7 @@ schemas:
         - version: 2018-09-01-preview
       language:
         default:
-          name: resource_name
+          name: ResourceName
           description: The name of the resource
       protocol: {}
     - &ref_16
@@ -161,7 +161,7 @@ schemas:
         - version: 2018-09-01-preview
       language:
         default:
-          name: resource_type
+          name: ResourceType
           description: The type of the resource. Ex- Microsoft.Compute/virtualMachines or Microsoft.Storage/storageAccounts.
       protocol: {}
     - &ref_24
@@ -170,7 +170,7 @@ schemas:
         - version: 2018-09-01-preview
       language:
         default:
-          name: attestation_service_creation_params_location
+          name: AttestationServiceCreationParamsLocation
           description: The supported Azure location where the attestation service instance should be created.
       protocol: {}
     - &ref_26
@@ -179,7 +179,7 @@ schemas:
         - version: 2018-09-01-preview
       language:
         default:
-          name: attestation_service_creation_specific_params_attestation_policy
+          name: AttestationServiceCreationSpecificParamsAttestationPolicy
           description: Name of attestation policy.
       protocol: {}
     - &ref_27
@@ -188,7 +188,7 @@ schemas:
         - version: 2018-09-01-preview
       language:
         default:
-          name: json_web_key_alg
+          name: JsonWebKeyAlg
           description: |-
             The "alg" (algorithm) parameter identifies the algorithm intended for
             use with the key.  The values used should either be registered in the
@@ -202,7 +202,7 @@ schemas:
         - version: 2018-09-01-preview
       language:
         default:
-          name: json_web_key_crv
+          name: JsonWebKeyCrv
           description: The "crv" (curve) parameter identifies the curve type
       protocol: {}
     - &ref_29
@@ -211,7 +211,7 @@ schemas:
         - version: 2018-09-01-preview
       language:
         default:
-          name: json_web_key_d
+          name: JsonWebKeyD
           description: RSA private exponent or ECC private key
       protocol: {}
     - &ref_30
@@ -220,7 +220,7 @@ schemas:
         - version: 2018-09-01-preview
       language:
         default:
-          name: json_web_key_dp
+          name: JsonWebKeyDp
           description: RSA Private Key Parameter
       protocol: {}
     - &ref_31
@@ -229,7 +229,7 @@ schemas:
         - version: 2018-09-01-preview
       language:
         default:
-          name: json_web_key_dq
+          name: JsonWebKeyDq
           description: RSA Private Key Parameter
       protocol: {}
     - &ref_32
@@ -238,7 +238,7 @@ schemas:
         - version: 2018-09-01-preview
       language:
         default:
-          name: json_web_key_e
+          name: JsonWebKeyE
           description: 'RSA public exponent, in Base64'
       protocol: {}
     - &ref_33
@@ -247,7 +247,7 @@ schemas:
         - version: 2018-09-01-preview
       language:
         default:
-          name: json_web_key_k
+          name: JsonWebKeyK
           description: Symmetric key
       protocol: {}
     - &ref_34
@@ -256,7 +256,7 @@ schemas:
         - version: 2018-09-01-preview
       language:
         default:
-          name: json_web_key_kid
+          name: JsonWebKeyKid
           description: |-
             The "kid" (key ID) parameter is used to match a specific key.  This
             is used, for instance, to choose among a set of keys within a JWK Set
@@ -274,7 +274,7 @@ schemas:
         - version: 2018-09-01-preview
       language:
         default:
-          name: json_web_key_kty
+          name: JsonWebKeyKty
           description: |-
             The "kty" (key type) parameter identifies the cryptographic algorithm
             family used with the key, such as "RSA" or "EC". "kty" values should
@@ -288,7 +288,7 @@ schemas:
         - version: 2018-09-01-preview
       language:
         default:
-          name: json_web_key_n
+          name: JsonWebKeyN
           description: 'RSA modulus, in Base64'
       protocol: {}
     - &ref_37
@@ -297,7 +297,7 @@ schemas:
         - version: 2018-09-01-preview
       language:
         default:
-          name: json_web_key_p
+          name: JsonWebKeyP
           description: RSA secret prime
       protocol: {}
     - &ref_38
@@ -306,7 +306,7 @@ schemas:
         - version: 2018-09-01-preview
       language:
         default:
-          name: json_web_key_q
+          name: JsonWebKeyQ
           description: 'RSA secret prime, with p < q'
       protocol: {}
     - &ref_39
@@ -315,7 +315,7 @@ schemas:
         - version: 2018-09-01-preview
       language:
         default:
-          name: json_web_key_qi
+          name: JsonWebKeyQi
           description: RSA Private Key Parameter
       protocol: {}
     - &ref_40
@@ -324,7 +324,7 @@ schemas:
         - version: 2018-09-01-preview
       language:
         default:
-          name: json_web_key_use
+          name: JsonWebKeyUse
           description: |-
             Use ("public key use") identifies the intended use of
             the public key. The "use" parameter is employed to indicate whether
@@ -337,7 +337,7 @@ schemas:
         - version: 2018-09-01-preview
       language:
         default:
-          name: json_web_key_x
+          name: JsonWebKeyX
           description: X coordinate for the Elliptic Curve point
       protocol: {}
     - &ref_42
@@ -346,7 +346,7 @@ schemas:
         - version: 2018-09-01-preview
       language:
         default:
-          name: json_web_key_x5_c_item
+          name: JsonWebKeyX5CItem
           description: ''
       protocol: {}
     - &ref_43
@@ -355,7 +355,7 @@ schemas:
         - version: 2018-09-01-preview
       language:
         default:
-          name: json_web_key_y
+          name: JsonWebKeyY
           description: Y coordinate for the Elliptic Curve point
       protocol: {}
   choices:
@@ -364,7 +364,7 @@ schemas:
         - value: Ready
           language:
             default:
-              name: ready
+              name: READY
               description: ''
             cli:
               cliKey: Ready
@@ -373,7 +373,7 @@ schemas:
         - value: NotReady
           language:
             default:
-              name: not_ready
+              name: NOT_READY
               description: ''
             cli:
               cliKey: NotReady
@@ -382,7 +382,7 @@ schemas:
         - value: Error
           language:
             default:
-              name: error
+              name: ERROR
               description: ''
             cli:
               cliKey: Error
@@ -394,7 +394,7 @@ schemas:
       choiceType: *ref_0
       language:
         default:
-          name: attestation_service_status
+          name: AttestationServiceStatus
           description: Status of attestation service.
         cli:
           cliKey: AttestationServiceStatus
@@ -419,7 +419,7 @@ schemas:
       nullableItems: false
       language:
         default:
-          name: tracked_resource_tags
+          name: TrackedResourceTags
           description: Resource tags.
       protocol: {}
     - &ref_25
@@ -428,7 +428,7 @@ schemas:
       nullableItems: false
       language:
         default:
-          name: attestation_service_creation_params_tags
+          name: AttestationServiceCreationParamsTags
           description: The tags that will be assigned to the attestation service instance.
       protocol: {}
     - &ref_47
@@ -437,7 +437,7 @@ schemas:
       nullableItems: false
       language:
         default:
-          name: attestation_service_patch_params_tags
+          name: AttestationServicePatchParamsTags
           description: The tags that will be assigned to the attestation service instance.
       protocol: {}
   objects:
@@ -521,7 +521,7 @@ schemas:
                       - output
                     language:
                       default:
-                        name: operations_display_definition
+                        name: OperationsDisplayDefinition
                         description: Display object with properties of the operation.
                         namespace: ''
                       cli:
@@ -545,7 +545,7 @@ schemas:
                 - output
               language:
                 default:
-                  name: operations_definition
+                  name: OperationsDefinition
                   description: Definition object with the name and properties of an operation.
                   namespace: ''
                 cli:
@@ -555,7 +555,7 @@ schemas:
               protocol: {}
             language:
               default:
-                name: operation_list_value
+                name: OperationListValue
                 description: List of supported operations.
             protocol: {}
           serializedName: value
@@ -574,7 +574,7 @@ schemas:
         - output
       language:
         default:
-          name: operation_list
+          name: OperationList
           description: List of supported operations.
           namespace: ''
         cli:
@@ -624,7 +624,7 @@ schemas:
               x-ms-external: true
             language:
               default:
-                name: cloud_error_body
+                name: CloudErrorBody
                 description: An error response from Attestation.
                 namespace: ''
               cli:
@@ -650,7 +650,7 @@ schemas:
         x-ms-external: true
       language:
         default:
-          name: cloud_error
+          name: CloudError
           description: An error response from Attestation.
           namespace: ''
         cli:
@@ -731,7 +731,7 @@ schemas:
                     x-ms-azure-resource: true
                   language:
                     default:
-                      name: resource
+                      name: Resource
                       description: ''
                       namespace: ''
                     cli:
@@ -772,7 +772,7 @@ schemas:
               - output
             language:
               default:
-                name: tracked_resource
+                name: TrackedResource
                 description: The resource model definition for a ARM tracked top level resource
                 namespace: ''
               cli:
@@ -831,7 +831,7 @@ schemas:
               - output
             language:
               default:
-                name: status_result
+                name: StatusResult
                 description: Status of attestation service.
                 namespace: ''
               cli:
@@ -858,7 +858,7 @@ schemas:
         - output
       language:
         default:
-          name: attestation_provider
+          name: AttestationProvider
           description: Attestation service response message.
           namespace: ''
         cli:
@@ -1138,7 +1138,7 @@ schemas:
                                 elementType: *ref_42
                                 language:
                                   default:
-                                    name: json_web_key_x5_c
+                                    name: JsonWebKeyX5C
                                     description: |-
                                       The "x5c" (X.509 certificate chain) parameter contains a chain of one
                                       or more PKIX certificates [RFC5280].  The certificate chain is
@@ -1184,7 +1184,7 @@ schemas:
                             - input
                           language:
                             default:
-                              name: json_web_key
+                              name: JsonWebKey
                               description: ''
                               namespace: ''
                             cli:
@@ -1194,7 +1194,7 @@ schemas:
                           protocol: {}
                         language:
                           default:
-                            name: json_web_key_set_keys
+                            name: JsonWebKeySetKeys
                             description: |-
                               The value of the "keys" parameter is an array of JWK values.  By
                               default, the order of the JWK values within the array does not imply
@@ -1223,7 +1223,7 @@ schemas:
                     - input
                   language:
                     default:
-                      name: json_web_key_set
+                      name: JsonWebKeySet
                       description: ''
                       namespace: ''
                     cli:
@@ -1247,7 +1247,7 @@ schemas:
               - input
             language:
               default:
-                name: attestation_service_creation_specific_params
+                name: AttestationServiceCreationSpecificParams
                 description: Client supplied parameters used to create a new attestation service instance.
                 namespace: ''
               cli:
@@ -1274,7 +1274,7 @@ schemas:
         x-ms-azure-resource: true
       language:
         default:
-          name: attestation_service_creation_params
+          name: AttestationServiceCreationParams
           description: Parameters for creating an attestation service instance
           namespace: ''
         cli:
@@ -1309,7 +1309,7 @@ schemas:
         x-ms-azure-resource: true
       language:
         default:
-          name: attestation_service_patch_params
+          name: AttestationServicePatchParams
           description: Parameters for patching an attestation service instance
           namespace: ''
         cli:
@@ -1329,7 +1329,7 @@ schemas:
             elementType: *ref_12
             language:
               default:
-                name: attestation_provider_list_result_value
+                name: AttestationProviderListResultValue
                 description: Attestation Provider array.
             protocol: {}
           serializedName: value
@@ -1348,7 +1348,7 @@ schemas:
         - output
       language:
         default:
-          name: attestation_provider_list_result
+          name: AttestationProviderListResult
           description: Attestation Providers List.
           namespace: ''
         cli:
@@ -1407,7 +1407,7 @@ globalParameters:
     required: true
     language:
       default:
-        name: apiVersion
+        name: apiversion
         description: Api Version
         serializedName: api-version
       cli:
@@ -1499,7 +1499,7 @@ operationGroups:
         protocol: {}
     language:
       default:
-        name: operation
+        name: Operation
         description: ''
       cli:
         cliKey: Operation
@@ -2193,7 +2193,7 @@ operationGroups:
         protocol: {}
     language:
       default:
-        name: attestation_providers
+        name: AttestationProviders
         description: ''
       cli:
         cliKey: AttestationProviders
