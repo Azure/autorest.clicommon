@@ -16,7 +16,7 @@ schemas:
       precision: 32
       language:
         default:
-          name: integer
+          name: Integer
           description: ''
       protocol: {}
   strings:
@@ -24,7 +24,7 @@ schemas:
       type: string
       language:
         default:
-          name: string
+          name: String
           description: simple string
       protocol: {}
     - &ref_1
@@ -33,7 +33,7 @@ schemas:
         - version: 2019-06-01-preview
       language:
         default:
-          name: string
+          name: String
           description: ''
       protocol: {}
     - &ref_11
@@ -42,7 +42,7 @@ schemas:
         - version: 2019-06-01-preview
       language:
         default:
-          name: resource_id
+          name: ResourceId
           description: Resource Id
       protocol: {}
     - &ref_18
@@ -51,7 +51,7 @@ schemas:
         - version: 2019-06-01-preview
       language:
         default:
-          name: resource_properties_etag
+          name: ResourcePropertiesEtag
           description: A unique read-only string that changes whenever the resource is updated.
       protocol: {}
     - &ref_24
@@ -60,7 +60,7 @@ schemas:
         - version: 2019-06-01-preview
       language:
         default:
-          name: resource_id
+          name: ResourceId
           description: 'Fully qualified resource Id for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}'
       protocol: {}
     - &ref_25
@@ -69,7 +69,7 @@ schemas:
         - version: 2019-06-01-preview
       language:
         default:
-          name: resource_name
+          name: ResourceName
           description: The name of the resource
       protocol: {}
     - &ref_26
@@ -78,7 +78,7 @@ schemas:
         - version: 2019-06-01-preview
       language:
         default:
-          name: resource_type
+          name: ResourceType
           description: The type of the resource. Ex- Microsoft.Compute/virtualMachines or Microsoft.Storage/storageAccounts.
       protocol: {}
     - &ref_27
@@ -91,7 +91,7 @@ schemas:
           - create
       language:
         default:
-          name: resource_location
+          name: ResourceLocation
           description: The geo-location where the resource lives
       protocol: {}
     - &ref_31
@@ -100,7 +100,7 @@ schemas:
         - version: 2019-06-01-preview
       language:
         default:
-          name: error_response_code
+          name: ErrorResponseCode
           description: The error code.
       protocol: {}
     - &ref_32
@@ -109,7 +109,7 @@ schemas:
         - version: 2019-06-01-preview
       language:
         default:
-          name: error_response_message
+          name: ErrorResponseMessage
           description: The error message.
       protocol: {}
     - &ref_34
@@ -118,7 +118,7 @@ schemas:
         - version: 2019-06-01-preview
       language:
         default:
-          name: managed_network_list_result_next_link
+          name: ManagedNetworkListResultNextLink
           description: Gets the URL to get the next page of results.
       protocol: {}
     - &ref_14
@@ -127,7 +127,7 @@ schemas:
         - version: 2019-06-01-preview
       language:
         default:
-          name: scope_assignment_properties_assigned_managed_network
+          name: ScopeAssignmentPropertiesAssignedManagedNetwork
           description: The managed network ID with scope will be assigned to.
       protocol: {}
     - &ref_35
@@ -136,7 +136,7 @@ schemas:
         - version: 2019-06-01-preview
       language:
         default:
-          name: scope_assignment_list_result_next_link
+          name: ScopeAssignmentListResultNextLink
           description: Gets the URL to get the next set of results.
       protocol: {}
     - &ref_36
@@ -145,7 +145,7 @@ schemas:
         - version: 2019-06-01-preview
       language:
         default:
-          name: managed_network_group_list_result_next_link
+          name: ManagedNetworkGroupListResultNextLink
           description: Gets the URL to get the next set of results.
       protocol: {}
     - &ref_37
@@ -154,7 +154,7 @@ schemas:
         - version: 2019-06-01-preview
       language:
         default:
-          name: managed_network_peering_policy_list_result_next_link
+          name: ManagedNetworkPeeringPolicyListResultNextLink
           description: Gets the URL to get the next page of results.
       protocol: {}
     - &ref_38
@@ -163,7 +163,7 @@ schemas:
         - version: 2019-06-01-preview
       language:
         default:
-          name: operation_name
+          name: OperationName
           description: 'Operation name: {provider}/{resource}/{operation}'
       protocol: {}
     - &ref_39
@@ -172,7 +172,7 @@ schemas:
         - version: 2019-06-01-preview
       language:
         default:
-          name: operation_display_provider
+          name: OperationDisplayProvider
           description: 'Service provider: Microsoft.ManagedNetwork'
       protocol: {}
     - &ref_40
@@ -181,7 +181,7 @@ schemas:
         - version: 2019-06-01-preview
       language:
         default:
-          name: operation_display_resource
+          name: OperationDisplayResource
           description: 'Resource on which the operation is performed: Profile, endpoint, etc.'
       protocol: {}
     - &ref_41
@@ -190,7 +190,7 @@ schemas:
         - version: 2019-06-01-preview
       language:
         default:
-          name: operation_display_operation
+          name: OperationDisplayOperation
           description: 'Operation type: Read, write, delete, etc.'
       protocol: {}
     - &ref_42
@@ -199,7 +199,7 @@ schemas:
         - version: 2019-06-01-preview
       language:
         default:
-          name: operation_list_result_next_link
+          name: OperationListResultNextLink
           description: URL to get the next set of operation list results if there are any.
       protocol: {}
   choices:
@@ -208,7 +208,7 @@ schemas:
         - value: Updating
           language:
             default:
-              name: updating
+              name: UPDATING
               description: ''
             cli:
               cliKey: Updating
@@ -217,7 +217,7 @@ schemas:
         - value: Deleting
           language:
             default:
-              name: deleting
+              name: DELETING
               description: ''
             cli:
               cliKey: Deleting
@@ -226,7 +226,7 @@ schemas:
         - value: Failed
           language:
             default:
-              name: failed
+              name: FAILED
               description: ''
             cli:
               cliKey: Failed
@@ -235,7 +235,7 @@ schemas:
         - value: Succeeded
           language:
             default:
-              name: succeeded
+              name: SUCCEEDED
               description: ''
             cli:
               cliKey: Succeeded
@@ -247,7 +247,7 @@ schemas:
       choiceType: *ref_0
       language:
         default:
-          name: provisioning_state
+          name: ProvisioningState
           description: Provisioning state of the ManagedNetwork resource.
         cli:
           cliKey: ProvisioningState
@@ -259,7 +259,7 @@ schemas:
         - value: Connectivity
           language:
             default:
-              name: connectivity
+              name: CONNECTIVITY
               description: ''
             cli:
               cliKey: Connectivity
@@ -271,7 +271,7 @@ schemas:
       choiceType: *ref_0
       language:
         default:
-          name: kind
+          name: Kind
           description: Responsibility role under which this Managed Network Group will be created
         cli:
           cliKey: Kind
@@ -285,7 +285,7 @@ schemas:
         - value: HubAndSpokeTopology
           language:
             default:
-              name: hub_and_spoke_topology
+              name: HUB_AND_SPOKE_TOPOLOGY
               description: ''
             cli:
               cliKey: HubAndSpokeTopology
@@ -294,7 +294,7 @@ schemas:
         - value: MeshTopology
           language:
             default:
-              name: mesh_topology
+              name: MESH_TOPOLOGY
               description: ''
             cli:
               cliKey: MeshTopology
@@ -306,7 +306,7 @@ schemas:
       choiceType: *ref_0
       language:
         default:
-          name: type
+          name: Type
           description: Gets or sets the connectivity type of a network structure policy
         cli:
           cliKey: type
@@ -331,7 +331,7 @@ schemas:
       nullableItems: false
       language:
         default:
-          name: tracked_resource_tags
+          name: TrackedResourceTags
           description: Resource tags
       protocol: {}
     - &ref_33
@@ -340,7 +340,7 @@ schemas:
       nullableItems: false
       language:
         default:
-          name: managed_network_update_tags
+          name: ManagedNetworkUpdateTags
           description: Resource tags
       protocol: {}
   objects:
@@ -416,7 +416,7 @@ schemas:
                                                   x-ms-discriminator-value: HubAndSpokeTopology
                                                 language:
                                                   default:
-                                                    name: hub_and_spoke_peering_policy_properties
+                                                    name: HubAndSpokePeeringPolicyProperties
                                                     description: Properties of a Hub and Spoke Peering Policy
                                                     namespace: ''
                                                   cli:
@@ -445,7 +445,7 @@ schemas:
                                                   x-ms-discriminator-value: MeshTopology
                                                 language:
                                                   default:
-                                                    name: mesh_peering_policy_properties
+                                                    name: MeshPeeringPolicyProperties
                                                     description: Properties of a Mesh Peering Policy
                                                     namespace: ''
                                                   cli:
@@ -509,7 +509,7 @@ schemas:
                                                   - input
                                                 language:
                                                   default:
-                                                    name: resource_id
+                                                    name: ResourceId
                                                     description: Generic pointer to a resource
                                                     namespace: ''
                                                   cli:
@@ -535,7 +535,7 @@ schemas:
                                                 elementType: *ref_12
                                                 language:
                                                   default:
-                                                    name: managed_network_peering_policy_properties_spokes
+                                                    name: ManagedNetworkPeeringPolicyPropertiesSpokes
                                                     description: Gets or sets the spokes group IDs
                                                 protocol: {}
                                               required: false
@@ -556,7 +556,7 @@ schemas:
                                                 elementType: *ref_12
                                                 language:
                                                   default:
-                                                    name: managed_network_peering_policy_properties_mesh
+                                                    name: ManagedNetworkPeeringPolicyPropertiesMesh
                                                     description: Gets or sets the mesh group IDs
                                                 protocol: {}
                                               required: false
@@ -577,7 +577,7 @@ schemas:
                                             - input
                                           language:
                                             default:
-                                              name: managed_network_peering_policy_properties
+                                              name: ManagedNetworkPeeringPolicyProperties
                                               description: Properties of a Managed Network Peering Policy
                                               namespace: ''
                                             cli:
@@ -608,7 +608,7 @@ schemas:
                                                       elementType: *ref_12
                                                       language:
                                                         default:
-                                                          name: scope_management_groups
+                                                          name: ScopeManagementGroups
                                                           description: The collection of management groups covered by the Managed Network
                                                       protocol: {}
                                                     serializedName: managementGroups
@@ -628,7 +628,7 @@ schemas:
                                                       elementType: *ref_12
                                                       language:
                                                         default:
-                                                          name: scope_subscriptions
+                                                          name: ScopeSubscriptions
                                                           description: The collection of subscriptions covered by the Managed Network
                                                       protocol: {}
                                                     serializedName: subscriptions
@@ -648,7 +648,7 @@ schemas:
                                                       elementType: *ref_12
                                                       language:
                                                         default:
-                                                          name: scope_virtual_networks
+                                                          name: ScopeVirtualNetworks
                                                           description: The collection of virtual nets covered by the Managed Network
                                                       protocol: {}
                                                     serializedName: virtualNetworks
@@ -668,7 +668,7 @@ schemas:
                                                       elementType: *ref_12
                                                       language:
                                                         default:
-                                                          name: scope_subnets
+                                                          name: ScopeSubnets
                                                           description: The collection of  subnets covered by the Managed Network
                                                       protocol: {}
                                                     serializedName: subnets
@@ -688,7 +688,7 @@ schemas:
                                                   - input
                                                 language:
                                                   default:
-                                                    name: scope
+                                                    name: Scope
                                                     description: Scope of a Managed Network
                                                     namespace: ''
                                                   cli:
@@ -722,7 +722,7 @@ schemas:
                                                       elementType: *ref_13
                                                       language:
                                                         default:
-                                                          name: connectivity_collection_groups
+                                                          name: ConnectivityCollectionGroups
                                                           description: The collection of connectivity related Managed Network Groups within the Managed Network
                                                       protocol: {}
                                                     readOnly: true
@@ -768,7 +768,7 @@ schemas:
                                                           - input
                                                         language:
                                                           default:
-                                                            name: managed_network_peering_policy
+                                                            name: ManagedNetworkPeeringPolicy
                                                             description: The Managed Network Peering Policy resource
                                                             namespace: ''
                                                           cli:
@@ -778,7 +778,7 @@ schemas:
                                                         protocol: {}
                                                       language:
                                                         default:
-                                                          name: connectivity_collection_peerings
+                                                          name: ConnectivityCollectionPeerings
                                                           description: The collection of Managed Network Peering Policies within the Managed Network
                                                       protocol: {}
                                                     readOnly: true
@@ -799,7 +799,7 @@ schemas:
                                                   - input
                                                 language:
                                                   default:
-                                                    name: connectivity_collection
+                                                    name: ConnectivityCollection
                                                     description: The collection of Connectivity related groups and policies within the Managed Network
                                                     namespace: ''
                                                   cli:
@@ -827,7 +827,7 @@ schemas:
                                             - input
                                           language:
                                             default:
-                                              name: managed_network_properties
+                                              name: ManagedNetworkProperties
                                               description: Properties of Managed Network
                                               namespace: ''
                                             cli:
@@ -863,7 +863,7 @@ schemas:
                                             - input
                                           language:
                                             default:
-                                              name: scope_assignment_properties
+                                              name: ScopeAssignmentProperties
                                               description: Properties of Managed Network
                                               namespace: ''
                                             cli:
@@ -910,7 +910,7 @@ schemas:
                                       - input
                                     language:
                                       default:
-                                        name: resource_properties
+                                        name: ResourceProperties
                                         description: Base for resource properties.
                                         namespace: ''
                                       cli:
@@ -928,7 +928,7 @@ schemas:
                                     elementType: *ref_12
                                     language:
                                       default:
-                                        name: managed_network_group_properties_management_groups
+                                        name: ManagedNetworkGroupPropertiesManagementGroups
                                         description: The collection of management groups covered by the Managed Network
                                     protocol: {}
                                   serializedName: managementGroups
@@ -948,7 +948,7 @@ schemas:
                                     elementType: *ref_12
                                     language:
                                       default:
-                                        name: managed_network_group_properties_subscriptions
+                                        name: ManagedNetworkGroupPropertiesSubscriptions
                                         description: The collection of subscriptions covered by the Managed Network
                                     protocol: {}
                                   serializedName: subscriptions
@@ -968,7 +968,7 @@ schemas:
                                     elementType: *ref_12
                                     language:
                                       default:
-                                        name: managed_network_group_properties_virtual_networks
+                                        name: ManagedNetworkGroupPropertiesVirtualNetworks
                                         description: The collection of virtual nets covered by the Managed Network
                                     protocol: {}
                                   serializedName: virtualNetworks
@@ -988,7 +988,7 @@ schemas:
                                     elementType: *ref_12
                                     language:
                                       default:
-                                        name: managed_network_group_properties_subnets
+                                        name: ManagedNetworkGroupPropertiesSubnets
                                         description: The collection of  subnets covered by the Managed Network
                                     protocol: {}
                                   serializedName: subnets
@@ -1008,7 +1008,7 @@ schemas:
                                 - input
                               language:
                                 default:
-                                  name: managed_network_group_properties
+                                  name: ManagedNetworkGroupProperties
                                   description: Properties of a Managed Network Group
                                   namespace: ''
                                 cli:
@@ -1046,7 +1046,7 @@ schemas:
                           - input
                         language:
                           default:
-                            name: managed_network_group
+                            name: ManagedNetworkGroup
                             description: The Managed Network Group resource
                             namespace: ''
                           cli:
@@ -1087,7 +1087,7 @@ schemas:
                           - input
                         language:
                           default:
-                            name: scope_assignment
+                            name: ScopeAssignment
                             description: The Managed Network resource
                             namespace: ''
                           cli:
@@ -1111,7 +1111,7 @@ schemas:
                           - input
                         language:
                           default:
-                            name: proxy_resource
+                            name: ProxyResource
                             description: The resource model definition for a ARM proxy resource. It will have everything other than required location and tags
                             namespace: ''
                           cli:
@@ -1182,7 +1182,7 @@ schemas:
                     x-ms-azure-resource: true
                   language:
                     default:
-                      name: resource
+                      name: Resource
                       description: The general resource model definition
                       namespace: ''
                     cli:
@@ -1212,7 +1212,7 @@ schemas:
               - input
             language:
               default:
-                name: tracked_resource
+                name: TrackedResource
                 description: The resource model definition for a ARM tracked top level resource
                 namespace: ''
               cli:
@@ -1244,7 +1244,7 @@ schemas:
         - input
       language:
         default:
-          name: managed_network
+          name: ManagedNetwork
           description: The Managed Network resource
           namespace: ''
         cli:
@@ -1298,7 +1298,7 @@ schemas:
         - exception
       language:
         default:
-          name: error_response
+          name: ErrorResponse
           description: The error response that indicates why an operation has failed.
           namespace: ''
         cli:
@@ -1328,7 +1328,7 @@ schemas:
         - input
       language:
         default:
-          name: managed_network_update
+          name: ManagedNetworkUpdate
           description: Update Tags of Managed Network
           namespace: ''
         cli:
@@ -1348,7 +1348,7 @@ schemas:
             elementType: *ref_2
             language:
               default:
-                name: managed_network_list_result_value
+                name: ManagedNetworkListResultValue
                 description: Gets a page of ManagedNetworks
             protocol: {}
           serializedName: value
@@ -1378,7 +1378,7 @@ schemas:
         - output
       language:
         default:
-          name: managed_network_list_result
+          name: ManagedNetworkListResult
           description: Result of the request to list Managed Network. It contains a list of Managed Networks and a URL link to get the next set of results.
           namespace: ''
         cli:
@@ -1400,7 +1400,7 @@ schemas:
             elementType: *ref_22
             language:
               default:
-                name: scope_assignment_list_result_value
+                name: ScopeAssignmentListResultValue
                 description: Gets a page of ScopeAssignment
             protocol: {}
           serializedName: value
@@ -1430,7 +1430,7 @@ schemas:
         - output
       language:
         default:
-          name: scope_assignment_list_result
+          name: ScopeAssignmentListResult
           description: Result of the request to list ScopeAssignment. It contains a list of groups and a URL link to get the next set of results.
           namespace: ''
         cli:
@@ -1450,7 +1450,7 @@ schemas:
             elementType: *ref_13
             language:
               default:
-                name: managed_network_group_list_result_value
+                name: ManagedNetworkGroupListResultValue
                 description: Gets a page of ManagedNetworkGroup
             protocol: {}
           serializedName: value
@@ -1480,7 +1480,7 @@ schemas:
         - output
       language:
         default:
-          name: managed_network_group_list_result
+          name: ManagedNetworkGroupListResult
           description: Result of the request to list Managed Network Groups. It contains a list of groups and a URL link to get the next set of results.
           namespace: ''
         cli:
@@ -1500,7 +1500,7 @@ schemas:
             elementType: *ref_20
             language:
               default:
-                name: managed_network_peering_policy_list_result_value
+                name: ManagedNetworkPeeringPolicyListResultValue
                 description: Gets a page of Peering Policies
             protocol: {}
           serializedName: value
@@ -1530,7 +1530,7 @@ schemas:
         - output
       language:
         default:
-          name: managed_network_peering_policy_list_result
+          name: ManagedNetworkPeeringPolicyListResult
           description: Result of the request to list Managed Network Peering Policies. It contains a list of policies and a URL link to get the next set of results.
           namespace: ''
         cli:
@@ -1607,7 +1607,7 @@ schemas:
                       - output
                     language:
                       default:
-                        name: operation_display
+                        name: OperationDisplay
                         description: The object that represents the operation.
                         namespace: ''
                       cli:
@@ -1631,7 +1631,7 @@ schemas:
                 - output
               language:
                 default:
-                  name: operation
+                  name: Operation
                   description: REST API operation
                   namespace: ''
                 cli:
@@ -1641,7 +1641,7 @@ schemas:
               protocol: {}
             language:
               default:
-                name: operation_list_result_value
+                name: OperationListResultValue
                 description: List of Resource Provider operations supported by the Managed Network resource provider.
             protocol: {}
           serializedName: value
@@ -1671,7 +1671,7 @@ schemas:
         - output
       language:
         default:
-          name: operation_list_result
+          name: OperationListResult
           description: Result of the request to list Managed Network operations. It contains a list of operations and a URL link to get the next set of results.
           namespace: ''
         cli:
@@ -1708,7 +1708,7 @@ schemas:
       elementType: *ref_12
       language:
         default:
-          name: hub_and_spoke_peering_policy_properties_spokes
+          name: HubAndSpokePeeringPolicyPropertiesSpokes
           description: Gets or sets the spokes group IDs
       protocol: {}
     - type: array
@@ -1717,7 +1717,7 @@ schemas:
       elementType: *ref_12
       language:
         default:
-          name: mesh_peering_policy_properties_mesh
+          name: MeshPeeringPolicyPropertiesMesh
           description: Gets or sets the mesh group IDs
       protocol: {}
 globalParameters:
@@ -1766,7 +1766,7 @@ globalParameters:
     required: true
     language:
       default:
-        name: apiVersion
+        name: apiversion
         description: Api Version
         serializedName: api-version
       cli:
@@ -2673,7 +2673,7 @@ operationGroups:
         protocol: {}
     language:
       default:
-        name: managed_networks
+        name: ManagedNetworks
         description: ''
       cli:
         cliKey: ManagedNetworks
@@ -3123,7 +3123,7 @@ operationGroups:
         protocol: {}
     language:
       default:
-        name: scope_assignments
+        name: ScopeAssignments
         description: ''
       cli:
         cliKey: ScopeAssignments
@@ -3736,7 +3736,7 @@ operationGroups:
         protocol: {}
     language:
       default:
-        name: managed_network_groups
+        name: ManagedNetworkGroups
         description: ''
       cli:
         cliKey: ManagedNetworkGroups
@@ -4339,7 +4339,7 @@ operationGroups:
         protocol: {}
     language:
       default:
-        name: managed_network_peering_policies
+        name: ManagedNetworkPeeringPolicies
         description: ''
       cli:
         cliKey: ManagedNetworkPeeringPolicies
@@ -4406,7 +4406,7 @@ operationGroups:
         protocol: {}
     language:
       default:
-        name: operations
+        name: Operations
         description: ''
       cli:
         cliKey: Operations

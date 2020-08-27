@@ -1,6 +1,6 @@
 operationGroups:
   all:
-    - operationGroupName: operation
+    - operationGroupName: Operation
       cli:
         cliKey: Operation
         cliM4Path: operationGroups['Operation']
@@ -12,17 +12,17 @@ operationGroups:
             cliM4Path: operationGroups['Operation']$$operations['List']
             cliPath: operationGroups['Operation']$$operations['List']
           parameters:
-            - parameterName: $host(string^string)
+            - parameterName: $host(String^string)
               cli:
                 cliKey: $host
                 cliM4Path: globalParameters['$host']
                 cliPath: globalParameters['$host']
-            - parameterName: apiVersion(api_version2018_09_01_preview^constant)
+            - parameterName: apiversion(api_version2018_09_01_preview^constant)
               cli:
                 cliKey: ApiVersion
                 cliM4Path: globalParameters['ApiVersion']
                 cliPath: globalParameters['ApiVersion']
-    - operationGroupName: attestation_providers
+    - operationGroupName: AttestationProviders
       cli:
         cliKey: AttestationProviders
         cliM4Path: operationGroups['AttestationProviders']
@@ -34,27 +34,27 @@ operationGroups:
             cliM4Path: operationGroups['AttestationProviders']$$operations['Get']
             cliPath: operationGroups['AttestationProviders']$$operations['Get']
           parameters:
-            - parameterName: $host(string^string)
+            - parameterName: $host(String^string)
               cli:
                 cliKey: $host
                 cliM4Path: globalParameters['$host']
                 cliPath: globalParameters['$host']
-            - parameterName: SubscriptionId(string^string)
+            - parameterName: SubscriptionId(String^string)
               cli:
                 cliKey: subscriptionId
                 cliM4Path: globalParameters['subscriptionId']
                 cliPath: globalParameters['subscriptionId']
-            - parameterName: resource_group_name(string^string)
+            - parameterName: resource_group_name(String^string)
               cli:
                 cliKey: resourceGroupName
                 cliM4Path: operationGroups['AttestationProviders']$$operations['Get']$$parameters['resourceGroupName']
                 cliPath: operationGroups['AttestationProviders']$$operations['Get']$$parameters['resourceGroupName']
-            - parameterName: provider_name(string^string)
+            - parameterName: provider_name(String^string)
               cli:
                 cliKey: providerName
                 cliM4Path: operationGroups['AttestationProviders']$$operations['Get']$$parameters['providerName']
                 cliPath: operationGroups['AttestationProviders']$$operations['Get']$$parameters['providerName']
-            - parameterName: apiVersion(api_version2018_09_01_preview^constant)
+            - parameterName: apiversion(api_version2018_09_01_preview^constant)
               cli:
                 cliKey: ApiVersion
                 cliM4Path: globalParameters['ApiVersion']
@@ -65,101 +65,101 @@ operationGroups:
             cliM4Path: operationGroups['AttestationProviders']$$operations['Create']
             cliPath: operationGroups['AttestationProviders']$$operations['Create']
           parameters:
-            - parameterName: $host(string^string)
+            - parameterName: $host(String^string)
               cli:
                 cliKey: $host
                 cliM4Path: globalParameters['$host']
                 cliPath: globalParameters['$host']
-            - parameterName: SubscriptionId(string^string)
+            - parameterName: SubscriptionId(String^string)
               cli:
                 cliKey: subscriptionId
                 cliM4Path: globalParameters['subscriptionId']
                 cliPath: globalParameters['subscriptionId']
-            - parameterName: resource_group_name(string^string)
+            - parameterName: resource_group_name(String^string)
               cli:
                 cliKey: resourceGroupName
                 cliM4Path: operationGroups['AttestationProviders']$$operations['Create']$$parameters['resourceGroupName']
                 cliPath: operationGroups['AttestationProviders']$$operations['Create']$$parameters['resourceGroupName']
-            - parameterName: provider_name(string^string)
+            - parameterName: provider_name(String^string)
               cli:
                 cliKey: providerName
                 cliM4Path: operationGroups['AttestationProviders']$$operations['Create']$$parameters['providerName']
                 cliPath: operationGroups['AttestationProviders']$$operations['Create']$$parameters['providerName']
-            - parameterName: apiVersion(api_version2018_09_01_preview^constant)
+            - parameterName: apiversion(api_version2018_09_01_preview^constant)
               cli:
                 cliKey: ApiVersion
                 cliM4Path: globalParameters['ApiVersion']
                 cliPath: globalParameters['ApiVersion']
-            - parameterName[0]: creation_params(attestation_service_creation_params^object)
+            - parameterName[0]: creation_params(AttestationServiceCreationParams^object)
               cli:
                 cliKey: creationParams
                 cliM4Path: operationGroups['AttestationProviders']$$operations['Create']$$requests[0]$$parameters['creationParams']
                 cliPath: operationGroups['AttestationProviders']$$operations['Create']$$requests[0]$$parameters['creationParams']
-              bodySchema: attestation_service_creation_params
+              bodySchema: AttestationServiceCreationParams
         - operationName: update
           cli:
             cliKey: Update
             cliM4Path: operationGroups['AttestationProviders']$$operations['Update']
             cliPath: operationGroups['AttestationProviders']$$operations['Update']
           parameters:
-            - parameterName: $host(string^string)
+            - parameterName: $host(String^string)
               cli:
                 cliKey: $host
                 cliM4Path: globalParameters['$host']
                 cliPath: globalParameters['$host']
-            - parameterName: SubscriptionId(string^string)
+            - parameterName: SubscriptionId(String^string)
               cli:
                 cliKey: subscriptionId
                 cliM4Path: globalParameters['subscriptionId']
                 cliPath: globalParameters['subscriptionId']
-            - parameterName: resource_group_name(string^string)
+            - parameterName: resource_group_name(String^string)
               cli:
                 cliKey: resourceGroupName
                 cliM4Path: operationGroups['AttestationProviders']$$operations['Update']$$parameters['resourceGroupName']
                 cliPath: operationGroups['AttestationProviders']$$operations['Update']$$parameters['resourceGroupName']
-            - parameterName: provider_name(string^string)
+            - parameterName: provider_name(String^string)
               cli:
                 cliKey: providerName
                 cliM4Path: operationGroups['AttestationProviders']$$operations['Update']$$parameters['providerName']
                 cliPath: operationGroups['AttestationProviders']$$operations['Update']$$parameters['providerName']
-            - parameterName: apiVersion(api_version2018_09_01_preview^constant)
+            - parameterName: apiversion(api_version2018_09_01_preview^constant)
               cli:
                 cliKey: ApiVersion
                 cliM4Path: globalParameters['ApiVersion']
                 cliPath: globalParameters['ApiVersion']
-            - parameterName[0]: update_params(attestation_service_patch_params^object)
+            - parameterName[0]: update_params(AttestationServicePatchParams^object)
               cli:
                 cliKey: updateParams
                 cliM4Path: operationGroups['AttestationProviders']$$operations['Update']$$requests[0]$$parameters['updateParams']
                 cliPath: operationGroups['AttestationProviders']$$operations['Update']$$requests[0]$$parameters['updateParams']
-              bodySchema: attestation_service_patch_params
+              bodySchema: AttestationServicePatchParams
         - operationName: delete
           cli:
             cliKey: Delete
             cliM4Path: operationGroups['AttestationProviders']$$operations['Delete']
             cliPath: operationGroups['AttestationProviders']$$operations['Delete']
           parameters:
-            - parameterName: $host(string^string)
+            - parameterName: $host(String^string)
               cli:
                 cliKey: $host
                 cliM4Path: globalParameters['$host']
                 cliPath: globalParameters['$host']
-            - parameterName: SubscriptionId(string^string)
+            - parameterName: SubscriptionId(String^string)
               cli:
                 cliKey: subscriptionId
                 cliM4Path: globalParameters['subscriptionId']
                 cliPath: globalParameters['subscriptionId']
-            - parameterName: resource_group_name(string^string)
+            - parameterName: resource_group_name(String^string)
               cli:
                 cliKey: resourceGroupName
                 cliM4Path: operationGroups['AttestationProviders']$$operations['Delete']$$parameters['resourceGroupName']
                 cliPath: operationGroups['AttestationProviders']$$operations['Delete']$$parameters['resourceGroupName']
-            - parameterName: provider_name(string^string)
+            - parameterName: provider_name(String^string)
               cli:
                 cliKey: providerName
                 cliM4Path: operationGroups['AttestationProviders']$$operations['Delete']$$parameters['providerName']
                 cliPath: operationGroups['AttestationProviders']$$operations['Delete']$$parameters['providerName']
-            - parameterName: apiVersion(api_version2018_09_01_preview^constant)
+            - parameterName: apiversion(api_version2018_09_01_preview^constant)
               cli:
                 cliKey: ApiVersion
                 cliM4Path: globalParameters['ApiVersion']
@@ -170,17 +170,17 @@ operationGroups:
             cliM4Path: operationGroups['AttestationProviders']$$operations['List']
             cliPath: operationGroups['AttestationProviders']$$operations['List']
           parameters:
-            - parameterName: $host(string^string)
+            - parameterName: $host(String^string)
               cli:
                 cliKey: $host
                 cliM4Path: globalParameters['$host']
                 cliPath: globalParameters['$host']
-            - parameterName: apiVersion(api_version2018_09_01_preview^constant)
+            - parameterName: apiversion(api_version2018_09_01_preview^constant)
               cli:
                 cliKey: ApiVersion
                 cliM4Path: globalParameters['ApiVersion']
                 cliPath: globalParameters['ApiVersion']
-            - parameterName: SubscriptionId(string^string)
+            - parameterName: SubscriptionId(String^string)
               cli:
                 cliKey: subscriptionId
                 cliM4Path: globalParameters['subscriptionId']
@@ -191,22 +191,22 @@ operationGroups:
             cliM4Path: operationGroups['AttestationProviders']$$operations['ListByResourceGroup']
             cliPath: operationGroups['AttestationProviders']$$operations['ListByResourceGroup']
           parameters:
-            - parameterName: $host(string^string)
+            - parameterName: $host(String^string)
               cli:
                 cliKey: $host
                 cliM4Path: globalParameters['$host']
                 cliPath: globalParameters['$host']
-            - parameterName: resource_group_name(string^string)
+            - parameterName: resource_group_name(String^string)
               cli:
                 cliKey: resourceGroupName
                 cliM4Path: operationGroups['AttestationProviders']$$operations['ListByResourceGroup']$$parameters['resourceGroupName']
                 cliPath: operationGroups['AttestationProviders']$$operations['ListByResourceGroup']$$parameters['resourceGroupName']
-            - parameterName: apiVersion(api_version2018_09_01_preview^constant)
+            - parameterName: apiversion(api_version2018_09_01_preview^constant)
               cli:
                 cliKey: ApiVersion
                 cliM4Path: globalParameters['ApiVersion']
                 cliPath: globalParameters['ApiVersion']
-            - parameterName: SubscriptionId(string^string)
+            - parameterName: SubscriptionId(String^string)
               cli:
                 cliKey: subscriptionId
                 cliM4Path: globalParameters['subscriptionId']
@@ -214,339 +214,339 @@ operationGroups:
 schemas:
   objects:
     all:
-      - schemaName: operation_list
+      - schemaName: OperationList
         cli:
           cliKey: OperationList
           cliM4Path: schemas$$objects['OperationList']
           cliPath: schemas$$objects['OperationList']
         properties:
-          - propertyName: value(operation_list_value^array)
+          - propertyName: value(OperationListValue^array)
             cli:
               cliKey: value
               cliM4Path: schemas$$objects['OperationList']$$properties['value']
               cliPath: schemas$$objects['OperationList']$$properties['value']
-      - schemaName: operations_definition
+      - schemaName: OperationsDefinition
         cli:
           cliKey: OperationsDefinition
           cliM4Path: schemas$$objects['OperationsDefinition']
           cliPath: schemas$$objects['OperationsDefinition']
         properties:
-          - propertyName: name(operations_definition_name^string)
+          - propertyName: name(OperationsDefinitionName^string)
             cli:
               cliKey: name
               cliM4Path: schemas$$objects['OperationsDefinition']$$properties['name']
               cliPath: schemas$$objects['OperationsDefinition']$$properties['name']
-          - propertyName: display(operations_display_definition^object)
+          - propertyName: display(OperationsDisplayDefinition^object)
             cli:
               cliKey: display
               cliM4Path: schemas$$objects['OperationsDefinition']$$properties['display']
               cliPath: schemas$$objects['OperationsDefinition']$$properties['display']
-      - schemaName: operations_display_definition
+      - schemaName: OperationsDisplayDefinition
         cli:
           cliKey: OperationsDisplayDefinition
           cliM4Path: schemas$$objects['OperationsDisplayDefinition']
           cliPath: schemas$$objects['OperationsDisplayDefinition']
         properties:
-          - propertyName: provider(operations_display_definition_provider^string)
+          - propertyName: provider(OperationsDisplayDefinitionProvider^string)
             cli:
               cliKey: provider
               cliM4Path: schemas$$objects['OperationsDisplayDefinition']$$properties['provider']
               cliPath: schemas$$objects['OperationsDisplayDefinition']$$properties['provider']
-          - propertyName: resource(operations_display_definition_resource^string)
+          - propertyName: resource(OperationsDisplayDefinitionResource^string)
             cli:
               cliKey: resource
               cliM4Path: schemas$$objects['OperationsDisplayDefinition']$$properties['resource']
               cliPath: schemas$$objects['OperationsDisplayDefinition']$$properties['resource']
-          - propertyName: operation(operations_display_definition_operation^string)
+          - propertyName: operation(OperationsDisplayDefinitionOperation^string)
             cli:
               cliKey: operation
               cliM4Path: schemas$$objects['OperationsDisplayDefinition']$$properties['operation']
               cliPath: schemas$$objects['OperationsDisplayDefinition']$$properties['operation']
-          - propertyName: description(operations_display_definition_description^string)
+          - propertyName: description(OperationsDisplayDefinitionDescription^string)
             cli:
               cliKey: description
               cliM4Path: schemas$$objects['OperationsDisplayDefinition']$$properties['description']
               cliPath: schemas$$objects['OperationsDisplayDefinition']$$properties['description']
-      - schemaName: cloud_error
+      - schemaName: CloudError
         cli:
           cliKey: CloudError
           cliM4Path: schemas$$objects['CloudError']
           cliPath: schemas$$objects['CloudError']
         properties:
-          - propertyName: error(cloud_error_body^object)
+          - propertyName: error(CloudErrorBody^object)
             cli:
               cliKey: error
               cliM4Path: schemas$$objects['CloudError']$$properties['error']
               cliPath: schemas$$objects['CloudError']$$properties['error']
-      - schemaName: cloud_error_body
+      - schemaName: CloudErrorBody
         cli:
           cliKey: CloudErrorBody
           cliM4Path: schemas$$objects['CloudErrorBody']
           cliPath: schemas$$objects['CloudErrorBody']
         properties:
-          - propertyName: code(cloud_error_body_code^string)
+          - propertyName: code(CloudErrorBodyCode^string)
             cli:
               cliKey: code
               cliM4Path: schemas$$objects['CloudErrorBody']$$properties['code']
               cliPath: schemas$$objects['CloudErrorBody']$$properties['code']
-          - propertyName: message(cloud_error_body_message^string)
+          - propertyName: message(CloudErrorBodyMessage^string)
             cli:
               cliKey: message
               cliM4Path: schemas$$objects['CloudErrorBody']$$properties['message']
               cliPath: schemas$$objects['CloudErrorBody']$$properties['message']
-      - schemaName: attestation_provider
+      - schemaName: AttestationProvider
         cli:
           cliKey: AttestationProvider
           cliM4Path: schemas$$objects['AttestationProvider']
           cliPath: schemas$$objects['AttestationProvider']
         properties:
-          - propertyName: properties(status_result^object)
+          - propertyName: properties(StatusResult^object)
             cli:
               cliKey: properties
               cliM4Path: schemas$$objects['AttestationProvider']$$properties['properties']
               cliPath: schemas$$objects['AttestationProvider']$$properties['properties']
             x-ms-client-flatten: true
-      - schemaName: status_result
+      - schemaName: StatusResult
         cli:
           cliKey: StatusResult
           cliM4Path: schemas$$objects['StatusResult']
           cliPath: schemas$$objects['StatusResult']
         properties:
-          - propertyName: trust_model(status_result_trust_model^string)
+          - propertyName: trust_model(StatusResultTrustModel^string)
             cli:
               cliKey: trustModel
               cliM4Path: schemas$$objects['StatusResult']$$properties['trustModel']
               cliPath: schemas$$objects['StatusResult']$$properties['trustModel']
-          - propertyName: status(attestation_service_status^choice)
+          - propertyName: status(AttestationServiceStatus^choice)
             cli:
               cliKey: status
               cliM4Path: schemas$$objects['StatusResult']$$properties['status']
               cliPath: schemas$$objects['StatusResult']$$properties['status']
-          - propertyName: attest_uri(status_result_attest_uri^string)
+          - propertyName: attest_uri(StatusResultAttestUri^string)
             cli:
               cliKey: attestUri
               cliM4Path: schemas$$objects['StatusResult']$$properties['attestUri']
               cliPath: schemas$$objects['StatusResult']$$properties['attestUri']
-      - schemaName: tracked_resource
+      - schemaName: TrackedResource
         cli:
           cliKey: TrackedResource
           cliM4Path: schemas$$objects['TrackedResource']
           cliPath: schemas$$objects['TrackedResource']
         properties:
-          - propertyName: tags(tracked_resource_tags^dictionary)
+          - propertyName: tags(TrackedResourceTags^dictionary)
             cli:
               cliKey: tags
               cliM4Path: schemas$$objects['TrackedResource']$$properties['tags']
               cliPath: schemas$$objects['TrackedResource']$$properties['tags']
-          - propertyName: location(tracked_resource_location^string)
+          - propertyName: location(TrackedResourceLocation^string)
             cli:
               cliKey: location
               cliM4Path: schemas$$objects['TrackedResource']$$properties['location']
               cliPath: schemas$$objects['TrackedResource']$$properties['location']
-      - schemaName: resource
+      - schemaName: Resource
         cli:
           cliKey: Resource
           cliM4Path: schemas$$objects['Resource']
           cliPath: schemas$$objects['Resource']
         properties:
-          - propertyName: id(resource_id^string)
+          - propertyName: id(ResourceId^string)
             cli:
               cliKey: id
               cliM4Path: schemas$$objects['Resource']$$properties['id']
               cliPath: schemas$$objects['Resource']$$properties['id']
             readOnly: true
-          - propertyName: name(resource_name^string)
+          - propertyName: name(ResourceName^string)
             cli:
               cliKey: name
               cliM4Path: schemas$$objects['Resource']$$properties['name']
               cliPath: schemas$$objects['Resource']$$properties['name']
             readOnly: true
-          - propertyName: type(resource_type^string)
+          - propertyName: type(ResourceType^string)
             cli:
               cliKey: type
               cliM4Path: schemas$$objects['Resource']$$properties['type']
               cliPath: schemas$$objects['Resource']$$properties['type']
             readOnly: true
-      - schemaName: attestation_service_creation_params
+      - schemaName: AttestationServiceCreationParams
         cli:
           cliKey: AttestationServiceCreationParams
           cliM4Path: schemas$$objects['AttestationServiceCreationParams']
           cliPath: schemas$$objects['AttestationServiceCreationParams']
         properties:
-          - propertyName: location(attestation_service_creation_params_location^string)
+          - propertyName: location(AttestationServiceCreationParamsLocation^string)
             cli:
               cliKey: location
               cliM4Path: schemas$$objects['AttestationServiceCreationParams']$$properties['location']
               cliPath: schemas$$objects['AttestationServiceCreationParams']$$properties['location']
-          - propertyName: tags(attestation_service_creation_params_tags^dictionary)
+          - propertyName: tags(AttestationServiceCreationParamsTags^dictionary)
             cli:
               cliKey: tags
               cliM4Path: schemas$$objects['AttestationServiceCreationParams']$$properties['tags']
               cliPath: schemas$$objects['AttestationServiceCreationParams']$$properties['tags']
-          - propertyName: properties(attestation_service_creation_specific_params^object)
+          - propertyName: properties(AttestationServiceCreationSpecificParams^object)
             cli:
               cliKey: properties
               cliM4Path: schemas$$objects['AttestationServiceCreationParams']$$properties['properties']
               cliPath: schemas$$objects['AttestationServiceCreationParams']$$properties['properties']
-      - schemaName: attestation_service_creation_specific_params
+      - schemaName: AttestationServiceCreationSpecificParams
         cli:
           cliKey: AttestationServiceCreationSpecificParams
           cliM4Path: schemas$$objects['AttestationServiceCreationSpecificParams']
           cliPath: schemas$$objects['AttestationServiceCreationSpecificParams']
         properties:
-          - propertyName: attestation_policy(attestation_service_creation_specific_params_attestation_policy^string)
+          - propertyName: attestation_policy(AttestationServiceCreationSpecificParamsAttestationPolicy^string)
             cli:
               cliKey: attestationPolicy
               cliM4Path: schemas$$objects['AttestationServiceCreationSpecificParams']$$properties['attestationPolicy']
               cliPath: schemas$$objects['AttestationServiceCreationSpecificParams']$$properties['attestationPolicy']
-          - propertyName: policy_signing_certificates(json_web_key_set^object)
+          - propertyName: policy_signing_certificates(JsonWebKeySet^object)
             cli:
               cliKey: policySigningCertificates
               cliM4Path: schemas$$objects['AttestationServiceCreationSpecificParams']$$properties['policySigningCertificates']
               cliPath: schemas$$objects['AttestationServiceCreationSpecificParams']$$properties['policySigningCertificates']
-      - schemaName: json_web_key_set
+      - schemaName: JsonWebKeySet
         cli:
           cliKey: JSONWebKeySet
           cliM4Path: schemas$$objects['JSONWebKeySet']
           cliPath: schemas$$objects['JSONWebKeySet']
         properties:
-          - propertyName: keys(json_web_key_set_keys^array)
+          - propertyName: keys(JsonWebKeySetKeys^array)
             cli:
               cliKey: keys
               cliM4Path: schemas$$objects['JSONWebKeySet']$$properties['keys']
               cliPath: schemas$$objects['JSONWebKeySet']$$properties['keys']
-      - schemaName: json_web_key
+      - schemaName: JsonWebKey
         cli:
           cliKey: JSONWebKey
           cliM4Path: schemas$$objects['JSONWebKey']
           cliPath: schemas$$objects['JSONWebKey']
         properties:
-          - propertyName: alg(json_web_key_alg^string)
+          - propertyName: alg(JsonWebKeyAlg^string)
             cli:
               cliKey: alg
               cliM4Path: schemas$$objects['JSONWebKey']$$properties['alg']
               cliPath: schemas$$objects['JSONWebKey']$$properties['alg']
-          - propertyName: crv(json_web_key_crv^string)
+          - propertyName: crv(JsonWebKeyCrv^string)
             cli:
               cliKey: crv
               cliM4Path: schemas$$objects['JSONWebKey']$$properties['crv']
               cliPath: schemas$$objects['JSONWebKey']$$properties['crv']
-          - propertyName: d(json_web_key_d^string)
+          - propertyName: d(JsonWebKeyD^string)
             cli:
               cliKey: d
               cliM4Path: schemas$$objects['JSONWebKey']$$properties['d']
               cliPath: schemas$$objects['JSONWebKey']$$properties['d']
-          - propertyName: dp(json_web_key_dp^string)
+          - propertyName: dp(JsonWebKeyDp^string)
             cli:
               cliKey: dp
               cliM4Path: schemas$$objects['JSONWebKey']$$properties['dp']
               cliPath: schemas$$objects['JSONWebKey']$$properties['dp']
-          - propertyName: dq(json_web_key_dq^string)
+          - propertyName: dq(JsonWebKeyDq^string)
             cli:
               cliKey: dq
               cliM4Path: schemas$$objects['JSONWebKey']$$properties['dq']
               cliPath: schemas$$objects['JSONWebKey']$$properties['dq']
-          - propertyName: e(json_web_key_e^string)
+          - propertyName: e(JsonWebKeyE^string)
             cli:
               cliKey: e
               cliM4Path: schemas$$objects['JSONWebKey']$$properties['e']
               cliPath: schemas$$objects['JSONWebKey']$$properties['e']
-          - propertyName: k(json_web_key_k^string)
+          - propertyName: k(JsonWebKeyK^string)
             cli:
               cliKey: k
               cliM4Path: schemas$$objects['JSONWebKey']$$properties['k']
               cliPath: schemas$$objects['JSONWebKey']$$properties['k']
-          - propertyName: kid(json_web_key_kid^string)
+          - propertyName: kid(JsonWebKeyKid^string)
             cli:
               cliKey: kid
               cliM4Path: schemas$$objects['JSONWebKey']$$properties['kid']
               cliPath: schemas$$objects['JSONWebKey']$$properties['kid']
-          - propertyName: kty(json_web_key_kty^string)
+          - propertyName: kty(JsonWebKeyKty^string)
             cli:
               cliKey: kty
               cliM4Path: schemas$$objects['JSONWebKey']$$properties['kty']
               cliPath: schemas$$objects['JSONWebKey']$$properties['kty']
-          - propertyName: n(json_web_key_n^string)
+          - propertyName: n(JsonWebKeyN^string)
             cli:
               cliKey: n
               cliM4Path: schemas$$objects['JSONWebKey']$$properties['n']
               cliPath: schemas$$objects['JSONWebKey']$$properties['n']
-          - propertyName: p(json_web_key_p^string)
+          - propertyName: p(JsonWebKeyP^string)
             cli:
               cliKey: p
               cliM4Path: schemas$$objects['JSONWebKey']$$properties['p']
               cliPath: schemas$$objects['JSONWebKey']$$properties['p']
-          - propertyName: q(json_web_key_q^string)
+          - propertyName: q(JsonWebKeyQ^string)
             cli:
               cliKey: q
               cliM4Path: schemas$$objects['JSONWebKey']$$properties['q']
               cliPath: schemas$$objects['JSONWebKey']$$properties['q']
-          - propertyName: qi(json_web_key_qi^string)
+          - propertyName: qi(JsonWebKeyQi^string)
             cli:
               cliKey: qi
               cliM4Path: schemas$$objects['JSONWebKey']$$properties['qi']
               cliPath: schemas$$objects['JSONWebKey']$$properties['qi']
-          - propertyName: use(json_web_key_use^string)
+          - propertyName: use(JsonWebKeyUse^string)
             cli:
               cliKey: use
               cliM4Path: schemas$$objects['JSONWebKey']$$properties['use']
               cliPath: schemas$$objects['JSONWebKey']$$properties['use']
-          - propertyName: x(json_web_key_x^string)
+          - propertyName: x(JsonWebKeyX^string)
             cli:
               cliKey: x
               cliM4Path: schemas$$objects['JSONWebKey']$$properties['x']
               cliPath: schemas$$objects['JSONWebKey']$$properties['x']
-          - propertyName: x5_c(json_web_key_x5_c^array)
+          - propertyName: x5_c(JsonWebKeyX5C^array)
             cli:
               cliKey: x5c
               cliM4Path: schemas$$objects['JSONWebKey']$$properties['x5c']
               cliPath: schemas$$objects['JSONWebKey']$$properties['x5c']
-          - propertyName: y(json_web_key_y^string)
+          - propertyName: y(JsonWebKeyY^string)
             cli:
               cliKey: y
               cliM4Path: schemas$$objects['JSONWebKey']$$properties['y']
               cliPath: schemas$$objects['JSONWebKey']$$properties['y']
-      - schemaName: attestation_service_patch_params
+      - schemaName: AttestationServicePatchParams
         cli:
           cliKey: AttestationServicePatchParams
           cliM4Path: schemas$$objects['AttestationServicePatchParams']
           cliPath: schemas$$objects['AttestationServicePatchParams']
         properties:
-          - propertyName: tags(attestation_service_patch_params_tags^dictionary)
+          - propertyName: tags(AttestationServicePatchParamsTags^dictionary)
             cli:
               cliKey: tags
               cliM4Path: schemas$$objects['AttestationServicePatchParams']$$properties['tags']
               cliPath: schemas$$objects['AttestationServicePatchParams']$$properties['tags']
-      - schemaName: attestation_provider_list_result
+      - schemaName: AttestationProviderListResult
         cli:
           cliKey: AttestationProviderListResult
           cliM4Path: schemas$$objects['AttestationProviderListResult']
           cliPath: schemas$$objects['AttestationProviderListResult']
         properties:
-          - propertyName: value(attestation_provider_list_result_value^array)
+          - propertyName: value(AttestationProviderListResultValue^array)
             cli:
               cliKey: value
               cliM4Path: schemas$$objects['AttestationProviderListResult']$$properties['value']
               cliPath: schemas$$objects['AttestationProviderListResult']$$properties['value']
   choices:
     all:
-      - choiceName: attestation_service_status
+      - choiceName: AttestationServiceStatus
         cli:
           cliKey: AttestationServiceStatus
           cliM4Path: schemas$$choices['AttestationServiceStatus']
           cliPath: schemas$$choices['AttestationServiceStatus']
         choiceValues:
-          - choiceValue: ready
+          - choiceValue: READY
             cli:
               cliKey: Ready
               cliM4Path: schemas$$choices['AttestationServiceStatus']$$choices['Ready]'
               cliPath: schemas$$choices['AttestationServiceStatus']$$choices['Ready]'
-          - choiceValue: not_ready
+          - choiceValue: NOT_READY
             cli:
               cliKey: NotReady
               cliM4Path: schemas$$choices['AttestationServiceStatus']$$choices['NotReady]'
               cliPath: schemas$$choices['AttestationServiceStatus']$$choices['NotReady]'
-          - choiceValue: error
+          - choiceValue: ERROR
             cli:
               cliKey: Error
               cliM4Path: schemas$$choices['AttestationServiceStatus']$$choices['Error]'

@@ -59,7 +59,7 @@ schemas:
       precision: 32
       language:
         default:
-          name: integer
+          name: Integer
           description: Available memory (MB) on the integration runtime node.
       protocol: {}
     - &ref_265
@@ -67,7 +67,7 @@ schemas:
       precision: 32
       language:
         default:
-          name: integer
+          name: Integer
           description: CPU percentage on the integration runtime node.
       protocol: {}
     - &ref_231
@@ -75,7 +75,7 @@ schemas:
       precision: 32
       language:
         default:
-          name: integer
+          name: Integer
           description: Maximum concurrent jobs on the integration runtime node.
       protocol: {}
     - &ref_266
@@ -83,7 +83,7 @@ schemas:
       precision: 32
       language:
         default:
-          name: integer
+          name: Integer
           description: The number of jobs currently running on the integration runtime node.
       protocol: {}
     - &ref_232
@@ -91,7 +91,7 @@ schemas:
       precision: 32
       language:
         default:
-          name: integer
+          name: Integer
           description: The maximum concurrent jobs in this integration runtime.
       protocol: {}
     - &ref_267
@@ -99,7 +99,7 @@ schemas:
       precision: 32
       language:
         default:
-          name: number
+          name: Number
           description: Sent bytes on the integration runtime node.
       protocol: {}
     - &ref_268
@@ -107,7 +107,7 @@ schemas:
       precision: 32
       language:
         default:
-          name: number
+          name: Number
           description: Received bytes on the integration runtime node.
       protocol: {}
     - &ref_124
@@ -115,7 +115,7 @@ schemas:
       precision: 32
       language:
         default:
-          name: integer
+          name: Integer
           description: The interval.
       protocol: {}
     - &ref_129
@@ -123,7 +123,7 @@ schemas:
       precision: 32
       language:
         default:
-          name: array_itemschema
+          name: ArrayItemschema
           description: ''
       protocol: {}
     - &ref_133
@@ -131,7 +131,7 @@ schemas:
       precision: 32
       language:
         default:
-          name: integer
+          name: Integer
           description: The occurrence.
       protocol: {}
     - &ref_135
@@ -139,7 +139,7 @@ schemas:
       precision: 32
       language:
         default:
-          name: integer
+          name: Integer
           description: The max number of parallel files to handle when it is triggered.
       protocol: {}
     - &ref_153
@@ -147,7 +147,7 @@ schemas:
       precision: 32
       language:
         default:
-          name: integer
+          name: Integer
           description: The interval of the time windows. The minimum interval allowed is 15 Minutes.
       protocol: {}
     - &ref_156
@@ -157,7 +157,7 @@ schemas:
       precision: 32
       language:
         default:
-          name: integer
+          name: Integer
           description: The max number of parallel time windows (ready for execution) for which a new run is triggered.
       protocol: {}
     - &ref_157
@@ -167,7 +167,7 @@ schemas:
       precision: 32
       language:
         default:
-          name: integer
+          name: Integer
           description: Interval between retries in seconds. Default is 30.
       protocol: {}
     - &ref_172
@@ -177,7 +177,7 @@ schemas:
       precision: 32
       language:
         default:
-          name: integer
+          name: Integer
           description: The max number of parallel time windows (ready for execution) for which a rerun is triggered.
       protocol: {}
     - &ref_65
@@ -186,7 +186,7 @@ schemas:
       precision: 32
       language:
         default:
-          name: integer
+          name: Integer
           description: The required number of nodes for managed integration runtime.
       protocol: {}
     - &ref_66
@@ -195,7 +195,7 @@ schemas:
       precision: 32
       language:
         default:
-          name: integer
+          name: Integer
           description: Maximum parallel executions count per node for managed integration runtime.
       protocol: {}
     - &ref_69
@@ -203,7 +203,7 @@ schemas:
       precision: 32
       language:
         default:
-          name: integer
+          name: Integer
           description: 'Core count of the cluster which will execute data flow job. Supported values are: 8, 16, 32, 48, 80, 144 and 272.'
       protocol: {}
     - &ref_70
@@ -212,7 +212,7 @@ schemas:
       precision: 32
       language:
         default:
-          name: integer
+          name: Integer
           description: Time to live (in minutes) setting of the cluster which will execute data flow job.
       protocol: {}
     - &ref_348
@@ -220,7 +220,7 @@ schemas:
       precision: 64
       language:
         default:
-          name: integer
+          name: Integer
           description: Metadata id.
       protocol: {}
     - &ref_312
@@ -228,7 +228,7 @@ schemas:
       precision: 64
       language:
         default:
-          name: integer
+          name: Integer
           description: Folder id which contains project.
       protocol: {}
     - &ref_313
@@ -236,7 +236,7 @@ schemas:
       precision: 64
       language:
         default:
-          name: integer
+          name: Integer
           description: Project version.
       protocol: {}
     - &ref_314
@@ -244,7 +244,7 @@ schemas:
       precision: 64
       language:
         default:
-          name: integer
+          name: Integer
           description: Environment reference id.
       protocol: {}
     - &ref_318
@@ -252,7 +252,7 @@ schemas:
       precision: 64
       language:
         default:
-          name: integer
+          name: Integer
           description: Parameter id.
       protocol: {}
     - &ref_330
@@ -260,7 +260,7 @@ schemas:
       precision: 64
       language:
         default:
-          name: integer
+          name: Integer
           description: Folder id which contains package.
       protocol: {}
     - &ref_331
@@ -268,7 +268,7 @@ schemas:
       precision: 64
       language:
         default:
-          name: integer
+          name: Integer
           description: Project version which contains package.
       protocol: {}
     - &ref_332
@@ -276,7 +276,7 @@ schemas:
       precision: 64
       language:
         default:
-          name: integer
+          name: Integer
           description: Project id which contains package.
       protocol: {}
     - &ref_334
@@ -284,7 +284,7 @@ schemas:
       precision: 64
       language:
         default:
-          name: integer
+          name: Integer
           description: Folder id which contains environment.
       protocol: {}
     - &ref_335
@@ -292,7 +292,7 @@ schemas:
       precision: 64
       language:
         default:
-          name: integer
+          name: Integer
           description: Variable id.
       protocol: {}
   strings:
@@ -300,7 +300,7 @@ schemas:
       type: string
       language:
         default:
-          name: string
+          name: String
           description: simple string
       protocol: {}
     - &ref_1
@@ -309,7 +309,7 @@ schemas:
         - version: '2018-06-01'
       language:
         default:
-          name: string
+          name: String
           description: ''
       protocol: {}
     - &ref_15
@@ -318,7 +318,7 @@ schemas:
         - version: '2018-06-01'
       language:
         default:
-          name: factory_properties_provisioning_state
+          name: FactoryPropertiesProvisioningState
           description: 'Factory provisioning state, example Succeeded.'
       protocol: {}
     - &ref_17
@@ -327,7 +327,7 @@ schemas:
         - version: '2018-06-01'
       language:
         default:
-          name: factory_properties_version
+          name: FactoryPropertiesVersion
           description: Version of the factory.
       protocol: {}
     - &ref_24
@@ -336,7 +336,7 @@ schemas:
         - version: '2018-06-01'
       language:
         default:
-          name: factory_repo_configuration_type
+          name: FactoryRepoConfigurationType
           description: Type of repo configuration.
       protocol: {}
     - &ref_26
@@ -345,7 +345,7 @@ schemas:
         - version: '2018-06-01'
       language:
         default:
-          name: factory_repo_configuration_account_name
+          name: FactoryRepoConfigurationAccountName
           description: Account name.
       protocol: {}
     - &ref_27
@@ -354,7 +354,7 @@ schemas:
         - version: '2018-06-01'
       language:
         default:
-          name: factory_repo_configuration_repository_name
+          name: FactoryRepoConfigurationRepositoryName
           description: Repository name.
       protocol: {}
     - &ref_28
@@ -363,7 +363,7 @@ schemas:
         - version: '2018-06-01'
       language:
         default:
-          name: factory_repo_configuration_collaboration_branch
+          name: FactoryRepoConfigurationCollaborationBranch
           description: Collaboration branch.
       protocol: {}
     - &ref_29
@@ -372,7 +372,7 @@ schemas:
         - version: '2018-06-01'
       language:
         default:
-          name: factory_repo_configuration_root_folder
+          name: FactoryRepoConfigurationRootFolder
           description: Root folder.
       protocol: {}
     - &ref_30
@@ -381,7 +381,7 @@ schemas:
         - version: '2018-06-01'
       language:
         default:
-          name: factory_repo_configuration_last_commit_id
+          name: FactoryRepoConfigurationLastCommitId
           description: Last commit id.
       protocol: {}
     - &ref_31
@@ -390,7 +390,7 @@ schemas:
         - version: '2018-06-01'
       language:
         default:
-          name: fake_factory_identity_name
+          name: FakeFactoryIdentityName
           description: ..
       protocol: {}
     - &ref_32
@@ -399,7 +399,7 @@ schemas:
         - version: '2018-06-01'
       language:
         default:
-          name: fake_factory_identity_zones_inside_item
+          name: FakeFactoryIdentityZonesInsideItem
           description: ''
       protocol: {}
     - &ref_33
@@ -408,7 +408,7 @@ schemas:
         - version: '2018-06-01'
       language:
         default:
-          name: zone_item
+          name: ZoneItem
           description: ''
       protocol: {}
     - &ref_4
@@ -417,7 +417,7 @@ schemas:
         - version: '2018-06-01'
       language:
         default:
-          name: resource_id
+          name: ResourceId
           description: The resource identifier.
       protocol: {}
     - &ref_5
@@ -426,7 +426,7 @@ schemas:
         - version: '2018-06-01'
       language:
         default:
-          name: resource_name
+          name: ResourceName
           description: The resource name.
       protocol: {}
     - &ref_6
@@ -435,7 +435,7 @@ schemas:
         - version: '2018-06-01'
       language:
         default:
-          name: resource_type
+          name: ResourceType
           description: The resource type.
       protocol: {}
     - &ref_7
@@ -448,7 +448,7 @@ schemas:
           - read
       language:
         default:
-          name: resource_location
+          name: ResourceLocation
           description: The resource location.
       protocol: {}
     - &ref_9
@@ -457,7 +457,7 @@ schemas:
         - version: '2018-06-01'
       language:
         default:
-          name: resource_e_tag
+          name: ResourceETag
           description: Etag identifies change in the resource.
       protocol: {}
     - &ref_34
@@ -466,7 +466,7 @@ schemas:
         - version: '2018-06-01'
       language:
         default:
-          name: factory_list_response_next_link
+          name: FactoryListResponseNextLink
           description: 'The link to the next page of results, if any remaining results exist.'
       protocol: {}
     - &ref_38
@@ -475,7 +475,7 @@ schemas:
         - version: '2018-06-01'
       language:
         default:
-          name: cloud_error_body_code
+          name: CloudErrorBodyCode
           description: Error code.
       protocol: {}
     - &ref_39
@@ -484,7 +484,7 @@ schemas:
         - version: '2018-06-01'
       language:
         default:
-          name: cloud_error_body_message
+          name: CloudErrorBodyMessage
           description: Error message.
       protocol: {}
     - &ref_40
@@ -493,7 +493,7 @@ schemas:
         - version: '2018-06-01'
       language:
         default:
-          name: cloud_error_body_target
+          name: CloudErrorBodyTarget
           description: Property name/path in request associated with error.
       protocol: {}
     - &ref_43
@@ -502,7 +502,7 @@ schemas:
         - version: '2018-06-01'
       language:
         default:
-          name: factory_repo_update_factory_resource_id
+          name: FactoryRepoUpdateFactoryResourceId
           description: The factory resource id.
       protocol: {}
     - &ref_396
@@ -514,7 +514,7 @@ schemas:
       pattern: '^[-\w\._\(\)]+$'
       language:
         default:
-          name: string
+          name: String
           description: ''
       protocol: {}
     - &ref_398
@@ -526,7 +526,7 @@ schemas:
       pattern: '^[A-Za-z0-9]+(?:-[A-Za-z0-9]+)*$'
       language:
         default:
-          name: string
+          name: String
           description: ''
       protocol: {}
     - &ref_45
@@ -535,7 +535,7 @@ schemas:
         - version: '2018-06-01'
       language:
         default:
-          name: git_hub_access_token_request_git_hub_access_code
+          name: GitHubAccessTokenRequestGitHubAccessCode
           description: GitHub access code.
       protocol: {}
     - &ref_46
@@ -544,7 +544,7 @@ schemas:
         - version: '2018-06-01'
       language:
         default:
-          name: git_hub_access_token_request_git_hub_client_id
+          name: GitHubAccessTokenRequestGitHubClientId
           description: GitHub application client ID.
       protocol: {}
     - &ref_47
@@ -553,7 +553,7 @@ schemas:
         - version: '2018-06-01'
       language:
         default:
-          name: git_hub_access_token_request_git_hub_access_token_base_url
+          name: GitHubAccessTokenRequestGitHubAccessTokenBaseUrl
           description: GitHub access token base URL.
       protocol: {}
     - &ref_48
@@ -562,7 +562,7 @@ schemas:
         - version: '2018-06-01'
       language:
         default:
-          name: git_hub_access_token_response_git_hub_access_token
+          name: GitHubAccessTokenResponseGitHubAccessToken
           description: GitHub access token.
       protocol: {}
     - &ref_49
@@ -571,7 +571,7 @@ schemas:
         - version: '2018-06-01'
       language:
         default:
-          name: user_access_policy_permissions
+          name: UserAccessPolicyPermissions
           description: The string with permissions for Data Plane access. Currently only 'r' is supported which grants read only access.
       protocol: {}
     - &ref_50
@@ -580,7 +580,7 @@ schemas:
         - version: '2018-06-01'
       language:
         default:
-          name: user_access_policy_access_resource_path
+          name: UserAccessPolicyAccessResourcePath
           description: The resource path to get access relative to factory. Currently only empty string is supported which corresponds to the factory resource.
       protocol: {}
     - &ref_51
@@ -589,7 +589,7 @@ schemas:
         - version: '2018-06-01'
       language:
         default:
-          name: user_access_policy_profile_name
+          name: UserAccessPolicyProfileName
           description: The name of the profile. Currently only the default is supported. The default value is DefaultProfile.
       protocol: {}
     - &ref_52
@@ -598,7 +598,7 @@ schemas:
         - version: '2018-06-01'
       language:
         default:
-          name: user_access_policy_start_time
+          name: UserAccessPolicyStartTime
           description: Start time for the token. If not specified the current time will be used.
       protocol: {}
     - &ref_53
@@ -607,7 +607,7 @@ schemas:
         - version: '2018-06-01'
       language:
         default:
-          name: user_access_policy_expire_time
+          name: UserAccessPolicyExpireTime
           description: Expiration time for the token. Maximum duration for the token is eight hours and by default the token will expire in eight hours.
       protocol: {}
     - &ref_55
@@ -616,7 +616,7 @@ schemas:
         - version: '2018-06-01'
       language:
         default:
-          name: access_policy_response_access_token
+          name: AccessPolicyResponseAccessToken
           description: Data Plane read only access token.
       protocol: {}
     - &ref_56
@@ -625,7 +625,7 @@ schemas:
         - version: '2018-06-01'
       language:
         default:
-          name: access_policy_response_data_plane_url
+          name: AccessPolicyResponseDataPlaneUrl
           description: Data Plane service base URL.
       protocol: {}
     - &ref_147
@@ -634,7 +634,7 @@ schemas:
         - version: '2018-06-01'
       language:
         default:
-          name: trigger_type
+          name: TriggerType
           description: Trigger type.
       protocol: {}
     - &ref_179
@@ -643,7 +643,7 @@ schemas:
         - version: '2018-06-01'
       language:
         default:
-          name: trigger_description
+          name: TriggerDescription
           description: Trigger description.
       protocol: {}
     - &ref_115
@@ -652,7 +652,7 @@ schemas:
         - version: '2018-06-01'
       language:
         default:
-          name: sub_resource_id
+          name: SubResourceId
           description: The resource identifier.
       protocol: {}
     - &ref_116
@@ -661,7 +661,7 @@ schemas:
         - version: '2018-06-01'
       language:
         default:
-          name: sub_resource_name
+          name: SubResourceName
           description: The resource name.
       protocol: {}
     - &ref_117
@@ -670,7 +670,7 @@ schemas:
         - version: '2018-06-01'
       language:
         default:
-          name: sub_resource_type
+          name: SubResourceType
           description: The resource type.
       protocol: {}
     - &ref_118
@@ -679,7 +679,7 @@ schemas:
         - version: '2018-06-01'
       language:
         default:
-          name: sub_resource_etag
+          name: SubResourceEtag
           description: Etag identifies change in the resource.
       protocol: {}
     - &ref_181
@@ -688,7 +688,7 @@ schemas:
         - version: '2018-06-01'
       language:
         default:
-          name: trigger_list_response_next_link
+          name: TriggerListResponseNextLink
           description: 'The link to the next page of results, if any remaining results exist.'
       protocol: {}
     - &ref_182
@@ -697,7 +697,7 @@ schemas:
         - version: '2018-06-01'
       language:
         default:
-          name: trigger_filter_parameters_continuation_token
+          name: TriggerFilterParametersContinuationToken
           description: The continuation token for getting the next page of results. Null for first page.
       protocol: {}
     - &ref_183
@@ -706,7 +706,7 @@ schemas:
         - version: '2018-06-01'
       language:
         default:
-          name: trigger_filter_parameters_parent_trigger_name
+          name: TriggerFilterParametersParentTriggerName
           description: The name of the parent TumblingWindowTrigger to get the child rerun triggers
       protocol: {}
     - &ref_184
@@ -715,7 +715,7 @@ schemas:
         - version: '2018-06-01'
       language:
         default:
-          name: trigger_query_response_continuation_token
+          name: TriggerQueryResponseContinuationToken
           description: 'The continuation token for getting the next page of results, if any remaining results exist, null otherwise.'
       protocol: {}
     - &ref_429
@@ -727,7 +727,7 @@ schemas:
       pattern: '^[A-Za-z0-9_][^<>*#.%&:\\+?/]*$'
       language:
         default:
-          name: string
+          name: String
           description: ''
       protocol: {}
     - &ref_185
@@ -736,7 +736,7 @@ schemas:
         - version: '2018-06-01'
       language:
         default:
-          name: trigger_subscription_operation_status_trigger_name
+          name: TriggerSubscriptionOperationStatusTriggerName
           description: Trigger name.
       protocol: {}
     - &ref_113
@@ -745,7 +745,7 @@ schemas:
         - version: '2018-06-01'
       language:
         default:
-          name: integration_runtime_description
+          name: IntegrationRuntimeDescription
           description: Integration runtime description.
       protocol: {}
     - &ref_187
@@ -754,7 +754,7 @@ schemas:
         - version: '2018-06-01'
       language:
         default:
-          name: integration_runtime_list_response_next_link
+          name: IntegrationRuntimeListResponseNextLink
           description: 'The link to the next page of results, if any remaining results exist.'
       protocol: {}
     - &ref_189
@@ -763,7 +763,7 @@ schemas:
         - version: '2018-06-01'
       language:
         default:
-          name: update_integration_runtime_request_update_delay_offset
+          name: UpdateIntegrationRuntimeRequestUpdateDelayOffset
           description: 'The time offset (in hours) in the day, e.g., PT03H is 3 hours. The integration runtime auto update will happen on that time.'
       protocol: {}
     - &ref_190
@@ -772,7 +772,7 @@ schemas:
         - version: '2018-06-01'
       language:
         default:
-          name: integration_runtime_status_response_name
+          name: IntegrationRuntimeStatusResponseName
           description: The integration runtime name.
       protocol: {}
     - &ref_250
@@ -781,7 +781,7 @@ schemas:
         - version: '2018-06-01'
       language:
         default:
-          name: integration_runtime_status_data_factory_name
+          name: IntegrationRuntimeStatusDataFactoryName
           description: The data factory name which the integration runtime belong to.
       protocol: {}
     - &ref_252
@@ -790,7 +790,7 @@ schemas:
         - version: '2018-06-01'
       language:
         default:
-          name: integration_runtime_connection_info_service_token
+          name: IntegrationRuntimeConnectionInfoServiceToken
           description: The token generated in service. Callers use this token to authenticate to integration runtime.
       protocol: {}
     - &ref_253
@@ -799,7 +799,7 @@ schemas:
         - version: '2018-06-01'
       language:
         default:
-          name: integration_runtime_connection_info_identity_cert_thumbprint
+          name: IntegrationRuntimeConnectionInfoIdentityCertThumbprint
           description: The integration runtime SSL certificate thumbprint. Click-Once application uses it to do server validation.
       protocol: {}
     - &ref_254
@@ -808,7 +808,7 @@ schemas:
         - version: '2018-06-01'
       language:
         default:
-          name: integration_runtime_connection_info_host_service_uri
+          name: IntegrationRuntimeConnectionInfoHostServiceUri
           description: The on-premises integration runtime host URL.
       protocol: {}
     - &ref_255
@@ -817,7 +817,7 @@ schemas:
         - version: '2018-06-01'
       language:
         default:
-          name: integration_runtime_connection_info_version
+          name: IntegrationRuntimeConnectionInfoVersion
           description: The integration runtime version.
       protocol: {}
     - &ref_256
@@ -826,7 +826,7 @@ schemas:
         - version: '2018-06-01'
       language:
         default:
-          name: integration_runtime_connection_info_public_key
+          name: IntegrationRuntimeConnectionInfoPublicKey
           description: The public key for encrypting a credential when transferring the credential to the integration runtime.
       protocol: {}
     - &ref_259
@@ -835,7 +835,7 @@ schemas:
         - version: '2018-06-01'
       language:
         default:
-          name: integration_runtime_auth_keys_auth_key1
+          name: IntegrationRuntimeAuthKeysAuthKey1
           description: The primary integration runtime authentication key.
       protocol: {}
     - &ref_260
@@ -844,7 +844,7 @@ schemas:
         - version: '2018-06-01'
       language:
         default:
-          name: integration_runtime_auth_keys_auth_key2
+          name: IntegrationRuntimeAuthKeysAuthKey2
           description: The secondary integration runtime authentication key.
       protocol: {}
     - &ref_261
@@ -853,7 +853,7 @@ schemas:
         - version: '2018-06-01'
       language:
         default:
-          name: integration_runtime_monitoring_data_name
+          name: IntegrationRuntimeMonitoringDataName
           description: Integration runtime name.
       protocol: {}
     - &ref_263
@@ -862,7 +862,7 @@ schemas:
         - version: '2018-06-01'
       language:
         default:
-          name: integration_runtime_node_monitoring_data_node_name
+          name: IntegrationRuntimeNodeMonitoringDataNodeName
           description: Name of the integration runtime node.
       protocol: {}
     - &ref_270
@@ -871,7 +871,7 @@ schemas:
         - version: '2018-06-01'
       language:
         default:
-          name: linked_factory_name
+          name: LinkedFactoryName
           description: The data factory name for linked integration runtime.
       protocol: {}
     - &ref_271
@@ -880,7 +880,7 @@ schemas:
         - version: '2018-06-01'
       language:
         default:
-          name: create_linked_integration_runtime_request_name
+          name: CreateLinkedIntegrationRuntimeRequestName
           description: The name of the linked integration runtime.
       protocol: {}
     - &ref_272
@@ -889,7 +889,7 @@ schemas:
         - version: '2018-06-01'
       language:
         default:
-          name: create_linked_integration_runtime_request_subscription_id
+          name: CreateLinkedIntegrationRuntimeRequestSubscriptionId
           description: The ID of the subscription that the linked integration runtime belongs to.
       protocol: {}
     - &ref_273
@@ -898,7 +898,7 @@ schemas:
         - version: '2018-06-01'
       language:
         default:
-          name: create_linked_integration_runtime_request_data_factory_name
+          name: CreateLinkedIntegrationRuntimeRequestDataFactoryName
           description: The name of the data factory that the linked integration runtime belongs to.
       protocol: {}
     - &ref_274
@@ -907,7 +907,7 @@ schemas:
         - version: '2018-06-01'
       language:
         default:
-          name: create_linked_integration_runtime_request_data_factory_location
+          name: CreateLinkedIntegrationRuntimeRequestDataFactoryLocation
           description: The location of the data factory that the linked integration runtime belongs to.
       protocol: {}
     - &ref_19
@@ -916,7 +916,7 @@ schemas:
         - version: '2018-06-01'
       language:
         default:
-          name: factory_vsts_configuration_project_name
+          name: FactoryVstsConfigurationProjectName
           description: VSTS project name.
       protocol: {}
     - &ref_20
@@ -925,7 +925,7 @@ schemas:
         - version: '2018-06-01'
       language:
         default:
-          name: factory_vsts_configuration_tenant_id
+          name: FactoryVstsConfigurationTenantId
           description: VSTS tenant id.
       protocol: {}
     - &ref_21
@@ -934,7 +934,7 @@ schemas:
         - version: '2018-06-01'
       language:
         default:
-          name: factory_git_hub_configuration_host_name
+          name: FactoryGitHubConfigurationHostName
           description: 'GitHub Enterprise host name. For example: https://github.mydomain.com'
       protocol: {}
     - &ref_149
@@ -943,7 +943,7 @@ schemas:
         - version: '2018-06-01'
       language:
         default:
-          name: pipeline_reference_name
+          name: PipelineReferenceName
           description: Reference pipeline name.
       protocol: {}
     - &ref_150
@@ -952,7 +952,7 @@ schemas:
         - version: '2018-06-01'
       language:
         default:
-          name: pipeline_reference_name
+          name: PipelineReferenceName
           description: Reference name.
       protocol: {}
     - &ref_127
@@ -961,7 +961,7 @@ schemas:
         - version: '2018-06-01'
       language:
         default:
-          name: schedule_trigger_recurrence_time_zone
+          name: ScheduleTriggerRecurrenceTimeZone
           description: The time zone.
       protocol: {}
     - &ref_134
@@ -970,7 +970,7 @@ schemas:
         - version: '2018-06-01'
       language:
         default:
-          name: blob_trigger_type_properties_folder_path
+          name: BlobTriggerTypePropertiesFolderPath
           description: The path of the container/folder that will trigger the pipeline.
       protocol: {}
     - &ref_137
@@ -979,7 +979,7 @@ schemas:
         - version: '2018-06-01'
       language:
         default:
-          name: linked_service_reference_name
+          name: LinkedServiceReferenceName
           description: Reference LinkedService name.
       protocol: {}
     - &ref_139
@@ -988,7 +988,7 @@ schemas:
         - version: '2018-06-01'
       language:
         default:
-          name: blob_events_trigger_type_properties_blob_path_begins_with
+          name: BlobEventsTriggerTypePropertiesBlobPathBeginsWith
           description: >-
             The blob path must begin with the pattern provided for trigger to fire. For example, '/records/blobs/december/' will only fire the trigger for blobs in the december folder under the records container. At least one of these must
             be provided: blobPathBeginsWith, blobPathEndsWith.
@@ -999,7 +999,7 @@ schemas:
         - version: '2018-06-01'
       language:
         default:
-          name: blob_events_trigger_type_properties_blob_path_ends_with
+          name: BlobEventsTriggerTypePropertiesBlobPathEndsWith
           description: >-
             The blob path must end with the pattern provided for trigger to fire. For example, 'december/boxes.csv' will only fire the trigger for blobs named boxes in a december folder. At least one of these must be provided:
             blobPathBeginsWith, blobPathEndsWith.
@@ -1010,7 +1010,7 @@ schemas:
         - version: '2018-06-01'
       language:
         default:
-          name: blob_events_trigger_type_properties_scope
+          name: BlobEventsTriggerTypePropertiesScope
           description: The ARM resource ID of the Storage Account.
       protocol: {}
     - &ref_163
@@ -1019,7 +1019,7 @@ schemas:
         - version: '2018-06-01'
       language:
         default:
-          name: dependency_reference_type
+          name: DependencyReferenceType
           description: The type of dependency reference.
       protocol: {}
     - &ref_165
@@ -1028,7 +1028,7 @@ schemas:
         - version: '2018-06-01'
       language:
         default:
-          name: trigger_reference_name
+          name: TriggerReferenceName
           description: Reference trigger name.
       protocol: {}
     - &ref_160
@@ -1040,7 +1040,7 @@ schemas:
       pattern: '-?((\d+)\.)?(\d\d):(60|([0-5][0-9])):(60|([0-5][0-9]))'
       language:
         default:
-          name: tumbling_window_trigger_dependency_reference_offset
+          name: TumblingWindowTriggerDependencyReferenceOffset
           description: Timespan applied to the start time of a tumbling window when evaluating dependency.
       protocol: {}
     - &ref_161
@@ -1052,7 +1052,7 @@ schemas:
       pattern: '((\d+)\.)?(\d\d):(60|([0-5][0-9])):(60|([0-5][0-9]))'
       language:
         default:
-          name: tumbling_window_trigger_dependency_reference_size
+          name: TumblingWindowTriggerDependencyReferenceSize
           description: The size of the window when evaluating the dependency. If undefined the frequency of the tumbling window will be used.
       protocol: {}
     - &ref_166
@@ -1064,7 +1064,7 @@ schemas:
       pattern: '-((\d+)\.)?(\d\d):(60|([0-5][0-9])):(60|([0-5][0-9]))'
       language:
         default:
-          name: self_dependency_tumbling_window_trigger_reference_offset
+          name: SelfDependencyTumblingWindowTriggerReferenceOffset
           description: Timespan applied to the start time of a tumbling window when evaluating dependency.
       protocol: {}
     - &ref_167
@@ -1076,7 +1076,7 @@ schemas:
       pattern: '((\d+)\.)?(\d\d):(60|([0-5][0-9])):(60|([0-5][0-9]))'
       language:
         default:
-          name: self_dependency_tumbling_window_trigger_reference_size
+          name: SelfDependencyTumblingWindowTriggerReferenceSize
           description: The size of the window when evaluating the dependency. If undefined the frequency of the tumbling window will be used.
       protocol: {}
     - &ref_174
@@ -1085,7 +1085,7 @@ schemas:
         - version: '2018-06-01'
       language:
         default:
-          name: chaining_trigger_type_properties_run_dimension
+          name: ChainingTriggerTypePropertiesRunDimension
           description: Run Dimension property that needs to be emitted by upstream pipelines.
       protocol: {}
     - &ref_288
@@ -1094,7 +1094,7 @@ schemas:
         - version: '2018-06-01'
       language:
         default:
-          name: integration_runtime_reference_name
+          name: IntegrationRuntimeReferenceName
           description: Reference integration runtime name.
       protocol: {}
     - &ref_290
@@ -1103,7 +1103,7 @@ schemas:
         - version: '2018-06-01'
       language:
         default:
-          name: integration_runtime_status_list_response_next_link
+          name: IntegrationRuntimeStatusListResponseNextLink
           description: 'The link to the next page of results, if any remaining results exist.'
       protocol: {}
     - &ref_63
@@ -1112,7 +1112,7 @@ schemas:
         - version: '2018-06-01'
       language:
         default:
-          name: integration_runtime_compute_properties_location
+          name: IntegrationRuntimeComputePropertiesLocation
           description: 'The location for managed integration runtime. The supported regions could be found on https://docs.microsoft.com/en-us/azure/data-factory/data-factory-data-movement-activities'
       protocol: {}
     - &ref_64
@@ -1121,7 +1121,7 @@ schemas:
         - version: '2018-06-01'
       language:
         default:
-          name: integration_runtime_compute_properties_node_size
+          name: IntegrationRuntimeComputePropertiesNodeSize
           description: The node size requirement to managed integration runtime.
       protocol: {}
     - &ref_72
@@ -1130,7 +1130,7 @@ schemas:
         - version: '2018-06-01'
       language:
         default:
-          name: integration_runtime_v_net_properties_v_net_id
+          name: IntegrationRuntimeVNetPropertiesVNetId
           description: The ID of the VNet that this integration runtime will join.
       protocol: {}
     - &ref_73
@@ -1139,7 +1139,7 @@ schemas:
         - version: '2018-06-01'
       language:
         default:
-          name: integration_runtime_v_net_properties_subnet
+          name: IntegrationRuntimeVNetPropertiesSubnet
           description: The name of the subnet this integration runtime will join.
       protocol: {}
     - &ref_74
@@ -1148,7 +1148,7 @@ schemas:
         - version: '2018-06-01'
       language:
         default:
-          name: integration_runtime_v_net_properties_public_IPs_item
+          name: IntegrationRuntimeVNetPropertiesPublicIpsItem
           description: The ID of the public IP address.
       protocol: {}
     - &ref_77
@@ -1157,7 +1157,7 @@ schemas:
         - version: '2018-06-01'
       language:
         default:
-          name: integration_runtime_ssis_catalog_info_catalog_server_endpoint
+          name: IntegrationRuntimeSsisCatalogInfoCatalogServerEndpoint
           description: The catalog database server URL.
       protocol: {}
     - &ref_78
@@ -1168,7 +1168,7 @@ schemas:
       minLength: 1
       language:
         default:
-          name: integration_runtime_ssis_catalog_info_catalog_admin_user_name
+          name: IntegrationRuntimeSsisCatalogInfoCatalogAdminUserName
           description: The administrator user name of catalog database.
       protocol: {}
     - &ref_83
@@ -1177,7 +1177,7 @@ schemas:
         - version: '2018-06-01'
       language:
         default:
-          name: secure_string_value
+          name: SecureStringValue
           description: Value of secure string.
       protocol: {}
     - &ref_80
@@ -1186,7 +1186,7 @@ schemas:
         - version: '2018-06-01'
       language:
         default:
-          name: secret_base_type
+          name: SecretBaseType
           description: Type of the secret.
       protocol: {}
     - &ref_86
@@ -1195,7 +1195,7 @@ schemas:
         - version: '2018-06-01'
       language:
         default:
-          name: integration_runtime_custom_setup_script_properties_blob_container_uri
+          name: IntegrationRuntimeCustomSetupScriptPropertiesBlobContainerUri
           description: The URI of the Azure blob container that contains the custom setup script.
       protocol: {}
     - &ref_88
@@ -1204,7 +1204,7 @@ schemas:
         - version: '2018-06-01'
       language:
         default:
-          name: entity_reference_name
+          name: EntityReferenceName
           description: The name of this referenced entity.
       protocol: {}
     - &ref_90
@@ -1213,7 +1213,7 @@ schemas:
         - version: '2018-06-01'
       language:
         default:
-          name: integration_runtime_data_proxy_properties_path
+          name: IntegrationRuntimeDataProxyPropertiesPath
           description: The path to contain the staged data in the Blob storage.
       protocol: {}
     - &ref_99
@@ -1222,7 +1222,7 @@ schemas:
         - version: '2018-06-01'
       language:
         default:
-          name: custom_setup_base_type
+          name: CustomSetupBaseType
           description: The type of custom setup.
       protocol: {}
     - &ref_101
@@ -1231,7 +1231,7 @@ schemas:
         - version: '2018-06-01'
       language:
         default:
-          name: package_store_name
+          name: PackageStoreName
           description: The name of the package store
       protocol: {}
     - &ref_93
@@ -1240,7 +1240,7 @@ schemas:
         - version: '2018-06-01'
       language:
         default:
-          name: environment_variable_setup_type_properties_variable_name
+          name: EnvironmentVariableSetupTypePropertiesVariableName
           description: The name of the environment variable.
       protocol: {}
     - &ref_94
@@ -1249,7 +1249,7 @@ schemas:
         - version: '2018-06-01'
       language:
         default:
-          name: environment_variable_setup_type_properties_variable_value
+          name: EnvironmentVariableSetupTypePropertiesVariableValue
           description: The value of the environment variable.
       protocol: {}
     - &ref_95
@@ -1258,7 +1258,7 @@ schemas:
         - version: '2018-06-01'
       language:
         default:
-          name: licensed_component_setup_type_properties_component_name
+          name: LicensedComponentSetupTypePropertiesComponentName
           description: The name of the 3rd party component.
       protocol: {}
     - &ref_107
@@ -1267,7 +1267,7 @@ schemas:
         - version: '2018-06-01'
       language:
         default:
-          name: linked_integration_runtime_type_authorization_type
+          name: LinkedIntegrationRuntimeTypeAuthorizationType
           description: The authorization type for integration runtime sharing.
       protocol: {}
     - &ref_104
@@ -1276,7 +1276,7 @@ schemas:
         - version: '2018-06-01'
       language:
         default:
-          name: linked_integration_runtime_rbac_authorization_resource_id
+          name: LinkedIntegrationRuntimeRbacAuthorizationResourceId
           description: The resource identifier of the integration runtime to be shared.
       protocol: {}
     - &ref_195
@@ -1285,7 +1285,7 @@ schemas:
         - version: '2018-06-01'
       language:
         default:
-          name: managed_integration_runtime_node_id
+          name: ManagedIntegrationRuntimeNodeId
           description: The managed integration runtime node id.
       protocol: {}
     - &ref_199
@@ -1294,7 +1294,7 @@ schemas:
         - version: '2018-06-01'
       language:
         default:
-          name: managed_integration_runtime_error_code
+          name: ManagedIntegrationRuntimeErrorCode
           description: Error code.
       protocol: {}
     - &ref_200
@@ -1303,7 +1303,7 @@ schemas:
         - version: '2018-06-01'
       language:
         default:
-          name: managed_integration_runtime_error_parameters_item
+          name: ManagedIntegrationRuntimeErrorParametersItem
           description: Error message parameters.
       protocol: {}
     - &ref_201
@@ -1312,7 +1312,7 @@ schemas:
         - version: '2018-06-01'
       language:
         default:
-          name: managed_integration_runtime_error_message
+          name: ManagedIntegrationRuntimeErrorMessage
           description: Error message.
       protocol: {}
     - &ref_204
@@ -1321,7 +1321,7 @@ schemas:
         - version: '2018-06-01'
       language:
         default:
-          name: managed_integration_runtime_operation_result_type
+          name: ManagedIntegrationRuntimeOperationResultType
           description: The operation type. Could be start or stop.
       protocol: {}
     - &ref_206
@@ -1330,7 +1330,7 @@ schemas:
         - version: '2018-06-01'
       language:
         default:
-          name: managed_integration_runtime_operation_result
+          name: ManagedIntegrationRuntimeOperationResult
           description: The operation result.
       protocol: {}
     - &ref_207
@@ -1339,7 +1339,7 @@ schemas:
         - version: '2018-06-01'
       language:
         default:
-          name: managed_integration_runtime_operation_result_error_code
+          name: ManagedIntegrationRuntimeOperationResultErrorCode
           description: The error code.
       protocol: {}
     - &ref_208
@@ -1348,7 +1348,7 @@ schemas:
         - version: '2018-06-01'
       language:
         default:
-          name: managed_integration_runtime_operation_result_parameters_item
+          name: ManagedIntegrationRuntimeOperationResultParametersItem
           description: Error message parameters.
       protocol: {}
     - &ref_209
@@ -1357,7 +1357,7 @@ schemas:
         - version: '2018-06-01'
       language:
         default:
-          name: managed_integration_runtime_operation_result_activity_id
+          name: ManagedIntegrationRuntimeOperationResultActivityId
           description: The activity id for the operation request.
       protocol: {}
     - &ref_211
@@ -1366,7 +1366,7 @@ schemas:
         - version: '2018-06-01'
       language:
         default:
-          name: self_hosted_integration_runtime_status_type_properties_task_queue_id
+          name: SelfHostedIntegrationRuntimeStatusTypePropertiesTaskQueueId
           description: The task queue id of the integration runtime.
       protocol: {}
     - &ref_213
@@ -1375,7 +1375,7 @@ schemas:
         - version: '2018-06-01'
       language:
         default:
-          name: self_hosted_integration_runtime_status_type_properties_version
+          name: SelfHostedIntegrationRuntimeStatusTypePropertiesVersion
           description: Version of the integration runtime.
       protocol: {}
     - &ref_215
@@ -1384,7 +1384,7 @@ schemas:
         - version: '2018-06-01'
       language:
         default:
-          name: self_hosted_integration_runtime_node_name
+          name: SelfHostedIntegrationRuntimeNodeName
           description: Name of the integration runtime node.
       protocol: {}
     - &ref_216
@@ -1393,7 +1393,7 @@ schemas:
         - version: '2018-06-01'
       language:
         default:
-          name: self_hosted_integration_runtime_node_machine_name
+          name: SelfHostedIntegrationRuntimeNodeMachineName
           description: Machine name of the integration runtime node.
       protocol: {}
     - &ref_217
@@ -1402,7 +1402,7 @@ schemas:
         - version: '2018-06-01'
       language:
         default:
-          name: self_hosted_integration_runtime_node_host_service_uri
+          name: SelfHostedIntegrationRuntimeNodeHostServiceUri
           description: URI for the host machine of the integration runtime.
       protocol: {}
     - &ref_220
@@ -1411,7 +1411,7 @@ schemas:
         - version: '2018-06-01'
       language:
         default:
-          name: self_hosted_integration_runtime_node_version_status
+          name: SelfHostedIntegrationRuntimeNodeVersionStatus
           description: Status of the integration runtime node version.
       protocol: {}
     - &ref_221
@@ -1420,7 +1420,7 @@ schemas:
         - version: '2018-06-01'
       language:
         default:
-          name: self_hosted_integration_runtime_node_version
+          name: SelfHostedIntegrationRuntimeNodeVersion
           description: Version of the integration runtime node.
       protocol: {}
     - &ref_234
@@ -1429,7 +1429,7 @@ schemas:
         - version: '2018-06-01'
       language:
         default:
-          name: self_hosted_integration_runtime_status_type_properties_update_delay_offset
+          name: SelfHostedIntegrationRuntimeStatusTypePropertiesUpdateDelayOffset
           description: 'The time in the date scheduled by service to update the integration runtime, e.g., PT03H is 3 hours'
       protocol: {}
     - &ref_235
@@ -1438,7 +1438,7 @@ schemas:
         - version: '2018-06-01'
       language:
         default:
-          name: self_hosted_integration_runtime_status_type_properties_local_time_zone_offset
+          name: SelfHostedIntegrationRuntimeStatusTypePropertiesLocalTimeZoneOffset
           description: The local time zone offset in hours.
       protocol: {}
     - &ref_237
@@ -1447,7 +1447,7 @@ schemas:
         - version: '2018-06-01'
       language:
         default:
-          name: self_hosted_integration_runtime_status_type_properties_service_urls_item
+          name: SelfHostedIntegrationRuntimeStatusTypePropertiesServiceUrlsItem
           description: The service URL
       protocol: {}
     - &ref_238
@@ -1456,7 +1456,7 @@ schemas:
         - version: '2018-06-01'
       language:
         default:
-          name: self_hosted_integration_runtime_status_type_properties_version_status
+          name: SelfHostedIntegrationRuntimeStatusTypePropertiesVersionStatus
           description: Status of the integration runtime version.
       protocol: {}
     - &ref_239
@@ -1465,7 +1465,7 @@ schemas:
         - version: '2018-06-01'
       language:
         default:
-          name: linked_integration_runtime_name
+          name: LinkedIntegrationRuntimeName
           description: The name of the linked integration runtime.
       protocol: {}
     - &ref_240
@@ -1474,7 +1474,7 @@ schemas:
         - version: '2018-06-01'
       language:
         default:
-          name: linked_integration_runtime_subscription_id
+          name: LinkedIntegrationRuntimeSubscriptionId
           description: The subscription ID for which the linked integration runtime belong to.
       protocol: {}
     - &ref_241
@@ -1483,7 +1483,7 @@ schemas:
         - version: '2018-06-01'
       language:
         default:
-          name: linked_integration_runtime_data_factory_name
+          name: LinkedIntegrationRuntimeDataFactoryName
           description: The name of the data factory for which the linked integration runtime belong to.
       protocol: {}
     - &ref_242
@@ -1492,7 +1492,7 @@ schemas:
         - version: '2018-06-01'
       language:
         default:
-          name: linked_integration_runtime_data_factory_location
+          name: LinkedIntegrationRuntimeDataFactoryLocation
           description: The location of the data factory for which the linked integration runtime belong to.
       protocol: {}
     - &ref_244
@@ -1501,7 +1501,7 @@ schemas:
         - version: '2018-06-01'
       language:
         default:
-          name: self_hosted_integration_runtime_status_type_properties_pushed_version
+          name: SelfHostedIntegrationRuntimeStatusTypePropertiesPushedVersion
           description: The version that the integration runtime is going to update to.
       protocol: {}
     - &ref_245
@@ -1510,7 +1510,7 @@ schemas:
         - version: '2018-06-01'
       language:
         default:
-          name: self_hosted_integration_runtime_status_type_properties_latest_version
+          name: SelfHostedIntegrationRuntimeStatusTypePropertiesLatestVersion
           description: The latest version on download center.
       protocol: {}
     - &ref_310
@@ -1519,7 +1519,7 @@ schemas:
         - version: '2018-06-01'
       language:
         default:
-          name: integration_runtime_node_ip_address
+          name: IntegrationRuntimeNodeIpAddress
           description: The IP address of self-hosted integration runtime node.
       protocol: {}
     - &ref_349
@@ -1528,7 +1528,7 @@ schemas:
         - version: '2018-06-01'
       language:
         default:
-          name: ssis_object_metadata_name
+          name: SsisObjectMetadataName
           description: Metadata name.
       protocol: {}
     - &ref_350
@@ -1537,7 +1537,7 @@ schemas:
         - version: '2018-06-01'
       language:
         default:
-          name: ssis_object_metadata_description
+          name: SsisObjectMetadataDescription
           description: Metadata description.
       protocol: {}
     - &ref_351
@@ -1546,7 +1546,7 @@ schemas:
         - version: '2018-06-01'
       language:
         default:
-          name: ssis_object_metadata_list_response_next_link
+          name: SsisObjectMetadataListResponseNextLink
           description: 'The link to the next page of results, if any remaining results exist.'
       protocol: {}
     - &ref_315
@@ -1555,7 +1555,7 @@ schemas:
         - version: '2018-06-01'
       language:
         default:
-          name: ssis_environment_reference_environment_folder_name
+          name: SsisEnvironmentReferenceEnvironmentFolderName
           description: Environment folder name.
       protocol: {}
     - &ref_316
@@ -1564,7 +1564,7 @@ schemas:
         - version: '2018-06-01'
       language:
         default:
-          name: ssis_environment_reference_environment_name
+          name: SsisEnvironmentReferenceEnvironmentName
           description: Environment name.
       protocol: {}
     - &ref_317
@@ -1573,7 +1573,7 @@ schemas:
         - version: '2018-06-01'
       language:
         default:
-          name: ssis_environment_reference_type
+          name: SsisEnvironmentReferenceType
           description: Reference type
       protocol: {}
     - &ref_319
@@ -1582,7 +1582,7 @@ schemas:
         - version: '2018-06-01'
       language:
         default:
-          name: ssis_parameter_name
+          name: SsisParameterName
           description: Parameter name.
       protocol: {}
     - &ref_320
@@ -1591,7 +1591,7 @@ schemas:
         - version: '2018-06-01'
       language:
         default:
-          name: ssis_parameter_description
+          name: SsisParameterDescription
           description: Parameter description.
       protocol: {}
     - &ref_321
@@ -1600,7 +1600,7 @@ schemas:
         - version: '2018-06-01'
       language:
         default:
-          name: ssis_parameter_data_type
+          name: SsisParameterDataType
           description: Parameter type.
       protocol: {}
     - &ref_324
@@ -1609,7 +1609,7 @@ schemas:
         - version: '2018-06-01'
       language:
         default:
-          name: ssis_parameter_design_default_value
+          name: SsisParameterDesignDefaultValue
           description: Design default value of parameter.
       protocol: {}
     - &ref_325
@@ -1618,7 +1618,7 @@ schemas:
         - version: '2018-06-01'
       language:
         default:
-          name: ssis_parameter_default_value
+          name: SsisParameterDefaultValue
           description: Default value of parameter.
       protocol: {}
     - &ref_326
@@ -1627,7 +1627,7 @@ schemas:
         - version: '2018-06-01'
       language:
         default:
-          name: ssis_parameter_sensitive_default_value
+          name: SsisParameterSensitiveDefaultValue
           description: Default sensitive value of parameter.
       protocol: {}
     - &ref_327
@@ -1636,7 +1636,7 @@ schemas:
         - version: '2018-06-01'
       language:
         default:
-          name: ssis_parameter_value_type
+          name: SsisParameterValueType
           description: Parameter value type.
       protocol: {}
     - &ref_329
@@ -1645,7 +1645,7 @@ schemas:
         - version: '2018-06-01'
       language:
         default:
-          name: ssis_parameter_variable
+          name: SsisParameterVariable
           description: Parameter reference variable.
       protocol: {}
     - &ref_336
@@ -1654,7 +1654,7 @@ schemas:
         - version: '2018-06-01'
       language:
         default:
-          name: ssis_variable_name
+          name: SsisVariableName
           description: Variable name.
       protocol: {}
     - &ref_337
@@ -1663,7 +1663,7 @@ schemas:
         - version: '2018-06-01'
       language:
         default:
-          name: ssis_variable_description
+          name: SsisVariableDescription
           description: Variable description.
       protocol: {}
     - &ref_338
@@ -1672,7 +1672,7 @@ schemas:
         - version: '2018-06-01'
       language:
         default:
-          name: ssis_variable_data_type
+          name: SsisVariableDataType
           description: Variable type.
       protocol: {}
     - &ref_340
@@ -1681,7 +1681,7 @@ schemas:
         - version: '2018-06-01'
       language:
         default:
-          name: ssis_variable_value
+          name: SsisVariableValue
           description: Variable value.
       protocol: {}
     - &ref_341
@@ -1690,7 +1690,7 @@ schemas:
         - version: '2018-06-01'
       language:
         default:
-          name: ssis_variable_sensitive_value
+          name: SsisVariableSensitiveValue
           description: Variable sensitive value.
       protocol: {}
   choices:
@@ -1699,7 +1699,7 @@ schemas:
         - value: SystemAssigned
           language:
             default:
-              name: system_assigned
+              name: SYSTEM_ASSIGNED
               description: ''
             cli:
               cliKey: SystemAssigned
@@ -1711,7 +1711,7 @@ schemas:
       choiceType: *ref_0
       language:
         default:
-          name: factory_identity_type
+          name: FactoryIdentityType
           description: The identity type. Currently the only supported type is 'SystemAssigned'.
         cli:
           cliKey: FactoryIdentityType
@@ -1725,7 +1725,7 @@ schemas:
         - value: Started
           language:
             default:
-              name: started
+              name: STARTED
               description: ''
             cli:
               cliKey: Started
@@ -1734,7 +1734,7 @@ schemas:
         - value: Stopped
           language:
             default:
-              name: stopped
+              name: STOPPED
               description: ''
             cli:
               cliKey: Stopped
@@ -1743,7 +1743,7 @@ schemas:
         - value: Disabled
           language:
             default:
-              name: disabled
+              name: DISABLED
               description: ''
             cli:
               cliKey: Disabled
@@ -1755,7 +1755,7 @@ schemas:
       choiceType: *ref_0
       language:
         default:
-          name: trigger_runtime_state
+          name: TriggerRuntimeState
           description: Enumerates possible state of Triggers.
         cli:
           cliKey: TriggerRuntimeState
@@ -1767,7 +1767,7 @@ schemas:
         - value: Enabled
           language:
             default:
-              name: enabled
+              name: ENABLED
               description: ''
             cli:
               cliKey: Enabled
@@ -1776,7 +1776,7 @@ schemas:
         - value: Provisioning
           language:
             default:
-              name: provisioning
+              name: PROVISIONING
               description: ''
             cli:
               cliKey: Provisioning
@@ -1785,7 +1785,7 @@ schemas:
         - value: Deprovisioning
           language:
             default:
-              name: deprovisioning
+              name: DEPROVISIONING
               description: ''
             cli:
               cliKey: Deprovisioning
@@ -1794,7 +1794,7 @@ schemas:
         - value: Disabled
           language:
             default:
-              name: disabled
+              name: DISABLED
               description: ''
             cli:
               cliKey: Disabled
@@ -1803,7 +1803,7 @@ schemas:
         - value: Unknown
           language:
             default:
-              name: unknown
+              name: UNKNOWN
               description: ''
             cli:
               cliKey: Unknown
@@ -1815,7 +1815,7 @@ schemas:
       choiceType: *ref_0
       language:
         default:
-          name: event_subscription_status
+          name: EventSubscriptionStatus
           description: Event Subscription Status.
         cli:
           cliKey: EventSubscriptionStatus
@@ -1827,7 +1827,7 @@ schemas:
         - value: Managed
           language:
             default:
-              name: managed
+              name: MANAGED
               description: ''
             cli:
               cliKey: Managed
@@ -1836,7 +1836,7 @@ schemas:
         - value: SelfHosted
           language:
             default:
-              name: self_hosted
+              name: SELF_HOSTED
               description: ''
             cli:
               cliKey: SelfHosted
@@ -1848,7 +1848,7 @@ schemas:
       choiceType: *ref_0
       language:
         default:
-          name: integration_runtime_type
+          name: IntegrationRuntimeType
           description: The type of integration runtime.
         cli:
           cliKey: IntegrationRuntimeType
@@ -1860,7 +1860,7 @@ schemas:
         - value: 'On'
           language:
             default:
-              name: 'on'
+              name: 'ON'
               description: ''
             cli:
               cliKey: 'On'
@@ -1869,7 +1869,7 @@ schemas:
         - value: 'Off'
           language:
             default:
-              name: 'off'
+              name: 'OFF'
               description: ''
             cli:
               cliKey: 'Off'
@@ -1881,7 +1881,7 @@ schemas:
       choiceType: *ref_0
       language:
         default:
-          name: integration_runtime_auto_update
+          name: IntegrationRuntimeAutoUpdate
           description: The state of integration runtime auto update.
         cli:
           cliKey: IntegrationRuntimeAutoUpdate
@@ -1893,7 +1893,7 @@ schemas:
         - value: Initial
           language:
             default:
-              name: initial
+              name: INITIAL
               description: ''
             cli:
               cliKey: Initial
@@ -1902,7 +1902,7 @@ schemas:
         - value: Stopped
           language:
             default:
-              name: stopped
+              name: STOPPED
               description: ''
             cli:
               cliKey: Stopped
@@ -1911,7 +1911,7 @@ schemas:
         - value: Started
           language:
             default:
-              name: started
+              name: STARTED
               description: ''
             cli:
               cliKey: Started
@@ -1920,7 +1920,7 @@ schemas:
         - value: Starting
           language:
             default:
-              name: starting
+              name: STARTING
               description: ''
             cli:
               cliKey: Starting
@@ -1929,7 +1929,7 @@ schemas:
         - value: Stopping
           language:
             default:
-              name: stopping
+              name: STOPPING
               description: ''
             cli:
               cliKey: Stopping
@@ -1938,7 +1938,7 @@ schemas:
         - value: NeedRegistration
           language:
             default:
-              name: need_registration
+              name: NEED_REGISTRATION
               description: ''
             cli:
               cliKey: NeedRegistration
@@ -1947,7 +1947,7 @@ schemas:
         - value: Online
           language:
             default:
-              name: online
+              name: ONLINE
               description: ''
             cli:
               cliKey: Online
@@ -1956,7 +1956,7 @@ schemas:
         - value: Limited
           language:
             default:
-              name: limited
+              name: LIMITED
               description: ''
             cli:
               cliKey: Limited
@@ -1965,7 +1965,7 @@ schemas:
         - value: Offline
           language:
             default:
-              name: offline
+              name: OFFLINE
               description: ''
             cli:
               cliKey: Offline
@@ -1974,7 +1974,7 @@ schemas:
         - value: AccessDenied
           language:
             default:
-              name: access_denied
+              name: ACCESS_DENIED
               description: ''
             cli:
               cliKey: AccessDenied
@@ -1986,7 +1986,7 @@ schemas:
       choiceType: *ref_0
       language:
         default:
-          name: integration_runtime_state
+          name: IntegrationRuntimeState
           description: The state of integration runtime.
         cli:
           cliKey: IntegrationRuntimeState
@@ -1998,7 +1998,7 @@ schemas:
         - value: authKey1
           language:
             default:
-              name: auth_key1
+              name: AUTH_KEY1
               description: ''
             cli:
               cliKey: authKey1
@@ -2007,7 +2007,7 @@ schemas:
         - value: authKey2
           language:
             default:
-              name: auth_key2
+              name: AUTH_KEY2
               description: ''
             cli:
               cliKey: authKey2
@@ -2019,7 +2019,7 @@ schemas:
       choiceType: *ref_0
       language:
         default:
-          name: integration_runtime_auth_key_name
+          name: IntegrationRuntimeAuthKeyName
           description: The name of the authentication key to regenerate.
         cli:
           cliKey: IntegrationRuntimeAuthKeyName
@@ -2031,7 +2031,7 @@ schemas:
         - value: NotSpecified
           language:
             default:
-              name: not_specified
+              name: NOT_SPECIFIED
               description: ''
             cli:
               cliKey: NotSpecified
@@ -2040,7 +2040,7 @@ schemas:
         - value: Minute
           language:
             default:
-              name: minute
+              name: MINUTE
               description: ''
             cli:
               cliKey: Minute
@@ -2049,7 +2049,7 @@ schemas:
         - value: Hour
           language:
             default:
-              name: hour
+              name: HOUR
               description: ''
             cli:
               cliKey: Hour
@@ -2058,7 +2058,7 @@ schemas:
         - value: Day
           language:
             default:
-              name: day
+              name: DAY
               description: ''
             cli:
               cliKey: Day
@@ -2067,7 +2067,7 @@ schemas:
         - value: Week
           language:
             default:
-              name: week
+              name: WEEK
               description: ''
             cli:
               cliKey: Week
@@ -2076,7 +2076,7 @@ schemas:
         - value: Month
           language:
             default:
-              name: month
+              name: MONTH
               description: ''
             cli:
               cliKey: Month
@@ -2085,7 +2085,7 @@ schemas:
         - value: Year
           language:
             default:
-              name: year
+              name: YEAR
               description: ''
             cli:
               cliKey: Year
@@ -2097,7 +2097,7 @@ schemas:
       choiceType: *ref_0
       language:
         default:
-          name: recurrence_frequency
+          name: RecurrenceFrequency
           description: Enumerates possible frequency option for the schedule trigger.
         cli:
           cliKey: RecurrenceFrequency
@@ -2109,7 +2109,7 @@ schemas:
         - value: Microsoft.Storage.BlobCreated
           language:
             default:
-              name: microsoft_storage_blob_created
+              name: MICROSOFT_STORAGE_BLOB_CREATED
               description: ''
             cli:
               cliKey: Microsoft.Storage.BlobCreated
@@ -2118,7 +2118,7 @@ schemas:
         - value: Microsoft.Storage.BlobDeleted
           language:
             default:
-              name: microsoft_storage_blob_deleted
+              name: MICROSOFT_STORAGE_BLOB_DELETED
               description: ''
             cli:
               cliKey: Microsoft.Storage.BlobDeleted
@@ -2130,7 +2130,7 @@ schemas:
       choiceType: *ref_0
       language:
         default:
-          name: blob_event_types
+          name: BlobEventTypes
           description: ''
         cli:
           cliKey: BlobEventTypes
@@ -2142,7 +2142,7 @@ schemas:
         - value: Minute
           language:
             default:
-              name: minute
+              name: MINUTE
               description: ''
             cli:
               cliKey: Minute
@@ -2151,7 +2151,7 @@ schemas:
         - value: Hour
           language:
             default:
-              name: hour
+              name: HOUR
               description: ''
             cli:
               cliKey: Hour
@@ -2163,7 +2163,7 @@ schemas:
       choiceType: *ref_0
       language:
         default:
-          name: tumbling_window_frequency
+          name: TumblingWindowFrequency
           description: Enumerates possible frequency option for the tumbling window trigger.
         cli:
           cliKey: TumblingWindowFrequency
@@ -2175,7 +2175,7 @@ schemas:
         - value: General
           language:
             default:
-              name: general
+              name: GENERAL
               description: ''
             cli:
               cliKey: General
@@ -2184,7 +2184,7 @@ schemas:
         - value: MemoryOptimized
           language:
             default:
-              name: memory_optimized
+              name: MEMORY_OPTIMIZED
               description: ''
             cli:
               cliKey: MemoryOptimized
@@ -2193,7 +2193,7 @@ schemas:
         - value: ComputeOptimized
           language:
             default:
-              name: compute_optimized
+              name: COMPUTE_OPTIMIZED
               description: ''
             cli:
               cliKey: ComputeOptimized
@@ -2205,7 +2205,7 @@ schemas:
       choiceType: *ref_0
       language:
         default:
-          name: data_flow_compute_type
+          name: DataFlowComputeType
           description: Compute type of the cluster which will execute data flow job.
         cli:
           cliKey: DataFlowComputeType
@@ -2217,7 +2217,7 @@ schemas:
         - value: Basic
           language:
             default:
-              name: basic
+              name: BASIC
               description: ''
             cli:
               cliKey: Basic
@@ -2226,7 +2226,7 @@ schemas:
         - value: Standard
           language:
             default:
-              name: standard
+              name: STANDARD
               description: ''
             cli:
               cliKey: Standard
@@ -2235,7 +2235,7 @@ schemas:
         - value: Premium
           language:
             default:
-              name: premium
+              name: PREMIUM
               description: ''
             cli:
               cliKey: Premium
@@ -2244,7 +2244,7 @@ schemas:
         - value: PremiumRS
           language:
             default:
-              name: premium_RS
+              name: PREMIUM_RS
               description: ''
             cli:
               cliKey: PremiumRS
@@ -2256,7 +2256,7 @@ schemas:
       choiceType: *ref_0
       language:
         default:
-          name: integration_runtime_ssis_catalog_pricing_tier
+          name: IntegrationRuntimeSsisCatalogPricingTier
           description: 'The pricing tier for the catalog database. The valid values could be found in https://azure.microsoft.com/en-us/pricing/details/sql-database/'
         cli:
           cliKey: IntegrationRuntimeSsisCatalogPricingTier
@@ -2268,7 +2268,7 @@ schemas:
         - value: BasePrice
           language:
             default:
-              name: base_price
+              name: BASE_PRICE
               description: ''
             cli:
               cliKey: BasePrice
@@ -2277,7 +2277,7 @@ schemas:
         - value: LicenseIncluded
           language:
             default:
-              name: license_included
+              name: LICENSE_INCLUDED
               description: ''
             cli:
               cliKey: LicenseIncluded
@@ -2289,7 +2289,7 @@ schemas:
       choiceType: *ref_0
       language:
         default:
-          name: integration_runtime_license_type
+          name: IntegrationRuntimeLicenseType
           description: License type for bringing your own license scenario.
         cli:
           cliKey: IntegrationRuntimeLicenseType
@@ -2301,7 +2301,7 @@ schemas:
         - value: IntegrationRuntimeReference
           language:
             default:
-              name: integration_runtime_reference
+              name: INTEGRATION_RUNTIME_REFERENCE
               description: ''
             cli:
               cliKey: IntegrationRuntimeReference
@@ -2310,7 +2310,7 @@ schemas:
         - value: LinkedServiceReference
           language:
             default:
-              name: linked_service_reference
+              name: LINKED_SERVICE_REFERENCE
               description: ''
             cli:
               cliKey: LinkedServiceReference
@@ -2322,7 +2322,7 @@ schemas:
       choiceType: *ref_0
       language:
         default:
-          name: integration_runtime_entity_reference_type
+          name: IntegrationRuntimeEntityReferenceType
           description: The type of this referenced entity.
         cli:
           cliKey: IntegrationRuntimeEntityReferenceType
@@ -2334,7 +2334,7 @@ schemas:
         - value: Standard
           language:
             default:
-              name: standard
+              name: STANDARD
               description: ''
             cli:
               cliKey: Standard
@@ -2343,7 +2343,7 @@ schemas:
         - value: Enterprise
           language:
             default:
-              name: enterprise
+              name: ENTERPRISE
               description: ''
             cli:
               cliKey: Enterprise
@@ -2355,7 +2355,7 @@ schemas:
       choiceType: *ref_0
       language:
         default:
-          name: integration_runtime_edition
+          name: IntegrationRuntimeEdition
           description: The edition for the SSIS Integration Runtime
         cli:
           cliKey: IntegrationRuntimeEdition
@@ -2367,7 +2367,7 @@ schemas:
         - value: Starting
           language:
             default:
-              name: starting
+              name: STARTING
               description: ''
             cli:
               cliKey: Starting
@@ -2376,7 +2376,7 @@ schemas:
         - value: Available
           language:
             default:
-              name: available
+              name: AVAILABLE
               description: ''
             cli:
               cliKey: Available
@@ -2385,7 +2385,7 @@ schemas:
         - value: Recycling
           language:
             default:
-              name: recycling
+              name: RECYCLING
               description: ''
             cli:
               cliKey: Recycling
@@ -2394,7 +2394,7 @@ schemas:
         - value: Unavailable
           language:
             default:
-              name: unavailable
+              name: UNAVAILABLE
               description: ''
             cli:
               cliKey: Unavailable
@@ -2406,7 +2406,7 @@ schemas:
       choiceType: *ref_0
       language:
         default:
-          name: managed_integration_runtime_node_status
+          name: ManagedIntegrationRuntimeNodeStatus
           description: The managed integration runtime node status.
         cli:
           cliKey: ManagedIntegrationRuntimeNodeStatus
@@ -2418,7 +2418,7 @@ schemas:
         - value: NotSet
           language:
             default:
-              name: not_set
+              name: NOT_SET
               description: ''
             cli:
               cliKey: NotSet
@@ -2427,7 +2427,7 @@ schemas:
         - value: SslEncrypted
           language:
             default:
-              name: ssl_encrypted
+              name: SSL_ENCRYPTED
               description: ''
             cli:
               cliKey: SslEncrypted
@@ -2436,7 +2436,7 @@ schemas:
         - value: NotEncrypted
           language:
             default:
-              name: not_encrypted
+              name: NOT_ENCRYPTED
               description: ''
             cli:
               cliKey: NotEncrypted
@@ -2448,7 +2448,7 @@ schemas:
       choiceType: *ref_0
       language:
         default:
-          name: integration_runtime_internal_channel_encryption_mode
+          name: IntegrationRuntimeInternalChannelEncryptionMode
           description: It is used to set the encryption mode for node-node communication channel (when more than 2 self-hosted integration runtime nodes exist).
         cli:
           cliKey: IntegrationRuntimeInternalChannelEncryptionMode
@@ -2460,7 +2460,7 @@ schemas:
         - value: NeedRegistration
           language:
             default:
-              name: need_registration
+              name: NEED_REGISTRATION
               description: ''
             cli:
               cliKey: NeedRegistration
@@ -2469,7 +2469,7 @@ schemas:
         - value: Online
           language:
             default:
-              name: online
+              name: ONLINE
               description: ''
             cli:
               cliKey: Online
@@ -2478,7 +2478,7 @@ schemas:
         - value: Limited
           language:
             default:
-              name: limited
+              name: LIMITED
               description: ''
             cli:
               cliKey: Limited
@@ -2487,7 +2487,7 @@ schemas:
         - value: Offline
           language:
             default:
-              name: offline
+              name: OFFLINE
               description: ''
             cli:
               cliKey: Offline
@@ -2496,7 +2496,7 @@ schemas:
         - value: Upgrading
           language:
             default:
-              name: upgrading
+              name: UPGRADING
               description: ''
             cli:
               cliKey: Upgrading
@@ -2505,7 +2505,7 @@ schemas:
         - value: Initializing
           language:
             default:
-              name: initializing
+              name: INITIALIZING
               description: ''
             cli:
               cliKey: Initializing
@@ -2514,7 +2514,7 @@ schemas:
         - value: InitializeFailed
           language:
             default:
-              name: initialize_failed
+              name: INITIALIZE_FAILED
               description: ''
             cli:
               cliKey: InitializeFailed
@@ -2526,7 +2526,7 @@ schemas:
       choiceType: *ref_0
       language:
         default:
-          name: self_hosted_integration_runtime_node_status
+          name: SelfHostedIntegrationRuntimeNodeStatus
           description: Status of the integration runtime node.
         cli:
           cliKey: SelfHostedIntegrationRuntimeNodeStatus
@@ -2538,7 +2538,7 @@ schemas:
         - value: None
           language:
             default:
-              name: none
+              name: NONE
               description: ''
             cli:
               cliKey: None
@@ -2547,7 +2547,7 @@ schemas:
         - value: Succeed
           language:
             default:
-              name: succeed
+              name: SUCCEED
               description: ''
             cli:
               cliKey: Succeed
@@ -2556,7 +2556,7 @@ schemas:
         - value: Fail
           language:
             default:
-              name: fail
+              name: FAIL
               description: ''
             cli:
               cliKey: Fail
@@ -2568,7 +2568,7 @@ schemas:
       choiceType: *ref_0
       language:
         default:
-          name: integration_runtime_update_result
+          name: IntegrationRuntimeUpdateResult
           description: The result of the last integration runtime node update.
         cli:
           cliKey: IntegrationRuntimeUpdateResult
@@ -2580,7 +2580,7 @@ schemas:
         - value: Folder
           language:
             default:
-              name: folder
+              name: FOLDER
               description: ''
             cli:
               cliKey: Folder
@@ -2589,7 +2589,7 @@ schemas:
         - value: Project
           language:
             default:
-              name: project
+              name: PROJECT
               description: ''
             cli:
               cliKey: Project
@@ -2598,7 +2598,7 @@ schemas:
         - value: Package
           language:
             default:
-              name: package
+              name: PACKAGE
               description: ''
             cli:
               cliKey: Package
@@ -2607,7 +2607,7 @@ schemas:
         - value: Environment
           language:
             default:
-              name: environment
+              name: ENVIRONMENT
               description: ''
             cli:
               cliKey: Environment
@@ -2619,7 +2619,7 @@ schemas:
       choiceType: *ref_0
       language:
         default:
-          name: ssis_object_metadata_type
+          name: SsisObjectMetadataType
           description: The type of SSIS object metadata.
         cli:
           cliKey: SsisObjectMetadataType
@@ -2632,7 +2632,7 @@ schemas:
         - value: Sunday
           language:
             default:
-              name: sunday
+              name: SUNDAY
               description: ''
             cli:
               cliKey: Sunday
@@ -2641,7 +2641,7 @@ schemas:
         - value: Monday
           language:
             default:
-              name: monday
+              name: MONDAY
               description: ''
             cli:
               cliKey: Monday
@@ -2650,7 +2650,7 @@ schemas:
         - value: Tuesday
           language:
             default:
-              name: tuesday
+              name: TUESDAY
               description: ''
             cli:
               cliKey: Tuesday
@@ -2659,7 +2659,7 @@ schemas:
         - value: Wednesday
           language:
             default:
-              name: wednesday
+              name: WEDNESDAY
               description: ''
             cli:
               cliKey: Wednesday
@@ -2668,7 +2668,7 @@ schemas:
         - value: Thursday
           language:
             default:
-              name: thursday
+              name: THURSDAY
               description: ''
             cli:
               cliKey: Thursday
@@ -2677,7 +2677,7 @@ schemas:
         - value: Friday
           language:
             default:
-              name: friday
+              name: FRIDAY
               description: ''
             cli:
               cliKey: Friday
@@ -2686,7 +2686,7 @@ schemas:
         - value: Saturday
           language:
             default:
-              name: saturday
+              name: SATURDAY
               description: ''
             cli:
               cliKey: Saturday
@@ -2698,7 +2698,7 @@ schemas:
       choiceType: *ref_0
       language:
         default:
-          name: days_of_week
+          name: DaysOfWeek
           description: ''
         cli:
           cliKey: DaysOfWeek
@@ -2710,7 +2710,7 @@ schemas:
         - value: Sunday
           language:
             default:
-              name: sunday
+              name: SUNDAY
               description: ''
             cli:
               cliKey: Sunday
@@ -2719,7 +2719,7 @@ schemas:
         - value: Monday
           language:
             default:
-              name: monday
+              name: MONDAY
               description: ''
             cli:
               cliKey: Monday
@@ -2728,7 +2728,7 @@ schemas:
         - value: Tuesday
           language:
             default:
-              name: tuesday
+              name: TUESDAY
               description: ''
             cli:
               cliKey: Tuesday
@@ -2737,7 +2737,7 @@ schemas:
         - value: Wednesday
           language:
             default:
-              name: wednesday
+              name: WEDNESDAY
               description: ''
             cli:
               cliKey: Wednesday
@@ -2746,7 +2746,7 @@ schemas:
         - value: Thursday
           language:
             default:
-              name: thursday
+              name: THURSDAY
               description: ''
             cli:
               cliKey: Thursday
@@ -2755,7 +2755,7 @@ schemas:
         - value: Friday
           language:
             default:
-              name: friday
+              name: FRIDAY
               description: ''
             cli:
               cliKey: Friday
@@ -2764,7 +2764,7 @@ schemas:
         - value: Saturday
           language:
             default:
-              name: saturday
+              name: SATURDAY
               description: ''
             cli:
               cliKey: Saturday
@@ -2776,7 +2776,7 @@ schemas:
       choiceType: *ref_0
       language:
         default:
-          name: day_of_week
+          name: DayOfWeek
           description: The days of the week.
         cli:
           cliKey: DayOfWeek
@@ -2849,12 +2849,12 @@ schemas:
         type: any
         language:
           default:
-            name: any
+            name: Any
             description: Any object
         protocol: {}
       language:
         default:
-          name: factory
+          name: Factory
           description: Factory resource type.
       protocol: {}
     - &ref_8
@@ -2863,7 +2863,7 @@ schemas:
       nullableItems: false
       language:
         default:
-          name: resource_tags
+          name: ResourceTags
           description: The resource tags.
       protocol: {}
     - &ref_44
@@ -2872,7 +2872,7 @@ schemas:
       nullableItems: false
       language:
         default:
-          name: factory_update_parameters_tags
+          name: FactoryUpdateParametersTags
           description: The resource tags.
       protocol: {}
     - &ref_121
@@ -2880,7 +2880,7 @@ schemas:
       elementType: *ref_2
       language:
         default:
-          name: trigger
+          name: Trigger
           description: Azure data factory nested object which contains information about creating pipeline run
       protocol: {}
     - &ref_60
@@ -2888,7 +2888,7 @@ schemas:
       elementType: *ref_2
       language:
         default:
-          name: integration_runtime
+          name: IntegrationRuntime
           description: Azure Data Factory nested object which serves as a compute resource for activities.
       protocol: {}
     - &ref_192
@@ -2896,7 +2896,7 @@ schemas:
       elementType: *ref_2
       language:
         default:
-          name: integration_runtime_status
+          name: IntegrationRuntimeStatus
           description: Integration runtime status.
       protocol: {}
     - &ref_251
@@ -2904,7 +2904,7 @@ schemas:
       elementType: *ref_2
       language:
         default:
-          name: integration_runtime_connection_info
+          name: IntegrationRuntimeConnectionInfo
           description: Connection information for encrypting the on-premises data source credentials.
       protocol: {}
     - &ref_262
@@ -2912,7 +2912,7 @@ schemas:
       elementType: *ref_2
       language:
         default:
-          name: integration_runtime_node_monitoring_data
+          name: IntegrationRuntimeNodeMonitoringData
           description: Monitoring data for integration runtime node.
       protocol: {}
     - &ref_138
@@ -2920,7 +2920,7 @@ schemas:
       elementType: *ref_2
       language:
         default:
-          name: parameter_value_specification
+          name: ParameterValueSpecification
           description: An object mapping parameter names to argument values.
       protocol: {}
     - &ref_122
@@ -2928,7 +2928,7 @@ schemas:
       elementType: *ref_2
       language:
         default:
-          name: schedule_trigger_recurrence
+          name: ScheduleTriggerRecurrence
           description: The workflow trigger recurrence.
       protocol: {}
     - &ref_128
@@ -2936,7 +2936,7 @@ schemas:
       elementType: *ref_2
       language:
         default:
-          name: recurrence_schedule
+          name: RecurrenceSchedule
           description: The recurrence schedule.
       protocol: {}
     - &ref_131
@@ -2944,7 +2944,7 @@ schemas:
       elementType: *ref_2
       language:
         default:
-          name: recurrence_schedule_occurrence
+          name: RecurrenceScheduleOccurrence
           description: The recurrence schedule occurrence.
       protocol: {}
     - &ref_62
@@ -2952,7 +2952,7 @@ schemas:
       elementType: *ref_2
       language:
         default:
-          name: integration_runtime_compute_properties
+          name: IntegrationRuntimeComputeProperties
           description: The compute resource properties for managed integration runtime.
       protocol: {}
     - &ref_67
@@ -2960,7 +2960,7 @@ schemas:
       elementType: *ref_2
       language:
         default:
-          name: integration_runtime_data_flow_properties
+          name: IntegrationRuntimeDataFlowProperties
           description: Data flow properties for managed integration runtime.
       protocol: {}
     - &ref_71
@@ -2968,7 +2968,7 @@ schemas:
       elementType: *ref_2
       language:
         default:
-          name: integration_runtime_v_net_properties
+          name: IntegrationRuntimeVNetProperties
           description: VNet properties for managed integration runtime.
       protocol: {}
     - &ref_75
@@ -2976,7 +2976,7 @@ schemas:
       elementType: *ref_2
       language:
         default:
-          name: integration_runtime_ssis_properties
+          name: IntegrationRuntimeSsisProperties
           description: SSIS properties for managed integration runtime.
       protocol: {}
     - &ref_76
@@ -2984,7 +2984,7 @@ schemas:
       elementType: *ref_2
       language:
         default:
-          name: integration_runtime_ssis_catalog_info
+          name: IntegrationRuntimeSsisCatalogInfo
           description: Catalog information for managed dedicated integration runtime.
       protocol: {}
     - &ref_194
@@ -2992,7 +2992,7 @@ schemas:
       elementType: *ref_2
       language:
         default:
-          name: managed_integration_runtime_node
+          name: ManagedIntegrationRuntimeNode
           description: Properties of integration runtime node.
       protocol: {}
     - &ref_197
@@ -3000,7 +3000,7 @@ schemas:
       elementType: *ref_2
       language:
         default:
-          name: managed_integration_runtime_error
+          name: ManagedIntegrationRuntimeError
           description: Error definition for managed integration runtime.
       protocol: {}
     - &ref_203
@@ -3008,7 +3008,7 @@ schemas:
       elementType: *ref_2
       language:
         default:
-          name: managed_integration_runtime_operation_result
+          name: ManagedIntegrationRuntimeOperationResult
           description: Properties of managed integration runtime operation result.
       protocol: {}
     - &ref_214
@@ -3016,7 +3016,7 @@ schemas:
       elementType: *ref_2
       language:
         default:
-          name: self_hosted_integration_runtime_node
+          name: SelfHostedIntegrationRuntimeNode
           description: Properties of Self-hosted integration runtime node.
       protocol: {}
     - &ref_219
@@ -3025,7 +3025,7 @@ schemas:
       nullableItems: false
       language:
         default:
-          name: self_hosted_integration_runtime_node_capabilities
+          name: SelfHostedIntegrationRuntimeNodeCapabilities
           description: The integration runtime capabilities dictionary
       protocol: {}
     - &ref_236
@@ -3034,7 +3034,7 @@ schemas:
       nullableItems: false
       language:
         default:
-          name: self_hosted_integration_runtime_status_type_properties_capabilities
+          name: SelfHostedIntegrationRuntimeStatusTypePropertiesCapabilities
           description: Object with additional information about integration runtime capabilities.
       protocol: {}
   any:
@@ -3374,7 +3374,7 @@ schemas:
                       x-ms-azure-resource: true
                     language:
                       default:
-                        name: resource
+                        name: Resource
                         description: Azure Data Factory top-level resource.
                         namespace: ''
                       cli:
@@ -3437,7 +3437,7 @@ schemas:
                       - input
                     language:
                       default:
-                        name: factory_identity
+                        name: FactoryIdentity
                         description: Identity properties of the factory resource.
                         namespace: ''
                       cli:
@@ -3546,7 +3546,7 @@ schemas:
                                   x-ms-discriminator-value: FactoryVSTSConfiguration
                                 language:
                                   default:
-                                    name: factory_vsts_configuration
+                                    name: FactoryVstsConfiguration
                                     description: Factory's VSTS repo information.
                                     namespace: ''
                                   cli:
@@ -3586,7 +3586,7 @@ schemas:
                                   x-ms-discriminator-value: FactoryGitHubConfiguration
                                 language:
                                   default:
-                                    name: factory_git_hub_configuration
+                                    name: FactoryGitHubConfiguration
                                     description: Factory's GitHub repo information.
                                     namespace: ''
                                   cli:
@@ -3688,7 +3688,7 @@ schemas:
                             - input
                           language:
                             default:
-                              name: factory_repo_configuration
+                              name: FactoryRepoConfiguration
                               description: Factory's git repo information.
                               namespace: ''
                             cli:
@@ -3730,7 +3730,7 @@ schemas:
                                 elementType: *ref_32
                                 language:
                                   default:
-                                    name: fake_factory_identity_zones_inside
+                                    name: FakeFactoryIdentityZonesInside
                                     description: sample of simple array
                                 protocol: {}
                               required: false
@@ -3751,7 +3751,7 @@ schemas:
                             - input
                           language:
                             default:
-                              name: fake_factory_identity
+                              name: FakeFactoryIdentity
                               description: This is only for az test.
                               namespace: ''
                             cli:
@@ -3776,7 +3776,7 @@ schemas:
                           elementType: *ref_33
                           language:
                             default:
-                              name: zone
+                              name: Zone
                               description: sample of simple array
                           protocol: {}
                         serializedName: zones
@@ -3796,7 +3796,7 @@ schemas:
                       - input
                     language:
                       default:
-                        name: factory_properties
+                        name: FactoryProperties
                         description: Factory resource properties.
                         namespace: ''
                       cli:
@@ -3823,7 +3823,7 @@ schemas:
                 - input
               language:
                 default:
-                  name: factory
+                  name: Factory
                   description: Factory resource type.
                   namespace: ''
                 cli:
@@ -3833,7 +3833,7 @@ schemas:
               protocol: {}
             language:
               default:
-                name: factory_list_response_value
+                name: FactoryListResponseValue
                 description: List of factories.
             protocol: {}
           required: true
@@ -3865,7 +3865,7 @@ schemas:
         - output
       language:
         default:
-          name: factory_list_response
+          name: FactoryListResponse
           description: A list of factory resources.
           namespace: ''
         cli:
@@ -3932,7 +3932,7 @@ schemas:
                   elementType: *ref_41
                   language:
                     default:
-                      name: cloud_error_body_details
+                      name: CloudErrorBodyDetails
                       description: Array with additional error details.
                   protocol: {}
                 required: false
@@ -3954,7 +3954,7 @@ schemas:
               x-ms-external: true
             language:
               default:
-                name: cloud_error_body
+                name: CloudErrorBody
                 description: The object that defines the structure of an Azure Data Factory error.
                 namespace: ''
               cli:
@@ -3983,7 +3983,7 @@ schemas:
         x-ms-external: true
       language:
         default:
-          name: cloud_error
+          name: CloudError
           description: The object that defines the structure of an Azure Data Factory error response.
           namespace: ''
         cli:
@@ -4025,7 +4025,7 @@ schemas:
         - input
       language:
         default:
-          name: factory_repo_update
+          name: FactoryRepoUpdate
           description: Factory's git repo information.
           namespace: ''
         cli:
@@ -4066,7 +4066,7 @@ schemas:
         - input
       language:
         default:
-          name: factory_update_parameters
+          name: FactoryUpdateParameters
           description: Parameters for updating a factory resource.
           namespace: ''
         cli:
@@ -4121,7 +4121,7 @@ schemas:
         - input
       language:
         default:
-          name: git_hub_access_token_request
+          name: GitHubAccessTokenRequest
           description: Get GitHub access token request definition.
           namespace: ''
         cli:
@@ -4151,7 +4151,7 @@ schemas:
         - output
       language:
         default:
-          name: git_hub_access_token_response
+          name: GitHubAccessTokenResponse
           description: Get GitHub access token response definition.
           namespace: ''
         cli:
@@ -4226,7 +4226,7 @@ schemas:
         - output
       language:
         default:
-          name: user_access_policy
+          name: UserAccessPolicy
           description: Get Data Plane read only token request definition.
           namespace: ''
         cli:
@@ -4278,7 +4278,7 @@ schemas:
         - output
       language:
         default:
-          name: access_policy_response
+          name: AccessPolicyResponse
           description: Get Data Plane read only token response definition.
           namespace: ''
         cli:
@@ -4458,7 +4458,7 @@ schemas:
                                                           - input
                                                         language:
                                                           default:
-                                                            name: integration_runtime_data_flow_properties
+                                                            name: IntegrationRuntimeDataFlowProperties
                                                             description: Data flow properties for managed integration runtime.
                                                             namespace: ''
                                                           cli:
@@ -4515,13 +4515,13 @@ schemas:
                                                               elementType: *ref_74
                                                               language:
                                                                 default:
-                                                                  name: integration_runtime_v_net_properties_public_i_Ps
+                                                                  name: IntegrationRuntimeVNetPropertiesPublicIPs
                                                                   description: Resource IDs of the public IP addresses that this integration runtime will use.
                                                               protocol: {}
                                                             serializedName: publicIPs
                                                             language:
                                                               default:
-                                                                name: public_i_Ps
+                                                                name: public_i_ps
                                                                 description: Resource IDs of the public IP addresses that this integration runtime will use.
                                                               cli:
                                                                 cliKey: publicIPs
@@ -4535,7 +4535,7 @@ schemas:
                                                           - input
                                                         language:
                                                           default:
-                                                            name: integration_runtime_v_net_properties
+                                                            name: IntegrationRuntimeVNetProperties
                                                             description: VNet properties for managed integration runtime.
                                                             namespace: ''
                                                           cli:
@@ -4560,7 +4560,7 @@ schemas:
                                                     - input
                                                   language:
                                                     default:
-                                                      name: integration_runtime_compute_properties
+                                                      name: IntegrationRuntimeComputeProperties
                                                       description: The compute resource properties for managed integration runtime.
                                                       namespace: ''
                                                     cli:
@@ -4664,7 +4664,7 @@ schemas:
                                                                       - input
                                                                     language:
                                                                       default:
-                                                                        name: secret_base
+                                                                        name: SecretBase
                                                                         description: The base definition of a secret type.
                                                                         namespace: ''
                                                                       cli:
@@ -4696,7 +4696,7 @@ schemas:
                                                                 x-ms-discriminator-value: SecureString
                                                               language:
                                                                 default:
-                                                                  name: secure_string
+                                                                  name: SecureString
                                                                   description: Azure Data Factory secure string definition. The string value will be masked with asterisks '*' during Get or List API calls.
                                                                   namespace: ''
                                                                 cli:
@@ -4733,7 +4733,7 @@ schemas:
                                                           - input
                                                         language:
                                                           default:
-                                                            name: integration_runtime_ssis_catalog_info
+                                                            name: IntegrationRuntimeSsisCatalogInfo
                                                             description: Catalog information for managed dedicated integration runtime.
                                                             namespace: ''
                                                           cli:
@@ -4796,7 +4796,7 @@ schemas:
                                                           - input
                                                         language:
                                                           default:
-                                                            name: integration_runtime_custom_setup_script_properties
+                                                            name: IntegrationRuntimeCustomSetupScriptProperties
                                                             description: Custom setup script properties for a managed dedicated integration runtime.
                                                             namespace: ''
                                                           cli:
@@ -4853,7 +4853,7 @@ schemas:
                                                                 - input
                                                               language:
                                                                 default:
-                                                                  name: entity_reference
+                                                                  name: EntityReference
                                                                   description: The entity reference.
                                                                   namespace: ''
                                                                 cli:
@@ -4900,7 +4900,7 @@ schemas:
                                                           - input
                                                         language:
                                                           default:
-                                                            name: integration_runtime_data_proxy_properties
+                                                            name: IntegrationRuntimeDataProxyProperties
                                                             description: Data proxy properties for a managed dedicated integration runtime.
                                                             namespace: ''
                                                           cli:
@@ -4998,7 +4998,7 @@ schemas:
                                                                         - input
                                                                       language:
                                                                         default:
-                                                                          name: cmdkey_setup_type_properties
+                                                                          name: CmdkeySetupTypeProperties
                                                                           description: Cmdkey command custom setup type properties.
                                                                           namespace: ''
                                                                         cli:
@@ -5026,7 +5026,7 @@ schemas:
                                                                   - input
                                                                 language:
                                                                   default:
-                                                                    name: cmdkey_setup
+                                                                    name: CmdkeySetup
                                                                     description: The custom setup of running cmdkey commands.
                                                                     namespace: ''
                                                                   cli:
@@ -5082,7 +5082,7 @@ schemas:
                                                                         - input
                                                                       language:
                                                                         default:
-                                                                          name: environment_variable_setup_type_properties
+                                                                          name: EnvironmentVariableSetupTypeProperties
                                                                           description: Environment variable custom setup type properties.
                                                                           namespace: ''
                                                                         cli:
@@ -5110,7 +5110,7 @@ schemas:
                                                                   - input
                                                                 language:
                                                                   default:
-                                                                    name: environment_variable_setup
+                                                                    name: EnvironmentVariableSetup
                                                                     description: The custom setup of setting environment variable.
                                                                     namespace: ''
                                                                   cli:
@@ -5166,7 +5166,7 @@ schemas:
                                                                         - input
                                                                       language:
                                                                         default:
-                                                                          name: licensed_component_setup_type_properties
+                                                                          name: LicensedComponentSetupTypeProperties
                                                                           description: Installation of licensed component setup type properties.
                                                                           namespace: ''
                                                                         cli:
@@ -5194,7 +5194,7 @@ schemas:
                                                                   - input
                                                                 language:
                                                                   default:
-                                                                    name: component_setup
+                                                                    name: ComponentSetup
                                                                     description: The custom setup of installing 3rd party components.
                                                                     namespace: ''
                                                                   cli:
@@ -5239,7 +5239,7 @@ schemas:
                                                             - input
                                                           language:
                                                             default:
-                                                              name: custom_setup_base
+                                                              name: CustomSetupBase
                                                               description: The base definition of the custom setup.
                                                               namespace: ''
                                                             cli:
@@ -5249,7 +5249,7 @@ schemas:
                                                           protocol: {}
                                                         language:
                                                           default:
-                                                            name: integration_runtime_ssis_properties_express_custom_setup_properties
+                                                            name: IntegrationRuntimeSsisPropertiesExpressCustomSetupProperties
                                                             description: Custom setup without script properties for a SSIS integration runtime.
                                                         protocol: {}
                                                       serializedName: expressCustomSetupProperties
@@ -5302,7 +5302,7 @@ schemas:
                                                             - input
                                                           language:
                                                             default:
-                                                              name: package_store
+                                                              name: PackageStore
                                                               description: Package store for the SSIS integration runtime.
                                                               namespace: ''
                                                             cli:
@@ -5312,7 +5312,7 @@ schemas:
                                                           protocol: {}
                                                         language:
                                                           default:
-                                                            name: integration_runtime_ssis_properties_package_stores
+                                                            name: IntegrationRuntimeSsisPropertiesPackageStores
                                                             description: Package stores for the SSIS Integration Runtime.
                                                         protocol: {}
                                                       serializedName: packageStores
@@ -5332,7 +5332,7 @@ schemas:
                                                     - input
                                                   language:
                                                     default:
-                                                      name: integration_runtime_ssis_properties
+                                                      name: IntegrationRuntimeSsisProperties
                                                       description: SSIS properties for managed integration runtime.
                                                       namespace: ''
                                                     cli:
@@ -5357,7 +5357,7 @@ schemas:
                                               - input
                                             language:
                                               default:
-                                                name: managed_integration_runtime_type_properties
+                                                name: ManagedIntegrationRuntimeTypeProperties
                                                 description: Managed integration runtime type properties.
                                                 namespace: ''
                                               cli:
@@ -5423,7 +5423,7 @@ schemas:
                                         x-ms-discriminator-value: Managed
                                       language:
                                         default:
-                                          name: managed_integration_runtime
+                                          name: ManagedIntegrationRuntime
                                           description: 'Managed integration runtime, including managed elastic and managed dedicated integration runtimes.'
                                           namespace: ''
                                         cli:
@@ -5487,7 +5487,7 @@ schemas:
                                                           x-ms-discriminator-value: Key
                                                         language:
                                                           default:
-                                                            name: linked_integration_runtime_key_authorization
+                                                            name: LinkedIntegrationRuntimeKeyAuthorization
                                                             description: The key authorization type integration runtime.
                                                             namespace: ''
                                                           cli:
@@ -5528,7 +5528,7 @@ schemas:
                                                           x-ms-discriminator-value: RBAC
                                                         language:
                                                           default:
-                                                            name: linked_integration_runtime_rbac_authorization
+                                                            name: LinkedIntegrationRuntimeRbacAuthorization
                                                             description: The role based access control (RBAC) authorization type integration runtime.
                                                             namespace: ''
                                                           cli:
@@ -5570,7 +5570,7 @@ schemas:
                                                     - input
                                                   language:
                                                     default:
-                                                      name: linked_integration_runtime_type
+                                                      name: LinkedIntegrationRuntimeType
                                                       description: The base definition of a linked integration runtime.
                                                       namespace: ''
                                                     cli:
@@ -5595,7 +5595,7 @@ schemas:
                                               - input
                                             language:
                                               default:
-                                                name: self_hosted_integration_runtime_type_properties
+                                                name: SelfHostedIntegrationRuntimeTypeProperties
                                                 description: The self-hosted integration runtime properties.
                                                 namespace: ''
                                               cli:
@@ -5624,7 +5624,7 @@ schemas:
                                         x-ms-discriminator-value: SelfHosted
                                       language:
                                         default:
-                                          name: self_hosted_integration_runtime
+                                          name: SelfHostedIntegrationRuntime
                                           description: Self-hosted integration runtime.
                                           namespace: ''
                                         cli:
@@ -5684,7 +5684,7 @@ schemas:
                                   - input
                                 language:
                                   default:
-                                    name: integration_runtime
+                                    name: IntegrationRuntime
                                     description: Azure Data Factory nested object which serves as a compute resource for activities.
                                     namespace: ''
                                   cli:
@@ -5711,7 +5711,7 @@ schemas:
                             - output
                           language:
                             default:
-                              name: integration_runtime_resource
+                              name: IntegrationRuntimeResource
                               description: Integration runtime resource type.
                               namespace: ''
                             cli:
@@ -5780,7 +5780,7 @@ schemas:
                       x-ms-azure-resource: true
                     language:
                       default:
-                        name: sub_resource
+                        name: SubResource
                         description: 'Azure Data Factory nested resource, which belongs to a factory.'
                         namespace: ''
                       cli:
@@ -5901,7 +5901,7 @@ schemas:
                                                         elementType: *ref_129
                                                         language:
                                                           default:
-                                                            name: array_ofarray_itemschema
+                                                            name: ArrayOfarrayItemschema
                                                             description: The minutes.
                                                         protocol: {}
                                                       serializedName: minutes
@@ -5919,7 +5919,7 @@ schemas:
                                                         elementType: *ref_129
                                                         language:
                                                           default:
-                                                            name: array_ofarray_itemschema
+                                                            name: ArrayOfarrayItemschema
                                                             description: The hours.
                                                         protocol: {}
                                                       serializedName: hours
@@ -5939,7 +5939,7 @@ schemas:
                                                         elementType: *ref_130
                                                         language:
                                                           default:
-                                                            name: recurrence_schedule_week_days
+                                                            name: RecurrenceScheduleWeekDays
                                                             description: The days of the week.
                                                         protocol: {}
                                                       serializedName: weekDays
@@ -5957,7 +5957,7 @@ schemas:
                                                         elementType: *ref_129
                                                         language:
                                                           default:
-                                                            name: array_ofarray_itemschema
+                                                            name: ArrayOfarrayItemschema
                                                             description: The month days.
                                                         protocol: {}
                                                       serializedName: monthDays
@@ -6013,7 +6013,7 @@ schemas:
                                                             - input
                                                           language:
                                                             default:
-                                                              name: recurrence_schedule_occurrence
+                                                              name: RecurrenceScheduleOccurrence
                                                               description: The recurrence schedule occurrence.
                                                               namespace: ''
                                                             cli:
@@ -6023,7 +6023,7 @@ schemas:
                                                           protocol: {}
                                                         language:
                                                           default:
-                                                            name: recurrence_schedule_monthly_occurrences
+                                                            name: RecurrenceScheduleMonthlyOccurrences
                                                             description: The monthly occurrences.
                                                         protocol: {}
                                                       serializedName: monthlyOccurrences
@@ -6043,7 +6043,7 @@ schemas:
                                                     - input
                                                   language:
                                                     default:
-                                                      name: recurrence_schedule
+                                                      name: RecurrenceSchedule
                                                       description: The recurrence schedule.
                                                       namespace: ''
                                                     cli:
@@ -6068,7 +6068,7 @@ schemas:
                                               - input
                                             language:
                                               default:
-                                                name: schedule_trigger_recurrence
+                                                name: ScheduleTriggerRecurrence
                                                 description: The workflow trigger recurrence.
                                                 namespace: ''
                                               cli:
@@ -6096,7 +6096,7 @@ schemas:
                                         x-ms-client-flatten: true
                                       language:
                                         default:
-                                          name: schedule_trigger_type_properties
+                                          name: ScheduleTriggerTypeProperties
                                           description: Schedule Trigger properties.
                                           namespace: ''
                                         cli:
@@ -6124,7 +6124,7 @@ schemas:
                                   - input
                                 language:
                                   default:
-                                    name: schedule_trigger
+                                    name: ScheduleTrigger
                                     description: 'Trigger that creates pipeline runs periodically, on schedule.'
                                     namespace: ''
                                   cli:
@@ -6223,7 +6223,7 @@ schemas:
                                               - input
                                             language:
                                               default:
-                                                name: linked_service_reference
+                                                name: LinkedServiceReference
                                                 description: Linked service reference type.
                                                 namespace: ''
                                               cli:
@@ -6251,7 +6251,7 @@ schemas:
                                         x-ms-client-flatten: true
                                       language:
                                         default:
-                                          name: blob_trigger_type_properties
+                                          name: BlobTriggerTypeProperties
                                           description: Blob Trigger properties.
                                           namespace: ''
                                         cli:
@@ -6279,7 +6279,7 @@ schemas:
                                   - input
                                 language:
                                   default:
-                                    name: blob_trigger
+                                    name: BlobTrigger
                                     description: Trigger that runs every time the selected Blob container changes.
                                     namespace: ''
                                   cli:
@@ -6353,7 +6353,7 @@ schemas:
                                             elementType: *ref_142
                                             language:
                                               default:
-                                                name: blob_event_types
+                                                name: BlobEventTypes
                                                 description: Blob event types.
                                             protocol: {}
                                           required: true
@@ -6388,7 +6388,7 @@ schemas:
                                         x-ms-client-flatten: true
                                       language:
                                         default:
-                                          name: blob_events_trigger_type_properties
+                                          name: BlobEventsTriggerTypeProperties
                                           description: Blob Events Trigger properties.
                                           namespace: ''
                                         cli:
@@ -6416,7 +6416,7 @@ schemas:
                                   - input
                                 language:
                                   default:
-                                    name: blob_events_trigger
+                                    name: BlobEventsTrigger
                                     description: Trigger that runs every time a Blob event occurs.
                                     namespace: ''
                                   cli:
@@ -6517,7 +6517,7 @@ schemas:
                                           - input
                                         language:
                                           default:
-                                            name: pipeline_reference
+                                            name: PipelineReference
                                             description: Pipeline reference type.
                                             namespace: ''
                                           cli:
@@ -6553,7 +6553,7 @@ schemas:
                                     - input
                                   language:
                                     default:
-                                      name: trigger_pipeline_reference
+                                      name: TriggerPipelineReference
                                       description: Pipeline that needs to be triggered with the given parameters.
                                       namespace: ''
                                     cli:
@@ -6563,7 +6563,7 @@ schemas:
                                   protocol: {}
                                 language:
                                   default:
-                                    name: multiple_pipeline_trigger_pipelines
+                                    name: MultiplePipelineTriggerPipelines
                                     description: Pipelines that need to be started.
                                 protocol: {}
                               serializedName: pipelines
@@ -6585,7 +6585,7 @@ schemas:
                             x-ms-discriminator-value: MultiplePipelineTrigger
                           language:
                             default:
-                              name: multiple_pipeline_trigger
+                              name: MultiplePipelineTrigger
                               description: Base class for all triggers that support one to many model for trigger to pipeline.
                               namespace: ''
                             cli:
@@ -6734,7 +6734,7 @@ schemas:
                                         - input
                                       language:
                                         default:
-                                          name: retry_policy
+                                          name: RetryPolicy
                                           description: Execution policy for an activity.
                                           namespace: ''
                                         cli:
@@ -6810,7 +6810,7 @@ schemas:
                                                       - input
                                                     language:
                                                       default:
-                                                        name: tumbling_window_trigger_dependency_reference
+                                                        name: TumblingWindowTriggerDependencyReference
                                                         description: Referenced tumbling window trigger dependency.
                                                         namespace: ''
                                                       cli:
@@ -6883,7 +6883,7 @@ schemas:
                                                       - input
                                                     language:
                                                       default:
-                                                        name: trigger_reference
+                                                        name: TriggerReference
                                                         description: Trigger reference type.
                                                         namespace: ''
                                                       cli:
@@ -6909,7 +6909,7 @@ schemas:
                                                 - input
                                               language:
                                                 default:
-                                                  name: trigger_dependency_reference
+                                                  name: TriggerDependencyReference
                                                   description: Trigger referenced dependency.
                                                   namespace: ''
                                                 cli:
@@ -6961,7 +6961,7 @@ schemas:
                                                 - input
                                               language:
                                                 default:
-                                                  name: self_dependency_tumbling_window_trigger_reference
+                                                  name: SelfDependencyTumblingWindowTriggerReference
                                                   description: Self referenced tumbling window trigger dependency.
                                                   namespace: ''
                                                 cli:
@@ -6991,7 +6991,7 @@ schemas:
                                           - input
                                         language:
                                           default:
-                                            name: dependency_reference
+                                            name: DependencyReference
                                             description: Referenced dependency.
                                             namespace: ''
                                           cli:
@@ -7001,7 +7001,7 @@ schemas:
                                         protocol: {}
                                       language:
                                         default:
-                                          name: tumbling_window_trigger_type_properties_depends_on
+                                          name: TumblingWindowTriggerTypePropertiesDependsOn
                                           description: Triggers that this trigger depends on. Only tumbling window triggers are supported.
                                       protocol: {}
                                     required: false
@@ -7024,7 +7024,7 @@ schemas:
                                   x-ms-client-flatten: true
                                 language:
                                   default:
-                                    name: tumbling_window_trigger_type_properties
+                                    name: TumblingWindowTriggerTypeProperties
                                     description: Tumbling Window Trigger properties.
                                     namespace: ''
                                   cli:
@@ -7052,7 +7052,7 @@ schemas:
                             - input
                           language:
                             default:
-                              name: tumbling_window_trigger
+                              name: TumblingWindowTrigger
                               description: Trigger that schedules pipeline runs for all fixed time interval windows from a start time without gaps and also supports backfill scenarios (when start time is in the past).
                               namespace: ''
                             cli:
@@ -7135,7 +7135,7 @@ schemas:
                                   x-ms-client-flatten: true
                                 language:
                                   default:
-                                    name: rerun_tumbling_window_trigger_type_properties
+                                    name: RerunTumblingWindowTriggerTypeProperties
                                     description: Rerun Trigger properties.
                                     namespace: ''
                                   cli:
@@ -7163,7 +7163,7 @@ schemas:
                             - input
                           language:
                             default:
-                              name: rerun_tumbling_window_trigger
+                              name: RerunTumblingWindowTrigger
                               description: Trigger that schedules pipeline reruns for all fixed time interval windows from a requested start time to requested end time.
                               namespace: ''
                             cli:
@@ -7208,7 +7208,7 @@ schemas:
                                       elementType: *ref_173
                                       language:
                                         default:
-                                          name: chaining_trigger_type_properties_depends_on
+                                          name: ChainingTriggerTypePropertiesDependsOn
                                           description: Upstream Pipelines.
                                       protocol: {}
                                     required: true
@@ -7243,7 +7243,7 @@ schemas:
                                   x-ms-client-flatten: true
                                 language:
                                   default:
-                                    name: chaining_trigger_type_properties
+                                    name: ChainingTriggerTypeProperties
                                     description: Chaining Trigger properties.
                                     namespace: ''
                                   cli:
@@ -7271,7 +7271,7 @@ schemas:
                             - input
                           language:
                             default:
-                              name: chaining_trigger
+                              name: ChainingTrigger
                               description: >-
                                 Trigger that allows the referenced pipeline to depend on other pipeline runs based on runDimension Name/Value pairs. Upstream pipelines should declare the same runDimension Name and their runs should have the
                                 values for those runDimensions. The referenced pipeline run would be triggered if the values for the runDimension match for all upstream pipeline runs.
@@ -7342,7 +7342,7 @@ schemas:
                           elementType: *ref_2
                           language:
                             default:
-                              name: trigger_annotations
+                              name: TriggerAnnotations
                               description: List of tags that can be used for describing the trigger.
                           protocol: {}
                         required: false
@@ -7363,7 +7363,7 @@ schemas:
                       - input
                     language:
                       default:
-                        name: trigger
+                        name: Trigger
                         description: Azure data factory nested object which contains information about creating pipeline run
                         namespace: ''
                       cli:
@@ -7390,7 +7390,7 @@ schemas:
                 - output
               language:
                 default:
-                  name: trigger_resource
+                  name: TriggerResource
                   description: Trigger resource type.
                   namespace: ''
                 cli:
@@ -7400,7 +7400,7 @@ schemas:
               protocol: {}
             language:
               default:
-                name: trigger_list_response_value
+                name: TriggerListResponseValue
                 description: List of triggers.
             protocol: {}
           required: true
@@ -7432,7 +7432,7 @@ schemas:
         - output
       language:
         default:
-          name: trigger_list_response
+          name: TriggerListResponse
           description: A list of trigger resources.
           namespace: ''
         cli:
@@ -7476,7 +7476,7 @@ schemas:
         - input
       language:
         default:
-          name: trigger_filter_parameters
+          name: TriggerFilterParameters
           description: Query parameters for triggers.
           namespace: ''
         cli:
@@ -7496,7 +7496,7 @@ schemas:
             elementType: *ref_57
             language:
               default:
-                name: trigger_query_response_value
+                name: TriggerQueryResponseValue
                 description: List of triggers.
             protocol: {}
           required: true
@@ -7528,7 +7528,7 @@ schemas:
         - output
       language:
         default:
-          name: trigger_query_response
+          name: TriggerQueryResponse
           description: A query of triggers.
           namespace: ''
         cli:
@@ -7571,7 +7571,7 @@ schemas:
         - output
       language:
         default:
-          name: trigger_subscription_operation_status
+          name: TriggerSubscriptionOperationStatus
           description: Defines the response of a trigger subscription operation.
           namespace: ''
         cli:
@@ -7591,7 +7591,7 @@ schemas:
             elementType: *ref_114
             language:
               default:
-                name: integration_runtime_list_response_value
+                name: IntegrationRuntimeListResponseValue
                 description: List of integration runtimes.
             protocol: {}
           required: true
@@ -7623,7 +7623,7 @@ schemas:
         - output
       language:
         default:
-          name: integration_runtime_list_response
+          name: IntegrationRuntimeListResponse
           description: A list of integration runtime resources.
           namespace: ''
         cli:
@@ -7666,7 +7666,7 @@ schemas:
         - input
       language:
         default:
-          name: update_integration_runtime_request
+          name: UpdateIntegrationRuntimeRequest
           description: Update integration runtime request.
           namespace: ''
         cli:
@@ -7810,7 +7810,7 @@ schemas:
                                               elementType: *ref_200
                                               language:
                                                 default:
-                                                  name: managed_integration_runtime_error_parameters
+                                                  name: ManagedIntegrationRuntimeErrorParameters
                                                   description: Managed integration runtime error parameters.
                                               protocol: {}
                                             readOnly: true
@@ -7842,7 +7842,7 @@ schemas:
                                           - output
                                         language:
                                           default:
-                                            name: managed_integration_runtime_error
+                                            name: ManagedIntegrationRuntimeError
                                             description: Error definition for managed integration runtime.
                                             namespace: ''
                                           cli:
@@ -7852,7 +7852,7 @@ schemas:
                                         protocol: {}
                                       language:
                                         default:
-                                          name: managed_integration_runtime_node_errors
+                                          name: ManagedIntegrationRuntimeNodeErrors
                                           description: The errors that occurred on this integration runtime node.
                                       protocol: {}
                                     serializedName: errors
@@ -7871,7 +7871,7 @@ schemas:
                                   - output
                                 language:
                                   default:
-                                    name: managed_integration_runtime_node
+                                    name: ManagedIntegrationRuntimeNode
                                     description: Properties of integration runtime node.
                                     namespace: ''
                                   cli:
@@ -7881,7 +7881,7 @@ schemas:
                                 protocol: {}
                               language:
                                 default:
-                                  name: managed_integration_runtime_status_type_properties_nodes
+                                  name: ManagedIntegrationRuntimeStatusTypePropertiesNodes
                                   description: The list of nodes for managed integration runtime.
                               protocol: {}
                             readOnly: true
@@ -7902,7 +7902,7 @@ schemas:
                               elementType: *ref_202
                               language:
                                 default:
-                                  name: managed_integration_runtime_status_type_properties_other_errors
+                                  name: ManagedIntegrationRuntimeStatusTypePropertiesOtherErrors
                                   description: The errors that occurred on this integration runtime.
                               protocol: {}
                             readOnly: true
@@ -7981,7 +7981,7 @@ schemas:
                                     elementType: *ref_208
                                     language:
                                       default:
-                                        name: managed_integration_runtime_operation_result_parameters
+                                        name: ManagedIntegrationRuntimeOperationResultParameters
                                         description: Managed integration runtime error parameters.
                                     protocol: {}
                                   readOnly: true
@@ -8013,7 +8013,7 @@ schemas:
                                 - output
                               language:
                                 default:
-                                  name: managed_integration_runtime_operation_result
+                                  name: ManagedIntegrationRuntimeOperationResult
                                   description: Properties of managed integration runtime operation result.
                                   namespace: ''
                                 cli:
@@ -8038,7 +8038,7 @@ schemas:
                           - output
                         language:
                           default:
-                            name: managed_integration_runtime_status_type_properties
+                            name: ManagedIntegrationRuntimeStatusTypeProperties
                             description: Managed integration runtime status type properties.
                             namespace: ''
                           cli:
@@ -8067,7 +8067,7 @@ schemas:
                     x-ms-discriminator-value: Managed
                   language:
                     default:
-                      name: managed_integration_runtime_status
+                      name: ManagedIntegrationRuntimeStatus
                       description: Managed integration runtime status.
                       namespace: ''
                     cli:
@@ -8377,7 +8377,7 @@ schemas:
                                   - output
                                 language:
                                   default:
-                                    name: self_hosted_integration_runtime_node
+                                    name: SelfHostedIntegrationRuntimeNode
                                     description: Properties of Self-hosted integration runtime node.
                                     namespace: ''
                                   cli:
@@ -8387,7 +8387,7 @@ schemas:
                                 protocol: {}
                               language:
                                 default:
-                                  name: self_hosted_integration_runtime_status_type_properties_nodes
+                                  name: SelfHostedIntegrationRuntimeStatusTypePropertiesNodes
                                   description: The list of nodes for this integration runtime.
                               protocol: {}
                             serializedName: nodes
@@ -8455,7 +8455,7 @@ schemas:
                               elementType: *ref_237
                               language:
                                 default:
-                                  name: self_hosted_integration_runtime_status_type_properties_service_urls
+                                  name: SelfHostedIntegrationRuntimeStatusTypePropertiesServiceUrls
                                   description: The URLs for the services used in integration runtime backend service.
                               protocol: {}
                             readOnly: true
@@ -8568,7 +8568,7 @@ schemas:
                                   - output
                                 language:
                                   default:
-                                    name: linked_integration_runtime
+                                    name: LinkedIntegrationRuntime
                                     description: The linked integration runtime information.
                                     namespace: ''
                                   cli:
@@ -8578,7 +8578,7 @@ schemas:
                                 protocol: {}
                               language:
                                 default:
-                                  name: self_hosted_integration_runtime_status_type_properties_links
+                                  name: SelfHostedIntegrationRuntimeStatusTypePropertiesLinks
                                   description: The list of linked integration runtimes that are created to share with this integration runtime.
                               protocol: {}
                             serializedName: links
@@ -8620,7 +8620,7 @@ schemas:
                             serializedName: autoUpdateETA
                             language:
                               default:
-                                name: auto_update_ETA
+                                name: auto_update_eta
                                 description: The estimated time when the self-hosted integration runtime will be updated.
                               cli:
                                 cliKey: autoUpdateETA
@@ -8633,7 +8633,7 @@ schemas:
                           - output
                         language:
                           default:
-                            name: self_hosted_integration_runtime_status_type_properties
+                            name: SelfHostedIntegrationRuntimeStatusTypeProperties
                             description: Self-hosted integration runtime status type properties.
                             namespace: ''
                           cli:
@@ -8662,7 +8662,7 @@ schemas:
                     x-ms-discriminator-value: SelfHosted
                   language:
                     default:
-                      name: self_hosted_integration_runtime_status
+                      name: SelfHostedIntegrationRuntimeStatus
                       description: Self-hosted integration runtime status.
                       namespace: ''
                     cli:
@@ -8735,7 +8735,7 @@ schemas:
               - output
             language:
               default:
-                name: integration_runtime_status
+                name: IntegrationRuntimeStatus
                 description: Integration runtime status.
                 namespace: ''
               cli:
@@ -8761,7 +8761,7 @@ schemas:
         - output
       language:
         default:
-          name: integration_runtime_status_response
+          name: IntegrationRuntimeStatusResponse
           description: Integration runtime status response.
           namespace: ''
         cli:
@@ -8858,7 +8858,7 @@ schemas:
         - output
       language:
         default:
-          name: integration_runtime_connection_info
+          name: IntegrationRuntimeConnectionInfo
           description: Connection information for encrypting the on-premises data source credentials.
           namespace: ''
         cli:
@@ -8888,7 +8888,7 @@ schemas:
         - input
       language:
         default:
-          name: integration_runtime_regenerate_key_parameters
+          name: IntegrationRuntimeRegenerateKeyParameters
           description: Parameters to regenerate the authentication key.
           namespace: ''
         cli:
@@ -8929,7 +8929,7 @@ schemas:
         - output
       language:
         default:
-          name: integration_runtime_auth_keys
+          name: IntegrationRuntimeAuthKeys
           description: The integration runtime authentication keys.
           namespace: ''
         cli:
@@ -8984,7 +8984,7 @@ schemas:
                   serializedName: availableMemoryInMB
                   language:
                     default:
-                      name: available_memory_in_MB
+                      name: available_memory_in_mb
                       description: Available memory (MB) on the integration runtime node.
                     cli:
                       cliKey: availableMemoryInMB
@@ -9069,7 +9069,7 @@ schemas:
                 - output
               language:
                 default:
-                  name: integration_runtime_node_monitoring_data
+                  name: IntegrationRuntimeNodeMonitoringData
                   description: Monitoring data for integration runtime node.
                   namespace: ''
                 cli:
@@ -9079,7 +9079,7 @@ schemas:
               protocol: {}
             language:
               default:
-                name: integration_runtime_monitoring_data_nodes
+                name: IntegrationRuntimeMonitoringDataNodes
                 description: Integration runtime node monitoring data.
             protocol: {}
           serializedName: nodes
@@ -9098,7 +9098,7 @@ schemas:
         - output
       language:
         default:
-          name: integration_runtime_monitoring_data
+          name: IntegrationRuntimeMonitoringData
           description: Get monitoring data response.
           namespace: ''
         cli:
@@ -9130,7 +9130,7 @@ schemas:
         - input
       language:
         default:
-          name: linked_integration_runtime_request
+          name: LinkedIntegrationRuntimeRequest
           description: Data factory name for linked integration runtime request.
           namespace: ''
         cli:
@@ -9193,7 +9193,7 @@ schemas:
         - input
       language:
         default:
-          name: create_linked_integration_runtime_request
+          name: CreateLinkedIntegrationRuntimeRequest
           description: The linked integration runtime information.
           namespace: ''
         cli:
@@ -9270,7 +9270,7 @@ schemas:
           protocol: {}
       language:
         default:
-          name: integration_runtime_reference
+          name: IntegrationRuntimeReference
           description: Integration runtime reference type.
           namespace: ''
         cli:
@@ -9289,7 +9289,7 @@ schemas:
             elementType: *ref_289
             language:
               default:
-                name: integration_runtime_status_list_response_value
+                name: IntegrationRuntimeStatusListResponseValue
                 description: List of integration runtime status.
             protocol: {}
           required: true
@@ -9317,7 +9317,7 @@ schemas:
           protocol: {}
       language:
         default:
-          name: integration_runtime_status_list_response
+          name: IntegrationRuntimeStatusListResponse
           description: A list of integration runtime status.
           namespace: ''
         cli:
@@ -9377,7 +9377,7 @@ schemas:
           protocol: {}
       language:
         default:
-          name: integration_runtime_node_ip_address
+          name: IntegrationRuntimeNodeIpAddress
           description: The IP address of self-hosted integration runtime node.
           namespace: ''
         cli:
@@ -9413,7 +9413,7 @@ schemas:
                       x-ms-discriminator-value: Folder
                     language:
                       default:
-                        name: ssis_folder
+                        name: SsisFolder
                         description: Ssis folder.
                         namespace: ''
                       cli:
@@ -9510,7 +9510,7 @@ schemas:
                                 protocol: {}
                             language:
                               default:
-                                name: ssis_environment_reference
+                                name: SsisEnvironmentReference
                                 description: Ssis environment reference.
                                 namespace: ''
                               cli:
@@ -9520,7 +9520,7 @@ schemas:
                             protocol: {}
                           language:
                             default:
-                              name: ssis_project_environment_refs
+                              name: SsisProjectEnvironmentRefs
                               description: Environment reference in project
                           protocol: {}
                         serializedName: environmentRefs
@@ -9676,7 +9676,7 @@ schemas:
                                 protocol: {}
                             language:
                               default:
-                                name: ssis_parameter
+                                name: SsisParameter
                                 description: Ssis parameter.
                                 namespace: ''
                               cli:
@@ -9686,7 +9686,7 @@ schemas:
                             protocol: {}
                           language:
                             default:
-                              name: ssis_project_parameters
+                              name: SsisProjectParameters
                               description: Parameters in project
                           protocol: {}
                         serializedName: parameters
@@ -9703,7 +9703,7 @@ schemas:
                       x-ms-discriminator-value: Project
                     language:
                       default:
-                        name: ssis_project
+                        name: SsisProject
                         description: Ssis project.
                         namespace: ''
                       cli:
@@ -9763,7 +9763,7 @@ schemas:
                           elementType: *ref_333
                           language:
                             default:
-                              name: ssis_package_parameters
+                              name: SsisPackageParameters
                               description: Parameters in package
                           protocol: {}
                         serializedName: parameters
@@ -9780,7 +9780,7 @@ schemas:
                       x-ms-discriminator-value: Package
                     language:
                       default:
-                        name: ssis_package
+                        name: SsisPackage
                         description: Ssis Package.
                         namespace: ''
                       cli:
@@ -9899,7 +9899,7 @@ schemas:
                                 protocol: {}
                             language:
                               default:
-                                name: ssis_variable
+                                name: SsisVariable
                                 description: Ssis variable.
                                 namespace: ''
                               cli:
@@ -9909,7 +9909,7 @@ schemas:
                             protocol: {}
                           language:
                             default:
-                              name: ssis_environment_variables
+                              name: SsisEnvironmentVariables
                               description: Variable in environment
                           protocol: {}
                         serializedName: variables
@@ -9926,7 +9926,7 @@ schemas:
                       x-ms-discriminator-value: Environment
                     language:
                       default:
-                        name: ssis_environment
+                        name: SsisEnvironment
                         description: Ssis environment.
                         namespace: ''
                       cli:
@@ -10005,7 +10005,7 @@ schemas:
                   protocol: {}
               language:
                 default:
-                  name: ssis_object_metadata
+                  name: SsisObjectMetadata
                   description: SSIS object metadata.
                   namespace: ''
                 cli:
@@ -10015,7 +10015,7 @@ schemas:
               protocol: {}
             language:
               default:
-                name: ssis_object_metadata_list_response_value
+                name: SsisObjectMetadataListResponseValue
                 description: List of SSIS object metadata.
             protocol: {}
           serializedName: value
@@ -10041,7 +10041,7 @@ schemas:
           protocol: {}
       language:
         default:
-          name: ssis_object_metadata_list_response
+          name: SsisObjectMetadataListResponse
           description: A list of SSIS object metadata.
           namespace: ''
         cli:
@@ -10139,7 +10139,7 @@ globalParameters:
     required: true
     language:
       default:
-        name: apiVersion
+        name: apiversion
         description: Api Version
         serializedName: api-version
       cli:
@@ -11453,7 +11453,7 @@ operationGroups:
         protocol: {}
     language:
       default:
-        name: factories
+        name: Factories
         description: ''
       cli:
         cliKey: Factories
@@ -12875,7 +12875,7 @@ operationGroups:
         protocol: {}
     language:
       default:
-        name: triggers
+        name: Triggers
         description: ''
       cli:
         cliKey: Triggers
@@ -15102,7 +15102,7 @@ operationGroups:
         protocol: {}
     language:
       default:
-        name: integration_runtimes
+        name: IntegrationRuntimes
         description: ''
       cli:
         cliKey: IntegrationRuntimes
