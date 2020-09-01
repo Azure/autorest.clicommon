@@ -60,9 +60,9 @@ For groupName, operationName, parameterName, typeName, propertyName, usually you
   - optional
 - json:
   - add 'json: ...' under 'language->cli'.
-  - add 'x-ms-client-flatten: false' under 'extensions' and 'cli-flatten: false' under 'language->cli' if 'json: true'. Note: if command includes argument'--target-mode=core' or '--sdk-no-flatter', 'x-ms-client-flatten' won't be changed.
+  - add 'x-ms-client-flatten: false' under 'extensions' and 'cli-flatten: false' under 'language->cli' if 'json: true'.
 - flatten:
-  - add 'x-ms-client-flatten: ..." under 'extensions'
+  - add 'cli-flatten: ..." under 'extensions'
 - formatTable:
   - add properties information  under 'language->cli'.
   - optional
@@ -87,10 +87,6 @@ For groupName, operationName, parameterName, typeName, propertyName, usually you
     - opName1
     - opName2
     - ...
-- cli-flatten
-  - flatten object
-  - add 'cli-flatten: ..." under 'language->cli'
-  - optional
 
 ## How to troubleshooting
 > Add --debug in your command line to have more intermedia output files for troubleshooting
