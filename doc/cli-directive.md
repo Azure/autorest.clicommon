@@ -62,7 +62,7 @@ For groupName, operationName, parameterName, typeName, propertyName, usually you
   - add 'json: ...' under 'language->cli'.
   - add 'x-ms-client-flatten: false' under 'extensions' and 'cli-flatten: false' under 'language->cli' if 'json: true'.
 - flatten:
-  - add 'cli-flatten: ..." under 'extensions'
+  - add 'cli-flatten: ..." under 'language->cli'
 - formatTable:
   - add properties information  under 'language->cli'.
   - optional
@@ -87,6 +87,10 @@ For groupName, operationName, parameterName, typeName, propertyName, usually you
     - opName1
     - opName2
     - ...
+- min-api:
+  - add 'min-api: ..." under 'language->cli'
+- max-api:
+  - add 'max-api: ..." under 'language->cli'
 
 ## How to troubleshooting
 > Add --debug in your command line to have more intermedia output files for troubleshooting

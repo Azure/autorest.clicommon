@@ -17,6 +17,8 @@ export class NodeCliHelper {
     public static readonly CLI_M4_PATH: string = 'cliM4Path';
     public static readonly CLI_PATH: string = 'cliPath';
     public static readonly CLI_FLATTEN_TRACE: string = 'cliFlattenTrace';
+    public static readonly CLI_MIN_API: string = 'min-api';
+    public static readonly CLI_MAX_API: string = 'max-api';
 
     private static readonly CLI: string = "cli";
     private static readonly NAME: string = "name";
