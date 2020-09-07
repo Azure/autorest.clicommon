@@ -270,6 +270,8 @@ cli:
                 cmyk : CMYK
                 $host: $host
                 LRO: LRO
+                # workaround for modelerfour issue
+                SubscriptionId: SubscriptionId
             parameter: 'snake'
             operation: 'snake'
             operationGroup:  'pascal'
