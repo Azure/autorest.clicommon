@@ -1,5 +1,5 @@
 import { Host, Session, startSession } from "@azure-tools/autorest-extension-base";
-import { CodeModel, Operation, codeModelSchema } from "@azure-tools/codemodel";
+import { CodeModel, Operation, codeModelSchema, OperationGroup } from "@azure-tools/codemodel";
 import { Helper } from "../helper";
 import { CliConst, CliCommonSchema } from "../schema";
 import { NodeCliHelper, NodeExtensionHelper } from "../nodeHelper";
@@ -30,7 +30,8 @@ export class SplitOperation{
                 splittedOperations.forEach((splittedOperation) => {
                     // Link splitted operation to src opreation
                     NodeExtensionHelper.setSplitOperationOriginalOperation(splittedOperation, operation);
-    
+                    
+                    this.updateSplitOperationDescription(splittedOperation, group);
                     splittedGroupOperations.push(splittedOperation);
                 });
 
@@ -40,6 +41,22 @@ export class SplitOperation{
             }
             splittedGroupOperations.forEach((op) => group.addOperation(op));
         }
+    }
+
+    private updateSplitOperationDescription(operation: Operation, group: OperationGroup): void {
+        const create = 'Create';
+        const update = 'Update';
+        const opCliKey = NodeCliHelper.getCliKey(operation, '').toLowerCase();
+        const createOrUpdate: string = opCliKey.endsWith('#create') ? create : opCliKey.endsWith('#update') ? update : null;
+        if (!createOrUpdate) {
+            return;
+        }
+        
+        const groupCliKey = NodeCliHelper.getCliKey(group, '');
+        const namingConvention: CliCommonSchema.NamingConvention = {
+            glossary: []
+        }
+        operation.language.default.description = createOrUpdate + ' ' + Helper.singularize(namingConvention, groupCliKey);
     }
 
     private async modifier(): Promise<void> {
