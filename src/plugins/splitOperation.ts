@@ -30,7 +30,7 @@ export class SplitOperation{
                 splittedOperations.forEach((splittedOperation) => {
                     // Link splitted operation to src opreation
                     NodeExtensionHelper.setSplitOperationOriginalOperation(splittedOperation, operation);
-                    
+
                     this.updateSplitOperationDescription(splittedOperation, group);
                     splittedGroupOperations.push(splittedOperation);
                 });
@@ -55,7 +55,7 @@ export class SplitOperation{
         const groupCliKey = NodeCliHelper.getCliKey(group, '');
         const namingConvention: CliCommonSchema.NamingConvention = {
             glossary: []
-        }
+        };
         operation.language.default.description = createOrUpdate + ' ' + Helper.singularize(namingConvention, groupCliKey);
     }
 
