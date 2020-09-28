@@ -2,7 +2,7 @@ import { ChoiceValue, Metadata } from "@azure-tools/codemodel";
 
 export type NamingStyle = 'camel' | 'pascal' | 'snake' | 'upper' | 'kebab' | 'space';
 export type NamingType = 'parameter' | 'operation' | 'operationGroup' | 'property' | 'type' | 'choice' | 'choiceValue' | 'constant' | 'client';
-export type M4NodeType = 'operationGroup' | 'operation' | 'parameter' | 'objectSchema' | 'property' | 'choiceSchema' | 'choiceValue';
+export type M4NodeType = 'operationGroup' | 'operation' | 'parameter' | 'objectSchema' | 'property' | 'choiceSchema' | 'choiceValue' | 'exampleName' | 'examplePath';
 export type LanguageType = 'cli' | 'default';
 export type M4Node = Metadata | ChoiceValue;
 
@@ -73,6 +73,8 @@ export namespace CliConst {
         static readonly property = 'property';
         static readonly choiceSchema = 'choiceSchema';
         static readonly choiceValue = 'choiceValue';
+        static readonly exampleName = 'exampleName';
+        static readonly examplePath = 'examplePath';
     }
 }
 
@@ -117,6 +119,8 @@ export namespace CliCommonSchema {
             property?: string;
             choiceSchema?: string;
             choiceValue?: string;
+            exampleName?: string;
+            examplePath?: string;
         }
 
         export interface FormatTableClause {
@@ -170,7 +174,8 @@ export namespace CliCommonSchema {
             objectSchema = 8,
             property = 16,
             choiceSchema = 32,
-            choiceValue = 64
+            choiceValue = 64,
+            exampleName = 128,
         }
 
         export enum Complexity {
@@ -233,6 +238,8 @@ export namespace CliCommonSchema {
              *            cliKey: nextLink
              **/
             nodePath?: string;
+            exampleName?: string;
+            examplePath?: string;
         }
     }
 }

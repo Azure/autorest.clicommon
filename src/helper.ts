@@ -631,6 +631,29 @@ export class Helper {
         }
     }
 
+    public static enumrateExamples(group: OperationGroup, op: Operation, paths: string[], action: (nodeDescriptor: CliCommonSchema.CodeModel.NodeDescriptor) => void, flag: CliCommonSchema.CodeModel.NodeTypeFlag): void {
+        const enumExample = isNullOrUndefined(flag) || ((flag & CliCommonSchema.CodeModel.NodeTypeFlag.exampleName) > 0);
+        if (!enumExample || isNullOrUndefined(op.extensions?.['x-ms-examples'])) return;
+        const cliKeyMissing = '<clikey-missing>';
+        
+        paths.push('extensions');
+        paths.push('x-ms-examples');
+        for (let exampleName of op.extensions['x-ms-examples'].getOwnPropertyNames()) {
+            const example = op.extensions['x-ms-examples'][exampleName];
+            paths.push(`['${exampleName}']`);
+            action({
+                operationGroupCliKey: NodeCliHelper.getCliKey(group, cliKeyMissing),
+                operationCliKey: NodeCliHelper.getCliKey(op, cliKeyMissing),
+                parent: op.extensions['x-ms-examples'],
+                target: example,
+                targetIndex: -1,
+            });
+            paths.pop();
+        }
+        paths.pop();
+        paths.pop();
+    }
+
     // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/explicit-module-boundary-types
     public static isOperationGroup(o: any): boolean {
         if (isNullOrUndefined(o)) {
@@ -872,5 +895,21 @@ export class Helper {
         });
         return m4Path;
     }
+
+    public static setPathValue (obj, path, value)  {
+        if (Object(obj) !== obj) return obj; // When obj is not an object
+        // If not yet an array, get the keys from the string-path
+        if (!Array.isArray(path)) path = path.toString().match(/[^.[\]]+/g) || []; 
+        path.slice(0,-1).reduce((a, c, i) => // Iterate all of them except the last one
+             Object(a[c]) === a[c] // Does the key exist and is its value an object?
+                 // Yes: then follow that path
+                 ? a[c] 
+                 // No: create the key. Is the next key a potential array-index?
+                 : a[c] = Math.abs(path[i+1])>>0 === +path[i+1] 
+                       ? [] // Yes: assign a new array object
+                       : {}, // No: assign a new plain object
+             obj)[path[path.length-1]] = value; // Finally assign the value to the last key
+        return obj; // Return the top-level object to allow chaining
+    };
 
 }
