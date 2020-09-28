@@ -73,7 +73,6 @@ export namespace CliConst {
         static readonly property = 'property';
         static readonly choiceSchema = 'choiceSchema';
         static readonly choiceValue = 'choiceValue';
-        static readonly exampleName = 'exampleName';
         static readonly examplePath = 'examplePath';
     }
 }
@@ -175,7 +174,7 @@ export namespace CliCommonSchema {
             property = 16,
             choiceSchema = 32,
             choiceValue = 64,
-            exampleName = 128,
+            examplePath = 128,
         }
 
         export enum Complexity {
@@ -239,7 +238,6 @@ export namespace CliCommonSchema {
              **/
             nodePath?: string;
             exampleName?: string;
-            examplePath?: string;
         }
     }
 }

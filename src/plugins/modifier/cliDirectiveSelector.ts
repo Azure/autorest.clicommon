@@ -45,8 +45,6 @@ export class NodeSelector {
                 this.selectType = CliConst.SelectType.choiceValue;
             else if (!Helper.isEmptyString(this.where.choiceSchema))
                 this.selectType = CliConst.SelectType.choiceSchema;
-            else if (!Helper.isEmptyString(this.where.exampleName))
-                this.selectType = CliConst.SelectType.exampleName;
             else if (!Helper.isEmptyString(this.where.examplePath))
                 this.selectType = CliConst.SelectType.examplePath;
             else
@@ -81,8 +79,8 @@ export class NodeSelector {
                 r = match(this.where.objectSchema, descriptor.objectSchemaCliKey) &&
                     match(this.where.property, descriptor.propertyCliKey);
                 break;
-            case CliConst.SelectType.exampleName:
-                r = match(this.where.exampleName, descriptor.exampleName);
+            case CliConst.SelectType.examplePath:
+                r = isNullOrUndefined(this.where.exampleName) || match(this.where.exampleName, descriptor.exampleName);
                 break;
             default:
                 throw Error(`Unknown select type: ${this.selectType}`);

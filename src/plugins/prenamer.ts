@@ -14,7 +14,7 @@ export class PreNamer{
 
     public async process(): Promise<void> {
         Helper.enumerateCodeModel(this.session.model, (n) => {
-            if (!isNullOrUndefined(n.target.language.default.name))
+            if (!isNullOrUndefined(n.target.language?.default?.name))
                 NodeCliHelper.setCliKey(n.target, n.target.language.default.name);
         });
 

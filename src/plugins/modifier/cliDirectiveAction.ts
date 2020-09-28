@@ -72,7 +72,7 @@ export abstract class Action {
                     arr.push(new ActionHitCount(value));
                     break;
                 case 'value':
-                    arr.push(new ActionSetExampleValue(value));
+                    arr.push(new ActionSetExampleValue(value, directive.where.examplePath));
                     break;
                 default:
                     // TODO: better to log instead of throw here?
@@ -223,13 +223,13 @@ export class ActionReplace extends Action {
 export class ActionSetExampleValue extends Action {
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    constructor(private directiveValue: CliCommonSchema.CliDirective.ValueClause) {
+    constructor(private directiveValue: CliCommonSchema.CliDirective.ValueClause, private examplePath: string) {
         super();
     }
 
     public process(descriptor: CliCommonSchema.CodeModel.NodeDescriptor): void {
-        if (!isNullOrUndefined(descriptor.examplePath)) {
-            Helper.setPathValue(descriptor.target, descriptor.examplePath, this.directiveValue);
+        if (!isNullOrUndefined(this.examplePath)) {
+            Helper.setPathValue(descriptor.target, this.examplePath, this.directiveValue);
         }
     }
 }

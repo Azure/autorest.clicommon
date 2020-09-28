@@ -132,6 +132,8 @@ export class Helper {
     public static ToM4NodeType(node: M4Node): M4NodeType {
         if (Helper.isOperationGroup(node))
             return CliConst.SelectType.operationGroup;
+        else if (Helper.isExample(node))
+            return CliConst.SelectType.examplePath;
         else if (Helper.isOperation(node))
             return CliConst.SelectType.operation;
         else if (Helper.isParameter(node))
@@ -568,6 +570,12 @@ export class Helper {
             Helper.enumerateRequestParameters(group, op, paths, action, flag);
             paths.pop();
 
+            paths.push('extensions');
+            paths.push('x-ms-examples');
+            Helper.enumerateExamples(group, op, paths, action, flag);
+            paths.pop();
+            paths.pop();
+
             paths.pop();
         }
     }
@@ -631,27 +639,22 @@ export class Helper {
         }
     }
 
-    public static enumrateExamples(group: OperationGroup, op: Operation, paths: string[], action: (nodeDescriptor: CliCommonSchema.CodeModel.NodeDescriptor) => void, flag: CliCommonSchema.CodeModel.NodeTypeFlag): void {
-        const enumExample = isNullOrUndefined(flag) || ((flag & CliCommonSchema.CodeModel.NodeTypeFlag.exampleName) > 0);
+    public static enumerateExamples(group: OperationGroup, op: Operation, paths: string[], action: (nodeDescriptor: CliCommonSchema.CodeModel.NodeDescriptor) => void, flag: CliCommonSchema.CodeModel.NodeTypeFlag): void {
+        const enumExample = isNullOrUndefined(flag) || ((flag & CliCommonSchema.CodeModel.NodeTypeFlag.examplePath) > 0);
         if (!enumExample || isNullOrUndefined(op.extensions?.['x-ms-examples'])) return;
         const cliKeyMissing = '<clikey-missing>';
-        
-        paths.push('extensions');
-        paths.push('x-ms-examples');
-        for (let exampleName of op.extensions['x-ms-examples'].getOwnPropertyNames()) {
+            
+        for (let exampleName of Object.getOwnPropertyNames(op.extensions['x-ms-examples'])) {
             const example = op.extensions['x-ms-examples'][exampleName];
             paths.push(`['${exampleName}']`);
             action({
-                operationGroupCliKey: NodeCliHelper.getCliKey(group, cliKeyMissing),
-                operationCliKey: NodeCliHelper.getCliKey(op, cliKeyMissing),
                 parent: op.extensions['x-ms-examples'],
                 target: example,
                 targetIndex: -1,
+                exampleName: exampleName,
             });
             paths.pop();
         }
-        paths.pop();
-        paths.pop();
     }
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/explicit-module-boundary-types
@@ -840,6 +843,20 @@ export class Helper {
         }
         const props = Object.getOwnPropertyNames(o);
         if (props.find((prop) => prop === 'language') && props.find((prop) => prop === 'value')) {
+            return true;
+        }
+        return false;
+    }
+
+    public static isExample(o: any): boolean {
+        if (isNullOrUndefined(o)) {
+            return false;
+        }
+        if (o.__proto__ !== Object.prototype) {
+            return false;
+        }
+        const props = Object.getOwnPropertyNames(o);
+        if (props.find((prop) => prop === 'parameters') && props.find((prop) => prop === 'responses') && props.length==2) {
             return true;
         }
         return false;
