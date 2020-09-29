@@ -21,7 +21,7 @@ export class NodeSelector {
             choiceSchema: ['enum', 'choice-schema'],
             choiceValue: ['value', 'choice-value'],
             exampleName: ['example-name'],
-            examplePath: ['example-path'],
+            dotPath: ['path', 'dot-path', 'example-path'],
         };
 
         for (const key in alias) {
@@ -45,8 +45,8 @@ export class NodeSelector {
                 this.selectType = CliConst.SelectType.choiceValue;
             else if (!Helper.isEmptyString(this.where.choiceSchema))
                 this.selectType = CliConst.SelectType.choiceSchema;
-            else if (!Helper.isEmptyString(this.where.examplePath))
-                this.selectType = CliConst.SelectType.examplePath;
+            else if (!Helper.isEmptyString(this.where.dotPath))
+                this.selectType = CliConst.SelectType.dotPath;
             else
                 throw Error("SelectType missing in directive: " + JSON.stringify(this.where));
         }
@@ -79,7 +79,7 @@ export class NodeSelector {
                 r = match(this.where.objectSchema, descriptor.objectSchemaCliKey) &&
                     match(this.where.property, descriptor.propertyCliKey);
                 break;
-            case CliConst.SelectType.examplePath:
+            case CliConst.SelectType.dotPath:
                 r = isNullOrUndefined(this.where.exampleName) || match(this.where.exampleName, descriptor.exampleName);
                 break;
             default:

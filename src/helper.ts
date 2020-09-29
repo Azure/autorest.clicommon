@@ -133,7 +133,7 @@ export class Helper {
         if (Helper.isOperationGroup(node))
             return CliConst.SelectType.operationGroup;
         else if (Helper.isExample(node))
-            return CliConst.SelectType.examplePath;
+            return CliConst.SelectType.dotPath;
         else if (Helper.isOperation(node))
             return CliConst.SelectType.operation;
         else if (Helper.isParameter(node))
@@ -640,7 +640,7 @@ export class Helper {
     }
 
     public static enumerateExamples(group: OperationGroup, op: Operation, paths: string[], action: (nodeDescriptor: CliCommonSchema.CodeModel.NodeDescriptor) => void, flag: CliCommonSchema.CodeModel.NodeTypeFlag): void {
-        const enumExample = isNullOrUndefined(flag) || ((flag & CliCommonSchema.CodeModel.NodeTypeFlag.examplePath) > 0);
+        const enumExample = isNullOrUndefined(flag) || ((flag & CliCommonSchema.CodeModel.NodeTypeFlag.dotPath) > 0);
         if (!enumExample || isNullOrUndefined(op.extensions?.['x-ms-examples'])) return;
         const cliKeyMissing = '<clikey-missing>';
             
