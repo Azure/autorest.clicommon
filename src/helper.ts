@@ -648,6 +648,8 @@ export class Helper {
             const example = op.extensions['x-ms-examples'][exampleName];
             paths.push(`['${exampleName}']`);
             action({
+                operationGroupCliKey: NodeCliHelper.getCliKey(group, cliKeyMissing),
+                operationCliKey: NodeCliHelper.getCliKey(op, cliKeyMissing),
                 parent: op.extensions['x-ms-examples'],
                 target: example,
                 targetIndex: -1,

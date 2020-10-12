@@ -80,7 +80,9 @@ export class NodeSelector {
                     match(this.where.property, descriptor.propertyCliKey);
                 break;
             case CliConst.SelectType.dotPath:
-                r = isNullOrUndefined(this.where.exampleName) || match(this.where.exampleName, descriptor.exampleName);
+                r = match(this.where.operationGroup, descriptor.operationGroupCliKey) &&
+                    match(this.where.operation, descriptor.operationCliKey) &&
+                    match(this.where.exampleName, descriptor.exampleName);
                 break;
             default:
                 throw Error(`Unknown select type: ${this.selectType}`);
