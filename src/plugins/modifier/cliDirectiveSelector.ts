@@ -20,6 +20,8 @@ export class NodeSelector {
             property: ['prop'],
             choiceSchema: ['enum', 'choice-schema'],
             choiceValue: ['value', 'choice-value'],
+            exampleName: ['example-name'],
+            dotPath: ['path', 'dot-path', 'example-parameter-path'],
         };
 
         for (const key in alias) {
@@ -43,6 +45,8 @@ export class NodeSelector {
                 this.selectType = CliConst.SelectType.choiceValue;
             else if (!Helper.isEmptyString(this.where.choiceSchema))
                 this.selectType = CliConst.SelectType.choiceSchema;
+            else if (!Helper.isEmptyString(this.where.dotPath))
+                this.selectType = CliConst.SelectType.dotPath;
             else
                 throw Error("SelectType missing in directive: " + JSON.stringify(this.where));
         }
@@ -74,6 +78,11 @@ export class NodeSelector {
             case CliConst.SelectType.property:
                 r = match(this.where.objectSchema, descriptor.objectSchemaCliKey) &&
                     match(this.where.property, descriptor.propertyCliKey);
+                break;
+            case CliConst.SelectType.dotPath:
+                r = match(this.where.operationGroup, descriptor.operationGroupCliKey) &&
+                    match(this.where.operation, descriptor.operationCliKey) &&
+                    match(this.where.exampleName, descriptor.exampleName);
                 break;
             default:
                 throw Error(`Unknown select type: ${this.selectType}`);

@@ -21,7 +21,7 @@ export class ModelerPostProcessor {
 
     private retrieveCodeModel(model: CodeModel): void {
         Helper.enumerateCodeModel(model, (n) => {
-            if (!isNullOrUndefined(n.target.language['cli'])) {
+            if (!isNullOrUndefined(n.target.language?.['cli'])) {
                 // In case cli is shared by multiple instances during modelerfour, do deep copy
                 n.target.language['cli'] = CopyHelper.deepCopy(n.target.language['cli']);
 

@@ -1,6 +1,7 @@
 import { isNullOrUndefined, isArray } from "util";
 import { CliCommonSchema, CliConst } from "../../schema";
 import { NodeHelper, NodeCliHelper, NodeExtensionHelper } from "../../nodeHelper";
+import { Helper } from "../../helper";
 
 
 function validateDirective(directive: CliCommonSchema.CliDirective.Directive | string, name: string): void {
@@ -69,6 +70,12 @@ export abstract class Action {
                     break;
                 case 'hitcount':
                     arr.push(new ActionHitCount(value));
+                    break;
+                case 'value':
+                    arr.push(new ActionSetValue(value, directive.where.dotPath));
+                    break;
+                case 'eval':
+                    arr.push(new ActionSetValue(eval(value), directive.where.dotPath));
                     break;
                 default:
                     // TODO: better to log instead of throw here?
@@ -211,6 +218,21 @@ export class ActionReplace extends Action {
         else {
             const regex = new RegExp(this.actionReplace.old);
             NodeCliHelper.setCliProperty(node, this.actionReplace.field, original.replace(regex, this.actionReplace.new));
+        }
+    }
+}
+
+
+export class ActionSetValue extends Action {
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    constructor(private directiveValue: CliCommonSchema.CliDirective.ValueClause, private dotPath: string) {
+        super();
+    }
+
+    public process(descriptor: CliCommonSchema.CodeModel.NodeDescriptor): void {
+        if (!isNullOrUndefined(this.dotPath)) {
+            Helper.setPathValue(descriptor.target, this.dotPath, this.directiveValue);
         }
     }
 }
