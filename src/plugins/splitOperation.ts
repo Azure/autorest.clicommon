@@ -47,16 +47,14 @@ export class SplitOperation{
         const create = 'Create';
         const update = 'Update';
         const opCliKey = NodeCliHelper.getCliKey(operation, '').toLowerCase();
-        const createOrUpdate: string = opCliKey.endsWith('#create') ? create : opCliKey.endsWith('#update') ? update : null;
-        if (!createOrUpdate) {
-            return;
+
+        if (opCliKey.endsWith("#create")) {
+            operation.language.default.description = operation.language.default.description.replace(/creates or updates|create or update|update or create|updates or creates|creates\/updates|create\/update/ig, create)
         }
-        
-        const groupCliKey = NodeCliHelper.getCliKey(group, '');
-        const namingConvention: CliCommonSchema.NamingConvention = {
-            glossary: []
-        };
-        operation.language.default.description = createOrUpdate + ' ' + Helper.singularize(namingConvention, groupCliKey);
+
+        if (opCliKey.endsWith("#update")) {
+            operation.language.default.description = operation.language.default.description.replace(/creates or updates|create or update|update or create|updates or creates|creates\/updates|create\/update|creates|create/ig, update)
+        }
     }
 
     private async modifier(): Promise<void> {
