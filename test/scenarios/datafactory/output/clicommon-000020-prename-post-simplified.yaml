@@ -17,6 +17,9 @@ operationGroups:
             - parameterName: ApiVersion(ApiVersion-2018-06-01^constant)
               cli:
                 cliKey: ApiVersion
+            - parameterName[0]: accept(Accept^constant)
+              cli:
+                cliKey: accept
         - operationName: ConfigureFactoryRepo
           cli:
             cliKey: ConfigureFactoryRepo
@@ -37,6 +40,9 @@ operationGroups:
               cli:
                 cliKey: factoryRepoUpdate
               bodySchema: FactoryRepoUpdate
+            - parameterName[0]: accept(Accept^constant)
+              cli:
+                cliKey: accept
         - operationName: ListByResourceGroup
           cli:
             cliKey: ListByResourceGroup
@@ -53,6 +59,9 @@ operationGroups:
             - parameterName: ApiVersion(ApiVersion-2018-06-01^constant)
               cli:
                 cliKey: ApiVersion
+            - parameterName[0]: accept(Accept^constant)
+              cli:
+                cliKey: accept
         - operationName: CreateOrUpdate
           cli:
             cliKey: CreateOrUpdate
@@ -79,6 +88,9 @@ operationGroups:
               cli:
                 cliKey: factory
               bodySchema: Factory
+            - parameterName[0]: accept(Accept^constant)
+              cli:
+                cliKey: accept
         - operationName: Update
           cli:
             cliKey: Update
@@ -102,6 +114,9 @@ operationGroups:
               cli:
                 cliKey: factoryUpdateParameters
               bodySchema: FactoryUpdateParameters
+            - parameterName[0]: accept(Accept^constant)
+              cli:
+                cliKey: accept
         - operationName: Get
           cli:
             cliKey: Get
@@ -124,6 +139,9 @@ operationGroups:
             - parameterName: If-None-Match(string^string)
               cli:
                 cliKey: If-None-Match
+            - parameterName[0]: accept(Accept^constant)
+              cli:
+                cliKey: accept
         - operationName: Delete
           cli:
             cliKey: Delete
@@ -143,6 +161,9 @@ operationGroups:
             - parameterName: ApiVersion(ApiVersion-2018-06-01^constant)
               cli:
                 cliKey: ApiVersion
+            - parameterName[0]: accept(Accept^constant)
+              cli:
+                cliKey: accept
         - operationName: GetGitHubAccessToken
           cli:
             cliKey: GetGitHubAccessToken
@@ -166,6 +187,9 @@ operationGroups:
               cli:
                 cliKey: gitHubAccessTokenRequest
               bodySchema: GitHubAccessTokenRequest
+            - parameterName[0]: accept(Accept^constant)
+              cli:
+                cliKey: accept
         - operationName: GetDataPlaneAccess
           cli:
             cliKey: GetDataPlaneAccess
@@ -189,6 +213,9 @@ operationGroups:
               cli:
                 cliKey: policy
               bodySchema: UserAccessPolicy
+            - parameterName[0]: accept(Accept^constant)
+              cli:
+                cliKey: accept
     - operationGroupName: Triggers
       cli:
         cliKey: Triggers
@@ -212,6 +239,9 @@ operationGroups:
             - parameterName: ApiVersion(ApiVersion-2018-06-01^constant)
               cli:
                 cliKey: ApiVersion
+            - parameterName[0]: accept(Accept^constant)
+              cli:
+                cliKey: accept
         - operationName: QueryByFactory
           cli:
             cliKey: QueryByFactory
@@ -235,6 +265,9 @@ operationGroups:
               cli:
                 cliKey: filterParameters
               bodySchema: TriggerFilterParameters
+            - parameterName[0]: accept(Accept^constant)
+              cli:
+                cliKey: accept
         - operationName: CreateOrUpdate
           cli:
             cliKey: CreateOrUpdate
@@ -264,6 +297,9 @@ operationGroups:
               cli:
                 cliKey: trigger
               bodySchema: TriggerResource
+            - parameterName[0]: accept(Accept^constant)
+              cli:
+                cliKey: accept
         - operationName: Get
           cli:
             cliKey: Get
@@ -289,6 +325,9 @@ operationGroups:
             - parameterName: If-None-Match(string^string)
               cli:
                 cliKey: If-None-Match
+            - parameterName[0]: accept(Accept^constant)
+              cli:
+                cliKey: accept
         - operationName: Delete
           cli:
             cliKey: Delete
@@ -311,6 +350,9 @@ operationGroups:
             - parameterName: ApiVersion(ApiVersion-2018-06-01^constant)
               cli:
                 cliKey: ApiVersion
+            - parameterName[0]: accept(Accept^constant)
+              cli:
+                cliKey: accept
         - operationName: SubscribeToEvents
           cli:
             cliKey: SubscribeToEvents
@@ -333,6 +375,9 @@ operationGroups:
             - parameterName: ApiVersion(ApiVersion-2018-06-01^constant)
               cli:
                 cliKey: ApiVersion
+            - parameterName[0]: accept(Accept^constant)
+              cli:
+                cliKey: accept
         - operationName: GetEventSubscriptionStatus
           cli:
             cliKey: GetEventSubscriptionStatus
@@ -355,6 +400,9 @@ operationGroups:
             - parameterName: ApiVersion(ApiVersion-2018-06-01^constant)
               cli:
                 cliKey: ApiVersion
+            - parameterName[0]: accept(Accept^constant)
+              cli:
+                cliKey: accept
         - operationName: UnsubscribeFromEvents
           cli:
             cliKey: UnsubscribeFromEvents
@@ -377,6 +425,9 @@ operationGroups:
             - parameterName: ApiVersion(ApiVersion-2018-06-01^constant)
               cli:
                 cliKey: ApiVersion
+            - parameterName[0]: accept(Accept^constant)
+              cli:
+                cliKey: accept
         - operationName: Start
           cli:
             cliKey: Start
@@ -399,6 +450,9 @@ operationGroups:
             - parameterName: ApiVersion(ApiVersion-2018-06-01^constant)
               cli:
                 cliKey: ApiVersion
+            - parameterName[0]: accept(Accept^constant)
+              cli:
+                cliKey: accept
         - operationName: Stop
           cli:
             cliKey: Stop
@@ -421,6 +475,9 @@ operationGroups:
             - parameterName: ApiVersion(ApiVersion-2018-06-01^constant)
               cli:
                 cliKey: ApiVersion
+            - parameterName[0]: accept(Accept^constant)
+              cli:
+                cliKey: accept
     - operationGroupName: IntegrationRuntimes
       cli:
         cliKey: IntegrationRuntimes
@@ -444,6 +501,9 @@ operationGroups:
             - parameterName: ApiVersion(ApiVersion-2018-06-01^constant)
               cli:
                 cliKey: ApiVersion
+            - parameterName[0]: accept(Accept^constant)
+              cli:
+                cliKey: accept
         - operationName: CreateOrUpdate
           cli:
             cliKey: CreateOrUpdate
@@ -473,6 +533,9 @@ operationGroups:
               cli:
                 cliKey: integrationRuntime
               bodySchema: IntegrationRuntimeResource
+            - parameterName[0]: accept(Accept^constant)
+              cli:
+                cliKey: accept
         - operationName: Get
           cli:
             cliKey: Get
@@ -498,6 +561,9 @@ operationGroups:
             - parameterName: If-None-Match(string^string)
               cli:
                 cliKey: If-None-Match
+            - parameterName[0]: accept(Accept^constant)
+              cli:
+                cliKey: accept
         - operationName: Update
           cli:
             cliKey: Update
@@ -524,6 +590,9 @@ operationGroups:
               cli:
                 cliKey: updateIntegrationRuntimeRequest
               bodySchema: UpdateIntegrationRuntimeRequest
+            - parameterName[0]: accept(Accept^constant)
+              cli:
+                cliKey: accept
         - operationName: Delete
           cli:
             cliKey: Delete
@@ -546,6 +615,9 @@ operationGroups:
             - parameterName: ApiVersion(ApiVersion-2018-06-01^constant)
               cli:
                 cliKey: ApiVersion
+            - parameterName[0]: accept(Accept^constant)
+              cli:
+                cliKey: accept
         - operationName: GetStatus
           cli:
             cliKey: GetStatus
@@ -568,6 +640,9 @@ operationGroups:
             - parameterName: ApiVersion(ApiVersion-2018-06-01^constant)
               cli:
                 cliKey: ApiVersion
+            - parameterName[0]: accept(Accept^constant)
+              cli:
+                cliKey: accept
         - operationName: GetConnectionInfo
           cli:
             cliKey: GetConnectionInfo
@@ -590,6 +665,9 @@ operationGroups:
             - parameterName: ApiVersion(ApiVersion-2018-06-01^constant)
               cli:
                 cliKey: ApiVersion
+            - parameterName[0]: accept(Accept^constant)
+              cli:
+                cliKey: accept
         - operationName: RegenerateAuthKey
           cli:
             cliKey: RegenerateAuthKey
@@ -616,6 +694,9 @@ operationGroups:
               cli:
                 cliKey: regenerateKeyParameters
               bodySchema: IntegrationRuntimeRegenerateKeyParameters
+            - parameterName[0]: accept(Accept^constant)
+              cli:
+                cliKey: accept
         - operationName: ListAuthKeys
           cli:
             cliKey: ListAuthKeys
@@ -638,6 +719,9 @@ operationGroups:
             - parameterName: ApiVersion(ApiVersion-2018-06-01^constant)
               cli:
                 cliKey: ApiVersion
+            - parameterName[0]: accept(Accept^constant)
+              cli:
+                cliKey: accept
         - operationName: Start
           cli:
             cliKey: Start
@@ -660,6 +744,9 @@ operationGroups:
             - parameterName: ApiVersion(ApiVersion-2018-06-01^constant)
               cli:
                 cliKey: ApiVersion
+            - parameterName[0]: accept(Accept^constant)
+              cli:
+                cliKey: accept
         - operationName: Stop
           cli:
             cliKey: Stop
@@ -682,6 +769,9 @@ operationGroups:
             - parameterName: ApiVersion(ApiVersion-2018-06-01^constant)
               cli:
                 cliKey: ApiVersion
+            - parameterName[0]: accept(Accept^constant)
+              cli:
+                cliKey: accept
         - operationName: SyncCredentials
           cli:
             cliKey: SyncCredentials
@@ -704,6 +794,9 @@ operationGroups:
             - parameterName: ApiVersion(ApiVersion-2018-06-01^constant)
               cli:
                 cliKey: ApiVersion
+            - parameterName[0]: accept(Accept^constant)
+              cli:
+                cliKey: accept
         - operationName: GetMonitoringData
           cli:
             cliKey: GetMonitoringData
@@ -726,6 +819,9 @@ operationGroups:
             - parameterName: ApiVersion(ApiVersion-2018-06-01^constant)
               cli:
                 cliKey: ApiVersion
+            - parameterName[0]: accept(Accept^constant)
+              cli:
+                cliKey: accept
         - operationName: Upgrade
           cli:
             cliKey: Upgrade
@@ -748,6 +844,9 @@ operationGroups:
             - parameterName: ApiVersion(ApiVersion-2018-06-01^constant)
               cli:
                 cliKey: ApiVersion
+            - parameterName[0]: accept(Accept^constant)
+              cli:
+                cliKey: accept
         - operationName: RemoveLinks
           cli:
             cliKey: RemoveLinks
@@ -774,6 +873,9 @@ operationGroups:
               cli:
                 cliKey: linkedIntegrationRuntimeRequest
               bodySchema: LinkedIntegrationRuntimeRequest
+            - parameterName[0]: accept(Accept^constant)
+              cli:
+                cliKey: accept
         - operationName: CreateLinkedIntegrationRuntime
           cli:
             cliKey: CreateLinkedIntegrationRuntime
@@ -800,6 +902,9 @@ operationGroups:
               cli:
                 cliKey: createLinkedIntegrationRuntimeRequest
               bodySchema: CreateLinkedIntegrationRuntimeRequest
+            - parameterName[0]: accept(Accept^constant)
+              cli:
+                cliKey: accept
 schemas:
   objects:
     all:

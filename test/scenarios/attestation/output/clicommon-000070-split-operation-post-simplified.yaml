@@ -18,6 +18,10 @@ operationGroups:
               cli:
                 cliKey: ApiVersion
                 cliM4Path: globalParameters['ApiVersion']
+            - parameterName[0]: accept(accept^constant)
+              cli:
+                cliKey: accept
+                cliM4Path: operationGroups['Operation']$$operations['List']$$requests[0]$$parameters['accept']
     - operationGroupName: attestation_providers
       cli:
         cliKey: AttestationProviders
@@ -48,6 +52,10 @@ operationGroups:
               cli:
                 cliKey: ApiVersion
                 cliM4Path: globalParameters['ApiVersion']
+            - parameterName[0]: accept(accept^constant)
+              cli:
+                cliKey: accept
+                cliM4Path: operationGroups['AttestationProviders']$$operations['Get']$$requests[0]$$parameters['accept']
         - operationName: create
           cli:
             cliKey: Create
@@ -78,6 +86,10 @@ operationGroups:
                 cliKey: creationParams
                 cliM4Path: operationGroups['AttestationProviders']$$operations['Create']$$requests[0]$$parameters['creationParams']
               bodySchema: attestation_service_creation_params
+            - parameterName[0]: accept(accept^constant)
+              cli:
+                cliKey: accept
+                cliM4Path: operationGroups['AttestationProviders']$$operations['Create']$$requests[0]$$parameters['accept']
         - operationName: update
           cli:
             cliKey: Update
@@ -108,6 +120,10 @@ operationGroups:
                 cliKey: updateParams
                 cliM4Path: operationGroups['AttestationProviders']$$operations['Update']$$requests[0]$$parameters['updateParams']
               bodySchema: attestation_service_patch_params
+            - parameterName[0]: accept(accept^constant)
+              cli:
+                cliKey: accept
+                cliM4Path: operationGroups['AttestationProviders']$$operations['Update']$$requests[0]$$parameters['accept']
         - operationName: delete
           cli:
             cliKey: Delete
@@ -133,6 +149,10 @@ operationGroups:
               cli:
                 cliKey: ApiVersion
                 cliM4Path: globalParameters['ApiVersion']
+            - parameterName[0]: accept(accept^constant)
+              cli:
+                cliKey: accept
+                cliM4Path: operationGroups['AttestationProviders']$$operations['Delete']$$requests[0]$$parameters['accept']
         - operationName: list
           cli:
             cliKey: List
@@ -150,6 +170,10 @@ operationGroups:
               cli:
                 cliKey: subscriptionId
                 cliM4Path: globalParameters['subscriptionId']
+            - parameterName[0]: accept(accept^constant)
+              cli:
+                cliKey: accept
+                cliM4Path: operationGroups['AttestationProviders']$$operations['List']$$requests[0]$$parameters['accept']
         - operationName: list_by_resource_group
           cli:
             cliKey: ListByResourceGroup
@@ -171,6 +195,10 @@ operationGroups:
               cli:
                 cliKey: subscriptionId
                 cliM4Path: globalParameters['subscriptionId']
+            - parameterName[0]: accept(accept^constant)
+              cli:
+                cliKey: accept
+                cliM4Path: operationGroups['AttestationProviders']$$operations['ListByResourceGroup']$$requests[0]$$parameters['accept']
 schemas:
   objects:
     all:

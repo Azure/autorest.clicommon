@@ -23,6 +23,9 @@ operationGroups:
             - parameterName: managedNetworkName(string^string)
               cli:
                 cliKey: managedNetworkName
+            - parameterName[0]: accept(Accept^constant)
+              cli:
+                cliKey: accept
         - operationName: CreateOrUpdate
           cli:
             cliKey: CreateOrUpdate
@@ -46,6 +49,9 @@ operationGroups:
               cli:
                 cliKey: managedNetwork
               bodySchema: ManagedNetwork
+            - parameterName[0]: accept(Accept^constant)
+              cli:
+                cliKey: accept
         - operationName: Delete
           cli:
             cliKey: Delete
@@ -65,6 +71,9 @@ operationGroups:
             - parameterName: managedNetworkName(string^string)
               cli:
                 cliKey: managedNetworkName
+            - parameterName[0]: accept(Accept^constant)
+              cli:
+                cliKey: accept
         - operationName: Update
           cli:
             cliKey: Update
@@ -88,6 +97,9 @@ operationGroups:
               cli:
                 cliKey: parameters
               bodySchema: ManagedNetworkUpdate
+            - parameterName[0]: accept(Accept^constant)
+              cli:
+                cliKey: accept
         - operationName: ListByResourceGroup
           cli:
             cliKey: ListByResourceGroup
@@ -110,6 +122,9 @@ operationGroups:
             - parameterName: $skiptoken(string^string)
               cli:
                 cliKey: $skiptoken
+            - parameterName[0]: accept(Accept^constant)
+              cli:
+                cliKey: accept
         - operationName: ListBySubscription
           cli:
             cliKey: ListBySubscription
@@ -129,6 +144,9 @@ operationGroups:
             - parameterName: $skiptoken(string^string)
               cli:
                 cliKey: $skiptoken
+            - parameterName[0]: accept(Accept^constant)
+              cli:
+                cliKey: accept
     - operationGroupName: ScopeAssignments
       cli:
         cliKey: ScopeAssignments
@@ -149,6 +167,9 @@ operationGroups:
             - parameterName: ApiVersion(ApiVersion-2019-06-01-preview^constant)
               cli:
                 cliKey: ApiVersion
+            - parameterName[0]: accept(Accept^constant)
+              cli:
+                cliKey: accept
         - operationName: CreateOrUpdate
           cli:
             cliKey: CreateOrUpdate
@@ -169,6 +190,9 @@ operationGroups:
               cli:
                 cliKey: parameters
               bodySchema: ScopeAssignment
+            - parameterName[0]: accept(Accept^constant)
+              cli:
+                cliKey: accept
         - operationName: Delete
           cli:
             cliKey: Delete
@@ -198,6 +222,9 @@ operationGroups:
             - parameterName: ApiVersion(ApiVersion-2019-06-01-preview^constant)
               cli:
                 cliKey: ApiVersion
+            - parameterName[0]: accept(Accept^constant)
+              cli:
+                cliKey: accept
     - operationGroupName: ManagedNetworkGroups
       cli:
         cliKey: ManagedNetworkGroups
@@ -224,6 +251,9 @@ operationGroups:
             - parameterName: managedNetworkGroupName(string^string)
               cli:
                 cliKey: managedNetworkGroupName
+            - parameterName[0]: accept(Accept^constant)
+              cli:
+                cliKey: accept
         - operationName: CreateOrUpdate
           cli:
             cliKey: CreateOrUpdate
@@ -250,6 +280,9 @@ operationGroups:
               cli:
                 cliKey: managedNetworkGroup
               bodySchema: ManagedNetworkGroup
+            - parameterName[0]: accept(Accept^constant)
+              cli:
+                cliKey: accept
         - operationName: Delete
           cli:
             cliKey: Delete
@@ -272,6 +305,9 @@ operationGroups:
             - parameterName: managedNetworkGroupName(string^string)
               cli:
                 cliKey: managedNetworkGroupName
+            - parameterName[0]: accept(Accept^constant)
+              cli:
+                cliKey: accept
         - operationName: ListByManagedNetwork
           cli:
             cliKey: ListByManagedNetwork
@@ -297,6 +333,9 @@ operationGroups:
             - parameterName: $skiptoken(string^string)
               cli:
                 cliKey: $skiptoken
+            - parameterName[0]: accept(Accept^constant)
+              cli:
+                cliKey: accept
     - operationGroupName: ManagedNetworkPeeringPolicies
       cli:
         cliKey: ManagedNetworkPeeringPolicies
@@ -323,6 +362,9 @@ operationGroups:
             - parameterName: managedNetworkPeeringPolicyName(string^string)
               cli:
                 cliKey: managedNetworkPeeringPolicyName
+            - parameterName[0]: accept(Accept^constant)
+              cli:
+                cliKey: accept
         - operationName: CreateOrUpdate
           cli:
             cliKey: CreateOrUpdate
@@ -349,6 +391,9 @@ operationGroups:
               cli:
                 cliKey: managedNetworkPolicy
               bodySchema: ManagedNetworkPeeringPolicy
+            - parameterName[0]: accept(Accept^constant)
+              cli:
+                cliKey: accept
         - operationName: Delete
           cli:
             cliKey: Delete
@@ -371,6 +416,9 @@ operationGroups:
             - parameterName: managedNetworkPeeringPolicyName(string^string)
               cli:
                 cliKey: managedNetworkPeeringPolicyName
+            - parameterName[0]: accept(Accept^constant)
+              cli:
+                cliKey: accept
         - operationName: ListByManagedNetwork
           cli:
             cliKey: ListByManagedNetwork
@@ -396,6 +444,9 @@ operationGroups:
             - parameterName: $skiptoken(string^string)
               cli:
                 cliKey: $skiptoken
+            - parameterName[0]: accept(Accept^constant)
+              cli:
+                cliKey: accept
     - operationGroupName: Operations
       cli:
         cliKey: Operations
@@ -410,6 +461,9 @@ operationGroups:
             - parameterName: ApiVersion(ApiVersion-2019-06-01-preview^constant)
               cli:
                 cliKey: ApiVersion
+            - parameterName[0]: accept(Accept^constant)
+              cli:
+                cliKey: accept
 schemas:
   objects:
     all:

@@ -14,6 +14,9 @@ operationGroups:
             - parameterName: ApiVersion(ApiVersion-2018-09-01-preview^constant)
               cli:
                 cliKey: ApiVersion
+            - parameterName[0]: accept(Accept^constant)
+              cli:
+                cliKey: accept
     - operationGroupName: AttestationProviders
       cli:
         cliKey: AttestationProviders
@@ -37,6 +40,9 @@ operationGroups:
             - parameterName: ApiVersion(ApiVersion-2018-09-01-preview^constant)
               cli:
                 cliKey: ApiVersion
+            - parameterName[0]: accept(Accept^constant)
+              cli:
+                cliKey: accept
         - operationName: Create
           cli:
             cliKey: Create
@@ -60,6 +66,9 @@ operationGroups:
               cli:
                 cliKey: creationParams
               bodySchema: AttestationServiceCreationParams
+            - parameterName[0]: accept(Accept^constant)
+              cli:
+                cliKey: accept
         - operationName: Update
           cli:
             cliKey: Update
@@ -83,6 +92,9 @@ operationGroups:
               cli:
                 cliKey: updateParams
               bodySchema: AttestationServicePatchParams
+            - parameterName[0]: accept(Accept^constant)
+              cli:
+                cliKey: accept
         - operationName: Delete
           cli:
             cliKey: Delete
@@ -102,6 +114,9 @@ operationGroups:
             - parameterName: ApiVersion(ApiVersion-2018-09-01-preview^constant)
               cli:
                 cliKey: ApiVersion
+            - parameterName[0]: accept(Accept^constant)
+              cli:
+                cliKey: accept
         - operationName: List
           cli:
             cliKey: List
@@ -115,6 +130,9 @@ operationGroups:
             - parameterName: subscriptionId(string^string)
               cli:
                 cliKey: subscriptionId
+            - parameterName[0]: accept(Accept^constant)
+              cli:
+                cliKey: accept
         - operationName: ListByResourceGroup
           cli:
             cliKey: ListByResourceGroup
@@ -131,6 +149,9 @@ operationGroups:
             - parameterName: subscriptionId(string^string)
               cli:
                 cliKey: subscriptionId
+            - parameterName[0]: accept(Accept^constant)
+              cli:
+                cliKey: accept
 schemas:
   objects:
     all:

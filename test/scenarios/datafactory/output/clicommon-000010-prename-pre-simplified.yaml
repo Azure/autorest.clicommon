@@ -7,6 +7,7 @@ operationGroups:
             - parameterName: $host(string^string)
             - parameterName: subscriptionId(string^string)
             - parameterName: ApiVersion(ApiVersion-2018-06-01^constant)
+            - parameterName[0]: accept(Accept^constant)
         - operationName: ConfigureFactoryRepo
           parameters:
             - parameterName: $host(string^string)
@@ -15,12 +16,14 @@ operationGroups:
             - parameterName: ApiVersion(ApiVersion-2018-06-01^constant)
             - parameterName[0]: factoryRepoUpdate(FactoryRepoUpdate^object)
               bodySchema: FactoryRepoUpdate
+            - parameterName[0]: accept(Accept^constant)
         - operationName: ListByResourceGroup
           parameters:
             - parameterName: $host(string^string)
             - parameterName: subscriptionId(string^string)
             - parameterName: resourceGroupName(string^string)
             - parameterName: ApiVersion(ApiVersion-2018-06-01^constant)
+            - parameterName[0]: accept(Accept^constant)
         - operationName: CreateOrUpdate
           parameters:
             - parameterName: $host(string^string)
@@ -31,6 +34,7 @@ operationGroups:
             - parameterName: If-Match(string^string)
             - parameterName[0]: factory(Factory^object)
               bodySchema: Factory
+            - parameterName[0]: accept(Accept^constant)
         - operationName: Update
           parameters:
             - parameterName: $host(string^string)
@@ -40,6 +44,7 @@ operationGroups:
             - parameterName: ApiVersion(ApiVersion-2018-06-01^constant)
             - parameterName[0]: factoryUpdateParameters(FactoryUpdateParameters^object)
               bodySchema: FactoryUpdateParameters
+            - parameterName[0]: accept(Accept^constant)
         - operationName: Get
           parameters:
             - parameterName: $host(string^string)
@@ -48,6 +53,7 @@ operationGroups:
             - parameterName: factoryName(string^string)
             - parameterName: ApiVersion(ApiVersion-2018-06-01^constant)
             - parameterName: If-None-Match(string^string)
+            - parameterName[0]: accept(Accept^constant)
         - operationName: Delete
           parameters:
             - parameterName: $host(string^string)
@@ -55,6 +61,7 @@ operationGroups:
             - parameterName: resourceGroupName(string^string)
             - parameterName: factoryName(string^string)
             - parameterName: ApiVersion(ApiVersion-2018-06-01^constant)
+            - parameterName[0]: accept(Accept^constant)
         - operationName: GetGitHubAccessToken
           parameters:
             - parameterName: $host(string^string)
@@ -64,6 +71,7 @@ operationGroups:
             - parameterName: ApiVersion(ApiVersion-2018-06-01^constant)
             - parameterName[0]: gitHubAccessTokenRequest(GitHubAccessTokenRequest^object)
               bodySchema: GitHubAccessTokenRequest
+            - parameterName[0]: accept(Accept^constant)
         - operationName: GetDataPlaneAccess
           parameters:
             - parameterName: $host(string^string)
@@ -73,6 +81,7 @@ operationGroups:
             - parameterName: ApiVersion(ApiVersion-2018-06-01^constant)
             - parameterName[0]: policy(UserAccessPolicy^object)
               bodySchema: UserAccessPolicy
+            - parameterName[0]: accept(Accept^constant)
     - operationGroupName: Triggers
       operations:
         - operationName: ListByFactory
@@ -82,6 +91,7 @@ operationGroups:
             - parameterName: resourceGroupName(string^string)
             - parameterName: factoryName(string^string)
             - parameterName: ApiVersion(ApiVersion-2018-06-01^constant)
+            - parameterName[0]: accept(Accept^constant)
         - operationName: QueryByFactory
           parameters:
             - parameterName: $host(string^string)
@@ -91,6 +101,7 @@ operationGroups:
             - parameterName: ApiVersion(ApiVersion-2018-06-01^constant)
             - parameterName[0]: filterParameters(TriggerFilterParameters^object)
               bodySchema: TriggerFilterParameters
+            - parameterName[0]: accept(Accept^constant)
         - operationName: CreateOrUpdate
           parameters:
             - parameterName: $host(string^string)
@@ -102,6 +113,7 @@ operationGroups:
             - parameterName: If-Match(string^string)
             - parameterName[0]: trigger(TriggerResource^object)
               bodySchema: TriggerResource
+            - parameterName[0]: accept(Accept^constant)
         - operationName: Get
           parameters:
             - parameterName: $host(string^string)
@@ -111,6 +123,7 @@ operationGroups:
             - parameterName: triggerName(string^string)
             - parameterName: ApiVersion(ApiVersion-2018-06-01^constant)
             - parameterName: If-None-Match(string^string)
+            - parameterName[0]: accept(Accept^constant)
         - operationName: Delete
           parameters:
             - parameterName: $host(string^string)
@@ -119,6 +132,7 @@ operationGroups:
             - parameterName: factoryName(string^string)
             - parameterName: triggerName(string^string)
             - parameterName: ApiVersion(ApiVersion-2018-06-01^constant)
+            - parameterName[0]: accept(Accept^constant)
         - operationName: SubscribeToEvents
           parameters:
             - parameterName: $host(string^string)
@@ -127,6 +141,7 @@ operationGroups:
             - parameterName: factoryName(string^string)
             - parameterName: triggerName(string^string)
             - parameterName: ApiVersion(ApiVersion-2018-06-01^constant)
+            - parameterName[0]: accept(Accept^constant)
         - operationName: GetEventSubscriptionStatus
           parameters:
             - parameterName: $host(string^string)
@@ -135,6 +150,7 @@ operationGroups:
             - parameterName: factoryName(string^string)
             - parameterName: triggerName(string^string)
             - parameterName: ApiVersion(ApiVersion-2018-06-01^constant)
+            - parameterName[0]: accept(Accept^constant)
         - operationName: UnsubscribeFromEvents
           parameters:
             - parameterName: $host(string^string)
@@ -143,6 +159,7 @@ operationGroups:
             - parameterName: factoryName(string^string)
             - parameterName: triggerName(string^string)
             - parameterName: ApiVersion(ApiVersion-2018-06-01^constant)
+            - parameterName[0]: accept(Accept^constant)
         - operationName: Start
           parameters:
             - parameterName: $host(string^string)
@@ -151,6 +168,7 @@ operationGroups:
             - parameterName: factoryName(string^string)
             - parameterName: triggerName(string^string)
             - parameterName: ApiVersion(ApiVersion-2018-06-01^constant)
+            - parameterName[0]: accept(Accept^constant)
         - operationName: Stop
           parameters:
             - parameterName: $host(string^string)
@@ -159,6 +177,7 @@ operationGroups:
             - parameterName: factoryName(string^string)
             - parameterName: triggerName(string^string)
             - parameterName: ApiVersion(ApiVersion-2018-06-01^constant)
+            - parameterName[0]: accept(Accept^constant)
     - operationGroupName: IntegrationRuntimes
       operations:
         - operationName: ListByFactory
@@ -168,6 +187,7 @@ operationGroups:
             - parameterName: resourceGroupName(string^string)
             - parameterName: factoryName(string^string)
             - parameterName: ApiVersion(ApiVersion-2018-06-01^constant)
+            - parameterName[0]: accept(Accept^constant)
         - operationName: CreateOrUpdate
           parameters:
             - parameterName: $host(string^string)
@@ -179,6 +199,7 @@ operationGroups:
             - parameterName: If-Match(string^string)
             - parameterName[0]: integrationRuntime(IntegrationRuntimeResource^object)
               bodySchema: IntegrationRuntimeResource
+            - parameterName[0]: accept(Accept^constant)
         - operationName: Get
           parameters:
             - parameterName: $host(string^string)
@@ -188,6 +209,7 @@ operationGroups:
             - parameterName: integrationRuntimeName(string^string)
             - parameterName: ApiVersion(ApiVersion-2018-06-01^constant)
             - parameterName: If-None-Match(string^string)
+            - parameterName[0]: accept(Accept^constant)
         - operationName: Update
           parameters:
             - parameterName: $host(string^string)
@@ -198,6 +220,7 @@ operationGroups:
             - parameterName: ApiVersion(ApiVersion-2018-06-01^constant)
             - parameterName[0]: updateIntegrationRuntimeRequest(UpdateIntegrationRuntimeRequest^object)
               bodySchema: UpdateIntegrationRuntimeRequest
+            - parameterName[0]: accept(Accept^constant)
         - operationName: Delete
           parameters:
             - parameterName: $host(string^string)
@@ -206,6 +229,7 @@ operationGroups:
             - parameterName: factoryName(string^string)
             - parameterName: integrationRuntimeName(string^string)
             - parameterName: ApiVersion(ApiVersion-2018-06-01^constant)
+            - parameterName[0]: accept(Accept^constant)
         - operationName: GetStatus
           parameters:
             - parameterName: $host(string^string)
@@ -214,6 +238,7 @@ operationGroups:
             - parameterName: factoryName(string^string)
             - parameterName: integrationRuntimeName(string^string)
             - parameterName: ApiVersion(ApiVersion-2018-06-01^constant)
+            - parameterName[0]: accept(Accept^constant)
         - operationName: GetConnectionInfo
           parameters:
             - parameterName: $host(string^string)
@@ -222,6 +247,7 @@ operationGroups:
             - parameterName: factoryName(string^string)
             - parameterName: integrationRuntimeName(string^string)
             - parameterName: ApiVersion(ApiVersion-2018-06-01^constant)
+            - parameterName[0]: accept(Accept^constant)
         - operationName: RegenerateAuthKey
           parameters:
             - parameterName: $host(string^string)
@@ -232,6 +258,7 @@ operationGroups:
             - parameterName: ApiVersion(ApiVersion-2018-06-01^constant)
             - parameterName[0]: regenerateKeyParameters(IntegrationRuntimeRegenerateKeyParameters^object)
               bodySchema: IntegrationRuntimeRegenerateKeyParameters
+            - parameterName[0]: accept(Accept^constant)
         - operationName: ListAuthKeys
           parameters:
             - parameterName: $host(string^string)
@@ -240,6 +267,7 @@ operationGroups:
             - parameterName: factoryName(string^string)
             - parameterName: integrationRuntimeName(string^string)
             - parameterName: ApiVersion(ApiVersion-2018-06-01^constant)
+            - parameterName[0]: accept(Accept^constant)
         - operationName: Start
           parameters:
             - parameterName: $host(string^string)
@@ -248,6 +276,7 @@ operationGroups:
             - parameterName: factoryName(string^string)
             - parameterName: integrationRuntimeName(string^string)
             - parameterName: ApiVersion(ApiVersion-2018-06-01^constant)
+            - parameterName[0]: accept(Accept^constant)
         - operationName: Stop
           parameters:
             - parameterName: $host(string^string)
@@ -256,6 +285,7 @@ operationGroups:
             - parameterName: factoryName(string^string)
             - parameterName: integrationRuntimeName(string^string)
             - parameterName: ApiVersion(ApiVersion-2018-06-01^constant)
+            - parameterName[0]: accept(Accept^constant)
         - operationName: SyncCredentials
           parameters:
             - parameterName: $host(string^string)
@@ -264,6 +294,7 @@ operationGroups:
             - parameterName: factoryName(string^string)
             - parameterName: integrationRuntimeName(string^string)
             - parameterName: ApiVersion(ApiVersion-2018-06-01^constant)
+            - parameterName[0]: accept(Accept^constant)
         - operationName: GetMonitoringData
           parameters:
             - parameterName: $host(string^string)
@@ -272,6 +303,7 @@ operationGroups:
             - parameterName: factoryName(string^string)
             - parameterName: integrationRuntimeName(string^string)
             - parameterName: ApiVersion(ApiVersion-2018-06-01^constant)
+            - parameterName[0]: accept(Accept^constant)
         - operationName: Upgrade
           parameters:
             - parameterName: $host(string^string)
@@ -280,6 +312,7 @@ operationGroups:
             - parameterName: factoryName(string^string)
             - parameterName: integrationRuntimeName(string^string)
             - parameterName: ApiVersion(ApiVersion-2018-06-01^constant)
+            - parameterName[0]: accept(Accept^constant)
         - operationName: RemoveLinks
           parameters:
             - parameterName: $host(string^string)
@@ -290,6 +323,7 @@ operationGroups:
             - parameterName: ApiVersion(ApiVersion-2018-06-01^constant)
             - parameterName[0]: linkedIntegrationRuntimeRequest(LinkedIntegrationRuntimeRequest^object)
               bodySchema: LinkedIntegrationRuntimeRequest
+            - parameterName[0]: accept(Accept^constant)
         - operationName: CreateLinkedIntegrationRuntime
           parameters:
             - parameterName: $host(string^string)
@@ -300,6 +334,7 @@ operationGroups:
             - parameterName: ApiVersion(ApiVersion-2018-06-01^constant)
             - parameterName[0]: createLinkedIntegrationRuntimeRequest(CreateLinkedIntegrationRuntimeRequest^object)
               bodySchema: CreateLinkedIntegrationRuntimeRequest
+            - parameterName[0]: accept(Accept^constant)
 schemas:
   objects:
     all:
