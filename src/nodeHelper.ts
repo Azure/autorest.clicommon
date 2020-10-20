@@ -225,6 +225,9 @@ export class NodeCliHelper {
      */
     // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types, @typescript-eslint/no-explicit-any
     public static setCliProperty(node: M4Node, key: string, value: any): void {
+        if (isNullOrUndefined(node?.language)) {
+            return undefined;
+        }
         if (isNullOrUndefined(node.language[NodeCliHelper.CLI]))
             node.language[NodeCliHelper.CLI] = {};
         node.language[NodeCliHelper.CLI][key] = value;
