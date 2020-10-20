@@ -31,7 +31,7 @@ export class SplitOperation{
                     // Link splitted operation to src opreation
                     NodeExtensionHelper.setSplitOperationOriginalOperation(splittedOperation, operation);
 
-                    this.updateSplitOperationDescription(splittedOperation);
+                    this.updateSplitOperationDescription(splittedOperation, group);
                     splittedGroupOperations.push(splittedOperation);
                 });
 
@@ -43,7 +43,7 @@ export class SplitOperation{
         }
     }
 
-    private updateSplitOperationDescription(operation: Operation): void {
+    private updateSplitOperationDescription(operation: Operation, group: OperationGroup): void {
         const create = 'Create';
         const update = 'Update';
         const opCliKey = NodeCliHelper.getCliKey(operation, '').toLowerCase();
