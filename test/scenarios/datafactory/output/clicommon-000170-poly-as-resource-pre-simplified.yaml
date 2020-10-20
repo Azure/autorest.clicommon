@@ -22,6 +22,10 @@ operationGroups:
               cli:
                 cliKey: ApiVersion
                 cliM4Path: globalParameters['ApiVersion']
+            - parameterName[0]: accept(accept^constant)
+              cli:
+                cliKey: accept
+                cliM4Path: operationGroups['Factories']$$operations['List']$$requests[0]$$parameters['accept']
         - operationName: configure_factory_repo
           cli:
             cliKey: ConfigureFactoryRepo
@@ -48,6 +52,10 @@ operationGroups:
                 cliKey: factoryRepoUpdate
                 cliM4Path: operationGroups['Factories']$$operations['ConfigureFactoryRepo']$$requests[0]$$parameters['factoryRepoUpdate']
               bodySchema: factory_repo_update
+            - parameterName[0]: accept(accept^constant)
+              cli:
+                cliKey: accept
+                cliM4Path: operationGroups['Factories']$$operations['ConfigureFactoryRepo']$$requests[0]$$parameters['accept']
         - operationName: list_by_resource_group
           cli:
             cliKey: ListByResourceGroup
@@ -69,6 +77,10 @@ operationGroups:
               cli:
                 cliKey: ApiVersion
                 cliM4Path: globalParameters['ApiVersion']
+            - parameterName[0]: accept(accept^constant)
+              cli:
+                cliKey: accept
+                cliM4Path: operationGroups['Factories']$$operations['ListByResourceGroup']$$requests[0]$$parameters['accept']
         - operationName: create_or_update
           cli:
             cliKey: CreateOrUpdate
@@ -103,6 +115,10 @@ operationGroups:
                 cliKey: factory
                 cliM4Path: operationGroups['Factories']$$operations['CreateOrUpdate']$$requests[0]$$parameters['factory']
               bodySchema: factory
+            - parameterName[0]: accept(accept^constant)
+              cli:
+                cliKey: accept
+                cliM4Path: operationGroups['Factories']$$operations['CreateOrUpdate']$$requests[0]$$parameters['accept']
         - operationName: update
           cli:
             cliKey: Update
@@ -133,6 +149,10 @@ operationGroups:
                 cliKey: factoryUpdateParameters
                 cliM4Path: operationGroups['Factories']$$operations['Update']$$requests[0]$$parameters['factoryUpdateParameters']
               bodySchema: factory_update_parameters
+            - parameterName[0]: accept(accept^constant)
+              cli:
+                cliKey: accept
+                cliM4Path: operationGroups['Factories']$$operations['Update']$$requests[0]$$parameters['accept']
         - operationName: get
           cli:
             cliKey: Get
@@ -162,6 +182,10 @@ operationGroups:
               cli:
                 cliKey: If-None-Match
                 cliM4Path: operationGroups['Factories']$$operations['Get']$$parameters['If-None-Match']
+            - parameterName[0]: accept(accept^constant)
+              cli:
+                cliKey: accept
+                cliM4Path: operationGroups['Factories']$$operations['Get']$$requests[0]$$parameters['accept']
         - operationName: delete
           cli:
             cliKey: Delete
@@ -187,6 +211,10 @@ operationGroups:
               cli:
                 cliKey: ApiVersion
                 cliM4Path: globalParameters['ApiVersion']
+            - parameterName[0]: accept(accept^constant)
+              cli:
+                cliKey: accept
+                cliM4Path: operationGroups['Factories']$$operations['Delete']$$requests[0]$$parameters['accept']
         - operationName: get_git_hub_access_token
           cli:
             cliKey: GetGitHubAccessToken
@@ -217,6 +245,10 @@ operationGroups:
                 cliKey: gitHubAccessTokenRequest
                 cliM4Path: operationGroups['Factories']$$operations['GetGitHubAccessToken']$$requests[0]$$parameters['gitHubAccessTokenRequest']
               bodySchema: git_hub_access_token_request
+            - parameterName[0]: accept(accept^constant)
+              cli:
+                cliKey: accept
+                cliM4Path: operationGroups['Factories']$$operations['GetGitHubAccessToken']$$requests[0]$$parameters['accept']
         - operationName: get_data_plane_access
           cli:
             cliKey: GetDataPlaneAccess
@@ -247,6 +279,10 @@ operationGroups:
                 cliKey: policy
                 cliM4Path: operationGroups['Factories']$$operations['GetDataPlaneAccess']$$requests[0]$$parameters['policy']
               bodySchema: user_access_policy
+            - parameterName[0]: accept(accept^constant)
+              cli:
+                cliKey: accept
+                cliM4Path: operationGroups['Factories']$$operations['GetDataPlaneAccess']$$requests[0]$$parameters['accept']
     - operationGroupName: triggers
       cli:
         cliKey: Triggers
@@ -277,6 +313,10 @@ operationGroups:
               cli:
                 cliKey: ApiVersion
                 cliM4Path: globalParameters['ApiVersion']
+            - parameterName[0]: accept(accept^constant)
+              cli:
+                cliKey: accept
+                cliM4Path: operationGroups['Triggers']$$operations['ListByFactory']$$requests[0]$$parameters['accept']
         - operationName: query_by_factory
           cli:
             cliKey: QueryByFactory
@@ -307,6 +347,10 @@ operationGroups:
                 cliKey: filterParameters
                 cliM4Path: operationGroups['Triggers']$$operations['QueryByFactory']$$requests[0]$$parameters['filterParameters']
               bodySchema: trigger_filter_parameters
+            - parameterName[0]: accept(accept^constant)
+              cli:
+                cliKey: accept
+                cliM4Path: operationGroups['Triggers']$$operations['QueryByFactory']$$requests[0]$$parameters['accept']
         - operationName: create_or_update
           cli:
             cliKey: CreateOrUpdate
@@ -345,6 +389,10 @@ operationGroups:
                 cliKey: trigger
                 cliM4Path: operationGroups['Triggers']$$operations['CreateOrUpdate']$$requests[0]$$parameters['trigger']
               bodySchema: trigger_resource
+            - parameterName[0]: accept(accept^constant)
+              cli:
+                cliKey: accept
+                cliM4Path: operationGroups['Triggers']$$operations['CreateOrUpdate']$$requests[0]$$parameters['accept']
         - operationName: get
           cli:
             cliKey: Get
@@ -378,6 +426,10 @@ operationGroups:
               cli:
                 cliKey: If-None-Match
                 cliM4Path: operationGroups['Triggers']$$operations['Get']$$parameters['If-None-Match']
+            - parameterName[0]: accept(accept^constant)
+              cli:
+                cliKey: accept
+                cliM4Path: operationGroups['Triggers']$$operations['Get']$$requests[0]$$parameters['accept']
         - operationName: delete
           cli:
             cliKey: Delete
@@ -407,6 +459,10 @@ operationGroups:
               cli:
                 cliKey: ApiVersion
                 cliM4Path: globalParameters['ApiVersion']
+            - parameterName[0]: accept(accept^constant)
+              cli:
+                cliKey: accept
+                cliM4Path: operationGroups['Triggers']$$operations['Delete']$$requests[0]$$parameters['accept']
         - operationName: subscribe_to_events
           cli:
             cliKey: SubscribeToEvents
@@ -436,6 +492,10 @@ operationGroups:
               cli:
                 cliKey: ApiVersion
                 cliM4Path: globalParameters['ApiVersion']
+            - parameterName[0]: accept(accept^constant)
+              cli:
+                cliKey: accept
+                cliM4Path: operationGroups['Triggers']$$operations['SubscribeToEvents']$$requests[0]$$parameters['accept']
         - operationName: get_event_subscription_status
           cli:
             cliKey: GetEventSubscriptionStatus
@@ -465,6 +525,10 @@ operationGroups:
               cli:
                 cliKey: ApiVersion
                 cliM4Path: globalParameters['ApiVersion']
+            - parameterName[0]: accept(accept^constant)
+              cli:
+                cliKey: accept
+                cliM4Path: operationGroups['Triggers']$$operations['GetEventSubscriptionStatus']$$requests[0]$$parameters['accept']
         - operationName: unsubscribe_from_events
           cli:
             cliKey: UnsubscribeFromEvents
@@ -494,6 +558,10 @@ operationGroups:
               cli:
                 cliKey: ApiVersion
                 cliM4Path: globalParameters['ApiVersion']
+            - parameterName[0]: accept(accept^constant)
+              cli:
+                cliKey: accept
+                cliM4Path: operationGroups['Triggers']$$operations['UnsubscribeFromEvents']$$requests[0]$$parameters['accept']
         - operationName: start
           cli:
             cliKey: Start
@@ -523,6 +591,10 @@ operationGroups:
               cli:
                 cliKey: ApiVersion
                 cliM4Path: globalParameters['ApiVersion']
+            - parameterName[0]: accept(accept^constant)
+              cli:
+                cliKey: accept
+                cliM4Path: operationGroups['Triggers']$$operations['Start']$$requests[0]$$parameters['accept']
         - operationName: stop
           cli:
             cliKey: Stop
@@ -552,6 +624,10 @@ operationGroups:
               cli:
                 cliKey: ApiVersion
                 cliM4Path: globalParameters['ApiVersion']
+            - parameterName[0]: accept(accept^constant)
+              cli:
+                cliKey: accept
+                cliM4Path: operationGroups['Triggers']$$operations['Stop']$$requests[0]$$parameters['accept']
     - operationGroupName: integration_runtimes
       cli:
         cliKey: IntegrationRuntimes
@@ -582,6 +658,10 @@ operationGroups:
               cli:
                 cliKey: ApiVersion
                 cliM4Path: globalParameters['ApiVersion']
+            - parameterName[0]: accept(accept^constant)
+              cli:
+                cliKey: accept
+                cliM4Path: operationGroups['IntegrationRuntimes']$$operations['ListByFactory']$$requests[0]$$parameters['accept']
         - operationName: create_or_update
           cli:
             cliKey: CreateOrUpdate
@@ -620,6 +700,10 @@ operationGroups:
                 cliKey: integrationRuntime
                 cliM4Path: operationGroups['IntegrationRuntimes']$$operations['CreateOrUpdate']$$requests[0]$$parameters['integrationRuntime']
               bodySchema: integration_runtime_resource
+            - parameterName[0]: accept(accept^constant)
+              cli:
+                cliKey: accept
+                cliM4Path: operationGroups['IntegrationRuntimes']$$operations['CreateOrUpdate']$$requests[0]$$parameters['accept']
         - operationName: get
           cli:
             cliKey: Get
@@ -653,6 +737,10 @@ operationGroups:
               cli:
                 cliKey: If-None-Match
                 cliM4Path: operationGroups['IntegrationRuntimes']$$operations['Get']$$parameters['If-None-Match']
+            - parameterName[0]: accept(accept^constant)
+              cli:
+                cliKey: accept
+                cliM4Path: operationGroups['IntegrationRuntimes']$$operations['Get']$$requests[0]$$parameters['accept']
         - operationName: update
           cli:
             cliKey: Update
@@ -687,6 +775,10 @@ operationGroups:
                 cliKey: updateIntegrationRuntimeRequest
                 cliM4Path: operationGroups['IntegrationRuntimes']$$operations['Update']$$requests[0]$$parameters['updateIntegrationRuntimeRequest']
               bodySchema: update_integration_runtime_request
+            - parameterName[0]: accept(accept^constant)
+              cli:
+                cliKey: accept
+                cliM4Path: operationGroups['IntegrationRuntimes']$$operations['Update']$$requests[0]$$parameters['accept']
         - operationName: delete
           cli:
             cliKey: Delete
@@ -716,6 +808,10 @@ operationGroups:
               cli:
                 cliKey: ApiVersion
                 cliM4Path: globalParameters['ApiVersion']
+            - parameterName[0]: accept(accept^constant)
+              cli:
+                cliKey: accept
+                cliM4Path: operationGroups['IntegrationRuntimes']$$operations['Delete']$$requests[0]$$parameters['accept']
         - operationName: get_status
           cli:
             cliKey: GetStatus
@@ -745,6 +841,10 @@ operationGroups:
               cli:
                 cliKey: ApiVersion
                 cliM4Path: globalParameters['ApiVersion']
+            - parameterName[0]: accept(accept^constant)
+              cli:
+                cliKey: accept
+                cliM4Path: operationGroups['IntegrationRuntimes']$$operations['GetStatus']$$requests[0]$$parameters['accept']
         - operationName: get_connection_info
           cli:
             cliKey: GetConnectionInfo
@@ -774,6 +874,10 @@ operationGroups:
               cli:
                 cliKey: ApiVersion
                 cliM4Path: globalParameters['ApiVersion']
+            - parameterName[0]: accept(accept^constant)
+              cli:
+                cliKey: accept
+                cliM4Path: operationGroups['IntegrationRuntimes']$$operations['GetConnectionInfo']$$requests[0]$$parameters['accept']
         - operationName: regenerate_auth_key
           cli:
             cliKey: RegenerateAuthKey
@@ -808,6 +912,10 @@ operationGroups:
                 cliKey: regenerateKeyParameters
                 cliM4Path: operationGroups['IntegrationRuntimes']$$operations['RegenerateAuthKey']$$requests[0]$$parameters['regenerateKeyParameters']
               bodySchema: integration_runtime_regenerate_key_parameters
+            - parameterName[0]: accept(accept^constant)
+              cli:
+                cliKey: accept
+                cliM4Path: operationGroups['IntegrationRuntimes']$$operations['RegenerateAuthKey']$$requests[0]$$parameters['accept']
         - operationName: list_auth_keys
           cli:
             cliKey: ListAuthKeys
@@ -837,6 +945,10 @@ operationGroups:
               cli:
                 cliKey: ApiVersion
                 cliM4Path: globalParameters['ApiVersion']
+            - parameterName[0]: accept(accept^constant)
+              cli:
+                cliKey: accept
+                cliM4Path: operationGroups['IntegrationRuntimes']$$operations['ListAuthKeys']$$requests[0]$$parameters['accept']
         - operationName: start
           cli:
             cliKey: Start
@@ -866,6 +978,10 @@ operationGroups:
               cli:
                 cliKey: ApiVersion
                 cliM4Path: globalParameters['ApiVersion']
+            - parameterName[0]: accept(accept^constant)
+              cli:
+                cliKey: accept
+                cliM4Path: operationGroups['IntegrationRuntimes']$$operations['Start']$$requests[0]$$parameters['accept']
         - operationName: stop
           cli:
             cliKey: Stop
@@ -895,6 +1011,10 @@ operationGroups:
               cli:
                 cliKey: ApiVersion
                 cliM4Path: globalParameters['ApiVersion']
+            - parameterName[0]: accept(accept^constant)
+              cli:
+                cliKey: accept
+                cliM4Path: operationGroups['IntegrationRuntimes']$$operations['Stop']$$requests[0]$$parameters['accept']
         - operationName: sync_credentials
           cli:
             cliKey: SyncCredentials
@@ -924,6 +1044,10 @@ operationGroups:
               cli:
                 cliKey: ApiVersion
                 cliM4Path: globalParameters['ApiVersion']
+            - parameterName[0]: accept(accept^constant)
+              cli:
+                cliKey: accept
+                cliM4Path: operationGroups['IntegrationRuntimes']$$operations['SyncCredentials']$$requests[0]$$parameters['accept']
         - operationName: get_monitoring_data
           cli:
             cliKey: GetMonitoringData
@@ -953,6 +1077,10 @@ operationGroups:
               cli:
                 cliKey: ApiVersion
                 cliM4Path: globalParameters['ApiVersion']
+            - parameterName[0]: accept(accept^constant)
+              cli:
+                cliKey: accept
+                cliM4Path: operationGroups['IntegrationRuntimes']$$operations['GetMonitoringData']$$requests[0]$$parameters['accept']
         - operationName: upgrade
           cli:
             cliKey: Upgrade
@@ -982,6 +1110,10 @@ operationGroups:
               cli:
                 cliKey: ApiVersion
                 cliM4Path: globalParameters['ApiVersion']
+            - parameterName[0]: accept(accept^constant)
+              cli:
+                cliKey: accept
+                cliM4Path: operationGroups['IntegrationRuntimes']$$operations['Upgrade']$$requests[0]$$parameters['accept']
         - operationName: remove_links
           cli:
             cliKey: RemoveLinks
@@ -1016,6 +1148,10 @@ operationGroups:
                 cliKey: linkedIntegrationRuntimeRequest
                 cliM4Path: operationGroups['IntegrationRuntimes']$$operations['RemoveLinks']$$requests[0]$$parameters['linkedIntegrationRuntimeRequest']
               bodySchema: linked_integration_runtime_request
+            - parameterName[0]: accept(accept^constant)
+              cli:
+                cliKey: accept
+                cliM4Path: operationGroups['IntegrationRuntimes']$$operations['RemoveLinks']$$requests[0]$$parameters['accept']
         - operationName: create_linked_integration_runtime
           cli:
             cliKey: CreateLinkedIntegrationRuntime
@@ -1050,6 +1186,10 @@ operationGroups:
                 cliKey: createLinkedIntegrationRuntimeRequest
                 cliM4Path: operationGroups['IntegrationRuntimes']$$operations['CreateLinkedIntegrationRuntime']$$requests[0]$$parameters['createLinkedIntegrationRuntimeRequest']
               bodySchema: create_linked_integration_runtime_request
+            - parameterName[0]: accept(accept^constant)
+              cli:
+                cliKey: accept
+                cliM4Path: operationGroups['IntegrationRuntimes']$$operations['CreateLinkedIntegrationRuntime']$$requests[0]$$parameters['accept']
 schemas:
   objects:
     all:

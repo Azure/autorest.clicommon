@@ -30,6 +30,10 @@ operationGroups:
               cli:
                 cliKey: managedNetworkName
                 cliM4Path: operationGroups['ManagedNetworks']$$operations['GetModify']$$parameters['managedNetworkName']
+            - parameterName[0]: accept(accept^constant)
+              cli:
+                cliKey: accept
+                cliM4Path: operationGroups['ManagedNetworks']$$operations['GetModify']$$requests[0]$$parameters['accept']
         - operationName: create_or_update
           cli:
             cliKey: CreateOrUpdate
@@ -60,6 +64,10 @@ operationGroups:
                 cliKey: managedNetwork
                 cliM4Path: operationGroups['ManagedNetworks']$$operations['CreateOrUpdate']$$requests[0]$$parameters['managedNetwork']
               bodySchema: managed_network
+            - parameterName[0]: accept(accept^constant)
+              cli:
+                cliKey: accept
+                cliM4Path: operationGroups['ManagedNetworks']$$operations['CreateOrUpdate']$$requests[0]$$parameters['accept']
         - operationName: delete
           cli:
             cliKey: Delete
@@ -85,6 +93,10 @@ operationGroups:
               cli:
                 cliKey: managedNetworkName
                 cliM4Path: operationGroups['ManagedNetworks']$$operations['Delete']$$parameters['managedNetworkName']
+            - parameterName[0]: accept(accept^constant)
+              cli:
+                cliKey: accept
+                cliM4Path: operationGroups['ManagedNetworks']$$operations['Delete']$$requests[0]$$parameters['accept']
         - operationName: update
           cli:
             cliKey: Update
@@ -115,6 +127,10 @@ operationGroups:
                 cliKey: parameters
                 cliM4Path: operationGroups['ManagedNetworks']$$operations['Update']$$requests[0]$$parameters['parameters']
               bodySchema: managed_network_update
+            - parameterName[0]: accept(accept^constant)
+              cli:
+                cliKey: accept
+                cliM4Path: operationGroups['ManagedNetworks']$$operations['Update']$$requests[0]$$parameters['accept']
         - operationName: list_by_resource_group
           cli:
             cliKey: ListByResourceGroup
@@ -144,6 +160,10 @@ operationGroups:
               cli:
                 cliKey: $skiptoken
                 cliM4Path: operationGroups['ManagedNetworks']$$operations['ListByResourceGroup']$$parameters['$skiptoken']
+            - parameterName[0]: accept(accept^constant)
+              cli:
+                cliKey: accept
+                cliM4Path: operationGroups['ManagedNetworks']$$operations['ListByResourceGroup']$$requests[0]$$parameters['accept']
         - operationName: list_by_subscription
           cli:
             cliKey: ListBySubscription
@@ -169,6 +189,10 @@ operationGroups:
               cli:
                 cliKey: $skiptoken
                 cliM4Path: operationGroups['ManagedNetworks']$$operations['ListBySubscription']$$parameters['$skiptoken']
+            - parameterName[0]: accept(accept^constant)
+              cli:
+                cliKey: accept
+                cliM4Path: operationGroups['ManagedNetworks']$$operations['ListBySubscription']$$requests[0]$$parameters['accept']
     - operationGroupName: scope_assignments
       cli:
         cliKey: ScopeAssignments
@@ -195,6 +219,10 @@ operationGroups:
               cli:
                 cliKey: ApiVersion
                 cliM4Path: globalParameters['ApiVersion']
+            - parameterName[0]: accept(accept^constant)
+              cli:
+                cliKey: accept
+                cliM4Path: operationGroups['ScopeAssignments']$$operations['Get']$$requests[0]$$parameters['accept']
         - operationName: create_or_update
           cli:
             cliKey: CreateOrUpdate
@@ -221,6 +249,10 @@ operationGroups:
                 cliKey: parameters
                 cliM4Path: operationGroups['ScopeAssignments']$$operations['CreateOrUpdate']$$requests[0]$$parameters['parameters']
               bodySchema: scope_assignment
+            - parameterName[0]: accept(accept^constant)
+              cli:
+                cliKey: accept
+                cliM4Path: operationGroups['ScopeAssignments']$$operations['CreateOrUpdate']$$requests[0]$$parameters['accept']
         - operationName: delete
           cli:
             cliKey: Delete
@@ -259,6 +291,10 @@ operationGroups:
               cli:
                 cliKey: ApiVersion
                 cliM4Path: globalParameters['ApiVersion']
+            - parameterName[0]: accept(accept^constant)
+              cli:
+                cliKey: accept
+                cliM4Path: operationGroups['ScopeAssignments']$$operations['List']$$requests[0]$$parameters['accept']
     - operationGroupName: managed_network_groups
       cli:
         cliKey: ManagedNetworkGroups
@@ -293,6 +329,10 @@ operationGroups:
               cli:
                 cliKey: managedNetworkGroupName
                 cliM4Path: operationGroups['ManagedNetworkGroups']$$operations['Get']$$parameters['managedNetworkGroupName']
+            - parameterName[0]: accept(accept^constant)
+              cli:
+                cliKey: accept
+                cliM4Path: operationGroups['ManagedNetworkGroups']$$operations['Get']$$requests[0]$$parameters['accept']
         - operationName: create_or_update
           cli:
             cliKey: CreateOrUpdate
@@ -327,6 +367,10 @@ operationGroups:
                 cliKey: managedNetworkGroup
                 cliM4Path: operationGroups['ManagedNetworkGroups']$$operations['CreateOrUpdate']$$requests[0]$$parameters['managedNetworkGroup']
               bodySchema: managed_network_group
+            - parameterName[0]: accept(accept^constant)
+              cli:
+                cliKey: accept
+                cliM4Path: operationGroups['ManagedNetworkGroups']$$operations['CreateOrUpdate']$$requests[0]$$parameters['accept']
         - operationName: delete
           cli:
             cliKey: Delete
@@ -356,6 +400,10 @@ operationGroups:
               cli:
                 cliKey: managedNetworkGroupName
                 cliM4Path: operationGroups['ManagedNetworkGroups']$$operations['Delete']$$parameters['managedNetworkGroupName']
+            - parameterName[0]: accept(accept^constant)
+              cli:
+                cliKey: accept
+                cliM4Path: operationGroups['ManagedNetworkGroups']$$operations['Delete']$$requests[0]$$parameters['accept']
         - operationName: list_by_managed_network
           cli:
             cliKey: ListByManagedNetwork
@@ -389,6 +437,10 @@ operationGroups:
               cli:
                 cliKey: $skiptoken
                 cliM4Path: operationGroups['ManagedNetworkGroups']$$operations['ListByManagedNetwork']$$parameters['$skiptoken']
+            - parameterName[0]: accept(accept^constant)
+              cli:
+                cliKey: accept
+                cliM4Path: operationGroups['ManagedNetworkGroups']$$operations['ListByManagedNetwork']$$requests[0]$$parameters['accept']
     - operationGroupName: managed_network_peering_policies
       cli:
         cliKey: ManagedNetworkPeeringPolicies
@@ -423,6 +475,10 @@ operationGroups:
               cli:
                 cliKey: managedNetworkPeeringPolicyName
                 cliM4Path: operationGroups['ManagedNetworkPeeringPolicies']$$operations['Get']$$parameters['managedNetworkPeeringPolicyName']
+            - parameterName[0]: accept(accept^constant)
+              cli:
+                cliKey: accept
+                cliM4Path: operationGroups['ManagedNetworkPeeringPolicies']$$operations['Get']$$requests[0]$$parameters['accept']
         - operationName: create_or_update
           cli:
             cliKey: CreateOrUpdate
@@ -457,6 +513,10 @@ operationGroups:
                 cliKey: managedNetworkPolicy
                 cliM4Path: operationGroups['ManagedNetworkPeeringPolicies']$$operations['CreateOrUpdate']$$requests[0]$$parameters['managedNetworkPolicy']
               bodySchema: managed_network_peering_policy
+            - parameterName[0]: accept(accept^constant)
+              cli:
+                cliKey: accept
+                cliM4Path: operationGroups['ManagedNetworkPeeringPolicies']$$operations['CreateOrUpdate']$$requests[0]$$parameters['accept']
         - operationName: delete
           cli:
             cliKey: Delete
@@ -486,6 +546,10 @@ operationGroups:
               cli:
                 cliKey: managedNetworkPeeringPolicyName
                 cliM4Path: operationGroups['ManagedNetworkPeeringPolicies']$$operations['Delete']$$parameters['managedNetworkPeeringPolicyName']
+            - parameterName[0]: accept(accept^constant)
+              cli:
+                cliKey: accept
+                cliM4Path: operationGroups['ManagedNetworkPeeringPolicies']$$operations['Delete']$$requests[0]$$parameters['accept']
         - operationName: list_by_managed_network
           cli:
             cliKey: ListByManagedNetwork
@@ -519,6 +583,10 @@ operationGroups:
               cli:
                 cliKey: $skiptoken
                 cliM4Path: operationGroups['ManagedNetworkPeeringPolicies']$$operations['ListByManagedNetwork']$$parameters['$skiptoken']
+            - parameterName[0]: accept(accept^constant)
+              cli:
+                cliKey: accept
+                cliM4Path: operationGroups['ManagedNetworkPeeringPolicies']$$operations['ListByManagedNetwork']$$requests[0]$$parameters['accept']
     - operationGroupName: operations
       cli:
         cliKey: Operations
@@ -537,6 +605,10 @@ operationGroups:
               cli:
                 cliKey: ApiVersion
                 cliM4Path: globalParameters['ApiVersion']
+            - parameterName[0]: accept(accept^constant)
+              cli:
+                cliKey: accept
+                cliM4Path: operationGroups['Operations']$$operations['List']$$requests[0]$$parameters['accept']
 schemas:
   objects:
     all:

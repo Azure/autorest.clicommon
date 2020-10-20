@@ -6,6 +6,7 @@ operationGroups:
           parameters:
             - parameterName: $host(string^string)
             - parameterName: ApiVersion(ApiVersion-2018-09-01-preview^constant)
+            - parameterName[0]: accept(Accept^constant)
     - operationGroupName: AttestationProviders
       operations:
         - operationName: Get
@@ -15,6 +16,7 @@ operationGroups:
             - parameterName: resourceGroupName(string^string)
             - parameterName: providerName(string^string)
             - parameterName: ApiVersion(ApiVersion-2018-09-01-preview^constant)
+            - parameterName[0]: accept(Accept^constant)
         - operationName: Create
           parameters:
             - parameterName: $host(string^string)
@@ -24,6 +26,7 @@ operationGroups:
             - parameterName: ApiVersion(ApiVersion-2018-09-01-preview^constant)
             - parameterName[0]: creationParams(AttestationServiceCreationParams^object)
               bodySchema: AttestationServiceCreationParams
+            - parameterName[0]: accept(Accept^constant)
         - operationName: Update
           parameters:
             - parameterName: $host(string^string)
@@ -33,6 +36,7 @@ operationGroups:
             - parameterName: ApiVersion(ApiVersion-2018-09-01-preview^constant)
             - parameterName[0]: updateParams(AttestationServicePatchParams^object)
               bodySchema: AttestationServicePatchParams
+            - parameterName[0]: accept(Accept^constant)
         - operationName: Delete
           parameters:
             - parameterName: $host(string^string)
@@ -40,17 +44,20 @@ operationGroups:
             - parameterName: resourceGroupName(string^string)
             - parameterName: providerName(string^string)
             - parameterName: ApiVersion(ApiVersion-2018-09-01-preview^constant)
+            - parameterName[0]: accept(Accept^constant)
         - operationName: List
           parameters:
             - parameterName: $host(string^string)
             - parameterName: ApiVersion(ApiVersion-2018-09-01-preview^constant)
             - parameterName: subscriptionId(string^string)
+            - parameterName[0]: accept(Accept^constant)
         - operationName: ListByResourceGroup
           parameters:
             - parameterName: $host(string^string)
             - parameterName: resourceGroupName(string^string)
             - parameterName: ApiVersion(ApiVersion-2018-09-01-preview^constant)
             - parameterName: subscriptionId(string^string)
+            - parameterName[0]: accept(Accept^constant)
 schemas:
   objects:
     all:

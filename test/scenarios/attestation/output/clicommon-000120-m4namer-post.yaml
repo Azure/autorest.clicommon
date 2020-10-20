@@ -85,7 +85,7 @@ schemas:
           name: String
           description: ''
       protocol: {}
-    - &ref_59
+    - &ref_60
       type: string
       apiVersions:
         - version: 2018-09-01-preview
@@ -412,11 +412,20 @@ schemas:
           name: api_version2018_09_01_preview
           description: Api Version (2018-09-01-preview)
       protocol: {}
+    - &ref_56
+      type: constant
+      value:
+        value: application/json
+      valueType: *ref_0
+      language:
+        default:
+          name: accept
+          description: 'Accept: application/json'
+      protocol: {}
   dictionaries:
     - &ref_18
       type: dictionary
       elementType: *ref_1
-      nullableItems: false
       language:
         default:
           name: TrackedResourceTags
@@ -425,7 +434,6 @@ schemas:
     - &ref_25
       type: dictionary
       elementType: *ref_1
-      nullableItems: false
       language:
         default:
           name: AttestationServiceCreationParamsTags
@@ -434,14 +442,13 @@ schemas:
     - &ref_47
       type: dictionary
       elementType: *ref_1
-      nullableItems: false
       language:
         default:
           name: AttestationServicePatchParamsTags
           description: The tags that will be assigned to the attestation service instance.
       protocol: {}
   objects:
-    - &ref_56
+    - &ref_57
       type: object
       apiVersions:
         - version: 2018-09-01-preview
@@ -584,7 +591,7 @@ schemas:
       protocol: {}
     - *ref_7
     - *ref_8
-    - &ref_57
+    - &ref_58
       type: object
       apiVersions:
         - version: 2018-09-01-preview
@@ -869,7 +876,7 @@ schemas:
     - *ref_23
     - *ref_13
     - *ref_17
-    - &ref_62
+    - &ref_63
       type: object
       apiVersions:
         - version: 2018-09-01-preview
@@ -1285,7 +1292,7 @@ schemas:
     - *ref_44
     - *ref_45
     - *ref_46
-    - &ref_66
+    - &ref_67
       type: object
       apiVersions:
         - version: 2018-09-01-preview
@@ -1317,7 +1324,7 @@ schemas:
           cliM4Path: 'schemas$$objects[''AttestationServicePatchParams'']'
           cliPath: 'schemas$$objects[''AttestationServicePatchParams'']'
       protocol: {}
-    - &ref_72
+    - &ref_73
       type: object
       apiVersions:
         - version: 2018-09-01-preview
@@ -1362,7 +1369,7 @@ schemas:
     - *ref_50
     - *ref_51
 globalParameters:
-  - &ref_58
+  - &ref_59
     schema: *ref_52
     implementation: Client
     required: true
@@ -1426,7 +1433,25 @@ operationGroups:
           - *ref_54
           - *ref_55
         requests:
-          - language:
+          - parameters:
+              - schema: *ref_56
+                implementation: Method
+                origin: 'modelerfour:synthesized/accept'
+                required: true
+                language:
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                  cli:
+                    cliKey: accept
+                    cliM4Path: 'operationGroups[''Operation'']$$operations[''List'']$$requests[0]$$parameters[''accept'']'
+                    cliPath: 'operationGroups[''Operation'']$$operations[''List'']$$requests[0]$$parameters[''accept'']'
+                protocol:
+                  http:
+                    in: header
+            signatureParameters: []
+            language:
               default:
                 name: ''
                 description: ''
@@ -1437,7 +1462,7 @@ operationGroups:
                 uri: '{$host}'
         signatureParameters: []
         responses:
-          - schema: *ref_56
+          - schema: *ref_57
             language:
               default:
                 name: ''
@@ -1450,7 +1475,7 @@ operationGroups:
                 statusCodes:
                   - '200'
         exceptions:
-          - schema: *ref_57
+          - schema: *ref_58
             language:
               default:
                 name: ''
@@ -1512,9 +1537,9 @@ operationGroups:
           - version: 2018-09-01-preview
         parameters:
           - *ref_54
-          - *ref_58
-          - &ref_60
-            schema: *ref_59
+          - *ref_59
+          - &ref_61
+            schema: *ref_60
             implementation: Method
             required: true
             language:
@@ -1529,7 +1554,7 @@ operationGroups:
             protocol:
               http:
                 in: path
-          - &ref_61
+          - &ref_62
             schema: *ref_1
             implementation: Method
             required: true
@@ -1547,7 +1572,25 @@ operationGroups:
                 in: path
           - *ref_55
         requests:
-          - language:
+          - parameters:
+              - schema: *ref_56
+                implementation: Method
+                origin: 'modelerfour:synthesized/accept'
+                required: true
+                language:
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                  cli:
+                    cliKey: accept
+                    cliM4Path: 'operationGroups[''AttestationProviders'']$$operations[''Get'']$$requests[0]$$parameters[''accept'']'
+                    cliPath: 'operationGroups[''AttestationProviders'']$$operations[''Get'']$$requests[0]$$parameters[''accept'']'
+                protocol:
+                  http:
+                    in: header
+            signatureParameters: []
+            language:
               default:
                 name: ''
                 description: ''
@@ -1557,8 +1600,8 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_60
           - *ref_61
+          - *ref_62
         responses:
           - schema: *ref_12
             language:
@@ -1573,7 +1616,7 @@ operationGroups:
                 statusCodes:
                   - '200'
         exceptions:
-          - schema: *ref_57
+          - schema: *ref_58
             language:
               default:
                 name: ''
@@ -1621,9 +1664,9 @@ operationGroups:
           - version: 2018-09-01-preview
         parameters:
           - *ref_54
-          - *ref_58
-          - &ref_64
-            schema: *ref_59
+          - *ref_59
+          - &ref_65
+            schema: *ref_60
             implementation: Method
             required: true
             language:
@@ -1638,7 +1681,7 @@ operationGroups:
             protocol:
               http:
                 in: path
-          - &ref_65
+          - &ref_66
             schema: *ref_1
             implementation: Method
             required: true
@@ -1657,8 +1700,8 @@ operationGroups:
           - *ref_55
         requests:
           - parameters:
-              - &ref_63
-                schema: *ref_62
+              - &ref_64
+                schema: *ref_63
                 implementation: Method
                 required: true
                 language:
@@ -1673,8 +1716,24 @@ operationGroups:
                   http:
                     in: body
                     style: json
+              - schema: *ref_56
+                implementation: Method
+                origin: 'modelerfour:synthesized/accept'
+                required: true
+                language:
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                  cli:
+                    cliKey: accept
+                    cliM4Path: 'operationGroups[''AttestationProviders'']$$operations[''Create'']$$requests[0]$$parameters[''accept'']'
+                    cliPath: 'operationGroups[''AttestationProviders'']$$operations[''Create'']$$requests[0]$$parameters[''accept'']'
+                protocol:
+                  http:
+                    in: header
             signatureParameters:
-              - *ref_63
+              - *ref_64
             language:
               default:
                 name: ''
@@ -1688,8 +1747,8 @@ operationGroups:
                   - application/json
                 uri: '{$host}'
         signatureParameters:
-          - *ref_64
           - *ref_65
+          - *ref_66
         responses:
           - schema: *ref_12
             language:
@@ -1716,7 +1775,7 @@ operationGroups:
                 statusCodes:
                   - '201'
         exceptions:
-          - schema: *ref_57
+          - schema: *ref_58
             language:
               default:
                 name: ''
@@ -1779,9 +1838,9 @@ operationGroups:
           - version: 2018-09-01-preview
         parameters:
           - *ref_54
-          - *ref_58
-          - &ref_68
-            schema: *ref_59
+          - *ref_59
+          - &ref_69
+            schema: *ref_60
             implementation: Method
             required: true
             language:
@@ -1796,7 +1855,7 @@ operationGroups:
             protocol:
               http:
                 in: path
-          - &ref_69
+          - &ref_70
             schema: *ref_1
             implementation: Method
             required: true
@@ -1815,8 +1874,8 @@ operationGroups:
           - *ref_55
         requests:
           - parameters:
-              - &ref_67
-                schema: *ref_66
+              - &ref_68
+                schema: *ref_67
                 implementation: Method
                 required: true
                 language:
@@ -1831,8 +1890,24 @@ operationGroups:
                   http:
                     in: body
                     style: json
+              - schema: *ref_56
+                implementation: Method
+                origin: 'modelerfour:synthesized/accept'
+                required: true
+                language:
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                  cli:
+                    cliKey: accept
+                    cliM4Path: 'operationGroups[''AttestationProviders'']$$operations[''Update'']$$requests[0]$$parameters[''accept'']'
+                    cliPath: 'operationGroups[''AttestationProviders'']$$operations[''Update'']$$requests[0]$$parameters[''accept'']'
+                protocol:
+                  http:
+                    in: header
             signatureParameters:
-              - *ref_67
+              - *ref_68
             language:
               default:
                 name: ''
@@ -1846,8 +1921,8 @@ operationGroups:
                   - application/json
                 uri: '{$host}'
         signatureParameters:
-          - *ref_68
           - *ref_69
+          - *ref_70
         responses:
           - schema: *ref_12
             language:
@@ -1862,7 +1937,7 @@ operationGroups:
                 statusCodes:
                   - '200'
         exceptions:
-          - schema: *ref_57
+          - schema: *ref_58
             language:
               default:
                 name: ''
@@ -1915,9 +1990,9 @@ operationGroups:
           - version: 2018-09-01-preview
         parameters:
           - *ref_54
-          - *ref_58
-          - &ref_70
-            schema: *ref_59
+          - *ref_59
+          - &ref_71
+            schema: *ref_60
             implementation: Method
             required: true
             language:
@@ -1932,7 +2007,7 @@ operationGroups:
             protocol:
               http:
                 in: path
-          - &ref_71
+          - &ref_72
             schema: *ref_1
             implementation: Method
             required: true
@@ -1950,7 +2025,25 @@ operationGroups:
                 in: path
           - *ref_55
         requests:
-          - language:
+          - parameters:
+              - schema: *ref_56
+                implementation: Method
+                origin: 'modelerfour:synthesized/accept'
+                required: true
+                language:
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                  cli:
+                    cliKey: accept
+                    cliM4Path: 'operationGroups[''AttestationProviders'']$$operations[''Delete'']$$requests[0]$$parameters[''accept'']'
+                    cliPath: 'operationGroups[''AttestationProviders'']$$operations[''Delete'']$$requests[0]$$parameters[''accept'']'
+                protocol:
+                  http:
+                    in: header
+            signatureParameters: []
+            language:
               default:
                 name: ''
                 description: ''
@@ -1960,8 +2053,8 @@ operationGroups:
                 method: delete
                 uri: '{$host}'
         signatureParameters:
-          - *ref_70
           - *ref_71
+          - *ref_72
         responses:
           - language:
               default:
@@ -1988,7 +2081,7 @@ operationGroups:
                 statusCodes:
                   - '204'
         exceptions:
-          - schema: *ref_57
+          - schema: *ref_58
             language:
               default:
                 name: ''
@@ -2030,9 +2123,27 @@ operationGroups:
         parameters:
           - *ref_54
           - *ref_55
-          - *ref_58
+          - *ref_59
         requests:
-          - language:
+          - parameters:
+              - schema: *ref_56
+                implementation: Method
+                origin: 'modelerfour:synthesized/accept'
+                required: true
+                language:
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                  cli:
+                    cliKey: accept
+                    cliM4Path: 'operationGroups[''AttestationProviders'']$$operations[''List'']$$requests[0]$$parameters[''accept'']'
+                    cliPath: 'operationGroups[''AttestationProviders'']$$operations[''List'']$$requests[0]$$parameters[''accept'']'
+                protocol:
+                  http:
+                    in: header
+            signatureParameters: []
+            language:
               default:
                 name: ''
                 description: ''
@@ -2043,7 +2154,7 @@ operationGroups:
                 uri: '{$host}'
         signatureParameters: []
         responses:
-          - schema: *ref_72
+          - schema: *ref_73
             language:
               default:
                 name: ''
@@ -2056,7 +2167,7 @@ operationGroups:
                 statusCodes:
                   - '200'
         exceptions:
-          - schema: *ref_57
+          - schema: *ref_58
             language:
               default:
                 name: ''
@@ -2103,8 +2214,8 @@ operationGroups:
           - version: 2018-09-01-preview
         parameters:
           - *ref_54
-          - &ref_73
-            schema: *ref_59
+          - &ref_74
+            schema: *ref_60
             implementation: Method
             required: true
             language:
@@ -2120,9 +2231,27 @@ operationGroups:
               http:
                 in: path
           - *ref_55
-          - *ref_58
+          - *ref_59
         requests:
-          - language:
+          - parameters:
+              - schema: *ref_56
+                implementation: Method
+                origin: 'modelerfour:synthesized/accept'
+                required: true
+                language:
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                  cli:
+                    cliKey: accept
+                    cliM4Path: 'operationGroups[''AttestationProviders'']$$operations[''ListByResourceGroup'']$$requests[0]$$parameters[''accept'']'
+                    cliPath: 'operationGroups[''AttestationProviders'']$$operations[''ListByResourceGroup'']$$requests[0]$$parameters[''accept'']'
+                protocol:
+                  http:
+                    in: header
+            signatureParameters: []
+            language:
               default:
                 name: ''
                 description: ''
@@ -2132,9 +2261,9 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_73
+          - *ref_74
         responses:
-          - schema: *ref_72
+          - schema: *ref_73
             language:
               default:
                 name: ''
@@ -2147,7 +2276,7 @@ operationGroups:
                 statusCodes:
                   - '200'
         exceptions:
-          - schema: *ref_57
+          - schema: *ref_58
             language:
               default:
                 name: ''

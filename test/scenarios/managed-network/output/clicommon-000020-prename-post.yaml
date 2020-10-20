@@ -7,7 +7,7 @@ info:
     cli-dump-index: 20
 schemas:
   numbers:
-    - &ref_78
+    - &ref_79
       type: integer
       apiVersions:
         - version: 2019-06-01-preview
@@ -302,11 +302,20 @@ schemas:
           name: ApiVersion-2019-06-01-preview
           description: Api Version (2019-06-01-preview)
       protocol: {}
+    - &ref_66
+      type: constant
+      value:
+        value: application/json
+      valueType: *ref_0
+      language:
+        default:
+          name: Accept
+          description: 'Accept: application/json'
+      protocol: {}
   dictionaries:
     - &ref_28
       type: dictionary
       elementType: *ref_1
-      nullableItems: false
       language:
         default:
           name: TrackedResource-tags
@@ -315,7 +324,6 @@ schemas:
     - &ref_33
       type: dictionary
       elementType: *ref_1
-      nullableItems: false
       language:
         default:
           name: ManagedNetworkUpdate-tags
@@ -1144,7 +1152,7 @@ schemas:
     - *ref_20
     - *ref_5
     - *ref_21
-    - &ref_68
+    - &ref_69
       type: object
       apiVersions:
         - version: 2019-06-01-preview
@@ -1181,7 +1189,7 @@ schemas:
         cli:
           cliKey: ErrorResponse
       protocol: {}
-    - &ref_74
+    - &ref_75
       type: object
       apiVersions:
         - version: 2019-06-01-preview
@@ -1207,7 +1215,7 @@ schemas:
         cli:
           cliKey: ManagedNetworkUpdate
       protocol: {}
-    - &ref_82
+    - &ref_83
       type: object
       apiVersions:
         - version: 2019-06-01-preview
@@ -1253,7 +1261,7 @@ schemas:
       protocol: {}
     - *ref_22
     - *ref_16
-    - &ref_93
+    - &ref_94
       type: object
       apiVersions:
         - version: 2019-06-01-preview
@@ -1297,7 +1305,7 @@ schemas:
         cli:
           cliKey: ScopeAssignmentListResult
       protocol: {}
-    - &ref_108
+    - &ref_109
       type: object
       apiVersions:
         - version: 2019-06-01-preview
@@ -1341,7 +1349,7 @@ schemas:
         cli:
           cliKey: ManagedNetworkGroupListResult
       protocol: {}
-    - &ref_123
+    - &ref_124
       type: object
       apiVersions:
         - version: 2019-06-01-preview
@@ -1385,7 +1393,7 @@ schemas:
         cli:
           cliKey: ManagedNetworkPeeringPolicyListResult
       protocol: {}
-    - &ref_124
+    - &ref_125
       type: object
       apiVersions:
         - version: 2019-06-01-preview
@@ -1606,7 +1614,7 @@ operationGroups:
           - *ref_63
           - *ref_64
           - *ref_65
-          - &ref_66
+          - &ref_67
             schema: *ref_1
             implementation: Method
             required: true
@@ -1620,7 +1628,7 @@ operationGroups:
             protocol:
               http:
                 in: path
-          - &ref_67
+          - &ref_68
             schema: *ref_1
             implementation: Method
             required: true
@@ -1635,7 +1643,23 @@ operationGroups:
               http:
                 in: path
         requests:
-          - language:
+          - parameters:
+              - schema: *ref_66
+                implementation: Method
+                origin: 'modelerfour:synthesized/accept'
+                required: true
+                language:
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                  cli:
+                    cliKey: accept
+                protocol:
+                  http:
+                    in: header
+            signatureParameters: []
+            language:
               default:
                 name: ''
                 description: ''
@@ -1645,8 +1669,8 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_66
           - *ref_67
+          - *ref_68
         responses:
           - schema: *ref_2
             language:
@@ -1661,7 +1685,7 @@ operationGroups:
                 statusCodes:
                   - '200'
         exceptions:
-          - schema: *ref_68
+          - schema: *ref_69
             language:
               default:
                 name: ''
@@ -1722,7 +1746,7 @@ operationGroups:
           - *ref_63
           - *ref_64
           - *ref_65
-          - &ref_70
+          - &ref_71
             schema: *ref_1
             implementation: Method
             required: true
@@ -1736,7 +1760,7 @@ operationGroups:
             protocol:
               http:
                 in: path
-          - &ref_71
+          - &ref_72
             schema: *ref_1
             implementation: Method
             required: true
@@ -1752,7 +1776,7 @@ operationGroups:
                 in: path
         requests:
           - parameters:
-              - &ref_69
+              - &ref_70
                 schema: *ref_2
                 implementation: Method
                 required: true
@@ -1766,8 +1790,22 @@ operationGroups:
                   http:
                     in: body
                     style: json
+              - schema: *ref_66
+                implementation: Method
+                origin: 'modelerfour:synthesized/accept'
+                required: true
+                language:
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                  cli:
+                    cliKey: accept
+                protocol:
+                  http:
+                    in: header
             signatureParameters:
-              - *ref_69
+              - *ref_70
             language:
               default:
                 name: ''
@@ -1781,8 +1819,8 @@ operationGroups:
                   - application/json
                 uri: '{$host}'
         signatureParameters:
-          - *ref_70
           - *ref_71
+          - *ref_72
         responses:
           - schema: *ref_2
             language:
@@ -1809,7 +1847,7 @@ operationGroups:
                 statusCodes:
                   - '201'
         exceptions:
-          - schema: *ref_68
+          - schema: *ref_69
             language:
               default:
                 name: ''
@@ -1913,7 +1951,7 @@ operationGroups:
           - *ref_63
           - *ref_64
           - *ref_65
-          - &ref_72
+          - &ref_73
             schema: *ref_1
             implementation: Method
             required: true
@@ -1927,7 +1965,7 @@ operationGroups:
             protocol:
               http:
                 in: path
-          - &ref_73
+          - &ref_74
             schema: *ref_1
             implementation: Method
             required: true
@@ -1942,7 +1980,23 @@ operationGroups:
               http:
                 in: path
         requests:
-          - language:
+          - parameters:
+              - schema: *ref_66
+                implementation: Method
+                origin: 'modelerfour:synthesized/accept'
+                required: true
+                language:
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                  cli:
+                    cliKey: accept
+                protocol:
+                  http:
+                    in: header
+            signatureParameters: []
+            language:
               default:
                 name: ''
                 description: ''
@@ -1952,8 +2006,8 @@ operationGroups:
                 method: delete
                 uri: '{$host}'
         signatureParameters:
-          - *ref_72
           - *ref_73
+          - *ref_74
         responses:
           - language:
               default:
@@ -1980,7 +2034,7 @@ operationGroups:
                 statusCodes:
                   - '204'
         exceptions:
-          - schema: *ref_68
+          - schema: *ref_69
             language:
               default:
                 name: ''
@@ -2021,7 +2075,7 @@ operationGroups:
           - *ref_63
           - *ref_64
           - *ref_65
-          - &ref_76
+          - &ref_77
             schema: *ref_1
             implementation: Method
             required: true
@@ -2035,7 +2089,7 @@ operationGroups:
             protocol:
               http:
                 in: path
-          - &ref_77
+          - &ref_78
             schema: *ref_1
             implementation: Method
             required: true
@@ -2051,8 +2105,8 @@ operationGroups:
                 in: path
         requests:
           - parameters:
-              - &ref_75
-                schema: *ref_74
+              - &ref_76
+                schema: *ref_75
                 implementation: Method
                 required: true
                 language:
@@ -2065,8 +2119,22 @@ operationGroups:
                   http:
                     in: body
                     style: json
+              - schema: *ref_66
+                implementation: Method
+                origin: 'modelerfour:synthesized/accept'
+                required: true
+                language:
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                  cli:
+                    cliKey: accept
+                protocol:
+                  http:
+                    in: header
             signatureParameters:
-              - *ref_75
+              - *ref_76
             language:
               default:
                 name: ''
@@ -2080,8 +2148,8 @@ operationGroups:
                   - application/json
                 uri: '{$host}'
         signatureParameters:
-          - *ref_76
           - *ref_77
+          - *ref_78
         responses:
           - schema: *ref_2
             language:
@@ -2108,7 +2176,7 @@ operationGroups:
                 statusCodes:
                   - '201'
         exceptions:
-          - schema: *ref_68
+          - schema: *ref_69
             language:
               default:
                 name: ''
@@ -2200,7 +2268,7 @@ operationGroups:
           - *ref_63
           - *ref_64
           - *ref_65
-          - &ref_79
+          - &ref_80
             schema: *ref_1
             implementation: Method
             required: true
@@ -2214,8 +2282,8 @@ operationGroups:
             protocol:
               http:
                 in: path
-          - &ref_80
-            schema: *ref_78
+          - &ref_81
+            schema: *ref_79
             implementation: Method
             language:
               default:
@@ -2227,7 +2295,7 @@ operationGroups:
             protocol:
               http:
                 in: query
-          - &ref_81
+          - &ref_82
             schema: *ref_1
             implementation: Method
             language:
@@ -2243,7 +2311,23 @@ operationGroups:
               http:
                 in: query
         requests:
-          - language:
+          - parameters:
+              - schema: *ref_66
+                implementation: Method
+                origin: 'modelerfour:synthesized/accept'
+                required: true
+                language:
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                  cli:
+                    cliKey: accept
+                protocol:
+                  http:
+                    in: header
+            signatureParameters: []
+            language:
               default:
                 name: ''
                 description: ''
@@ -2253,11 +2337,11 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_79
           - *ref_80
           - *ref_81
+          - *ref_82
         responses:
-          - schema: *ref_82
+          - schema: *ref_83
             language:
               default:
                 name: ''
@@ -2270,7 +2354,7 @@ operationGroups:
                 statusCodes:
                   - '200'
         exceptions:
-          - schema: *ref_68
+          - schema: *ref_69
             language:
               default:
                 name: ''
@@ -2336,8 +2420,8 @@ operationGroups:
           - *ref_63
           - *ref_64
           - *ref_65
-          - &ref_83
-            schema: *ref_78
+          - &ref_84
+            schema: *ref_79
             implementation: Method
             language:
               default:
@@ -2349,7 +2433,7 @@ operationGroups:
             protocol:
               http:
                 in: query
-          - &ref_84
+          - &ref_85
             schema: *ref_1
             implementation: Method
             language:
@@ -2365,7 +2449,23 @@ operationGroups:
               http:
                 in: query
         requests:
-          - language:
+          - parameters:
+              - schema: *ref_66
+                implementation: Method
+                origin: 'modelerfour:synthesized/accept'
+                required: true
+                language:
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                  cli:
+                    cliKey: accept
+                protocol:
+                  http:
+                    in: header
+            signatureParameters: []
+            language:
               default:
                 name: ''
                 description: ''
@@ -2375,10 +2475,10 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_83
           - *ref_84
+          - *ref_85
         responses:
-          - schema: *ref_82
+          - schema: *ref_83
             language:
               default:
                 name: ''
@@ -2391,7 +2491,7 @@ operationGroups:
                 statusCodes:
                   - '200'
         exceptions:
-          - schema: *ref_68
+          - schema: *ref_69
             language:
               default:
                 name: ''
@@ -2463,7 +2563,7 @@ operationGroups:
           - version: 2019-06-01-preview
         parameters:
           - *ref_63
-          - &ref_85
+          - &ref_86
             schema: *ref_1
             implementation: Method
             required: true
@@ -2479,7 +2579,7 @@ operationGroups:
             protocol:
               http:
                 in: path
-          - &ref_86
+          - &ref_87
             schema: *ref_1
             implementation: Method
             required: true
@@ -2495,7 +2595,23 @@ operationGroups:
                 in: path
           - *ref_64
         requests:
-          - language:
+          - parameters:
+              - schema: *ref_66
+                implementation: Method
+                origin: 'modelerfour:synthesized/accept'
+                required: true
+                language:
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                  cli:
+                    cliKey: accept
+                protocol:
+                  http:
+                    in: header
+            signatureParameters: []
+            language:
               default:
                 name: ''
                 description: ''
@@ -2505,8 +2621,8 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_85
           - *ref_86
+          - *ref_87
         responses:
           - schema: *ref_22
             language:
@@ -2521,7 +2637,7 @@ operationGroups:
                 statusCodes:
                   - '200'
         exceptions:
-          - schema: *ref_68
+          - schema: *ref_69
             language:
               default:
                 name: ''
@@ -2560,7 +2676,7 @@ operationGroups:
           - version: 2019-06-01-preview
         parameters:
           - *ref_63
-          - &ref_88
+          - &ref_89
             schema: *ref_1
             implementation: Method
             required: true
@@ -2579,7 +2695,7 @@ operationGroups:
             protocol:
               http:
                 in: path
-          - &ref_89
+          - &ref_90
             schema: *ref_1
             implementation: Method
             required: true
@@ -2596,7 +2712,7 @@ operationGroups:
           - *ref_64
         requests:
           - parameters:
-              - &ref_87
+              - &ref_88
                 schema: *ref_22
                 implementation: Method
                 required: true
@@ -2610,8 +2726,22 @@ operationGroups:
                   http:
                     in: body
                     style: json
+              - schema: *ref_66
+                implementation: Method
+                origin: 'modelerfour:synthesized/accept'
+                required: true
+                language:
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                  cli:
+                    cliKey: accept
+                protocol:
+                  http:
+                    in: header
             signatureParameters:
-              - *ref_87
+              - *ref_88
             language:
               default:
                 name: ''
@@ -2625,8 +2755,8 @@ operationGroups:
                   - application/json
                 uri: '{$host}'
         signatureParameters:
-          - *ref_88
           - *ref_89
+          - *ref_90
         responses:
           - schema: *ref_22
             language:
@@ -2653,7 +2783,7 @@ operationGroups:
                 statusCodes:
                   - '201'
         exceptions:
-          - schema: *ref_68
+          - schema: *ref_69
             language:
               default:
                 name: ''
@@ -2706,7 +2836,7 @@ operationGroups:
           - version: 2019-06-01-preview
         parameters:
           - *ref_63
-          - &ref_90
+          - &ref_91
             schema: *ref_1
             implementation: Method
             required: true
@@ -2722,7 +2852,7 @@ operationGroups:
             protocol:
               http:
                 in: path
-          - &ref_91
+          - &ref_92
             schema: *ref_1
             implementation: Method
             required: true
@@ -2748,8 +2878,8 @@ operationGroups:
                 method: delete
                 uri: '{$host}'
         signatureParameters:
-          - *ref_90
           - *ref_91
+          - *ref_92
         responses:
           - language:
               default:
@@ -2789,7 +2919,7 @@ operationGroups:
           - version: 2019-06-01-preview
         parameters:
           - *ref_63
-          - &ref_92
+          - &ref_93
             schema: *ref_1
             implementation: Method
             required: true
@@ -2807,7 +2937,23 @@ operationGroups:
                 in: path
           - *ref_64
         requests:
-          - language:
+          - parameters:
+              - schema: *ref_66
+                implementation: Method
+                origin: 'modelerfour:synthesized/accept'
+                required: true
+                language:
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                  cli:
+                    cliKey: accept
+                protocol:
+                  http:
+                    in: header
+            signatureParameters: []
+            language:
               default:
                 name: ''
                 description: ''
@@ -2817,9 +2963,9 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_92
+          - *ref_93
         responses:
-          - schema: *ref_93
+          - schema: *ref_94
             language:
               default:
                 name: ''
@@ -2832,7 +2978,7 @@ operationGroups:
                 statusCodes:
                   - '200'
         exceptions:
-          - schema: *ref_68
+          - schema: *ref_69
             language:
               default:
                 name: ''
@@ -2889,7 +3035,7 @@ operationGroups:
           - *ref_63
           - *ref_64
           - *ref_65
-          - &ref_94
+          - &ref_95
             schema: *ref_1
             implementation: Method
             required: true
@@ -2903,7 +3049,7 @@ operationGroups:
             protocol:
               http:
                 in: path
-          - &ref_95
+          - &ref_96
             schema: *ref_1
             implementation: Method
             required: true
@@ -2917,7 +3063,7 @@ operationGroups:
             protocol:
               http:
                 in: path
-          - &ref_96
+          - &ref_97
             schema: *ref_1
             implementation: Method
             required: true
@@ -2932,7 +3078,23 @@ operationGroups:
               http:
                 in: path
         requests:
-          - language:
+          - parameters:
+              - schema: *ref_66
+                implementation: Method
+                origin: 'modelerfour:synthesized/accept'
+                required: true
+                language:
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                  cli:
+                    cliKey: accept
+                protocol:
+                  http:
+                    in: header
+            signatureParameters: []
+            language:
               default:
                 name: ''
                 description: ''
@@ -2942,9 +3104,9 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_94
           - *ref_95
           - *ref_96
+          - *ref_97
         responses:
           - schema: *ref_13
             language:
@@ -2959,7 +3121,7 @@ operationGroups:
                 statusCodes:
                   - '200'
         exceptions:
-          - schema: *ref_68
+          - schema: *ref_69
             language:
               default:
                 name: ''
@@ -3010,7 +3172,7 @@ operationGroups:
           - *ref_63
           - *ref_64
           - *ref_65
-          - &ref_98
+          - &ref_99
             schema: *ref_1
             implementation: Method
             required: true
@@ -3024,7 +3186,7 @@ operationGroups:
             protocol:
               http:
                 in: path
-          - &ref_99
+          - &ref_100
             schema: *ref_1
             implementation: Method
             required: true
@@ -3038,7 +3200,7 @@ operationGroups:
             protocol:
               http:
                 in: path
-          - &ref_100
+          - &ref_101
             schema: *ref_1
             implementation: Method
             required: true
@@ -3054,7 +3216,7 @@ operationGroups:
                 in: path
         requests:
           - parameters:
-              - &ref_97
+              - &ref_98
                 schema: *ref_13
                 implementation: Method
                 required: true
@@ -3068,8 +3230,22 @@ operationGroups:
                   http:
                     in: body
                     style: json
+              - schema: *ref_66
+                implementation: Method
+                origin: 'modelerfour:synthesized/accept'
+                required: true
+                language:
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                  cli:
+                    cliKey: accept
+                protocol:
+                  http:
+                    in: header
             signatureParameters:
-              - *ref_97
+              - *ref_98
             language:
               default:
                 name: ''
@@ -3083,9 +3259,9 @@ operationGroups:
                   - application/json
                 uri: '{$host}'
         signatureParameters:
-          - *ref_98
           - *ref_99
           - *ref_100
+          - *ref_101
         responses:
           - schema: *ref_13
             language:
@@ -3112,7 +3288,7 @@ operationGroups:
                 statusCodes:
                   - '201'
         exceptions:
-          - schema: *ref_68
+          - schema: *ref_69
             language:
               default:
                 name: ''
@@ -3190,7 +3366,7 @@ operationGroups:
           - *ref_63
           - *ref_64
           - *ref_65
-          - &ref_101
+          - &ref_102
             schema: *ref_1
             implementation: Method
             required: true
@@ -3204,7 +3380,7 @@ operationGroups:
             protocol:
               http:
                 in: path
-          - &ref_102
+          - &ref_103
             schema: *ref_1
             implementation: Method
             required: true
@@ -3218,7 +3394,7 @@ operationGroups:
             protocol:
               http:
                 in: path
-          - &ref_103
+          - &ref_104
             schema: *ref_1
             implementation: Method
             required: true
@@ -3233,7 +3409,23 @@ operationGroups:
               http:
                 in: path
         requests:
-          - language:
+          - parameters:
+              - schema: *ref_66
+                implementation: Method
+                origin: 'modelerfour:synthesized/accept'
+                required: true
+                language:
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                  cli:
+                    cliKey: accept
+                protocol:
+                  http:
+                    in: header
+            signatureParameters: []
+            language:
               default:
                 name: ''
                 description: ''
@@ -3243,9 +3435,9 @@ operationGroups:
                 method: delete
                 uri: '{$host}'
         signatureParameters:
-          - *ref_101
           - *ref_102
           - *ref_103
+          - *ref_104
         responses:
           - language:
               default:
@@ -3272,7 +3464,7 @@ operationGroups:
                 statusCodes:
                   - '204'
         exceptions:
-          - schema: *ref_68
+          - schema: *ref_69
             language:
               default:
                 name: ''
@@ -3314,7 +3506,7 @@ operationGroups:
           - *ref_63
           - *ref_64
           - *ref_65
-          - &ref_104
+          - &ref_105
             schema: *ref_1
             implementation: Method
             required: true
@@ -3328,7 +3520,7 @@ operationGroups:
             protocol:
               http:
                 in: path
-          - &ref_105
+          - &ref_106
             schema: *ref_1
             implementation: Method
             required: true
@@ -3342,8 +3534,8 @@ operationGroups:
             protocol:
               http:
                 in: path
-          - &ref_106
-            schema: *ref_78
+          - &ref_107
+            schema: *ref_79
             implementation: Method
             language:
               default:
@@ -3355,7 +3547,7 @@ operationGroups:
             protocol:
               http:
                 in: query
-          - &ref_107
+          - &ref_108
             schema: *ref_1
             implementation: Method
             language:
@@ -3371,7 +3563,23 @@ operationGroups:
               http:
                 in: query
         requests:
-          - language:
+          - parameters:
+              - schema: *ref_66
+                implementation: Method
+                origin: 'modelerfour:synthesized/accept'
+                required: true
+                language:
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                  cli:
+                    cliKey: accept
+                protocol:
+                  http:
+                    in: header
+            signatureParameters: []
+            language:
               default:
                 name: ''
                 description: ''
@@ -3381,12 +3589,12 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_104
           - *ref_105
           - *ref_106
           - *ref_107
+          - *ref_108
         responses:
-          - schema: *ref_108
+          - schema: *ref_109
             language:
               default:
                 name: ''
@@ -3399,7 +3607,7 @@ operationGroups:
                 statusCodes:
                   - '200'
         exceptions:
-          - schema: *ref_68
+          - schema: *ref_69
             language:
               default:
                 name: ''
@@ -3464,7 +3672,7 @@ operationGroups:
           - *ref_63
           - *ref_64
           - *ref_65
-          - &ref_109
+          - &ref_110
             schema: *ref_1
             implementation: Method
             required: true
@@ -3478,7 +3686,7 @@ operationGroups:
             protocol:
               http:
                 in: path
-          - &ref_110
+          - &ref_111
             schema: *ref_1
             implementation: Method
             required: true
@@ -3492,7 +3700,7 @@ operationGroups:
             protocol:
               http:
                 in: path
-          - &ref_111
+          - &ref_112
             schema: *ref_1
             implementation: Method
             required: true
@@ -3507,7 +3715,23 @@ operationGroups:
               http:
                 in: path
         requests:
-          - language:
+          - parameters:
+              - schema: *ref_66
+                implementation: Method
+                origin: 'modelerfour:synthesized/accept'
+                required: true
+                language:
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                  cli:
+                    cliKey: accept
+                protocol:
+                  http:
+                    in: header
+            signatureParameters: []
+            language:
               default:
                 name: ''
                 description: ''
@@ -3517,9 +3741,9 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_109
           - *ref_110
           - *ref_111
+          - *ref_112
         responses:
           - schema: *ref_20
             language:
@@ -3534,7 +3758,7 @@ operationGroups:
                 statusCodes:
                   - '200'
         exceptions:
-          - schema: *ref_68
+          - schema: *ref_69
             language:
               default:
                 name: ''
@@ -3583,7 +3807,7 @@ operationGroups:
           - *ref_63
           - *ref_64
           - *ref_65
-          - &ref_113
+          - &ref_114
             schema: *ref_1
             implementation: Method
             required: true
@@ -3597,7 +3821,7 @@ operationGroups:
             protocol:
               http:
                 in: path
-          - &ref_114
+          - &ref_115
             schema: *ref_1
             implementation: Method
             required: true
@@ -3611,7 +3835,7 @@ operationGroups:
             protocol:
               http:
                 in: path
-          - &ref_115
+          - &ref_116
             schema: *ref_1
             implementation: Method
             required: true
@@ -3627,7 +3851,7 @@ operationGroups:
                 in: path
         requests:
           - parameters:
-              - &ref_112
+              - &ref_113
                 schema: *ref_20
                 implementation: Method
                 required: true
@@ -3641,8 +3865,22 @@ operationGroups:
                   http:
                     in: body
                     style: json
+              - schema: *ref_66
+                implementation: Method
+                origin: 'modelerfour:synthesized/accept'
+                required: true
+                language:
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                  cli:
+                    cliKey: accept
+                protocol:
+                  http:
+                    in: header
             signatureParameters:
-              - *ref_112
+              - *ref_113
             language:
               default:
                 name: ''
@@ -3656,9 +3894,9 @@ operationGroups:
                   - application/json
                 uri: '{$host}'
         signatureParameters:
-          - *ref_113
           - *ref_114
           - *ref_115
+          - *ref_116
         responses:
           - schema: *ref_20
             language:
@@ -3685,7 +3923,7 @@ operationGroups:
                 statusCodes:
                   - '201'
         exceptions:
-          - schema: *ref_68
+          - schema: *ref_69
             language:
               default:
                 name: ''
@@ -3757,7 +3995,7 @@ operationGroups:
           - *ref_63
           - *ref_64
           - *ref_65
-          - &ref_116
+          - &ref_117
             schema: *ref_1
             implementation: Method
             required: true
@@ -3771,7 +4009,7 @@ operationGroups:
             protocol:
               http:
                 in: path
-          - &ref_117
+          - &ref_118
             schema: *ref_1
             implementation: Method
             required: true
@@ -3785,7 +4023,7 @@ operationGroups:
             protocol:
               http:
                 in: path
-          - &ref_118
+          - &ref_119
             schema: *ref_1
             implementation: Method
             required: true
@@ -3800,7 +4038,23 @@ operationGroups:
               http:
                 in: path
         requests:
-          - language:
+          - parameters:
+              - schema: *ref_66
+                implementation: Method
+                origin: 'modelerfour:synthesized/accept'
+                required: true
+                language:
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                  cli:
+                    cliKey: accept
+                protocol:
+                  http:
+                    in: header
+            signatureParameters: []
+            language:
               default:
                 name: ''
                 description: ''
@@ -3810,9 +4064,9 @@ operationGroups:
                 method: delete
                 uri: '{$host}'
         signatureParameters:
-          - *ref_116
           - *ref_117
           - *ref_118
+          - *ref_119
         responses:
           - language:
               default:
@@ -3839,7 +4093,7 @@ operationGroups:
                 statusCodes:
                   - '204'
         exceptions:
-          - schema: *ref_68
+          - schema: *ref_69
             language:
               default:
                 name: ''
@@ -3881,7 +4135,7 @@ operationGroups:
           - *ref_63
           - *ref_64
           - *ref_65
-          - &ref_119
+          - &ref_120
             schema: *ref_1
             implementation: Method
             required: true
@@ -3895,7 +4149,7 @@ operationGroups:
             protocol:
               http:
                 in: path
-          - &ref_120
+          - &ref_121
             schema: *ref_1
             implementation: Method
             required: true
@@ -3909,8 +4163,8 @@ operationGroups:
             protocol:
               http:
                 in: path
-          - &ref_121
-            schema: *ref_78
+          - &ref_122
+            schema: *ref_79
             implementation: Method
             language:
               default:
@@ -3922,7 +4176,7 @@ operationGroups:
             protocol:
               http:
                 in: query
-          - &ref_122
+          - &ref_123
             schema: *ref_1
             implementation: Method
             language:
@@ -3938,7 +4192,23 @@ operationGroups:
               http:
                 in: query
         requests:
-          - language:
+          - parameters:
+              - schema: *ref_66
+                implementation: Method
+                origin: 'modelerfour:synthesized/accept'
+                required: true
+                language:
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                  cli:
+                    cliKey: accept
+                protocol:
+                  http:
+                    in: header
+            signatureParameters: []
+            language:
               default:
                 name: ''
                 description: ''
@@ -3948,12 +4218,12 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_119
           - *ref_120
           - *ref_121
           - *ref_122
+          - *ref_123
         responses:
-          - schema: *ref_123
+          - schema: *ref_124
             language:
               default:
                 name: ''
@@ -3966,7 +4236,7 @@ operationGroups:
                 statusCodes:
                   - '200'
         exceptions:
-          - schema: *ref_68
+          - schema: *ref_69
             language:
               default:
                 name: ''
@@ -4029,7 +4299,23 @@ operationGroups:
           - *ref_63
           - *ref_64
         requests:
-          - language:
+          - parameters:
+              - schema: *ref_66
+                implementation: Method
+                origin: 'modelerfour:synthesized/accept'
+                required: true
+                language:
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                  cli:
+                    cliKey: accept
+                protocol:
+                  http:
+                    in: header
+            signatureParameters: []
+            language:
               default:
                 name: ''
                 description: ''
@@ -4040,7 +4326,7 @@ operationGroups:
                 uri: '{$host}'
         signatureParameters: []
         responses:
-          - schema: *ref_124
+          - schema: *ref_125
             language:
               default:
                 name: ''
@@ -4053,7 +4339,7 @@ operationGroups:
                 statusCodes:
                   - '200'
         exceptions:
-          - schema: *ref_68
+          - schema: *ref_69
             language:
               default:
                 name: ''
