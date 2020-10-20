@@ -36,7 +36,7 @@ For groupName, operationName, parameterName, typeName, propertyName, usually you
       - 'choiceValue' | 'value': 'choiceName'
     - search for example and path in it
       - 'exampleName'
-      - 'path' | 'dotPath' | 'examplePath': 'dotPath'
+      - 'path' | 'dotPath' | 'exampleParameterPath': 'dotPath'
 - set:
   - set anything property in the selected object(s)
   - optional
@@ -225,12 +225,12 @@ cli:
     # set example content with static value
       - where:
           exampleName: TheExampleName
-          examplePath: parameters.hostPool.location
+          exampleParameterPath: parameters.hostPool.location
         value: Shanghai
     # set example content with dynamic script
       - where:
           exampleName: TheExampleName
-          examplePath: parameters.registration-info.expiration-time
+          exampleParameterPath: parameters.registration-info.expiration-time
         eval: "var d = new Date(); d.setDate(d.getDate()+15); var ye = new Intl.DateTimeFormat('en', { year: 'numeric' }).format(d); var mo = new Intl.DateTimeFormat('en', { month: '2-digit' }).format(d); var da = new Intl.DateTimeFormat('en', { day: '2-digit' }).format(d); `${ye}-${mo}-${da}T00:00:00.000Z` "
 
 ```

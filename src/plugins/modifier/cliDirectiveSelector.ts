@@ -21,7 +21,7 @@ export class NodeSelector {
             choiceSchema: ['enum', 'choice-schema'],
             choiceValue: ['value', 'choice-value'],
             exampleName: ['example-name'],
-            dotPath: ['path', 'dot-path', 'example-path'],
+            dotPath: ['path', 'dot-path', 'example-parameter-path'],
         };
 
         for (const key in alias) {
