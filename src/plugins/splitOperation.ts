@@ -1,5 +1,5 @@
 import { Host, Session, startSession } from "@azure-tools/autorest-extension-base";
-import { CodeModel, Operation, codeModelSchema, OperationGroup } from "@azure-tools/codemodel";
+import { CodeModel, Operation, codeModelSchema } from "@azure-tools/codemodel";
 import { Helper } from "../helper";
 import { CliConst, CliCommonSchema } from "../schema";
 import { NodeCliHelper, NodeExtensionHelper } from "../nodeHelper";
