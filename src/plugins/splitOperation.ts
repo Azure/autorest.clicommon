@@ -49,11 +49,11 @@ export class SplitOperation{
         const opCliKey = NodeCliHelper.getCliKey(operation, '').toLowerCase();
 
         if (opCliKey.endsWith("#create")) {
-            operation.language.default.description = operation.language.default.description.replace(/creates or updates|create or update|update or create|updates or creates|creates\/updates|create\/update/ig, create)
+            operation.language.default.description = operation.language.default.description.replace(/creates or updates|create or update|update or create|updates or creates|creates\/updates|create\/update/ig, create);
         }
 
         if (opCliKey.endsWith("#update")) {
-            operation.language.default.description = operation.language.default.description.replace(/creates or updates|create or update|update or create|updates or creates|creates\/updates|create\/update|creates|create/ig, update)
+            operation.language.default.description = operation.language.default.description.replace(/creates or updates|create or update|update or create|updates or creates|creates\/updates|create\/update|creates|create/ig, update);
         }
     }
 
