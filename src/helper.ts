@@ -132,6 +132,8 @@ export class Helper {
     public static ToM4NodeType(node: M4Node): M4NodeType {
         if (Helper.isOperationGroup(node))
             return CliConst.SelectType.operationGroup;
+        else if (Helper.isExample(node))
+            return CliConst.SelectType.dotPath;
         else if (Helper.isOperation(node))
             return CliConst.SelectType.operation;
         else if (Helper.isParameter(node))
@@ -568,6 +570,12 @@ export class Helper {
             Helper.enumerateRequestParameters(group, op, paths, action, flag);
             paths.pop();
 
+            paths.push('extensions');
+            paths.push('x-ms-examples');
+            Helper.enumerateExamples(group, op, paths, action, flag);
+            paths.pop();
+            paths.pop();
+
             paths.pop();
         }
     }
@@ -627,6 +635,26 @@ export class Helper {
                 paths.pop();
             }
             paths.pop();
+            paths.pop();
+        }
+    }
+
+    public static enumerateExamples(group: OperationGroup, op: Operation, paths: string[], action: (nodeDescriptor: CliCommonSchema.CodeModel.NodeDescriptor) => void, flag: CliCommonSchema.CodeModel.NodeTypeFlag): void {
+        const enumExample = isNullOrUndefined(flag) || ((flag & CliCommonSchema.CodeModel.NodeTypeFlag.dotPath) > 0);
+        if (!enumExample || isNullOrUndefined(op.extensions?.['x-ms-examples'])) return;
+        const cliKeyMissing = '<clikey-missing>';
+            
+        for (let exampleName of Object.getOwnPropertyNames(op.extensions['x-ms-examples'])) {
+            const example = op.extensions['x-ms-examples'][exampleName];
+            paths.push(`['${exampleName}']`);
+            action({
+                operationGroupCliKey: NodeCliHelper.getCliKey(group, cliKeyMissing),
+                operationCliKey: NodeCliHelper.getCliKey(op, cliKeyMissing),
+                parent: op.extensions['x-ms-examples'],
+                target: example,
+                targetIndex: -1,
+                exampleName: exampleName,
+            });
             paths.pop();
         }
     }
@@ -822,6 +850,20 @@ export class Helper {
         return false;
     }
 
+    public static isExample(o: any): boolean {
+        if (isNullOrUndefined(o)) {
+            return false;
+        }
+        if (o.__proto__ !== Object.prototype) {
+            return false;
+        }
+        const props = Object.getOwnPropertyNames(o);
+        if (props.find((prop) => prop === 'parameters') && props.find((prop) => prop === 'responses') && props.length==2) {
+            return true;
+        }
+        return false;
+    }
+
     // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/explicit-module-boundary-types
     public static isSchema(o: any): boolean {
         if (isNullOrUndefined(o)) {
@@ -872,5 +914,21 @@ export class Helper {
         });
         return m4Path;
     }
+
+    public static setPathValue (obj, path, value)  {
+        if (Object(obj) !== obj) return obj; // When obj is not an object
+        // If not yet an array, get the keys from the string-path
+        if (!Array.isArray(path)) path = path.toString().match(/[^.[\]]+/g) || []; 
+        path.slice(0,-1).reduce((a, c, i) => // Iterate all of them except the last one
+             Object(a[c]) === a[c] // Does the key exist and is its value an object?
+                 // Yes: then follow that path
+                 ? a[c] 
+                 // No: create the key. Is the next key a potential array-index?
+                 : a[c] = Math.abs(path[i+1])>>0 === +path[i+1] 
+                       ? [] // Yes: assign a new array object
+                       : {}, // No: assign a new plain object
+             obj)[path[path.length-1]] = value; // Finally assign the value to the last key
+        return obj; // Return the top-level object to allow chaining
+    };
 
 }

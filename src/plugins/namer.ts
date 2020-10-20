@@ -87,7 +87,7 @@ export class CommonNamer {
 
     private retrieveCodeModel(model: CodeModel): void {
         Helper.enumerateCodeModel(model, (n) => {
-            if (!isNullOrUndefined(n.target.language['cli'])) {
+            if (!isNullOrUndefined(n.target?.language?.['cli'])) {
                 // log path for code model
                 NodeCliHelper.setCliPath(n.target, n.nodePath);
             }
