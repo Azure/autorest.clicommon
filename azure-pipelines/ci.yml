@@ -2,7 +2,7 @@ trigger:
 - master
 
 variables:
-  NodeVersion: '12.x'
+  NodeVersion: '12.16.1'
 
 jobs:
 

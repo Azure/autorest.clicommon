@@ -1,5 +1,5 @@
 import { Host, Session, startSession } from "@azure-tools/autorest-extension-base";
-import { CodeModel, Operation, codeModelSchema, OperationGroup } from "@azure-tools/codemodel";
+import { CodeModel, Operation, codeModelSchema } from "@azure-tools/codemodel";
 import { Helper } from "../helper";
 import { CliConst, CliCommonSchema } from "../schema";
 import { NodeCliHelper, NodeExtensionHelper } from "../nodeHelper";
@@ -31,7 +31,7 @@ export class SplitOperation{
                     // Link splitted operation to src opreation
                     NodeExtensionHelper.setSplitOperationOriginalOperation(splittedOperation, operation);
 
-                    this.updateSplitOperationDescription(splittedOperation, group);
+                    this.updateSplitOperationDescription(splittedOperation);
                     splittedGroupOperations.push(splittedOperation);
                 });
 
@@ -43,20 +43,18 @@ export class SplitOperation{
         }
     }
 
-    private updateSplitOperationDescription(operation: Operation, group: OperationGroup): void {
+    private updateSplitOperationDescription(operation: Operation): void {
         const create = 'Create';
         const update = 'Update';
         const opCliKey = NodeCliHelper.getCliKey(operation, '').toLowerCase();
-        const createOrUpdate: string = opCliKey.endsWith('#create') ? create : opCliKey.endsWith('#update') ? update : null;
-        if (!createOrUpdate) {
-            return;
+
+        if (opCliKey.endsWith("#create")) {
+            operation.language.default.description = operation.language.default.description.replace(/[cC]reates?( or |\/)[uU]pdates?|[uU]pdates?( or |\/)[cC]reates?/g, create);
         }
-        
-        const groupCliKey = NodeCliHelper.getCliKey(group, '');
-        const namingConvention: CliCommonSchema.NamingConvention = {
-            glossary: []
-        };
-        operation.language.default.description = createOrUpdate + ' ' + Helper.singularize(namingConvention, groupCliKey);
+
+        if (opCliKey.endsWith("#update")) {
+            operation.language.default.description = operation.language.default.description.replace(/[cC]reates?( or |\/)[uU]pdates?|[uU]pdates?( or |\/)[cC]reates?|[cC]reates?/g, update);
+        }
     }
 
     private async modifier(): Promise<void> {
