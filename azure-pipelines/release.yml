@@ -70,7 +70,7 @@ stages:
       steps:
       - task: NodeTool@0
         inputs:
-          versionSpec: '12.16.1'
+          versionSpec: '10.17.0'
         displayName: 'Install Node.js'
       - script: |
           LAST_TAG_COMMIT_HASH=$(git rev-list --tags --max-count=1)
@@ -135,7 +135,7 @@ stages:
       steps:
       - task: NodeTool@0
         inputs:
-          versionSpec: '12.16.1'
+          versionSpec: '10.17.0'
         displayName: 'Install Node.js'
       - task: DownloadBuildArtifacts@0
         inputs:
@@ -166,7 +166,7 @@ stages:
       steps:
       - task: NodeTool@0
         inputs:
-          versionSpec: '12.16.1'
+          versionSpec: '10.17.0'
         displayName: 'Install Node.js'
       - task: DownloadBuildArtifacts@0
         inputs:
@@ -202,7 +202,7 @@ stages:
     steps:
     - task: NodeTool@0
       inputs:
-        versionSpec: '12.16.1'
+        versionSpec: '10.17.0'
       displayName: 'Install Node.js'
     - script: |
         REPO_URL_REPLACE="$(USER_GITHUB_TOKEN)@github"

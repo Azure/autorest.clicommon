@@ -11,8 +11,8 @@
             "node"
         ],
         "rootDirs": [
-            "src",
-            "test"
+            "./src",
+            "./test"
         ],
         "target": "es2016"
     },
