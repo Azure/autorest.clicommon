@@ -858,8 +858,10 @@ export class Helper {
             return false;
         }
         const props = Object.getOwnPropertyNames(o);
-        if (props.find((prop) => prop === 'parameters') && props.find((prop) => prop === 'responses') && props.length==2) {
-            return true;
+        if (props.find((prop) => prop === 'parameters') && props.find((prop) => prop === 'responses')) {
+            if (props.length==2 ||
+                props.length==3 && props.find((prop) => prop === 'title'))
+                return true;
         }
         return false;
     }
