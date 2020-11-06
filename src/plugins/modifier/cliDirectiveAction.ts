@@ -42,6 +42,7 @@ export abstract class Action {
                 case NodeCliHelper.SPLIT_OPERATION_NAMES:
                 case NodeCliHelper.CLI_MIN_API:
                 case NodeCliHelper.CLI_MAX_API:
+                case NodeCliHelper.CLI_RESOURCE_TYPE:
                     arr.push(new ActionSetProperty(value, key, () => null));
                     break;
                 case 'delete':

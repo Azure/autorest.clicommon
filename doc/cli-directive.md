@@ -94,6 +94,8 @@ For groupName, operationName, parameterName, typeName, propertyName, usually you
   - add 'min-api: ..." under 'language->cli'
 - max-api:
   - add 'max-api: ..." under 'language->cli'
+- resource-type:
+  - add 'resource-type: ..." under 'language->cli'
 - value:
   - set static value for example dotPath
 - eval:
@@ -222,6 +224,13 @@ cli:
           op: CreateOrUpdate#Update
           param: properties
         cli-flatten: true
+    # set resource-type/max-api/min-api
+      - where:
+          group: OperationGroupName
+          op: Delete
+      - max-api: '2019-01-01'
+      - max-api: '2018-01-01'
+      - resource-type: 'DATA_STORAGE_BLOB'
     # set example content with static value
       - where:
           exampleName: TheExampleName
