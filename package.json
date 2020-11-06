@@ -1,6 +1,6 @@
 {
     "name": "@autorest/clicommon",
-    "version": "0.5.5",
+    "version": "0.5.6",
     "description": "Autorest Azure Cli Common Module",
     "main": "dist/index.js",
     "engines": {
