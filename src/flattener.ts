@@ -142,13 +142,13 @@ export class Flattener {
                     // remove that property from the scheama
                     schema.properties.splice(index, 1);
 
-                    // copy all of the properties from the child into this 
-                    // schema 
+                    // copy all of the properties from the child into this schema 
                     for (const childProperty of values(getAllProperties(property.schema))) {
+                        const parentFlattenedNames = property.flattenedNames ?? [property.serializedName];
                         const newProp = new Property(childProperty.language.default.name, childProperty.language.default.description, childProperty.schema, {
                             // eslint-disable-next-line @typescript-eslint/no-explicit-any
                             ...(<any>childProperty),
-                            flattenedNames: [property.serializedName, ...childProperty.flattenedNames ? childProperty.flattenedNames : [childProperty.serializedName]],
+                            flattenedNames: [...parentFlattenedNames, ...childProperty.flattenedNames ? childProperty.flattenedNames : [childProperty.serializedName]],
                             required: property.required && childProperty.required
                         });
                         schema.addProperty(newProp);
