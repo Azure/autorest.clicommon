@@ -1,0 +1,347 @@
+operationGroups:
+  all:
+    - operationGroupName: Operation
+      cli:
+        cliKey: Operation
+      operations:
+        - operationName: List
+          cli:
+            cliKey: List
+          parameters:
+            - parameterName: $host(string^string)
+              cli:
+                cliKey: $host
+            - parameterName: ApiVersion(ApiVersion-2018-09-01-preview^constant)
+              cli:
+                cliKey: ApiVersion
+    - operationGroupName: AttestationProviders
+      cli:
+        cliKey: AttestationProviders
+      operations:
+        - operationName: Get
+          cli:
+            cliKey: Get
+          parameters:
+            - parameterName: $host(string^string)
+              cli:
+                cliKey: $host
+            - parameterName: subscriptionId(string^string)
+              cli:
+                cliKey: subscriptionId
+            - parameterName: resourceGroupName(string^string)
+              cli:
+                cliKey: resourceGroupName
+            - parameterName: providerName(string^string)
+              cli:
+                cliKey: providerName
+            - parameterName: ApiVersion(ApiVersion-2018-09-01-preview^constant)
+              cli:
+                cliKey: ApiVersion
+        - operationName: Create
+          cli:
+            cliKey: Create
+          parameters:
+            - parameterName: $host(string^string)
+              cli:
+                cliKey: $host
+            - parameterName: subscriptionId(string^string)
+              cli:
+                cliKey: subscriptionId
+            - parameterName: resourceGroupName(string^string)
+              cli:
+                cliKey: resourceGroupName
+            - parameterName: providerName(string^string)
+              cli:
+                cliKey: providerName
+            - parameterName: ApiVersion(ApiVersion-2018-09-01-preview^constant)
+              cli:
+                cliKey: ApiVersion
+            - parameterName[0]: creationParams(AttestationServiceCreationParams^object)
+              cli:
+                cliKey: creationParams
+              bodySchema: AttestationServiceCreationParams
+        - operationName: Update
+          cli:
+            cliKey: Update
+          parameters:
+            - parameterName: $host(string^string)
+              cli:
+                cliKey: $host
+            - parameterName: subscriptionId(string^string)
+              cli:
+                cliKey: subscriptionId
+            - parameterName: resourceGroupName(string^string)
+              cli:
+                cliKey: resourceGroupName
+            - parameterName: providerName(string^string)
+              cli:
+                cliKey: providerName
+            - parameterName: ApiVersion(ApiVersion-2018-09-01-preview^constant)
+              cli:
+                cliKey: ApiVersion
+            - parameterName[0]: updateParams(AttestationServicePatchParams^object)
+              cli:
+                cliKey: updateParams
+              bodySchema: AttestationServicePatchParams
+        - operationName: Delete
+          cli:
+            cliKey: Delete
+          parameters:
+            - parameterName: $host(string^string)
+              cli:
+                cliKey: $host
+            - parameterName: subscriptionId(string^string)
+              cli:
+                cliKey: subscriptionId
+            - parameterName: resourceGroupName(string^string)
+              cli:
+                cliKey: resourceGroupName
+            - parameterName: providerName(string^string)
+              cli:
+                cliKey: providerName
+            - parameterName: ApiVersion(ApiVersion-2018-09-01-preview^constant)
+              cli:
+                cliKey: ApiVersion
+        - operationName: List
+          cli:
+            cliKey: List
+          parameters:
+            - parameterName: $host(string^string)
+              cli:
+                cliKey: $host
+            - parameterName: ApiVersion(ApiVersion-2018-09-01-preview^constant)
+              cli:
+                cliKey: ApiVersion
+            - parameterName: subscriptionId(string^string)
+              cli:
+                cliKey: subscriptionId
+        - operationName: ListByResourceGroup
+          cli:
+            cliKey: ListByResourceGroup
+          parameters:
+            - parameterName: $host(string^string)
+              cli:
+                cliKey: $host
+            - parameterName: resourceGroupName(string^string)
+              cli:
+                cliKey: resourceGroupName
+            - parameterName: ApiVersion(ApiVersion-2018-09-01-preview^constant)
+              cli:
+                cliKey: ApiVersion
+            - parameterName: subscriptionId(string^string)
+              cli:
+                cliKey: subscriptionId
+schemas:
+  objects:
+    all:
+      - schemaName: OperationList
+        cli:
+          cliKey: OperationList
+        properties:
+          - propertyName: value(OperationList-value^array)
+            cli:
+              cliKey: value
+      - schemaName: OperationsDefinition
+        cli:
+          cliKey: OperationsDefinition
+        properties:
+          - propertyName: name(OperationsDefinition-name^string)
+            cli:
+              cliKey: name
+          - propertyName: display(OperationsDisplayDefinition^object)
+            cli:
+              cliKey: display
+      - schemaName: OperationsDisplayDefinition
+        cli:
+          cliKey: OperationsDisplayDefinition
+        properties:
+          - propertyName: provider(OperationsDisplayDefinition-provider^string)
+            cli:
+              cliKey: provider
+          - propertyName: resource(OperationsDisplayDefinition-resource^string)
+            cli:
+              cliKey: resource
+          - propertyName: operation(OperationsDisplayDefinition-operation^string)
+            cli:
+              cliKey: operation
+          - propertyName: description(OperationsDisplayDefinition-description^string)
+            cli:
+              cliKey: description
+      - schemaName: CloudError
+        cli:
+          cliKey: CloudError
+        properties:
+          - propertyName: error(CloudErrorBody^object)
+            cli:
+              cliKey: error
+      - schemaName: CloudErrorBody
+        cli:
+          cliKey: CloudErrorBody
+        properties:
+          - propertyName: code(CloudErrorBody-code^string)
+            cli:
+              cliKey: code
+          - propertyName: message(CloudErrorBody-message^string)
+            cli:
+              cliKey: message
+      - schemaName: AttestationProvider
+        cli:
+          cliKey: AttestationProvider
+        properties:
+          - propertyName: properties(StatusResult^object)
+            cli:
+              cliKey: properties
+            x-ms-client-flatten: true
+      - schemaName: StatusResult
+        cli:
+          cliKey: StatusResult
+        properties:
+          - propertyName: trustModel(StatusResult-trustModel^string)
+            cli:
+              cliKey: trustModel
+          - propertyName: status(AttestationServiceStatus^choice)
+            cli:
+              cliKey: status
+          - propertyName: attestUri(StatusResult-attestUri^string)
+            cli:
+              cliKey: attestUri
+      - schemaName: TrackedResource
+        cli:
+          cliKey: TrackedResource
+        properties:
+          - propertyName: tags(TrackedResource-tags^dictionary)
+            cli:
+              cliKey: tags
+          - propertyName: location(TrackedResource-location^string)
+            cli:
+              cliKey: location
+      - schemaName: Resource
+        cli:
+          cliKey: Resource
+        properties:
+          - propertyName: id(Resource-id^string)
+            cli:
+              cliKey: id
+            readOnly: true
+          - propertyName: name(Resource-name^string)
+            cli:
+              cliKey: name
+            readOnly: true
+          - propertyName: type(Resource-type^string)
+            cli:
+              cliKey: type
+            readOnly: true
+      - schemaName: AttestationServiceCreationParams
+        cli:
+          cliKey: AttestationServiceCreationParams
+        properties:
+          - propertyName: location(AttestationServiceCreationParams-location^string)
+            cli:
+              cliKey: location
+          - propertyName: tags(AttestationServiceCreationParams-tags^dictionary)
+            cli:
+              cliKey: tags
+          - propertyName: properties(AttestationServiceCreationSpecificParams^object)
+            cli:
+              cliKey: properties
+      - schemaName: AttestationServiceCreationSpecificParams
+        cli:
+          cliKey: AttestationServiceCreationSpecificParams
+        properties:
+          - propertyName: attestationPolicy(AttestationServiceCreationSpecificParams-attestationPolicy^string)
+            cli:
+              cliKey: attestationPolicy
+          - propertyName: policySigningCertificates(JSONWebKeySet^object)
+            cli:
+              cliKey: policySigningCertificates
+      - schemaName: JSONWebKeySet
+        cli:
+          cliKey: JSONWebKeySet
+        properties:
+          - propertyName: keys(JSONWebKeySet-keys^array)
+            cli:
+              cliKey: keys
+      - schemaName: JSONWebKey
+        cli:
+          cliKey: JSONWebKey
+        properties:
+          - propertyName: alg(JSONWebKey-alg^string)
+            cli:
+              cliKey: alg
+          - propertyName: crv(JSONWebKey-crv^string)
+            cli:
+              cliKey: crv
+          - propertyName: d(JSONWebKey-d^string)
+            cli:
+              cliKey: d
+          - propertyName: dp(JSONWebKey-dp^string)
+            cli:
+              cliKey: dp
+          - propertyName: dq(JSONWebKey-dq^string)
+            cli:
+              cliKey: dq
+          - propertyName: e(JSONWebKey-e^string)
+            cli:
+              cliKey: e
+          - propertyName: k(JSONWebKey-k^string)
+            cli:
+              cliKey: k
+          - propertyName: kid(JSONWebKey-kid^string)
+            cli:
+              cliKey: kid
+          - propertyName: kty(JSONWebKey-kty^string)
+            cli:
+              cliKey: kty
+          - propertyName: n(JSONWebKey-n^string)
+            cli:
+              cliKey: n
+          - propertyName: p(JSONWebKey-p^string)
+            cli:
+              cliKey: p
+          - propertyName: q(JSONWebKey-q^string)
+            cli:
+              cliKey: q
+          - propertyName: qi(JSONWebKey-qi^string)
+            cli:
+              cliKey: qi
+          - propertyName: use(JSONWebKey-use^string)
+            cli:
+              cliKey: use
+          - propertyName: x(JSONWebKey-x^string)
+            cli:
+              cliKey: x
+          - propertyName: x5c(JSONWebKey-x5c^array)
+            cli:
+              cliKey: x5c
+          - propertyName: y(JSONWebKey-y^string)
+            cli:
+              cliKey: y
+      - schemaName: AttestationServicePatchParams
+        cli:
+          cliKey: AttestationServicePatchParams
+        properties:
+          - propertyName: tags(AttestationServicePatchParams-tags^dictionary)
+            cli:
+              cliKey: tags
+      - schemaName: AttestationProviderListResult
+        cli:
+          cliKey: AttestationProviderListResult
+        properties:
+          - propertyName: value(AttestationProviderListResult-value^array)
+            cli:
+              cliKey: value
+  choices:
+    all:
+      - choiceName: AttestationServiceStatus
+        cli:
+          cliKey: AttestationServiceStatus
+        choiceValues:
+          - choiceValue: Ready
+            cli:
+              cliKey: Ready
+          - choiceValue: NotReady
+            cli:
+              cliKey: NotReady
+          - choiceValue: Error
+            cli:
+              cliKey: Error

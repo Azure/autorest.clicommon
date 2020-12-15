@@ -69,23 +69,12 @@ export class FlattenHelper {
             }
         }
 
-        const arr2: Parameter[] = [];
-        const hash: Set<string> = new Set<string>();
-        // base class's property is before the subclass's
-        for (let i = 0; i < arr.length; i++) {
-            const cur = arr[i];
-            if (!hash.has(cur.language.default.name)) {
-                arr2.push(cur);
-                hash.add(cur.language.default.name);
-            }
-        }
-
-        if (arr2.length > 0) {
+        if (arr.length > 0) {
             if (isNullOrUndefined(request.parameters)) {
                 request.parameters = [];
             }
             const index = request.parameters.findIndex((param) => param === parameter);
-            request.parameters.splice(index + 1, 0, ...arr2);
+            request.parameters.splice(index + 1, 0, ...arr);
         }
     }
 

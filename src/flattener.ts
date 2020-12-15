@@ -160,7 +160,8 @@ export class Flattener {
                         }
 
                         const trace = NodeCliHelper.getCliFlattenTrace(newProp) ?? [NodeCliHelper.getCliM4Path(childProperty)];
-                        trace.splice(0, 0, NodeCliHelper.getCliM4Path(property));
+                        const parentTrace = NodeCliHelper.getCliFlattenTrace(property) ?? [NodeCliHelper.getCliM4Path(property)];
+                        trace.splice(0, 0, ...parentTrace);
                         NodeCliHelper.setCliFlattenTrace(newProp, trace);
                     }
 

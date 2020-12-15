@@ -1,0 +1,141 @@
+operationGroups:
+  all:
+    - operationGroupName: Operation
+      operations:
+        - operationName: List
+          parameters:
+            - parameterName: $host(string^string)
+            - parameterName: ApiVersion(ApiVersion-2018-09-01-preview^constant)
+    - operationGroupName: AttestationProviders
+      operations:
+        - operationName: Get
+          parameters:
+            - parameterName: $host(string^string)
+            - parameterName: subscriptionId(string^string)
+            - parameterName: resourceGroupName(string^string)
+            - parameterName: providerName(string^string)
+            - parameterName: ApiVersion(ApiVersion-2018-09-01-preview^constant)
+        - operationName: Create
+          parameters:
+            - parameterName: $host(string^string)
+            - parameterName: subscriptionId(string^string)
+            - parameterName: resourceGroupName(string^string)
+            - parameterName: providerName(string^string)
+            - parameterName: ApiVersion(ApiVersion-2018-09-01-preview^constant)
+            - parameterName[0]: creationParams(AttestationServiceCreationParams^object)
+              bodySchema: AttestationServiceCreationParams
+        - operationName: Update
+          parameters:
+            - parameterName: $host(string^string)
+            - parameterName: subscriptionId(string^string)
+            - parameterName: resourceGroupName(string^string)
+            - parameterName: providerName(string^string)
+            - parameterName: ApiVersion(ApiVersion-2018-09-01-preview^constant)
+            - parameterName[0]: updateParams(AttestationServicePatchParams^object)
+              bodySchema: AttestationServicePatchParams
+        - operationName: Delete
+          parameters:
+            - parameterName: $host(string^string)
+            - parameterName: subscriptionId(string^string)
+            - parameterName: resourceGroupName(string^string)
+            - parameterName: providerName(string^string)
+            - parameterName: ApiVersion(ApiVersion-2018-09-01-preview^constant)
+        - operationName: List
+          parameters:
+            - parameterName: $host(string^string)
+            - parameterName: ApiVersion(ApiVersion-2018-09-01-preview^constant)
+            - parameterName: subscriptionId(string^string)
+        - operationName: ListByResourceGroup
+          parameters:
+            - parameterName: $host(string^string)
+            - parameterName: resourceGroupName(string^string)
+            - parameterName: ApiVersion(ApiVersion-2018-09-01-preview^constant)
+            - parameterName: subscriptionId(string^string)
+schemas:
+  objects:
+    all:
+      - schemaName: OperationList
+        properties:
+          - propertyName: value(OperationList-value^array)
+      - schemaName: OperationsDefinition
+        properties:
+          - propertyName: name(OperationsDefinition-name^string)
+          - propertyName: display(OperationsDisplayDefinition^object)
+      - schemaName: OperationsDisplayDefinition
+        properties:
+          - propertyName: provider(OperationsDisplayDefinition-provider^string)
+          - propertyName: resource(OperationsDisplayDefinition-resource^string)
+          - propertyName: operation(OperationsDisplayDefinition-operation^string)
+          - propertyName: description(OperationsDisplayDefinition-description^string)
+      - schemaName: CloudError
+        properties:
+          - propertyName: error(CloudErrorBody^object)
+      - schemaName: CloudErrorBody
+        properties:
+          - propertyName: code(CloudErrorBody-code^string)
+          - propertyName: message(CloudErrorBody-message^string)
+      - schemaName: AttestationProvider
+        properties:
+          - propertyName: properties(StatusResult^object)
+            x-ms-client-flatten: true
+      - schemaName: StatusResult
+        properties:
+          - propertyName: trustModel(StatusResult-trustModel^string)
+          - propertyName: status(AttestationServiceStatus^choice)
+          - propertyName: attestUri(StatusResult-attestUri^string)
+      - schemaName: TrackedResource
+        properties:
+          - propertyName: tags(TrackedResource-tags^dictionary)
+          - propertyName: location(TrackedResource-location^string)
+      - schemaName: Resource
+        properties:
+          - propertyName: id(Resource-id^string)
+            readOnly: true
+          - propertyName: name(Resource-name^string)
+            readOnly: true
+          - propertyName: type(Resource-type^string)
+            readOnly: true
+      - schemaName: AttestationServiceCreationParams
+        properties:
+          - propertyName: location(AttestationServiceCreationParams-location^string)
+          - propertyName: tags(AttestationServiceCreationParams-tags^dictionary)
+          - propertyName: properties(AttestationServiceCreationSpecificParams^object)
+      - schemaName: AttestationServiceCreationSpecificParams
+        properties:
+          - propertyName: attestationPolicy(AttestationServiceCreationSpecificParams-attestationPolicy^string)
+          - propertyName: policySigningCertificates(JSONWebKeySet^object)
+      - schemaName: JSONWebKeySet
+        properties:
+          - propertyName: keys(JSONWebKeySet-keys^array)
+      - schemaName: JSONWebKey
+        properties:
+          - propertyName: alg(JSONWebKey-alg^string)
+          - propertyName: crv(JSONWebKey-crv^string)
+          - propertyName: d(JSONWebKey-d^string)
+          - propertyName: dp(JSONWebKey-dp^string)
+          - propertyName: dq(JSONWebKey-dq^string)
+          - propertyName: e(JSONWebKey-e^string)
+          - propertyName: k(JSONWebKey-k^string)
+          - propertyName: kid(JSONWebKey-kid^string)
+          - propertyName: kty(JSONWebKey-kty^string)
+          - propertyName: n(JSONWebKey-n^string)
+          - propertyName: p(JSONWebKey-p^string)
+          - propertyName: q(JSONWebKey-q^string)
+          - propertyName: qi(JSONWebKey-qi^string)
+          - propertyName: use(JSONWebKey-use^string)
+          - propertyName: x(JSONWebKey-x^string)
+          - propertyName: x5c(JSONWebKey-x5c^array)
+          - propertyName: y(JSONWebKey-y^string)
+      - schemaName: AttestationServicePatchParams
+        properties:
+          - propertyName: tags(AttestationServicePatchParams-tags^dictionary)
+      - schemaName: AttestationProviderListResult
+        properties:
+          - propertyName: value(AttestationProviderListResult-value^array)
+  choices:
+    all:
+      - choiceName: AttestationServiceStatus
+        choiceValues:
+          - choiceValue: Ready
+          - choiceValue: NotReady
+          - choiceValue: Error
