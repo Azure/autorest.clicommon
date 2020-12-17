@@ -25,8 +25,8 @@ extension.Add("cli-test", async host => {
     // add test scenario from common settings
     const testCommonSettings = await host.GetValue("test");
     const cliCommonSettings = await host.GetValue("cli");
-    if (testCommonSettings || cliCommonSettings) {
-        session.model["test-scenario"] = testCommonSettings['test-scenario'] || testCommonSettings['test-setup'] || cliCommonSettings['test-scenario'] || cliCommonSettings['test-setup'];
+    if (testCommonSettings) {
+        session.model["test-scenario"] = testCommonSettings?.['test-scenario'] || testCommonSettings?.['test-setup'] || cliCommonSettings?.['test-scenario'] || cliCommonSettings?.['test-setup'];
     }
 
     dumper.dumpCodeModel("test-post", session.model);
