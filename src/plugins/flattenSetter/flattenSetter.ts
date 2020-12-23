@@ -223,7 +223,7 @@ export class FlattenSetter {
                     // situation though it's not expected
                     const config = cloneFlattenConfig(flattenConfig);
                     config.maxLevel = Math.max(32, config.maxLevel);
-                    this.flattenSchemaFromPayload((<ArraySchema>prop.schema).elementType, curLevel, true, config);
+                    this.flattenSchemaFromPayload((<ArraySchema>prop.schema).elementType, curLevel, flattenSimpleObject, config);
                 }
             }
             this.flattenSchemaFromPayload(prop.schema, curLevel + 1, flattenSimpleObject, flattenConfig);
