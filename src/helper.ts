@@ -629,7 +629,8 @@ export class Helper {
                         parent: op.requests[m].parameters,
                         target: param,
                         targetIndex: k,
-                        nodePath: Helper.joinNodePath(paths)
+                        nodePath: Helper.joinNodePath(paths),
+                        apiVersions: op.apiVersions?Array.from(op.apiVersions, x => x.version): undefined,
                     });
                 }
                 paths.pop();

@@ -28,6 +28,7 @@ For groupName, operationName, parameterName, typeName, propertyName, usually you
       - 'operationGroup' | 'group' | 'resource': 'operationGroupName'
       - 'operation' | 'op': 'operationName'
       - 'parameter' | 'param': 'parameterName'
+      - 'apiVersion': 'apiVersion'
     - search for schema or properties
       - 'schemaObject' | 'type' | 'object': 'schemaName'
       - 'property' | 'prop': 'propertyName'
