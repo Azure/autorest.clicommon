@@ -10,7 +10,7 @@
         "start": "node dist/src/index.js",
         "debug": "node --max_old_space_size=4096 --inspect-brk --inspect-port=9997 ./dist/src/index.js",
         "eslint": "node_modules\\.bin\\eslint src/**/*.*",
-        "build": "tsc -p .",
+        "build": "npm run eslint && tsc -p .",
         "start-testserver": "./node_modules/.bin/start-autorest-testserver",
         "stop-testserver": "./node_modules/.bin/stop-autorest-testserver",
         "watch": "tsc -p . --watch",
