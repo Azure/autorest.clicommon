@@ -53,6 +53,10 @@ export class NodeSelector {
         }
     }
 
+    public get SelectType():M4NodeType {
+        return this.selectType;
+    }
+
     public match(descriptor: CliCommonSchema.CodeModel.NodeDescriptor): boolean {
 
         // TODO: seperate different node type to get better performance when needed
