@@ -61,7 +61,7 @@ schemas:
       language:
         default:
           name: resource_id
-          description: 'Fully qualified resource Id for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}'
+          description: Fully qualified resource Id for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
       protocol: {}
     - &ref_25
       type: string
@@ -1048,7 +1048,7 @@ schemas:
                       language:
                         default:
                           name: id
-                          description: 'Fully qualified resource Id for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}'
+                          description: Fully qualified resource Id for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
                         cli:
                           cliKey: id
                       protocol: {}
@@ -1583,9 +1583,9 @@ globalParameters:
         in: path
   - &ref_63
     schema: *ref_0
-    clientDefaultValue: 'https://management.azure.com'
+    clientDefaultValue: https://management.azure.com
     implementation: Client
-    origin: 'modelerfour:synthesized/host'
+    origin: modelerfour:synthesized/host
     required: true
     extensions:
       x-ms-skip-url-encoding: true
@@ -1602,7 +1602,7 @@ globalParameters:
   - &ref_64
     schema: *ref_62
     implementation: Client
-    origin: 'modelerfour:synthesized/api-version'
+    origin: modelerfour:synthesized/api-version
     required: true
     language:
       default:
@@ -1655,7 +1655,7 @@ operationGroups:
           - parameters:
               - schema: *ref_66
                 implementation: Method
-                origin: 'modelerfour:synthesized/accept'
+                origin: modelerfour:synthesized/accept
                 required: true
                 language:
                   default:
@@ -1674,7 +1674,7 @@ operationGroups:
                 description: ''
             protocol:
               http:
-                path: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedNetwork/managedNetworks/{managedNetworkName}'
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedNetwork/managedNetworks/{managedNetworkName}
                 method: get
                 uri: '{$host}'
         signatureParameters:
@@ -1745,7 +1745,7 @@ operationGroups:
         language:
           default:
             name: get_modify
-            description: 'The Get ManagedNetworks operation gets a Managed Network Resource, specified by the resource group and Managed Network name'
+            description: The Get ManagedNetworks operation gets a Managed Network Resource, specified by the resource group and Managed Network name
           cli:
             cliKey: GetModify
         protocol: {}
@@ -1801,7 +1801,7 @@ operationGroups:
                     style: json
               - schema: *ref_66
                 implementation: Method
-                origin: 'modelerfour:synthesized/accept'
+                origin: modelerfour:synthesized/accept
                 required: true
                 language:
                   default:
@@ -1821,7 +1821,7 @@ operationGroups:
                 description: ''
             protocol:
               http:
-                path: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedNetwork/managedNetworks/{managedNetworkName}'
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedNetwork/managedNetworks/{managedNetworkName}
                 method: put
                 knownMediaType: json
                 mediaTypes:
@@ -1950,7 +1950,7 @@ operationGroups:
         language:
           default:
             name: create_or_update
-            description: 'The Put ManagedNetworks operation creates/updates a Managed Network Resource, specified by resource group and Managed Network name'
+            description: The Put ManagedNetworks operation creates/updates a Managed Network Resource, specified by resource group and Managed Network name
           cli:
             cliKey: CreateOrUpdate
         protocol: {}
@@ -1992,7 +1992,7 @@ operationGroups:
           - parameters:
               - schema: *ref_66
                 implementation: Method
-                origin: 'modelerfour:synthesized/accept'
+                origin: modelerfour:synthesized/accept
                 required: true
                 language:
                   default:
@@ -2011,7 +2011,7 @@ operationGroups:
                 description: ''
             protocol:
               http:
-                path: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedNetwork/managedNetworks/{managedNetworkName}'
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedNetwork/managedNetworks/{managedNetworkName}
                 method: delete
                 uri: '{$host}'
         signatureParameters:
@@ -2074,7 +2074,7 @@ operationGroups:
         language:
           default:
             name: delete
-            description: 'The Delete ManagedNetworks operation deletes a Managed Network Resource, specified by the  resource group and Managed Network name'
+            description: The Delete ManagedNetworks operation deletes a Managed Network Resource, specified by the  resource group and Managed Network name
           cli:
             cliKey: Delete
         protocol: {}
@@ -2130,7 +2130,7 @@ operationGroups:
                     style: json
               - schema: *ref_66
                 implementation: Method
-                origin: 'modelerfour:synthesized/accept'
+                origin: modelerfour:synthesized/accept
                 required: true
                 language:
                   default:
@@ -2150,7 +2150,7 @@ operationGroups:
                 description: ''
             protocol:
               http:
-                path: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedNetwork/managedNetworks/{managedNetworkName}'
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedNetwork/managedNetworks/{managedNetworkName}
                 method: patch
                 knownMediaType: json
                 mediaTypes:
@@ -2323,7 +2323,7 @@ operationGroups:
           - parameters:
               - schema: *ref_66
                 implementation: Method
-                origin: 'modelerfour:synthesized/accept'
+                origin: modelerfour:synthesized/accept
                 required: true
                 language:
                   default:
@@ -2342,7 +2342,7 @@ operationGroups:
                 description: ''
             protocol:
               http:
-                path: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedNetwork/managedNetworks'
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedNetwork/managedNetworks
                 method: get
                 uri: '{$host}'
         signatureParameters:
@@ -2461,7 +2461,7 @@ operationGroups:
           - parameters:
               - schema: *ref_66
                 implementation: Method
-                origin: 'modelerfour:synthesized/accept'
+                origin: modelerfour:synthesized/accept
                 required: true
                 language:
                   default:
@@ -2480,7 +2480,7 @@ operationGroups:
                 description: ''
             protocol:
               http:
-                path: '/subscriptions/{subscriptionId}/providers/Microsoft.ManagedNetwork/managedNetworks'
+                path: /subscriptions/{subscriptionId}/providers/Microsoft.ManagedNetwork/managedNetworks
                 method: get
                 uri: '{$host}'
         signatureParameters:
@@ -2607,7 +2607,7 @@ operationGroups:
           - parameters:
               - schema: *ref_66
                 implementation: Method
-                origin: 'modelerfour:synthesized/accept'
+                origin: modelerfour:synthesized/accept
                 required: true
                 language:
                   default:
@@ -2626,7 +2626,7 @@ operationGroups:
                 description: ''
             protocol:
               http:
-                path: '/{scope}/providers/Microsoft.ManagedNetwork/scopeAssignments/{scopeAssignmentName}'
+                path: /{scope}/providers/Microsoft.ManagedNetwork/scopeAssignments/{scopeAssignmentName}
                 method: get
                 uri: '{$host}'
         signatureParameters:
@@ -2737,7 +2737,7 @@ operationGroups:
                     style: json
               - schema: *ref_66
                 implementation: Method
-                origin: 'modelerfour:synthesized/accept'
+                origin: modelerfour:synthesized/accept
                 required: true
                 language:
                   default:
@@ -2757,7 +2757,7 @@ operationGroups:
                 description: ''
             protocol:
               http:
-                path: '/{scope}/providers/Microsoft.ManagedNetwork/scopeAssignments/{scopeAssignmentName}'
+                path: /{scope}/providers/Microsoft.ManagedNetwork/scopeAssignments/{scopeAssignmentName}
                 method: put
                 knownMediaType: json
                 mediaTypes:
@@ -2883,7 +2883,7 @@ operationGroups:
                 description: ''
             protocol:
               http:
-                path: '/{scope}/providers/Microsoft.ManagedNetwork/scopeAssignments/{scopeAssignmentName}'
+                path: /{scope}/providers/Microsoft.ManagedNetwork/scopeAssignments/{scopeAssignmentName}
                 method: delete
                 uri: '{$host}'
         signatureParameters:
@@ -2949,7 +2949,7 @@ operationGroups:
           - parameters:
               - schema: *ref_66
                 implementation: Method
-                origin: 'modelerfour:synthesized/accept'
+                origin: modelerfour:synthesized/accept
                 required: true
                 language:
                   default:
@@ -2968,7 +2968,7 @@ operationGroups:
                 description: ''
             protocol:
               http:
-                path: '/{scope}/providers/Microsoft.ManagedNetwork/scopeAssignments'
+                path: /{scope}/providers/Microsoft.ManagedNetwork/scopeAssignments
                 method: get
                 uri: '{$host}'
         signatureParameters:
@@ -3090,7 +3090,7 @@ operationGroups:
           - parameters:
               - schema: *ref_66
                 implementation: Method
-                origin: 'modelerfour:synthesized/accept'
+                origin: modelerfour:synthesized/accept
                 required: true
                 language:
                   default:
@@ -3109,7 +3109,7 @@ operationGroups:
                 description: ''
             protocol:
               http:
-                path: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedNetwork/managedNetworks/{managedNetworkName}/managedNetworkGroups/{managedNetworkGroupName}'
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedNetwork/managedNetworks/{managedNetworkName}/managedNetworkGroups/{managedNetworkGroupName}
                 method: get
                 uri: '{$host}'
         signatureParameters:
@@ -3171,7 +3171,7 @@ operationGroups:
         language:
           default:
             name: get
-            description: 'The Get ManagedNetworkGroups operation gets a Managed Network Group specified by the resource group, Managed Network name, and group name'
+            description: The Get ManagedNetworkGroups operation gets a Managed Network Group specified by the resource group, Managed Network name, and group name
           cli:
             cliKey: Get
         protocol: {}
@@ -3241,7 +3241,7 @@ operationGroups:
                     style: json
               - schema: *ref_66
                 implementation: Method
-                origin: 'modelerfour:synthesized/accept'
+                origin: modelerfour:synthesized/accept
                 required: true
                 language:
                   default:
@@ -3261,7 +3261,7 @@ operationGroups:
                 description: ''
             protocol:
               http:
-                path: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedNetwork/managedNetworks/{managedNetworkName}/managedNetworkGroups/{managedNetworkGroupName}'
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedNetwork/managedNetworks/{managedNetworkName}/managedNetworkGroups/{managedNetworkGroupName}
                 method: put
                 knownMediaType: json
                 mediaTypes:
@@ -3421,7 +3421,7 @@ operationGroups:
           - parameters:
               - schema: *ref_66
                 implementation: Method
-                origin: 'modelerfour:synthesized/accept'
+                origin: modelerfour:synthesized/accept
                 required: true
                 language:
                   default:
@@ -3440,7 +3440,7 @@ operationGroups:
                 description: ''
             protocol:
               http:
-                path: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedNetwork/managedNetworks/{managedNetworkName}/managedNetworkGroups/{managedNetworkGroupName}'
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedNetwork/managedNetworks/{managedNetworkName}/managedNetworkGroups/{managedNetworkGroupName}
                 method: delete
                 uri: '{$host}'
         signatureParameters:
@@ -3505,7 +3505,7 @@ operationGroups:
         language:
           default:
             name: delete
-            description: 'The Delete ManagedNetworkGroups operation deletes a Managed Network Group specified by the resource group, Managed Network name, and group name'
+            description: The Delete ManagedNetworkGroups operation deletes a Managed Network Group specified by the resource group, Managed Network name, and group name
           cli:
             cliKey: Delete
         protocol: {}
@@ -3575,7 +3575,7 @@ operationGroups:
           - parameters:
               - schema: *ref_66
                 implementation: Method
-                origin: 'modelerfour:synthesized/accept'
+                origin: modelerfour:synthesized/accept
                 required: true
                 language:
                   default:
@@ -3594,7 +3594,7 @@ operationGroups:
                 description: ''
             protocol:
               http:
-                path: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedNetwork/managedNetworks/{managedNetworkName}/managedNetworkGroups'
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedNetwork/managedNetworks/{managedNetworkName}/managedNetworkGroups
                 method: get
                 uri: '{$host}'
         signatureParameters:
@@ -3727,7 +3727,7 @@ operationGroups:
           - parameters:
               - schema: *ref_66
                 implementation: Method
-                origin: 'modelerfour:synthesized/accept'
+                origin: modelerfour:synthesized/accept
                 required: true
                 language:
                   default:
@@ -3746,7 +3746,7 @@ operationGroups:
                 description: ''
             protocol:
               http:
-                path: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedNetwork/managedNetworks/{managedNetworkName}/managedNetworkPeeringPolicies/{managedNetworkPeeringPolicyName}'
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedNetwork/managedNetworks/{managedNetworkName}/managedNetworkPeeringPolicies/{managedNetworkPeeringPolicyName}
                 method: get
                 uri: '{$host}'
         signatureParameters:
@@ -3806,7 +3806,7 @@ operationGroups:
         language:
           default:
             name: get
-            description: 'The Get ManagedNetworkPeeringPolicies operation gets a Managed Network Peering Policy resource, specified by the  resource group, Managed Network name, and peering policy name'
+            description: The Get ManagedNetworkPeeringPolicies operation gets a Managed Network Peering Policy resource, specified by the  resource group, Managed Network name, and peering policy name
           cli:
             cliKey: Get
         protocol: {}
@@ -3876,7 +3876,7 @@ operationGroups:
                     style: json
               - schema: *ref_66
                 implementation: Method
-                origin: 'modelerfour:synthesized/accept'
+                origin: modelerfour:synthesized/accept
                 required: true
                 language:
                   default:
@@ -3896,7 +3896,7 @@ operationGroups:
                 description: ''
             protocol:
               http:
-                path: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedNetwork/managedNetworks/{managedNetworkName}/managedNetworkPeeringPolicies/{managedNetworkPeeringPolicyName}'
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedNetwork/managedNetworks/{managedNetworkName}/managedNetworkPeeringPolicies/{managedNetworkPeeringPolicyName}
                 method: put
                 knownMediaType: json
                 mediaTypes:
@@ -4050,7 +4050,7 @@ operationGroups:
           - parameters:
               - schema: *ref_66
                 implementation: Method
-                origin: 'modelerfour:synthesized/accept'
+                origin: modelerfour:synthesized/accept
                 required: true
                 language:
                   default:
@@ -4069,7 +4069,7 @@ operationGroups:
                 description: ''
             protocol:
               http:
-                path: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedNetwork/managedNetworks/{managedNetworkName}/managedNetworkPeeringPolicies/{managedNetworkPeeringPolicyName}'
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedNetwork/managedNetworks/{managedNetworkName}/managedNetworkPeeringPolicies/{managedNetworkPeeringPolicyName}
                 method: delete
                 uri: '{$host}'
         signatureParameters:
@@ -4134,7 +4134,7 @@ operationGroups:
         language:
           default:
             name: delete
-            description: 'The Delete ManagedNetworkPeeringPolicies operation deletes a Managed Network Peering Policy, specified by the  resource group, Managed Network name, and peering policy name'
+            description: The Delete ManagedNetworkPeeringPolicies operation deletes a Managed Network Peering Policy, specified by the  resource group, Managed Network name, and peering policy name
           cli:
             cliKey: Delete
         protocol: {}
@@ -4204,7 +4204,7 @@ operationGroups:
           - parameters:
               - schema: *ref_66
                 implementation: Method
-                origin: 'modelerfour:synthesized/accept'
+                origin: modelerfour:synthesized/accept
                 required: true
                 language:
                   default:
@@ -4223,7 +4223,7 @@ operationGroups:
                 description: ''
             protocol:
               http:
-                path: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedNetwork/managedNetworks/{managedNetworkName}/managedNetworkPeeringPolicies'
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedNetwork/managedNetworks/{managedNetworkName}/managedNetworkPeeringPolicies
                 method: get
                 uri: '{$host}'
         signatureParameters:
@@ -4236,7 +4236,7 @@ operationGroups:
             language:
               default:
                 name: ''
-                description: 'Get successful. The operation returns all Managed Network Peering Policy resources in the specified Managed Network, in a paginated format'
+                description: Get successful. The operation returns all Managed Network Peering Policy resources in the specified Managed Network, in a paginated format
             protocol:
               http:
                 knownMediaType: json
@@ -4287,7 +4287,7 @@ operationGroups:
         language:
           default:
             name: list_by_managed_network
-            description: 'The ListByManagedNetwork PeeringPolicies operation retrieves all the Managed Network Peering Policies in a specified Managed Network, in a paginated format.'
+            description: The ListByManagedNetwork PeeringPolicies operation retrieves all the Managed Network Peering Policies in a specified Managed Network, in a paginated format.
             paging:
               nextLinkName: nextLink
           cli:
@@ -4311,7 +4311,7 @@ operationGroups:
           - parameters:
               - schema: *ref_66
                 implementation: Method
-                origin: 'modelerfour:synthesized/accept'
+                origin: modelerfour:synthesized/accept
                 required: true
                 language:
                   default:

@@ -76,10 +76,10 @@ schemas:
       language:
         default:
           name: ResourceId
-          description: 'Fully qualified resource Id for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}'
+          description: Fully qualified resource Id for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
         cli:
           name: ResourceId
-          description: 'Fully qualified resource Id for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}'
+          description: Fully qualified resource Id for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
       protocol: {}
     - &ref_25
       type: string
@@ -277,8 +277,8 @@ schemas:
               name: Updating
               description: ''
               cliKey: Updating
-              cliM4Path: 'schemas$$choices[''ProvisioningState'']$$choices[''Updating]'''
-              cliPath: 'schemas$$choices[''ProvisioningState'']$$choices[''Updating]'''
+              cliM4Path: schemas$$choices['ProvisioningState']$$choices['Updating]'
+              cliPath: schemas$$choices['ProvisioningState']$$choices['Updating]'
         - value: Deleting
           language:
             default:
@@ -288,8 +288,8 @@ schemas:
               name: Deleting
               description: ''
               cliKey: Deleting
-              cliM4Path: 'schemas$$choices[''ProvisioningState'']$$choices[''Deleting]'''
-              cliPath: 'schemas$$choices[''ProvisioningState'']$$choices[''Deleting]'''
+              cliM4Path: schemas$$choices['ProvisioningState']$$choices['Deleting]'
+              cliPath: schemas$$choices['ProvisioningState']$$choices['Deleting]'
         - value: Failed
           language:
             default:
@@ -299,8 +299,8 @@ schemas:
               name: Failed
               description: ''
               cliKey: Failed
-              cliM4Path: 'schemas$$choices[''ProvisioningState'']$$choices[''Failed]'''
-              cliPath: 'schemas$$choices[''ProvisioningState'']$$choices[''Failed]'''
+              cliM4Path: schemas$$choices['ProvisioningState']$$choices['Failed]'
+              cliPath: schemas$$choices['ProvisioningState']$$choices['Failed]'
         - value: Succeeded
           language:
             default:
@@ -310,8 +310,8 @@ schemas:
               name: Succeeded
               description: ''
               cliKey: Succeeded
-              cliM4Path: 'schemas$$choices[''ProvisioningState'']$$choices[''Succeeded]'''
-              cliPath: 'schemas$$choices[''ProvisioningState'']$$choices[''Succeeded]'''
+              cliM4Path: schemas$$choices['ProvisioningState']$$choices['Succeeded]'
+              cliPath: schemas$$choices['ProvisioningState']$$choices['Succeeded]'
       type: choice
       apiVersions:
         - version: 2019-06-01-preview
@@ -324,8 +324,8 @@ schemas:
           name: ProvisioningState
           description: Provisioning state of the ManagedNetwork resource.
           cliKey: ProvisioningState
-          cliM4Path: 'schemas$$choices[''ProvisioningState'']'
-          cliPath: 'schemas$$choices[''ProvisioningState'']'
+          cliM4Path: schemas$$choices['ProvisioningState']
+          cliPath: schemas$$choices['ProvisioningState']
       protocol: {}
     - &ref_20
       choices:
@@ -338,8 +338,8 @@ schemas:
               name: Connectivity
               description: ''
               cliKey: Connectivity
-              cliM4Path: 'schemas$$choices[''Kind'']$$choices[''Connectivity]'''
-              cliPath: 'schemas$$choices[''Kind'']$$choices[''Connectivity]'''
+              cliM4Path: schemas$$choices['Kind']$$choices['Connectivity]'
+              cliPath: schemas$$choices['Kind']$$choices['Connectivity]'
       type: choice
       apiVersions:
         - version: 2019-06-01-preview
@@ -352,8 +352,8 @@ schemas:
           name: Kind
           description: Responsibility role under which this Managed Network Group will be created
           cliKey: Kind
-          cliM4Path: 'schemas$$choices[''Kind'']'
-          cliPath: 'schemas$$choices[''Kind'']'
+          cliM4Path: schemas$$choices['Kind']
+          cliPath: schemas$$choices['Kind']
           default-value: Connectivity
           hidden: true
       protocol: {}
@@ -368,8 +368,8 @@ schemas:
               name: HubAndSpokeTopology
               description: ''
               cliKey: HubAndSpokeTopology
-              cliM4Path: 'schemas$$choices[''type'']$$choices[''HubAndSpokeTopology]'''
-              cliPath: 'schemas$$choices[''type'']$$choices[''HubAndSpokeTopology]'''
+              cliM4Path: schemas$$choices['type']$$choices['HubAndSpokeTopology]'
+              cliPath: schemas$$choices['type']$$choices['HubAndSpokeTopology]'
         - value: MeshTopology
           language:
             default:
@@ -379,8 +379,8 @@ schemas:
               name: MeshTopology
               description: ''
               cliKey: MeshTopology
-              cliM4Path: 'schemas$$choices[''type'']$$choices[''MeshTopology]'''
-              cliPath: 'schemas$$choices[''type'']$$choices[''MeshTopology]'''
+              cliM4Path: schemas$$choices['type']$$choices['MeshTopology]'
+              cliPath: schemas$$choices['type']$$choices['MeshTopology]'
       type: choice
       apiVersions:
         - version: 2019-06-01-preview
@@ -393,8 +393,8 @@ schemas:
           name: Type
           description: Gets or sets the connectivity type of a network structure policy
           cliKey: type
-          cliM4Path: 'schemas$$choices[''type'']'
-          cliPath: 'schemas$$choices[''type'']'
+          cliM4Path: schemas$$choices['type']
+          cliPath: schemas$$choices['type']
       protocol: {}
   constants:
     - &ref_62
@@ -544,8 +544,8 @@ schemas:
                                                             propertyCountIfSimplifyWithoutSimpleObject: 10000
                                                             simplifiable: false
                                                           cliKey: HubAndSpokePeeringPolicyProperties
-                                                          cliM4Path: 'schemas$$objects[''HubAndSpokePeeringPolicyProperties'']'
-                                                          cliPath: 'schemas$$objects[''HubAndSpokePeeringPolicyProperties'']'
+                                                          cliM4Path: schemas$$objects['HubAndSpokePeeringPolicyProperties']
+                                                          cliPath: schemas$$objects['HubAndSpokePeeringPolicyProperties']
                                                       protocol: {}
                                                     - &ref_9
                                                       type: object
@@ -581,8 +581,8 @@ schemas:
                                                             propertyCountIfSimplifyWithoutSimpleObject: 10000
                                                             simplifiable: false
                                                           cliKey: MeshPeeringPolicyProperties
-                                                          cliM4Path: 'schemas$$objects[''MeshPeeringPolicyProperties'']'
-                                                          cliPath: 'schemas$$objects[''MeshPeeringPolicyProperties'']'
+                                                          cliM4Path: schemas$$objects['MeshPeeringPolicyProperties']
+                                                          cliPath: schemas$$objects['MeshPeeringPolicyProperties']
                                                       protocol: {}
                                                   immediate:
                                                     - *ref_8
@@ -607,8 +607,8 @@ schemas:
                                                         name: type
                                                         description: Gets or sets the connectivity type of a network structure policy
                                                         cliKey: type
-                                                        cliM4Path: 'schemas$$objects[''ManagedNetworkPeeringPolicyProperties'']$$properties[''type'']'
-                                                        cliPath: 'schemas$$objects[''ManagedNetworkPeeringPolicyProperties'']$$properties[''type'']'
+                                                        cliM4Path: schemas$$objects['ManagedNetworkPeeringPolicyProperties']$$properties['type']
+                                                        cliPath: schemas$$objects['ManagedNetworkPeeringPolicyProperties']$$properties['type']
                                                     protocol: {}
                                                 discriminatorValue: ManagedNetworkPeeringPolicyProperties
                                                 parents:
@@ -633,8 +633,8 @@ schemas:
                                                               name: id
                                                               description: Resource Id
                                                               cliKey: id
-                                                              cliM4Path: 'schemas$$objects[''ResourceId'']$$properties[''id'']'
-                                                              cliPath: 'schemas$$objects[''ResourceId'']$$properties[''id'']'
+                                                              cliM4Path: schemas$$objects['ResourceId']$$properties['id']
+                                                              cliPath: schemas$$objects['ResourceId']$$properties['id']
                                                           protocol: {}
                                                       serializationFormats:
                                                         - json
@@ -656,8 +656,8 @@ schemas:
                                                             propertyCountIfSimplifyWithoutSimpleObject: 1
                                                             simplifiable: true
                                                           cliKey: ResourceId
-                                                          cliM4Path: 'schemas$$objects[''ResourceId'']'
-                                                          cliPath: 'schemas$$objects[''ResourceId'']'
+                                                          cliM4Path: schemas$$objects['ResourceId']
+                                                          cliPath: schemas$$objects['ResourceId']
                                                       protocol: {}
                                                     required: false
                                                     serializedName: hub
@@ -669,8 +669,8 @@ schemas:
                                                         name: hub
                                                         description: Gets or sets the hub virtual network ID
                                                         cliKey: hub
-                                                        cliM4Path: 'schemas$$objects[''ManagedNetworkPeeringPolicyProperties'']$$properties[''hub'']'
-                                                        cliPath: 'schemas$$objects[''ManagedNetworkPeeringPolicyProperties'']$$properties[''hub'']'
+                                                        cliM4Path: schemas$$objects['ManagedNetworkPeeringPolicyProperties']$$properties['hub']
+                                                        cliPath: schemas$$objects['ManagedNetworkPeeringPolicyProperties']$$properties['hub']
                                                     protocol: {}
                                                   - schema: &ref_54
                                                       type: array
@@ -697,8 +697,8 @@ schemas:
                                                         name: spokes
                                                         description: Gets or sets the spokes group IDs
                                                         cliKey: spokes
-                                                        cliM4Path: 'schemas$$objects[''ManagedNetworkPeeringPolicyProperties'']$$properties[''spokes'']'
-                                                        cliPath: 'schemas$$objects[''ManagedNetworkPeeringPolicyProperties'']$$properties[''spokes'']'
+                                                        cliM4Path: schemas$$objects['ManagedNetworkPeeringPolicyProperties']$$properties['spokes']
+                                                        cliPath: schemas$$objects['ManagedNetworkPeeringPolicyProperties']$$properties['spokes']
                                                     protocol: {}
                                                   - schema: &ref_55
                                                       type: array
@@ -725,8 +725,8 @@ schemas:
                                                         name: mesh
                                                         description: Gets or sets the mesh group IDs
                                                         cliKey: mesh
-                                                        cliM4Path: 'schemas$$objects[''ManagedNetworkPeeringPolicyProperties'']$$properties[''mesh'']'
-                                                        cliPath: 'schemas$$objects[''ManagedNetworkPeeringPolicyProperties'']$$properties[''mesh'']'
+                                                        cliM4Path: schemas$$objects['ManagedNetworkPeeringPolicyProperties']$$properties['mesh']
+                                                        cliPath: schemas$$objects['ManagedNetworkPeeringPolicyProperties']$$properties['mesh']
                                                     protocol: {}
                                                 serializationFormats:
                                                   - json
@@ -749,8 +749,8 @@ schemas:
                                                       propertyCountIfSimplifyWithoutSimpleObject: 10000
                                                       simplifiable: false
                                                     cliKey: ManagedNetworkPeeringPolicyProperties
-                                                    cliM4Path: 'schemas$$objects[''ManagedNetworkPeeringPolicyProperties'']'
-                                                    cliPath: 'schemas$$objects[''ManagedNetworkPeeringPolicyProperties'']'
+                                                    cliM4Path: schemas$$objects['ManagedNetworkPeeringPolicyProperties']
+                                                    cliPath: schemas$$objects['ManagedNetworkPeeringPolicyProperties']
                                                 protocol: {}
                                               - &ref_16
                                                 type: object
@@ -791,8 +791,8 @@ schemas:
                                                               name: managementGroups
                                                               description: The collection of management groups covered by the Managed Network
                                                               cliKey: managementGroups
-                                                              cliM4Path: 'schemas$$objects[''Scope'']$$properties[''managementGroups'']'
-                                                              cliPath: 'schemas$$objects[''Scope'']$$properties[''managementGroups'']'
+                                                              cliM4Path: schemas$$objects['Scope']$$properties['managementGroups']
+                                                              cliPath: schemas$$objects['Scope']$$properties['managementGroups']
                                                           protocol: {}
                                                         - schema: &ref_46
                                                             type: array
@@ -818,8 +818,8 @@ schemas:
                                                               name: subscriptions
                                                               description: The collection of subscriptions covered by the Managed Network
                                                               cliKey: subscriptions
-                                                              cliM4Path: 'schemas$$objects[''Scope'']$$properties[''subscriptions'']'
-                                                              cliPath: 'schemas$$objects[''Scope'']$$properties[''subscriptions'']'
+                                                              cliM4Path: schemas$$objects['Scope']$$properties['subscriptions']
+                                                              cliPath: schemas$$objects['Scope']$$properties['subscriptions']
                                                           protocol: {}
                                                         - schema: &ref_47
                                                             type: array
@@ -845,8 +845,8 @@ schemas:
                                                               name: virtualNetworks
                                                               description: The collection of virtual nets covered by the Managed Network
                                                               cliKey: virtualNetworks
-                                                              cliM4Path: 'schemas$$objects[''Scope'']$$properties[''virtualNetworks'']'
-                                                              cliPath: 'schemas$$objects[''Scope'']$$properties[''virtualNetworks'']'
+                                                              cliM4Path: schemas$$objects['Scope']$$properties['virtualNetworks']
+                                                              cliPath: schemas$$objects['Scope']$$properties['virtualNetworks']
                                                           protocol: {}
                                                         - schema: &ref_48
                                                             type: array
@@ -872,8 +872,8 @@ schemas:
                                                               name: subnets
                                                               description: The collection of  subnets covered by the Managed Network
                                                               cliKey: subnets
-                                                              cliM4Path: 'schemas$$objects[''Scope'']$$properties[''subnets'']'
-                                                              cliPath: 'schemas$$objects[''Scope'']$$properties[''subnets'']'
+                                                              cliM4Path: schemas$$objects['Scope']$$properties['subnets']
+                                                              cliPath: schemas$$objects['Scope']$$properties['subnets']
                                                           protocol: {}
                                                       serializationFormats:
                                                         - json
@@ -895,8 +895,8 @@ schemas:
                                                             propertyCountIfSimplifyWithoutSimpleObject: 10000
                                                             simplifiable: false
                                                           cliKey: Scope
-                                                          cliM4Path: 'schemas$$objects[''Scope'']'
-                                                          cliPath: 'schemas$$objects[''Scope'']'
+                                                          cliM4Path: schemas$$objects['Scope']
+                                                          cliPath: schemas$$objects['Scope']
                                                       protocol: {}
                                                     serializedName: scope
                                                     extensions:
@@ -913,8 +913,8 @@ schemas:
                                                           The collection of management groups, subscriptions, virtual networks, and subnets by the Managed Network. This is a read-only property that is reflective of all ScopeAssignments for
                                                           this Managed Network
                                                         cliKey: scope
-                                                        cliM4Path: 'schemas$$objects[''ManagedNetworkProperties'']$$properties[''scope'']'
-                                                        cliPath: 'schemas$$objects[''ManagedNetworkProperties'']$$properties[''scope'']'
+                                                        cliM4Path: schemas$$objects['ManagedNetworkProperties']$$properties['scope']
+                                                        cliPath: schemas$$objects['ManagedNetworkProperties']$$properties['scope']
                                                     protocol: {}
                                                   - schema: &ref_30
                                                       type: object
@@ -946,8 +946,8 @@ schemas:
                                                               name: groups
                                                               description: The collection of connectivity related Managed Network Groups within the Managed Network
                                                               cliKey: groups
-                                                              cliM4Path: 'schemas$$objects[''ConnectivityCollection'']$$properties[''groups'']'
-                                                              cliPath: 'schemas$$objects[''ConnectivityCollection'']$$properties[''groups'']'
+                                                              cliM4Path: schemas$$objects['ConnectivityCollection']$$properties['groups']
+                                                              cliPath: schemas$$objects['ConnectivityCollection']$$properties['groups']
                                                           protocol: {}
                                                         - schema: &ref_56
                                                             type: array
@@ -974,8 +974,8 @@ schemas:
                                                                       name: properties
                                                                       description: Gets or sets the properties of a Managed Network Policy
                                                                       cliKey: properties
-                                                                      cliM4Path: 'schemas$$objects[''ManagedNetworkPeeringPolicy'']$$properties[''properties'']'
-                                                                      cliPath: 'schemas$$objects[''ManagedNetworkPeeringPolicy'']$$properties[''properties'']'
+                                                                      cliM4Path: schemas$$objects['ManagedNetworkPeeringPolicy']$$properties['properties']
+                                                                      cliPath: schemas$$objects['ManagedNetworkPeeringPolicy']$$properties['properties']
                                                                   protocol: {}
                                                               serializationFormats:
                                                                 - json
@@ -997,8 +997,8 @@ schemas:
                                                                     propertyCountIfSimplifyWithoutSimpleObject: 10000
                                                                     simplifiable: false
                                                                   cliKey: ManagedNetworkPeeringPolicy
-                                                                  cliM4Path: 'schemas$$objects[''ManagedNetworkPeeringPolicy'']'
-                                                                  cliPath: 'schemas$$objects[''ManagedNetworkPeeringPolicy'']'
+                                                                  cliM4Path: schemas$$objects['ManagedNetworkPeeringPolicy']
+                                                                  cliPath: schemas$$objects['ManagedNetworkPeeringPolicy']
                                                               protocol: {}
                                                             language:
                                                               default:
@@ -1020,8 +1020,8 @@ schemas:
                                                               name: peerings
                                                               description: The collection of Managed Network Peering Policies within the Managed Network
                                                               cliKey: peerings
-                                                              cliM4Path: 'schemas$$objects[''ConnectivityCollection'']$$properties[''peerings'']'
-                                                              cliPath: 'schemas$$objects[''ConnectivityCollection'']$$properties[''peerings'']'
+                                                              cliM4Path: schemas$$objects['ConnectivityCollection']$$properties['peerings']
+                                                              cliPath: schemas$$objects['ConnectivityCollection']$$properties['peerings']
                                                           protocol: {}
                                                       serializationFormats:
                                                         - json
@@ -1043,8 +1043,8 @@ schemas:
                                                             propertyCountIfSimplifyWithoutSimpleObject: 0
                                                             simplifiable: true
                                                           cliKey: ConnectivityCollection
-                                                          cliM4Path: 'schemas$$objects[''ConnectivityCollection'']'
-                                                          cliPath: 'schemas$$objects[''ConnectivityCollection'']'
+                                                          cliM4Path: schemas$$objects['ConnectivityCollection']
+                                                          cliPath: schemas$$objects['ConnectivityCollection']
                                                       protocol: {}
                                                     readOnly: true
                                                     serializedName: connectivity
@@ -1058,8 +1058,8 @@ schemas:
                                                         name: connectivity
                                                         description: The collection of groups and policies concerned with connectivity
                                                         cliKey: connectivity
-                                                        cliM4Path: 'schemas$$objects[''ManagedNetworkProperties'']$$properties[''connectivity'']'
-                                                        cliPath: 'schemas$$objects[''ManagedNetworkProperties'']$$properties[''connectivity'']'
+                                                        cliM4Path: schemas$$objects['ManagedNetworkProperties']$$properties['connectivity']
+                                                        cliPath: schemas$$objects['ManagedNetworkProperties']$$properties['connectivity']
                                                     protocol: {}
                                                 serializationFormats:
                                                   - json
@@ -1081,8 +1081,8 @@ schemas:
                                                       propertyCountIfSimplifyWithoutSimpleObject: 10000
                                                       simplifiable: false
                                                     cliKey: ManagedNetworkProperties
-                                                    cliM4Path: 'schemas$$objects[''ManagedNetworkProperties'']'
-                                                    cliPath: 'schemas$$objects[''ManagedNetworkProperties'']'
+                                                    cliM4Path: schemas$$objects['ManagedNetworkProperties']
+                                                    cliPath: schemas$$objects['ManagedNetworkProperties']
                                                 protocol: {}
                                               - &ref_17
                                                 type: object
@@ -1104,8 +1104,8 @@ schemas:
                                                         name: assignedManagedNetwork
                                                         description: The managed network ID with scope will be assigned to.
                                                         cliKey: assignedManagedNetwork
-                                                        cliM4Path: 'schemas$$objects[''ScopeAssignmentProperties'']$$properties[''assignedManagedNetwork'']'
-                                                        cliPath: 'schemas$$objects[''ScopeAssignmentProperties'']$$properties[''assignedManagedNetwork'']'
+                                                        cliM4Path: schemas$$objects['ScopeAssignmentProperties']$$properties['assignedManagedNetwork']
+                                                        cliPath: schemas$$objects['ScopeAssignmentProperties']$$properties['assignedManagedNetwork']
                                                     protocol: {}
                                                 serializationFormats:
                                                   - json
@@ -1127,8 +1127,8 @@ schemas:
                                                       propertyCountIfSimplifyWithoutSimpleObject: 1
                                                       simplifiable: true
                                                     cliKey: ScopeAssignmentProperties
-                                                    cliM4Path: 'schemas$$objects[''ScopeAssignmentProperties'']'
-                                                    cliPath: 'schemas$$objects[''ScopeAssignmentProperties'']'
+                                                    cliM4Path: schemas$$objects['ScopeAssignmentProperties']
+                                                    cliPath: schemas$$objects['ScopeAssignmentProperties']
                                                 protocol: {}
                                               - *ref_8
                                               - *ref_9
@@ -1149,8 +1149,8 @@ schemas:
                                                   name: provisioningState
                                                   description: Provisioning state of the ManagedNetwork resource.
                                                   cliKey: provisioningState
-                                                  cliM4Path: 'schemas$$objects[''ResourceProperties'']$$properties[''provisioningState'']'
-                                                  cliPath: 'schemas$$objects[''ResourceProperties'']$$properties[''provisioningState'']'
+                                                  cliM4Path: schemas$$objects['ResourceProperties']$$properties['provisioningState']
+                                                  cliPath: schemas$$objects['ResourceProperties']$$properties['provisioningState']
                                               protocol: {}
                                             - schema: *ref_19
                                               readOnly: true
@@ -1163,8 +1163,8 @@ schemas:
                                                   name: etag
                                                   description: A unique read-only string that changes whenever the resource is updated.
                                                   cliKey: etag
-                                                  cliM4Path: 'schemas$$objects[''ResourceProperties'']$$properties[''etag'']'
-                                                  cliPath: 'schemas$$objects[''ResourceProperties'']$$properties[''etag'']'
+                                                  cliM4Path: schemas$$objects['ResourceProperties']$$properties['etag']
+                                                  cliPath: schemas$$objects['ResourceProperties']$$properties['etag']
                                               protocol: {}
                                           serializationFormats:
                                             - json
@@ -1186,8 +1186,8 @@ schemas:
                                                 propertyCountIfSimplifyWithoutSimpleObject: 0
                                                 simplifiable: true
                                               cliKey: ResourceProperties
-                                              cliM4Path: 'schemas$$objects[''ResourceProperties'']'
-                                              cliPath: 'schemas$$objects[''ResourceProperties'']'
+                                              cliM4Path: schemas$$objects['ResourceProperties']
+                                              cliPath: schemas$$objects['ResourceProperties']
                                           protocol: {}
                                       immediate:
                                         - *ref_7
@@ -1216,8 +1216,8 @@ schemas:
                                             name: managementGroups
                                             description: The collection of management groups covered by the Managed Network
                                             cliKey: managementGroups
-                                            cliM4Path: 'schemas$$objects[''ManagedNetworkGroupProperties'']$$properties[''managementGroups'']'
-                                            cliPath: 'schemas$$objects[''ManagedNetworkGroupProperties'']$$properties[''managementGroups'']'
+                                            cliM4Path: schemas$$objects['ManagedNetworkGroupProperties']$$properties['managementGroups']
+                                            cliPath: schemas$$objects['ManagedNetworkGroupProperties']$$properties['managementGroups']
                                         protocol: {}
                                       - schema: &ref_50
                                           type: array
@@ -1243,8 +1243,8 @@ schemas:
                                             name: subscriptions
                                             description: The collection of subscriptions covered by the Managed Network
                                             cliKey: subscriptions
-                                            cliM4Path: 'schemas$$objects[''ManagedNetworkGroupProperties'']$$properties[''subscriptions'']'
-                                            cliPath: 'schemas$$objects[''ManagedNetworkGroupProperties'']$$properties[''subscriptions'']'
+                                            cliM4Path: schemas$$objects['ManagedNetworkGroupProperties']$$properties['subscriptions']
+                                            cliPath: schemas$$objects['ManagedNetworkGroupProperties']$$properties['subscriptions']
                                         protocol: {}
                                       - schema: &ref_51
                                           type: array
@@ -1270,8 +1270,8 @@ schemas:
                                             name: virtualNetworks
                                             description: The collection of virtual nets covered by the Managed Network
                                             cliKey: virtualNetworks
-                                            cliM4Path: 'schemas$$objects[''ManagedNetworkGroupProperties'']$$properties[''virtualNetworks'']'
-                                            cliPath: 'schemas$$objects[''ManagedNetworkGroupProperties'']$$properties[''virtualNetworks'']'
+                                            cliM4Path: schemas$$objects['ManagedNetworkGroupProperties']$$properties['virtualNetworks']
+                                            cliPath: schemas$$objects['ManagedNetworkGroupProperties']$$properties['virtualNetworks']
                                         protocol: {}
                                       - schema: &ref_52
                                           type: array
@@ -1297,8 +1297,8 @@ schemas:
                                             name: subnets
                                             description: The collection of  subnets covered by the Managed Network
                                             cliKey: subnets
-                                            cliM4Path: 'schemas$$objects[''ManagedNetworkGroupProperties'']$$properties[''subnets'']'
-                                            cliPath: 'schemas$$objects[''ManagedNetworkGroupProperties'']$$properties[''subnets'']'
+                                            cliM4Path: schemas$$objects['ManagedNetworkGroupProperties']$$properties['subnets']
+                                            cliPath: schemas$$objects['ManagedNetworkGroupProperties']$$properties['subnets']
                                         protocol: {}
                                     serializationFormats:
                                       - json
@@ -1320,8 +1320,8 @@ schemas:
                                           propertyCountIfSimplifyWithoutSimpleObject: 10000
                                           simplifiable: false
                                         cliKey: ManagedNetworkGroupProperties
-                                        cliM4Path: 'schemas$$objects[''ManagedNetworkGroupProperties'']'
-                                        cliPath: 'schemas$$objects[''ManagedNetworkGroupProperties'']'
+                                        cliM4Path: schemas$$objects['ManagedNetworkGroupProperties']
+                                        cliPath: schemas$$objects['ManagedNetworkGroupProperties']
                                     protocol: {}
                                   serializedName: properties
                                   extensions:
@@ -1334,8 +1334,8 @@ schemas:
                                       name: properties
                                       description: Gets or sets the properties of a network group
                                       cliKey: properties
-                                      cliM4Path: 'schemas$$objects[''ManagedNetworkGroup'']$$properties[''properties'']'
-                                      cliPath: 'schemas$$objects[''ManagedNetworkGroup'']$$properties[''properties'']'
+                                      cliM4Path: schemas$$objects['ManagedNetworkGroup']$$properties['properties']
+                                      cliPath: schemas$$objects['ManagedNetworkGroup']$$properties['properties']
                                   protocol: {}
                                 - schema: *ref_20
                                   serializedName: kind
@@ -1347,8 +1347,8 @@ schemas:
                                       name: kind
                                       description: Responsibility role under which this Managed Network Group will be created
                                       cliKey: kind
-                                      cliM4Path: 'schemas$$objects[''ManagedNetworkGroup'']$$properties[''kind'']'
-                                      cliPath: 'schemas$$objects[''ManagedNetworkGroup'']$$properties[''kind'']'
+                                      cliM4Path: schemas$$objects['ManagedNetworkGroup']$$properties['kind']
+                                      cliPath: schemas$$objects['ManagedNetworkGroup']$$properties['kind']
                                   protocol: {}
                               serializationFormats:
                                 - json
@@ -1370,8 +1370,8 @@ schemas:
                                     propertyCountIfSimplifyWithoutSimpleObject: 10000
                                     simplifiable: false
                                   cliKey: ManagedNetworkGroup
-                                  cliM4Path: 'schemas$$objects[''ManagedNetworkGroup'']'
-                                  cliPath: 'schemas$$objects[''ManagedNetworkGroup'']'
+                                  cliM4Path: schemas$$objects['ManagedNetworkGroup']
+                                  cliPath: schemas$$objects['ManagedNetworkGroup']
                               protocol: {}
                             - *ref_21
                             - &ref_22
@@ -1397,8 +1397,8 @@ schemas:
                                       name: properties
                                       description: The Scope Assignment properties
                                       cliKey: properties
-                                      cliM4Path: 'schemas$$objects[''ScopeAssignment'']$$properties[''properties'']'
-                                      cliPath: 'schemas$$objects[''ScopeAssignment'']$$properties[''properties'']'
+                                      cliM4Path: schemas$$objects['ScopeAssignment']$$properties['properties']
+                                      cliPath: schemas$$objects['ScopeAssignment']$$properties['properties']
                                   protocol: {}
                               serializationFormats:
                                 - json
@@ -1420,8 +1420,8 @@ schemas:
                                     propertyCountIfSimplifyWithoutSimpleObject: 2
                                     simplifiable: true
                                   cliKey: ScopeAssignment
-                                  cliM4Path: 'schemas$$objects[''ScopeAssignment'']'
-                                  cliPath: 'schemas$$objects[''ScopeAssignment'']'
+                                  cliM4Path: schemas$$objects['ScopeAssignment']
+                                  cliPath: schemas$$objects['ScopeAssignment']
                               protocol: {}
                           immediate:
                             - *ref_14
@@ -1452,8 +1452,8 @@ schemas:
                               propertyCountIfSimplifyWithoutSimpleObject: 1
                               simplifiable: true
                             cliKey: ProxyResource
-                            cliM4Path: 'schemas$$objects[''ProxyResource'']'
-                            cliPath: 'schemas$$objects[''ProxyResource'']'
+                            cliM4Path: schemas$$objects['ProxyResource']
+                            cliPath: schemas$$objects['ProxyResource']
                         protocol: {}
                       - *ref_14
                       - *ref_21
@@ -1470,13 +1470,13 @@ schemas:
                       language:
                         default:
                           name: id
-                          description: 'Fully qualified resource Id for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}'
+                          description: Fully qualified resource Id for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
                         cli:
                           name: id
-                          description: 'Fully qualified resource Id for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}'
+                          description: Fully qualified resource Id for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
                           cliKey: id
-                          cliM4Path: 'schemas$$objects[''Resource'']$$properties[''id'']'
-                          cliPath: 'schemas$$objects[''Resource'']$$properties[''id'']'
+                          cliM4Path: schemas$$objects['Resource']$$properties['id']
+                          cliPath: schemas$$objects['Resource']$$properties['id']
                       protocol: {}
                     - schema: *ref_25
                       readOnly: true
@@ -1489,8 +1489,8 @@ schemas:
                           name: name
                           description: The name of the resource
                           cliKey: name
-                          cliM4Path: 'schemas$$objects[''Resource'']$$properties[''name'']'
-                          cliPath: 'schemas$$objects[''Resource'']$$properties[''name'']'
+                          cliM4Path: schemas$$objects['Resource']$$properties['name']
+                          cliPath: schemas$$objects['Resource']$$properties['name']
                       protocol: {}
                     - schema: *ref_26
                       readOnly: true
@@ -1503,8 +1503,8 @@ schemas:
                           name: type
                           description: The type of the resource. Ex- Microsoft.Compute/virtualMachines or Microsoft.Storage/storageAccounts.
                           cliKey: type
-                          cliM4Path: 'schemas$$objects[''Resource'']$$properties[''type'']'
-                          cliPath: 'schemas$$objects[''Resource'']$$properties[''type'']'
+                          cliM4Path: schemas$$objects['Resource']$$properties['type']
+                          cliPath: schemas$$objects['Resource']$$properties['type']
                       protocol: {}
                     - schema: *ref_27
                       serializedName: location
@@ -1516,8 +1516,8 @@ schemas:
                           name: location
                           description: The geo-location where the resource lives
                           cliKey: location
-                          cliM4Path: 'schemas$$objects[''Resource'']$$properties[''location'']'
-                          cliPath: 'schemas$$objects[''Resource'']$$properties[''location'']'
+                          cliM4Path: schemas$$objects['Resource']$$properties['location']
+                          cliPath: schemas$$objects['Resource']$$properties['location']
                       protocol: {}
                   serializationFormats:
                     - json
@@ -1541,8 +1541,8 @@ schemas:
                         propertyCountIfSimplifyWithoutSimpleObject: 1
                         simplifiable: true
                       cliKey: Resource
-                      cliM4Path: 'schemas$$objects[''Resource'']'
-                      cliPath: 'schemas$$objects[''Resource'']'
+                      cliM4Path: schemas$$objects['Resource']
+                      cliPath: schemas$$objects['Resource']
                   protocol: {}
               immediate:
                 - *ref_4
@@ -1558,8 +1558,8 @@ schemas:
                     name: tags
                     description: Resource tags
                     cliKey: tags
-                    cliM4Path: 'schemas$$objects[''TrackedResource'']$$properties[''tags'']'
-                    cliPath: 'schemas$$objects[''TrackedResource'']$$properties[''tags'']'
+                    cliM4Path: schemas$$objects['TrackedResource']$$properties['tags']
+                    cliPath: schemas$$objects['TrackedResource']$$properties['tags']
                 protocol: {}
             serializationFormats:
               - json
@@ -1581,8 +1581,8 @@ schemas:
                   propertyCountIfSimplifyWithoutSimpleObject: 10000
                   simplifiable: false
                 cliKey: TrackedResource
-                cliM4Path: 'schemas$$objects[''TrackedResource'']'
-                cliPath: 'schemas$$objects[''TrackedResource'']'
+                cliM4Path: schemas$$objects['TrackedResource']
+                cliPath: schemas$$objects['TrackedResource']
             protocol: {}
           - *ref_4
         immediate:
@@ -1600,8 +1600,8 @@ schemas:
               name: properties
               description: The MNC properties
               cliKey: properties
-              cliM4Path: 'schemas$$objects[''ManagedNetwork'']$$properties[''properties'']'
-              cliPath: 'schemas$$objects[''ManagedNetwork'']$$properties[''properties'']'
+              cliM4Path: schemas$$objects['ManagedNetwork']$$properties['properties']
+              cliPath: schemas$$objects['ManagedNetwork']$$properties['properties']
           protocol: {}
       serializationFormats:
         - json
@@ -1623,8 +1623,8 @@ schemas:
             propertyCountIfSimplifyWithoutSimpleObject: 10000
             simplifiable: false
           cliKey: ManagedNetwork
-          cliM4Path: 'schemas$$objects[''ManagedNetwork'']'
-          cliPath: 'schemas$$objects[''ManagedNetwork'']'
+          cliM4Path: schemas$$objects['ManagedNetwork']
+          cliPath: schemas$$objects['ManagedNetwork']
       protocol: {}
     - *ref_16
     - *ref_29
@@ -1654,8 +1654,8 @@ schemas:
               name: code
               description: The error code.
               cliKey: code
-              cliM4Path: 'schemas$$objects[''ErrorResponse'']$$properties[''code'']'
-              cliPath: 'schemas$$objects[''ErrorResponse'']$$properties[''code'']'
+              cliM4Path: schemas$$objects['ErrorResponse']$$properties['code']
+              cliPath: schemas$$objects['ErrorResponse']$$properties['code']
           protocol: {}
         - schema: *ref_32
           readOnly: true
@@ -1668,8 +1668,8 @@ schemas:
               name: message
               description: The error message.
               cliKey: message
-              cliM4Path: 'schemas$$objects[''ErrorResponse'']$$properties[''message'']'
-              cliPath: 'schemas$$objects[''ErrorResponse'']$$properties[''message'']'
+              cliM4Path: schemas$$objects['ErrorResponse']$$properties['message']
+              cliPath: schemas$$objects['ErrorResponse']$$properties['message']
           protocol: {}
       serializationFormats:
         - json
@@ -1690,8 +1690,8 @@ schemas:
             propertyCountIfSimplifyWithoutSimpleObject: 0
             simplifiable: true
           cliKey: ErrorResponse
-          cliM4Path: 'schemas$$objects[''ErrorResponse'']'
-          cliPath: 'schemas$$objects[''ErrorResponse'']'
+          cliM4Path: schemas$$objects['ErrorResponse']
+          cliPath: schemas$$objects['ErrorResponse']
       protocol: {}
     - &ref_75
       type: object
@@ -1708,8 +1708,8 @@ schemas:
               name: tags
               description: Resource tags
               cliKey: tags
-              cliM4Path: 'schemas$$objects[''ManagedNetworkUpdate'']$$properties[''tags'']'
-              cliPath: 'schemas$$objects[''ManagedNetworkUpdate'']$$properties[''tags'']'
+              cliM4Path: schemas$$objects['ManagedNetworkUpdate']$$properties['tags']
+              cliPath: schemas$$objects['ManagedNetworkUpdate']$$properties['tags']
           protocol: {}
       serializationFormats:
         - json
@@ -1730,8 +1730,8 @@ schemas:
             propertyCountIfSimplifyWithoutSimpleObject: 10000
             simplifiable: false
           cliKey: ManagedNetworkUpdate
-          cliM4Path: 'schemas$$objects[''ManagedNetworkUpdate'']'
-          cliPath: 'schemas$$objects[''ManagedNetworkUpdate'']'
+          cliM4Path: schemas$$objects['ManagedNetworkUpdate']
+          cliPath: schemas$$objects['ManagedNetworkUpdate']
       protocol: {}
     - &ref_83
       type: object
@@ -1762,8 +1762,8 @@ schemas:
               name: value
               description: Gets a page of ManagedNetworks
               cliKey: value
-              cliM4Path: 'schemas$$objects[''ManagedNetworkListResult'']$$properties[''value'']'
-              cliPath: 'schemas$$objects[''ManagedNetworkListResult'']$$properties[''value'']'
+              cliM4Path: schemas$$objects['ManagedNetworkListResult']$$properties['value']
+              cliPath: schemas$$objects['ManagedNetworkListResult']$$properties['value']
           protocol: {}
         - schema: *ref_34
           serializedName: nextLink
@@ -1775,8 +1775,8 @@ schemas:
               name: nextLink
               description: Gets the URL to get the next page of results.
               cliKey: nextLink
-              cliM4Path: 'schemas$$objects[''ManagedNetworkListResult'']$$properties[''nextLink'']'
-              cliPath: 'schemas$$objects[''ManagedNetworkListResult'']$$properties[''nextLink'']'
+              cliM4Path: schemas$$objects['ManagedNetworkListResult']$$properties['nextLink']
+              cliPath: schemas$$objects['ManagedNetworkListResult']$$properties['nextLink']
           protocol: {}
       serializationFormats:
         - json
@@ -1797,8 +1797,8 @@ schemas:
             propertyCountIfSimplifyWithoutSimpleObject: 10000
             simplifiable: false
           cliKey: ManagedNetworkListResult
-          cliM4Path: 'schemas$$objects[''ManagedNetworkListResult'']'
-          cliPath: 'schemas$$objects[''ManagedNetworkListResult'']'
+          cliM4Path: schemas$$objects['ManagedNetworkListResult']
+          cliPath: schemas$$objects['ManagedNetworkListResult']
       protocol: {}
     - *ref_22
     - *ref_17
@@ -1831,8 +1831,8 @@ schemas:
               name: value
               description: Gets a page of ScopeAssignment
               cliKey: value
-              cliM4Path: 'schemas$$objects[''ScopeAssignmentListResult'']$$properties[''value'']'
-              cliPath: 'schemas$$objects[''ScopeAssignmentListResult'']$$properties[''value'']'
+              cliM4Path: schemas$$objects['ScopeAssignmentListResult']$$properties['value']
+              cliPath: schemas$$objects['ScopeAssignmentListResult']$$properties['value']
           protocol: {}
         - schema: *ref_35
           serializedName: nextLink
@@ -1844,8 +1844,8 @@ schemas:
               name: nextLink
               description: Gets the URL to get the next set of results.
               cliKey: nextLink
-              cliM4Path: 'schemas$$objects[''ScopeAssignmentListResult'']$$properties[''nextLink'']'
-              cliPath: 'schemas$$objects[''ScopeAssignmentListResult'']$$properties[''nextLink'']'
+              cliM4Path: schemas$$objects['ScopeAssignmentListResult']$$properties['nextLink']
+              cliPath: schemas$$objects['ScopeAssignmentListResult']$$properties['nextLink']
           protocol: {}
       serializationFormats:
         - json
@@ -1866,8 +1866,8 @@ schemas:
             propertyCountIfSimplifyWithoutSimpleObject: 10000
             simplifiable: false
           cliKey: ScopeAssignmentListResult
-          cliM4Path: 'schemas$$objects[''ScopeAssignmentListResult'']'
-          cliPath: 'schemas$$objects[''ScopeAssignmentListResult'']'
+          cliM4Path: schemas$$objects['ScopeAssignmentListResult']
+          cliPath: schemas$$objects['ScopeAssignmentListResult']
       protocol: {}
     - &ref_109
       type: object
@@ -1898,8 +1898,8 @@ schemas:
               name: value
               description: Gets a page of ManagedNetworkGroup
               cliKey: value
-              cliM4Path: 'schemas$$objects[''ManagedNetworkGroupListResult'']$$properties[''value'']'
-              cliPath: 'schemas$$objects[''ManagedNetworkGroupListResult'']$$properties[''value'']'
+              cliM4Path: schemas$$objects['ManagedNetworkGroupListResult']$$properties['value']
+              cliPath: schemas$$objects['ManagedNetworkGroupListResult']$$properties['value']
           protocol: {}
         - schema: *ref_36
           serializedName: nextLink
@@ -1911,8 +1911,8 @@ schemas:
               name: nextLink
               description: Gets the URL to get the next set of results.
               cliKey: nextLink
-              cliM4Path: 'schemas$$objects[''ManagedNetworkGroupListResult'']$$properties[''nextLink'']'
-              cliPath: 'schemas$$objects[''ManagedNetworkGroupListResult'']$$properties[''nextLink'']'
+              cliM4Path: schemas$$objects['ManagedNetworkGroupListResult']$$properties['nextLink']
+              cliPath: schemas$$objects['ManagedNetworkGroupListResult']$$properties['nextLink']
           protocol: {}
       serializationFormats:
         - json
@@ -1933,8 +1933,8 @@ schemas:
             propertyCountIfSimplifyWithoutSimpleObject: 10000
             simplifiable: false
           cliKey: ManagedNetworkGroupListResult
-          cliM4Path: 'schemas$$objects[''ManagedNetworkGroupListResult'']'
-          cliPath: 'schemas$$objects[''ManagedNetworkGroupListResult'']'
+          cliM4Path: schemas$$objects['ManagedNetworkGroupListResult']
+          cliPath: schemas$$objects['ManagedNetworkGroupListResult']
       protocol: {}
     - &ref_124
       type: object
@@ -1965,8 +1965,8 @@ schemas:
               name: value
               description: Gets a page of Peering Policies
               cliKey: value
-              cliM4Path: 'schemas$$objects[''ManagedNetworkPeeringPolicyListResult'']$$properties[''value'']'
-              cliPath: 'schemas$$objects[''ManagedNetworkPeeringPolicyListResult'']$$properties[''value'']'
+              cliM4Path: schemas$$objects['ManagedNetworkPeeringPolicyListResult']$$properties['value']
+              cliPath: schemas$$objects['ManagedNetworkPeeringPolicyListResult']$$properties['value']
           protocol: {}
         - schema: *ref_37
           serializedName: nextLink
@@ -1978,8 +1978,8 @@ schemas:
               name: nextLink
               description: Gets the URL to get the next page of results.
               cliKey: nextLink
-              cliM4Path: 'schemas$$objects[''ManagedNetworkPeeringPolicyListResult'']$$properties[''nextLink'']'
-              cliPath: 'schemas$$objects[''ManagedNetworkPeeringPolicyListResult'']$$properties[''nextLink'']'
+              cliM4Path: schemas$$objects['ManagedNetworkPeeringPolicyListResult']$$properties['nextLink']
+              cliPath: schemas$$objects['ManagedNetworkPeeringPolicyListResult']$$properties['nextLink']
           protocol: {}
       serializationFormats:
         - json
@@ -2000,8 +2000,8 @@ schemas:
             propertyCountIfSimplifyWithoutSimpleObject: 10000
             simplifiable: false
           cliKey: ManagedNetworkPeeringPolicyListResult
-          cliM4Path: 'schemas$$objects[''ManagedNetworkPeeringPolicyListResult'']'
-          cliPath: 'schemas$$objects[''ManagedNetworkPeeringPolicyListResult'']'
+          cliM4Path: schemas$$objects['ManagedNetworkPeeringPolicyListResult']
+          cliPath: schemas$$objects['ManagedNetworkPeeringPolicyListResult']
       protocol: {}
     - &ref_125
       type: object
@@ -2027,8 +2027,8 @@ schemas:
                       name: name
                       description: 'Operation name: {provider}/{resource}/{operation}'
                       cliKey: name
-                      cliM4Path: 'schemas$$objects[''Operation'']$$properties[''name'']'
-                      cliPath: 'schemas$$objects[''Operation'']$$properties[''name'']'
+                      cliM4Path: schemas$$objects['Operation']$$properties['name']
+                      cliPath: schemas$$objects['Operation']$$properties['name']
                   protocol: {}
                 - schema: &ref_44
                     type: object
@@ -2045,8 +2045,8 @@ schemas:
                             name: provider
                             description: 'Service provider: Microsoft.ManagedNetwork'
                             cliKey: provider
-                            cliM4Path: 'schemas$$objects[''Operation-display'']$$properties[''provider'']'
-                            cliPath: 'schemas$$objects[''Operation-display'']$$properties[''provider'']'
+                            cliM4Path: schemas$$objects['Operation-display']$$properties['provider']
+                            cliPath: schemas$$objects['Operation-display']$$properties['provider']
                         protocol: {}
                       - schema: *ref_40
                         serializedName: resource
@@ -2058,8 +2058,8 @@ schemas:
                             name: resource
                             description: 'Resource on which the operation is performed: Profile, endpoint, etc.'
                             cliKey: resource
-                            cliM4Path: 'schemas$$objects[''Operation-display'']$$properties[''resource'']'
-                            cliPath: 'schemas$$objects[''Operation-display'']$$properties[''resource'']'
+                            cliM4Path: schemas$$objects['Operation-display']$$properties['resource']
+                            cliPath: schemas$$objects['Operation-display']$$properties['resource']
                         protocol: {}
                       - schema: *ref_41
                         serializedName: operation
@@ -2071,8 +2071,8 @@ schemas:
                             name: operation
                             description: 'Operation type: Read, write, delete, etc.'
                             cliKey: operation
-                            cliM4Path: 'schemas$$objects[''Operation-display'']$$properties[''operation'']'
-                            cliPath: 'schemas$$objects[''Operation-display'']$$properties[''operation'']'
+                            cliM4Path: schemas$$objects['Operation-display']$$properties['operation']
+                            cliPath: schemas$$objects['Operation-display']$$properties['operation']
                         protocol: {}
                     serializationFormats:
                       - json
@@ -2093,8 +2093,8 @@ schemas:
                           propertyCountIfSimplifyWithoutSimpleObject: 3
                           simplifiable: true
                         cliKey: Operation-display
-                        cliM4Path: 'schemas$$objects[''Operation-display'']'
-                        cliPath: 'schemas$$objects[''Operation-display'']'
+                        cliM4Path: schemas$$objects['Operation-display']
+                        cliPath: schemas$$objects['Operation-display']
                     protocol: {}
                   serializedName: display
                   language:
@@ -2105,8 +2105,8 @@ schemas:
                       name: display
                       description: The object that represents the operation.
                       cliKey: display
-                      cliM4Path: 'schemas$$objects[''Operation'']$$properties[''display'']'
-                      cliPath: 'schemas$$objects[''Operation'']$$properties[''display'']'
+                      cliM4Path: schemas$$objects['Operation']$$properties['display']
+                      cliPath: schemas$$objects['Operation']$$properties['display']
                   protocol: {}
               serializationFormats:
                 - json
@@ -2127,8 +2127,8 @@ schemas:
                     propertyCountIfSimplifyWithoutSimpleObject: 2
                     simplifiable: true
                   cliKey: Operation
-                  cliM4Path: 'schemas$$objects[''Operation'']'
-                  cliPath: 'schemas$$objects[''Operation'']'
+                  cliM4Path: schemas$$objects['Operation']
+                  cliPath: schemas$$objects['Operation']
               protocol: {}
             language:
               default:
@@ -2149,8 +2149,8 @@ schemas:
               name: value
               description: List of Resource Provider operations supported by the Managed Network resource provider.
               cliKey: value
-              cliM4Path: 'schemas$$objects[''OperationListResult'']$$properties[''value'']'
-              cliPath: 'schemas$$objects[''OperationListResult'']$$properties[''value'']'
+              cliM4Path: schemas$$objects['OperationListResult']$$properties['value']
+              cliPath: schemas$$objects['OperationListResult']$$properties['value']
           protocol: {}
         - schema: *ref_42
           serializedName: nextLink
@@ -2162,8 +2162,8 @@ schemas:
               name: nextLink
               description: URL to get the next set of operation list results if there are any.
               cliKey: nextLink
-              cliM4Path: 'schemas$$objects[''OperationListResult'']$$properties[''nextLink'']'
-              cliPath: 'schemas$$objects[''OperationListResult'']$$properties[''nextLink'']'
+              cliM4Path: schemas$$objects['OperationListResult']$$properties['nextLink']
+              cliPath: schemas$$objects['OperationListResult']$$properties['nextLink']
           protocol: {}
       serializationFormats:
         - json
@@ -2184,8 +2184,8 @@ schemas:
             propertyCountIfSimplifyWithoutSimpleObject: 10000
             simplifiable: false
           cliKey: OperationListResult
-          cliM4Path: 'schemas$$objects[''OperationListResult'']'
-          cliPath: 'schemas$$objects[''OperationListResult'']'
+          cliM4Path: schemas$$objects['OperationListResult']
+          cliPath: schemas$$objects['OperationListResult']
       protocol: {}
     - *ref_43
     - *ref_44
@@ -2253,16 +2253,16 @@ globalParameters:
         name: SubscriptionId
         description: Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
         cliKey: subscriptionId
-        cliM4Path: 'globalParameters[''subscriptionId'']'
-        cliPath: 'globalParameters[''subscriptionId'']'
+        cliM4Path: globalParameters['subscriptionId']
+        cliPath: globalParameters['subscriptionId']
     protocol:
       http:
         in: path
   - &ref_63
     schema: *ref_0
-    clientDefaultValue: 'https://management.azure.com'
+    clientDefaultValue: https://management.azure.com
     implementation: Client
-    origin: 'modelerfour:synthesized/host'
+    origin: modelerfour:synthesized/host
     required: true
     extensions:
       x-ms-skip-url-encoding: true
@@ -2275,15 +2275,15 @@ globalParameters:
         name: $host
         description: server parameter
         cliKey: $host
-        cliM4Path: 'globalParameters[''$host'']'
-        cliPath: 'globalParameters[''$host'']'
+        cliM4Path: globalParameters['$host']
+        cliPath: globalParameters['$host']
     protocol:
       http:
         in: uri
   - &ref_64
     schema: *ref_62
     implementation: Client
-    origin: 'modelerfour:synthesized/api-version'
+    origin: modelerfour:synthesized/api-version
     required: true
     language:
       default:
@@ -2294,8 +2294,8 @@ globalParameters:
         name: Apiversion
         description: Api Version
         cliKey: ApiVersion
-        cliM4Path: 'globalParameters[''ApiVersion'']'
-        cliPath: 'globalParameters[''ApiVersion'']'
+        cliM4Path: globalParameters['ApiVersion']
+        cliPath: globalParameters['ApiVersion']
     protocol:
       http:
         in: query
@@ -2321,8 +2321,8 @@ operationGroups:
                 name: resourceGroupName
                 description: The name of the resource group.
                 cliKey: resourceGroupName
-                cliM4Path: 'operationGroups[''ManagedNetworks'']$$operations[''GetModify'']$$parameters[''resourceGroupName'']'
-                cliPath: 'operationGroups[''ManagedNetworks'']$$operations[''GetModify'']$$parameters[''resourceGroupName'']'
+                cliM4Path: operationGroups['ManagedNetworks']$$operations['GetModify']$$parameters['resourceGroupName']
+                cliPath: operationGroups['ManagedNetworks']$$operations['GetModify']$$parameters['resourceGroupName']
             protocol:
               http:
                 in: path
@@ -2339,8 +2339,8 @@ operationGroups:
                 name: managedNetworkName
                 description: The name of the Managed Network.
                 cliKey: managedNetworkName
-                cliM4Path: 'operationGroups[''ManagedNetworks'']$$operations[''GetModify'']$$parameters[''managedNetworkName'']'
-                cliPath: 'operationGroups[''ManagedNetworks'']$$operations[''GetModify'']$$parameters[''managedNetworkName'']'
+                cliM4Path: operationGroups['ManagedNetworks']$$operations['GetModify']$$parameters['managedNetworkName']
+                cliPath: operationGroups['ManagedNetworks']$$operations['GetModify']$$parameters['managedNetworkName']
             protocol:
               http:
                 in: path
@@ -2348,7 +2348,7 @@ operationGroups:
           - parameters:
               - schema: *ref_66
                 implementation: Method
-                origin: 'modelerfour:synthesized/accept'
+                origin: modelerfour:synthesized/accept
                 required: true
                 language:
                   default:
@@ -2359,8 +2359,8 @@ operationGroups:
                     name: Accept
                     description: Accept header
                     cliKey: accept
-                    cliM4Path: 'operationGroups[''ManagedNetworks'']$$operations[''GetModify'']$$requests[0]$$parameters[''accept'']'
-                    cliPath: 'operationGroups[''ManagedNetworks'']$$operations[''GetModify'']$$requests[0]$$parameters[''accept'']'
+                    cliM4Path: operationGroups['ManagedNetworks']$$operations['GetModify']$$requests[0]$$parameters['accept']
+                    cliPath: operationGroups['ManagedNetworks']$$operations['GetModify']$$requests[0]$$parameters['accept']
                 protocol:
                   http:
                     in: header
@@ -2371,7 +2371,7 @@ operationGroups:
                 description: ''
             protocol:
               http:
-                path: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedNetwork/managedNetworks/{managedNetworkName}'
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedNetwork/managedNetworks/{managedNetworkName}
                 method: get
                 uri: '{$host}'
         signatureParameters:
@@ -2442,13 +2442,13 @@ operationGroups:
         language:
           default:
             name: GetModify
-            description: 'The Get ManagedNetworks operation gets a Managed Network Resource, specified by the resource group and Managed Network name'
+            description: The Get ManagedNetworks operation gets a Managed Network Resource, specified by the resource group and Managed Network name
           cli:
             name: GetModify
-            description: 'The Get ManagedNetworks operation gets a Managed Network Resource, specified by the resource group and Managed Network name'
+            description: The Get ManagedNetworks operation gets a Managed Network Resource, specified by the resource group and Managed Network name
             cliKey: GetModify
-            cliM4Path: 'operationGroups[''ManagedNetworks'']$$operations[''GetModify'']'
-            cliPath: 'operationGroups[''ManagedNetworks'']$$operations[''GetModify'']'
+            cliM4Path: operationGroups['ManagedNetworks']$$operations['GetModify']
+            cliPath: operationGroups['ManagedNetworks']$$operations['GetModify']
         protocol: {}
       - apiVersions:
           - version: 2019-06-01-preview
@@ -2469,8 +2469,8 @@ operationGroups:
                 name: resourceGroupName
                 description: The name of the resource group.
                 cliKey: resourceGroupName
-                cliM4Path: 'operationGroups[''ManagedNetworks'']$$operations[''CreateOrUpdate'']$$parameters[''resourceGroupName'']'
-                cliPath: 'operationGroups[''ManagedNetworks'']$$operations[''CreateOrUpdate'']$$parameters[''resourceGroupName'']'
+                cliM4Path: operationGroups['ManagedNetworks']$$operations['CreateOrUpdate']$$parameters['resourceGroupName']
+                cliPath: operationGroups['ManagedNetworks']$$operations['CreateOrUpdate']$$parameters['resourceGroupName']
             protocol:
               http:
                 in: path
@@ -2487,8 +2487,8 @@ operationGroups:
                 name: managedNetworkName
                 description: The name of the Managed Network.
                 cliKey: managedNetworkName
-                cliM4Path: 'operationGroups[''ManagedNetworks'']$$operations[''CreateOrUpdate'']$$parameters[''managedNetworkName'']'
-                cliPath: 'operationGroups[''ManagedNetworks'']$$operations[''CreateOrUpdate'']$$parameters[''managedNetworkName'']'
+                cliM4Path: operationGroups['ManagedNetworks']$$operations['CreateOrUpdate']$$parameters['managedNetworkName']
+                cliPath: operationGroups['ManagedNetworks']$$operations['CreateOrUpdate']$$parameters['managedNetworkName']
             protocol:
               http:
                 in: path
@@ -2506,15 +2506,15 @@ operationGroups:
                     name: managedNetwork
                     description: Parameters supplied to the create/update a Managed Network Resource
                     cliKey: managedNetwork
-                    cliM4Path: 'operationGroups[''ManagedNetworks'']$$operations[''CreateOrUpdate'']$$requests[0]$$parameters[''managedNetwork'']'
-                    cliPath: 'operationGroups[''ManagedNetworks'']$$operations[''CreateOrUpdate'']$$requests[0]$$parameters[''managedNetwork'']'
+                    cliM4Path: operationGroups['ManagedNetworks']$$operations['CreateOrUpdate']$$requests[0]$$parameters['managedNetwork']
+                    cliPath: operationGroups['ManagedNetworks']$$operations['CreateOrUpdate']$$requests[0]$$parameters['managedNetwork']
                 protocol:
                   http:
                     in: body
                     style: json
               - schema: *ref_66
                 implementation: Method
-                origin: 'modelerfour:synthesized/accept'
+                origin: modelerfour:synthesized/accept
                 required: true
                 language:
                   default:
@@ -2525,8 +2525,8 @@ operationGroups:
                     name: Accept
                     description: Accept header
                     cliKey: accept
-                    cliM4Path: 'operationGroups[''ManagedNetworks'']$$operations[''CreateOrUpdate'']$$requests[0]$$parameters[''accept'']'
-                    cliPath: 'operationGroups[''ManagedNetworks'']$$operations[''CreateOrUpdate'']$$requests[0]$$parameters[''accept'']'
+                    cliM4Path: operationGroups['ManagedNetworks']$$operations['CreateOrUpdate']$$requests[0]$$parameters['accept']
+                    cliPath: operationGroups['ManagedNetworks']$$operations['CreateOrUpdate']$$requests[0]$$parameters['accept']
                 protocol:
                   http:
                     in: header
@@ -2538,7 +2538,7 @@ operationGroups:
                 description: ''
             protocol:
               http:
-                path: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedNetwork/managedNetworks/{managedNetworkName}'
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedNetwork/managedNetworks/{managedNetworkName}
                 method: put
                 knownMediaType: json
                 mediaTypes:
@@ -2667,13 +2667,13 @@ operationGroups:
         language:
           default:
             name: CreateOrUpdate
-            description: 'The Put ManagedNetworks operation creates/updates a Managed Network Resource, specified by resource group and Managed Network name'
+            description: The Put ManagedNetworks operation creates/updates a Managed Network Resource, specified by resource group and Managed Network name
           cli:
             name: CreateOrUpdate
-            description: 'The Put ManagedNetworks operation creates/updates a Managed Network Resource, specified by resource group and Managed Network name'
+            description: The Put ManagedNetworks operation creates/updates a Managed Network Resource, specified by resource group and Managed Network name
             cliKey: CreateOrUpdate
-            cliM4Path: 'operationGroups[''ManagedNetworks'']$$operations[''CreateOrUpdate'']'
-            cliPath: 'operationGroups[''ManagedNetworks'']$$operations[''CreateOrUpdate'']'
+            cliM4Path: operationGroups['ManagedNetworks']$$operations['CreateOrUpdate']
+            cliPath: operationGroups['ManagedNetworks']$$operations['CreateOrUpdate']
         protocol: {}
       - apiVersions:
           - version: 2019-06-01-preview
@@ -2694,8 +2694,8 @@ operationGroups:
                 name: resourceGroupName
                 description: The name of the resource group.
                 cliKey: resourceGroupName
-                cliM4Path: 'operationGroups[''ManagedNetworks'']$$operations[''Delete'']$$parameters[''resourceGroupName'']'
-                cliPath: 'operationGroups[''ManagedNetworks'']$$operations[''Delete'']$$parameters[''resourceGroupName'']'
+                cliM4Path: operationGroups['ManagedNetworks']$$operations['Delete']$$parameters['resourceGroupName']
+                cliPath: operationGroups['ManagedNetworks']$$operations['Delete']$$parameters['resourceGroupName']
             protocol:
               http:
                 in: path
@@ -2712,8 +2712,8 @@ operationGroups:
                 name: managedNetworkName
                 description: The name of the Managed Network.
                 cliKey: managedNetworkName
-                cliM4Path: 'operationGroups[''ManagedNetworks'']$$operations[''Delete'']$$parameters[''managedNetworkName'']'
-                cliPath: 'operationGroups[''ManagedNetworks'']$$operations[''Delete'']$$parameters[''managedNetworkName'']'
+                cliM4Path: operationGroups['ManagedNetworks']$$operations['Delete']$$parameters['managedNetworkName']
+                cliPath: operationGroups['ManagedNetworks']$$operations['Delete']$$parameters['managedNetworkName']
             protocol:
               http:
                 in: path
@@ -2721,7 +2721,7 @@ operationGroups:
           - parameters:
               - schema: *ref_66
                 implementation: Method
-                origin: 'modelerfour:synthesized/accept'
+                origin: modelerfour:synthesized/accept
                 required: true
                 language:
                   default:
@@ -2732,8 +2732,8 @@ operationGroups:
                     name: Accept
                     description: Accept header
                     cliKey: accept
-                    cliM4Path: 'operationGroups[''ManagedNetworks'']$$operations[''Delete'']$$requests[0]$$parameters[''accept'']'
-                    cliPath: 'operationGroups[''ManagedNetworks'']$$operations[''Delete'']$$requests[0]$$parameters[''accept'']'
+                    cliM4Path: operationGroups['ManagedNetworks']$$operations['Delete']$$requests[0]$$parameters['accept']
+                    cliPath: operationGroups['ManagedNetworks']$$operations['Delete']$$requests[0]$$parameters['accept']
                 protocol:
                   http:
                     in: header
@@ -2744,7 +2744,7 @@ operationGroups:
                 description: ''
             protocol:
               http:
-                path: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedNetwork/managedNetworks/{managedNetworkName}'
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedNetwork/managedNetworks/{managedNetworkName}
                 method: delete
                 uri: '{$host}'
         signatureParameters:
@@ -2807,13 +2807,13 @@ operationGroups:
         language:
           default:
             name: Delete
-            description: 'The Delete ManagedNetworks operation deletes a Managed Network Resource, specified by the  resource group and Managed Network name'
+            description: The Delete ManagedNetworks operation deletes a Managed Network Resource, specified by the  resource group and Managed Network name
           cli:
             name: Delete
-            description: 'The Delete ManagedNetworks operation deletes a Managed Network Resource, specified by the  resource group and Managed Network name'
+            description: The Delete ManagedNetworks operation deletes a Managed Network Resource, specified by the  resource group and Managed Network name
             cliKey: Delete
-            cliM4Path: 'operationGroups[''ManagedNetworks'']$$operations[''Delete'']'
-            cliPath: 'operationGroups[''ManagedNetworks'']$$operations[''Delete'']'
+            cliM4Path: operationGroups['ManagedNetworks']$$operations['Delete']
+            cliPath: operationGroups['ManagedNetworks']$$operations['Delete']
         protocol: {}
       - apiVersions:
           - version: 2019-06-01-preview
@@ -2834,8 +2834,8 @@ operationGroups:
                 name: resourceGroupName
                 description: The name of the resource group.
                 cliKey: resourceGroupName
-                cliM4Path: 'operationGroups[''ManagedNetworks'']$$operations[''Update'']$$parameters[''resourceGroupName'']'
-                cliPath: 'operationGroups[''ManagedNetworks'']$$operations[''Update'']$$parameters[''resourceGroupName'']'
+                cliM4Path: operationGroups['ManagedNetworks']$$operations['Update']$$parameters['resourceGroupName']
+                cliPath: operationGroups['ManagedNetworks']$$operations['Update']$$parameters['resourceGroupName']
             protocol:
               http:
                 in: path
@@ -2852,8 +2852,8 @@ operationGroups:
                 name: managedNetworkName
                 description: The name of the Managed Network.
                 cliKey: managedNetworkName
-                cliM4Path: 'operationGroups[''ManagedNetworks'']$$operations[''Update'']$$parameters[''managedNetworkName'']'
-                cliPath: 'operationGroups[''ManagedNetworks'']$$operations[''Update'']$$parameters[''managedNetworkName'']'
+                cliM4Path: operationGroups['ManagedNetworks']$$operations['Update']$$parameters['managedNetworkName']
+                cliPath: operationGroups['ManagedNetworks']$$operations['Update']$$parameters['managedNetworkName']
             protocol:
               http:
                 in: path
@@ -2871,15 +2871,15 @@ operationGroups:
                     name: parameters
                     description: Parameters supplied to update application gateway tags and/or scope.
                     cliKey: parameters
-                    cliM4Path: 'operationGroups[''ManagedNetworks'']$$operations[''Update'']$$requests[0]$$parameters[''parameters'']'
-                    cliPath: 'operationGroups[''ManagedNetworks'']$$operations[''Update'']$$requests[0]$$parameters[''parameters'']'
+                    cliM4Path: operationGroups['ManagedNetworks']$$operations['Update']$$requests[0]$$parameters['parameters']
+                    cliPath: operationGroups['ManagedNetworks']$$operations['Update']$$requests[0]$$parameters['parameters']
                 protocol:
                   http:
                     in: body
                     style: json
               - schema: *ref_66
                 implementation: Method
-                origin: 'modelerfour:synthesized/accept'
+                origin: modelerfour:synthesized/accept
                 required: true
                 language:
                   default:
@@ -2890,8 +2890,8 @@ operationGroups:
                     name: Accept
                     description: Accept header
                     cliKey: accept
-                    cliM4Path: 'operationGroups[''ManagedNetworks'']$$operations[''Update'']$$requests[0]$$parameters[''accept'']'
-                    cliPath: 'operationGroups[''ManagedNetworks'']$$operations[''Update'']$$requests[0]$$parameters[''accept'']'
+                    cliM4Path: operationGroups['ManagedNetworks']$$operations['Update']$$requests[0]$$parameters['accept']
+                    cliPath: operationGroups['ManagedNetworks']$$operations['Update']$$requests[0]$$parameters['accept']
                 protocol:
                   http:
                     in: header
@@ -2903,7 +2903,7 @@ operationGroups:
                 description: ''
             protocol:
               http:
-                path: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedNetwork/managedNetworks/{managedNetworkName}'
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedNetwork/managedNetworks/{managedNetworkName}
                 method: patch
                 knownMediaType: json
                 mediaTypes:
@@ -3025,8 +3025,8 @@ operationGroups:
             name: Update
             description: Updates the specified Managed Network resource tags.
             cliKey: Update
-            cliM4Path: 'operationGroups[''ManagedNetworks'']$$operations[''Update'']'
-            cliPath: 'operationGroups[''ManagedNetworks'']$$operations[''Update'']'
+            cliM4Path: operationGroups['ManagedNetworks']$$operations['Update']
+            cliPath: operationGroups['ManagedNetworks']$$operations['Update']
         protocol: {}
       - apiVersions:
           - version: 2019-06-01-preview
@@ -3047,8 +3047,8 @@ operationGroups:
                 name: resourceGroupName
                 description: The name of the resource group.
                 cliKey: resourceGroupName
-                cliM4Path: 'operationGroups[''ManagedNetworks'']$$operations[''ListByResourceGroup'']$$parameters[''resourceGroupName'']'
-                cliPath: 'operationGroups[''ManagedNetworks'']$$operations[''ListByResourceGroup'']$$parameters[''resourceGroupName'']'
+                cliM4Path: operationGroups['ManagedNetworks']$$operations['ListByResourceGroup']$$parameters['resourceGroupName']
+                cliPath: operationGroups['ManagedNetworks']$$operations['ListByResourceGroup']$$parameters['resourceGroupName']
             protocol:
               http:
                 in: path
@@ -3064,8 +3064,8 @@ operationGroups:
                 name: top
                 description: May be used to limit the number of results in a page for list queries.
                 cliKey: $top
-                cliM4Path: 'operationGroups[''ManagedNetworks'']$$operations[''ListByResourceGroup'']$$parameters[''$top'']'
-                cliPath: 'operationGroups[''ManagedNetworks'']$$operations[''ListByResourceGroup'']$$parameters[''$top'']'
+                cliM4Path: operationGroups['ManagedNetworks']$$operations['ListByResourceGroup']$$parameters['$top']
+                cliPath: operationGroups['ManagedNetworks']$$operations['ListByResourceGroup']$$parameters['$top']
             protocol:
               http:
                 in: query
@@ -3085,8 +3085,8 @@ operationGroups:
                   Skiptoken is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skiptoken parameter that specifies a starting
                   point to use for subsequent calls.
                 cliKey: $skiptoken
-                cliM4Path: 'operationGroups[''ManagedNetworks'']$$operations[''ListByResourceGroup'']$$parameters[''$skiptoken'']'
-                cliPath: 'operationGroups[''ManagedNetworks'']$$operations[''ListByResourceGroup'']$$parameters[''$skiptoken'']'
+                cliM4Path: operationGroups['ManagedNetworks']$$operations['ListByResourceGroup']$$parameters['$skiptoken']
+                cliPath: operationGroups['ManagedNetworks']$$operations['ListByResourceGroup']$$parameters['$skiptoken']
             protocol:
               http:
                 in: query
@@ -3094,7 +3094,7 @@ operationGroups:
           - parameters:
               - schema: *ref_66
                 implementation: Method
-                origin: 'modelerfour:synthesized/accept'
+                origin: modelerfour:synthesized/accept
                 required: true
                 language:
                   default:
@@ -3105,8 +3105,8 @@ operationGroups:
                     name: Accept
                     description: Accept header
                     cliKey: accept
-                    cliM4Path: 'operationGroups[''ManagedNetworks'']$$operations[''ListByResourceGroup'']$$requests[0]$$parameters[''accept'']'
-                    cliPath: 'operationGroups[''ManagedNetworks'']$$operations[''ListByResourceGroup'']$$requests[0]$$parameters[''accept'']'
+                    cliM4Path: operationGroups['ManagedNetworks']$$operations['ListByResourceGroup']$$requests[0]$$parameters['accept']
+                    cliPath: operationGroups['ManagedNetworks']$$operations['ListByResourceGroup']$$requests[0]$$parameters['accept']
                 protocol:
                   http:
                     in: header
@@ -3117,7 +3117,7 @@ operationGroups:
                 description: ''
             protocol:
               http:
-                path: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedNetwork/managedNetworks'
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedNetwork/managedNetworks
                 method: get
                 uri: '{$host}'
         signatureParameters:
@@ -3199,8 +3199,8 @@ operationGroups:
             name: ListByResourceGroup
             description: The ListByResourceGroup ManagedNetwork operation retrieves all the Managed Network resources in a resource group in a paginated format.
             cliKey: ListByResourceGroup
-            cliM4Path: 'operationGroups[''ManagedNetworks'']$$operations[''ListByResourceGroup'']'
-            cliPath: 'operationGroups[''ManagedNetworks'']$$operations[''ListByResourceGroup'']'
+            cliM4Path: operationGroups['ManagedNetworks']$$operations['ListByResourceGroup']
+            cliPath: operationGroups['ManagedNetworks']$$operations['ListByResourceGroup']
         protocol: {}
       - apiVersions:
           - version: 2019-06-01-preview
@@ -3220,8 +3220,8 @@ operationGroups:
                 name: top
                 description: May be used to limit the number of results in a page for list queries.
                 cliKey: $top
-                cliM4Path: 'operationGroups[''ManagedNetworks'']$$operations[''ListBySubscription'']$$parameters[''$top'']'
-                cliPath: 'operationGroups[''ManagedNetworks'']$$operations[''ListBySubscription'']$$parameters[''$top'']'
+                cliM4Path: operationGroups['ManagedNetworks']$$operations['ListBySubscription']$$parameters['$top']
+                cliPath: operationGroups['ManagedNetworks']$$operations['ListBySubscription']$$parameters['$top']
             protocol:
               http:
                 in: query
@@ -3241,8 +3241,8 @@ operationGroups:
                   Skiptoken is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skiptoken parameter that specifies a starting
                   point to use for subsequent calls.
                 cliKey: $skiptoken
-                cliM4Path: 'operationGroups[''ManagedNetworks'']$$operations[''ListBySubscription'']$$parameters[''$skiptoken'']'
-                cliPath: 'operationGroups[''ManagedNetworks'']$$operations[''ListBySubscription'']$$parameters[''$skiptoken'']'
+                cliM4Path: operationGroups['ManagedNetworks']$$operations['ListBySubscription']$$parameters['$skiptoken']
+                cliPath: operationGroups['ManagedNetworks']$$operations['ListBySubscription']$$parameters['$skiptoken']
             protocol:
               http:
                 in: query
@@ -3250,7 +3250,7 @@ operationGroups:
           - parameters:
               - schema: *ref_66
                 implementation: Method
-                origin: 'modelerfour:synthesized/accept'
+                origin: modelerfour:synthesized/accept
                 required: true
                 language:
                   default:
@@ -3261,8 +3261,8 @@ operationGroups:
                     name: Accept
                     description: Accept header
                     cliKey: accept
-                    cliM4Path: 'operationGroups[''ManagedNetworks'']$$operations[''ListBySubscription'']$$requests[0]$$parameters[''accept'']'
-                    cliPath: 'operationGroups[''ManagedNetworks'']$$operations[''ListBySubscription'']$$requests[0]$$parameters[''accept'']'
+                    cliM4Path: operationGroups['ManagedNetworks']$$operations['ListBySubscription']$$requests[0]$$parameters['accept']
+                    cliPath: operationGroups['ManagedNetworks']$$operations['ListBySubscription']$$requests[0]$$parameters['accept']
                 protocol:
                   http:
                     in: header
@@ -3273,7 +3273,7 @@ operationGroups:
                 description: ''
             protocol:
               http:
-                path: '/subscriptions/{subscriptionId}/providers/Microsoft.ManagedNetwork/managedNetworks'
+                path: /subscriptions/{subscriptionId}/providers/Microsoft.ManagedNetwork/managedNetworks
                 method: get
                 uri: '{$host}'
         signatureParameters:
@@ -3353,8 +3353,8 @@ operationGroups:
             name: ListBySubscription
             description: The ListBySubscription  ManagedNetwork operation retrieves all the Managed Network Resources in the current subscription in a paginated format.
             cliKey: ListBySubscription
-            cliM4Path: 'operationGroups[''ManagedNetworks'']$$operations[''ListBySubscription'']'
-            cliPath: 'operationGroups[''ManagedNetworks'']$$operations[''ListBySubscription'']'
+            cliM4Path: operationGroups['ManagedNetworks']$$operations['ListBySubscription']
+            cliPath: operationGroups['ManagedNetworks']$$operations['ListBySubscription']
         protocol: {}
     language:
       default:
@@ -3364,8 +3364,8 @@ operationGroups:
         name: ManagedNetwork
         description: ''
         cliKey: ManagedNetworks
-        cliM4Path: 'operationGroups[''ManagedNetworks'']'
-        cliPath: 'operationGroups[''ManagedNetworks'']'
+        cliM4Path: operationGroups['ManagedNetworks']
+        cliPath: operationGroups['ManagedNetworks']
     protocol: {}
   - $key: ScopeAssignments
     operations:
@@ -3388,8 +3388,8 @@ operationGroups:
                 name: scope
                 description: The base resource of the scope assignment.
                 cliKey: scope
-                cliM4Path: 'operationGroups[''ScopeAssignments'']$$operations[''Get'']$$parameters[''scope'']'
-                cliPath: 'operationGroups[''ScopeAssignments'']$$operations[''Get'']$$parameters[''scope'']'
+                cliM4Path: operationGroups['ScopeAssignments']$$operations['Get']$$parameters['scope']
+                cliPath: operationGroups['ScopeAssignments']$$operations['Get']$$parameters['scope']
             protocol:
               http:
                 in: path
@@ -3406,8 +3406,8 @@ operationGroups:
                 name: scopeAssignmentName
                 description: The name of the scope assignment to get.
                 cliKey: scopeAssignmentName
-                cliM4Path: 'operationGroups[''ScopeAssignments'']$$operations[''Get'']$$parameters[''scopeAssignmentName'']'
-                cliPath: 'operationGroups[''ScopeAssignments'']$$operations[''Get'']$$parameters[''scopeAssignmentName'']'
+                cliM4Path: operationGroups['ScopeAssignments']$$operations['Get']$$parameters['scopeAssignmentName']
+                cliPath: operationGroups['ScopeAssignments']$$operations['Get']$$parameters['scopeAssignmentName']
             protocol:
               http:
                 in: path
@@ -3416,7 +3416,7 @@ operationGroups:
           - parameters:
               - schema: *ref_66
                 implementation: Method
-                origin: 'modelerfour:synthesized/accept'
+                origin: modelerfour:synthesized/accept
                 required: true
                 language:
                   default:
@@ -3427,8 +3427,8 @@ operationGroups:
                     name: Accept
                     description: Accept header
                     cliKey: accept
-                    cliM4Path: 'operationGroups[''ScopeAssignments'']$$operations[''Get'']$$requests[0]$$parameters[''accept'']'
-                    cliPath: 'operationGroups[''ScopeAssignments'']$$operations[''Get'']$$requests[0]$$parameters[''accept'']'
+                    cliM4Path: operationGroups['ScopeAssignments']$$operations['Get']$$requests[0]$$parameters['accept']
+                    cliPath: operationGroups['ScopeAssignments']$$operations['Get']$$requests[0]$$parameters['accept']
                 protocol:
                   http:
                     in: header
@@ -3439,7 +3439,7 @@ operationGroups:
                 description: ''
             protocol:
               http:
-                path: '/{scope}/providers/Microsoft.ManagedNetwork/scopeAssignments/{scopeAssignmentName}'
+                path: /{scope}/providers/Microsoft.ManagedNetwork/scopeAssignments/{scopeAssignmentName}
                 method: get
                 uri: '{$host}'
         signatureParameters:
@@ -3495,8 +3495,8 @@ operationGroups:
             name: Get
             description: Get the specified scope assignment.
             cliKey: Get
-            cliM4Path: 'operationGroups[''ScopeAssignments'']$$operations[''Get'']'
-            cliPath: 'operationGroups[''ScopeAssignments'']$$operations[''Get'']'
+            cliM4Path: operationGroups['ScopeAssignments']$$operations['Get']
+            cliPath: operationGroups['ScopeAssignments']$$operations['Get']
         protocol: {}
       - apiVersions:
           - version: 2019-06-01-preview
@@ -3523,8 +3523,8 @@ operationGroups:
                   'subscriptions/{subscription-id}/resourceGroups/{resource-group-name}' for a resource group, and
                   'subscriptions/{subscription-id}/resourceGroups/{resource-group-name}/providers/{resource-provider}/{resource-type}/{resource-name}' for a resource.
                 cliKey: scope
-                cliM4Path: 'operationGroups[''ScopeAssignments'']$$operations[''CreateOrUpdate'']$$parameters[''scope'']'
-                cliPath: 'operationGroups[''ScopeAssignments'']$$operations[''CreateOrUpdate'']$$parameters[''scope'']'
+                cliM4Path: operationGroups['ScopeAssignments']$$operations['CreateOrUpdate']$$parameters['scope']
+                cliPath: operationGroups['ScopeAssignments']$$operations['CreateOrUpdate']$$parameters['scope']
             protocol:
               http:
                 in: path
@@ -3541,8 +3541,8 @@ operationGroups:
                 name: scopeAssignmentName
                 description: The name of the scope assignment to create.
                 cliKey: scopeAssignmentName
-                cliM4Path: 'operationGroups[''ScopeAssignments'']$$operations[''CreateOrUpdate'']$$parameters[''scopeAssignmentName'']'
-                cliPath: 'operationGroups[''ScopeAssignments'']$$operations[''CreateOrUpdate'']$$parameters[''scopeAssignmentName'']'
+                cliM4Path: operationGroups['ScopeAssignments']$$operations['CreateOrUpdate']$$parameters['scopeAssignmentName']
+                cliPath: operationGroups['ScopeAssignments']$$operations['CreateOrUpdate']$$parameters['scopeAssignmentName']
             protocol:
               http:
                 in: path
@@ -3561,15 +3561,15 @@ operationGroups:
                     name: parameters
                     description: Parameters supplied to the specify which Managed Network this scope is being assigned
                     cliKey: parameters
-                    cliM4Path: 'operationGroups[''ScopeAssignments'']$$operations[''CreateOrUpdate'']$$requests[0]$$parameters[''parameters'']'
-                    cliPath: 'operationGroups[''ScopeAssignments'']$$operations[''CreateOrUpdate'']$$requests[0]$$parameters[''parameters'']'
+                    cliM4Path: operationGroups['ScopeAssignments']$$operations['CreateOrUpdate']$$requests[0]$$parameters['parameters']
+                    cliPath: operationGroups['ScopeAssignments']$$operations['CreateOrUpdate']$$requests[0]$$parameters['parameters']
                 protocol:
                   http:
                     in: body
                     style: json
               - schema: *ref_66
                 implementation: Method
-                origin: 'modelerfour:synthesized/accept'
+                origin: modelerfour:synthesized/accept
                 required: true
                 language:
                   default:
@@ -3580,8 +3580,8 @@ operationGroups:
                     name: Accept
                     description: Accept header
                     cliKey: accept
-                    cliM4Path: 'operationGroups[''ScopeAssignments'']$$operations[''CreateOrUpdate'']$$requests[0]$$parameters[''accept'']'
-                    cliPath: 'operationGroups[''ScopeAssignments'']$$operations[''CreateOrUpdate'']$$requests[0]$$parameters[''accept'']'
+                    cliM4Path: operationGroups['ScopeAssignments']$$operations['CreateOrUpdate']$$requests[0]$$parameters['accept']
+                    cliPath: operationGroups['ScopeAssignments']$$operations['CreateOrUpdate']$$requests[0]$$parameters['accept']
                 protocol:
                   http:
                     in: header
@@ -3593,7 +3593,7 @@ operationGroups:
                 description: ''
             protocol:
               http:
-                path: '/{scope}/providers/Microsoft.ManagedNetwork/scopeAssignments/{scopeAssignmentName}'
+                path: /{scope}/providers/Microsoft.ManagedNetwork/scopeAssignments/{scopeAssignmentName}
                 method: put
                 knownMediaType: json
                 mediaTypes:
@@ -3678,8 +3678,8 @@ operationGroups:
             name: CreateOrUpdate
             description: Creates a scope assignment.
             cliKey: CreateOrUpdate
-            cliM4Path: 'operationGroups[''ScopeAssignments'']$$operations[''CreateOrUpdate'']'
-            cliPath: 'operationGroups[''ScopeAssignments'']$$operations[''CreateOrUpdate'']'
+            cliM4Path: operationGroups['ScopeAssignments']$$operations['CreateOrUpdate']
+            cliPath: operationGroups['ScopeAssignments']$$operations['CreateOrUpdate']
         protocol: {}
       - apiVersions:
           - version: 2019-06-01-preview
@@ -3700,8 +3700,8 @@ operationGroups:
                 name: scope
                 description: The scope of the scope assignment to delete.
                 cliKey: scope
-                cliM4Path: 'operationGroups[''ScopeAssignments'']$$operations[''Delete'']$$parameters[''scope'']'
-                cliPath: 'operationGroups[''ScopeAssignments'']$$operations[''Delete'']$$parameters[''scope'']'
+                cliM4Path: operationGroups['ScopeAssignments']$$operations['Delete']$$parameters['scope']
+                cliPath: operationGroups['ScopeAssignments']$$operations['Delete']$$parameters['scope']
             protocol:
               http:
                 in: path
@@ -3718,8 +3718,8 @@ operationGroups:
                 name: scopeAssignmentName
                 description: The name of the scope assignment to delete.
                 cliKey: scopeAssignmentName
-                cliM4Path: 'operationGroups[''ScopeAssignments'']$$operations[''Delete'']$$parameters[''scopeAssignmentName'']'
-                cliPath: 'operationGroups[''ScopeAssignments'']$$operations[''Delete'']$$parameters[''scopeAssignmentName'']'
+                cliM4Path: operationGroups['ScopeAssignments']$$operations['Delete']$$parameters['scopeAssignmentName']
+                cliPath: operationGroups['ScopeAssignments']$$operations['Delete']$$parameters['scopeAssignmentName']
             protocol:
               http:
                 in: path
@@ -3731,7 +3731,7 @@ operationGroups:
                 description: ''
             protocol:
               http:
-                path: '/{scope}/providers/Microsoft.ManagedNetwork/scopeAssignments/{scopeAssignmentName}'
+                path: /{scope}/providers/Microsoft.ManagedNetwork/scopeAssignments/{scopeAssignmentName}
                 method: delete
                 uri: '{$host}'
         signatureParameters:
@@ -3773,8 +3773,8 @@ operationGroups:
             name: Delete
             description: Deletes a scope assignment.
             cliKey: Delete
-            cliM4Path: 'operationGroups[''ScopeAssignments'']$$operations[''Delete'']'
-            cliPath: 'operationGroups[''ScopeAssignments'']$$operations[''Delete'']'
+            cliM4Path: operationGroups['ScopeAssignments']$$operations['Delete']
+            cliPath: operationGroups['ScopeAssignments']$$operations['Delete']
         protocol: {}
       - apiVersions:
           - version: 2019-06-01-preview
@@ -3795,8 +3795,8 @@ operationGroups:
                 name: scope
                 description: The base resource of the scope assignment.
                 cliKey: scope
-                cliM4Path: 'operationGroups[''ScopeAssignments'']$$operations[''List'']$$parameters[''scope'']'
-                cliPath: 'operationGroups[''ScopeAssignments'']$$operations[''List'']$$parameters[''scope'']'
+                cliM4Path: operationGroups['ScopeAssignments']$$operations['List']$$parameters['scope']
+                cliPath: operationGroups['ScopeAssignments']$$operations['List']$$parameters['scope']
             protocol:
               http:
                 in: path
@@ -3805,7 +3805,7 @@ operationGroups:
           - parameters:
               - schema: *ref_66
                 implementation: Method
-                origin: 'modelerfour:synthesized/accept'
+                origin: modelerfour:synthesized/accept
                 required: true
                 language:
                   default:
@@ -3816,8 +3816,8 @@ operationGroups:
                     name: Accept
                     description: Accept header
                     cliKey: accept
-                    cliM4Path: 'operationGroups[''ScopeAssignments'']$$operations[''List'']$$requests[0]$$parameters[''accept'']'
-                    cliPath: 'operationGroups[''ScopeAssignments'']$$operations[''List'']$$requests[0]$$parameters[''accept'']'
+                    cliM4Path: operationGroups['ScopeAssignments']$$operations['List']$$requests[0]$$parameters['accept']
+                    cliPath: operationGroups['ScopeAssignments']$$operations['List']$$requests[0]$$parameters['accept']
                 protocol:
                   http:
                     in: header
@@ -3828,7 +3828,7 @@ operationGroups:
                 description: ''
             protocol:
               http:
-                path: '/{scope}/providers/Microsoft.ManagedNetwork/scopeAssignments'
+                path: /{scope}/providers/Microsoft.ManagedNetwork/scopeAssignments
                 method: get
                 uri: '{$host}'
         signatureParameters:
@@ -3890,8 +3890,8 @@ operationGroups:
             name: List
             description: Get the specified scope assignment.
             cliKey: List
-            cliM4Path: 'operationGroups[''ScopeAssignments'']$$operations[''List'']'
-            cliPath: 'operationGroups[''ScopeAssignments'']$$operations[''List'']'
+            cliM4Path: operationGroups['ScopeAssignments']$$operations['List']
+            cliPath: operationGroups['ScopeAssignments']$$operations['List']
         protocol: {}
     language:
       default:
@@ -3901,8 +3901,8 @@ operationGroups:
         name: ScopeAssignment
         description: ''
         cliKey: ScopeAssignments
-        cliM4Path: 'operationGroups[''ScopeAssignments'']'
-        cliPath: 'operationGroups[''ScopeAssignments'']'
+        cliM4Path: operationGroups['ScopeAssignments']
+        cliPath: operationGroups['ScopeAssignments']
     protocol: {}
   - $key: ManagedNetworkGroups
     operations:
@@ -3925,8 +3925,8 @@ operationGroups:
                 name: resourceGroupName
                 description: The name of the resource group.
                 cliKey: resourceGroupName
-                cliM4Path: 'operationGroups[''ManagedNetworkGroups'']$$operations[''Get'']$$parameters[''resourceGroupName'']'
-                cliPath: 'operationGroups[''ManagedNetworkGroups'']$$operations[''Get'']$$parameters[''resourceGroupName'']'
+                cliM4Path: operationGroups['ManagedNetworkGroups']$$operations['Get']$$parameters['resourceGroupName']
+                cliPath: operationGroups['ManagedNetworkGroups']$$operations['Get']$$parameters['resourceGroupName']
             protocol:
               http:
                 in: path
@@ -3943,8 +3943,8 @@ operationGroups:
                 name: managedNetworkName
                 description: The name of the Managed Network.
                 cliKey: managedNetworkName
-                cliM4Path: 'operationGroups[''ManagedNetworkGroups'']$$operations[''Get'']$$parameters[''managedNetworkName'']'
-                cliPath: 'operationGroups[''ManagedNetworkGroups'']$$operations[''Get'']$$parameters[''managedNetworkName'']'
+                cliM4Path: operationGroups['ManagedNetworkGroups']$$operations['Get']$$parameters['managedNetworkName']
+                cliPath: operationGroups['ManagedNetworkGroups']$$operations['Get']$$parameters['managedNetworkName']
             protocol:
               http:
                 in: path
@@ -3961,8 +3961,8 @@ operationGroups:
                 name: managedNetworkGroupName
                 description: The name of the Managed Network Group.
                 cliKey: managedNetworkGroupName
-                cliM4Path: 'operationGroups[''ManagedNetworkGroups'']$$operations[''Get'']$$parameters[''managedNetworkGroupName'']'
-                cliPath: 'operationGroups[''ManagedNetworkGroups'']$$operations[''Get'']$$parameters[''managedNetworkGroupName'']'
+                cliM4Path: operationGroups['ManagedNetworkGroups']$$operations['Get']$$parameters['managedNetworkGroupName']
+                cliPath: operationGroups['ManagedNetworkGroups']$$operations['Get']$$parameters['managedNetworkGroupName']
             protocol:
               http:
                 in: path
@@ -3970,7 +3970,7 @@ operationGroups:
           - parameters:
               - schema: *ref_66
                 implementation: Method
-                origin: 'modelerfour:synthesized/accept'
+                origin: modelerfour:synthesized/accept
                 required: true
                 language:
                   default:
@@ -3981,8 +3981,8 @@ operationGroups:
                     name: Accept
                     description: Accept header
                     cliKey: accept
-                    cliM4Path: 'operationGroups[''ManagedNetworkGroups'']$$operations[''Get'']$$requests[0]$$parameters[''accept'']'
-                    cliPath: 'operationGroups[''ManagedNetworkGroups'']$$operations[''Get'']$$requests[0]$$parameters[''accept'']'
+                    cliM4Path: operationGroups['ManagedNetworkGroups']$$operations['Get']$$requests[0]$$parameters['accept']
+                    cliPath: operationGroups['ManagedNetworkGroups']$$operations['Get']$$requests[0]$$parameters['accept']
                 protocol:
                   http:
                     in: header
@@ -3993,7 +3993,7 @@ operationGroups:
                 description: ''
             protocol:
               http:
-                path: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedNetwork/managedNetworks/{managedNetworkName}/managedNetworkGroups/{managedNetworkGroupName}'
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedNetwork/managedNetworks/{managedNetworkName}/managedNetworkGroups/{managedNetworkGroupName}
                 method: get
                 uri: '{$host}'
         signatureParameters:
@@ -4055,13 +4055,13 @@ operationGroups:
         language:
           default:
             name: Get
-            description: 'The Get ManagedNetworkGroups operation gets a Managed Network Group specified by the resource group, Managed Network name, and group name'
+            description: The Get ManagedNetworkGroups operation gets a Managed Network Group specified by the resource group, Managed Network name, and group name
           cli:
             name: Get
-            description: 'The Get ManagedNetworkGroups operation gets a Managed Network Group specified by the resource group, Managed Network name, and group name'
+            description: The Get ManagedNetworkGroups operation gets a Managed Network Group specified by the resource group, Managed Network name, and group name
             cliKey: Get
-            cliM4Path: 'operationGroups[''ManagedNetworkGroups'']$$operations[''Get'']'
-            cliPath: 'operationGroups[''ManagedNetworkGroups'']$$operations[''Get'']'
+            cliM4Path: operationGroups['ManagedNetworkGroups']$$operations['Get']
+            cliPath: operationGroups['ManagedNetworkGroups']$$operations['Get']
         protocol: {}
       - apiVersions:
           - version: 2019-06-01-preview
@@ -4082,8 +4082,8 @@ operationGroups:
                 name: resourceGroupName
                 description: The name of the resource group.
                 cliKey: resourceGroupName
-                cliM4Path: 'operationGroups[''ManagedNetworkGroups'']$$operations[''CreateOrUpdate'']$$parameters[''resourceGroupName'']'
-                cliPath: 'operationGroups[''ManagedNetworkGroups'']$$operations[''CreateOrUpdate'']$$parameters[''resourceGroupName'']'
+                cliM4Path: operationGroups['ManagedNetworkGroups']$$operations['CreateOrUpdate']$$parameters['resourceGroupName']
+                cliPath: operationGroups['ManagedNetworkGroups']$$operations['CreateOrUpdate']$$parameters['resourceGroupName']
             protocol:
               http:
                 in: path
@@ -4100,8 +4100,8 @@ operationGroups:
                 name: managedNetworkName
                 description: The name of the Managed Network.
                 cliKey: managedNetworkName
-                cliM4Path: 'operationGroups[''ManagedNetworkGroups'']$$operations[''CreateOrUpdate'']$$parameters[''managedNetworkName'']'
-                cliPath: 'operationGroups[''ManagedNetworkGroups'']$$operations[''CreateOrUpdate'']$$parameters[''managedNetworkName'']'
+                cliM4Path: operationGroups['ManagedNetworkGroups']$$operations['CreateOrUpdate']$$parameters['managedNetworkName']
+                cliPath: operationGroups['ManagedNetworkGroups']$$operations['CreateOrUpdate']$$parameters['managedNetworkName']
             protocol:
               http:
                 in: path
@@ -4118,8 +4118,8 @@ operationGroups:
                 name: managedNetworkGroupName
                 description: The name of the Managed Network Group.
                 cliKey: managedNetworkGroupName
-                cliM4Path: 'operationGroups[''ManagedNetworkGroups'']$$operations[''CreateOrUpdate'']$$parameters[''managedNetworkGroupName'']'
-                cliPath: 'operationGroups[''ManagedNetworkGroups'']$$operations[''CreateOrUpdate'']$$parameters[''managedNetworkGroupName'']'
+                cliM4Path: operationGroups['ManagedNetworkGroups']$$operations['CreateOrUpdate']$$parameters['managedNetworkGroupName']
+                cliPath: operationGroups['ManagedNetworkGroups']$$operations['CreateOrUpdate']$$parameters['managedNetworkGroupName']
             protocol:
               http:
                 in: path
@@ -4137,15 +4137,15 @@ operationGroups:
                     name: managedNetworkGroup
                     description: Parameters supplied to the create/update a Managed Network Group resource
                     cliKey: managedNetworkGroup
-                    cliM4Path: 'operationGroups[''ManagedNetworkGroups'']$$operations[''CreateOrUpdate'']$$requests[0]$$parameters[''managedNetworkGroup'']'
-                    cliPath: 'operationGroups[''ManagedNetworkGroups'']$$operations[''CreateOrUpdate'']$$requests[0]$$parameters[''managedNetworkGroup'']'
+                    cliM4Path: operationGroups['ManagedNetworkGroups']$$operations['CreateOrUpdate']$$requests[0]$$parameters['managedNetworkGroup']
+                    cliPath: operationGroups['ManagedNetworkGroups']$$operations['CreateOrUpdate']$$requests[0]$$parameters['managedNetworkGroup']
                 protocol:
                   http:
                     in: body
                     style: json
               - schema: *ref_66
                 implementation: Method
-                origin: 'modelerfour:synthesized/accept'
+                origin: modelerfour:synthesized/accept
                 required: true
                 language:
                   default:
@@ -4156,8 +4156,8 @@ operationGroups:
                     name: Accept
                     description: Accept header
                     cliKey: accept
-                    cliM4Path: 'operationGroups[''ManagedNetworkGroups'']$$operations[''CreateOrUpdate'']$$requests[0]$$parameters[''accept'']'
-                    cliPath: 'operationGroups[''ManagedNetworkGroups'']$$operations[''CreateOrUpdate'']$$requests[0]$$parameters[''accept'']'
+                    cliM4Path: operationGroups['ManagedNetworkGroups']$$operations['CreateOrUpdate']$$requests[0]$$parameters['accept']
+                    cliPath: operationGroups['ManagedNetworkGroups']$$operations['CreateOrUpdate']$$requests[0]$$parameters['accept']
                 protocol:
                   http:
                     in: header
@@ -4169,7 +4169,7 @@ operationGroups:
                 description: ''
             protocol:
               http:
-                path: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedNetwork/managedNetworks/{managedNetworkName}/managedNetworkGroups/{managedNetworkGroupName}'
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedNetwork/managedNetworks/{managedNetworkName}/managedNetworkGroups/{managedNetworkGroupName}
                 method: put
                 knownMediaType: json
                 mediaTypes:
@@ -4278,8 +4278,8 @@ operationGroups:
             name: CreateOrUpdate
             description: The Put ManagedNetworkGroups operation creates or updates a Managed Network Group resource
             cliKey: CreateOrUpdate
-            cliM4Path: 'operationGroups[''ManagedNetworkGroups'']$$operations[''CreateOrUpdate'']'
-            cliPath: 'operationGroups[''ManagedNetworkGroups'']$$operations[''CreateOrUpdate'']'
+            cliM4Path: operationGroups['ManagedNetworkGroups']$$operations['CreateOrUpdate']
+            cliPath: operationGroups['ManagedNetworkGroups']$$operations['CreateOrUpdate']
         protocol: {}
       - apiVersions:
           - version: 2019-06-01-preview
@@ -4300,8 +4300,8 @@ operationGroups:
                 name: resourceGroupName
                 description: The name of the resource group.
                 cliKey: resourceGroupName
-                cliM4Path: 'operationGroups[''ManagedNetworkGroups'']$$operations[''Delete'']$$parameters[''resourceGroupName'']'
-                cliPath: 'operationGroups[''ManagedNetworkGroups'']$$operations[''Delete'']$$parameters[''resourceGroupName'']'
+                cliM4Path: operationGroups['ManagedNetworkGroups']$$operations['Delete']$$parameters['resourceGroupName']
+                cliPath: operationGroups['ManagedNetworkGroups']$$operations['Delete']$$parameters['resourceGroupName']
             protocol:
               http:
                 in: path
@@ -4318,8 +4318,8 @@ operationGroups:
                 name: managedNetworkName
                 description: The name of the Managed Network.
                 cliKey: managedNetworkName
-                cliM4Path: 'operationGroups[''ManagedNetworkGroups'']$$operations[''Delete'']$$parameters[''managedNetworkName'']'
-                cliPath: 'operationGroups[''ManagedNetworkGroups'']$$operations[''Delete'']$$parameters[''managedNetworkName'']'
+                cliM4Path: operationGroups['ManagedNetworkGroups']$$operations['Delete']$$parameters['managedNetworkName']
+                cliPath: operationGroups['ManagedNetworkGroups']$$operations['Delete']$$parameters['managedNetworkName']
             protocol:
               http:
                 in: path
@@ -4336,8 +4336,8 @@ operationGroups:
                 name: managedNetworkGroupName
                 description: The name of the Managed Network Group.
                 cliKey: managedNetworkGroupName
-                cliM4Path: 'operationGroups[''ManagedNetworkGroups'']$$operations[''Delete'']$$parameters[''managedNetworkGroupName'']'
-                cliPath: 'operationGroups[''ManagedNetworkGroups'']$$operations[''Delete'']$$parameters[''managedNetworkGroupName'']'
+                cliM4Path: operationGroups['ManagedNetworkGroups']$$operations['Delete']$$parameters['managedNetworkGroupName']
+                cliPath: operationGroups['ManagedNetworkGroups']$$operations['Delete']$$parameters['managedNetworkGroupName']
             protocol:
               http:
                 in: path
@@ -4345,7 +4345,7 @@ operationGroups:
           - parameters:
               - schema: *ref_66
                 implementation: Method
-                origin: 'modelerfour:synthesized/accept'
+                origin: modelerfour:synthesized/accept
                 required: true
                 language:
                   default:
@@ -4356,8 +4356,8 @@ operationGroups:
                     name: Accept
                     description: Accept header
                     cliKey: accept
-                    cliM4Path: 'operationGroups[''ManagedNetworkGroups'']$$operations[''Delete'']$$requests[0]$$parameters[''accept'']'
-                    cliPath: 'operationGroups[''ManagedNetworkGroups'']$$operations[''Delete'']$$requests[0]$$parameters[''accept'']'
+                    cliM4Path: operationGroups['ManagedNetworkGroups']$$operations['Delete']$$requests[0]$$parameters['accept']
+                    cliPath: operationGroups['ManagedNetworkGroups']$$operations['Delete']$$requests[0]$$parameters['accept']
                 protocol:
                   http:
                     in: header
@@ -4368,7 +4368,7 @@ operationGroups:
                 description: ''
             protocol:
               http:
-                path: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedNetwork/managedNetworks/{managedNetworkName}/managedNetworkGroups/{managedNetworkGroupName}'
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedNetwork/managedNetworks/{managedNetworkName}/managedNetworkGroups/{managedNetworkGroupName}
                 method: delete
                 uri: '{$host}'
         signatureParameters:
@@ -4433,13 +4433,13 @@ operationGroups:
         language:
           default:
             name: Delete
-            description: 'The Delete ManagedNetworkGroups operation deletes a Managed Network Group specified by the resource group, Managed Network name, and group name'
+            description: The Delete ManagedNetworkGroups operation deletes a Managed Network Group specified by the resource group, Managed Network name, and group name
           cli:
             name: Delete
-            description: 'The Delete ManagedNetworkGroups operation deletes a Managed Network Group specified by the resource group, Managed Network name, and group name'
+            description: The Delete ManagedNetworkGroups operation deletes a Managed Network Group specified by the resource group, Managed Network name, and group name
             cliKey: Delete
-            cliM4Path: 'operationGroups[''ManagedNetworkGroups'']$$operations[''Delete'']'
-            cliPath: 'operationGroups[''ManagedNetworkGroups'']$$operations[''Delete'']'
+            cliM4Path: operationGroups['ManagedNetworkGroups']$$operations['Delete']
+            cliPath: operationGroups['ManagedNetworkGroups']$$operations['Delete']
         protocol: {}
       - apiVersions:
           - version: 2019-06-01-preview
@@ -4460,8 +4460,8 @@ operationGroups:
                 name: resourceGroupName
                 description: The name of the resource group.
                 cliKey: resourceGroupName
-                cliM4Path: 'operationGroups[''ManagedNetworkGroups'']$$operations[''ListByManagedNetwork'']$$parameters[''resourceGroupName'']'
-                cliPath: 'operationGroups[''ManagedNetworkGroups'']$$operations[''ListByManagedNetwork'']$$parameters[''resourceGroupName'']'
+                cliM4Path: operationGroups['ManagedNetworkGroups']$$operations['ListByManagedNetwork']$$parameters['resourceGroupName']
+                cliPath: operationGroups['ManagedNetworkGroups']$$operations['ListByManagedNetwork']$$parameters['resourceGroupName']
             protocol:
               http:
                 in: path
@@ -4478,8 +4478,8 @@ operationGroups:
                 name: managedNetworkName
                 description: The name of the Managed Network.
                 cliKey: managedNetworkName
-                cliM4Path: 'operationGroups[''ManagedNetworkGroups'']$$operations[''ListByManagedNetwork'']$$parameters[''managedNetworkName'']'
-                cliPath: 'operationGroups[''ManagedNetworkGroups'']$$operations[''ListByManagedNetwork'']$$parameters[''managedNetworkName'']'
+                cliM4Path: operationGroups['ManagedNetworkGroups']$$operations['ListByManagedNetwork']$$parameters['managedNetworkName']
+                cliPath: operationGroups['ManagedNetworkGroups']$$operations['ListByManagedNetwork']$$parameters['managedNetworkName']
             protocol:
               http:
                 in: path
@@ -4495,8 +4495,8 @@ operationGroups:
                 name: top
                 description: May be used to limit the number of results in a page for list queries.
                 cliKey: $top
-                cliM4Path: 'operationGroups[''ManagedNetworkGroups'']$$operations[''ListByManagedNetwork'']$$parameters[''$top'']'
-                cliPath: 'operationGroups[''ManagedNetworkGroups'']$$operations[''ListByManagedNetwork'']$$parameters[''$top'']'
+                cliM4Path: operationGroups['ManagedNetworkGroups']$$operations['ListByManagedNetwork']$$parameters['$top']
+                cliPath: operationGroups['ManagedNetworkGroups']$$operations['ListByManagedNetwork']$$parameters['$top']
             protocol:
               http:
                 in: query
@@ -4516,8 +4516,8 @@ operationGroups:
                   Skiptoken is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skiptoken parameter that specifies a starting
                   point to use for subsequent calls.
                 cliKey: $skiptoken
-                cliM4Path: 'operationGroups[''ManagedNetworkGroups'']$$operations[''ListByManagedNetwork'']$$parameters[''$skiptoken'']'
-                cliPath: 'operationGroups[''ManagedNetworkGroups'']$$operations[''ListByManagedNetwork'']$$parameters[''$skiptoken'']'
+                cliM4Path: operationGroups['ManagedNetworkGroups']$$operations['ListByManagedNetwork']$$parameters['$skiptoken']
+                cliPath: operationGroups['ManagedNetworkGroups']$$operations['ListByManagedNetwork']$$parameters['$skiptoken']
             protocol:
               http:
                 in: query
@@ -4525,7 +4525,7 @@ operationGroups:
           - parameters:
               - schema: *ref_66
                 implementation: Method
-                origin: 'modelerfour:synthesized/accept'
+                origin: modelerfour:synthesized/accept
                 required: true
                 language:
                   default:
@@ -4536,8 +4536,8 @@ operationGroups:
                     name: Accept
                     description: Accept header
                     cliKey: accept
-                    cliM4Path: 'operationGroups[''ManagedNetworkGroups'']$$operations[''ListByManagedNetwork'']$$requests[0]$$parameters[''accept'']'
-                    cliPath: 'operationGroups[''ManagedNetworkGroups'']$$operations[''ListByManagedNetwork'']$$requests[0]$$parameters[''accept'']'
+                    cliM4Path: operationGroups['ManagedNetworkGroups']$$operations['ListByManagedNetwork']$$requests[0]$$parameters['accept']
+                    cliPath: operationGroups['ManagedNetworkGroups']$$operations['ListByManagedNetwork']$$requests[0]$$parameters['accept']
                 protocol:
                   http:
                     in: header
@@ -4548,7 +4548,7 @@ operationGroups:
                 description: ''
             protocol:
               http:
-                path: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedNetwork/managedNetworks/{managedNetworkName}/managedNetworkGroups'
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedNetwork/managedNetworks/{managedNetworkName}/managedNetworkGroups
                 method: get
                 uri: '{$host}'
         signatureParameters:
@@ -4621,8 +4621,8 @@ operationGroups:
             name: ListByManagedNetwork
             description: The ListByManagedNetwork ManagedNetworkGroup operation retrieves all the Managed Network Groups in a specified Managed Networks in a paginated format.
             cliKey: ListByManagedNetwork
-            cliM4Path: 'operationGroups[''ManagedNetworkGroups'']$$operations[''ListByManagedNetwork'']'
-            cliPath: 'operationGroups[''ManagedNetworkGroups'']$$operations[''ListByManagedNetwork'']'
+            cliM4Path: operationGroups['ManagedNetworkGroups']$$operations['ListByManagedNetwork']
+            cliPath: operationGroups['ManagedNetworkGroups']$$operations['ListByManagedNetwork']
         protocol: {}
     language:
       default:
@@ -4632,8 +4632,8 @@ operationGroups:
         name: ManagedNetworkGroup
         description: ''
         cliKey: ManagedNetworkGroups
-        cliM4Path: 'operationGroups[''ManagedNetworkGroups'']'
-        cliPath: 'operationGroups[''ManagedNetworkGroups'']'
+        cliM4Path: operationGroups['ManagedNetworkGroups']
+        cliPath: operationGroups['ManagedNetworkGroups']
     protocol: {}
   - $key: ManagedNetworkPeeringPolicies
     operations:
@@ -4656,8 +4656,8 @@ operationGroups:
                 name: resourceGroupName
                 description: The name of the resource group.
                 cliKey: resourceGroupName
-                cliM4Path: 'operationGroups[''ManagedNetworkPeeringPolicies'']$$operations[''Get'']$$parameters[''resourceGroupName'']'
-                cliPath: 'operationGroups[''ManagedNetworkPeeringPolicies'']$$operations[''Get'']$$parameters[''resourceGroupName'']'
+                cliM4Path: operationGroups['ManagedNetworkPeeringPolicies']$$operations['Get']$$parameters['resourceGroupName']
+                cliPath: operationGroups['ManagedNetworkPeeringPolicies']$$operations['Get']$$parameters['resourceGroupName']
             protocol:
               http:
                 in: path
@@ -4674,8 +4674,8 @@ operationGroups:
                 name: managedNetworkName
                 description: The name of the Managed Network.
                 cliKey: managedNetworkName
-                cliM4Path: 'operationGroups[''ManagedNetworkPeeringPolicies'']$$operations[''Get'']$$parameters[''managedNetworkName'']'
-                cliPath: 'operationGroups[''ManagedNetworkPeeringPolicies'']$$operations[''Get'']$$parameters[''managedNetworkName'']'
+                cliM4Path: operationGroups['ManagedNetworkPeeringPolicies']$$operations['Get']$$parameters['managedNetworkName']
+                cliPath: operationGroups['ManagedNetworkPeeringPolicies']$$operations['Get']$$parameters['managedNetworkName']
             protocol:
               http:
                 in: path
@@ -4692,8 +4692,8 @@ operationGroups:
                 name: managedNetworkPeeringPolicyName
                 description: The name of the Managed Network Peering Policy.
                 cliKey: managedNetworkPeeringPolicyName
-                cliM4Path: 'operationGroups[''ManagedNetworkPeeringPolicies'']$$operations[''Get'']$$parameters[''managedNetworkPeeringPolicyName'']'
-                cliPath: 'operationGroups[''ManagedNetworkPeeringPolicies'']$$operations[''Get'']$$parameters[''managedNetworkPeeringPolicyName'']'
+                cliM4Path: operationGroups['ManagedNetworkPeeringPolicies']$$operations['Get']$$parameters['managedNetworkPeeringPolicyName']
+                cliPath: operationGroups['ManagedNetworkPeeringPolicies']$$operations['Get']$$parameters['managedNetworkPeeringPolicyName']
             protocol:
               http:
                 in: path
@@ -4701,7 +4701,7 @@ operationGroups:
           - parameters:
               - schema: *ref_66
                 implementation: Method
-                origin: 'modelerfour:synthesized/accept'
+                origin: modelerfour:synthesized/accept
                 required: true
                 language:
                   default:
@@ -4712,8 +4712,8 @@ operationGroups:
                     name: Accept
                     description: Accept header
                     cliKey: accept
-                    cliM4Path: 'operationGroups[''ManagedNetworkPeeringPolicies'']$$operations[''Get'']$$requests[0]$$parameters[''accept'']'
-                    cliPath: 'operationGroups[''ManagedNetworkPeeringPolicies'']$$operations[''Get'']$$requests[0]$$parameters[''accept'']'
+                    cliM4Path: operationGroups['ManagedNetworkPeeringPolicies']$$operations['Get']$$requests[0]$$parameters['accept']
+                    cliPath: operationGroups['ManagedNetworkPeeringPolicies']$$operations['Get']$$requests[0]$$parameters['accept']
                 protocol:
                   http:
                     in: header
@@ -4724,7 +4724,7 @@ operationGroups:
                 description: ''
             protocol:
               http:
-                path: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedNetwork/managedNetworks/{managedNetworkName}/managedNetworkPeeringPolicies/{managedNetworkPeeringPolicyName}'
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedNetwork/managedNetworks/{managedNetworkName}/managedNetworkPeeringPolicies/{managedNetworkPeeringPolicyName}
                 method: get
                 uri: '{$host}'
         signatureParameters:
@@ -4784,13 +4784,13 @@ operationGroups:
         language:
           default:
             name: Get
-            description: 'The Get ManagedNetworkPeeringPolicies operation gets a Managed Network Peering Policy resource, specified by the  resource group, Managed Network name, and peering policy name'
+            description: The Get ManagedNetworkPeeringPolicies operation gets a Managed Network Peering Policy resource, specified by the  resource group, Managed Network name, and peering policy name
           cli:
             name: Get
-            description: 'The Get ManagedNetworkPeeringPolicies operation gets a Managed Network Peering Policy resource, specified by the  resource group, Managed Network name, and peering policy name'
+            description: The Get ManagedNetworkPeeringPolicies operation gets a Managed Network Peering Policy resource, specified by the  resource group, Managed Network name, and peering policy name
             cliKey: Get
-            cliM4Path: 'operationGroups[''ManagedNetworkPeeringPolicies'']$$operations[''Get'']'
-            cliPath: 'operationGroups[''ManagedNetworkPeeringPolicies'']$$operations[''Get'']'
+            cliM4Path: operationGroups['ManagedNetworkPeeringPolicies']$$operations['Get']
+            cliPath: operationGroups['ManagedNetworkPeeringPolicies']$$operations['Get']
         protocol: {}
       - apiVersions:
           - version: 2019-06-01-preview
@@ -4811,8 +4811,8 @@ operationGroups:
                 name: resourceGroupName
                 description: The name of the resource group.
                 cliKey: resourceGroupName
-                cliM4Path: 'operationGroups[''ManagedNetworkPeeringPolicies'']$$operations[''CreateOrUpdate'']$$parameters[''resourceGroupName'']'
-                cliPath: 'operationGroups[''ManagedNetworkPeeringPolicies'']$$operations[''CreateOrUpdate'']$$parameters[''resourceGroupName'']'
+                cliM4Path: operationGroups['ManagedNetworkPeeringPolicies']$$operations['CreateOrUpdate']$$parameters['resourceGroupName']
+                cliPath: operationGroups['ManagedNetworkPeeringPolicies']$$operations['CreateOrUpdate']$$parameters['resourceGroupName']
             protocol:
               http:
                 in: path
@@ -4829,8 +4829,8 @@ operationGroups:
                 name: managedNetworkName
                 description: The name of the Managed Network.
                 cliKey: managedNetworkName
-                cliM4Path: 'operationGroups[''ManagedNetworkPeeringPolicies'']$$operations[''CreateOrUpdate'']$$parameters[''managedNetworkName'']'
-                cliPath: 'operationGroups[''ManagedNetworkPeeringPolicies'']$$operations[''CreateOrUpdate'']$$parameters[''managedNetworkName'']'
+                cliM4Path: operationGroups['ManagedNetworkPeeringPolicies']$$operations['CreateOrUpdate']$$parameters['managedNetworkName']
+                cliPath: operationGroups['ManagedNetworkPeeringPolicies']$$operations['CreateOrUpdate']$$parameters['managedNetworkName']
             protocol:
               http:
                 in: path
@@ -4847,8 +4847,8 @@ operationGroups:
                 name: managedNetworkPeeringPolicyName
                 description: The name of the Managed Network Peering Policy.
                 cliKey: managedNetworkPeeringPolicyName
-                cliM4Path: 'operationGroups[''ManagedNetworkPeeringPolicies'']$$operations[''CreateOrUpdate'']$$parameters[''managedNetworkPeeringPolicyName'']'
-                cliPath: 'operationGroups[''ManagedNetworkPeeringPolicies'']$$operations[''CreateOrUpdate'']$$parameters[''managedNetworkPeeringPolicyName'']'
+                cliM4Path: operationGroups['ManagedNetworkPeeringPolicies']$$operations['CreateOrUpdate']$$parameters['managedNetworkPeeringPolicyName']
+                cliPath: operationGroups['ManagedNetworkPeeringPolicies']$$operations['CreateOrUpdate']$$parameters['managedNetworkPeeringPolicyName']
             protocol:
               http:
                 in: path
@@ -4866,15 +4866,15 @@ operationGroups:
                     name: managedNetworkPolicy
                     description: Parameters supplied to create/update a Managed Network Peering Policy
                     cliKey: managedNetworkPolicy
-                    cliM4Path: 'operationGroups[''ManagedNetworkPeeringPolicies'']$$operations[''CreateOrUpdate'']$$requests[0]$$parameters[''managedNetworkPolicy'']'
-                    cliPath: 'operationGroups[''ManagedNetworkPeeringPolicies'']$$operations[''CreateOrUpdate'']$$requests[0]$$parameters[''managedNetworkPolicy'']'
+                    cliM4Path: operationGroups['ManagedNetworkPeeringPolicies']$$operations['CreateOrUpdate']$$requests[0]$$parameters['managedNetworkPolicy']
+                    cliPath: operationGroups['ManagedNetworkPeeringPolicies']$$operations['CreateOrUpdate']$$requests[0]$$parameters['managedNetworkPolicy']
                 protocol:
                   http:
                     in: body
                     style: json
               - schema: *ref_66
                 implementation: Method
-                origin: 'modelerfour:synthesized/accept'
+                origin: modelerfour:synthesized/accept
                 required: true
                 language:
                   default:
@@ -4885,8 +4885,8 @@ operationGroups:
                     name: Accept
                     description: Accept header
                     cliKey: accept
-                    cliM4Path: 'operationGroups[''ManagedNetworkPeeringPolicies'']$$operations[''CreateOrUpdate'']$$requests[0]$$parameters[''accept'']'
-                    cliPath: 'operationGroups[''ManagedNetworkPeeringPolicies'']$$operations[''CreateOrUpdate'']$$requests[0]$$parameters[''accept'']'
+                    cliM4Path: operationGroups['ManagedNetworkPeeringPolicies']$$operations['CreateOrUpdate']$$requests[0]$$parameters['accept']
+                    cliPath: operationGroups['ManagedNetworkPeeringPolicies']$$operations['CreateOrUpdate']$$requests[0]$$parameters['accept']
                 protocol:
                   http:
                     in: header
@@ -4898,7 +4898,7 @@ operationGroups:
                 description: ''
             protocol:
               http:
-                path: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedNetwork/managedNetworks/{managedNetworkName}/managedNetworkPeeringPolicies/{managedNetworkPeeringPolicyName}'
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedNetwork/managedNetworks/{managedNetworkName}/managedNetworkPeeringPolicies/{managedNetworkPeeringPolicyName}
                 method: put
                 knownMediaType: json
                 mediaTypes:
@@ -5001,8 +5001,8 @@ operationGroups:
             name: CreateOrUpdate
             description: The Put ManagedNetworkPeeringPolicies operation creates/updates a new Managed Network Peering Policy
             cliKey: CreateOrUpdate
-            cliM4Path: 'operationGroups[''ManagedNetworkPeeringPolicies'']$$operations[''CreateOrUpdate'']'
-            cliPath: 'operationGroups[''ManagedNetworkPeeringPolicies'']$$operations[''CreateOrUpdate'']'
+            cliM4Path: operationGroups['ManagedNetworkPeeringPolicies']$$operations['CreateOrUpdate']
+            cliPath: operationGroups['ManagedNetworkPeeringPolicies']$$operations['CreateOrUpdate']
         protocol: {}
       - apiVersions:
           - version: 2019-06-01-preview
@@ -5023,8 +5023,8 @@ operationGroups:
                 name: resourceGroupName
                 description: The name of the resource group.
                 cliKey: resourceGroupName
-                cliM4Path: 'operationGroups[''ManagedNetworkPeeringPolicies'']$$operations[''Delete'']$$parameters[''resourceGroupName'']'
-                cliPath: 'operationGroups[''ManagedNetworkPeeringPolicies'']$$operations[''Delete'']$$parameters[''resourceGroupName'']'
+                cliM4Path: operationGroups['ManagedNetworkPeeringPolicies']$$operations['Delete']$$parameters['resourceGroupName']
+                cliPath: operationGroups['ManagedNetworkPeeringPolicies']$$operations['Delete']$$parameters['resourceGroupName']
             protocol:
               http:
                 in: path
@@ -5041,8 +5041,8 @@ operationGroups:
                 name: managedNetworkName
                 description: The name of the Managed Network.
                 cliKey: managedNetworkName
-                cliM4Path: 'operationGroups[''ManagedNetworkPeeringPolicies'']$$operations[''Delete'']$$parameters[''managedNetworkName'']'
-                cliPath: 'operationGroups[''ManagedNetworkPeeringPolicies'']$$operations[''Delete'']$$parameters[''managedNetworkName'']'
+                cliM4Path: operationGroups['ManagedNetworkPeeringPolicies']$$operations['Delete']$$parameters['managedNetworkName']
+                cliPath: operationGroups['ManagedNetworkPeeringPolicies']$$operations['Delete']$$parameters['managedNetworkName']
             protocol:
               http:
                 in: path
@@ -5059,8 +5059,8 @@ operationGroups:
                 name: managedNetworkPeeringPolicyName
                 description: The name of the Managed Network Peering Policy.
                 cliKey: managedNetworkPeeringPolicyName
-                cliM4Path: 'operationGroups[''ManagedNetworkPeeringPolicies'']$$operations[''Delete'']$$parameters[''managedNetworkPeeringPolicyName'']'
-                cliPath: 'operationGroups[''ManagedNetworkPeeringPolicies'']$$operations[''Delete'']$$parameters[''managedNetworkPeeringPolicyName'']'
+                cliM4Path: operationGroups['ManagedNetworkPeeringPolicies']$$operations['Delete']$$parameters['managedNetworkPeeringPolicyName']
+                cliPath: operationGroups['ManagedNetworkPeeringPolicies']$$operations['Delete']$$parameters['managedNetworkPeeringPolicyName']
             protocol:
               http:
                 in: path
@@ -5068,7 +5068,7 @@ operationGroups:
           - parameters:
               - schema: *ref_66
                 implementation: Method
-                origin: 'modelerfour:synthesized/accept'
+                origin: modelerfour:synthesized/accept
                 required: true
                 language:
                   default:
@@ -5079,8 +5079,8 @@ operationGroups:
                     name: Accept
                     description: Accept header
                     cliKey: accept
-                    cliM4Path: 'operationGroups[''ManagedNetworkPeeringPolicies'']$$operations[''Delete'']$$requests[0]$$parameters[''accept'']'
-                    cliPath: 'operationGroups[''ManagedNetworkPeeringPolicies'']$$operations[''Delete'']$$requests[0]$$parameters[''accept'']'
+                    cliM4Path: operationGroups['ManagedNetworkPeeringPolicies']$$operations['Delete']$$requests[0]$$parameters['accept']
+                    cliPath: operationGroups['ManagedNetworkPeeringPolicies']$$operations['Delete']$$requests[0]$$parameters['accept']
                 protocol:
                   http:
                     in: header
@@ -5091,7 +5091,7 @@ operationGroups:
                 description: ''
             protocol:
               http:
-                path: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedNetwork/managedNetworks/{managedNetworkName}/managedNetworkPeeringPolicies/{managedNetworkPeeringPolicyName}'
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedNetwork/managedNetworks/{managedNetworkName}/managedNetworkPeeringPolicies/{managedNetworkPeeringPolicyName}
                 method: delete
                 uri: '{$host}'
         signatureParameters:
@@ -5156,13 +5156,13 @@ operationGroups:
         language:
           default:
             name: Delete
-            description: 'The Delete ManagedNetworkPeeringPolicies operation deletes a Managed Network Peering Policy, specified by the  resource group, Managed Network name, and peering policy name'
+            description: The Delete ManagedNetworkPeeringPolicies operation deletes a Managed Network Peering Policy, specified by the  resource group, Managed Network name, and peering policy name
           cli:
             name: Delete
-            description: 'The Delete ManagedNetworkPeeringPolicies operation deletes a Managed Network Peering Policy, specified by the  resource group, Managed Network name, and peering policy name'
+            description: The Delete ManagedNetworkPeeringPolicies operation deletes a Managed Network Peering Policy, specified by the  resource group, Managed Network name, and peering policy name
             cliKey: Delete
-            cliM4Path: 'operationGroups[''ManagedNetworkPeeringPolicies'']$$operations[''Delete'']'
-            cliPath: 'operationGroups[''ManagedNetworkPeeringPolicies'']$$operations[''Delete'']'
+            cliM4Path: operationGroups['ManagedNetworkPeeringPolicies']$$operations['Delete']
+            cliPath: operationGroups['ManagedNetworkPeeringPolicies']$$operations['Delete']
         protocol: {}
       - apiVersions:
           - version: 2019-06-01-preview
@@ -5183,8 +5183,8 @@ operationGroups:
                 name: resourceGroupName
                 description: The name of the resource group.
                 cliKey: resourceGroupName
-                cliM4Path: 'operationGroups[''ManagedNetworkPeeringPolicies'']$$operations[''ListByManagedNetwork'']$$parameters[''resourceGroupName'']'
-                cliPath: 'operationGroups[''ManagedNetworkPeeringPolicies'']$$operations[''ListByManagedNetwork'']$$parameters[''resourceGroupName'']'
+                cliM4Path: operationGroups['ManagedNetworkPeeringPolicies']$$operations['ListByManagedNetwork']$$parameters['resourceGroupName']
+                cliPath: operationGroups['ManagedNetworkPeeringPolicies']$$operations['ListByManagedNetwork']$$parameters['resourceGroupName']
             protocol:
               http:
                 in: path
@@ -5201,8 +5201,8 @@ operationGroups:
                 name: managedNetworkName
                 description: The name of the Managed Network.
                 cliKey: managedNetworkName
-                cliM4Path: 'operationGroups[''ManagedNetworkPeeringPolicies'']$$operations[''ListByManagedNetwork'']$$parameters[''managedNetworkName'']'
-                cliPath: 'operationGroups[''ManagedNetworkPeeringPolicies'']$$operations[''ListByManagedNetwork'']$$parameters[''managedNetworkName'']'
+                cliM4Path: operationGroups['ManagedNetworkPeeringPolicies']$$operations['ListByManagedNetwork']$$parameters['managedNetworkName']
+                cliPath: operationGroups['ManagedNetworkPeeringPolicies']$$operations['ListByManagedNetwork']$$parameters['managedNetworkName']
             protocol:
               http:
                 in: path
@@ -5218,8 +5218,8 @@ operationGroups:
                 name: top
                 description: May be used to limit the number of results in a page for list queries.
                 cliKey: $top
-                cliM4Path: 'operationGroups[''ManagedNetworkPeeringPolicies'']$$operations[''ListByManagedNetwork'']$$parameters[''$top'']'
-                cliPath: 'operationGroups[''ManagedNetworkPeeringPolicies'']$$operations[''ListByManagedNetwork'']$$parameters[''$top'']'
+                cliM4Path: operationGroups['ManagedNetworkPeeringPolicies']$$operations['ListByManagedNetwork']$$parameters['$top']
+                cliPath: operationGroups['ManagedNetworkPeeringPolicies']$$operations['ListByManagedNetwork']$$parameters['$top']
             protocol:
               http:
                 in: query
@@ -5239,8 +5239,8 @@ operationGroups:
                   Skiptoken is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skiptoken parameter that specifies a starting
                   point to use for subsequent calls.
                 cliKey: $skiptoken
-                cliM4Path: 'operationGroups[''ManagedNetworkPeeringPolicies'']$$operations[''ListByManagedNetwork'']$$parameters[''$skiptoken'']'
-                cliPath: 'operationGroups[''ManagedNetworkPeeringPolicies'']$$operations[''ListByManagedNetwork'']$$parameters[''$skiptoken'']'
+                cliM4Path: operationGroups['ManagedNetworkPeeringPolicies']$$operations['ListByManagedNetwork']$$parameters['$skiptoken']
+                cliPath: operationGroups['ManagedNetworkPeeringPolicies']$$operations['ListByManagedNetwork']$$parameters['$skiptoken']
             protocol:
               http:
                 in: query
@@ -5248,7 +5248,7 @@ operationGroups:
           - parameters:
               - schema: *ref_66
                 implementation: Method
-                origin: 'modelerfour:synthesized/accept'
+                origin: modelerfour:synthesized/accept
                 required: true
                 language:
                   default:
@@ -5259,8 +5259,8 @@ operationGroups:
                     name: Accept
                     description: Accept header
                     cliKey: accept
-                    cliM4Path: 'operationGroups[''ManagedNetworkPeeringPolicies'']$$operations[''ListByManagedNetwork'']$$requests[0]$$parameters[''accept'']'
-                    cliPath: 'operationGroups[''ManagedNetworkPeeringPolicies'']$$operations[''ListByManagedNetwork'']$$requests[0]$$parameters[''accept'']'
+                    cliM4Path: operationGroups['ManagedNetworkPeeringPolicies']$$operations['ListByManagedNetwork']$$requests[0]$$parameters['accept']
+                    cliPath: operationGroups['ManagedNetworkPeeringPolicies']$$operations['ListByManagedNetwork']$$requests[0]$$parameters['accept']
                 protocol:
                   http:
                     in: header
@@ -5271,7 +5271,7 @@ operationGroups:
                 description: ''
             protocol:
               http:
-                path: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedNetwork/managedNetworks/{managedNetworkName}/managedNetworkPeeringPolicies'
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedNetwork/managedNetworks/{managedNetworkName}/managedNetworkPeeringPolicies
                 method: get
                 uri: '{$host}'
         signatureParameters:
@@ -5284,7 +5284,7 @@ operationGroups:
             language:
               default:
                 name: ''
-                description: 'Get successful. The operation returns all Managed Network Peering Policy resources in the specified Managed Network, in a paginated format'
+                description: Get successful. The operation returns all Managed Network Peering Policy resources in the specified Managed Network, in a paginated format
             protocol:
               http:
                 knownMediaType: json
@@ -5335,15 +5335,15 @@ operationGroups:
         language:
           default:
             name: ListByManagedNetwork
-            description: 'The ListByManagedNetwork PeeringPolicies operation retrieves all the Managed Network Peering Policies in a specified Managed Network, in a paginated format.'
+            description: The ListByManagedNetwork PeeringPolicies operation retrieves all the Managed Network Peering Policies in a specified Managed Network, in a paginated format.
             paging:
               nextLinkName: nextLink
           cli:
             name: ListByManagedNetwork
-            description: 'The ListByManagedNetwork PeeringPolicies operation retrieves all the Managed Network Peering Policies in a specified Managed Network, in a paginated format.'
+            description: The ListByManagedNetwork PeeringPolicies operation retrieves all the Managed Network Peering Policies in a specified Managed Network, in a paginated format.
             cliKey: ListByManagedNetwork
-            cliM4Path: 'operationGroups[''ManagedNetworkPeeringPolicies'']$$operations[''ListByManagedNetwork'']'
-            cliPath: 'operationGroups[''ManagedNetworkPeeringPolicies'']$$operations[''ListByManagedNetwork'']'
+            cliM4Path: operationGroups['ManagedNetworkPeeringPolicies']$$operations['ListByManagedNetwork']
+            cliPath: operationGroups['ManagedNetworkPeeringPolicies']$$operations['ListByManagedNetwork']
         protocol: {}
     language:
       default:
@@ -5353,8 +5353,8 @@ operationGroups:
         name: ManagedNetworkPeeringPolicy
         description: ''
         cliKey: ManagedNetworkPeeringPolicies
-        cliM4Path: 'operationGroups[''ManagedNetworkPeeringPolicies'']'
-        cliPath: 'operationGroups[''ManagedNetworkPeeringPolicies'']'
+        cliM4Path: operationGroups['ManagedNetworkPeeringPolicies']
+        cliPath: operationGroups['ManagedNetworkPeeringPolicies']
     protocol: {}
   - $key: Operations
     operations:
@@ -5367,7 +5367,7 @@ operationGroups:
           - parameters:
               - schema: *ref_66
                 implementation: Method
-                origin: 'modelerfour:synthesized/accept'
+                origin: modelerfour:synthesized/accept
                 required: true
                 language:
                   default:
@@ -5378,8 +5378,8 @@ operationGroups:
                     name: Accept
                     description: Accept header
                     cliKey: accept
-                    cliM4Path: 'operationGroups[''Operations'']$$operations[''List'']$$requests[0]$$parameters[''accept'']'
-                    cliPath: 'operationGroups[''Operations'']$$operations[''List'']$$requests[0]$$parameters[''accept'']'
+                    cliM4Path: operationGroups['Operations']$$operations['List']$$requests[0]$$parameters['accept']
+                    cliPath: operationGroups['Operations']$$operations['List']$$requests[0]$$parameters['accept']
                 protocol:
                   http:
                     in: header
@@ -5433,8 +5433,8 @@ operationGroups:
             name: List
             description: Lists all of the available MNC operations.
             cliKey: List
-            cliM4Path: 'operationGroups[''Operations'']$$operations[''List'']'
-            cliPath: 'operationGroups[''Operations'']$$operations[''List'']'
+            cliM4Path: operationGroups['Operations']$$operations['List']
+            cliPath: operationGroups['Operations']$$operations['List']
         protocol: {}
     language:
       default:
@@ -5444,8 +5444,8 @@ operationGroups:
         name: Operation
         description: ''
         cliKey: Operations
-        cliM4Path: 'operationGroups[''Operations'']'
-        cliPath: 'operationGroups[''Operations'']'
+        cliM4Path: operationGroups['Operations']
+        cliPath: operationGroups['Operations']
     protocol: {}
 security:
   authenticationRequired: false

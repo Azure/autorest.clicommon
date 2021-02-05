@@ -16,7 +16,7 @@ schemas:
       language:
         default:
           name: boolean
-          description: 'If set to true, blobs with zero bytes will be ignored.'
+          description: If set to true, blobs with zero bytes will be ignored.
       protocol: {}
     - &ref_230
       type: boolean
@@ -319,7 +319,7 @@ schemas:
       language:
         default:
           name: factory_properties_provisioning_state
-          description: 'Factory provisioning state, example Succeeded.'
+          description: Factory provisioning state, example Succeeded.
       protocol: {}
     - &ref_17
       type: string
@@ -467,7 +467,7 @@ schemas:
       language:
         default:
           name: factory_list_response_next_link
-          description: 'The link to the next page of results, if any remaining results exist.'
+          description: The link to the next page of results, if any remaining results exist.
       protocol: {}
     - &ref_38
       type: string
@@ -511,7 +511,7 @@ schemas:
         - version: '2018-06-01'
       maxLength: 90
       minLength: 1
-      pattern: '^[-\w\._\(\)]+$'
+      pattern: ^[-\w\._\(\)]+$
       language:
         default:
           name: string
@@ -523,7 +523,7 @@ schemas:
         - version: '2018-06-01'
       maxLength: 63
       minLength: 3
-      pattern: '^[A-Za-z0-9]+(?:-[A-Za-z0-9]+)*$'
+      pattern: ^[A-Za-z0-9]+(?:-[A-Za-z0-9]+)*$
       language:
         default:
           name: string
@@ -689,7 +689,7 @@ schemas:
       language:
         default:
           name: trigger_list_response_next_link
-          description: 'The link to the next page of results, if any remaining results exist.'
+          description: The link to the next page of results, if any remaining results exist.
       protocol: {}
     - &ref_182
       type: string
@@ -716,7 +716,7 @@ schemas:
       language:
         default:
           name: trigger_query_response_continuation_token
-          description: 'The continuation token for getting the next page of results, if any remaining results exist, null otherwise.'
+          description: The continuation token for getting the next page of results, if any remaining results exist, null otherwise.
       protocol: {}
     - &ref_430
       type: string
@@ -724,7 +724,7 @@ schemas:
         - version: '2018-06-01'
       maxLength: 260
       minLength: 1
-      pattern: '^[A-Za-z0-9_][^<>*#.%&:\\+?/]*$'
+      pattern: ^[A-Za-z0-9_][^<>*#.%&:\\+?/]*$
       language:
         default:
           name: string
@@ -755,7 +755,7 @@ schemas:
       language:
         default:
           name: integration_runtime_list_response_next_link
-          description: 'The link to the next page of results, if any remaining results exist.'
+          description: The link to the next page of results, if any remaining results exist.
       protocol: {}
     - &ref_189
       type: string
@@ -764,7 +764,7 @@ schemas:
       language:
         default:
           name: update_integration_runtime_request_update_delay_offset
-          description: 'The time offset (in hours) in the day, e.g., PT03H is 3 hours. The integration runtime auto update will happen on that time.'
+          description: The time offset (in hours) in the day, e.g., PT03H is 3 hours. The integration runtime auto update will happen on that time.
       protocol: {}
     - &ref_190
       type: string
@@ -1049,7 +1049,7 @@ schemas:
         - version: '2018-06-01'
       maxLength: 15
       minLength: 8
-      pattern: '((\d+)\.)?(\d\d):(60|([0-5][0-9])):(60|([0-5][0-9]))'
+      pattern: ((\d+)\.)?(\d\d):(60|([0-5][0-9])):(60|([0-5][0-9]))
       language:
         default:
           name: tumbling_window_trigger_dependency_reference_size
@@ -1073,7 +1073,7 @@ schemas:
         - version: '2018-06-01'
       maxLength: 15
       minLength: 8
-      pattern: '((\d+)\.)?(\d\d):(60|([0-5][0-9])):(60|([0-5][0-9]))'
+      pattern: ((\d+)\.)?(\d\d):(60|([0-5][0-9])):(60|([0-5][0-9]))
       language:
         default:
           name: self_dependency_tumbling_window_trigger_reference_size
@@ -1104,7 +1104,7 @@ schemas:
       language:
         default:
           name: integration_runtime_status_list_response_next_link
-          description: 'The link to the next page of results, if any remaining results exist.'
+          description: The link to the next page of results, if any remaining results exist.
       protocol: {}
     - &ref_63
       type: string
@@ -1113,7 +1113,7 @@ schemas:
       language:
         default:
           name: integration_runtime_compute_properties_location
-          description: 'The location for managed integration runtime. The supported regions could be found on https://docs.microsoft.com/en-us/azure/data-factory/data-factory-data-movement-activities'
+          description: The location for managed integration runtime. The supported regions could be found on https://docs.microsoft.com/en-us/azure/data-factory/data-factory-data-movement-activities
       protocol: {}
     - &ref_64
       type: string
@@ -1430,7 +1430,7 @@ schemas:
       language:
         default:
           name: self_hosted_integration_runtime_status_type_properties_update_delay_offset
-          description: 'The time in the date scheduled by service to update the integration runtime, e.g., PT03H is 3 hours'
+          description: The time in the date scheduled by service to update the integration runtime, e.g., PT03H is 3 hours
       protocol: {}
     - &ref_235
       type: string
@@ -1547,7 +1547,7 @@ schemas:
       language:
         default:
           name: ssis_object_metadata_list_response_next_link
-          description: 'The link to the next page of results, if any remaining results exist.'
+          description: The link to the next page of results, if any remaining results exist.
       protocol: {}
     - &ref_315
       type: string
@@ -2147,7 +2147,7 @@ schemas:
       language:
         default:
           name: integration_runtime_ssis_catalog_pricing_tier
-          description: 'The pricing tier for the catalog database. The valid values could be found in https://azure.microsoft.com/en-us/pricing/details/sql-database/'
+          description: The pricing tier for the catalog database. The valid values could be found in https://azure.microsoft.com/en-us/pricing/details/sql-database/
         cli:
           cliKey: IntegrationRuntimeSsisCatalogPricingTier
       protocol: {}
@@ -2910,7 +2910,7 @@ schemas:
       language:
         default:
           name: managed_integration_runtime_status_type_properties_create_time
-          description: 'The time at which the integration runtime was created, in ISO8601 format.'
+          description: The time at which the integration runtime was created, in ISO8601 format.
       protocol: {}
     - &ref_198
       type: date-time
@@ -2940,7 +2940,7 @@ schemas:
       language:
         default:
           name: self_hosted_integration_runtime_status_type_properties_create_time
-          description: 'The time at which the integration runtime was created, in ISO8601 format.'
+          description: The time at which the integration runtime was created, in ISO8601 format.
       protocol: {}
     - &ref_222
       type: date-time
@@ -3020,7 +3020,7 @@ schemas:
       language:
         default:
           name: self_hosted_integration_runtime_status_type_properties_scheduled_update_date
-          description: 'The date at which the integration runtime will be scheduled to update, in ISO8601 format.'
+          description: The date at which the integration runtime will be scheduled to update, in ISO8601 format.
       protocol: {}
     - &ref_243
       type: date-time
@@ -3234,7 +3234,7 @@ schemas:
                         language:
                           default:
                             name: provisioning_state
-                            description: 'Factory provisioning state, example Succeeded.'
+                            description: Factory provisioning state, example Succeeded.
                           cli:
                             cliKey: provisioningState
                         protocol: {}
@@ -3569,7 +3569,7 @@ schemas:
           language:
             default:
               name: next_link
-              description: 'The link to the next page of results, if any remaining results exist.'
+              description: The link to the next page of results, if any remaining results exist.
             cli:
               cliKey: nextLink
           protocol: {}
@@ -3997,7 +3997,7 @@ schemas:
                                           language:
                                             default:
                                               name: state
-                                              description: 'Integration runtime state, only valid for managed dedicated integration runtime.'
+                                              description: Integration runtime state, only valid for managed dedicated integration runtime.
                                             cli:
                                               cliKey: state
                                           protocol: {}
@@ -4021,7 +4021,7 @@ schemas:
                                                       language:
                                                         default:
                                                           name: location
-                                                          description: 'The location for managed integration runtime. The supported regions could be found on https://docs.microsoft.com/en-us/azure/data-factory/data-factory-data-movement-activities'
+                                                          description: The location for managed integration runtime. The supported regions could be found on https://docs.microsoft.com/en-us/azure/data-factory/data-factory-data-movement-activities
                                                         cli:
                                                           cliKey: location
                                                       protocol: {}
@@ -4325,7 +4325,7 @@ schemas:
                                                             language:
                                                               default:
                                                                 name: catalog_pricing_tier
-                                                                description: 'The pricing tier for the catalog database. The valid values could be found in https://azure.microsoft.com/en-us/pricing/details/sql-database/'
+                                                                description: The pricing tier for the catalog database. The valid values could be found in https://azure.microsoft.com/en-us/pricing/details/sql-database/
                                                               cli:
                                                                 cliKey: catalogPricingTier
                                                             protocol: {}
@@ -4932,7 +4932,7 @@ schemas:
                                       language:
                                         default:
                                           name: managed_integration_runtime
-                                          description: 'Managed integration runtime, including managed elastic and managed dedicated integration runtimes.'
+                                          description: Managed integration runtime, including managed elastic and managed dedicated integration runtimes.
                                           namespace: ''
                                         cli:
                                           cliKey: ManagedIntegrationRuntime
@@ -5096,7 +5096,7 @@ schemas:
                                           language:
                                             default:
                                               name: type_properties
-                                              description: 'When this property is not null, means this is a linked integration runtime. The property is used to access original integration runtime.'
+                                              description: When this property is not null, means this is a linked integration runtime. The property is used to access original integration runtime.
                                             cli:
                                               cliKey: typeProperties
                                           protocol: {}
@@ -5244,7 +5244,7 @@ schemas:
                     language:
                       default:
                         name: sub_resource
-                        description: 'Azure Data Factory nested resource, which belongs to a factory.'
+                        description: Azure Data Factory nested resource, which belongs to a factory.
                         namespace: ''
                       cli:
                         cliKey: SubResource
@@ -5548,7 +5548,7 @@ schemas:
                                 language:
                                   default:
                                     name: schedule_trigger
-                                    description: 'Trigger that creates pipeline runs periodically, on schedule.'
+                                    description: Trigger that creates pipeline runs periodically, on schedule.
                                     namespace: ''
                                   cli:
                                     cliKey: ScheduleTrigger
@@ -5735,7 +5735,7 @@ schemas:
                                           language:
                                             default:
                                               name: ignore_empty_blobs
-                                              description: 'If set to true, blobs with zero bytes will be ignored.'
+                                              description: If set to true, blobs with zero bytes will be ignored.
                                             cli:
                                               cliKey: ignoreEmptyBlobs
                                           protocol: {}
@@ -6678,7 +6678,7 @@ schemas:
           language:
             default:
               name: next_link
-              description: 'The link to the next page of results, if any remaining results exist.'
+              description: The link to the next page of results, if any remaining results exist.
             cli:
               cliKey: nextLink
           protocol: {}
@@ -6762,7 +6762,7 @@ schemas:
           language:
             default:
               name: continuation_token
-              description: 'The continuation token for getting the next page of results, if any remaining results exist, null otherwise.'
+              description: The continuation token for getting the next page of results, if any remaining results exist, null otherwise.
             cli:
               cliKey: continuationToken
           protocol: {}
@@ -6845,7 +6845,7 @@ schemas:
           language:
             default:
               name: next_link
-              description: 'The link to the next page of results, if any remaining results exist.'
+              description: The link to the next page of results, if any remaining results exist.
             cli:
               cliKey: nextLink
           protocol: {}
@@ -6873,7 +6873,7 @@ schemas:
           language:
             default:
               name: auto_update
-              description: 'Enables or disables the auto-update feature of the self-hosted integration runtime. See https://go.microsoft.com/fwlink/?linkid=854189.'
+              description: Enables or disables the auto-update feature of the self-hosted integration runtime. See https://go.microsoft.com/fwlink/?linkid=854189.
             cli:
               cliKey: autoUpdate
           protocol: {}
@@ -6882,7 +6882,7 @@ schemas:
           language:
             default:
               name: update_delay_offset
-              description: 'The time offset (in hours) in the day, e.g., PT03H is 3 hours. The integration runtime auto update will happen on that time.'
+              description: The time offset (in hours) in the day, e.g., PT03H is 3 hours. The integration runtime auto update will happen on that time.
             cli:
               cliKey: updateDelayOffset
           protocol: {}
@@ -6943,7 +6943,7 @@ schemas:
                             language:
                               default:
                                 name: create_time
-                                description: 'The time at which the integration runtime was created, in ISO8601 format.'
+                                description: The time at which the integration runtime was created, in ISO8601 format.
                               cli:
                                 cliKey: createTime
                             protocol: {}
@@ -7274,7 +7274,7 @@ schemas:
                             language:
                               default:
                                 name: create_time
-                                description: 'The time at which the integration runtime was created, in ISO8601 format.'
+                                description: The time at which the integration runtime was created, in ISO8601 format.
                               cli:
                                 cliKey: createTime
                             protocol: {}
@@ -7533,7 +7533,7 @@ schemas:
                             language:
                               default:
                                 name: scheduled_update_date
-                                description: 'The date at which the integration runtime will be scheduled to update, in ISO8601 format.'
+                                description: The date at which the integration runtime will be scheduled to update, in ISO8601 format.
                               cli:
                                 cliKey: scheduledUpdateDate
                             protocol: {}
@@ -7543,7 +7543,7 @@ schemas:
                             language:
                               default:
                                 name: update_delay_offset
-                                description: 'The time in the date scheduled by service to update the integration runtime, e.g., PT03H is 3 hours'
+                                description: The time in the date scheduled by service to update the integration runtime, e.g., PT03H is 3 hours
                               cli:
                                 cliKey: updateDelayOffset
                             protocol: {}
@@ -8310,7 +8310,7 @@ schemas:
           language:
             default:
               name: next_link
-              description: 'The link to the next page of results, if any remaining results exist.'
+              description: The link to the next page of results, if any remaining results exist.
             cli:
               cliKey: nextLink
           protocol: {}
@@ -8930,7 +8930,7 @@ schemas:
           language:
             default:
               name: next_link
-              description: 'The link to the next page of results, if any remaining results exist.'
+              description: The link to the next page of results, if any remaining results exist.
             cli:
               cliKey: nextLink
           protocol: {}
@@ -9005,9 +9005,9 @@ globalParameters:
         in: path
   - &ref_389
     schema: *ref_0
-    clientDefaultValue: 'https://management.azure.com'
+    clientDefaultValue: https://management.azure.com
     implementation: Client
-    origin: 'modelerfour:synthesized/host'
+    origin: modelerfour:synthesized/host
     required: true
     extensions:
       x-ms-skip-url-encoding: true
@@ -9024,7 +9024,7 @@ globalParameters:
   - &ref_391
     schema: *ref_388
     implementation: Client
-    origin: 'modelerfour:synthesized/api-version'
+    origin: modelerfour:synthesized/api-version
     required: true
     language:
       default:
@@ -9049,7 +9049,7 @@ operationGroups:
           - parameters:
               - schema: *ref_392
                 implementation: Method
-                origin: 'modelerfour:synthesized/accept'
+                origin: modelerfour:synthesized/accept
                 required: true
                 language:
                   default:
@@ -9068,7 +9068,7 @@ operationGroups:
                 description: ''
             protocol:
               http:
-                path: '/subscriptions/{subscriptionId}/providers/Microsoft.DataFactory/factories'
+                path: /subscriptions/{subscriptionId}/providers/Microsoft.DataFactory/factories
                 method: get
                 uri: '{$host}'
         signatureParameters: []
@@ -9253,7 +9253,7 @@ operationGroups:
                         tags:
                           exampleTag: exampleValue
                   headers:
-                    Date: 'Tue, 19 Jun 2018 05:41:51 GMT'
+                    Date: Tue, 19 Jun 2018 05:41:51 GMT
                     X-Content-Type-Options: nosniff
                     x-ms-correlation-request-id: 533da6af-ad1a-4f89-ae04-d55e9c72b89d
                     x-ms-ratelimit-remaining-subscription-reads: '14992'
@@ -9307,7 +9307,7 @@ operationGroups:
                     style: json
               - schema: *ref_392
                 implementation: Method
-                origin: 'modelerfour:synthesized/accept'
+                origin: modelerfour:synthesized/accept
                 required: true
                 language:
                   default:
@@ -9327,7 +9327,7 @@ operationGroups:
                 description: ''
             protocol:
               http:
-                path: '/subscriptions/{subscriptionId}/providers/Microsoft.DataFactory/locations/{locationId}/configureFactoryRepo'
+                path: /subscriptions/{subscriptionId}/providers/Microsoft.DataFactory/locations/{locationId}/configureFactoryRepo
                 method: post
                 knownMediaType: json
                 mediaTypes:
@@ -9403,7 +9403,7 @@ operationGroups:
                     tags:
                       exampleTag: exampleValue
                   headers:
-                    Date: 'Tue, 19 Jun 2018 05:41:50 GMT'
+                    Date: Tue, 19 Jun 2018 05:41:50 GMT
                     X-Content-Type-Options: nosniff
                     x-ms-correlation-request-id: c63640bd-3e5f-4ee0-bae1-cea74f761a7d
                     x-ms-ratelimit-remaining-subscription-writes: '1191'
@@ -9439,7 +9439,7 @@ operationGroups:
           - parameters:
               - schema: *ref_392
                 implementation: Method
-                origin: 'modelerfour:synthesized/accept'
+                origin: modelerfour:synthesized/accept
                 required: true
                 language:
                   default:
@@ -9458,7 +9458,7 @@ operationGroups:
                 description: ''
             protocol:
               http:
-                path: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories'
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories
                 method: get
                 uri: '{$host}'
         signatureParameters:
@@ -9545,7 +9545,7 @@ operationGroups:
                         tags:
                           exampleTag: exampleValue
                   headers:
-                    Date: 'Tue, 19 Jun 2018 05:41:51 GMT'
+                    Date: Tue, 19 Jun 2018 05:41:51 GMT
                     X-Content-Type-Options: nosniff
                     x-ms-correlation-request-id: f9c976e7-4205-4cfc-833e-e5d50565fcef
                     x-ms-ratelimit-remaining-subscription-reads: '14993'
@@ -9601,7 +9601,7 @@ operationGroups:
             language:
               default:
                 name: if_match
-                description: 'ETag of the factory entity. Should only be specified for update, for which it should match existing entity or can be * for unconditional update.'
+                description: ETag of the factory entity. Should only be specified for update, for which it should match existing entity or can be * for unconditional update.
                 serializedName: If-Match
               cli:
                 cliKey: If-Match
@@ -9626,7 +9626,7 @@ operationGroups:
                     style: json
               - schema: *ref_392
                 implementation: Method
-                origin: 'modelerfour:synthesized/accept'
+                origin: modelerfour:synthesized/accept
                 required: true
                 language:
                   default:
@@ -9646,7 +9646,7 @@ operationGroups:
                 description: ''
             protocol:
               http:
-                path: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}'
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}
                 method: put
                 knownMediaType: json
                 mediaTypes:
@@ -9706,7 +9706,7 @@ operationGroups:
                       version: '2018-06-01'
                     tags: {}
                   headers:
-                    Date: 'Tue, 19 Jun 2018 05:41:50 GMT'
+                    Date: Tue, 19 Jun 2018 05:41:50 GMT
                     X-Content-Type-Options: nosniff
                     x-ms-correlation-request-id: 657028b7-5e63-4d7c-b8e7-cb336ed92ff0
                     x-ms-ratelimit-remaining-subscription-writes: '1193'
@@ -9770,7 +9770,7 @@ operationGroups:
                     style: json
               - schema: *ref_392
                 implementation: Method
-                origin: 'modelerfour:synthesized/accept'
+                origin: modelerfour:synthesized/accept
                 required: true
                 language:
                   default:
@@ -9790,7 +9790,7 @@ operationGroups:
                 description: ''
             protocol:
               http:
-                path: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}'
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}
                 method: patch
                 knownMediaType: json
                 mediaTypes:
@@ -9851,7 +9851,7 @@ operationGroups:
                     tags:
                       exampleTag: exampleValue
                   headers:
-                    Date: 'Tue, 19 Jun 2018 05:41:50 GMT'
+                    Date: Tue, 19 Jun 2018 05:41:50 GMT
                     X-Content-Type-Options: nosniff
                     x-ms-correlation-request-id: 699c67a6-fef5-40c9-bc73-d571d09783c3
                     x-ms-ratelimit-remaining-subscription-writes: '1192'
@@ -9903,7 +9903,7 @@ operationGroups:
             language:
               default:
                 name: if_none_match
-                description: 'ETag of the factory entity. Should only be specified for get. If the ETag matches the existing entity tag, or if * was provided, then no content will be returned.'
+                description: ETag of the factory entity. Should only be specified for get. If the ETag matches the existing entity tag, or if * was provided, then no content will be returned.
                 serializedName: If-None-Match
               cli:
                 cliKey: If-None-Match
@@ -9914,7 +9914,7 @@ operationGroups:
           - parameters:
               - schema: *ref_392
                 implementation: Method
-                origin: 'modelerfour:synthesized/accept'
+                origin: modelerfour:synthesized/accept
                 required: true
                 language:
                   default:
@@ -9933,7 +9933,7 @@ operationGroups:
                 description: ''
             protocol:
               http:
-                path: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}'
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}
                 method: get
                 uri: '{$host}'
         signatureParameters:
@@ -10007,7 +10007,7 @@ operationGroups:
                     tags:
                       exampleTag: exampleValue
                   headers:
-                    Date: 'Tue, 19 Jun 2018 05:41:50 GMT'
+                    Date: Tue, 19 Jun 2018 05:41:50 GMT
                     X-Content-Type-Options: nosniff
                     x-ms-correlation-request-id: d84e59aa-718c-4b1a-951c-076ffff766c8
                     x-ms-ratelimit-remaining-subscription-reads: '14994'
@@ -10058,7 +10058,7 @@ operationGroups:
           - parameters:
               - schema: *ref_392
                 implementation: Method
-                origin: 'modelerfour:synthesized/accept'
+                origin: modelerfour:synthesized/accept
                 required: true
                 language:
                   default:
@@ -10077,7 +10077,7 @@ operationGroups:
                 description: ''
             protocol:
               http:
-                path: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}'
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}
                 method: delete
                 uri: '{$host}'
         signatureParameters:
@@ -10183,7 +10183,7 @@ operationGroups:
                     style: json
               - schema: *ref_392
                 implementation: Method
-                origin: 'modelerfour:synthesized/accept'
+                origin: modelerfour:synthesized/accept
                 required: true
                 language:
                   default:
@@ -10203,7 +10203,7 @@ operationGroups:
                 description: ''
             protocol:
               http:
-                path: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/getGitHubAccessToken'
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/getGitHubAccessToken
                 method: post
                 knownMediaType: json
                 mediaTypes:
@@ -10255,7 +10255,7 @@ operationGroups:
                   body:
                     gitHubAccessToken: myAccessTokenExample
                   headers:
-                    Date: 'Fri, 7 Sep 2018 18:42:45 GMT'
+                    Date: Fri, 7 Sep 2018 18:42:45 GMT
                     X-Content-Type-Options: nosniff
                     x-ms-correlation-request-id: da630ed9-35e4-41cd-9f93-be14dbcbd099
                     x-ms-ratelimit-remaining-subscription-reads: '1199'
@@ -10319,7 +10319,7 @@ operationGroups:
                     style: json
               - schema: *ref_392
                 implementation: Method
-                origin: 'modelerfour:synthesized/accept'
+                origin: modelerfour:synthesized/accept
                 required: true
                 language:
                   default:
@@ -10339,7 +10339,7 @@ operationGroups:
                 description: ''
             protocol:
               http:
-                path: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/getDataPlaneAccess'
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/getDataPlaneAccess
                 method: post
                 knownMediaType: json
                 mediaTypes:
@@ -10392,7 +10392,7 @@ operationGroups:
                 '200':
                   body:
                     accessToken: '**********'
-                    dataPlaneUrl: 'https://rpeastus.svc.datafactory.azure.com:4433'
+                    dataPlaneUrl: https://rpeastus.svc.datafactory.azure.com:4433
                     policy:
                       accessResourcePath: ''
                       expireTime: '2018-11-10T09:46:20.2659347Z'
@@ -10400,7 +10400,7 @@ operationGroups:
                       profileName: DefaultProfile
                       startTime: '2018-11-10T02:46:20.2659347Z'
                   headers:
-                    Date: 'Wed, 07 Nov 2018 03:41:57 GMT'
+                    Date: Wed, 07 Nov 2018 03:41:57 GMT
                     X-Content-Type-Options: nosniff
                     x-ms-correlation-request-id: 82bc20d2-4bec-496d-a1c8-3f7746fed307
                     x-ms-ratelimit-remaining-subscription-reads: '11996'
@@ -10459,7 +10459,7 @@ operationGroups:
           - parameters:
               - schema: *ref_392
                 implementation: Method
-                origin: 'modelerfour:synthesized/accept'
+                origin: modelerfour:synthesized/accept
                 required: true
                 language:
                   default:
@@ -10478,7 +10478,7 @@ operationGroups:
                 description: ''
             protocol:
               http:
-                path: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/triggers'
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/triggers
                 method: get
                 uri: '{$host}'
         signatureParameters:
@@ -10545,7 +10545,7 @@ operationGroups:
                               startTime: '2018-06-16T00:39:14.905167Z'
                               timeZone: UTC
                   headers:
-                    Date: 'Sat, 16 Jun 2018 00:40:20 GMT'
+                    Date: Sat, 16 Jun 2018 00:40:20 GMT
                     X-Content-Type-Options: nosniff
                     x-ms-correlation-request-id: e474f8f8-b34f-4536-b059-ca740e6b44c3
                     x-ms-ratelimit-remaining-subscription-reads: '14986'
@@ -10613,7 +10613,7 @@ operationGroups:
                     style: json
               - schema: *ref_392
                 implementation: Method
-                origin: 'modelerfour:synthesized/accept'
+                origin: modelerfour:synthesized/accept
                 required: true
                 language:
                   default:
@@ -10633,7 +10633,7 @@ operationGroups:
                 description: ''
             protocol:
               http:
-                path: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/querytriggers'
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/querytriggers
                 method: post
                 knownMediaType: json
                 mediaTypes:
@@ -10695,7 +10695,7 @@ operationGroups:
                             requestedStartTime: '2018-06-16T00:39:14.905167Z'
                             rerunConcurrency: 4
                   headers:
-                    Date: 'Sat, 16 Jun 2018 00:40:20 GMT'
+                    Date: Sat, 16 Jun 2018 00:40:20 GMT
                     X-Content-Type-Options: nosniff
                     x-ms-correlation-request-id: e474f8f8-b34f-4536-b059-ca740e6b44c3
                     x-ms-ratelimit-remaining-subscription-reads: '14986'
@@ -10761,7 +10761,7 @@ operationGroups:
             language:
               default:
                 name: if_match
-                description: 'ETag of the trigger entity.  Should only be specified for update, for which it should match existing entity or can be * for unconditional update.'
+                description: ETag of the trigger entity.  Should only be specified for update, for which it should match existing entity or can be * for unconditional update.
                 serializedName: If-Match
               cli:
                 cliKey: If-Match
@@ -10786,7 +10786,7 @@ operationGroups:
                     style: json
               - schema: *ref_392
                 implementation: Method
-                origin: 'modelerfour:synthesized/accept'
+                origin: modelerfour:synthesized/accept
                 required: true
                 language:
                   default:
@@ -10806,7 +10806,7 @@ operationGroups:
                 description: ''
             protocol:
               http:
-                path: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/triggers/{triggerName}'
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/triggers/{triggerName}
                 method: put
                 knownMediaType: json
                 mediaTypes:
@@ -10895,7 +10895,7 @@ operationGroups:
                           startTime: '2018-06-16T00:39:13.8441801Z'
                           timeZone: UTC
                   headers:
-                    Date: 'Sat, 16 Jun 2018 00:40:14 GMT'
+                    Date: Sat, 16 Jun 2018 00:40:14 GMT
                     X-Content-Type-Options: nosniff
                     x-ms-correlation-request-id: 373f1a49-685d-4c07-8857-0fcf1bcaffcb
                     x-ms-ratelimit-remaining-subscription-writes: '1186'
@@ -10952,7 +10952,7 @@ operationGroups:
                           startTime: '2018-06-16T00:39:14.905167Z'
                           timeZone: UTC
                   headers:
-                    Date: 'Sat, 16 Jun 2018 00:40:15 GMT'
+                    Date: Sat, 16 Jun 2018 00:40:15 GMT
                     X-Content-Type-Options: nosniff
                     x-ms-correlation-request-id: d5ccf096-0618-4b26-9829-db77e4c391c7
                     x-ms-ratelimit-remaining-subscription-writes: '1185'
@@ -11018,7 +11018,7 @@ operationGroups:
             language:
               default:
                 name: if_none_match
-                description: 'ETag of the trigger entity. Should only be specified for get. If the ETag matches the existing entity tag, or if * was provided, then no content will be returned.'
+                description: ETag of the trigger entity. Should only be specified for get. If the ETag matches the existing entity tag, or if * was provided, then no content will be returned.
                 serializedName: If-None-Match
               cli:
                 cliKey: If-None-Match
@@ -11029,7 +11029,7 @@ operationGroups:
           - parameters:
               - schema: *ref_392
                 implementation: Method
-                origin: 'modelerfour:synthesized/accept'
+                origin: modelerfour:synthesized/accept
                 required: true
                 language:
                   default:
@@ -11048,7 +11048,7 @@ operationGroups:
                 description: ''
             protocol:
               http:
-                path: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/triggers/{triggerName}'
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/triggers/{triggerName}
                 method: get
                 uri: '{$host}'
         signatureParameters:
@@ -11125,7 +11125,7 @@ operationGroups:
                           startTime: '2019-04-22T18:32:52.527912Z'
                           timeZone: UTC
                   headers:
-                    Date: 'Mon, 22 Apr 2019 18:33:52 GMT'
+                    Date: Mon, 22 Apr 2019 18:33:52 GMT
                     X-Content-Type-Options: nosniff
                     x-ms-correlation-request-id: 8ad1759f-24c1-46a5-aef5-edd267e18870
                     x-ms-ratelimit-remaining-subscription-reads: '11989'
@@ -11190,7 +11190,7 @@ operationGroups:
           - parameters:
               - schema: *ref_392
                 implementation: Method
-                origin: 'modelerfour:synthesized/accept'
+                origin: modelerfour:synthesized/accept
                 required: true
                 language:
                   default:
@@ -11209,7 +11209,7 @@ operationGroups:
                 description: ''
             protocol:
               http:
-                path: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/triggers/{triggerName}'
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/triggers/{triggerName}
                 method: delete
                 uri: '{$host}'
         signatureParameters:
@@ -11317,7 +11317,7 @@ operationGroups:
           - parameters:
               - schema: *ref_392
                 implementation: Method
-                origin: 'modelerfour:synthesized/accept'
+                origin: modelerfour:synthesized/accept
                 required: true
                 language:
                   default:
@@ -11336,7 +11336,7 @@ operationGroups:
                 description: ''
             protocol:
               http:
-                path: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/triggers/{triggerName}/subscribeToEvents'
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/triggers/{triggerName}/subscribeToEvents
                 method: post
                 uri: '{$host}'
         signatureParameters:
@@ -11455,7 +11455,7 @@ operationGroups:
           - parameters:
               - schema: *ref_392
                 implementation: Method
-                origin: 'modelerfour:synthesized/accept'
+                origin: modelerfour:synthesized/accept
                 required: true
                 language:
                   default:
@@ -11474,7 +11474,7 @@ operationGroups:
                 description: ''
             protocol:
               http:
-                path: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/triggers/{triggerName}/getEventSubscriptionStatus'
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/triggers/{triggerName}/getEventSubscriptionStatus
                 method: post
                 uri: '{$host}'
         signatureParameters:
@@ -11580,7 +11580,7 @@ operationGroups:
           - parameters:
               - schema: *ref_392
                 implementation: Method
-                origin: 'modelerfour:synthesized/accept'
+                origin: modelerfour:synthesized/accept
                 required: true
                 language:
                   default:
@@ -11599,7 +11599,7 @@ operationGroups:
                 description: ''
             protocol:
               http:
-                path: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/triggers/{triggerName}/unsubscribeFromEvents'
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/triggers/{triggerName}/unsubscribeFromEvents
                 method: post
                 uri: '{$host}'
         signatureParameters:
@@ -11718,7 +11718,7 @@ operationGroups:
           - parameters:
               - schema: *ref_392
                 implementation: Method
-                origin: 'modelerfour:synthesized/accept'
+                origin: modelerfour:synthesized/accept
                 required: true
                 language:
                   default:
@@ -11737,7 +11737,7 @@ operationGroups:
                 description: ''
             protocol:
               http:
-                path: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/triggers/{triggerName}/start'
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/triggers/{triggerName}/start
                 method: post
                 uri: '{$host}'
         signatureParameters:
@@ -11837,7 +11837,7 @@ operationGroups:
           - parameters:
               - schema: *ref_392
                 implementation: Method
-                origin: 'modelerfour:synthesized/accept'
+                origin: modelerfour:synthesized/accept
                 required: true
                 language:
                   default:
@@ -11856,7 +11856,7 @@ operationGroups:
                 description: ''
             protocol:
               http:
-                path: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/triggers/{triggerName}/stop'
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/triggers/{triggerName}/stop
                 method: post
                 uri: '{$host}'
         signatureParameters:
@@ -11951,7 +11951,7 @@ operationGroups:
           - parameters:
               - schema: *ref_392
                 implementation: Method
-                origin: 'modelerfour:synthesized/accept'
+                origin: modelerfour:synthesized/accept
                 required: true
                 language:
                   default:
@@ -11970,7 +11970,7 @@ operationGroups:
                 description: ''
             protocol:
               http:
-                path: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/integrationRuntimes'
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/integrationRuntimes
                 method: get
                 uri: '{$host}'
         signatureParameters:
@@ -12023,7 +12023,7 @@ operationGroups:
                           type: SelfHosted
                           description: A selfhosted integration runtime
                   headers:
-                    Date: 'Wed, 13 Jun 2018 21:33:05 GMT'
+                    Date: Wed, 13 Jun 2018 21:33:05 GMT
                     X-Content-Type-Options: nosniff
                     x-ms-correlation-request-id: f632df92-1140-4e19-9e19-0b1c8cbe393b
                     x-ms-ratelimit-remaining-subscription-reads: '14909'
@@ -12093,7 +12093,7 @@ operationGroups:
             language:
               default:
                 name: if_match
-                description: 'ETag of the integration runtime entity. Should only be specified for update, for which it should match existing entity or can be * for unconditional update.'
+                description: ETag of the integration runtime entity. Should only be specified for update, for which it should match existing entity or can be * for unconditional update.
                 serializedName: If-Match
               cli:
                 cliKey: If-Match
@@ -12118,7 +12118,7 @@ operationGroups:
                     style: json
               - schema: *ref_392
                 implementation: Method
-                origin: 'modelerfour:synthesized/accept'
+                origin: modelerfour:synthesized/accept
                 required: true
                 language:
                   default:
@@ -12138,7 +12138,7 @@ operationGroups:
                 description: ''
             protocol:
               http:
-                path: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/integrationRuntimes/{integrationRuntimeName}'
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/integrationRuntimes/{integrationRuntimeName}
                 method: put
                 knownMediaType: json
                 mediaTypes:
@@ -12200,7 +12200,7 @@ operationGroups:
                       type: SelfHosted
                       description: A selfhosted integration runtime
                   headers:
-                    Date: 'Wed, 13 Jun 2018 22:20:47 GMT'
+                    Date: Wed, 13 Jun 2018 22:20:47 GMT
                     X-Content-Type-Options: nosniff
                     x-ms-correlation-request-id: 125c07fa-e39a-4541-885f-5019631a5ecd
                     x-ms-ratelimit-remaining-subscription-writes: '1197'
@@ -12266,7 +12266,7 @@ operationGroups:
             language:
               default:
                 name: if_none_match
-                description: 'ETag of the integration runtime entity. Should only be specified for get. If the ETag matches the existing entity tag, or if * was provided, then no content will be returned.'
+                description: ETag of the integration runtime entity. Should only be specified for get. If the ETag matches the existing entity tag, or if * was provided, then no content will be returned.
                 serializedName: If-None-Match
               cli:
                 cliKey: If-None-Match
@@ -12277,7 +12277,7 @@ operationGroups:
           - parameters:
               - schema: *ref_392
                 implementation: Method
-                origin: 'modelerfour:synthesized/accept'
+                origin: modelerfour:synthesized/accept
                 required: true
                 language:
                   default:
@@ -12296,7 +12296,7 @@ operationGroups:
                 description: ''
             protocol:
               http:
-                path: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/integrationRuntimes/{integrationRuntimeName}'
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/integrationRuntimes/{integrationRuntimeName}
                 method: get
                 uri: '{$host}'
         signatureParameters:
@@ -12359,7 +12359,7 @@ operationGroups:
                       type: SelfHosted
                       description: A selfhosted integration runtime
                   headers:
-                    Date: 'Mon, 22 Apr 2019 18:33:47 GMT'
+                    Date: Mon, 22 Apr 2019 18:33:47 GMT
                     X-Content-Type-Options: nosniff
                     x-ms-correlation-request-id: ad824326-e577-4a47-a092-2e621c4d59d9
                     x-ms-ratelimit-remaining-subscription-reads: '11997'
@@ -12438,7 +12438,7 @@ operationGroups:
                     style: json
               - schema: *ref_392
                 implementation: Method
-                origin: 'modelerfour:synthesized/accept'
+                origin: modelerfour:synthesized/accept
                 required: true
                 language:
                   default:
@@ -12458,7 +12458,7 @@ operationGroups:
                 description: ''
             protocol:
               http:
-                path: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/integrationRuntimes/{integrationRuntimeName}'
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/integrationRuntimes/{integrationRuntimeName}
                 method: patch
                 knownMediaType: json
                 mediaTypes:
@@ -12517,7 +12517,7 @@ operationGroups:
                       type: SelfHosted
                       description: A selfhosted integration runtime
                   headers:
-                    Date: 'Wed, 13 Jun 2018 21:33:04 GMT'
+                    Date: Wed, 13 Jun 2018 21:33:04 GMT
                     X-Content-Type-Options: nosniff
                     x-ms-correlation-request-id: eb1c35f8-4b37-4d08-b5dd-d6a0ad8b182d
                     x-ms-ratelimit-remaining-subscription-writes: '1192'
@@ -12581,7 +12581,7 @@ operationGroups:
           - parameters:
               - schema: *ref_392
                 implementation: Method
-                origin: 'modelerfour:synthesized/accept'
+                origin: modelerfour:synthesized/accept
                 required: true
                 language:
                   default:
@@ -12600,7 +12600,7 @@ operationGroups:
                 description: ''
             protocol:
               http:
-                path: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/integrationRuntimes/{integrationRuntimeName}'
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/integrationRuntimes/{integrationRuntimeName}
                 method: delete
                 uri: '{$host}'
         signatureParameters:
@@ -12708,7 +12708,7 @@ operationGroups:
           - parameters:
               - schema: *ref_392
                 implementation: Method
-                origin: 'modelerfour:synthesized/accept'
+                origin: modelerfour:synthesized/accept
                 required: true
                 language:
                   default:
@@ -12727,7 +12727,7 @@ operationGroups:
                 description: ''
             protocol:
               http:
-                path: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/integrationRuntimes/{integrationRuntimeName}/getStatus'
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/integrationRuntimes/{integrationRuntimeName}/getStatus
                 method: post
                 uri: '{$host}'
         signatureParameters:
@@ -12794,7 +12794,7 @@ operationGroups:
                               httpsPortEnabled: 'True'
                               nodeEnabled: 'True'
                               serviceBusConnected: 'True'
-                            hostServiceUri: 'https://yanzhang-dt.fareast.corp.microsoft.com:8050/HostServiceRemote.svc/'
+                            hostServiceUri: https://yanzhang-dt.fareast.corp.microsoft.com:8050/HostServiceRemote.svc/
                             isActiveDispatcher: true
                             lastConnectTime: '2018-06-14T14:52:59.8933313Z'
                             lastStartTime: '2018-06-14T14:52:59.8933313Z'
@@ -12814,7 +12814,7 @@ operationGroups:
                         version: 3.8.6730.2
                         versionStatus: UpToDate
                   headers:
-                    Date: 'Thu, 14 Jun 2018 14:53:22 GMT'
+                    Date: Thu, 14 Jun 2018 14:53:22 GMT
                     X-Content-Type-Options: nosniff
                     x-ms-correlation-request-id: 19efe790-074f-4241-ae94-0422935d0f46
                     x-ms-ratelimit-remaining-subscription-reads: '14997'
@@ -12878,7 +12878,7 @@ operationGroups:
           - parameters:
               - schema: *ref_392
                 implementation: Method
-                origin: 'modelerfour:synthesized/accept'
+                origin: modelerfour:synthesized/accept
                 required: true
                 language:
                   default:
@@ -12897,7 +12897,7 @@ operationGroups:
                 description: ''
             protocol:
               http:
-                path: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/integrationRuntimes/{integrationRuntimeName}/getConnectionInfo'
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/integrationRuntimes/{integrationRuntimeName}/getConnectionInfo
                 method: post
                 uri: '{$host}'
         signatureParameters:
@@ -12942,14 +12942,14 @@ operationGroups:
               responses:
                 '200':
                   body:
-                    hostServiceUri: 'https://yanzhang-dt.fareast.corp.microsoft.com:8050/HostServiceRemote.svc/'
+                    hostServiceUri: https://yanzhang-dt.fareast.corp.microsoft.com:8050/HostServiceRemote.svc/
                     identityCertThumbprint: '**********'
                     isIdentityCertExprired: false
                     publicKey: '**********'
                     serviceToken: '**********'
                     version: 3.8.6730.2
                   headers:
-                    Date: 'Thu, 14 Jun 2018 14:53:21 GMT'
+                    Date: Thu, 14 Jun 2018 14:53:21 GMT
                     X-Content-Type-Options: nosniff
                     x-ms-correlation-request-id: 05774db5-e79b-4224-9097-46714b92fbd8
                     x-ms-ratelimit-remaining-subscription-reads: '14998'
@@ -13027,7 +13027,7 @@ operationGroups:
                     style: json
               - schema: *ref_392
                 implementation: Method
-                origin: 'modelerfour:synthesized/accept'
+                origin: modelerfour:synthesized/accept
                 required: true
                 language:
                   default:
@@ -13047,7 +13047,7 @@ operationGroups:
                 description: ''
             protocol:
               http:
-                path: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/integrationRuntimes/{integrationRuntimeName}/regenerateAuthKey'
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/integrationRuntimes/{integrationRuntimeName}/regenerateAuthKey
                 method: post
                 knownMediaType: json
                 mediaTypes:
@@ -13099,7 +13099,7 @@ operationGroups:
                   body:
                     authKey2: '**********'
                   headers:
-                    Date: 'Thu, 14 Jun 2018 14:50:41 GMT'
+                    Date: Thu, 14 Jun 2018 14:50:41 GMT
                     X-Content-Type-Options: nosniff
                     x-ms-correlation-request-id: 25af6d34-52c6-40a4-a882-16052af85c99
                     x-ms-ratelimit-remaining-subscription-writes: '1198'
@@ -13163,7 +13163,7 @@ operationGroups:
           - parameters:
               - schema: *ref_392
                 implementation: Method
-                origin: 'modelerfour:synthesized/accept'
+                origin: modelerfour:synthesized/accept
                 required: true
                 language:
                   default:
@@ -13182,7 +13182,7 @@ operationGroups:
                 description: ''
             protocol:
               http:
-                path: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/integrationRuntimes/{integrationRuntimeName}/listAuthKeys'
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/integrationRuntimes/{integrationRuntimeName}/listAuthKeys
                 method: post
                 uri: '{$host}'
         signatureParameters:
@@ -13230,7 +13230,7 @@ operationGroups:
                     authKey1: '**********'
                     authKey2: '**********'
                   headers:
-                    Date: 'Thu, 14 Jun 2018 14:51:00 GMT'
+                    Date: Thu, 14 Jun 2018 14:51:00 GMT
                     X-Content-Type-Options: nosniff
                     x-ms-correlation-request-id: 2ea25426-9d1d-49f3-88b6-fb853eb02cb9
                     x-ms-ratelimit-remaining-subscription-reads: '14999'
@@ -13294,7 +13294,7 @@ operationGroups:
           - parameters:
               - schema: *ref_392
                 implementation: Method
-                origin: 'modelerfour:synthesized/accept'
+                origin: modelerfour:synthesized/accept
                 required: true
                 language:
                   default:
@@ -13313,7 +13313,7 @@ operationGroups:
                 description: ''
             protocol:
               http:
-                path: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/integrationRuntimes/{integrationRuntimeName}/start'
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/integrationRuntimes/{integrationRuntimeName}/start
                 method: post
                 uri: '{$host}'
         signatureParameters:
@@ -13376,7 +13376,7 @@ operationGroups:
                         nodes: []
                         otherErrors: []
                   headers:
-                    Date: 'Wed, 13 Jun 2018 21:33:00 GMT'
+                    Date: Wed, 13 Jun 2018 21:33:00 GMT
                     X-Content-Type-Options: nosniff
                     x-ms-correlation-request-id: 2af47f9f-5625-4b01-a3a5-bccb576a4677
                     x-ms-ratelimit-remaining-subscription-reads: '14912'
@@ -13442,7 +13442,7 @@ operationGroups:
           - parameters:
               - schema: *ref_392
                 implementation: Method
-                origin: 'modelerfour:synthesized/accept'
+                origin: modelerfour:synthesized/accept
                 required: true
                 language:
                   default:
@@ -13461,7 +13461,7 @@ operationGroups:
                 description: ''
             protocol:
               http:
-                path: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/integrationRuntimes/{integrationRuntimeName}/stop'
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/integrationRuntimes/{integrationRuntimeName}/stop
                 method: post
                 uri: '{$host}'
         signatureParameters:
@@ -13570,7 +13570,7 @@ operationGroups:
           - parameters:
               - schema: *ref_392
                 implementation: Method
-                origin: 'modelerfour:synthesized/accept'
+                origin: modelerfour:synthesized/accept
                 required: true
                 language:
                   default:
@@ -13589,7 +13589,7 @@ operationGroups:
                 description: ''
             protocol:
               http:
-                path: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/integrationRuntimes/{integrationRuntimeName}/syncCredentials'
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/integrationRuntimes/{integrationRuntimeName}/syncCredentials
                 method: post
                 uri: '{$host}'
         signatureParameters:
@@ -13690,7 +13690,7 @@ operationGroups:
           - parameters:
               - schema: *ref_392
                 implementation: Method
-                origin: 'modelerfour:synthesized/accept'
+                origin: modelerfour:synthesized/accept
                 required: true
                 language:
                   default:
@@ -13709,7 +13709,7 @@ operationGroups:
                 description: ''
             protocol:
               http:
-                path: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/integrationRuntimes/{integrationRuntimeName}/monitoringData'
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/integrationRuntimes/{integrationRuntimeName}/monitoringData
                 method: post
                 uri: '{$host}'
         signatureParameters:
@@ -13764,7 +13764,7 @@ operationGroups:
                         receivedBytes: 6.731423377990723
                         sentBytes: 2.647491693496704
                   headers:
-                    Date: 'Thu, 14 Jun 2018 15:27:44 GMT'
+                    Date: Thu, 14 Jun 2018 15:27:44 GMT
                     X-Content-Type-Options: nosniff
                     x-ms-correlation-request-id: 39277952-edbe-4336-ae94-f6f42b50b5f7
                     x-ms-ratelimit-remaining-subscription-reads: '14999'
@@ -13772,7 +13772,7 @@ operationGroups:
         language:
           default:
             name: get_monitoring_data
-            description: 'Get the integration runtime monitoring data, which includes the monitor data for all the nodes under this integration runtime.'
+            description: Get the integration runtime monitoring data, which includes the monitor data for all the nodes under this integration runtime.
           cli:
             cliKey: GetMonitoringData
         protocol: {}
@@ -13828,7 +13828,7 @@ operationGroups:
           - parameters:
               - schema: *ref_392
                 implementation: Method
-                origin: 'modelerfour:synthesized/accept'
+                origin: modelerfour:synthesized/accept
                 required: true
                 language:
                   default:
@@ -13847,7 +13847,7 @@ operationGroups:
                 description: ''
             protocol:
               http:
-                path: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/integrationRuntimes/{integrationRuntimeName}/upgrade'
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/integrationRuntimes/{integrationRuntimeName}/upgrade
                 method: post
                 uri: '{$host}'
         signatureParameters:
@@ -13960,7 +13960,7 @@ operationGroups:
                     style: json
               - schema: *ref_392
                 implementation: Method
-                origin: 'modelerfour:synthesized/accept'
+                origin: modelerfour:synthesized/accept
                 required: true
                 language:
                   default:
@@ -13980,7 +13980,7 @@ operationGroups:
                 description: ''
             protocol:
               http:
-                path: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/integrationRuntimes/{integrationRuntimeName}/removeLinks'
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/integrationRuntimes/{integrationRuntimeName}/removeLinks
                 method: post
                 knownMediaType: json
                 mediaTypes:
@@ -14098,7 +14098,7 @@ operationGroups:
                     style: json
               - schema: *ref_392
                 implementation: Method
-                origin: 'modelerfour:synthesized/accept'
+                origin: modelerfour:synthesized/accept
                 required: true
                 language:
                   default:
@@ -14118,7 +14118,7 @@ operationGroups:
                 description: ''
             protocol:
               http:
-                path: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/integrationRuntimes/{integrationRuntimeName}/linkedIntegrationRuntime'
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/integrationRuntimes/{integrationRuntimeName}/linkedIntegrationRuntime
                 method: post
                 knownMediaType: json
                 mediaTypes:
@@ -14201,7 +14201,7 @@ operationGroups:
                               httpsPortEnabled: 'True'
                               nodeEnabled: 'True'
                               serviceBusConnected: 'True'
-                            hostServiceUri: 'https://yanzhang-dt.fareast.corp.microsoft.com:8050/HostServiceRemote.svc/'
+                            hostServiceUri: https://yanzhang-dt.fareast.corp.microsoft.com:8050/HostServiceRemote.svc/
                             isActiveDispatcher: true
                             lastConnectTime: '2018-08-17T06:30:46.6262976Z'
                             lastStartTime: '2018-08-17T03:45:30.8499851Z'
@@ -14223,7 +14223,7 @@ operationGroups:
                         version: 3.8.6743.6
                         versionStatus: UpdateAvailable
                   headers:
-                    Date: 'Fri, 17 Aug 2018 06:31:03 GMT'
+                    Date: Fri, 17 Aug 2018 06:31:03 GMT
                     X-Content-Type-Options: nosniff
                     x-ms-correlation-request-id: f9a67067-62f3-43ce-b891-2ccb3de4a15f
                     x-ms-ratelimit-remaining-subscription-writes: '1199'
