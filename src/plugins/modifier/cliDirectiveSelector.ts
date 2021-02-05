@@ -22,6 +22,7 @@ export class NodeSelector {
             choiceValue: ['value', 'choice-value'],
             exampleName: ['example-name'],
             dotPath: ['path', 'dot-path', 'example-parameter-path'],
+            apiVersion: ['api-version'],
         };
 
         for (const key in alias) {
@@ -56,6 +57,7 @@ export class NodeSelector {
 
         // TODO: seperate different node type to get better performance when needed
         const match = (e, v) => isNullOrUndefined(e) || Helper.matchRegex(Helper.createRegex(e), v);
+        const matchOneOf = (e, l: string[]) => isNullOrUndefined(e) || isNullOrUndefined(l) || l.some(v=>match(e,v)); 
         if (Helper.ToM4NodeType(descriptor.target) !== this.selectType)
             return false;
 
@@ -67,7 +69,8 @@ export class NodeSelector {
                 r = match(this.where.operationGroup, descriptor.operationGroupCliKey) &&
                     match(this.where.operation, descriptor.operationCliKey) &&
                     match(this.where.parameter, descriptor.parameterCliKey) &&
-                    (isNullOrUndefined(this.where.requestIndex) || descriptor.requestIndex === this.where.requestIndex);
+                    (isNullOrUndefined(this.where.requestIndex) || descriptor.requestIndex === this.where.requestIndex) &&
+                    matchOneOf(this.where.apiVersion, descriptor.apiVersions);
                 break;
             case CliConst.SelectType.choiceSchema:
             case CliConst.SelectType.choiceValue:

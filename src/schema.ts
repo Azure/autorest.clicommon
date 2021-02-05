@@ -120,6 +120,7 @@ export namespace CliCommonSchema {
             choiceValue?: string;
             exampleName?: string;
             dotPath?: string;
+            apiVersion?: string;
         }
 
         export interface FormatTableClause {
@@ -238,6 +239,7 @@ export namespace CliCommonSchema {
              **/
             nodePath?: string;
             exampleName?: string;
+            apiVersions?: string[];
         }
     }
 }

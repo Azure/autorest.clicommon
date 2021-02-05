@@ -548,7 +548,7 @@ export class Helper {
         operations.push(...cliOps);
 
         for (let j = operations.length - 1; j >= 0; j--) {
-            const op = operations[j];
+            const op: Operation = operations[j];
             const cliKey = NodeCliHelper.getCliKey(op, cliKeyMissing);
             paths.push(`['${cliKey}']`);
             if (enumOperation) {
@@ -558,7 +558,8 @@ export class Helper {
                     parent: group.operations,
                     target: op,
                     targetIndex: j,
-                    nodePath: Helper.joinNodePath(paths)
+                    nodePath: Helper.joinNodePath(paths),
+                    apiVersions: op.apiVersions?Array.from(op.apiVersions, x => x.version): undefined,
                 });
             }
 
@@ -629,7 +630,7 @@ export class Helper {
                         parent: op.requests[m].parameters,
                         target: param,
                         targetIndex: k,
-                        nodePath: Helper.joinNodePath(paths)
+                        nodePath: Helper.joinNodePath(paths),
                     });
                 }
                 paths.pop();
