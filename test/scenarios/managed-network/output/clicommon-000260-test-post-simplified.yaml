@@ -957,6 +957,17 @@ schemas:
               cliM4Path: schemas$$objects['ResourceProperties']$$properties['etag']
               cliPath: schemas$$objects['ResourceProperties']$$properties['etag']
             readOnly: true
+      - schemaName: ProxyResource
+        cli:
+          cli-complexity: object_simple
+          cli-mark: checked
+          cli-simplify-indicator: 
+            propertyCountIfSimplify: 1
+            propertyCountIfSimplifyWithoutSimpleObject: 1
+            simplifiable: true
+          cliKey: ProxyResource
+          cliM4Path: schemas$$objects['ProxyResource']
+          cliPath: schemas$$objects['ProxyResource']
       - schemaName: Resource
         cli:
           cli-complexity: object_simple
@@ -1319,17 +1330,6 @@ schemas:
           cliKey: MeshPeeringPolicyProperties
           cliM4Path: schemas$$objects['MeshPeeringPolicyProperties']
           cliPath: schemas$$objects['MeshPeeringPolicyProperties']
-      - schemaName: ProxyResource
-        cli:
-          cli-complexity: object_simple
-          cli-mark: checked
-          cli-simplify-indicator: 
-            propertyCountIfSimplify: 1
-            propertyCountIfSimplifyWithoutSimpleObject: 1
-            simplifiable: true
-          cliKey: ProxyResource
-          cliM4Path: schemas$$objects['ProxyResource']
-          cliPath: schemas$$objects['ProxyResource']
   choices:
     all:
       - choiceName: ProvisioningState

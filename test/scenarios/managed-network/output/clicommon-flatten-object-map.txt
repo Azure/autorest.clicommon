@@ -6,6 +6,7 @@ connectivity_collection<2>
 managed_network_group<2>(properties:managed_network_group_properties)
 managed_network_group_properties<4>
 resource_properties<2>
+proxy_resource<0>
 resource<4>
 managed_network_peering_policy<1>(properties*:managed_network_peering_policy_properties)
 managed_network_peering_policy_properties<4>*(hub:resource_id)
@@ -23,4 +24,3 @@ operation<2>(display:operation_display)
 operation_display<3>
 hub_and_spoke_peering_policy_properties<0>
 mesh_peering_policy_properties<0>
-proxy_resource<0>

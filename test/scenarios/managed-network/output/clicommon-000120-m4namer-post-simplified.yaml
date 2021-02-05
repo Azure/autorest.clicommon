@@ -904,6 +904,11 @@ schemas:
               cliM4Path: schemas$$objects['ResourceProperties']$$properties['etag']
               cliPath: schemas$$objects['ResourceProperties']$$properties['etag']
             readOnly: true
+      - schemaName: ProxyResource
+        cli:
+          cliKey: ProxyResource
+          cliM4Path: schemas$$objects['ProxyResource']
+          cliPath: schemas$$objects['ProxyResource']
       - schemaName: Resource
         cli:
           cliKey: Resource
@@ -1164,11 +1169,6 @@ schemas:
           cliM4Path: schemas$$objects['MeshPeeringPolicyProperties']
           cli-discriminator-value: mesh_topology
           cliPath: schemas$$objects['MeshPeeringPolicyProperties']
-      - schemaName: ProxyResource
-        cli:
-          cliKey: ProxyResource
-          cliM4Path: schemas$$objects['ProxyResource']
-          cliPath: schemas$$objects['ProxyResource']
   choices:
     all:
       - choiceName: ProvisioningState

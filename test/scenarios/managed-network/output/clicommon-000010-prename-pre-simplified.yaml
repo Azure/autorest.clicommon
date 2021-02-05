@@ -220,6 +220,7 @@ schemas:
             readOnly: true
           - propertyName: etag(ResourceProperties-etag^string)
             readOnly: true
+      - schemaName: ProxyResource
       - schemaName: Resource
         properties:
           - propertyName: id(Resource-id^string)
@@ -289,7 +290,6 @@ schemas:
           - propertyName: operation(Operation-display-operation^string)
       - schemaName: HubAndSpokePeeringPolicyProperties
       - schemaName: MeshPeeringPolicyProperties
-      - schemaName: ProxyResource
   choices:
     all:
       - choiceName: ProvisioningState

@@ -1909,7 +1909,7 @@ operationGroups:
             language:
               default:
                 name: ''
-                description: ''
+                description: List all the operations.
             protocol:
               http:
                 knownMediaType: json
@@ -1922,7 +1922,7 @@ operationGroups:
             language:
               default:
                 name: ''
-                description: ''
+                description: Error response describing why the operation failed.
             protocol:
               http:
                 knownMediaType: json
@@ -2060,7 +2060,7 @@ operationGroups:
             language:
               default:
                 name: ''
-                description: ''
+                description: The status of the specified attestation service instance
             protocol:
               http:
                 knownMediaType: json
@@ -2073,7 +2073,7 @@ operationGroups:
             language:
               default:
                 name: ''
-                description: ''
+                description: Error result from Attestation service
             protocol:
               http:
                 knownMediaType: json
@@ -2217,7 +2217,7 @@ operationGroups:
             language:
               default:
                 name: ''
-                description: ''
+                description: Created or updated attestation service
             protocol:
               http:
                 knownMediaType: json
@@ -2229,7 +2229,7 @@ operationGroups:
             language:
               default:
                 name: ''
-                description: ''
+                description: Created or updated attestation service
             protocol:
               http:
                 knownMediaType: json
@@ -2242,7 +2242,7 @@ operationGroups:
             language:
               default:
                 name: ''
-                description: ''
+                description: Error result from Attestation service
             protocol:
               http:
                 knownMediaType: json
@@ -2401,7 +2401,7 @@ operationGroups:
             language:
               default:
                 name: ''
-                description: ''
+                description: Updated attestation service
             protocol:
               http:
                 knownMediaType: json
@@ -2414,7 +2414,7 @@ operationGroups:
             language:
               default:
                 name: ''
-                description: ''
+                description: Error result from Attestation service
             protocol:
               http:
                 knownMediaType: json
@@ -2540,7 +2540,7 @@ operationGroups:
           - language:
               default:
                 name: ''
-                description: ''
+                description: Resource exists and was deleted successfully
             protocol:
               http:
                 statusCodes:
@@ -2548,7 +2548,7 @@ operationGroups:
           - language:
               default:
                 name: ''
-                description: ''
+                description: Request accepted for deletion of attestation service
             protocol:
               http:
                 statusCodes:
@@ -2556,7 +2556,7 @@ operationGroups:
           - language:
               default:
                 name: ''
-                description: ''
+                description: Resource does not exist
             protocol:
               http:
                 statusCodes:
@@ -2566,7 +2566,7 @@ operationGroups:
             language:
               default:
                 name: ''
-                description: ''
+                description: Error result from Attestation service
             protocol:
               http:
                 knownMediaType: json
@@ -2643,7 +2643,7 @@ operationGroups:
             language:
               default:
                 name: ''
-                description: ''
+                description: OK
             protocol:
               http:
                 knownMediaType: json
@@ -2656,7 +2656,7 @@ operationGroups:
             language:
               default:
                 name: ''
-                description: ''
+                description: Attestation service error result
             protocol:
               http:
                 knownMediaType: json
@@ -2758,7 +2758,7 @@ operationGroups:
             language:
               default:
                 name: ''
-                description: ''
+                description: OK
             protocol:
               http:
                 knownMediaType: json
@@ -2771,7 +2771,7 @@ operationGroups:
             language:
               default:
                 name: ''
-                description: ''
+                description: Attestation service error result
             protocol:
               http:
                 knownMediaType: json

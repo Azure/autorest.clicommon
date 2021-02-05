@@ -10449,7 +10449,7 @@ operationGroups:
             language:
               default:
                 name: ''
-                description: ''
+                description: OK.
             protocol:
               http:
                 knownMediaType: json
@@ -10462,7 +10462,7 @@ operationGroups:
             language:
               default:
                 name: ''
-                description: ''
+                description: An error response received from the Azure Data Factory service.
             protocol:
               http:
                 knownMediaType: json
@@ -10716,7 +10716,7 @@ operationGroups:
             language:
               default:
                 name: ''
-                description: ''
+                description: OK.
             protocol:
               http:
                 knownMediaType: json
@@ -10729,7 +10729,7 @@ operationGroups:
             language:
               default:
                 name: ''
-                description: ''
+                description: An error response received from the Azure Data Factory service.
             protocol:
               http:
                 knownMediaType: json
@@ -10847,7 +10847,7 @@ operationGroups:
             language:
               default:
                 name: ''
-                description: ''
+                description: OK.
             protocol:
               http:
                 knownMediaType: json
@@ -10860,7 +10860,7 @@ operationGroups:
             language:
               default:
                 name: ''
-                description: ''
+                description: An error response received from the Azure Data Factory service.
             protocol:
               http:
                 knownMediaType: json
@@ -11046,7 +11046,7 @@ operationGroups:
             language:
               default:
                 name: ''
-                description: ''
+                description: OK.
             protocol:
               http:
                 knownMediaType: json
@@ -11059,7 +11059,7 @@ operationGroups:
             language:
               default:
                 name: ''
-                description: ''
+                description: An error response received from the Azure Data Factory service.
             protocol:
               http:
                 knownMediaType: json
@@ -11194,7 +11194,7 @@ operationGroups:
             language:
               default:
                 name: ''
-                description: ''
+                description: OK.
             protocol:
               http:
                 knownMediaType: json
@@ -11207,7 +11207,7 @@ operationGroups:
             language:
               default:
                 name: ''
-                description: ''
+                description: An error response received from the Azure Data Factory service.
             protocol:
               http:
                 knownMediaType: json
@@ -11340,7 +11340,7 @@ operationGroups:
             language:
               default:
                 name: ''
-                description: ''
+                description: OK.
             protocol:
               http:
                 knownMediaType: json
@@ -11351,7 +11351,7 @@ operationGroups:
           - language:
               default:
                 name: ''
-                description: ''
+                description: Not modified.
             protocol:
               http:
                 statusCodes:
@@ -11361,7 +11361,7 @@ operationGroups:
             language:
               default:
                 name: ''
-                description: ''
+                description: An error response received from the Azure Data Factory service.
             protocol:
               http:
                 knownMediaType: json
@@ -11486,7 +11486,7 @@ operationGroups:
           - language:
               default:
                 name: ''
-                description: ''
+                description: OK.
             protocol:
               http:
                 statusCodes:
@@ -11494,7 +11494,7 @@ operationGroups:
           - language:
               default:
                 name: ''
-                description: ''
+                description: No Content.
             protocol:
               http:
                 statusCodes:
@@ -11504,7 +11504,7 @@ operationGroups:
             language:
               default:
                 name: ''
-                description: ''
+                description: An error response received from the Azure Data Factory service.
             protocol:
               http:
                 knownMediaType: json
@@ -11621,7 +11621,7 @@ operationGroups:
             language:
               default:
                 name: ''
-                description: ''
+                description: OK.
             protocol:
               http:
                 knownMediaType: json
@@ -11634,7 +11634,7 @@ operationGroups:
             language:
               default:
                 name: ''
-                description: ''
+                description: An error response received from the Azure Data Factory service.
             protocol:
               http:
                 knownMediaType: json
@@ -11762,7 +11762,7 @@ operationGroups:
             language:
               default:
                 name: ''
-                description: ''
+                description: OK.
             protocol:
               http:
                 knownMediaType: json
@@ -11775,7 +11775,7 @@ operationGroups:
             language:
               default:
                 name: ''
-                description: ''
+                description: An error response received from the Azure Data Factory service.
             protocol:
               http:
                 knownMediaType: json
@@ -11903,7 +11903,7 @@ operationGroups:
             language:
               default:
                 name: ''
-                description: ''
+                description: OK.
             protocol:
               http:
                 knownMediaType: json
@@ -11916,7 +11916,7 @@ operationGroups:
             language:
               default:
                 name: ''
-                description: ''
+                description: An error response received from the Azure Data Factory service.
             protocol:
               http:
                 knownMediaType: json
@@ -12066,7 +12066,7 @@ operationGroups:
             language:
               default:
                 name: ''
-                description: ''
+                description: OK.
             protocol:
               http:
                 knownMediaType: json
@@ -12079,7 +12079,7 @@ operationGroups:
             language:
               default:
                 name: ''
-                description: ''
+                description: An error response received from the Azure Data Factory service.
             protocol:
               http:
                 knownMediaType: json
@@ -12248,7 +12248,7 @@ operationGroups:
             language:
               default:
                 name: ''
-                description: ''
+                description: OK.
             protocol:
               http:
                 knownMediaType: json
@@ -12261,7 +12261,7 @@ operationGroups:
             language:
               default:
                 name: ''
-                description: ''
+                description: An error response received from the Azure Data Factory service.
             protocol:
               http:
                 knownMediaType: json
@@ -12493,7 +12493,7 @@ operationGroups:
             language:
               default:
                 name: ''
-                description: ''
+                description: OK.
             protocol:
               http:
                 knownMediaType: json
@@ -12504,7 +12504,7 @@ operationGroups:
           - language:
               default:
                 name: ''
-                description: ''
+                description: Not modified.
             protocol:
               http:
                 statusCodes:
@@ -12514,7 +12514,7 @@ operationGroups:
             language:
               default:
                 name: ''
-                description: ''
+                description: An error response received from the Azure Data Factory service.
             protocol:
               http:
                 knownMediaType: json
@@ -12657,7 +12657,7 @@ operationGroups:
           - language:
               default:
                 name: ''
-                description: ''
+                description: OK.
             protocol:
               http:
                 statusCodes:
@@ -12665,7 +12665,7 @@ operationGroups:
           - language:
               default:
                 name: ''
-                description: ''
+                description: No Content.
             protocol:
               http:
                 statusCodes:
@@ -12675,7 +12675,7 @@ operationGroups:
             language:
               default:
                 name: ''
-                description: ''
+                description: An error response received from the Azure Data Factory service.
             protocol:
               http:
                 knownMediaType: json
@@ -12790,7 +12790,7 @@ operationGroups:
             language:
               default:
                 name: ''
-                description: ''
+                description: Trigger is subscribed to events.
             protocol:
               http:
                 knownMediaType: json
@@ -12801,7 +12801,7 @@ operationGroups:
           - language:
               default:
                 name: ''
-                description: ''
+                description: Accepted.
             protocol:
               http:
                 statusCodes:
@@ -12811,7 +12811,7 @@ operationGroups:
             language:
               default:
                 name: ''
-                description: ''
+                description: An error response received from the Azure Data Factory service.
             protocol:
               http:
                 knownMediaType: json
@@ -12933,7 +12933,7 @@ operationGroups:
             language:
               default:
                 name: ''
-                description: ''
+                description: Trigger event subscription state.
             protocol:
               http:
                 knownMediaType: json
@@ -12946,7 +12946,7 @@ operationGroups:
             language:
               default:
                 name: ''
-                description: ''
+                description: An error response received from the Azure Data Factory service.
             protocol:
               http:
                 knownMediaType: json
@@ -13063,7 +13063,7 @@ operationGroups:
             language:
               default:
                 name: ''
-                description: ''
+                description: Trigger is unsubscribed from events.
             protocol:
               http:
                 knownMediaType: json
@@ -13074,7 +13074,7 @@ operationGroups:
           - language:
               default:
                 name: ''
-                description: ''
+                description: Accepted.
             protocol:
               http:
                 statusCodes:
@@ -13084,7 +13084,7 @@ operationGroups:
             language:
               default:
                 name: ''
-                description: ''
+                description: An error response received from the Azure Data Factory service.
             protocol:
               http:
                 knownMediaType: json
@@ -13205,7 +13205,7 @@ operationGroups:
           - language:
               default:
                 name: ''
-                description: ''
+                description: Trigger has been started successfully.
             protocol:
               http:
                 statusCodes:
@@ -13215,7 +13215,7 @@ operationGroups:
             language:
               default:
                 name: ''
-                description: ''
+                description: An error response received from the Azure Data Factory service.
             protocol:
               http:
                 knownMediaType: json
@@ -13329,7 +13329,7 @@ operationGroups:
           - language:
               default:
                 name: ''
-                description: ''
+                description: Trigger has been stopped successfully.
             protocol:
               http:
                 statusCodes:
@@ -13339,7 +13339,7 @@ operationGroups:
             language:
               default:
                 name: ''
-                description: ''
+                description: An error response received from the Azure Data Factory service.
             protocol:
               http:
                 knownMediaType: json
@@ -13448,7 +13448,7 @@ operationGroups:
             language:
               default:
                 name: ''
-                description: ''
+                description: OK.
             protocol:
               http:
                 knownMediaType: json
@@ -13461,7 +13461,7 @@ operationGroups:
             language:
               default:
                 name: ''
-                description: ''
+                description: An error response received from the Azure Data Factory service.
             protocol:
               http:
                 knownMediaType: json
@@ -13628,7 +13628,7 @@ operationGroups:
             language:
               default:
                 name: ''
-                description: ''
+                description: OK.
             protocol:
               http:
                 knownMediaType: json
@@ -13641,7 +13641,7 @@ operationGroups:
             language:
               default:
                 name: ''
-                description: ''
+                description: An error response received from PUT integration runtime operation.
             protocol:
               http:
                 knownMediaType: json
@@ -13789,7 +13789,7 @@ operationGroups:
             language:
               default:
                 name: ''
-                description: ''
+                description: OK.
             protocol:
               http:
                 knownMediaType: json
@@ -13800,7 +13800,7 @@ operationGroups:
           - language:
               default:
                 name: ''
-                description: ''
+                description: Not modified.
             protocol:
               http:
                 statusCodes:
@@ -13810,7 +13810,7 @@ operationGroups:
             language:
               default:
                 name: ''
-                description: ''
+                description: An error response received from GET integration runtime operation.
             protocol:
               http:
                 knownMediaType: json
@@ -13959,7 +13959,7 @@ operationGroups:
             language:
               default:
                 name: ''
-                description: ''
+                description: OK.
             protocol:
               http:
                 knownMediaType: json
@@ -13972,7 +13972,7 @@ operationGroups:
             language:
               default:
                 name: ''
-                description: ''
+                description: An error response received from the Azure Data Factory service.
             protocol:
               http:
                 knownMediaType: json
@@ -14102,7 +14102,7 @@ operationGroups:
           - language:
               default:
                 name: ''
-                description: ''
+                description: OK.
             protocol:
               http:
                 statusCodes:
@@ -14110,7 +14110,7 @@ operationGroups:
           - language:
               default:
                 name: ''
-                description: ''
+                description: No Content.
             protocol:
               http:
                 statusCodes:
@@ -14120,7 +14120,7 @@ operationGroups:
             language:
               default:
                 name: ''
-                description: ''
+                description: An error response received from DELETE integration runtime operation.
             protocol:
               http:
                 knownMediaType: json
@@ -14235,7 +14235,7 @@ operationGroups:
             language:
               default:
                 name: ''
-                description: ''
+                description: OK.
             protocol:
               http:
                 knownMediaType: json
@@ -14248,7 +14248,7 @@ operationGroups:
             language:
               default:
                 name: ''
-                description: ''
+                description: An error response received from the Azure Data Factory service.
             protocol:
               http:
                 knownMediaType: json
@@ -14410,7 +14410,7 @@ operationGroups:
             language:
               default:
                 name: ''
-                description: ''
+                description: OK.
             protocol:
               http:
                 knownMediaType: json
@@ -14423,7 +14423,7 @@ operationGroups:
             language:
               default:
                 name: ''
-                description: ''
+                description: An error response received from the Azure Data Factory service.
             protocol:
               http:
                 knownMediaType: json
@@ -14569,7 +14569,7 @@ operationGroups:
             language:
               default:
                 name: ''
-                description: ''
+                description: OK.
             protocol:
               http:
                 knownMediaType: json
@@ -14582,7 +14582,7 @@ operationGroups:
             language:
               default:
                 name: ''
-                description: ''
+                description: An error response received from the Azure Data Factory service.
             protocol:
               http:
                 knownMediaType: json
@@ -14706,7 +14706,7 @@ operationGroups:
             language:
               default:
                 name: ''
-                description: ''
+                description: OK.
             protocol:
               http:
                 knownMediaType: json
@@ -14719,7 +14719,7 @@ operationGroups:
             language:
               default:
                 name: ''
-                description: ''
+                description: An error response received from the Azure Data Factory service.
             protocol:
               http:
                 knownMediaType: json
@@ -14842,7 +14842,7 @@ operationGroups:
             language:
               default:
                 name: ''
-                description: ''
+                description: OK.
             protocol:
               http:
                 knownMediaType: json
@@ -14853,7 +14853,7 @@ operationGroups:
           - language:
               default:
                 name: ''
-                description: ''
+                description: Accepted.
             protocol:
               http:
                 statusCodes:
@@ -14863,7 +14863,7 @@ operationGroups:
             language:
               default:
                 name: ''
-                description: ''
+                description: An error response received from the Azure Data Factory service.
             protocol:
               http:
                 knownMediaType: json
@@ -14994,7 +14994,7 @@ operationGroups:
           - language:
               default:
                 name: ''
-                description: ''
+                description: OK.
             protocol:
               http:
                 statusCodes:
@@ -15002,7 +15002,7 @@ operationGroups:
           - language:
               default:
                 name: ''
-                description: ''
+                description: Accepted.
             protocol:
               http:
                 statusCodes:
@@ -15012,7 +15012,7 @@ operationGroups:
             language:
               default:
                 name: ''
-                description: ''
+                description: An error response received from the Azure Data Factory service.
             protocol:
               http:
                 knownMediaType: json
@@ -15127,7 +15127,7 @@ operationGroups:
           - language:
               default:
                 name: ''
-                description: ''
+                description: OK.
             protocol:
               http:
                 statusCodes:
@@ -15137,7 +15137,7 @@ operationGroups:
             language:
               default:
                 name: ''
-                description: ''
+                description: An error response received from the Azure Data Factory service.
             protocol:
               http:
                 knownMediaType: json
@@ -15253,7 +15253,7 @@ operationGroups:
             language:
               default:
                 name: ''
-                description: ''
+                description: OK.
             protocol:
               http:
                 knownMediaType: json
@@ -15266,7 +15266,7 @@ operationGroups:
             language:
               default:
                 name: ''
-                description: ''
+                description: An error response received from the Azure Data Factory service.
             protocol:
               http:
                 knownMediaType: json
@@ -15395,7 +15395,7 @@ operationGroups:
           - language:
               default:
                 name: ''
-                description: ''
+                description: OK.
             protocol:
               http:
                 statusCodes:
@@ -15405,7 +15405,7 @@ operationGroups:
             language:
               default:
                 name: ''
-                description: ''
+                description: An error response received from the Azure Data Factory service.
             protocol:
               http:
                 knownMediaType: json
@@ -15537,7 +15537,7 @@ operationGroups:
           - language:
               default:
                 name: ''
-                description: ''
+                description: OK.
             protocol:
               http:
                 statusCodes:
@@ -15547,7 +15547,7 @@ operationGroups:
             language:
               default:
                 name: ''
-                description: ''
+                description: An error response received from the Azure Data Factory service.
             protocol:
               http:
                 knownMediaType: json
@@ -15682,7 +15682,7 @@ operationGroups:
             language:
               default:
                 name: ''
-                description: ''
+                description: OK.
             protocol:
               http:
                 knownMediaType: json
@@ -15695,7 +15695,7 @@ operationGroups:
             language:
               default:
                 name: ''
-                description: ''
+                description: An error response received from the Azure Data Factory service.
             protocol:
               http:
                 knownMediaType: json

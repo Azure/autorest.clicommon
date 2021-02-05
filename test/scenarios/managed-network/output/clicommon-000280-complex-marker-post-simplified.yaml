@@ -957,6 +957,17 @@ schemas:
               cliM4Path: schemas$$objects['ResourceProperties']$$properties['etag']
               cliPath: schemas$$objects['ResourceProperties']$$properties['etag']
             readOnly: true
+      - schemaName: ProxyResource
+        cli:
+          cliKey: ProxyResource
+          cliM4Path: schemas$$objects['ProxyResource']
+          cliPath: schemas$$objects['ProxyResource']
+          cli-complexity: object_simple
+          cli-simplify-indicator: 
+            simplifiable: true
+            propertyCountIfSimplify: 1
+            propertyCountIfSimplifyWithoutSimpleObject: 1
+          cli-mark: checked
       - schemaName: Resource
         cli:
           cliKey: Resource
@@ -1318,17 +1329,6 @@ schemas:
             simplifiable: false
             propertyCountIfSimplify: 10000
             propertyCountIfSimplifyWithoutSimpleObject: 10000
-          cli-mark: checked
-      - schemaName: ProxyResource
-        cli:
-          cliKey: ProxyResource
-          cliM4Path: schemas$$objects['ProxyResource']
-          cliPath: schemas$$objects['ProxyResource']
-          cli-complexity: object_simple
-          cli-simplify-indicator: 
-            simplifiable: true
-            propertyCountIfSimplify: 1
-            propertyCountIfSimplifyWithoutSimpleObject: 1
           cli-mark: checked
   choices:
     all:

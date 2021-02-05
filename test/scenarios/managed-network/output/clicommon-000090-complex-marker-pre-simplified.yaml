@@ -733,6 +733,10 @@ schemas:
               cliKey: etag
               cliM4Path: schemas$$objects['ResourceProperties']$$properties['etag']
             readOnly: true
+      - schemaName: proxy_resource
+        cli:
+          cliKey: ProxyResource
+          cliM4Path: schemas$$objects['ProxyResource']
       - schemaName: resource
         cli:
           cliKey: Resource
@@ -943,10 +947,6 @@ schemas:
         cli:
           cliKey: MeshPeeringPolicyProperties
           cliM4Path: schemas$$objects['MeshPeeringPolicyProperties']
-      - schemaName: proxy_resource
-        cli:
-          cliKey: ProxyResource
-          cliM4Path: schemas$$objects['ProxyResource']
   choices:
     all:
       - choiceName: provisioning_state

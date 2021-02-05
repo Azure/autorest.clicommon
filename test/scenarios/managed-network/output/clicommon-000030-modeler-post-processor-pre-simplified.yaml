@@ -562,6 +562,9 @@ schemas:
             cli:
               cliKey: etag
             readOnly: true
+      - schemaName: proxy_resource
+        cli:
+          cliKey: ProxyResource
       - schemaName: resource
         cli:
           cliKey: Resource
@@ -725,9 +728,6 @@ schemas:
       - schemaName: mesh_peering_policy_properties
         cli:
           cliKey: MeshPeeringPolicyProperties
-      - schemaName: proxy_resource
-        cli:
-          cliKey: ProxyResource
   choices:
     all:
       - choiceName: provisioning_state
