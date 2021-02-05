@@ -1,6 +1,6 @@
 {
     "name": "@autorest/clicommon",
-    "version": "0.6.0",
+    "version": "0.6.1",
     "description": "Autorest Azure Cli Common Module",
     "main": "dist/index.js",
     "engines": {
@@ -55,11 +55,11 @@
         "typescript": "^3.8.3"
     },
     "dependencies": {
-        "@azure-tools/autorest-extension-base": "^3.1.235",
-        "@azure-tools/codegen": "^2.5.276",
+        "@azure-tools/autorest-extension-base": "3.1.235",
+        "@azure-tools/codegen": "2.5.276",
         "@azure-tools/codemodel": "4.13.325",
-        "@azure-tools/linq": "^3.1.232",
-        "@azure-tools/async-io": "^3.0.209",
+        "@azure-tools/linq": "3.1.232",
+        "@azure-tools/async-io": "3.0.209",
         "node-yaml": "^4.0.1"
     },
     "mocha": {
