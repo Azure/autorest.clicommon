@@ -105,9 +105,9 @@ scope-clicommon:
         - clicommon-m4flatten-modifier-output
 
 modelerfour:
-    # group-parameters: true
-    # flatten-models: true
-    # flatten-payloads: true    
+    group-parameters: true
+    flatten-models: true
+    flatten-payloads: true    
     lenient-model-deduplication: true
 
     # standardize to snake in modelerfour for selecting and formatting in clicommon
@@ -128,12 +128,12 @@ modelerfour:
           LRO: LRO
 
 cli:
-    # flatten:
-    #    cli-flatten-set-enabled: true
+    flatten:
+       cli-flatten-set-enabled: true
     #    cli-flatten-all: true
-    #    cli-flatten-payload: true
-    #    cli-flatten-schema: false
-    #    cli-flatten-all-overwrite-swagger: false
+       cli-flatten-payload: true
+       cli-flatten-schema: false
+       cli-flatten-all-overwrite-swagger: false
     #    cli-flatten-directive:
     #        - where:
     #            type: SchemaType
