@@ -8,6 +8,7 @@ import { CliCommonSchema, CliConst, M4Node } from "./schema";
 import { NodeCliHelper, NodeExtensionHelper, NodeHelper } from "./nodeHelper";
 import { CopyHelper } from "./copyHelper";
 import { FlattenHelper } from "./flattenHelper";
+import { setegid } from "process";
 
 export interface FlattenSetting {
     flattenEnabled: boolean;
@@ -133,6 +134,9 @@ export class Flattener {
         }
 
         if (schema.properties) {
+            if (schema.language['cli'].cliKey === 'microsoft.graph.userSettings') {
+                schema;
+            }
             for (const { key: index, value: property } of items(schema.properties).toArray().reverse()) {
 
                 if (isObjectSchema(property.schema) && this.isFlattenTarget(property) && !NodeCliHelper.isCliFlattened(property)) {
@@ -160,6 +164,16 @@ export class Flattener {
                         }
 
                         const trace = NodeCliHelper.getCliFlattenTrace(newProp) ?? [NodeCliHelper.getCliM4Path(childProperty)];
+                        if (trace.length > 0 && property.schema.properties?.indexOf(childProperty) === -1) {
+                            const schemaName = NodeCliHelper.getCliKey(property.schema, null);
+                            const lastTrace = trace[trace.length - 1];
+                            const segs = lastTrace.split('$$');
+                            // const objSeg = segs[segs.length - 2];
+                            if (!isNullOrUndefined(schemaName)) {
+                                segs[segs.length - 2] = "objects['" + schemaName + "']";
+                                trace[trace.length - 1] = segs.join("$$");
+                            }
+                        }
                         const parentTrace = NodeCliHelper.getCliFlattenTrace(property) ?? [NodeCliHelper.getCliM4Path(property)];
                         trace.splice(0, 0, ...parentTrace);
                         NodeCliHelper.setCliFlattenTrace(newProp, trace);
@@ -186,6 +200,10 @@ export class Flattener {
                 // and the generator asks not to flatten them
                 if (length(operation.requests) > 1 && !flattenMultiPayload) {
                     continue;
+                }
+
+                if (operation.language['cli'].cliKey === 'CreateUser') {
+                    operation;
                 }
 
                 for (const request of values(operation.requests)) {
