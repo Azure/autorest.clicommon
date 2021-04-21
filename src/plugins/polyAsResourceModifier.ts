@@ -106,7 +106,8 @@ export class PolyAsResourceModifier {
                     const op2: Operation = this.cloneOperationForSubclass(op, baseSchema, subClass);
                     
                     Helper.logDebug(this.session, `${g.language.default.name}/${op.language.default.name} cloned for subclass ${discriminatorValue}`);
-                    NodeExtensionHelper.addCliOperation(op, op2);
+                    g.operations.push(op2);
+                    // NodeExtensionHelper.addCliOperation(op, op2);
                 }
 
                 NodeCliHelper.setHidden(op, true);
@@ -126,7 +127,7 @@ export class PolyAsResourceModifier {
             return [];
         }
         return request.parameters?.filter(p =>
-            Helper.isObjectSchema(p.schema) && (p.schema as ObjectSchema).discriminator && NodeCliHelper.isPolyAsResource(p));
+            Helper.isObjectSchema(p.schema) && (p.schema as ObjectSchema).discriminator && NodeCliHelper.isPolyAsResource(p) && !NodeCliHelper.isCliFlattened(p));
     }
 
     private getDefaultRequest(operation: Operation): Request {

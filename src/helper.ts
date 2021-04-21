@@ -332,19 +332,19 @@ export class Helper {
     }
 
     public static createPolyOperationDefaultName(baseOperation: Operation, discriminatorValue: string): string {
-        return `${baseOperation.language.default.name}_${discriminatorValue}`;
+        return `${baseOperation.language['cli']['cliKey']}_${discriminatorValue}`;
     }
 
     public static createPolyOperationCliKey(baseOperation: Operation, discriminatorValue: string): string {
-        return `${NodeCliHelper.getCliKey(baseOperation, baseOperation.language.default.name)}#${discriminatorValue}`;
+        return `${NodeCliHelper.getCliKey(baseOperation, baseOperation.language['cli']['cliKey'])}#${discriminatorValue}`;
     }
     
     public static createPolyOperationCliName(baseOperation: Operation, discriminatorValue: string): string {
-        return `${NodeCliHelper.getCliName(baseOperation, baseOperation.language.default.name)}#${discriminatorValue}`;
+        return `${NodeCliHelper.getCliName(baseOperation, baseOperation.language['cli']['cliKey'])}#${discriminatorValue}`;
     }
 
     public static createSplitOperationCliKey(baseOperation: Operation, splitName: string): string {
-        return `${NodeCliHelper.getCliKey(baseOperation, baseOperation.language.default.name)}#${splitName}`;
+        return `${NodeCliHelper.getCliKey(baseOperation, baseOperation.language['cli']['cliKey'])}#${splitName}`;
     }
 
     /**
