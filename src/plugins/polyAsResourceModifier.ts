@@ -99,18 +99,22 @@ export class PolyAsResourceModifier {
                 const polyParam = allPolyParam[0];
                 const baseSchema = polyParam.schema as ObjectSchema;
 
-                for (const subClass of NodeHelper.getSubClasses(baseSchema, true)) {
+                for (const subClass of NodeHelper.getSubClasses(baseSchema, false)) {
 
                     const discriminatorValue = NodeCliHelper.getCliDiscriminatorValue(subClass);
 
                     const op2: Operation = this.cloneOperationForSubclass(op, baseSchema, subClass);
                     
                     Helper.logDebug(this.session, `${g.language.default.name}/${op.language.default.name} cloned for subclass ${discriminatorValue}`);
-                    g.operations.push(op2);
+                    if (g.operations.indexOf(op2) === -1) {
+                        g.operations.push(op2);
+                    }
+                    NodeCliHelper.setPolyClassProcessed(subClass, true);
                     // NodeExtensionHelper.addCliOperation(op, op2);
                 }
 
                 NodeCliHelper.setHidden(op, true);
+                NodeCliHelper.setPolyAsResourced(polyParam, true);
             });
         });
     }
@@ -127,7 +131,7 @@ export class PolyAsResourceModifier {
             return [];
         }
         return request.parameters?.filter(p =>
-            Helper.isObjectSchema(p.schema) && (p.schema as ObjectSchema).discriminator && NodeCliHelper.isPolyAsResource(p) && !NodeCliHelper.isCliFlattened(p));
+            Helper.isObjectSchema(p.schema) && (p.schema as ObjectSchema).discriminator && NodeCliHelper.isPolyAsResource(p) && !NodeCliHelper.isPolyAsResourced(p));
     }
 
     private getDefaultRequest(operation: Operation): Request {
