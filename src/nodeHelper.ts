@@ -9,7 +9,6 @@ export class NodeCliHelper {
     // TODO: Consider add specific class for directive keys
     public static readonly POLY_RESOURCE: string = 'poly-resource';
     public static readonly POLY_RESOURCED: string = 'poly-resourced';
-    public static readonly POLY_CLASS_PROCESSED: string = 'poly-class-processed'
     public static readonly CLI_FLATTEN: string = 'cli-flatten';
     public static readonly CLI_FLATTENED: string = 'cli-flattened';
     public static readonly CLI_M4_FLATTEN: string = 'cli-m4-flatten';
@@ -187,15 +186,6 @@ export class NodeCliHelper {
 
     public static setPolyAsResourced(node: Parameter, value: boolean): void {
         return NodeCliHelper.setCliProperty(node, NodeCliHelper.POLY_RESOURCED, value);
-    }
-
-    
-    public static isPolyClassProcessed(node: Schema): boolean {
-        return NodeCliHelper.getCliProperty(node, NodeCliHelper.POLY_CLASS_PROCESSED, () => false);
-    }
-
-    public static setPolyClassProcessed(node: Schema, value: boolean): void {
-        return NodeCliHelper.setCliProperty(node, NodeCliHelper.POLY_CLASS_PROCESSED, value);
     }
 
     public static setPolyAsParamExpanded(param: Parameter, value: boolean): void {
@@ -485,9 +475,6 @@ export class NodeHelper {
                 continue;
             }
             if (NodeHelper.HasSubClass(subClass as ObjectSchema) && leafOnly) {
-                continue;
-            }
-            if (NodeCliHelper.isPolyClassProcessed(subClass)) {
                 continue;
             }
             yield subClass as ObjectSchema;

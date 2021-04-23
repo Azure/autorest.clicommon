@@ -93,13 +93,20 @@ export class PolyAsResourceModifier {
                     return;
                 }
                 if (allPolyParam.length > 1) {
-                    throw Error('multiple polymorphism parameter as resource found: ' + allPolyParam.map(p => p.language['cli']));
+                    throw Error('multiple polymorphism parameter as resource found: op: ' + NodeCliHelper.getCliKey(op, null) + ' dup parameters: ' + allPolyParam.map(p => NodeCliHelper.getCliKey(p, null)));
                 }
 
                 const polyParam = allPolyParam[0];
                 const baseSchema = polyParam.schema as ObjectSchema;
-
-                for (const subClass of NodeHelper.getSubClasses(baseSchema, false)) {
+                const baseDiscriminatorValue = NodeCliHelper.getCliDiscriminatorValue(baseSchema);
+                const subClasses = NodeHelper.getSubClasses(baseSchema, false);
+                NodeCliHelper.setPolyAsResourced(polyParam, true);
+                
+                if (!isNullOrUndefined(baseDiscriminatorValue)) {
+                    return;
+                }
+                
+                for (const subClass of subClasses) {
 
                     const discriminatorValue = NodeCliHelper.getCliDiscriminatorValue(subClass);
 
@@ -109,12 +116,11 @@ export class PolyAsResourceModifier {
                     if (g.operations.indexOf(op2) === -1) {
                         g.operations.push(op2);
                     }
-                    NodeCliHelper.setPolyClassProcessed(subClass, true);
+
                     // NodeExtensionHelper.addCliOperation(op, op2);
                 }
 
                 NodeCliHelper.setHidden(op, true);
-                NodeCliHelper.setPolyAsResourced(polyParam, true);
             });
         });
     }
