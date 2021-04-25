@@ -1,6 +1,6 @@
 import { Request, Parameter, Operation, Schema, Languages } from '@azure-tools/codemodel';
 import { isNullOrUndefined } from 'util';
-import { NodeCliHelper } from './nodeHelper';
+import { NodeCliHelper, NodeExtensionHelper } from './nodeHelper';
 
 export class CopyHelper {
     public static copyOperation(source: Operation, globalParameters?: Parameter[], customizedReqCopy?: (req: Request) => Request, customizedParamCopy?: (srcParam: Parameter) => Parameter): Operation {
@@ -43,6 +43,10 @@ export class CopyHelper {
             if (isNullOrUndefined(copy[property])) {
                 copy[property] = source[property];
             }
+        }
+
+        if (!isNullOrUndefined(NodeExtensionHelper.getCliDiscriminatorValue(source))) {
+            NodeExtensionHelper.setCliDiscriminatorValue(copy, NodeExtensionHelper.getCliDiscriminatorValue(source));
         }
 
         return copy;

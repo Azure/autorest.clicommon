@@ -322,6 +322,7 @@ export class NodeExtensionHelper {
 
     private static readonly CLI_FLATTEN_ORIGIN = 'cli-flatten-origin';
     private static readonly CLI_FLATTEN_PREFIX = 'cli-flatten-prefix';
+    private static readonly CLI_DISCRIMINATOR_VALUE = 'cli-discriminator-value';
 
     /**
      * return the value of node.extensions['x-ms-client-flatten']
@@ -348,6 +349,14 @@ export class NodeExtensionHelper {
 
     public static getCliFlattenPrefix(param: Parameter): string {
         return NodeExtensionHelper.getExtensionsProperty(param, NodeExtensionHelper.CLI_FLATTEN_PREFIX, () => null);
+    }
+
+    public static setCliDiscriminatorValue(node: M4Node, value: string): void{
+        return NodeExtensionHelper.setExtensionsProperty(node, NodeExtensionHelper.CLI_DISCRIMINATOR_VALUE, value);
+    }
+
+    public static getCliDiscriminatorValue(param: Parameter): string {
+        return NodeExtensionHelper.getExtensionsProperty(param, NodeExtensionHelper.CLI_DISCRIMINATOR_VALUE, () => null);
     }
 
     public static setPolyAsResourceParam(op: Operation, polyParam: Parameter): void {
