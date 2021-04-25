@@ -293,6 +293,9 @@ export class Flattener {
         if (this.isCliOperation(desc)) {
             return;
         }
+        if (desc.operationCliKey === '"TriggerRestore#AzureBackupRecoveryTimeBasedRestoreRequest#RestoreFilesTargetInfo"') {
+            desc;
+        }
         const operation = desc.target as Operation;
         const request = operation.requests?.[0];
         if (isNullOrUndefined(request) || isNullOrUndefined(request.parameters)) {

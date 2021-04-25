@@ -4,6 +4,7 @@ import { isNullOrUndefined } from "util";
 import { Helper } from "./helper";
 import { NodeExtensionHelper, NodeCliHelper } from "./nodeHelper";
 import { CopyHelper } from "./copyHelper";
+import { cpuUsage } from "process";
 
 export class FlattenHelper {
 
