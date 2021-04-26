@@ -415,16 +415,6 @@ export class NodeExtensionHelper {
         return NodeExtensionHelper.getExtensionsProperty(param, NodeExtensionHelper.POLY_AS_PARAM_ORIGINIAL_PARAMETER, null);
     }
 
-    public static addCliOperation(originalOperation: Operation, cliOperation: Operation): void {
-        const v: Operation[] = NodeExtensionHelper.getExtensionsProperty(originalOperation, NodeExtensionHelper.CLI_OPERATIONS, () => []);
-        v.push(cliOperation);
-        NodeExtensionHelper.setExtensionsProperty(originalOperation, NodeExtensionHelper.CLI_OPERATIONS, v);
-    }
-
-    public static getCliOperation(originalOperation: Operation, defaultValue: () => Operation[]): Operation[] {
-        return NodeExtensionHelper.getExtensionsProperty(originalOperation, NodeExtensionHelper.CLI_OPERATIONS, defaultValue);
-    }
-
     // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types, @typescript-eslint/no-explicit-any
     public static setExtensionsProperty(node: M4Node, key: string, value: any): void {
         if (isNullOrUndefined(node.extensions))

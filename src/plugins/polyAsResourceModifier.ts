@@ -100,9 +100,8 @@ export class PolyAsResourceModifier {
                 const baseSchema = polyParam.schema as ObjectSchema;
                 const baseDiscriminatorValue = NodeCliHelper.getCliDiscriminatorValue(baseSchema);
                 const subClasses = NodeHelper.getSubClasses(baseSchema, false);
-                NodeCliHelper.setPolyAsResourced(polyParam, true);
                 
-                if (!isNullOrUndefined(baseDiscriminatorValue)) {
+                if (!isNullOrUndefined(baseDiscriminatorValue) && NodeCliHelper.isPolyAsResourced(polyParam)) {
                     return;
                 }
                 
@@ -116,9 +115,9 @@ export class PolyAsResourceModifier {
                     if (g.operations.indexOf(op2) === -1) {
                         g.operations.push(op2);
                     }
-
-                    // NodeExtensionHelper.addCliOperation(op, op2);
                 }
+
+                NodeCliHelper.setPolyAsResourced(polyParam, true);
 
                 NodeCliHelper.setHidden(op, true);
             });

@@ -538,14 +538,11 @@ export class Helper {
 
         // collect operations in cli-operations
         const operations = [];
-        const cliOps = [];
         group.operations.forEach((op) => {
             operations.push(op);
-            cliOps.push(...NodeExtensionHelper.getCliOperation((op), () => []));
         });
 
         // put all cli operations at the end of array. So we can use targetIndex and parent.length to know whehter this operation is in cli.
-        operations.push(...cliOps);
 
         for (let j = operations.length - 1; j >= 0; j--) {
             const op = operations[j];

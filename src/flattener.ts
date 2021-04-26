@@ -346,7 +346,8 @@ export class Flattener {
 
     private isCliOperation(desc: CliCommonSchema.CodeModel.NodeDescriptor): boolean {
         // CliOperation is not in group.operations. So its index is equal or bigger than operation array(desc.parent)'s length
-        return desc.targetIndex >= desc.parent.length;
+        const operation = desc.target as Operation;
+        return !isNullOrUndefined(NodeExtensionHelper.getPolyAsResourceOriginalOperation(operation));
     }
 
     private fixPropertyCollisions() {
