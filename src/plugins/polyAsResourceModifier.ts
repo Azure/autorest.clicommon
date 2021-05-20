@@ -114,6 +114,11 @@ export class PolyAsResourceModifier {
                     Helper.logDebug(this.session, `${g.language.default.name}/${op.language.default.name} cloned for subclass ${discriminatorValue}`);
                     if (g.operations.indexOf(op2) === -1) {
                         g.operations.push(op2);
+                        for (const p2 of this.findPolyParameters(this.getDefaultRequest(op2))) {
+                            if (NodeCliHelper.isPolyAsResource(p2) && NodeExtensionHelper.getPolyAsResourceBaseSchema(p2) === baseSchema) {
+                                NodeCliHelper.setPolyAsResourced(p2, true);
+                            }
+                        }
                     }
                 }
 
