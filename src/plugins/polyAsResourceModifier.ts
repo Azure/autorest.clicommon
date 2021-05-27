@@ -1,5 +1,5 @@
 import { Host, Session, startSession } from "@azure-tools/autorest-extension-base";
-import { CodeModel, Request, ObjectSchema, Operation, OperationGroup, Parameter, codeModelSchema } from "@azure-tools/codemodel";
+import { CodeModel, Request, ObjectSchema, Operation, OperationGroup, Parameter, codeModelSchema, getAllProperties } from "@azure-tools/codemodel";
 import { isNullOrUndefined } from "util";
 import { Helper } from "../helper";
 import { NodeHelper, NodeCliHelper, NodeExtensionHelper } from "../nodeHelper";
@@ -93,21 +93,36 @@ export class PolyAsResourceModifier {
                     return;
                 }
                 if (allPolyParam.length > 1) {
-                    throw Error('multiple polymorphism parameter as resource found: ' + allPolyParam.map(p => p.language['cli']));
+                    throw Error('multiple polymorphism parameter as resource found: op: ' + NodeCliHelper.getCliKey(op, null) + ' dup parameters: ' + allPolyParam.map(p => NodeCliHelper.getCliKey(p, null)));
                 }
 
                 const polyParam = allPolyParam[0];
                 const baseSchema = polyParam.schema as ObjectSchema;
-
-                for (const subClass of NodeHelper.getSubClasses(baseSchema, true)) {
+                const baseDiscriminatorValue = NodeCliHelper.getCliDiscriminatorValue(baseSchema);
+                const subClasses = NodeHelper.getSubClasses(baseSchema, false);
+                
+                if (!isNullOrUndefined(baseDiscriminatorValue) && NodeCliHelper.isPolyAsResourced(polyParam)) {
+                    return;
+                }
+                
+                for (const subClass of subClasses) {
 
                     const discriminatorValue = NodeCliHelper.getCliDiscriminatorValue(subClass);
 
                     const op2: Operation = this.cloneOperationForSubclass(op, baseSchema, subClass);
                     
                     Helper.logDebug(this.session, `${g.language.default.name}/${op.language.default.name} cloned for subclass ${discriminatorValue}`);
-                    NodeExtensionHelper.addCliOperation(op, op2);
+                    if (g.operations.indexOf(op2) === -1) {
+                        g.operations.push(op2);
+                        for (const p2 of this.findPolyParameters(this.getDefaultRequest(op2))) {
+                            if (NodeCliHelper.isPolyAsResource(p2) && NodeExtensionHelper.getPolyAsResourceBaseSchema(p2) === baseSchema) {
+                                NodeCliHelper.setPolyAsResourced(p2, true);
+                            }
+                        }
+                    }
                 }
+
+                NodeCliHelper.setPolyAsResourced(polyParam, true);
 
                 NodeCliHelper.setHidden(op, true);
             });
@@ -126,7 +141,7 @@ export class PolyAsResourceModifier {
             return [];
         }
         return request.parameters?.filter(p =>
-            Helper.isObjectSchema(p.schema) && (p.schema as ObjectSchema).discriminator && NodeCliHelper.isPolyAsResource(p));
+            Helper.isObjectSchema(p.schema) && (p.schema as ObjectSchema).discriminator && NodeCliHelper.isPolyAsResource(p) && !NodeCliHelper.isPolyAsResourced(p));
     }
 
     private getDefaultRequest(operation: Operation): Request {

@@ -140,13 +140,14 @@ export class CommonNamer {
         // To be backward compatiable, reassign poly operations and parameters' default name and cli name
         for (const operationGroup of values(this.codeModel.operationGroups)) {
             for (const operation of values(operationGroup.operations)) {
-                for (const op of values(NodeExtensionHelper.getCliOperation(operation, () => []))) {
-                    this.applyNamingConventionOnCliOperation(operation, op);
-                    for (const parameter of values(op.parameters)) {
+                const polyOriginOp = NodeExtensionHelper.getPolyAsResourceOriginalOperation(operation);
+                if (!isNullOrUndefined(polyOriginOp)) {
+                    this.applyNamingConventionOnCliOperation(polyOriginOp, operation);
+                    for (const parameter of values(operation.parameters)) {
                         this.applyNamingConvention(parameter);
                     }
                     
-                    for (const request of values(op.requests)) {
+                    for (const request of values(operation.requests)) {
                         if (!isNullOrUndefined(request.parameters)) {
                             for (const parameter of values(request.parameters)) {
                                 this.applyNamingConventionOnCliParameter(parameter);

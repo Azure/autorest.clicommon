@@ -45,17 +45,27 @@ pipeline:
         input: clicommon/cli-flatten-setter
         output-artifact: clicommon-flatten-modifier-pre
 
-    clicommon/cli-poly-as-resource-modifier:
+    clicommon/pre/cli-poly-as-resource-modifier:
         input: clicommon/pre/cli-flatten-modifier
-        output-artifact: clicommon-poly-as-resource-modifier
+        output-artifact: clicommon-poly-as-resource-modifier-pre
 
     clicommon/cli-flatten-modifier:
-        input: clicommon/cli-poly-as-resource-modifier
+        input: clicommon/pre/cli-poly-as-resource-modifier
         output-artifact: clicommon-flatten-modifier
 
-    clicommon/cli-modifier:
+    clicommon/cli-poly-as-resource-modifier:
         input: clicommon/cli-flatten-modifier
+        output-artifact: clicommon-poly-as-resource-modifier
+
+    clicommon/post/cli-flatten-modifier:
+        input: clicommon/cli-poly-as-resource-modifier
+        output-artifact: clicommon-flatten-modifier-post
+
+    clicommon/cli-modifier:
+        input: clicommon/post/cli-flatten-modifier
         output-artifact: clicommon-modifier-output
+
+
 
     clicommon/cli-namer:
         input: clicommon/cli-modifier

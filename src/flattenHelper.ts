@@ -58,6 +58,9 @@ export class FlattenHelper {
                 vp.language.default.name = FlattenHelper.createFlattenedParameterDefaultName(property, prefix);
                 NodeExtensionHelper.setCliFlattenOrigin(vp, property);
                 NodeExtensionHelper.setCliFlattenPrefix(vp, prefix);
+                if (property.isDiscriminator) {
+                    NodeExtensionHelper.setCliDiscriminatorValue(vp, parameter.schema['discriminatorValue']);
+                }
                 arr.push(vp);
 
                 // if prop is inherit, update path

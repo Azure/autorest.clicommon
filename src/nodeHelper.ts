@@ -8,6 +8,7 @@ export class NodeCliHelper {
 
     // TODO: Consider add specific class for directive keys
     public static readonly POLY_RESOURCE: string = 'poly-resource';
+    public static readonly POLY_RESOURCED: string = 'poly-resourced';
     public static readonly CLI_FLATTEN: string = 'cli-flatten';
     public static readonly CLI_FLATTENED: string = 'cli-flattened';
     public static readonly CLI_M4_FLATTEN: string = 'cli-m4-flatten';
@@ -179,6 +180,14 @@ export class NodeCliHelper {
         return NodeCliHelper.getCliProperty(node, NodeCliHelper.POLY_RESOURCE, () => false);
     }
 
+    public static isPolyAsResourced(node: Parameter): boolean {
+        return NodeCliHelper.getCliProperty(node, NodeCliHelper.POLY_RESOURCED, () => false);
+    }
+
+    public static setPolyAsResourced(node: Parameter, value: boolean): void {
+        return NodeCliHelper.setCliProperty(node, NodeCliHelper.POLY_RESOURCED, value);
+    }
+
     public static setPolyAsParamExpanded(param: Parameter, value: boolean): void {
         NodeCliHelper.setCliProperty(param, NodeCliHelper.POLY_AS_PARAM_EXPANDED, value);
     }
@@ -313,6 +322,7 @@ export class NodeExtensionHelper {
 
     private static readonly CLI_FLATTEN_ORIGIN = 'cli-flatten-origin';
     private static readonly CLI_FLATTEN_PREFIX = 'cli-flatten-prefix';
+    private static readonly CLI_DISCRIMINATOR_VALUE = 'cli-discriminator-value';
 
     /**
      * return the value of node.extensions['x-ms-client-flatten']
@@ -341,6 +351,14 @@ export class NodeExtensionHelper {
         return NodeExtensionHelper.getExtensionsProperty(param, NodeExtensionHelper.CLI_FLATTEN_PREFIX, () => null);
     }
 
+    public static setCliDiscriminatorValue(node: M4Node, value: string): void{
+        return NodeExtensionHelper.setExtensionsProperty(node, NodeExtensionHelper.CLI_DISCRIMINATOR_VALUE, value);
+    }
+
+    public static getCliDiscriminatorValue(param: Parameter): string {
+        return NodeExtensionHelper.getExtensionsProperty(param, NodeExtensionHelper.CLI_DISCRIMINATOR_VALUE, () => null);
+    }
+
     public static setPolyAsResourceParam(op: Operation, polyParam: Parameter): void {
         NodeExtensionHelper.setExtensionsProperty(op, NodeExtensionHelper.POLY_AS_RESOURCE_SUBCLASS_PARAM, polyParam);
     }
@@ -361,7 +379,7 @@ export class NodeExtensionHelper {
         NodeExtensionHelper.setExtensionsProperty(op, NodeExtensionHelper.POLY_AS_RESOURCE_ORIGINAL_OPERATION, ori);
     }
 
-    public static getPolyAsResourceOriginalOperation(op: Operation): Schema {
+    public static getPolyAsResourceOriginalOperation(op: Operation): Operation {
         return NodeExtensionHelper.getExtensionsProperty(op, NodeExtensionHelper.POLY_AS_RESOURCE_ORIGINAL_OPERATION, null);
     }
 
@@ -395,16 +413,6 @@ export class NodeExtensionHelper {
 
     public static getPolyAsParamOriginalParam(param: Parameter): Schema {
         return NodeExtensionHelper.getExtensionsProperty(param, NodeExtensionHelper.POLY_AS_PARAM_ORIGINIAL_PARAMETER, null);
-    }
-
-    public static addCliOperation(originalOperation: Operation, cliOperation: Operation): void {
-        const v: Operation[] = NodeExtensionHelper.getExtensionsProperty(originalOperation, NodeExtensionHelper.CLI_OPERATIONS, () => []);
-        v.push(cliOperation);
-        NodeExtensionHelper.setExtensionsProperty(originalOperation, NodeExtensionHelper.CLI_OPERATIONS, v);
-    }
-
-    public static getCliOperation(originalOperation: Operation, defaultValue: () => Operation[]): Operation[] {
-        return NodeExtensionHelper.getExtensionsProperty(originalOperation, NodeExtensionHelper.CLI_OPERATIONS, defaultValue);
     }
 
     // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types, @typescript-eslint/no-explicit-any
