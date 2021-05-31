@@ -142,7 +142,7 @@ export class M4CommonNamer {
         if (!isNullOrUndefined(obj['discriminatorValue'])) {
             const dv: string = obj['discriminatorValue'];
             // dv should be in pascal format, let's do a simple convert to snake
-            const newValue = dv.replace(/([A-Z][a-z0-9]+)|([A-Z]+(?=[A-Z][a-z0-9]+))|([A-Z]+$)/g, '_$1$2$3').substr(1).toLowerCase();
+            const newValue = Helper.camelToSnake(dv);
             NodeCliHelper.setCliDiscriminatorValue(obj, newValue);
         }
 

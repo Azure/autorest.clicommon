@@ -930,4 +930,7 @@ export class Helper {
         return obj; // Return the top-level object to allow chaining
     }
 
+    public static camelToSnake(camel: string): string {
+        return camel.replace(/([A-Z][a-z0-9]+)|([A-Z]+(?=[A-Z][a-z0-9]+))|([A-Z]+$)/g, '_$1$2$3').substr(1).toLowerCase();
+    }
 }
