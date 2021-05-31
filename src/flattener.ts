@@ -284,7 +284,7 @@ export class Flattener {
         }
         if (NodeHelper.getJson(subClass) !== true && !NodeCliHelper.isCliFlattened(polyParam)) {
             const path = isNullOrUndefined(polyParam['targetProperty']) ? [] : [polyParam['targetProperty']];
-            FlattenHelper.flattenParameter(request, polyParam, path, `${discriminatorValue}_`);
+            FlattenHelper.flattenParameter(request, polyParam, path, `${Helper.camelToSnake(discriminatorValue)}_`);
             this.onAfterFlatten(polyParam);
         }
     }
